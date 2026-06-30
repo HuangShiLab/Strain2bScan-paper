@@ -47,6 +47,7 @@ Makefile    convenience targets for the multi-species benchmark
 | Detection vs depth (0.1–5×) | `results/depth_sensitivity.tsv` | `scripts/sim_depth.py` then profile with each tool |
 | Multi-species scaling (species & sample gradients) | `results/multispecies_scaling.tsv` | `make genomes samples build scaling` |
 | Multi-species accuracy vs species gate | `results/multispecies_accuracy_gate.tsv` | `make gate-sweep` |
+| Reference-genome quality vs accuracy (supp.) | `results/refqual_degradation.tsv` + `figures/refqual_figure.*` | `scripts/run_refqual.py` (Strain2bScan) + `run_refqual_strainscan.py` (Linux); `plot_refqual.py` |
 
 ### Quick multi-species run
 ```bash
@@ -66,6 +67,10 @@ make gate-sweep   # accuracy vs Layer-1 species gate
   evidence that the two-layer (species → strain) design is necessary.
 - **Depth:** below ~1× per strain, full-k-mer StrainScan is more sensitive; Strain2bScan
   matches it at sufficient depth while being far faster/lighter.
+- **Reference quality (supp.):** degrading the reference DB (completeness↓, contamination↑,
+  fragmentation↑) lowers precision (0.90→0.64) and roughly doubles abundance error
+  (Bray–Curtis 0.25→0.46) by ≤50% completeness / 10% contamination — Jaccard clustering is
+  completeness-sensitive, motivating the `quality.rs` filters.
 
 ## Notes
 - Committed scripts are the exact ones used (paths parameterized via `$WORKDIR` /
