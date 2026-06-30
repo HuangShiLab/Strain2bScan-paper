@@ -1,0 +1,6 @@
+n_enzymes	strain_specific	cluster_specific	n_clusters	build_s	build_RSS_MB	profile_s	profile_RSS_MB	precision	recall	bray_curtis	detect_target_0.5x	detect_target_1x
+1	891	324	16	0.24	127	0.12	42	1.000	1.000	0.000	0	1
+2	1093	14	51	0.40	142	0.15	45	0.000	0.000	1.000	0	0
+4	6118	60	60	0.93	147	0.22	66	1.000	0.312	0.383	0	0
+8	10475	103	60	1.66	166	0.34	90	1.000	0.562	0.150	0	0
+14	18566	165	60	2.81	201	0.55	128	0.900	0.562	0.252	0	0

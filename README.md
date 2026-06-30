@@ -48,6 +48,7 @@ Makefile    convenience targets for the multi-species benchmark
 | Multi-species scaling (species & sample gradients) | `results/multispecies_scaling.tsv` | `make genomes samples build scaling` |
 | Multi-species accuracy vs species gate | `results/multispecies_accuracy_gate.tsv` | `make gate-sweep` |
 | Reference-genome quality vs accuracy (supp.) | `results/refqual_degradation.tsv` + `figures/refqual_figure.*` | `scripts/run_refqual.py` (Strain2bScan) + `run_refqual_strainscan.py` (Linux); `plot_refqual.py` |
+| Enzyme count vs performance (the 2bRAD knob) | `results/enzyme_sweep.tsv` + `figures/enzyme_sweep.*` | `make enzyme-sweep` |
 
 ### Quick multi-species run
 ```bash
@@ -71,6 +72,9 @@ make gate-sweep   # accuracy vs Layer-1 species gate
   fragmentation↑) lowers precision (0.90→0.64) and roughly doubles abundance error
   (Bray–Curtis 0.25→0.46) by ≤50% completeness / 10% contamination — Jaccard clustering is
   completeness-sensitive, motivating the `quality.rs` filters.
+- **Enzyme count (the 2bRAD knob):** ≥4 enzymes reach full strain resolution; **~8 is the
+  accuracy sweet spot** (precision 1.0, Bray–Curtis 0.15) — more enzymes add cost and noise
+  with no accuracy gain (14: precision 0.90). Enzyme count trades efficiency ↔ resolution.
 
 ## Notes
 - Committed scripts are the exact ones used (paths parameterized via `$WORKDIR` /
