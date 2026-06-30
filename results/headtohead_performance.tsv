@@ -1,0 +1,10 @@
+# Strain2bScan vs StrainScan, per-sample profiling on 5 real C. acnes mock samples
+# (identical input reads; each tool with its native DB). 16-core arm64 macOS.
+sample	s2bscan_time_s	s2bscan_maxRSS_MB	strainscan_time_s	strainscan_maxRSS_MB
+sample1	3.55	101	6.22	828
+sample2	3.63	114	6.76	828
+sample3	3.58	94	6.96	828
+sample4	3.63	112	7.17	828
+sample5	3.66	106	6.70	828
+mean	3.61	105	6.76	828
+# Strain2bScan profile at 16 threads: 0.50 s (see parallel_and_build_scaling.tsv) -> ~14x faster.

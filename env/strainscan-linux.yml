@@ -1,0 +1,18 @@
+# Conda environment for the StrainScan head-to-head comparison.
+# Resolves on Linux (bioconda). On macOS the build deps (sibeliaz/dashing) are unavailable;
+# for profiling-only against a pre-built DB, install jellyfish and symlink it over the
+# bundled Linux binary: ln -sf $(which jellyfish) StrainScan/library/jellyfish-linux
+name: strainscan
+channels:
+  - bioconda
+  - conda-forge
+dependencies:
+  - python=3.9
+  - strainscan
+  - jellyfish
+  - treelib
+  - numpy
+  - scipy
+  - scikit-learn
+  - pandas
+  - biopython

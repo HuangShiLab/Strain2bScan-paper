@@ -1,0 +1,12 @@
+# Multi-species accuracy vs the Layer-1 species gate (min species-specific markers required
+# before strain profiling). 20 samples, 40-species panel. Strain markers are unique only
+# within a species, so without the gate, present species' reads over-detect relatives.
+species_gate	species_precision	species_recall	strain_recall	strain_recall_ge1x	false_pos_species
+10	0.369	1.000	1.000	1.000	(no gate)
+30	0.737	1.000	1.000	1.000	57
+100	0.879	1.000	1.000	1.000	22
+200	0.936	1.000	1.000	1.000	11
+400	0.976	1.000	1.000	1.000	4
+800	0.988	1.000	1.000	1.000	2
+# Recall stays 1.0 at every gate -> the gate removes false positives at no sensitivity cost.
+# Default gate = 200 (P=0.94); production gate = Fast2bRAD-M's species-level call.

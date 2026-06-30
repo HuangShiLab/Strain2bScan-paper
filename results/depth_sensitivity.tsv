@@ -1,0 +1,10 @@
+# Detection vs per-strain sequencing depth (single C. acnes strain GCF_009737125,
+# present in both tools' DBs; simulated shotgun, error-free). 1 = detected, 0 = missed.
+# StrainScan run in low-depth modes (-l 2 for <1x, -l 1 at 1x).
+depth_x	s2bscan_floor10	s2bscan_floor3	strainscan
+0.1	0	0	0
+0.5	0	0	1
+1.0	0	1	1
+5.0	1	1	1
+# Detection onset: StrainScan ~0.5x, Strain2bScan ~1x (permissive floor) to ~5x (default).
+# Sparse 2bRAD markers are less sensitive at low depth; the win is speed/memory at >=~5x.

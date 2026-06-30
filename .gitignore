@@ -1,0 +1,25 @@
+# Large data — regenerated from the committed scripts + accession lists. Do NOT commit.
+work/
+**/genomes/
+**/samples/
+**/dbs/
+**/dbs_*/
+multispecies/
+acnes/
+scaling/
+ss_db/
+ss_out/
+depthsweep/
+StrainScan/
+*.fq
+*.fq.gz
+*.fna
+*.fasta
+*.db.tsv
+*.db.members.tsv
+*.iibdb
+*.iibsp
+*.zip
+*.tar.gz
+.DS_Store
+__pycache__/
