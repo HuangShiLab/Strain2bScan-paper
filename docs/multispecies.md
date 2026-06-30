@@ -10,12 +10,12 @@ contributing 2 strains) at log-normal depth ≥1×. 16-core arm64 macOS.
 Built with `cluster` per species (single-copy markers, 14 enzymes), profiled with
 `multi-profile` (digest the sample **once**, match all species DBs in parallel).
 
-**Build:** 160 genomes → 40 species DBs in **21 s** (16 threads).
+**Build:** 160 genomes → 40 species DBs in **20 s** (16 threads).
 
 **Species-count gradient** (1 sample vs N species DBs):
 | species DBs | 10 | 20 | 30 | 40 |
 |---|---|---|---|---|
-| time | ~1 s | ~1 s | ~1 s | ~1 s |
+| time | 1.00 s | 1.05 s | 1.13 s | 1.12 s |
 
 **Flat.** Matching 40 species costs the same as 10 — the read digestion is paid once and each
 extra species is a cheap hash match. A full-k-mer profiler run once per species would cost
@@ -24,9 +24,9 @@ extra species is a cheap hash match. A full-k-mer profiler run once per species 
 **Sample-count gradient** (N samples vs all 40 species DBs):
 | samples | 10 | 50 | 100 | 200 |
 |---|---|---|---|---|
-| time | 12 s | 60 s | 123 s | 247 s |
+| time | 12 s | 61 s | 124 s | 247 s |
 
-**Linear** at ~1.23 s/sample (each ~0.4–0.85 M reads, re-digested per sample).
+**Linear** at ~1.2 s/sample (each ~0.4–0.85 M reads, re-digested per sample).
 
 ## Accuracy & the necessity of the species gate
 Strain markers are unique only *within* a species, so profiling every species DB without a

@@ -58,9 +58,9 @@ make gate-sweep   # accuracy vs Layer-1 species gate
 ```
 
 ## Headline results (see `results/` and `docs/` for detail)
-- **Speed/memory:** ~14× faster, ~8× less memory per sample than StrainScan (real *C. acnes*).
+- **Speed/memory:** ~14× faster, ~7× less memory per sample than StrainScan (real *C. acnes*).
 - **Scalability:** per-sample cost independent of species count (digest once, match many);
-  linear in samples; ~10× parallel build speedup; MinHash clustering identical to exact.
+  linear in samples; ~9× parallel build speedup; MinHash clustering identical to exact.
 - **Accuracy (40-species panel):** with the Layer-1 species gate, species precision 0.98 /
   recall 1.0 and strain recall 1.0; without it, precision collapses (cross-species sharing) —
   evidence that the two-layer (species → strain) design is necessary.

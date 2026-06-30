@@ -24,14 +24,17 @@ A reviewer will ask which is responsible. Design the benchmark to separate them.
 - Threads: report single- and multi-threaded; StrainScan parallelizes DB build, so Strain2bScan
   must too for a fair large-scale claim.
 
-**Evidence so far** (this machine, 16-core arm64; 64-genome C. acnes panel, 14 enzymes):
-- DB build: **24.3 s, 159 MB peak RSS**, 60 clusters, 34.5 MB DB.
-- Per-sample profile (200k reads): **3.6 s, 106 MB peak RSS**.
-- StrainScan numbers: pending (see head-to-head section).
+**Evidence** (16-core arm64; 64-genome C. acnes panel, 14 enzymes; re-verified 2026-06-30 with
+strain2bscan v0.1.0):
+- DB build: **2.6 s @16 threads** (22.4 s @1 thread), 60 clusters, ~34 MB DB.
+- Per-sample profile: **0.50 s @16 threads** (3.4 s @1 thread), ~120 MB peak RSS.
+- StrainScan: ~7.0 s / 828 MB per sample → **~14× faster, ~7× lighter** (head-to-head section).
 
-**Risk / gap**: "large scale" requires scaling work first — the build is **single-threaded**
-and clustering is **O(n²·m)** (fine at 64 genomes, not at 500+). Add `rayon` + inverted-index
-single-linkage before the headline large-panel benchmark, or the claim is vulnerable.
+**Status (resolved)**: the scaling work is **done** — `std::thread::scope` parallelism (no
+rayon dep; ~8.5× build speedup) and **MinHash-sketch clustering** (O(n²·k), k=2000; identical
+partitions to exact on real C. acnes) replace the original single-threaded O(n²·m) path.
+Validated to 400 genomes / 80 species; the remaining tail is LSH bucketing for >1000 strains
+in a single species.
 
 ---
 

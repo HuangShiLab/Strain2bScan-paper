@@ -8,10 +8,10 @@ DBs in parallel).
 ## 1. Parallel speedup (real C. acnes, 64 genomes)
 | stage | 1 thread | 16 threads | speedup |
 |---|---|---|---|
-| DB build (cluster) | 24.8 s | 2.5 s | **9.7×** |
-| profile (200k reads) | 3.67 s | 0.50 s | **7.3×** |
+| DB build (cluster) | 22.4 s | 2.6 s | **8.5×** |
+| profile (200k reads) | 3.37 s | 0.52 s | **6.5×** |
 
-→ Strain2bScan profile **0.50 s** vs StrainScan **7.2 s** = **~14× faster**, ~8× less memory.
+→ Strain2bScan profile **0.50 s** vs StrainScan **~7.0 s** = **~14× faster**, ~7× less memory.
 
 ## 2. MinHash clustering: scalable *and* faithful
 Replaces exact all-pairs Jaccard (O(n²·m)) with bottom-k MinHash sketches (O(n²·k), k=2000).
@@ -21,10 +21,10 @@ clusters; same non-singleton groups). So the scalable path does not change resul
 ## 3. DB build scaling (synthetic genomes, 16 threads)
 | genomes | 50 | 100 | 200 | 400 |
 |---|---|---|---|---|
-| build time | 0.26 s | 0.53 s | 1.56 s | 5.07 s |
-| peak RSS | 24 MB | 41 MB | 64 MB | 111 MB |
+| build time | 0.24 s | 0.53 s | 1.54 s | 5.38 s |
+| peak RSS | 27 MB | 40 MB | 65 MB | 114 MB |
 
-400 genomes also builds in 15.3 s on **1 thread** → 3.0× from threading here (clustering is
+400 genomes also builds in 15.3 s on **1 thread** → ~2.8× from threading here (clustering is
 the serial-ish O(n²) tail; digestion parallelizes fully). Memory grows slowly.
 
 ## 4. Multi-species throughput — the architectural win

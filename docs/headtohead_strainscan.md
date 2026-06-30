@@ -16,17 +16,19 @@ Machine: 16-core arm64 macOS, 51 GB RAM.
 
 | sample | Strain2bScan time | Strain2bScan RSS | StrainScan time | StrainScan RSS |
 |---|---|---|---|---|
-| s1 | 3.55 s | 101 MB | 6.22 s | 828 MB |
-| s2 | 3.63 s | 114 MB | 6.76 s | 828 MB |
-| s3 | 3.58 s | 94 MB | 6.96 s | 828 MB |
-| s4 | 3.63 s | 112 MB | 7.17 s | 828 MB |
-| s5 | 3.66 s | 106 MB | 6.70 s | 828 MB |
-| **mean** | **3.6 s** | **~105 MB** | **6.8 s** | **828 MB** |
+| s1 | 0.49 s | 118 MB | 8.14 s | 828 MB |
+| s2 | 0.49 s | 123 MB | 6.83 s | 828 MB |
+| s3 | 0.49 s | 119 MB | 6.79 s | 828 MB |
+| s4 | 0.50 s | 124 MB | 6.76 s | 828 MB |
+| s5 | 0.51 s | 115 MB | 6.77 s | 828 MB |
+| **mean** | **0.50 s** | **~120 MB** | **~7.0 s** | **828 MB** |
 
-→ **Strain2bScan is ~1.9× faster and ~8× lighter per sample.** The memory gap is structural:
-StrainScan counts the full k-mer set with jellyfish (~800 MB hash); Strain2bScan streams reads
-and keeps only sparse 2b-tag markers. (DB build: Strain2bScan 24.3 s / 159 MB on 64 genomes;
-StrainScan build not runnable on macOS — see above.)
+→ **Strain2bScan is ~14× faster and ~7× lighter per sample** (both at default parallelism on
+16 cores; sample1's StrainScan time includes process cold-start, typical ~6.8 s). The memory
+gap is structural: StrainScan counts the full k-mer set with jellyfish (~800 MB hash);
+Strain2bScan streams reads and keeps only sparse 2b-tag markers. Even single-threaded,
+Strain2bScan profile is ~3.4 s — still faster than StrainScan. (DB build: Strain2bScan 2.6 s
+@16 threads / 22.4 s @1 thread on 64 genomes; StrainScan build not runnable on macOS — see above.)
 
 *Caveat*: StrainScan profiles against its 275-strain DB and Strain2bScan against a 64-genome
 DB — but this is exactly how each tool is used in practice (each with its native DB on the
@@ -58,7 +60,7 @@ StrainScan can't build on macOS, run this on Linux:
    resolution (remap truth via membership). Identical panel → clean accuracy comparison.
 
 ## Takeaways for the manuscript
-- **Performance claim is well-supported**: ~2× faster, ~8× less memory per sample, with the
+- **Performance claim is well-supported**: ~14× faster, ~7× less memory per sample, with the
   memory advantage structurally attributable to sparse 2b markers vs full k-mer counting.
 - **Accuracy claim needs the same-panel benchmark on Linux** (above). Current evidence:
   Strain2bScan detects dominant/co-dominant strains at precision 0.90 on the 64-panel; on

@@ -1,17 +1,18 @@
 # Multi-species benchmark: 40 real species x 4 strains = 160 NCBI genomes; 20 mock samples
-# (8 species each, >=1x, log-normal). Build: 160 genomes -> 40 DBs in 21 s (16 threads).
+# (8 species each, >=1x, log-normal). Build: 160 genomes -> 40 DBs in 20 s (16 threads).
+# Re-verified 2026-06-30 with strain2bscan v0.1.0.
 
 # (A) Species-count gradient: profile ONE sample vs N species DBs (digest once, match many).
 n_species_dbs	profile_time_s
-10	1
-20	1
-30	1
-40	1
+10	1.00
+20	1.05
+30	1.13
+40	1.12
 
 # (B) Sample-count gradient: profile N samples vs all 40 species DBs.
 n_samples	total_time_s	per_sample_s
 10	12	1.20
-50	60	1.20
-100	123	1.23
+50	61	1.22
+100	124	1.24
 200	247	1.24
 # Species cost is flat (~1 s regardless of N species); sample throughput is linear.
