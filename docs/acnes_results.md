@@ -1,6 +1,6 @@
 # Real-data benchmark: C. acnes (MockMetagenomes4Benchmark, Cutibacterium_acnes_0.01)
 
-First run of strain2brad on real data. Honest results + interpretation.
+First run of Strain2bScan on real data. Honest results + interpretation.
 
 ## Setup
 - **Panel**: 64 *C. acnes* genomes downloaded from NCBI = 14 ground-truth strains + 50

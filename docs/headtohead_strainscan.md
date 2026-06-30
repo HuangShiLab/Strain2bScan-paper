@@ -1,4 +1,4 @@
-# Head-to-head: strain2bRAD vs StrainScan (C. acnes, 5 real mock samples)
+# Head-to-head: Strain2bScan vs StrainScan (C. acnes, 5 real mock samples)
 
 Both tools run on the **same 5 paired-end C. acnes mock samples** (~100k pairs each).
 Machine: 16-core arm64 macOS, 51 GB RAM.
@@ -14,7 +14,7 @@ Machine: 16-core arm64 macOS, 51 GB RAM.
 
 ## Performance — FAIR comparison (identical input reads, each tool with its own DB)
 
-| sample | strain2bRAD time | strain2bRAD RSS | StrainScan time | StrainScan RSS |
+| sample | Strain2bScan time | Strain2bScan RSS | StrainScan time | StrainScan RSS |
 |---|---|---|---|---|
 | s1 | 3.55 s | 101 MB | 6.22 s | 828 MB |
 | s2 | 3.63 s | 114 MB | 6.76 s | 828 MB |
@@ -23,12 +23,12 @@ Machine: 16-core arm64 macOS, 51 GB RAM.
 | s5 | 3.66 s | 106 MB | 6.70 s | 828 MB |
 | **mean** | **3.6 s** | **~105 MB** | **6.8 s** | **828 MB** |
 
-→ **strain2bRAD is ~1.9× faster and ~8× lighter per sample.** The memory gap is structural:
-StrainScan counts the full k-mer set with jellyfish (~800 MB hash); strain2bRAD streams reads
-and keeps only sparse 2b-tag markers. (DB build: strain2bRAD 24.3 s / 159 MB on 64 genomes;
+→ **Strain2bScan is ~1.9× faster and ~8× lighter per sample.** The memory gap is structural:
+StrainScan counts the full k-mer set with jellyfish (~800 MB hash); Strain2bScan streams reads
+and keeps only sparse 2b-tag markers. (DB build: Strain2bScan 24.3 s / 159 MB on 64 genomes;
 StrainScan build not runnable on macOS — see above.)
 
-*Caveat*: StrainScan profiles against its 275-strain DB and strain2bRAD against a 64-genome
+*Caveat*: StrainScan profiles against its 275-strain DB and Strain2bScan against a 64-genome
 DB — but this is exactly how each tool is used in practice (each with its native DB on the
 same reads), so the per-sample resource comparison is fair.
 
@@ -38,7 +38,7 @@ StrainScan's **pre-built C. acnes DB (275 strains, 2022)** is **missing 6 of the
 strains**, including the dominant strains of s2, s3, and s4. So StrainScan structurally
 reports nothing for those samples — an artifact of the outdated DB, not the algorithm.
 
-| sample | truth dominant | in StrainScan DB? | StrainScan | strain2bRAD |
+| sample | truth dominant | in StrainScan DB? | StrainScan | Strain2bScan |
 |---|---|---|---|---|
 | s1 | GCF_009737125 (.97) | yes | **found** | **found** |
 | s5 | GCF_003384585 (.84) | yes | **found** | **found** |
@@ -53,13 +53,13 @@ agree** (both detect the dominant, both miss the low-abundance minors).
 StrainScan can't build on macOS, run this on Linux:
 1. `conda install -c bioconda strainscan` (Linux resolves dashing/sibeliaz).
 2. Build StrainScan on the 64-genome panel: `StrainScan_build.py -i acnes/genomes -o DB`
-   (optionally `-c` with strain2bRAD's clustering for matched clusters).
-3. Run both tools on the 5 samples; evaluate with `strain2brad evaluate` at cluster
+   (optionally `-c` with Strain2bScan's clustering for matched clusters).
+3. Run both tools on the 5 samples; evaluate with `strain2bscan evaluate` at cluster
    resolution (remap truth via membership). Identical panel → clean accuracy comparison.
 
 ## Takeaways for the manuscript
 - **Performance claim is well-supported**: ~2× faster, ~8× less memory per sample, with the
   memory advantage structurally attributable to sparse 2b markers vs full k-mer counting.
 - **Accuracy claim needs the same-panel benchmark on Linux** (above). Current evidence:
-  strain2bRAD detects dominant/co-dominant strains at precision 0.90 on the 64-panel; on
+  Strain2bScan detects dominant/co-dominant strains at precision 0.90 on the 64-panel; on
   shared-DB strains it agrees with StrainScan.

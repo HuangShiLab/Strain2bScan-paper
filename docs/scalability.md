@@ -1,7 +1,7 @@
-# Scalability & parallelism — strain2bRAD
+# Scalability & parallelism — Strain2bScan
 
 Evidence for the scale/parallelism claim. Engineering added: zero-dependency multi-threading
-(`std::thread::scope`, env knob `STRAIN2BRAD_THREADS`), MinHash-sketch clustering
+(`std::thread::scope`, env knob `STRAIN2BSCAN_THREADS`), MinHash-sketch clustering
 (O(n²·m) → O(n²·k)), and a `multi-profile` mode (digest the sample once, match all species
 DBs in parallel).
 
@@ -11,7 +11,7 @@ DBs in parallel).
 | DB build (cluster) | 24.8 s | 2.5 s | **9.7×** |
 | profile (200k reads) | 3.67 s | 0.50 s | **7.3×** |
 
-→ strain2bRAD profile **0.50 s** vs StrainScan **7.2 s** = **~14× faster**, ~8× less memory.
+→ Strain2bScan profile **0.50 s** vs StrainScan **7.2 s** = **~14× faster**, ~8× less memory.
 
 ## 2. MinHash clustering: scalable *and* faithful
 Replaces exact all-pairs Jaccard (O(n²·m)) with bottom-k MinHash sketches (O(n²·k), k=2000).
@@ -40,7 +40,7 @@ sample containing strains from 40 of the 80 species at ~2×:
 | species detected | **40 / 40 present, 0 / 40 absent (no false positives)** |
 
 The contrast with a full-k-mer profiler is structural: StrainScan re-counts k-mers (jellyfish,
-~6–7 s) **per run**, so S species ≈ S × 6.5 s. strain2bRAD pays the read-digestion cost
+~6–7 s) **per run**, so S species ≈ S × 6.5 s. Strain2bScan pays the read-digestion cost
 **once** (~0.1–0.5 s) and each additional species is a cheap hash-set match — so per-species
 marginal cost drops from seconds to ~milliseconds. This is where the hundreds-of-species
 advantage comes from.

@@ -1,4 +1,4 @@
-# strain2bRAD — manuscript framing & benchmark plan
+# Strain2bScan — manuscript framing & benchmark plan
 
 Assessment of the three intended claims and the experiments needed to support each, with
 evidence gathered so far. Bottom line: **the story is sound and publishable as a methods/
@@ -15,13 +15,13 @@ sources**: (a) Rust vs Python, and (b) 2bRAD markers (~1–2% of k-mers) vs the 
 A reviewer will ask which is responsible. Design the benchmark to separate them.
 
 **Experiments**
-- Primary (what users care about): strain2bRAD (Rust+2b) vs StrainScan (Python+full k-mer),
+- Primary (what users care about): Strain2bScan (Rust+2b) vs StrainScan (Python+full k-mer),
   identical genomes & samples. Report **wall-clock + peak RSS** for (i) DB build and (ii)
   per-sample profile, across **panel sizes** (10/50/100/500/all genomes) and **read depths**.
 - Attribution: report the **marker-count reduction** (tags vs k-mers per genome) so the
   data-size win is explicit; ideally add a dense-k-mer Rust variant to isolate language vs
   marker effects. At minimum, state that both contribute.
-- Threads: report single- and multi-threaded; StrainScan parallelizes DB build, so strain2bRAD
+- Threads: report single- and multi-threaded; StrainScan parallelizes DB build, so Strain2bScan
   must too for a fair large-scale claim.
 
 **Evidence so far** (this machine, 16-core arm64; 64-genome C. acnes panel, 14 enzymes):
