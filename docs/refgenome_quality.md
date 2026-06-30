@@ -68,3 +68,30 @@ expected; the figure quantifies whether full-k-mer density buffers it relative t
   assemblies for the final figure (Linux).
 - The two arms score at slightly different resolutions (Strain2bScan at cluster level,
   StrainScan at strain level) — noted on the figure.
+
+## Running it (one `make` target per arm)
+
+**Strain2bScan arm + figure** (any platform; needs the built binary):
+```bash
+export STRAIN2BSCAN_BIN=/path/to/strain2bscan      # or have `strain2bscan` on PATH
+make refqual        # downloads the C. acnes 64-panel + 5 mock reads + E. coli, runs the gradient
+# -> work/refqual/refqual_degradation.tsv, work/figures/refqual_figure.{png,pdf}
+```
+
+**StrainScan arm** (Linux HPC; StrainScan_build needs `dashing`):
+```bash
+conda env create -f env/strainscan-linux.yml && conda activate strainscan
+export STRAINSCAN=/path/to/StrainScan  STRAINSCAN_PY=$(which python)
+make refqual              # ensure data + Strain2bScan arm are in place
+make refqual-strainscan   # StrainScan DB per quality level; plot_refqual.py overlays both tools
+```
+
+**CheckM2 validation** (Linux HPC; for the published x-axis = measured scores):
+```bash
+conda create -n checkm2 -c bioconda -c conda-forge checkm2 && conda activate checkm2
+checkm2 database --download        # ~3 GB diamond DB, once
+make refqual-checkm2               # -> work/refqual/refqual_checkm2.tsv (designed vs measured)
+```
+
+Then copy `work/refqual/*.tsv` and `work/figures/*` back into `results/` and `figures/` to
+refresh the committed snapshots.

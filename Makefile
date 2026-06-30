@@ -27,7 +27,22 @@ accuracy:                       ## species/strain detection accuracy (default ga
 gate-sweep:                     ## accuracy vs species-gate threshold
 	cd $(WORKDIR) && for g in 30 100 200 400 800; do python3 $(SCRIPTS)/ms_eval2.py $$g; done
 
+# ---- Reference-genome quality experiment (supplementary figure) ----
+refqual-data: $(WORKDIR)        ## download C. acnes 64-panel + 5 mock reads + E. coli contaminant
+	cd $(WORKDIR) && python3 $(SCRIPTS)/dl_acnes_panel.py
+
+refqual: refqual-data           ## Strain2bScan arm: degrade DB across a quality gradient + figure
+	cd $(WORKDIR) && python3 $(SCRIPTS)/run_refqual.py && python3 $(SCRIPTS)/plot_refqual.py
+	@echo "outputs: $(WORKDIR)/refqual/refqual_degradation.tsv, $(WORKDIR)/figures/refqual_figure.*"
+
+refqual-strainscan:             ## StrainScan arm (LINUX; needs $$STRAINSCAN, $$STRAINSCAN_PY)
+	cd $(WORKDIR) && python3 $(SCRIPTS)/run_refqual_strainscan.py && python3 $(SCRIPTS)/plot_refqual.py
+
+refqual-checkm2:                ## CheckM2 validation of simulated degraded genomes (LINUX)
+	cd $(WORKDIR) && python3 $(SCRIPTS)/checkm2_validate.py
+
 clean:                          ## remove the work directory
 	rm -rf $(WORKDIR)
 
-.PHONY: genomes samples build scaling accuracy gate-sweep clean
+.PHONY: genomes samples build scaling accuracy gate-sweep \
+        refqual-data refqual refqual-strainscan refqual-checkm2 clean
