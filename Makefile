@@ -45,8 +45,15 @@ enzyme-sweep: refqual-data      ## enzyme-count sweep on C. acnes (markers/accur
 	cd $(WORKDIR) && python3 $(SCRIPTS)/sim_depth.py
 	cd $(WORKDIR) && python3 $(SCRIPTS)/run_enzyme_sweep.py && python3 $(SCRIPTS)/plot_enzyme_sweep.py
 
+cross-species-data: $(WORKDIR)  ## download the pinned S. aureus + S. epidermidis panels
+	cd $(WORKDIR) && python3 $(SCRIPTS)/dl_staph.py
+
+cross-species: refqual-data cross-species-data  ## strain-mixture accuracy across 3 species + figure
+	cd $(WORKDIR) && python3 $(SCRIPTS)/run_cross_species.py && python3 $(SCRIPTS)/plot_cross_species.py
+
 clean:                          ## remove the work directory
 	rm -rf $(WORKDIR)
 
 .PHONY: genomes samples build scaling accuracy gate-sweep \
-        refqual-data refqual refqual-strainscan refqual-checkm2 enzyme-sweep clean
+        refqual-data refqual refqual-strainscan refqual-checkm2 enzyme-sweep \
+        cross-species-data cross-species clean
