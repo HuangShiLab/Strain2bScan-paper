@@ -41,6 +41,9 @@ refqual-strainscan:             ## StrainScan arm (LINUX; needs $$STRAINSCAN, $$
 refqual-checkm2:                ## CheckM2 validation of simulated degraded genomes (LINUX)
 	cd $(WORKDIR) && python3 $(SCRIPTS)/checkm2_validate.py
 
+headtohead-strainscan: refqual-data  ## StrainScan on the identical 64-genome panel (LINUX; needs $$STRAINSCAN)
+	cd $(WORKDIR) && python3 $(SCRIPTS)/run_headtohead_strainscan.py
+
 enzyme-sweep: refqual-data      ## enzyme-count sweep on C. acnes (markers/accuracy/cost vs #enzymes)
 	cd $(WORKDIR) && python3 $(SCRIPTS)/sim_depth.py
 	cd $(WORKDIR) && python3 $(SCRIPTS)/run_enzyme_sweep.py && python3 $(SCRIPTS)/plot_enzyme_sweep.py
@@ -64,4 +67,4 @@ clean:                          ## remove the work directory
 
 .PHONY: genomes samples build scaling accuracy gate-sweep \
         refqual-data refqual refqual-strainscan refqual-checkm2 enzyme-sweep \
-        cross-species-data cross-species figures clean
+        cross-species-data cross-species headtohead-strainscan figures clean
