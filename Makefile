@@ -51,9 +51,17 @@ cross-species-data: $(WORKDIR)  ## download the pinned S. aureus + S. epidermidi
 cross-species: refqual-data cross-species-data  ## strain-mixture accuracy across 3 species + figure
 	cd $(WORKDIR) && python3 $(SCRIPTS)/run_cross_species.py && python3 $(SCRIPTS)/plot_cross_species.py
 
+figures:                        ## regenerate all figures from results/*.tsv (no workdir needed)
+	python3 scripts/plot_performance.py
+	python3 scripts/plot_scalability.py
+	python3 scripts/plot_depth.py
+	python3 scripts/plot_enzyme_sweep.py
+	python3 scripts/plot_cross_species.py
+	python3 scripts/plot_refqual.py
+
 clean:                          ## remove the work directory
 	rm -rf $(WORKDIR)
 
 .PHONY: genomes samples build scaling accuracy gate-sweep \
         refqual-data refqual refqual-strainscan refqual-checkm2 enzyme-sweep \
-        cross-species-data cross-species clean
+        cross-species-data cross-species figures clean
