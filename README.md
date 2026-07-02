@@ -78,7 +78,9 @@ make gate-sweep   # accuracy vs Layer-1 species gate
   with no accuracy gain (14: precision 0.90). Enzyme count trades efficiency ↔ resolution.
 - **Cross-species:** accuracy tracks intra-species **resolvability** (clusters/genomes): high
   for diverse *C. acnes* (0.94 → precision 0.90), lower for similar-strain *S. epidermidis*
-  (0.20 → precision 0.48). Low-diversity species need overlap-aware deconvolution.
+  (0.20 → precision 0.59). Occurrence-based uniqueness (a marker unique iff present at any copy
+  in one cluster) lifts similar-strain precision/abundance; a residual gap needs overlap-aware
+  deconvolution.
 
 ## Notes
 - Committed scripts are the exact ones used (paths parameterized via `$WORKDIR` /
