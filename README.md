@@ -45,8 +45,9 @@ Makefile    convenience targets for the multi-species benchmark
 | Strain2bScan vs StrainScan, per-sample time & memory | `results/headtohead_performance.tsv` | `scripts/run_acnes.sh` (Strain2bScan) + StrainScan on the 5 *C. acnes* mocks |
 | Parallel speedup + DB-build scaling | `results/parallel_and_build_scaling.tsv` | `STRAIN2BSCAN_THREADS=1\|16 strain2bscan cluster …`; `scripts/gen_scale.py` for synthetic panels |
 | Detection vs depth (0.1–5×) | `results/depth_sensitivity.tsv` | `scripts/sim_depth.py` then profile with each tool |
-| Multi-species scaling (species & sample gradients) | `results/multispecies_scaling.tsv` | `make genomes samples build scaling` |
-| Multi-species accuracy vs species gate | `results/multispecies_accuracy_gate.tsv` | `make gate-sweep` |
+| Multi-species scaling, earlier 40-species panel (species & sample gradients) | `results/multispecies_scaling.tsv` | superseded by the 55-species run below; kept for reference |
+| Multi-species scaling, **55-species** panel + community throughput vs StrainScan | `results/multispecies_species_gradient55.tsv`, `..._sample_gradient55.tsv`, `..._accuracy_gate55.tsv`, `community_throughput.tsv` + `figures/community_throughput.*` | `make genomes samples build scaling gate-sweep` (55-species pinned accessions), then `make figures`; see `docs/multispecies.md` |
+| Multi-species accuracy vs species gate | `results/multispecies_accuracy_gate.tsv`, `..._accuracy_gate55.tsv` | `make gate-sweep` |
 | Reference-genome quality vs accuracy (supp.) | `results/refqual_degradation.tsv` + `figures/refqual_figure.*` | `scripts/run_refqual.py` (Strain2bScan) + `run_refqual_strainscan.py` (Linux); `plot_refqual.py` |
 | Enzyme count vs performance (the 2bRAD knob) | `results/enzyme_sweep.tsv` + `figures/enzyme_sweep.*` | `make enzyme-sweep` |
 | Cross-species generalization (3 species) | `results/cross_species.tsv` + `figures/cross_species.*` | `make cross-species` |
@@ -62,11 +63,17 @@ make gate-sweep   # accuracy vs Layer-1 species gate
 
 ## Headline results (see `results/` and `docs/` for detail)
 - **Speed/memory:** ~14× faster, ~7× less memory per sample than StrainScan (real *C. acnes*).
-- **Scalability:** per-sample cost independent of species count (digest once, match many);
-  linear in samples; ~9× parallel build speedup; MinHash clustering identical to exact.
-- **Accuracy (40-species panel):** with the Layer-1 species gate, species precision 0.98 /
-  recall 1.0 and strain recall 1.0; without it, precision collapses (cross-species sharing) —
-  evidence that the two-layer (species → strain) design is necessary.
+- **Scalability:** per-sample cost independent of species count (digest once, match many),
+  confirmed flat from 10 to **55 real species**; linear in samples from 10 to **500**; ~9×
+  parallel build speedup; MinHash clustering identical to exact.
+- **Complex-community efficiency (55 species, measured):** **~167× faster at 100 samples**
+  (3.7 min vs a projected 10.4 h), **~192× at 500 samples** (16 min vs ~2.2 days) than running
+  StrainScan once per species per sample — the only mode available to a tool with no
+  multi-species support. See `docs/multispecies.md`.
+- **Accuracy (55-species panel):** with the Layer-1 species gate, species precision 0.97–0.99
+  and strain recall ≥0.994 across gate settings 10–800; without a gate, precision collapses on
+  a naive 40-species panel (cross-species sharing) — evidence that the two-layer (species →
+  strain) design is necessary, and that occurrence-based uniqueness (below) improves it further.
 - **Depth:** below ~1× per strain, full-k-mer StrainScan is more sensitive; Strain2bScan
   matches it at sufficient depth while being far faster/lighter.
 - **Reference quality (supp.):** degrading the reference DB (completeness↓, contamination↑,

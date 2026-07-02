@@ -14,11 +14,12 @@ for sp in $(ls "$GEN"); do
 done
 echo "built $nb species DBs in $((SECONDS-t0))s"
 
-echo "### 2. SPECIES-COUNT gradient: profile 1 sample vs N species DBs ###"
+echo "### 2. SPECIES-COUNT gradient: profile 1 sample vs N species DBs (up to the full panel) ###"
 ALLSP=($(ls "$DBS"/*.tsv | grep -v members | sed 's#.*/##; s#.tsv##'))
+TOTSP=${#ALLSP[@]}
 printf '%-10s %-10s\n' "n_species" "time_s"
-for N in 10 20 30 40; do
-  [ $N -le ${#ALLSP[@]} ] || continue
+for N in 10 20 30 40 50 $TOTSP; do
+  [ $N -le $TOTSP ] || continue
   d="multispecies/dbs_$N"; rm -rf "$d"; mkdir -p "$d"
   for sp in "${ALLSP[@]:0:$N}"; do ln -sf "$(pwd)/$DBS/$sp.tsv" "$d/$sp.tsv"; done
   s=$SECONDS
@@ -26,10 +27,10 @@ for N in 10 20 30 40; do
   printf '%-10s %-10s\n' "$N" "$((SECONDS-s))"
 done
 
-echo "### 3. SAMPLE-COUNT gradient: profile N samples vs ALL species DBs (cycle pool of 20) ###"
+echo "### 3. SAMPLE-COUNT gradient: profile N samples vs ALL species DBs (cycle the sample pool) ###"
 POOL=($(ls multispecies/samples/*.fq)); P=${#POOL[@]}
 printf '%-10s %-10s\n' "n_samples" "time_s"
-for N in 10 50 100 200; do
+for N in 10 50 100 200 500; do
   s=$SECONDS
   for ((i=0;i<N;i++)); do
     $BIN multi-profile --dbs "$DBS" --reads "${POOL[$((i % P))]}" --enzyme "$SET" >/dev/null 2>&1

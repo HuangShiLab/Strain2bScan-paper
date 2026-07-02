@@ -12,11 +12,11 @@ export WORKDIR STRAIN2BSCAN_BIN
 $(WORKDIR):
 	mkdir -p $(WORKDIR)
 
-genomes: $(WORKDIR)              ## download 40 species x 4 strains from NCBI
+genomes: $(WORKDIR)              ## download 55 species x 4 strains from NCBI (pinned accessions)
 	cd $(WORKDIR) && python3 $(SCRIPTS)/dl_multispecies.py
 
-samples: $(WORKDIR)             ## simulate 20 multi-species samples (seeded) + truth
-	cd $(WORKDIR) && python3 $(SCRIPTS)/sim_samples.py 20 8
+samples: $(WORKDIR)             ## simulate 30 multi-species samples (seeded, 12 species/sample) + truth
+	cd $(WORKDIR) && python3 $(SCRIPTS)/sim_samples.py 30 12
 
 build scaling:                  ## build per-species DBs + species/sample scaling gradients
 	cd $(WORKDIR) && WORKDIR=$(WORKDIR) bash $(SCRIPTS)/run_ms.sh
@@ -61,6 +61,7 @@ figures:                        ## regenerate all figures from results/*.tsv (no
 	python3 scripts/plot_enzyme_sweep.py
 	python3 scripts/plot_cross_species.py
 	python3 scripts/plot_refqual.py
+	python3 scripts/plot_community_throughput.py
 
 clean:                          ## remove the work directory
 	rm -rf $(WORKDIR)

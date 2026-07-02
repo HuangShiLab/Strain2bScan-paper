@@ -1,33 +1,39 @@
 #!/usr/bin/env python3
 """Community-scale throughput: strain-profiling an S-species community across N samples.
-Strain2bScan side is MEASURED (multi-species sample gradient: ~1.24 s/sample, flat in species,
-+ ~20 s build for 40 species). StrainScan has no multi-species mode, so resolving S species
-means running it once per species database per sample; we PROJECT that from its measured
-per-run cost on C. acnes (~6.8 s). Clearly a projection for the StrainScan line."""
+Strain2bScan side is MEASURED end-to-end (results/multispecies_sample_gradient55.tsv: real
+multi-profile wall-clock at N=10..500 samples against all 55 species databases; no formula,
+no extrapolation). StrainScan has no multi-species mode, so resolving S species means running
+it once per species database per sample; that side is PROJECTED from its measured per-run
+cost on C. acnes (results/headtohead_performance.tsv, 6.8 s/run) -- the StrainScan line is
+explicitly a projection, not a measurement (same-panel head-to-head: see
+scripts/run_headtohead_strainscan.py, Linux-only)."""
 import os
 import matplotlib; matplotlib.use("Agg"); import matplotlib.pyplot as plt
 
-S = 40                    # species in the community
-S2B_PER_SAMPLE = 1.24     # measured (Fig 2b, 40 species)
-S2B_BUILD = 20            # measured, one-off
-SS_PER_RUN = 6.8          # measured StrainScan per-run (C. acnes); one run per species per sample
-N = [10, 50, 100, 200, 500]
-s2b = [S2B_BUILD + n * S2B_PER_SAMPLE for n in N]
-ss = [n * S * SS_PER_RUN for n in N]
+def rows(path):
+    return [l.rstrip("\n").split("\t") for l in open(path) if l.strip() and not l.startswith("#")]
+
+S = 55  # species in the panel (data/accessions/multispecies_55x4.tsv)
+SS_PER_RUN = 6.8  # measured StrainScan per-run cost, C. acnes (results/headtohead_performance.tsv)
+
+sg = [r for r in rows("results/multispecies_sample_gradient55.tsv") if r[0] != "n_samples"]
+N = [int(r[0]) for r in sg]
+s2b = [float(r[1]) for r in sg]           # measured total wall-clock
+ss = [n * S * SS_PER_RUN for n in N]      # projected StrainScan (S runs/sample, no multi-species mode)
 
 fig, ax = plt.subplots(figsize=(6.8, 4.4))
 ax.plot(N, ss, "o-", color="#8c8c8c", label=f"StrainScan (projected: {S}× runs/sample)")
-ax.plot(N, s2b, "s-", color="#1f77b4", label="Strain2bScan (measured)")
+ax.plot(N, s2b, "s-", color="#1f77b4", label=f"Strain2bScan (measured, {S} real species)")
 ax.set_yscale("log"); ax.set_xlabel("# samples"); ax.set_ylabel("total wall-clock (s, log)")
-ax.set_title(f"Community-scale strain profiling ({S} species)")
+ax.set_title(f"Community-scale strain profiling ({S} real species)")
 ax.grid(alpha=0.3, which="both")
 ax.legend(loc="lower right")
 for n, a, b in zip(N, s2b, ss):
     ax.annotate(f"{b/a:.0f}×", (n, (a*b)**0.5), fontsize=8, color="#d62728", ha="center")
-# human-readable anchors
-ax.annotate("~2.4 min", (100, s2b[2]), textcoords="offset points", xytext=(0, -14), fontsize=8, color="#1f77b4", ha="center")
-ax.annotate("~7.6 h", (100, ss[2]), textcoords="offset points", xytext=(0, 8), fontsize=8, color="#8c8c8c", ha="center")
+ax.annotate(f"~{s2b[2]/60:.1f} min", (100, s2b[2]), textcoords="offset points", xytext=(0, -14), fontsize=8, color="#1f77b4", ha="center")
+ax.annotate(f"~{ss[2]/3600:.1f} h", (100, ss[2]), textcoords="offset points", xytext=(0, 8), fontsize=8, color="#8c8c8c", ha="center")
 fig.tight_layout(); os.makedirs("figures", exist_ok=True)
 fig.savefig("figures/community_throughput.png", dpi=150); fig.savefig("figures/community_throughput.pdf")
 print("wrote figures/community_throughput.png + .pdf")
-print(f"ratio ≈ S × (SS_per_run / S2B_per_sample) = {S} × {SS_PER_RUN/S2B_PER_SAMPLE:.1f} = {S*SS_PER_RUN/S2B_PER_SAMPLE:.0f}× (independent of N)")
+for n, a, b in zip(N, s2b, ss):
+    print(f"  N={n:>4}: Strain2bScan {a:.0f}s ({a/60:.1f} min) | StrainScan {b:.0f}s ({b/3600:.1f} h) | {b/a:.0f}x")
