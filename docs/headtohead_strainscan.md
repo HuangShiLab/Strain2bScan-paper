@@ -4,13 +4,23 @@ Both tools run on the **same 5 paired-end C. acnes mock samples** (~100k pairs e
 Machine: 16-core arm64 macOS, 51 GB RAM.
 
 ## Reproducibility notes (getting StrainScan to run on macOS)
-- StrainScan bundles **Linux-only** binaries: `library/jellyfish-linux` and
-  `library/dashing_s128`. On macOS they silently fail.
-- Fix for **profiling**: `ln -sf $(which jellyfish) StrainScan/library/jellyfish-linux`
-  (system jellyfish 2.2.10 from bioconda works). Also `pip install treelib`.
-- **Building** a StrainScan DB on macOS is **not possible** here: it calls `dashing_s128`
-  (Linux) for the distance matrix unconditionally, and `dashing` has no osx-arm64 conda
-  build. So StrainScan DB build must be done on Linux.
+- StrainScan bundles **Linux ELF** binaries: `library/jellyfish-linux` (confirmed via `file`:
+  genuine `ELF 64-bit ... x86-64, GNU/Linux`) and `library/dashing_s128` (same). These cannot
+  run on macOS at all — not a missing-package issue, but an OS-level incompatibility (Rosetta
+  2 translates macOS x86_64 Mach-O binaries, not foreign-OS ELF binaries).
+- Fix for **profiling**: `ln -sf $(which jellyfish) StrainScan/library/jellyfish-linux`,
+  pointing at a genuine macOS x86_64 Mach-O jellyfish build (bioconda, osx-64 subdir, runs via
+  Rosetta 2). Also `pip install treelib`. This works — used throughout this benchmark.
+- **Building** a StrainScan DB on this machine is **not possible**, but the precise reason took
+  rigorous re-checking to pin down (see `docs/macos_dashing.md` for the full, corrected
+  investigation): a `dashing` **osx-64 bioconda package does exist** (an earlier claim that "no
+  macOS dashing build exists" was wrong — that failure was from an unrelated dependency,
+  `sibeliaz`, in the full `strainscan` meta-package). The real, verified blocker: the only
+  available macOS `dashing` build **hangs indefinitely under Rosetta 2** (confirmed firsthand,
+  0% CPU / uninterruptible wait, both multi- and single-threaded, on a trivial 2-genome task) —
+  a Rosetta translation failure, not a missing package. Net effect is the same (StrainScan
+  build needs Linux, or a real Linux container e.g. Docker — not just Rosetta), but the
+  mechanism is different from what was previously stated.
 
 ## Performance — FAIR comparison (identical input reads, each tool with its own DB)
 

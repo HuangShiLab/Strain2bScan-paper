@@ -44,6 +44,10 @@ refqual-checkm2:                ## CheckM2 validation of simulated degraded geno
 headtohead-strainscan: refqual-data  ## StrainScan on the identical 64-genome panel (LINUX; needs $$STRAINSCAN)
 	cd $(WORKDIR) && python3 $(SCRIPTS)/run_headtohead_strainscan.py
 
+species-expansion: $(WORKDIR)   ## 3 more StrainScan-native species via its own pre-built DBs
+	cd $(WORKDIR) && python3 $(SCRIPTS)/dl_strainscan_dbs.py
+	cd $(WORKDIR) && python3 $(SCRIPTS)/run_species_expansion.py
+
 enzyme-sweep: refqual-data      ## enzyme-count sweep on C. acnes (markers/accuracy/cost vs #enzymes)
 	cd $(WORKDIR) && python3 $(SCRIPTS)/sim_depth.py
 	cd $(WORKDIR) && python3 $(SCRIPTS)/run_enzyme_sweep.py && python3 $(SCRIPTS)/plot_enzyme_sweep.py
@@ -62,6 +66,7 @@ figures:                        ## regenerate all figures from results/*.tsv (no
 	python3 scripts/plot_cross_species.py
 	python3 scripts/plot_refqual.py
 	python3 scripts/plot_community_throughput.py
+	python3 scripts/plot_species_expansion.py
 
 clean:                          ## remove the work directory
 	rm -rf $(WORKDIR)

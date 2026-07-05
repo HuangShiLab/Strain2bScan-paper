@@ -50,7 +50,8 @@ Makefile    convenience targets for the multi-species benchmark
 | Multi-species accuracy vs species gate | `results/multispecies_accuracy_gate.tsv`, `..._accuracy_gate55.tsv` | `make gate-sweep` |
 | Reference-genome quality vs accuracy (supp.) | `results/refqual_degradation.tsv` + `figures/refqual_figure.*` | `scripts/run_refqual.py` (Strain2bScan) + `run_refqual_strainscan.py` (Linux); `plot_refqual.py` |
 | Enzyme count vs performance (the 2bRAD knob) | `results/enzyme_sweep.tsv` + `figures/enzyme_sweep.*` | `make enzyme-sweep` |
-| Cross-species generalization (3 species) | `results/cross_species.tsv` + `figures/cross_species.*` | `make cross-species` |
+| Cross-species generalization (3 species, our own panels) | `results/cross_species.tsv` + `figures/cross_species.*` | `make cross-species` |
+| Species expansion (3 more, StrainScan's own pre-built DBs) | `results/species_expansion.tsv` + `figures/species_expansion.*` | `make species-expansion`; see `docs/species_expansion.md` |
 
 ### Quick multi-species run
 ```bash
@@ -88,6 +89,17 @@ make gate-sweep   # accuracy vs Layer-1 species gate
   (0.20 → precision 0.59). Occurrence-based uniqueness (a marker unique iff present at any copy
   in one cluster) lifts similar-strain precision/abundance; a residual gap needs overlap-aware
   deconvolution.
+- **Species expansion (StrainScan's own pre-built DBs — *A. muciniphila*, *P. copri*,
+  *M. tuberculosis*):** speed/memory advantage replicates (~20–30× faster, ~9–18× lighter where
+  StrainScan completes); precision/recall shows a genuine trade-off (StrainScan
+  precision-first, Strain2bScan recall-first, 0.75–0.93 recall throughout). Surfaced two
+  distinct, biologically-grounded limitations beyond clustering collapse: **recombination-driven
+  false uniqueness** in the highly mosaic *P. copri* genome (a marker "unique" in a 40-genome
+  panel can still be carried by the true strain via recombination — expected to improve with
+  larger panels), and **StrainScan itself failing to complete** on near-clonal *M. tuberculosis*
+  (>3.3 h, >25.5 GB RAM, 1 sample, killed) — a real scalability ceiling of full-k-mer
+  regression-based Layer-2 on very low-diversity species that Strain2bScan's simpler detection
+  has no analog of. See `docs/species_expansion.md`.
 
 ## Notes
 - Committed scripts are the exact ones used (paths parameterized via `$WORKDIR` /
