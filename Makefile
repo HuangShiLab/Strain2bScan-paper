@@ -48,6 +48,11 @@ species-expansion: $(WORKDIR)   ## 3 more StrainScan-native species via its own 
 	cd $(WORKDIR) && python3 $(SCRIPTS)/dl_strainscan_dbs.py
 	cd $(WORKDIR) && python3 $(SCRIPTS)/run_species_expansion.py
 
+panelsize: $(WORKDIR)           ## P. copri panel-size test (nested 40/80/112; ENA genomes)
+	cd $(WORKDIR) && python3 $(SCRIPTS)/run_panelsize.py
+	cp $(WORKDIR)/panelsize/panelsize_results.tsv results/panelsize_prevotella.tsv
+	python3 $(SCRIPTS)/plot_panelsize.py
+
 enzyme-sweep: refqual-data      ## enzyme-count sweep on C. acnes (markers/accuracy/cost vs #enzymes)
 	cd $(WORKDIR) && python3 $(SCRIPTS)/sim_depth.py
 	cd $(WORKDIR) && python3 $(SCRIPTS)/run_enzyme_sweep.py && python3 $(SCRIPTS)/plot_enzyme_sweep.py
@@ -67,10 +72,12 @@ figures:                        ## regenerate all figures from results/*.tsv (no
 	python3 scripts/plot_refqual.py
 	python3 scripts/plot_community_throughput.py
 	python3 scripts/plot_species_expansion.py
+	python3 scripts/plot_panelsize.py
 
 clean:                          ## remove the work directory
 	rm -rf $(WORKDIR)
 
 .PHONY: genomes samples build scaling accuracy gate-sweep \
         refqual-data refqual refqual-strainscan refqual-checkm2 enzyme-sweep \
-        cross-species-data cross-species headtohead-strainscan figures clean
+        cross-species-data cross-species headtohead-strainscan \
+        species-expansion panelsize figures clean

@@ -48,13 +48,41 @@ genomes form **40 singleton clusters (0.231 precision) despite maximal apparent 
 genuinely distinct genome accessions, and confirmed several false positives have *higher*
 read support/coverage than the true positives — ruling out a simple confidence-threshold fix).
 *P. copri* is documented in the literature as highly recombinogenic with mosaic genomes; a
-marker that is "unique" within a **40-genome reference subset** can still be carried by the
-*true* (mosaic) sample strain if a recombination breakpoint happens to match a segment private
-to some *other* panel genome. Panel-uniqueness ⇒ genome-uniqueness only holds when the panel
-is large/complete enough to have already captured that segment elsewhere as shared — so, unlike
-clustering collapse (a fixed property of the species), **this failure mode is expected to
-improve with reference panel size** (a 40-genome subset is only ~35% of StrainScan's own
-112-genome *P. copri* panel).
+marker that is "unique" within a reference panel can still be carried by the *true* (mosaic)
+sample strain if a recombination breakpoint happens to match a segment private to some *other*
+panel genome.
+
+### Panel-size test: prediction made, then REFUTED
+
+We initially predicted this would **improve with reference panel size** (reasoning: a bigger
+panel is more likely to already contain, somewhere, any given recombinant segment, so it gets
+reclassified as shared rather than falsely unique). We tested it directly: strictly-nested
+panels **40 ⊂ 80 ⊂ 111** genomes (111/112 of StrainScan's whole *P. copri* panel; one genome
+un-fetchable), the **identical 5 samples**, Strain2bScan only (`scripts/run_panelsize.py`,
+`results/panelsize_prevotella.tsv`, `figures/panelsize_prevotella.*`; genomes from EBI/ENA as
+NCBI was IP-blocked during this run — GCA vs GCF assemblies, hence the 40-genome baseline reads
+0.194 here vs 0.231 in the NCBI-sourced run above, within assembly-source noise).
+
+| panel size | clusters | precision | recall |
+|---|---|---|---|
+| 40 | 40 | 0.194 | 0.650 |
+| 80 | 80 | 0.121 | 0.400 |
+| 111 | 111 | 0.114 | 0.400 |
+
+**The prediction was wrong — precision *and* recall both DECLINE as the panel grows.** The
+mechanism is the opposite of what we guessed: because *P. copri* genomes are all distinct
+(every added genome is a new singleton cluster), a larger panel means (a) **more** singleton
+clusters whose "unique" markers a mosaic sample strain can spuriously match → more false
+positives, and (b) the true strain's own previously-unique markers get reclassified as shared
+once a recombination-similar genome is added → the true cluster loses detectable unique signal
+→ recall drops too. So for a highly recombinant species, adding reference genomes makes the
+simple unique-marker Layer-2 *worse*, not better.
+
+This is a **stronger** result than a confirmation would have been: it shows the false-uniqueness
+problem is **intrinsic to unique-marker detection for recombinant species and cannot be fixed by
+enlarging the database** — it specifically needs a joint, overlap-aware Layer-2 (deconvolve which
+few clusters best explain the reads, rather than calling every cluster with enough matched
+"unique" markers). It sharpens, rather than weakens, the motivation for that step.
 
 **3. Mycobacterium tuberculosis: StrainScan itself did not complete.** Profiling a *single*
 simulated sample against StrainScan's own 792-strain pre-built DB ran for **>3.3 hours and
@@ -75,20 +103,23 @@ has no such failure mode (P=0.824, R=0.933, sub-second).
 2. **Precision/recall is a genuine, honestly-reported trade-off**, not a Strain2bScan
    weakness to paper over — cite it plainly, alongside the resolvability framing from
    `docs/cross_species.md`.
-3. **Two distinct, biologically-grounded limitations**, not one: clustering collapse (fixed by
-   more diverse panels) vs. recombination-driven false uniqueness (mitigated by *larger*
-   panels of the *same* species) — both point to the same fix, **overlap-aware Layer-2**
-   (StrainScan's own lasso/overlap-matrix step), which is more robust to both regimes than our
-   simple detect+depth Layer-2, at the cost of the numerical/scaling fragility item 3 exposes
-   on near-clonal species.
+3. **Two distinct, biologically-grounded limitations**, not one: clustering collapse (a fixed
+   species property) vs. recombination-driven false uniqueness. Critically, the panel-size test
+   above shows the recombination case is **not** fixable by a larger database (both precision
+   and recall got worse) — it, like clustering collapse, needs the **overlap-aware Layer-2**
+   (StrainScan's lasso/overlap-matrix step): jointly deconvolve which few clusters explain the
+   reads rather than calling every cluster with enough matched "unique" markers. That single fix
+   addresses both regimes, at the cost of the numerical/scaling fragility item 3 exposes on
+   near-clonal species — a real design tension to state in the paper, not hide.
 4. **A genuine scalability ceiling for full-k-mer regression on near-clonal species** — a
    novel, citable robustness result distinct from the standard "faster/lighter" efficiency claim.
 
 ## Caveats
 
 - 40-genome subsets (not each species' full StrainScan panel) — chosen for tractable
-  build/profile time; the *P. copri* finding explicitly predicts accuracy should improve with
-  a larger subset (worth testing before submission).
+  build/profile time. For *P. copri* we went further and tested the full nested 40/80/111 panel
+  (above): accuracy did **not** improve — it declined — refuting our initial "bigger panel
+  helps" prediction and localizing the fix to an overlap-aware Layer-2 instead.
 - Reads are simulated, error-free, closed-world (truth strains guaranteed in both DBs by
   construction) — a stronger, real-world test needs held-out strains and sequencing errors.
 - The *M. tuberculosis* DNF is one data point (1 sample, killed rather than left to completion)

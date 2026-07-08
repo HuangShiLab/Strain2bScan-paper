@@ -52,6 +52,7 @@ Makefile    convenience targets for the multi-species benchmark
 | Enzyme count vs performance (the 2bRAD knob) | `results/enzyme_sweep.tsv` + `figures/enzyme_sweep.*` | `make enzyme-sweep` |
 | Cross-species generalization (3 species, our own panels) | `results/cross_species.tsv` + `figures/cross_species.*` | `make cross-species` |
 | Species expansion (3 more, StrainScan's own pre-built DBs) | `results/species_expansion.tsv` + `figures/species_expansion.*` | `make species-expansion`; see `docs/species_expansion.md` |
+| P. copri panel-size test (does a bigger DB fix it? — no) | `results/panelsize_prevotella.tsv` + `figures/panelsize_prevotella.*` | `make panelsize`; see `docs/species_expansion.md` |
 
 ### Quick multi-species run
 ```bash
@@ -94,9 +95,12 @@ make gate-sweep   # accuracy vs Layer-1 species gate
   StrainScan completes); precision/recall shows a genuine trade-off (StrainScan
   precision-first, Strain2bScan recall-first, 0.75–0.93 recall throughout). Surfaced two
   distinct, biologically-grounded limitations beyond clustering collapse: **recombination-driven
-  false uniqueness** in the highly mosaic *P. copri* genome (a marker "unique" in a 40-genome
-  panel can still be carried by the true strain via recombination — expected to improve with
-  larger panels), and **StrainScan itself failing to complete** on near-clonal *M. tuberculosis*
+  false uniqueness** in the highly mosaic *P. copri* genome (a marker "unique" in the panel can
+  still be carried by the true strain via recombination). We predicted a larger reference panel
+  would fix this and **tested it — it did not**: on nested 40/80/112-genome panels, precision and
+  recall both *declined*, showing the problem is intrinsic to unique-marker detection and needs
+  an overlap-aware Layer-2, not a bigger database. We also found **StrainScan itself failing to
+  complete** on near-clonal *M. tuberculosis*
   (>3.3 h, >25.5 GB RAM, 1 sample, killed) — a real scalability ceiling of full-k-mer
   regression-based Layer-2 on very low-diversity species that Strain2bScan's simpler detection
   has no analog of. See `docs/species_expansion.md`.
