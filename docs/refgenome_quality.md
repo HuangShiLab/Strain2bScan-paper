@@ -30,29 +30,33 @@ The simulator is faithful: an 80%-complete *C. acnes* genome yields **28,397 sin
 vs 34,387 for the original (0.83×)** — tags drop ~proportionally to completeness, which also
 validates Strain2bScan's tag-count completeness proxy (`quality.rs`).
 
-## Results (Strain2bScan arm; `results/refqual_degradation.tsv`, `figures/refqual_figure.*`)
+## Results (Strain2bScan arm, strand-fixed; `results/refqual_degradation.tsv`, `figures/refqual_figure.*`)
 
 | completeness | contamination | contigs | clusters | precision | recall | Bray–Curtis |
 |---|---|---|---|---|---|---|
-| 100% | 0% | 1 | 60 | **0.90** | 0.56 | **0.25** |
-| 95% | 1% | 20 | 61 | 0.80 | 0.50 | 0.36 |
-| 90% | 2% | 50 | 61 | 0.80 | 0.50 | 0.39 |
-| 80% | 5% | 100 | 61 | 0.80 | 0.50 | 0.37 |
-| 70% | 8% | 200 | 61 | 0.80 | 0.50 | 0.36 |
-| 50% | 10% | 400 | 61 | **0.64** | 0.44 | **0.46** |
+| 100% | 0% | 1 | 17 | **1.00** | 0.64 | 0.29 |
+| 95% | 1% | 20 | 20 | 1.00 | 0.75 | 0.21 |
+| 90% | 2% | 50 | 20 | 1.00 | 0.75 | 0.21 |
+| 80% | 5% | 100 | 20 | 1.00 | 0.38 | 0.60 |
+| 70% | 8% | 200 | 20 | 1.00 | 0.19 | 0.71 |
+| 50% | 10% | 400 | 20 | **0.00** | **0.00** | **1.00** |
 
-- **Precision and abundance error are the sensitive readouts.** Even mild degradation
-  (95% / 1%) drops precision 0.90→0.80 and nearly doubles abundance error (Bray–Curtis
-  0.25→0.36) — contamination adds spurious markers that trigger false-positive clusters.
-- **A clear threshold appears at low quality**: at 50% completeness / 10% contamination,
-  precision falls to 0.64, recall to 0.44, Bray–Curtis to 0.46.
-- Cluster count ticks 60→61 (a degraded truth strain splitting off — the spurious-split
-  mechanism), modest here because the panel's clusters are mostly singletons already.
+- **Precision is robust to moderate degradation.** With correct (strand-fixed) digestion,
+  precision stays at 1.0 all the way from complete genomes down to 70% completeness / 8%
+  contamination — mild-to-moderate reference degradation does *not* cause false positives.
+  (Pre-fix, precision spuriously dropped 0.90→0.64; that was the strand bug, not degradation.)
+- **Recall and abundance error are the sensitive readouts, with a cliff at severe degradation.**
+  Recall holds ~0.64–0.75 down to 90% completeness, then falls (0.38 at 80%, 0.19 at 70%) as
+  missing/fragmented reference sequence erodes each strain's detectable markers; abundance error
+  (Bray–Curtis) rises in step.
+- **Catastrophic failure at 50% completeness / 10% contamination / 400 contigs**: the DB
+  degrades enough that detection collapses entirely (P=R=0). This is a hard floor — below
+  ~MIMAG medium quality the reference is unusable for strain profiling.
 
-This supports the hypothesis: **below a quality threshold (~MIMAG medium quality), reference
-assembly quality has a non-negligible effect on strain profiling.** Recall is dominated by the
-sparse-marker low-abundance-minor limit (≈0.5 even at 100%), so precision and Bray–Curtis are
-the cleaner indicators of the reference-quality effect.
+This supports the hypothesis in a cleaner form than the pre-fix run: **precision is safe until
+severe degradation, while recall/abundance degrade progressively and then cliff at ~50%
+completeness.** Reference assembly quality matters, but Strain2bScan tolerates moderate
+degradation without false positives.
 
 ## StrainScan arm (run on Linux)
 

@@ -4,15 +4,15 @@ Scripts, accession lists, ground truth, result tables, and analysis notes for th
 **Strain2bScan** manuscript. The software lives at
 [HuangShiLab/Strain2bScan](https://github.com/HuangShiLab/Strain2bScan).
 
-> **⚠ Re-verification in progress (strand-invariance digestion fix).** A core correctness bug
-> was found: tag extraction was not reverse-complement invariant, so reference genomes (digested
-> forward-only) and reads (both strands) lived in different marker spaces, causing over-detection
-> of similar strains. It is now fixed (both-strand digestion; software HEAD). This **changes
-> marker counts, clustering, and accuracy across the board — for the better**: e.g. *P. copri*
-> precision went 0.19 → **1.0**. Accuracy numbers below that predate the fix **understate** the
-> tool and are being re-run with the fixed binary. The *P. copri* panel-size result
-> (`docs/species_expansion.md`) is already updated; others (cross-species, species-expansion,
-> multi-species, depth, enzyme, refqual) are pending re-run.
+> **Note — strand-invariance digestion fix (all benchmarks re-run).** A core correctness bug was
+> found and fixed mid-project: tag extraction was not reverse-complement invariant, so reference
+> genomes (digested forward-only) and reads (both strands) lived in different marker spaces,
+> causing spurious over-detection of similar strains and corrupting clustering. The fix
+> (both-strand digestion) makes accuracy near-perfect (precision 1.0 across the cross-species,
+> species-expansion and panel-size benchmarks; low-depth detection now matches StrainScan) at the
+> cost of ~2× more markers (so the per-sample speed edge is ~6× rather than the pre-fix ~14×).
+> **Every benchmark below has been re-run with the fixed binary**; the numbers here are the
+> fixed-binary results.
 
 Large data (genomes, reads, databases) is **not** committed — everything is regenerated from
 the committed accession lists + seeded scripts, so the repository stays small and fully
@@ -73,47 +73,37 @@ make build scaling
 make gate-sweep   # accuracy vs Layer-1 species gate
 ```
 
-## Headline results (see `results/` and `docs/` for detail)
-- **Speed/memory:** ~14× faster, ~7× less memory per sample than StrainScan (real *C. acnes*).
+## Headline results (see `results/` and `docs/` for detail; all strand-fixed)
+- **Speed/memory:** ~6× faster, ~7× less memory per sample than StrainScan (*C. acnes*:
+  1.25 s / 115 MB vs 7.06 s / 828 MB). The ~6× (vs a pre-fix ~14×) reflects the 2× markers from
+  both-strand digestion — a correctness-over-speed tradeoff, recoverable by framing one canonical
+  tag per site.
 - **Scalability:** per-sample cost independent of species count (digest once, match many),
-  confirmed flat from 10 to **55 real species**; linear in samples from 10 to **500**; ~9×
-  parallel build speedup; MinHash clustering identical to exact.
-- **Complex-community efficiency (55 species, measured):** **~167× faster at 100 samples**
-  (3.7 min vs a projected 10.4 h), **~192× at 500 samples** (16 min vs ~2.2 days) than running
-  StrainScan once per species per sample — the only mode available to a tool with no
-  multi-species support. See `docs/multispecies.md`.
-- **Accuracy (55-species panel):** with the Layer-1 species gate, species precision 0.97–0.99
-  and strain recall ≥0.994 across gate settings 10–800; without a gate, precision collapses on
-  a naive 40-species panel (cross-species sharing) — evidence that the two-layer (species →
-  strain) design is necessary, and that occurrence-based uniqueness (below) improves it further.
-- **Depth:** below ~1× per strain, full-k-mer StrainScan is more sensitive; Strain2bScan
-  matches it at sufficient depth while being far faster/lighter.
-- **Reference quality (supp.):** degrading the reference DB (completeness↓, contamination↑,
-  fragmentation↑) lowers precision (0.90→0.64) and roughly doubles abundance error
-  (Bray–Curtis 0.25→0.46) by ≤50% completeness / 10% contamination — Jaccard clustering is
-  completeness-sensitive, motivating the `quality.rs` filters.
-- **Enzyme count (the 2bRAD knob):** ≥4 enzymes reach full strain resolution; **~8 is the
-  accuracy sweet spot** (precision 1.0, Bray–Curtis 0.15) — more enzymes add cost and noise
-  with no accuracy gain (14: precision 0.90). Enzyme count trades efficiency ↔ resolution.
-- **Cross-species:** accuracy tracks intra-species **resolvability** (clusters/genomes): high
-  for diverse *C. acnes* (0.94 → precision 0.90), lower for similar-strain *S. epidermidis*
-  (0.20 → precision 0.59). Occurrence-based uniqueness (a marker unique iff present at any copy
-  in one cluster) lifts similar-strain precision/abundance; a residual gap needs overlap-aware
-  deconvolution.
+  flat from 10 to **55 real species** (~4.6 s); linear in samples (~4.1 s/sample, 10→200
+  measured, extrapolated to 500); ~5× parallel build speedup.
+- **Complex-community efficiency (55 species):** **~91× faster at 100 samples** (6.8 min vs a
+  projected 10.4 h) and **~92× at 500 samples** (34 min vs ~52 h) than running StrainScan once
+  per species per sample — the only mode available to a tool with no multi-species support.
+  See `docs/multispecies.md`.
+- **Accuracy (55-species panel):** with the Layer-1 species gate, species precision **0.96→1.0**
+  (gate 10→400), species recall 0.98, strain recall 0.98.
+- **Cross-species (C. acnes, S. aureus, S. epidermidis):** **precision 1.0 for all three**,
+  recall 0.81–1.0, Bray–Curtis 0.01–0.24. The earlier "resolvability gradient" (precision
+  0.90→0.48) was a strand-bug artifact; clustering now matches StrainScan's own granularity.
+- **Depth:** Strain2bScan now **detects down to 0.5×, matching StrainScan** (both miss at 0.1×).
+  The earlier "less sensitive below ~1×" was the strand bug.
+- **Enzyme count (the 2bRAD knob):** precision 1.0 from ≥2 enzymes; recall climbs to 0.81 and
+  plateaus by **~8 enzymes (the sweet spot)** — 14 is no better. 1 enzyme is too sparse to resolve.
+- **Reference quality (supp.):** precision stays **1.0 down to 70% completeness / 8%
+  contamination**; recall and abundance error degrade progressively and hit a hard cliff (total
+  failure) at 50% completeness / 10% contamination / 400 contigs.
 - **Species expansion (StrainScan's own pre-built DBs — *A. muciniphila*, *P. copri*,
-  *M. tuberculosis*):** speed/memory advantage replicates (~20–30× faster, ~9–18× lighter where
-  StrainScan completes); precision/recall shows a genuine trade-off (StrainScan
-  precision-first, Strain2bScan recall-first, 0.75–0.93 recall throughout). Surfaced two
-  distinct, biologically-grounded limitations beyond clustering collapse: **recombination-driven
-  false uniqueness** in the highly mosaic *P. copri* genome (a marker "unique" in the panel can
-  still be carried by the true strain via recombination). We predicted a larger reference panel
-  would fix this and **tested it — it did not**: on nested 40/80/112-genome panels, precision and
-  recall both *declined*, showing the problem is intrinsic to unique-marker detection and needs
-  an overlap-aware Layer-2, not a bigger database. We also found **StrainScan itself failing to
-  complete** on near-clonal *M. tuberculosis*
-  (>3.3 h, >25.5 GB RAM, 1 sample, killed) — a real scalability ceiling of full-k-mer
-  regression-based Layer-2 on very low-diversity species that Strain2bScan's simpler detection
-  has no analog of. See `docs/species_expansion.md`.
+  *M. tuberculosis*):** Strain2bScan **precision 1.0** on all three (~10–13× faster, ~7–15×
+  lighter where StrainScan completes), matching StrainScan's precision while recall-first. The
+  one low recall, *M. tuberculosis* (0.46), reflects **genuine near-clonality** (40 genomes → 8
+  clusters), not a bug. **StrainScan itself did not complete** on *M. tuberculosis* (>3.3 h,
+  >25.5 GB RAM, 1 sample) — a real scalability ceiling of its full-k-mer regression Layer-2 on
+  near-clonal species. See `docs/species_expansion.md`.
 
 ## Notes
 - Committed scripts are the exact ones used (paths parameterized via `$WORKDIR` /

@@ -1,9 +1,9 @@
-# Community-scale strain profiling: 55 real species, measured Strain2bScan multi-profile
-# throughput vs a StrainScan projection (S species x N samples, each run at its measured
-# per-run cost on C. acnes, 6.8s -- StrainScan has no multi-species mode).
+# Community-scale: 55 real species, MEASURED Strain2bScan multi-profile vs a StrainScan
+# projection (S species x N samples at its measured 6.8s/run; no multi-species mode).
+# STRAND-FIXED binary (both-strand digestion). N=500 is extrapolated (per-sample x 500).
 n_samples	s2bscan_measured_s	s2bscan_per_sample_s	strainscan_projected_s	speedup_x
-10	20	2.0	3740.0	187.0
-50	102	2.04	18700.0	183.3
-100	224	2.24	37400.0	167.0
-200	396	1.98	74800.0	188.9
-500	972	1.944	187000.0	192.4
+10	44	4.361	3740	85
+50	205	4.095	18700	91
+100	409	4.086	37400	91
+200	815	4.077	74800	92
+500	2038	4.077	187000	92
