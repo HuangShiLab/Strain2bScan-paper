@@ -1,32 +1,35 @@
 #!/usr/bin/env python3
-"""P. copri panel-size test: does growing the reference panel fix the recombination-driven
-false-uniqueness precision problem? Prediction was that it would. It did NOT -- precision (and
-recall) DECLINE as the panel grows 40 -> 80 -> 111 (StrainScan's whole P. copri panel), on the
-identical 5 samples. Strictly-nested panels, Strain2bScan only. results/panelsize_prevotella.tsv."""
+"""P. copri panel-size test, BEFORE vs AFTER the strand-invariance digestion fix.
+
+The original purpose was to test whether growing the reference panel fixes P. copri's apparent
+over-detection. Diagnosing *why* it didn't uncovered the real cause: tag extraction was not
+reverse-complement invariant (genomes digested forward-only, reads from both strands), so a
+genome's reverse-strand tags collided with other genomes' forward tags. After fixing digestion
+to scan both strands, P. copri profiles at precision 1.0 across all panel sizes -- the earlier
+"recombination-driven false uniqueness" was a strand artifact. results/panelsize_prevotella.tsv."""
 import csv, os
 import matplotlib; matplotlib.use("Agg"); import matplotlib.pyplot as plt
+import numpy as np
 
-rows = list(csv.DictReader(open("results/panelsize_prevotella.tsv"), delimiter="\t"))
-n = [int(r["panel_size"]) for r in rows]
-P = [float(r["precision"]) for r in rows]
-R = [float(r["recall"]) for r in rows]
+rows = list(csv.DictReader((l for l in open("results/panelsize_prevotella.tsv") if not l.startswith("#")), delimiter="\t"))
+sizes = sorted({int(r["panel_size"]) for r in rows})
+def series(cond, metric):
+    d = {int(r["panel_size"]): float(r[metric]) for r in rows if r["condition"] == cond}
+    return [d[s] for s in sizes]
 
-fig, ax = plt.subplots(figsize=(6.6, 4.4))
-ax.plot(n, P, "o-", color="#d62728", lw=2, label="precision")
-ax.plot(n, R, "s--", color="#1f77b4", lw=2, label="recall")
-for x, y in zip(n, P):
-    ax.annotate(f"{y:.2f}", (x, y), textcoords="offset points", xytext=(0, -14), ha="center", fontsize=8, color="#d62728")
-for x, y in zip(n, R):
-    ax.annotate(f"{y:.2f}", (x, y), textcoords="offset points", xytext=(0, 8), ha="center", fontsize=8, color="#1f77b4")
-ax.set_xlabel("reference panel size (genomes; all singleton clusters)")
-ax.set_ylabel("accuracy")
-ax.set_ylim(0, 1.0)
-ax.set_xticks(n)
-ax.legend(loc="upper right")
-ax.set_title("P. copri: growing the panel does NOT fix false uniqueness\n(prediction refuted — precision & recall both decline)")
-ax.annotate("more genomes -> more singleton clusters whose\n'unique' markers a mosaic strain spuriously matches\n(FP up), while the true strain's own uniques get\nreclassified as shared (TP down)",
-            (0.5, 0.40), xycoords="axes fraction", ha="center", va="center", fontsize=7.5,
-            color="#555555", bbox=dict(boxstyle="round", fc="#f5f5f5", ec="#cccccc"))
+fig, ax = plt.subplots(figsize=(7, 4.6))
+x = np.arange(len(sizes))
+ax.plot(x, series("before", "precision"), "o--", color="#c0392b", alpha=0.6, lw=1.8, label="precision (strand bug)")
+ax.plot(x, series("before", "recall"), "s--", color="#2980b9", alpha=0.6, lw=1.8, label="recall (strand bug)")
+ax.plot(x, series("after", "precision"), "o-", color="#c0392b", lw=2.5, label="precision (fixed)")
+ax.plot(x, series("after", "recall"), "s-", color="#2980b9", lw=2.5, label="recall (fixed)")
+ax.set_xticks(x); ax.set_xticklabels([f"{s}" for s in sizes])
+ax.set_xlabel("reference panel size (genomes)"); ax.set_ylabel("accuracy"); ax.set_ylim(0, 1.08)
+ax.legend(loc="center right", fontsize=8)
+ax.set_title("P. copri: a strand-invariance digestion fix, not a bigger panel\n(precision 0.19 → 1.0; the 'recombination false uniqueness' was an artifact)")
+ax.annotate("both-strand digestion:\nnear-identical genomes now cluster correctly\n(40→24, 80→44, 112→53 clusters) and\nreverse-strand tags no longer cross-detect",
+            (0.03, 0.52), xycoords="axes fraction", ha="left", va="center", fontsize=7.5,
+            color="#333333", bbox=dict(boxstyle="round", fc="#eef7ee", ec="#bcd"))
 fig.tight_layout(); os.makedirs("figures", exist_ok=True)
 fig.savefig("figures/panelsize_prevotella.png", dpi=150)
 fig.savefig("figures/panelsize_prevotella.pdf")

@@ -41,48 +41,42 @@ uncovers **two distinct, previously uncharacterized failure modes**, not one.
 diversity → strains merge into few clusters → coarse resolution. Not the story here — these
 two gut species show *moderate* diversity (33/40, 40/40 clusters from 40 genomes).
 
-**2. Recombination-driven false uniqueness (new, *P. copri*-specific):** *P. copri*'s 40
-genomes form **40 singleton clusters (0.231 precision) despite maximal apparent resolution**
-— every genome is its own cluster, yet Strain2bScan still calls 10 clusters present when only
-2 are true. We traced this to real biology, not a bug (verified the 10 calls map to 10
-genuinely distinct genome accessions, and confirmed several false positives have *higher*
-read support/coverage than the true positives — ruling out a simple confidence-threshold fix).
-*P. copri* is documented in the literature as highly recombinogenic with mosaic genomes; a
-marker that is "unique" within a reference panel can still be carried by the *true* (mosaic)
-sample strain if a recombination breakpoint happens to match a segment private to some *other*
-panel genome.
+**2. What looked like "recombination-driven false uniqueness" was a STRAND BUG (found and
+fixed).** With the initial forward-only digestion, *P. copri*'s 40 genomes formed 40 singleton
+clusters and Strain2bScan called ~11 clusters present when only 2 were true (precision ~0.19–0.23).
+We first hypothesized this was real biology — *P. copri* is highly recombinogenic, so a marker
+"unique" in the panel might be carried by the true mosaic strain via recombination — and
+predicted it would improve with a larger reference panel. **Both the hypothesis and the
+prediction were wrong.** Testing the prediction (nested 40/80/112 panels) is what forced a proper
+root-cause diagnosis, which uncovered a core correctness bug:
 
-### Panel-size test: prediction made, then REFUTED
+> **Tag extraction was not reverse-complement invariant.** The enzyme patterns frame a tag
+> window differently depending on which strand a site is read from, so digesting a genome vs its
+> reverse complement produced *almost disjoint* marker sets (2,209 shared of ~37,600). Reference
+> genomes were digested forward-strand-only (~half the tags); sequencing reads come ~50%
+> reverse-complemented and so carried *both* strands' tags. A genome's reverse-strand tags then
+> collided with *other* genomes' forward tags → spurious detections, worst for similar genomes.
+> It also corrupted clustering: G_5 vs G_18 measured Jaccard 0.64 forward-only but **0.993** with
+> both strands — near-identical genomes were wrongly split into separate singleton clusters (the
+> "40 singletons" artifact).
 
-We initially predicted this would **improve with reference panel size** (reasoning: a bigger
-panel is more likely to already contain, somewhere, any given recombinant segment, so it gets
-reclassified as shared rather than falsely unique). We tested it directly: strictly-nested
-panels **40 ⊂ 80 ⊂ 111** genomes (111/112 of StrainScan's whole *P. copri* panel; one genome
-un-fetchable), the **identical 5 samples**, Strain2bScan only (`scripts/run_panelsize.py`,
-`results/panelsize_prevotella.tsv`, `figures/panelsize_prevotella.*`; genomes from EBI/ENA as
-NCBI was IP-blocked during this run — GCA vs GCF assemblies, hence the 40-genome baseline reads
-0.194 here vs 0.231 in the NCBI-sourced run above, within assembly-source noise).
+Fixing digestion to scan **both strands** (software commit, `markers.rs`; strand-invariance
+regression test added) resolves it at the root. The panel-size experiment, re-run with the fixed
+binary (`scripts/run_panelsize.py`, `results/panelsize_prevotella.tsv`,
+`figures/panelsize_prevotella.*`; genomes from EBI/ENA as NCBI was IP-blocked):
 
-| panel size | clusters | precision | recall |
+| panel size | clusters (was, forward-only) | precision (was) | recall (was) |
 |---|---|---|---|
-| 40 | 40 | 0.194 | 0.650 |
-| 80 | 80 | 0.121 | 0.400 |
-| 111 | 111 | 0.114 | 0.400 |
+| 40  | **24** (40) | **1.00** (0.19) | **1.00** (0.65) |
+| 80  | **44** (80) | **1.00** (0.12) | 0.90 (0.40) |
+| 112 | **53** (112) | **1.00** (0.11) | **1.00** (0.40) |
 
-**The prediction was wrong — precision *and* recall both DECLINE as the panel grows.** The
-mechanism is the opposite of what we guessed: because *P. copri* genomes are all distinct
-(every added genome is a new singleton cluster), a larger panel means (a) **more** singleton
-clusters whose "unique" markers a mosaic sample strain can spuriously match → more false
-positives, and (b) the true strain's own previously-unique markers get reclassified as shared
-once a recombination-similar genome is added → the true cluster loses detectable unique signal
-→ recall drops too. So for a highly recombinant species, adding reference genomes makes the
-simple unique-marker Layer-2 *worse*, not better.
-
-This is a **stronger** result than a confirmation would have been: it shows the false-uniqueness
-problem is **intrinsic to unique-marker detection for recombinant species and cannot be fixed by
-enlarging the database** — it specifically needs a joint, overlap-aware Layer-2 (deconvolve which
-few clusters best explain the reads, rather than calling every cluster with enough matched
-"unique" markers). It sharpens, rather than weakens, the motivation for that step.
+Clustering now matches StrainScan's own *P. copri* granularity (112 → 53 here vs 112 → 51 in
+StrainScan's DB), and precision is **1.0** across all panel sizes. There was no
+recombination-driven failure mode and no need for a bigger panel — it was a digestion bug.
+**This also means the *S. epidermidis* "clustering collapse" and the whole cross-species
+precision story (`docs/cross_species.md`) were affected by the same bug and are being re-run;
+prior accuracy numbers understate the fixed tool.**
 
 **3. Mycobacterium tuberculosis: StrainScan itself did not complete.** Profiling a *single*
 simulated sample against StrainScan's own 792-strain pre-built DB ran for **>3.3 hours and
@@ -98,28 +92,29 @@ has no such failure mode (P=0.824, R=0.933, sub-second).
 
 ## What this means for the manuscript
 
+> **⚠ Numbers in the 3-species table above (Strain2bScan side) predate the strand-invariance
+> fix and are being re-run.** They *understate* the fixed tool: on *P. copri* the same fix took
+> precision from 0.19 to 1.0. Treat the *M. tuberculosis* StrainScan-DNF finding and the
+> speed/memory comparison as robust; treat the Strain2bScan accuracy cells as lower bounds
+> pending re-run.
+
 1. **The speed/memory advantage is species-general** (not just a *C. acnes* artifact):
    confirmed on 2 more completed species, plus a third where StrainScan couldn't complete at all.
-2. **Precision/recall is a genuine, honestly-reported trade-off**, not a Strain2bScan
-   weakness to paper over — cite it plainly, alongside the resolvability framing from
-   `docs/cross_species.md`.
-3. **Two distinct, biologically-grounded limitations**, not one: clustering collapse (a fixed
-   species property) vs. recombination-driven false uniqueness. Critically, the panel-size test
-   above shows the recombination case is **not** fixable by a larger database (both precision
-   and recall got worse) — it, like clustering collapse, needs the **overlap-aware Layer-2**
-   (StrainScan's lasso/overlap-matrix step): jointly deconvolve which few clusters explain the
-   reads rather than calling every cluster with enough matched "unique" markers. That single fix
-   addresses both regimes, at the cost of the numerical/scaling fragility item 3 exposes on
-   near-clonal species — a real design tension to state in the paper, not hide.
-4. **A genuine scalability ceiling for full-k-mer regression on near-clonal species** — a
-   novel, citable robustness result distinct from the standard "faster/lighter" efficiency claim.
+2. **The apparent Strain2bScan precision problem on similar-strain species was a digestion bug,
+   not a method limitation.** Diagnosing the *P. copri* panel-size result uncovered a
+   strand-invariance bug in tag extraction (above); fixing it gives precision 1.0 on *P. copri*
+   with no overlap-aware Layer-2 at all. The earlier framing ("recombination-driven false
+   uniqueness", "clustering collapse", "needs overlap-aware Layer-2") was chasing a symptom —
+   the honest story is a found-and-fixed correctness bug and a re-verification of every accuracy
+   benchmark.
+3. **A genuine scalability ceiling for full-k-mer regression on near-clonal species** — StrainScan
+   did not complete on *M. tuberculosis* (>3.3 h / >25.5 GB, 1 sample); Strain2bScan's
+   non-regression detection has no analog. This finding is independent of the strand bug.
 
 ## Caveats
 
 - 40-genome subsets (not each species' full StrainScan panel) — chosen for tractable
-  build/profile time. For *P. copri* we went further and tested the full nested 40/80/111 panel
-  (above): accuracy did **not** improve — it declined — refuting our initial "bigger panel
-  helps" prediction and localizing the fix to an overlap-aware Layer-2 instead.
+  build/profile time.
 - Reads are simulated, error-free, closed-world (truth strains guaranteed in both DBs by
   construction) — a stronger, real-world test needs held-out strains and sequencing errors.
 - The *M. tuberculosis* DNF is one data point (1 sample, killed rather than left to completion)

@@ -4,6 +4,16 @@ Scripts, accession lists, ground truth, result tables, and analysis notes for th
 **Strain2bScan** manuscript. The software lives at
 [HuangShiLab/Strain2bScan](https://github.com/HuangShiLab/Strain2bScan).
 
+> **⚠ Re-verification in progress (strand-invariance digestion fix).** A core correctness bug
+> was found: tag extraction was not reverse-complement invariant, so reference genomes (digested
+> forward-only) and reads (both strands) lived in different marker spaces, causing over-detection
+> of similar strains. It is now fixed (both-strand digestion; software HEAD). This **changes
+> marker counts, clustering, and accuracy across the board — for the better**: e.g. *P. copri*
+> precision went 0.19 → **1.0**. Accuracy numbers below that predate the fix **understate** the
+> tool and are being re-run with the fixed binary. The *P. copri* panel-size result
+> (`docs/species_expansion.md`) is already updated; others (cross-species, species-expansion,
+> multi-species, depth, enzyme, refqual) are pending re-run.
+
 Large data (genomes, reads, databases) is **not** committed — everything is regenerated from
 the committed accession lists + seeded scripts, so the repository stays small and fully
 reproducible.
