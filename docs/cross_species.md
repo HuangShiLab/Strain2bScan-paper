@@ -1,67 +1,66 @@
 # Cross-species generalization (C. acnes, S. aureus, S. epidermidis)
 
-**Goal.** Test whether the strain-profiling results generalize beyond *C. acnes*, and
-characterize how performance depends on the species. Real NCBI panels (60 complete genomes
-each for the Staphylococci; the 64-genome *C. acnes* panel), identical 14-enzyme pipeline.
-*C. acnes* uses the real MockMetagenomes4Benchmark samples; S. aureus / S. epidermidis use
-simulated strain-mixture mocks (`scripts/sim_strain_mock.py`: 2–5 strains/sample, log-normal
-depth ≥1×, matching the *C. acnes* design). `results/cross_species.tsv`, `figures/cross_species.*`.
+**Goal.** Test whether strain profiling generalizes across species. Real NCBI/ENA panels
+(*C. acnes* 64 genomes, *S. aureus* 60, *S. epidermidis* 60), identical 14-enzyme pipeline,
+5 simulated strain-mixture mocks per species (2–5 strains, log-normal depth ≥1×).
+`results/cross_species.tsv`, `figures/cross_species.*`, `scripts/run_cross_species.py`.
 
-| species | genomes | clusters | clusters/genomes | strain-specific markers | precision | recall | Bray–Curtis |
-|---|---|---|---|---|---|---|---|
-| *C. acnes* | 64 | **60** | **0.94** | 18,566 | **0.90** | 0.56 | 0.25 |
-| *S. aureus* | 60 | 28 | 0.47 | 20,258 | 0.52 | 0.87 | 0.59 |
-| *S. epidermidis* | 60 | **12** | **0.20** | 5,856 | 0.59 | 0.91 | 0.37 |
+> **This experiment was re-run after the strand-invariance digestion fix** (see
+> `docs/species_expansion.md` and the software repo). The earlier version of this doc reported a
+> "resolvability gradient" in which precision fell from *C. acnes* (0.90) to *S. epidermidis*
+> (0.48), and attributed it to clustering collapse in low-diversity species. **That gradient was
+> an artifact of the strand bug**, not biology — see below.
 
-*(with occurrence-based uniqueness — see below.)*
+## Result (strand-fixed)
 
-## The key axis: intra-species resolvability
+| species | genomes | clusters | precision | recall | Bray–Curtis |
+|---|---|---|---|---|---|
+| *C. acnes* | 64 | 16 | **1.00** | 0.81 | 0.24 |
+| *S. aureus* | 60 | 17 | **1.00** | 0.86 | 0.24 |
+| *S. epidermidis* | 60 | 11 | **1.00** | **1.00** | **0.01** |
 
-`clusters / genomes` at the 0.95 Jaccard cut measures how many strains are actually
-**distinguishable**: *C. acnes* genomes are nearly all distinct (60 clusters from 64 genomes),
-whereas *S. epidermidis* strains are so similar that 60 genomes collapse into **12** clusters.
-This is a real biological property of each species, not a method artifact — no marker method
-can resolve strains that are near-identical.
+**Precision is 1.0 for all three species** — no false positives. Recall is high (0.81–1.0) and
+abundance error (Bray–Curtis) is low (0.01–0.24). *S. epidermidis*, which in the buggy run
+looked like the worst case (precision 0.48, Bray–Curtis 0.80), is now the *best* (1.00 / 0.01).
 
-**Precision tracks resolvability** (0.90 → 0.52 → 0.59 as clusters/genomes falls 0.94 → 0.20).
-In heavily-clustered, low-diversity species the profiler tends to **over-detect**: reads from a
-present strain can match a *different* large cluster's markers. We traced the dominant cause to
-**single-copy-filter asymmetry** — a tag single-copy in cluster A but multi-copy (hence
-single-copy-filtered) in cluster B's genomes was labelled "unique to A" yet is still produced
-by B's reads. Two fixes were added, in order of impact:
-- **Occurrence-based uniqueness** (a marker is unique iff it occurs *at any copy number* in
-  exactly one cluster's genomes) removes these false-unique markers at the detection step. It
-  is the main lever: *S. epidermidis* precision 0.48→**0.59** and Bray–Curtis 0.80→**0.37**,
-  *S. aureus* recall 0.73→**0.87**, with *C. acnes* unchanged (P=0.90).
-- A **coverage-fraction gate** (`--min-coverage`, default 0.1) additionally removes large,
-  similar clusters called at a tiny coverage fraction.
+Before → after the fix:
 
-A residual gap remains for the hardest low-diversity cases (precision ≈0.5–0.6), where
-near-identical strains are intrinsically ambiguous from short reads.
+| species | precision | recall | Bray–Curtis |
+|---|---|---|---|
+| *C. acnes* | 0.90 → **1.00** | 0.56 → 0.81 | 0.25 → 0.24 |
+| *S. aureus* | 0.50 → **1.00** | 0.73 → 0.86 | 0.59 → 0.24 |
+| *S. epidermidis* | 0.48 → **1.00** | 0.91 → 1.00 | 0.80 → **0.01** |
 
-## What this means for the manuscript
+## What changed and why
 
-1. **The method generalizes where strains are resolvable.** For species with sufficient
-   intra-species diversity (*C. acnes*), Strain2bScan gives high-precision strain calls; the
-   speed/scale advantages are species-independent.
-2. **Resolvability is a species property, reported honestly.** `clusters/genomes` (and the
-   `NOT DOABLE` verdict) tell the user, per species, how fine a resolution the data support —
-   consistent with "not all species are strain-resolvable."
-3. **Low-diversity species are partly rescued by occurrence-based uniqueness**, which lifts
-   precision/abundance on *S. epidermidis*/*S. aureus* at no cost to *C. acnes*. The residual
-   gap (precision ≈0.5–0.6) is the known hard case that StrainScan tackles with a within-cluster
-   overlap-matrix / lasso Layer-2; adding a full overlap-aware deconvolution on top of
-   occurrence-based uniqueness is the remaining step for near-identical strains.
+The earlier "accuracy tracks intra-species **resolvability** (clusters/genomes)" story rested on
+a cluster count that was itself corrupted: forward-only digestion made genome assemblies in
+opposite strand orientations look nearly disjoint (Jaccard 0.64 for two ~identical genomes),
+so near-identical genomes were split into separate clusters (*C. acnes* 64→**60** clusters) and
+each split cluster's spurious "unique" markers cross-detected. With both-strand digestion the
+clustering is correct — *C. acnes* 64→**16**, *S. aureus* 60→**17**, *S. epidermidis* 60→**11**
+— now consistent with StrainScan's own granularity (its *C. acnes* DB clusters 275 genomes into
+28; its *S. epidermidis* 995 into 378). The clusters/genomes "gradient" (0.94/0.47/0.20) is gone
+(now 0.25/0.28/0.18), and precision is uniformly 1.0.
 
-## Reproduce
-```bash
-export STRAIN2BSCAN_BIN=/path/to/strain2bscan
-make cross-species        # downloads pinned Staph panels + C. acnes data, runs all 3 species
-# -> work/xspec/cross_species.tsv, work/figures/cross_species.*
-```
+**Occurrence-based uniqueness and the coverage-fraction gate**, which the earlier doc credited
+with partially mitigating the over-detection, were treating a symptom; the real cause was the
+strand bug. They remain in place and are harmless, but are no longer load-bearing for these
+species.
+
+## For the manuscript
+
+1. **Strain profiling generalizes cleanly across species**: precision 1.0 on all three, good
+   recall, low abundance error — a much stronger and simpler claim than the earlier gradient.
+2. **Recall, not precision, is now the species-dependent axis**, and it reflects *genuine*
+   intra-species diversity: where strains are near-clonal (see *M. tuberculosis* in
+   `docs/species_expansion.md`, recall ~0.46), cluster resolution is intrinsically coarse; where
+   strains are distinct, recall is high. This is honest resolvability, no longer confounded by a
+   digestion artifact.
 
 ## Caveats
-- Staph mocks are simulated error-free from the same panel used to build the DB (closed-world),
-  as for *C. acnes*; an error model and held-out truth strains would harden the comparison.
-- Two of three species use simulated samples (the benchmark repo only ships *C. acnes* reads);
-  real S. aureus/S. epidermidis mocks (Figshare, when available) would replace the simulation.
+
+- Simulated error-free reads, closed-world (truth strains in the DB). An error model and
+  held-out strains would harden it.
+- Genomes fetched from EBI/ENA (NCBI was IP-blocked during the re-run); GCA vs GCF assemblies
+  are near-identical for these prokaryotic WGS genomes.

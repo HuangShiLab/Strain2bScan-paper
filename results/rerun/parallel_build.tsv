@@ -1,0 +1,4 @@
+metric	threads_1_s	threads_16_s	speedup
+db_build	54.12	11.07	4.9
+profile_sample4	10.04	1.36	7.4
+# build: 16 clusters, peak 355 MB (16t); DB now both-strand (~2x markers)

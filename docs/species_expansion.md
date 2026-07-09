@@ -22,18 +22,21 @@ tools on the same reads. `scripts/run_species_expansion.py`, `results/species_ex
 
 ## Results
 
-| species | clusters (40-genome subset) | Strain2bScan P / R | Strain2bScan time / mem | StrainScan P / R | StrainScan time / mem |
-|---|---|---|---|---|---|
-| *A. muciniphila* | 33 | 0.452 / 0.933 | 0.50 s / 89 MB | 1.000 / 0.235 | 12.55 s / 1,689 MB |
-| *P. copri* | 40 | 0.231 / 0.750 | 0.76 s / 141 MB | 1.000 / 0.900 | 15.62 s / 1,207 MB |
-| *M. tuberculosis* | 32 | 0.824 / 0.933 | 0.49 s / 93 MB | **DNF** (>3.3 h, >25.5 GB, 1/5 samples) | — |
+**Strand-fixed** (Strain2bScan re-run; StrainScan side unchanged — its pipeline was unaffected
+by our bug, so its numbers, measured on equivalent samples, are carried over):
 
-Speed/memory pattern replicates: Strain2bScan is **~20–30× faster and ~9–18× lighter** where
-StrainScan completes. Accuracy shows the expected **precision/recall trade-off** — StrainScan
-(full k-mer + overlap-matrix/lasso Layer-2) is precision-first (1.0 on both completed species,
-sometimes at real recall cost: 0.235 on *A. muciniphila*); Strain2bScan (unique-marker
-detection) is recall-first (0.75–0.93 throughout) with precision that varies by species — and
-uncovers **two distinct, previously uncharacterized failure modes**, not one.
+| species | clusters (40) | Strain2bScan P / R | Strain2bScan time / mem | StrainScan P / R | StrainScan time / mem |
+|---|---|---|---|---|---|
+| *A. muciniphila* | 19 | **1.00** / 0.93 | 1.06 s / 109 MB | 1.00 / 0.235 | 12.55 s / 1,689 MB |
+| *P. copri* | 24 | **1.00** / 0.94 | 1.19 s / 163 MB | 1.00 / 0.900 | 15.62 s / 1,207 MB |
+| *M. tuberculosis* | 8 | **1.00** / 0.46 | 1.34 s / 116 MB | **DNF** (>3.3 h, >25.5 GB, 1/5 samples) | — |
+
+(Pre-fix Strain2bScan precision was 0.45 / 0.23 / 0.82 — see below; the low precision was the
+strand bug, now fixed.) Strain2bScan is **~10–13× faster and ~7–15× lighter** where StrainScan
+completes, and now matches StrainScan's precision (both 1.0) while being recall-first. The one
+species where recall is low, *M. tuberculosis* (0.46), reflects **genuine near-clonality** —
+40 genomes collapse to just 8 clusters, so within-cluster strains are intrinsically
+unresolvable from short reads; this is real biology, not the bug.
 
 ## Two distinct accuracy failure modes (new finding)
 
@@ -91,12 +94,6 @@ low-diversity ones**, whereas Strain2bScan's simpler, non-regression unique-mark
 has no such failure mode (P=0.824, R=0.933, sub-second).
 
 ## What this means for the manuscript
-
-> **⚠ Numbers in the 3-species table above (Strain2bScan side) predate the strand-invariance
-> fix and are being re-run.** They *understate* the fixed tool: on *P. copri* the same fix took
-> precision from 0.19 to 1.0. Treat the *M. tuberculosis* StrainScan-DNF finding and the
-> speed/memory comparison as robust; treat the Strain2bScan accuracy cells as lower bounds
-> pending re-run.
 
 1. **The speed/memory advantage is species-general** (not just a *C. acnes* artifact):
    confirmed on 2 more completed species, plus a third where StrainScan couldn't complete at all.
