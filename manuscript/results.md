@@ -1,5 +1,15 @@
 # Strain2bScan — Results (draft)
 
+> **⚠ Narrative + numbers below PREDATE the strand-invariance digestion fix and need revision.**
+> A core bug (forward-only tag extraction) was found and fixed after this draft. It changes the
+> story substantially — for the better: accuracy is now precision 1.0 across species (the
+> "resolvability gradient" and "low-diversity over-detection" here were bug artifacts), low-depth
+> detection now matches StrainScan at 0.5×, and the per-sample speed edge is ~6× (not ~14×; the
+> DB doubled). The authoritative fixed numbers/figures are in `results/*.tsv`, `figures/*`, and
+> the updated `docs/*` (cross_species, multispecies, depth_sensitivity, enzyme_sweep,
+> refgenome_quality, species_expansion). This prose should be rewritten around: *accurate +
+> fast/light + community-scale + 2bRAD-capable*, dropping the "operating envelope" framing.
+
 ## Faster and lighter than StrainScan per sample
 
 On five real *C. acnes* mock samples profiled against a 64-genome panel, Strain2bScan and

@@ -1,5 +1,13 @@
 # Strain2bScan — Discussion (draft)
 
+> **⚠ Needs revision after the strand-invariance fix.** Much of the discussion below is built on
+> the pre-fix "accuracy–efficiency frontier / resolvability envelope / low-depth weakness"
+> framing, which the fix obsoletes: accuracy is now precision 1.0 across species and low-depth
+> sensitivity matches StrainScan. Keep the genuinely-still-valid threads — cluster-level as the
+> honest unit of strain analysis, the community-scale efficiency argument (now ~91×), the
+> BcgI-2bRAD niche, and StrainScan's *M. tuberculosis* non-completion — and drop the "trades
+> low-depth/low-diversity sensitivity" positioning. See the updated `docs/*` for fixed numbers.
+
 Strain2bScan reframes strain-level profiling around a sparse, reproducible marker set. By
 porting StrainScan's clustering-plus-unique-marker framework onto 2bRAD tags in Rust, it turns
 a ~50–100× smaller marker database into large, structural gains in speed, memory and

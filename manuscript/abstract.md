@@ -13,25 +13,24 @@ genome and has been used for species-level profiling, but not for strain resolut
 
 **Results.** We present Strain2bScan, a Rust strain profiler that ports the StrainScan
 resolution framework (within-species clustering plus unique-marker scoring) onto **2bRAD
-markers** — the 32–38 bp tags released by type-IIB restriction digestion, a ~1–2% subset of
-the genome. Strain2bScan accepts both BcgI 2bRAD experimental libraries and in-silico
-digestion of conventional metagenomes with up to 16 enzymes. On a real *Cutibacterium acnes*
-benchmark it profiles **~14× faster and with ~7× less peak memory** than StrainScan at
-comparable accuracy for sufficiently distinct, sufficiently covered strains; because the
-sample is digested once and matched against every per-species database, its per-sample cost is
-**independent of the number of species and linear in the number of samples**, and MinHash-based
-clustering scales to large panels without changing the result. We map the operating envelope:
-accuracy is high at ≥~5× per-strain depth and for species with high intra-species diversity
-(*C. acnes*), and declines below ~1× depth and for low-diversity species whose strains are
-near-identical (*Staphylococcus epidermidis*); the number of enzymes is a tunable
-efficiency-versus-resolution knob (≈8 enzymes optimal). Strain2bScan reports honestly when a
-species is not strain-resolvable and includes assembly-quality filtering that counters the
-completeness-driven bias of Jaccard clustering.
+markers** — the 32–38 bp tags released by type-IIB restriction digestion. Strain2bScan accepts
+both BcgI 2bRAD experimental libraries and in-silico digestion of conventional metagenomes with
+up to 16 enzymes. Across five species (*Cutibacterium acnes*, *Staphylococcus aureus*,
+*S. epidermidis*, *Akkermansia muciniphila*, *Prevotella copri*) it achieves **precision 1.0**
+with high recall and low abundance error, and detects strains down to **0.5× coverage —
+matching StrainScan** — while profiling each sample **~6× faster and with ~7× less peak
+memory**. Because the sample is digested once and matched against every per-species database,
+per-sample cost is **independent of the number of species and linear in the number of
+samples**: on a 55-species community it profiles ~91× faster than running a per-species tool
+once per species (∼7 min vs a projected ∼10 h at 100 samples). Recall is limited only by
+*genuine* near-clonality — where strains are nearly identical (*Mycobacterium tuberculosis*),
+cluster resolution is intrinsically coarse — and, notably, StrainScan's regression-based
+within-cluster step failed to complete on *M. tuberculosis* (>3 h, >25 GB) where Strain2bScan
+finished in ~1 s.
 
-**Conclusions.** Strain2bScan trades a controlled amount of low-depth and low-diversity
-sensitivity for large gains in speed, memory, and scalability, making genome-resolved
-strain surveillance across many species and samples practical, and uniquely enabling
-strain-level analysis of BcgI 2bRAD experimental data.
+**Conclusions.** Strain2bScan delivers accurate, genome-resolved strain profiling at a fraction
+of the compute and memory of full-k-mer methods, scales to communities of many species across
+many samples, and uniquely enables strain-level analysis of BcgI 2bRAD experimental data.
 
 **Availability.** Rust source: https://github.com/HuangShiLab/Strain2bScan · reproducible
 benchmarks and figures: https://github.com/HuangShiLab/Strain2bScan-paper.
@@ -39,7 +38,12 @@ benchmarks and figures: https://github.com/HuangShiLab/Strain2bScan-paper.
 ---
 
 ### Author-facing notes (delete before submission)
-- Keep the honest framing: **efficiency + envelope + 2bRAD capability**, not "more accurate."
-- Numbers to finalize against the last re-verified run: 14× / 7× (Fig 1); ≈8-enzyme optimum
-  (Fig 4); resolvability→precision (Fig 5); depth onset 0.5× vs 1×/5× (Fig 3).
-- Add one sentence on the StrainScan same-panel head-to-head once the Linux run is in (step 3).
+- Framing (post strand-fix): **accurate (precision 1.0) + fast/light + community-scale +
+  2bRAD capability**. The earlier "operating envelope / accuracy tracks resolvability" framing
+  is obsolete — that gradient was a digestion bug (see `docs/species_expansion.md`), now fixed.
+- Numbers are from the strand-fixed binary: ~6×/~7× (Fig 1); ~91× community (Fig, multispecies);
+  precision 1.0 cross-species (Fig 5); depth onset 0.5× = StrainScan (Fig 3); ~8-enzyme sweet
+  spot (Fig 4). All `results/*.tsv` and `docs/*` are regenerated with the fix.
+- The honest cost to state: both-strand digestion doubles markers → ~6× (not ~14×) speed edge;
+  recoverable by framing one canonical tag per site.
+- Add the StrainScan same-panel build head-to-head once the Linux run is in.
