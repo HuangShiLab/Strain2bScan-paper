@@ -33,10 +33,15 @@ Machine: 16-core arm64 macOS, 51 GB RAM.
 | s5 | 0.51 s | 115 MB | 6.77 s | 828 MB |
 | **mean** | **0.50 s** | **~120 MB** | **~7.0 s** | **828 MB** |
 
-→ **Strain2bScan is ~14× faster and ~7× lighter per sample** (both at default parallelism on
-16 cores; sample1's StrainScan time includes process cold-start, typical ~6.8 s). The memory
-gap is structural: StrainScan counts the full k-mer set with jellyfish (~800 MB hash);
-Strain2bScan streams reads and keeps only sparse 2b-tag markers. Even single-threaded,
+> **⚠ The Strain2bScan column above is PRE strand-fix (forward-only, ~half the markers).** With
+> the strand fix (both-strand digestion, ~2× markers), re-measured Strain2bScan is **1.25 s /
+> 115 MB** per sample (`results/headtohead_performance.tsv`) → **~6× faster, ~7× lighter** than
+> StrainScan. The StrainScan column is unchanged (its pipeline was unaffected by our bug).
+
+→ **Strain2bScan is ~6× faster and ~7× lighter per sample** (strand-fixed; the pre-fix ~14×
+reflected ~half the markers). The memory gap is structural: StrainScan counts the full k-mer set
+with jellyfish (~800 MB hash); Strain2bScan streams reads and keeps only sparse 2b-tag markers.
+Even single-threaded,
 Strain2bScan profile is ~3.4 s — still faster than StrainScan. (DB build: Strain2bScan 2.6 s
 @16 threads / 22.4 s @1 thread on 64 genomes; StrainScan build not runnable on macOS — see above.)
 
@@ -70,7 +75,7 @@ StrainScan can't build on macOS, run this on Linux:
    resolution (remap truth via membership). Identical panel → clean accuracy comparison.
 
 ## Takeaways for the manuscript
-- **Performance claim is well-supported**: ~14× faster, ~7× less memory per sample, with the
+- **Performance claim is well-supported**: ~6× faster, ~7× less memory per sample (strand-fixed; ~14× pre-fix), with the
   memory advantage structurally attributable to sparse 2b markers vs full k-mer counting.
 - **Accuracy claim needs the same-panel benchmark on Linux** (above). Current evidence:
   Strain2bScan detects dominant/co-dominant strains at precision 0.90 on the 64-panel; on
