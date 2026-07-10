@@ -32,9 +32,11 @@ conventional shotgun reads with up to 16 enzymes. Operating on the sparse tag se
 database ~50–100× smaller and lets a sample be digested **once** and matched against every
 per-species database, so the per-sample cost becomes independent of the number of species.
 We show that this yields ~8× faster, ~11× lighter per-sample profiling and near-flat scaling
-in species count on real *Cutibacterium acnes* data; we map the operating envelope
-(sufficient depth, sufficient intra-species diversity) across depth, enzyme count and three
-species; and we show that the number of enzymes is a tunable knob trading efficiency against
-resolution. Strain2bScan reports honestly when a species is not strain-resolvable, and trades
-a controlled amount of low-depth and low-diversity sensitivity for the scalability that
-community-wide, population-scale strain profiling requires.
+in species count on real *Cutibacterium acnes* data — reaching ~132× throughput over a
+per-species k-mer tool on a 55-species community — while holding **precision 1.0** across
+species, matching StrainScan's detection onset at 0.5× coverage and matching or exceeding its
+recall on StrainScan's own databases; and that the number of enzymes is a tunable knob trading
+efficiency against resolution, with single-enzyme BcgI operation enabling native 2bRAD data.
+Where recall is limited it reflects genuine near-clonality — the intrinsic short-read resolution
+limit — which Strain2bScan reports honestly, and at which StrainScan failed to complete on
+*Mycobacterium tuberculosis* while Strain2bScan finished in ~1 s.
