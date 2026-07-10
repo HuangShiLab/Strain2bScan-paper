@@ -43,9 +43,9 @@ benchmarks and figures: https://github.com/HuangShiLab/Strain2bScan-paper.
 - Framing (post strand-fix): **accurate (precision 1.0) + fast/light + community-scale +
   2bRAD capability**. The earlier "operating envelope / accuracy tracks resolvability" framing
   is obsolete — that gradient was a digestion bug (see `docs/species_expansion.md`), now fixed.
-- Numbers are from the strand-fixed binary: ~6×/~7× (Fig 1); ~91× community (Fig, multispecies);
-  precision 1.0 cross-species (Fig 5); depth onset 0.5× = StrainScan (Fig 3); ~8-enzyme sweet
-  spot (Fig 4). All `results/*.tsv` and `docs/*` are regenerated with the fix.
-- The honest cost to state: both-strand digestion doubles markers → ~6× (not ~14×) speed edge;
-  recoverable by framing one canonical tag per site.
+- Numbers are from the corrected-enzyme binary: ~8×/~11× (Fig 1); ~132× community (Fig, multispecies);
+  precision 1.0 cross-species (Fig 5); depth onset 0.5× = StrainScan (Fig 3); ~4-enzyme sweet
+  spot (Fig 4). All `results/*.tsv` and `docs/*` are regenerated with the corrected binary.
+- Interoperability point worth foregrounding: tags match Fast2bRAD-M / 2bRADExtraction.pl exactly,
+  so the species layer (Fast2bRAD-M) and strain layer (Strain2bScan) share one tag space.
 - Add the StrainScan same-panel build head-to-head once the Linux run is in.
