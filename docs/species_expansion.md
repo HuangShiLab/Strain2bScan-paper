@@ -27,15 +27,15 @@ by our bug, so its numbers, measured on equivalent samples, are carried over):
 
 | species | clusters (40) | Strain2bScan P / R | Strain2bScan time / mem | StrainScan P / R | StrainScan time / mem |
 |---|---|---|---|---|---|
-| *A. muciniphila* | 19 | **1.00** / 0.93 | 1.06 s / 109 MB | 1.00 / 0.235 | 12.55 s / 1,689 MB |
-| *P. copri* | 24 | **1.00** / 0.94 | 1.19 s / 163 MB | 1.00 / 0.900 | 15.62 s / 1,207 MB |
-| *M. tuberculosis* | 8 | **1.00** / 0.46 | 1.34 s / 116 MB | **DNF** (>3.3 h, >25.5 GB, 1/5 samples) | — |
+| *A. muciniphila* | 19 | **1.00** / 0.93 | 0.75 s / 71 MB | 1.00 / 0.235 | 12.55 s / 1,689 MB |
+| *P. copri* | 23 | **1.00** / 0.94 | 0.68 s / 81 MB | 1.00 / 0.900 | 15.62 s / 1,207 MB |
+| *M. tuberculosis* | 5 | **1.00** / 0.25 | 0.89 s / 85 MB | **DNF** (>3.3 h, >25.5 GB, 1/5 samples) | — |
 
 (Pre-fix Strain2bScan precision was 0.45 / 0.23 / 0.82 — see below; the low precision was the
 strand bug, now fixed.) Strain2bScan is **~10–13× faster and ~7–15× lighter** where StrainScan
 completes, and now matches StrainScan's precision (both 1.0) while being recall-first. The one
-species where recall is low, *M. tuberculosis* (0.46), reflects **genuine near-clonality** —
-40 genomes collapse to just 8 clusters, so within-cluster strains are intrinsically
+species where recall is low, *M. tuberculosis* (0.25), reflects **genuine near-clonality** —
+40 genomes collapse to just 5 clusters, so within-cluster strains are intrinsically
 unresolvable from short reads; this is real biology, not the bug.
 
 ## Two distinct accuracy failure modes (new finding)
@@ -63,19 +63,20 @@ root-cause diagnosis, which uncovered a core correctness bug:
 > both strands — near-identical genomes were wrongly split into separate singleton clusters (the
 > "40 singletons" artifact).
 
-Fixing digestion to scan **both strands** (software commit, `markers.rs`; strand-invariance
-regression test added) resolves it at the root. The panel-size experiment, re-run with the fixed
+The strand asymmetry was ultimately traced to **wrong enzyme tag lengths** (15 of 16 enzymes; only
+BcgI was correct), which made the forward/reverse recognition patterns stop being reverse-complement
+pairs. The fix ports Fast2bRAD-M's correct tag lengths and keeps a single forward-strand scan +
+canonical hash (now strand-invariant, and interoperable with Fast2bRAD-M). The panel-size experiment, re-run with the fixed
 binary (`scripts/run_panelsize.py`, `results/panelsize_prevotella.tsv`,
 `figures/panelsize_prevotella.*`; genomes from EBI/ENA as NCBI was IP-blocked):
 
 | panel size | clusters (was, forward-only) | precision (was) | recall (was) |
 |---|---|---|---|
-| 40  | **24** (40) | **1.00** (0.19) | **1.00** (0.65) |
-| 80  | **44** (80) | **1.00** (0.12) | 0.90 (0.40) |
-| 112 | **53** (112) | **1.00** (0.11) | **1.00** (0.40) |
+| 40  | **23** (40) | **1.00** (0.19) | **1.00** (0.65) |
+| 80  | **43** (80) | **1.00** (0.12) | 0.95 (0.40) |
+| 112 | **51** (112) | **1.00** (0.11) | **1.00** (0.40) |
 
-Clustering now matches StrainScan's own *P. copri* granularity (112 → 53 here vs 112 → 51 in
-StrainScan's DB), and precision is **1.0** across all panel sizes. There was no
+Clustering now matches StrainScan's own *P. copri* granularity (112 → **51** here, exactly StrainScan's 112 → 51), and precision is **1.0** across all panel sizes. There was no
 recombination-driven failure mode and no need for a bigger panel — it was a digestion bug.
 **This also means the *S. epidermidis* "clustering collapse" and the whole cross-species
 precision story (`docs/cross_species.md`) were affected by the same bug and are being re-run;
@@ -84,14 +85,14 @@ prior accuracy numbers understate the fixed tool.**
 **3. Mycobacterium tuberculosis: StrainScan itself did not complete.** Profiling a *single*
 simulated sample against StrainScan's own 792-strain pre-built DB ran for **>3.3 hours and
 >25.5 GB RAM** without finishing (we killed it to protect the host machine) — on a task
-Strain2bScan completes in 0.49 s / 93 MB. *M. tuberculosis* is textbook near-clonal (very low
+Strain2bScan completes in ~0.9 s / 85 MB (precision 1.0, recall 0.25). *M. tuberculosis* is textbook near-clonal (very low
 inter-strain diversity), and we attribute this to StrainScan's within-cluster Layer-2, which
 solves a lasso/regression over highly collinear (near-identical) genome columns — a regime
 where such regressions are known to become numerically unstable or slow to converge. This is
 itself a notable finding: **the full-k-mer regression-based approach that gives StrainScan its
 precision advantage on diverse species can become computationally pathological on very
 low-diversity ones**, whereas Strain2bScan's simpler, non-regression unique-marker detection
-has no such failure mode (P=0.824, R=0.933, sub-second).
+has no such failure mode (P=1.0, R=0.25, sub-second).
 
 ## What this means for the manuscript
 

@@ -7,7 +7,7 @@
 > This doc previously reported that StrainScan was *more* sensitive (Strain2bScan onset ~1–5×
 > vs StrainScan 0.5×) and framed it as a fundamental 2bRAD marker-sparsity limit. That was an
 > artifact of the **strand bug**: forward-only digestion recovered only ~half the strain's tags,
-> so at low depth too few were observed. With both-strand digestion (the fix), the observed
+> so at low depth too few were observed. With the correct (Fast2bRAD-M) tag lengths (the fix), the observed
 > marker count per unit depth roughly doubles, and the low-depth gap disappears.
 
 ## Experiment

@@ -15,20 +15,20 @@
 
 | species | genomes | clusters | precision | recall | Bray–Curtis |
 |---|---|---|---|---|---|
-| *C. acnes* | 64 | 16 | **1.00** | 0.81 | 0.24 |
-| *S. aureus* | 60 | 17 | **1.00** | 0.86 | 0.24 |
+| *C. acnes* | 64 | 16 | **1.00** | 0.75 | 0.24 |
+| *S. aureus* | 60 | 17 | **1.00** | 0.79 | 0.33 |
 | *S. epidermidis* | 60 | 11 | **1.00** | **1.00** | **0.01** |
 
-**Precision is 1.0 for all three species** — no false positives. Recall is high (0.81–1.0) and
-abundance error (Bray–Curtis) is low (0.01–0.24). *S. epidermidis*, which in the buggy run
+**Precision is 1.0 for all three species** — no false positives. Recall is high (0.75–1.0) and
+abundance error (Bray–Curtis) is low (0.02–0.33). *S. epidermidis*, which in the buggy run
 looked like the worst case (precision 0.48, Bray–Curtis 0.80), is now the *best* (1.00 / 0.01).
 
 Before → after the fix:
 
 | species | precision | recall | Bray–Curtis |
 |---|---|---|---|
-| *C. acnes* | 0.90 → **1.00** | 0.56 → 0.81 | 0.25 → 0.24 |
-| *S. aureus* | 0.50 → **1.00** | 0.73 → 0.86 | 0.59 → 0.24 |
+| *C. acnes* | 0.90 → **1.00** | 0.56 → 0.75 | 0.25 → 0.24 |
+| *S. aureus* | 0.50 → **1.00** | 0.73 → 0.79 | 0.59 → 0.33 |
 | *S. epidermidis* | 0.48 → **1.00** | 0.91 → 1.00 | 0.80 → **0.01** |
 
 ## What changed and why
@@ -37,7 +37,9 @@ The earlier "accuracy tracks intra-species **resolvability** (clusters/genomes)"
 a cluster count that was itself corrupted: forward-only digestion made genome assemblies in
 opposite strand orientations look nearly disjoint (Jaccard 0.64 for two ~identical genomes),
 so near-identical genomes were split into separate clusters (*C. acnes* 64→**60** clusters) and
-each split cluster's spurious "unique" markers cross-detected. With both-strand digestion the
+each split cluster's spurious "unique" markers cross-detected. With the correct (Fast2bRAD-M) tag
+lengths — which restore the forward/reverse patterns as reverse-complement pairs, making a
+single-strand scan strand-invariant — the
 clustering is correct — *C. acnes* 64→**16**, *S. aureus* 60→**17**, *S. epidermidis* 60→**11**
 — now consistent with StrainScan's own granularity (its *C. acnes* DB clusters 275 genomes into
 28; its *S. epidermidis* 995 into 378). The clusters/genomes "gradient" (0.94/0.47/0.20) is gone
@@ -54,7 +56,7 @@ species.
    recall, low abundance error — a much stronger and simpler claim than the earlier gradient.
 2. **Recall, not precision, is now the species-dependent axis**, and it reflects *genuine*
    intra-species diversity: where strains are near-clonal (see *M. tuberculosis* in
-   `docs/species_expansion.md`, recall ~0.46), cluster resolution is intrinsically coarse; where
+   `docs/species_expansion.md`, recall ~0.25), cluster resolution is intrinsically coarse; where
    strains are distinct, recall is high. This is honest resolvability, no longer confounded by a
    digestion artifact.
 
