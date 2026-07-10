@@ -69,3 +69,48 @@ CheckM2 validation of degraded refs, per-sample tables, BcgI-2bRAD verification 
 enzyme knob → robustness (panel size + quality) → efficiency & community scale (our headline) →
 head-to-head vs StrainScan → real saliva case study (individual discrimination + paired
 shotgun/2bRAD).**
+
+## Additions from prior Strain2bfunc data (PPTX 2026-07-10)
+
+Three prior results from the Strain2bfunc project (`Strain2bFunc_20260710--Shi.pptx`) strengthen
+the paper. All were generated with **Strain2bfunc** (the earlier heavy Python tool). The
+2bRAD-representation result is tool-agnostic and reusable as-is; the two data-driven results should
+be **re-run with Strain2bScan** to show it reproduces them at a fraction of the compute.
+
+**New motivation figure — 2bRAD captures strain-level signal that 16S cannot.** Across 15 common
+pathogenic/probiotic species, the correlation of between-strain distances with whole-genome (Mash)
+distance is **0.68–0.99 for 2bRAD (median ~0.90) vs 0.002–0.73 for 16S (median ~0.28)** — e.g.
+*S. aureus* 0.970 vs 0.114, *M. tuberculosis* 0.957 vs 0.002, *C. acnes* 0.985 vs 0.354 (slide 23),
+with example dendrograms (whole-genome / 2bRAD / 16S) for *A. actinomycetemcomitans*,
+*P. gingivalis*, *K. pneumoniae*, *L. plantarum* (slides 22, 24). This is the "why 2bRAD for
+strains" motivation — StrainScan's Fig 1 analog. Tool-agnostic (a property of the 2bRAD
+representation); recomputable directly from Strain2bScan's tags.
+
+**New figure — DNA mock community, real DNA with known truth (low-biomass / high-host niche).**
+ATCC MSA-1002 (20 strains, even) and MSA-1003 (staggered), Strain2bfunc-on-2bRAD vs inStrain-on-WMS
+(slide 26). Strain2bfunc-2bRAD: **precision 1.0, recall 1.0, F1 1.0** down to **0.001 ng input** and
+up to **99% human-DNA contamination** (Bray–Curtis 0.82–0.94); inStrain-WMS: precision 0.4–0.5 with
+many false positives, collapsing at 99% host (BC 0.36). This closes the "all simulated" gap with a
+real-DNA ground-truth benchmark, adds a second comparator (**inStrain**), and demonstrates the
+**low-biomass/high-host niche** — a major selling point currently absent from the plan. Re-run with
+Strain2bScan (needs the raw 2bRAD + WMS reads).
+
+**Saliva case study — now with a target result.** The saliva chapter (8 subjects × 4 timepoints =
+32) already has a Strain2bfunc result to reproduce: strain-level Adonis R² up to **0.87** (*Rothia
+mucilaginosa*) > **species-level 0.72**, and a host-ID ML model at **100% accuracy from 65
+strain-level features (6 species)** vs 96.9% from 1530 species-level features (slides 31–32).
+
+**Framing decision (needed).** These are Strain2bfunc outputs. To carry the tool-specific ones
+(mock, saliva) into a *Strain2bScan* paper, either (a) **re-run with Strain2bScan** on the raw reads
+(best — shows reproduction at lower compute; needs the reads on the Mac Studio/HPC), or (b) present
+as prior validation of the 2bRAD approach with attribution. The Mash-distance figure works directly
+either way.
+
+**Proposed updated main-figure sequence:** Fig 1 schematic → **Fig 2 2bRAD-vs-16S motivation** →
+Fig 3 cross-species accuracy → Fig 4 depth → Fig 5 enzyme knob → Fig 6 robustness → Fig 7 efficiency
+& community scale → Fig 8 head-to-head vs StrainScan → **Fig 9 DNA mock community (real DNA, vs
+inStrain, low-biomass/high-host)** → Fig 10 saliva case study.
+
+The low-biomass / high-host-contamination angle (slides 10–11: saliva ≥90% human DNA, FFPE <150 bp,
+skin <1 ng) is a distinct 2bRAD selling point worth foregrounding in the Introduction, and the mock
+figure is its quantitative payoff.
