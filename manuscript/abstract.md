@@ -43,9 +43,16 @@ benchmarks and figures: https://github.com/HuangShiLab/Strain2bScan-paper.
 - Framing (post strand-fix): **accurate (precision 1.0) + fast/light + community-scale +
   2bRAD capability**. The earlier "operating envelope / accuracy tracks resolvability" framing
   is obsolete — that gradient was a digestion bug (see `docs/species_expansion.md`), now fixed.
-- Numbers are from the corrected-enzyme binary: ~8×/~11× (Fig 1); ~132× community (Fig, multispecies);
-  precision 1.0 cross-species (Fig 5); depth onset 0.5× = StrainScan (Fig 3); ~4-enzyme sweet
-  spot (Fig 4). All `results/*.tsv` and `docs/*` are regenerated with the corrected binary.
+- Figure numbering follows `docs/results_figure_plan.md` / `manuscript/results.md`: Fig 1 overview
+  schematic, Fig 2 cross-species accuracy, Fig 3 depth, Fig 4 enzyme knob, Fig 5 robustness
+  (panel-size + ref-quality), Fig 6 efficiency & community scale, Fig 7 head-to-head vs StrainScan,
+  Fig 8 saliva (planned). File map: cross_species.png=Fig 2, depth_sensitivity=Fig 3,
+  enzyme_sweep=Fig 4, panelsize_prevotella+refqual_figure=Fig 5, performance+scalability+
+  community_throughput=Fig 6, species_expansion=Fig 7.
+- Numbers are from the corrected-enzyme binary: precision 1.0 cross-species (Fig 2); depth onset
+  0.5× = StrainScan (Fig 3); ~4-enzyme sweet spot (Fig 4); ~8×/~11× per sample + ~132× community
+  (Fig 6). All `results/*.tsv` and `docs/*` are regenerated with the corrected binary.
 - Interoperability point worth foregrounding: tags match Fast2bRAD-M / 2bRADExtraction.pl exactly,
   so the species layer (Fast2bRAD-M) and strain layer (Strain2bScan) share one tag space.
-- Add the StrainScan same-panel build head-to-head once the Linux run is in.
+- Fig 7 (species_expansion) is the StrainScan same-panel head-to-head on its own DBs; a further
+  Linux-built oral-DB concordance run folds into the Fig 8 saliva chapter.
