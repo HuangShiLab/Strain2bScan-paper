@@ -86,14 +86,16 @@ with example dendrograms (whole-genome / 2bRAD / 16S) for *A. actinomycetemcomit
 strains" motivation — StrainScan's Fig 1 analog. Tool-agnostic (a property of the 2bRAD
 representation); recomputable directly from Strain2bScan's tags.
 
-**New figure — DNA mock community, real DNA with known truth (low-biomass / high-host niche).**
-ATCC MSA-1002 (20 strains, even) and MSA-1003 (staggered), Strain2bfunc-on-2bRAD vs inStrain-on-WMS
-(slide 26). Strain2bfunc-2bRAD: **precision 1.0, recall 1.0, F1 1.0** down to **0.001 ng input** and
-up to **99% human-DNA contamination** (Bray–Curtis 0.82–0.94); inStrain-WMS: precision 0.4–0.5 with
-many false positives, collapsing at 99% host (BC 0.36). This closes the "all simulated" gap with a
-real-DNA ground-truth benchmark, adds a second comparator (**inStrain**), and demonstrates the
-**low-biomass/high-host niche** — a major selling point currently absent from the plan. Re-run with
-Strain2bScan (needs the raw 2bRAD + WMS reads).
+**New figure — DNA mock community, real DNA with known truth (low-biomass niche). ✅ DONE (2bRAD
+side) with Strain2bScan.** Raw ATCC MSA-1002 native BcgI 2bRAD reads obtained from Figshare
+(12272360) and profiled with Strain2bScan against a 62-species BcgI panel (20 mock + 42 decoys):
+**precision 1.0 at every DNA input, recall 20/20 at ≥0.1 ng and 19/20 at 0.01 ng** — reproducing the
+prior Strain2bfunc result on real, error-containing data and demonstrating the low-biomass niche.
+See `docs/mock_msa1002.md`, `results/mock_msa1002_titration.tsv`, `figures/mock_msa1002_titration.*`.
+Still open: cross-species abundance even-ness; the WMS/inStrain contrast (needs the 2.6 GB shotgun +
+inStrain); the 90/95/99 % host-contamination series (not in this archive); MSA-1003. The original
+PPTX numbers for reference — Strain2bfunc-2bRAD precision/recall/F1 = 1.0 down to 0.001 ng & 99 %
+human DNA vs inStrain-WMS precision 0.4–0.5.
 
 **Saliva case study — now with a target result.** The saliva chapter (8 subjects × 4 timepoints =
 32) already has a Strain2bfunc result to reproduce: strain-level Adonis R² up to **0.87** (*Rothia
