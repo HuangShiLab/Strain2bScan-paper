@@ -44,7 +44,12 @@ So we keep the flow but foreground efficiency and add the 2bRAD story.
 | **5** | Robustness (their 9) | Reference **panel size** (P. copri 40/80/112 → clusters match StrainScan) + reference **quality** degradation | ✅ `panelsize_prevotella` + `refqual_figure` (combine as A/B) |
 | **6** | **Efficiency & scalability (their 6B/7B, expanded — our headline)** | Per-sample speed/memory (~8×/~11×) + parallelism + **community-scale ~130–146× on 55 species × hundreds of samples** (flat in species, linear in samples) | ✅ `performance` + `scalability` + `community_throughput` (multi-panel) |
 | **7** | Head-to-head vs StrainScan (their tool comparison) | 3 species on **StrainScan's own DBs**: matched precision, ~17–23× faster, **StrainScan DNF on near-clonal *M. tuberculosis*** | ✅ `species_expansion` |
-| **8** | **Real-data case study (their 10+11)** | **Saliva**: strain-level individual discrimination (PERMANOVA R² **>** species-level) + **paired shotgun↔2bRAD concordance** + temporal stability; reproduces strain2bfunc at ~78 MB/~1 s | **TO DO** (needs the saliva data; see `docs/real_metagenome_plan.md`) |
+| **8** | **Real-data case study (their 10+11)** | **Saliva**: strain-level individual discrimination (PERMANOVA R² **>** species-level) + **paired shotgun↔2bRAD concordance** + temporal stability; reproduces strain2bfunc at ~78 MB/~1 s | ✅ **DONE** — `docs/saliva_individual_discrimination.md`; subject strain R²=0.833 > species 0.822 (p=2e-4), 1-NN 90.6%, timepoint ns, *Rothia mucilaginosa* R²=0.921. Shotgun↔2bRAD concordance still open. |
+
+Additional real-data figure completed since this table:
+- **Fig 9 mock host-contamination** (`docs/mock_hostcontam.md`): native 2bRAD vs shotgun on the
+  ATCC MSA-1002 mock across 0/90/99% human DNA — precision 1.0 throughout for both; 2bRAD holds
+  20/20 recall at 99% host vs shotgun 12/20 (2bRAD preserves ~10× more usable markers).
 
 Supplementary: parallel-speedup + MinHash-vs-exact validation, gate-sweep accuracy table,
 CheckM2 validation of degraded refs, per-sample tables, BcgI-2bRAD verification (`benchmark #9`).

@@ -1,0 +1,5 @@
+factor	level	n_samples	n_features	R2	pseudo_F	p_value	LOO_1NN_acc
+subject	species	32	18	0.8222	15.852	0.0002	0.875
+timepoint	species	32	18	0.0706	0.709	0.6740	0.094
+subject	strain	32	229	0.8328	17.082	0.0002	0.906
+timepoint	strain	32	229	0.0526	0.519	0.8936	0.094
