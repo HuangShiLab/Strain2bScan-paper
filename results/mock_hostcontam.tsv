@@ -1,0 +1,8 @@
+data_type	host_pct	rep	sample_markers	TP	FP	precision	recall	n_detected_not_resolved	time_s	false_positives
+2bRAD	90	1	369344	20	0	1.0000	1.0000	2	4.8	-
+2bRAD	90	2	361191	20	0	1.0000	1.0000	2	4.9	-
+2bRAD	99	1	328219	20	0	1.0000	1.0000	2	4.2	-
+2bRAD	99	2	345808	20	0	1.0000	1.0000	2	4.4	-
+WMS	0	1	96049	20	0	1.0000	1.0000	2	7.0	-
+WMS	90	1	53181	20	0	1.0000	1.0000	2	9.6	-
+WMS	99	1	32598	12	0	1.0000	0.6000	9	10.9	-
