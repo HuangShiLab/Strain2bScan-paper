@@ -4,7 +4,7 @@
 > the pre-fix "accuracy–efficiency frontier / resolvability envelope / low-depth weakness"
 > framing, which the fix obsoletes: accuracy is now precision 1.0 across species and low-depth
 > sensitivity matches StrainScan. Keep the genuinely-still-valid threads — cluster-level as the
-> honest unit of strain analysis, the community-scale efficiency argument (now ~91×), the
+> honest unit of strain analysis, the community-scale efficiency argument (now ~130x), the
 > BcgI-2bRAD niche, and StrainScan's *M. tuberculosis* non-completion — and drop the "trades
 > low-depth/low-diversity sensitivity" positioning. See the updated `docs/*` for fixed numbers.
 

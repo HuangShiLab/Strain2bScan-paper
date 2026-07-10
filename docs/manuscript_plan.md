@@ -28,7 +28,7 @@ A reviewer will ask which is responsible. Design the benchmark to separate them.
 strain2bscan v0.1.0):
 - DB build: **2.6 s @16 threads** (22.4 s @1 thread), 60 clusters, ~34 MB DB.
 - Per-sample profile: **0.50 s @16 threads** (3.4 s @1 thread), ~120 MB peak RSS.
-- StrainScan: ~7.0 s / 828 MB per sample → **~6× faster, ~7× lighter** (strand-fixed; ~14× pre-fix).
+- StrainScan: ~7.0 s / 828 MB per sample → **~8× faster, ~11× lighter** (correct Fast2bRAD-M enzymes, single-strand scan).
 
 **Status (resolved)**: the scaling work is **done** — `std::thread::scope` parallelism (no
 rayon dep; ~8.5× build speedup) and **MinHash-sketch clustering** (O(n²·k), k=2000; identical

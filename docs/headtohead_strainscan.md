@@ -34,11 +34,11 @@ Machine: 16-core arm64 macOS, 51 GB RAM.
 | **mean** | **0.50 s** | **~120 MB** | **~7.0 s** | **828 MB** |
 
 > **⚠ The Strain2bScan column above is PRE strand-fix (forward-only, ~half the markers).** With
-> the strand fix (both-strand digestion, ~2× markers), re-measured Strain2bScan is **1.25 s /
-> 115 MB** per sample (`results/headtohead_performance.tsv`) → **~6× faster, ~7× lighter** than
-> StrainScan. The StrainScan column is unchanged (its pipeline was unaffected by our bug).
+> the enzyme-table correction (Fast2bRAD-M tag lengths + single-strand scan + canonical hash),
+> re-measured Strain2bScan is **0.86 s / 78 MB** per sample (`results/headtohead_performance.tsv`)
+> → **~8× faster, ~11× lighter** than StrainScan. The StrainScan column is unchanged (unaffected).
 
-→ **Strain2bScan is ~6× faster and ~7× lighter per sample** (strand-fixed; the pre-fix ~14×
+→ **Strain2bScan is ~8× faster and ~11× lighter per sample** (correct enzymes; single-strand; the pre-fix ~14× used wrong tag lengths
 reflected ~half the markers). The memory gap is structural: StrainScan counts the full k-mer set
 with jellyfish (~800 MB hash); Strain2bScan streams reads and keeps only sparse 2b-tag markers.
 Even single-threaded,
@@ -75,7 +75,7 @@ StrainScan can't build on macOS, run this on Linux:
    resolution (remap truth via membership). Identical panel → clean accuracy comparison.
 
 ## Takeaways for the manuscript
-- **Performance claim is well-supported**: ~6× faster, ~7× less memory per sample (strand-fixed; ~14× pre-fix), with the
+- **Performance claim is well-supported**: ~8× faster, ~11× less memory per sample (correct Fast2bRAD-M enzymes), with the
   memory advantage structurally attributable to sparse 2b markers vs full k-mer counting.
 - **Accuracy claim needs the same-panel benchmark on Linux** (above). Current evidence:
   Strain2bScan detects dominant/co-dominant strains at precision 0.90 on the 64-panel; on

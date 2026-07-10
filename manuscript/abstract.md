@@ -15,14 +15,16 @@ genome and has been used for species-level profiling, but not for strain resolut
 resolution framework (within-species clustering plus unique-marker scoring) onto **2bRAD
 markers** — the 32–38 bp tags released by type-IIB restriction digestion. Strain2bScan accepts
 both BcgI 2bRAD experimental libraries and in-silico digestion of conventional metagenomes with
-up to 16 enzymes. Across five species (*Cutibacterium acnes*, *Staphylococcus aureus*,
-*S. epidermidis*, *Akkermansia muciniphila*, *Prevotella copri*) it achieves **precision 1.0**
-with high recall and low abundance error, and detects strains down to **0.5× coverage —
-matching StrainScan** — while profiling each sample **~6× faster and with ~7× less peak
-memory**. Because the sample is digested once and matched against every per-species database,
-per-sample cost is **independent of the number of species and linear in the number of
-samples**: on a 55-species community it profiles ~91× faster than running a per-species tool
-once per species (∼7 min vs a projected ∼10 h at 100 samples). Recall is limited only by
+up to 16 enzymes; its tag lengths and recognition patterns match Fast2bRAD-M /
+`2bRADExtraction.pl` exactly, so the tags are interoperable with the Fast2bRAD-M species layer
+and with real BcgI 2bRAD libraries. Across five species (*Cutibacterium acnes*, *Staphylococcus
+aureus*, *S. epidermidis*, *Akkermansia muciniphila*, *Prevotella copri*) it achieves
+**precision 1.0** with high recall and low abundance error, and detects strains down to **0.5×
+coverage — matching StrainScan** — while profiling each sample **~8× faster and with ~11× less
+peak memory**. Because the sample is digested once and matched against every per-species
+database, per-sample cost is **independent of the number of species and linear in the number of
+samples**: on a 55-species community it profiles ~130× faster than running a per-species tool
+once per species (∼5 min vs a projected ∼10 h at 100 samples). Recall is limited only by
 *genuine* near-clonality — where strains are nearly identical (*Mycobacterium tuberculosis*),
 cluster resolution is intrinsically coarse — and, notably, StrainScan's regression-based
 within-cluster step failed to complete on *M. tuberculosis* (>3 h, >25 GB) where Strain2bScan

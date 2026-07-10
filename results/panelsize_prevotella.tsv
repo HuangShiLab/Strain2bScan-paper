@@ -1,9 +1,8 @@
-# P. copri panel-size test, BEFORE vs AFTER the strand-invariance digestion fix.
-# 'before' = forward-only digestion (the strand bug); 'after' = both-strand (fixed).
+# P. copri panel-size, BEFORE (strand bug / wrong enzyme lengths) vs AFTER (correct Fast2bRAD-M enzymes).
 condition	panel_size	n_clusters	precision	recall
 before	40	-	0.194	0.65
 before	80	-	0.121	0.4
 before	112	-	0.114	0.4
-after	40	24	1.0	1.0
-after	80	44	1.0	0.9
-after	112	53	1.0	1.0
+after	40	23	1.0	1.0
+after	80	43	1.0	0.95
+after	112	51	1.0	1.0

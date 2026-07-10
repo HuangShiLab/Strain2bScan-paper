@@ -1,9 +1,8 @@
-# Community-scale: 55 real species, MEASURED Strain2bScan multi-profile vs a StrainScan
-# projection (S species x N samples at its measured 6.8s/run; no multi-species mode).
-# STRAND-FIXED binary (both-strand digestion). N=500 is extrapolated (per-sample x 500).
+# 55 real species, MEASURED Strain2bScan (correct enzymes) vs StrainScan projection (S x N x 6.8s/run).
+# N=500 extrapolated (per-sample x 500). Single-strand, correct Fast2bRAD-M tag lengths.
 n_samples	s2bscan_measured_s	s2bscan_per_sample_s	strainscan_projected_s	speedup_x
-10	44	4.361	3740	85
-50	205	4.095	18700	91
-100	409	4.086	37400	91
-200	815	4.077	74800	92
-500	2038	4.077	187000	92
+10	31	3.063	3740	121
+50	148	2.951	18700	126
+100	283	2.831	37400	132
+200	512	2.560	74800	146
+500	1280	2.560	187000	146

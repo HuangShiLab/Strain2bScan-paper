@@ -11,7 +11,7 @@ DBs in parallel).
 | DB build (cluster) | 22.4 s | 2.6 s | **8.5×** |
 | profile (200k reads) | 3.37 s | 0.52 s | **6.5×** |
 
-→ Strain2bScan profile **1.25 s** (strand-fixed; both-strand) vs StrainScan **~7.0 s** = **~6× faster**, ~7× less memory.
+→ Strain2bScan profile **0.86 s** (correct enzymes, single-strand) vs StrainScan **~7.0 s** = **~8× faster**, ~11× less memory.
 
 ## 2. MinHash clustering: scalable *and* faithful
 Replaces exact all-pairs Jaccard (O(n²·m)) with bottom-k MinHash sketches (O(n²·k), k=2000).

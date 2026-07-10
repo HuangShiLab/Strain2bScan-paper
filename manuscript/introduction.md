@@ -31,7 +31,7 @@ experimental libraries (a capability no full k-mer tool provides) and in-silico 
 conventional shotgun reads with up to 16 enzymes. Operating on the sparse tag set makes the
 database ~50–100× smaller and lets a sample be digested **once** and matched against every
 per-species database, so the per-sample cost becomes independent of the number of species.
-We show that this yields ~6× faster, ~7× lighter per-sample profiling and near-flat scaling
+We show that this yields ~8× faster, ~11× lighter per-sample profiling and near-flat scaling
 in species count on real *Cutibacterium acnes* data; we map the operating envelope
 (sufficient depth, sufficient intra-species diversity) across depth, enzyme count and three
 species; and we show that the number of enzymes is a tunable knob trading efficiency against

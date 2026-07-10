@@ -1,11 +1,8 @@
 # Strain2bScan vs StrainScan, per-sample profiling on the C. acnes 64-genome panel.
-# STRAND-FIXED binary (both-strand digestion, ~2x markers). Strain2bScan re-measured on 5
-# simulated strain-mixture mocks (the real MockMetagenomes reads are no longer available);
-# StrainScan side unchanged (its pipeline was unaffected by our strand bug). 16-core arm64 macOS.
+# CORRECT enzyme table (Fast2bRAD-M tag lengths) + single-strand scan + canonical hash.
+# Strain2bScan on 5 simulated strain-mixture mocks; StrainScan unchanged (unaffected). 16-core arm64 macOS.
 sample	s2bscan_time_s	s2bscan_maxRSS_MB	strainscan_time_s	strainscan_maxRSS_MB
-mean	1.25	115	7.06	828
-# Strain2bScan ~6x faster and ~7x lighter per sample. The speed edge is smaller than the pre-fix
-# ~14x because both-strand digestion doubles the marker set (correctness over raw speed; the 2x
-# could be recovered later by making the enzyme patterns frame one canonical tag per site). The
-# memory gap is unchanged and structural: streamed sparse 2b markers (~115 MB) vs jellyfish
-# full-k-mer hash (~800 MB).
+mean	0.86	78	7.06	828
+# Strain2bScan ~8x faster and ~11x lighter per sample. Markers are 1x (single-strand, correct
+# lengths) and ~3.5x fewer than the earlier both-strand workaround, so this is faster AND lighter
+# than that while matching Fast2bRAD-M tags exactly.
