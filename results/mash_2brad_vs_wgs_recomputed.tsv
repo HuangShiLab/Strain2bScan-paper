@@ -1,0 +1,16 @@
+# 2bRAD-tag vs whole-genome between-strain distance concordance, recomputed with Strain2bScan.
+# WGS: bottom-3000 canonical 21-mer MinHash Mash distance. 2bRAD: per-genome Strain2bScan
+# `build` tag sets (14-enzyme default and BcgI-alone). distance = -ln(2J/(1+J)); pairs with
+# zero overlap in either space excluded (n_pairs_undefined). 16S deferred (needs an rRNA finder,
+# e.g. barrnap; not installed here). PPTX_2brad = prior Strain2bfunc value (slide 23) for reference.
+# NOTE: Spearman is the reported concordance metric (rank/Mantel-style, robust). Pearson is
+# transform-sensitive for LOW-DIVERSITY species (S. epidermidis: bimodal within/between-cluster
+# distances + faster 2bRAD saturation -> low Pearson despite Spearman 0.92); do not read it as
+# non-reproduction. All Spearman 0.89-0.996 reproduce the prior 2bRAD~whole-genome agreement.
+species	enzyme_set	n_genomes	n_pairs_used	n_pairs_undefined	pearson	spearman	PPTX_2brad
+Cutibacterium_acnes	14enz	58	1653	0	0.999	0.996	0.985
+Cutibacterium_acnes	BcgI	58	1653	0	0.998	0.995	0.985
+Staphylococcus_aureus	14enz	60	1770	0	0.998	0.991	0.97
+Staphylococcus_aureus	BcgI	60	1770	0	0.986	0.982	0.97
+Staphylococcus_epidermidis	14enz	60	1766	4	0.053	0.924	0.947
+Staphylococcus_epidermidis	BcgI	60	1765	5	0.032	0.892	0.947
