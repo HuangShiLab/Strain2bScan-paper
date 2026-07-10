@@ -74,17 +74,41 @@ floor at a tiny coverage fraction) and a minimum relative abundance (0.02), and 
 When no cluster passes, Strain2bScan reports the species as detectable but not
 strain-resolvable with the given enzyme set.
 
-## Multi-species profiling
+## Multi-species profiling and species selection
 
-For community samples, the reads are digested **once** into a shared set of tag counts, which
-is then matched against every per-species cluster database in parallel; the per-species
-marginal cost is a hash-set lookup rather than a re-count, so the total cost is independent of
-the number of species. A **Layer-1 species gate** requires that at least *G* species-specific
-markers (markers unique to one species across the panel — the Fast2bRAD-M species layer) be
-present before a species is profiled at the strain level (default *G* = 200), suppressing the
-cross-species false positives that arise because strain markers are unique only within a
-species. In practice the species set to resolve is supplied by an upstream Fast2bRAD-M
-species-level profiling step.
+For community samples, the reads are digested **once** into a shared set of tag counts, matched
+against every per-species cluster database in parallel; the per-species marginal cost is a
+hash-set lookup rather than a re-count, so the total cost is independent of the number of species.
+
+**Which species to strain-profile — the Layer-1 gate.** Strain markers are unique only *within* a
+species, so a species absent from a sample can be spuriously hit by a present relative's shared
+tags. Strain2bScan therefore decides per species from **absolute species-specific marker
+evidence**, never relative abundance (which conflates community composition with sequencing
+depth). Let *total* be the species-specific markers a species carries — tags unique to a single
+species across the panel, the same tag space as the Fast2bRAD-M species layer — and *present* the
+subset observed in the sample at count ≥ 2. The gate is
+
+&nbsp;&nbsp;&nbsp;&nbsp;*resolve_gate* = max(*G*, ⌈*f* · *total*⌉), &nbsp; *detect_gate* = min(*d*, *resolve_gate*)
+
+with an absolute floor *G* (`--min-species-markers`, default 200), a breadth fraction *f*
+(`--min-species-marker-frac`, default 0) that scales the bar to each species' panel size, and a
+low detection floor *d* (`--min-species-detect`, default 10). This yields three outcomes per
+species: **strain-resolved** (*present* ≥ *resolve_gate*; Layer-2 runs), **detected but not
+strain-resolvable** (*detect_gate* ≤ *present* < *resolve_gate*; reported at species level with its
+observed marker breadth, no strain claim), or **absent**. The middle tier is the honest treatment
+of a low-abundance species — present but too faint to support strain calls — rather than a binary
+drop or an over-call. All inputs are computed by Strain2bScan from its own databases and a single
+digest of the reads, so the gate needs no external abundance input; for open-world samples the
+species presence call can instead be taken from an upstream Fast2bRAD-M step whose species
+database is far broader than the strain panel.
+
+**Gate calibration.** On the 55-species panel across normal and low (median 0.62×) depth, the
+default floor gives species precision 1.0 at both depths, with leakage species correctly held in
+the middle tier; at this panel the breadth term only trades recall, so *f* = 0 is optimal and is
+the shipped default. The breadth term is scale insurance: when the floor is relaxed — or the panel
+grows large enough for a fixed floor to be outrun by leakage — a small *f* (≈0.02) restores
+precision to 1.0 at negligible recall cost, because it raises the bar in proportion to panel size,
+where large-panel leakage concentrates (Results; `docs/gate_calibration.md`).
 
 ## Implementation
 
@@ -98,8 +122,9 @@ tables with an inverted unique-marker index and the enzyme set in the header.
 **Datasets.** (i) A real *C. acnes* benchmark: a 64-genome reference panel (14 ground-truth
 strains + 50 background, NCBI accessions pinned) and five paired-end mock samples from
 MockMetagenomes4Benchmark (~100k read pairs each, ~12× total). (ii) A simulated multi-species
-benchmark: 40 real species × 4 strains (160 NCBI genomes) and 20 samples, each mixing strains
-from eight species at log-normal depth ≥1×. (iii) Cross-species mocks for *Staphylococcus
+benchmark: 55 real species × ~4 strains (218 NCBI genomes) and 30 samples, each mixing strains
+from twelve species at log-normal depth ≥1× (plus a low-depth variant, median 0.62×, used for
+gate calibration). (iii) Cross-species mocks for *Staphylococcus
 aureus* and *S. epidermidis* (60-genome panels each; 2–5 strains/sample, log-normal ≥1×,
 matching the *C. acnes* design). (iv) A reference-degradation gradient in which the truth
 strains' database genomes are degraded to completeness 100→50 % (with co-varying contamination
