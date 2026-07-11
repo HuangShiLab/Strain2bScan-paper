@@ -1,0 +1,16 @@
+species	n_hq_genomes	n_clusters
+Akkermansia_muciniphila	50	24
+Clostridioides_difficile	47	27
+Cutibacterium_acnes	43	8
+Escherichia_coli	50	30
+Fusobacterium_nucleatum	25	19
+Klebsiella_pneumoniae	47	28
+Lactiplantibacillus_plantarum	50	39
+Mycobacterium_tuberculosis	29	1
+Phocaeicola_dorei	15	10
+Porphyromonas_gingivalis	43	27
+Prevotella_copri	19	19
+Salmonella_enterica	45	19
+Staphylococcus_aureus	48	13
+Staphylococcus_epidermidis	50	9
+Streptococcus_pneumoniae	50	38
