@@ -1,58 +1,55 @@
 # Strain2bScan — Abstract (draft)
 
-**Working title:** *Strain2bScan: fast, scalable strain-level metagenomic profiling on
-2bRAD-reduced markers.*
+**Working title:** *Strain2bScan: strain-level profiling from 2bRAD-reduced markers for low-biomass
+microbiomes and community-scale metagenomes.*
 
 ## Abstract
 
-**Background.** Strain-level microbiome profiling resolves clinically and ecologically
-important within-species variation, but existing k-mer methods are computationally heavy at
-the scale of modern cohorts, where hundreds of species must be resolved across hundreds of
-samples. Reduced-representation 2bRAD sequencing samples a sparse, reproducible subset of the
-genome and has been used for species-level profiling, but not for strain resolution.
+**Background.** Strain-level variation drives clinically important microbial phenotypes, but 16S
+surveys cannot resolve strains and shotgun k-mer methods, while accurate, are held back from two
+increasingly important settings: they are computationally heavy across the many-species, many-sample
+cohorts of modern studies, and they fail on low-biomass, host-contaminated samples (saliva, tumour/FFPE,
+skin) where most DNA is human. Reduced-representation 2bRAD sequencing samples a sparse, reproducible
+subset of the genome, is robust to low input and host contamination, and has been used for species-level
+profiling — but not for strain resolution.
 
-**Results.** We present Strain2bScan, a Rust strain profiler that ports the StrainScan
-resolution framework (within-species clustering plus unique-marker scoring) onto **2bRAD
-markers** — the 32–38 bp tags released by type-IIB restriction digestion. Strain2bScan accepts
-both BcgI 2bRAD experimental libraries and in-silico digestion of conventional metagenomes with
-up to 16 enzymes; its tag lengths and recognition patterns match Fast2bRAD-M /
-`2bRADExtraction.pl` exactly, so the tags are interoperable with the Fast2bRAD-M species layer
-and with real BcgI 2bRAD libraries. Across five species (*Cutibacterium acnes*, *Staphylococcus
-aureus*, *S. epidermidis*, *Akkermansia muciniphila*, *Prevotella copri*) it achieves
-**precision 1.0** with high recall and low abundance error, and detects strains down to **0.5×
-coverage — matching StrainScan** — while profiling each sample **~8× faster and with ~11× less
-peak memory**. Because the sample is digested once and matched against every per-species
-database, per-sample cost is **independent of the number of species and linear in the number of
-samples**: on a 55-species community it profiles ~130× faster than running a per-species tool
-once per species (∼5 min vs a projected ∼10 h at 100 samples). Recall is limited only by
-*genuine* near-clonality — where strains are nearly identical (*Mycobacterium tuberculosis*),
-cluster resolution is intrinsically coarse — and, notably, StrainScan's regression-based
-within-cluster step failed to complete on *M. tuberculosis* (>3 h, >25 GB) where Strain2bScan
-finished in ~1 s.
+**Results.** We present **Strain2bScan**, a dependency-free Rust strain profiler that ports the
+StrainScan resolution framework (within-species clustering plus unique-marker scoring) onto **2bRAD
+markers** — the 32–38 bp tags released by type-IIB restriction digestion — and uniquely accepts **two
+input modes**. As a shared foundation it is accurate (**precision 1.0** across species, high recall, low
+abundance error), detects strains to **0.5× coverage matching StrainScan**, is robust to reference panel
+size and to reference degradation to 70 % completeness, and — unlike 16S, whose between-strain distances
+are uncorrelated with genome divergence (median Spearman 0.36 across 15 species) — its tags track
+whole-genome strain distance (median 0.94). **(1) Native 2bRAD-M for low-biomass microbiomes:** on the
+ATCC MSA-1002 mock, native 2bRAD holds precision 1.0 and **20/20 strain recall at 99 % human DNA** where
+in-silico-digested shotgun drops to 12/20; on real saliva (8 subjects × 4 timepoints) strain-level
+profiles discriminate individuals better than species-level (PERMANOVA **R² 0.83 > 0.82**; leave-one-
+timepoint-out host-ID **100 %**), are temporally stable, and recover **128–163 low-abundance strains per
+sample that host-limited shotgun misses**. **(2) Conventional metagenomes at scale:** the sample is
+digested once and matched against every species database, so per-sample cost is independent of the
+number of species — **~8× faster and ~11× lighter** than StrainScan per sample and **~130–146× faster on
+a 55-species community**, while matching or exceeding StrainScan's recall on its own databases and
+completing near-clonal *Mycobacterium tuberculosis* in ~1 s where StrainScan does not (>3 h, >25 GB). The
+two modes agree, so one tool spans both regimes.
 
-**Conclusions.** Strain2bScan delivers accurate, genome-resolved strain profiling at a fraction
-of the compute and memory of full-k-mer methods, scales to communities of many species across
-many samples, and uniquely enables strain-level analysis of BcgI 2bRAD experimental data.
+**Conclusions.** Strain2bScan delivers accurate, genome-resolved strain profiling from a sparse marker
+set: it uniquely enables strain-level analysis of low-biomass, high-host 2bRAD-M data, and scales
+conventional-metagenome strain profiling to communities of many species across many samples.
 
-**Availability.** Rust source: https://github.com/HuangShiLab/Strain2bScan · reproducible
-benchmarks and figures: https://github.com/HuangShiLab/Strain2bScan-paper.
+**Availability.** Rust source: https://github.com/HuangShiLab/Strain2bScan · reproducible benchmarks and
+figures: https://github.com/HuangShiLab/Strain2bScan-paper.
 
 ---
 
 ### Author-facing notes (delete before submission)
-- Framing (post strand-fix): **accurate (precision 1.0) + fast/light + community-scale +
-  2bRAD capability**. The earlier "operating envelope / accuracy tracks resolvability" framing
-  is obsolete — that gradient was a digestion bug (see `docs/species_expansion.md`), now fixed.
-- Figure numbering follows `docs/results_figure_plan.md` / `manuscript/results.md`: Fig 1 overview
-  schematic, Fig 2 cross-species accuracy, Fig 3 depth, Fig 4 enzyme knob, Fig 5 robustness
-  (panel-size + ref-quality), Fig 6 efficiency & community scale, Fig 7 head-to-head vs StrainScan,
-  Fig 8 saliva (planned). File map: cross_species.png=Fig 2, depth_sensitivity=Fig 3,
-  enzyme_sweep=Fig 4, panelsize_prevotella+refqual_figure=Fig 5, performance+scalability+
-  community_throughput=Fig 6, species_expansion=Fig 7.
-- Numbers are from the corrected-enzyme binary: precision 1.0 cross-species (Fig 2); depth onset
-  0.5× = StrainScan (Fig 3); ~4-enzyme sweet spot (Fig 4); ~8×/~11× per sample + ~132× community
-  (Fig 6). All `results/*.tsv` and `docs/*` are regenerated with the corrected binary.
-- Interoperability point worth foregrounding: tags match Fast2bRAD-M / 2bRADExtraction.pl exactly,
-  so the species layer (Fast2bRAD-M) and strain layer (Strain2bScan) share one tag space.
-- Fig 7 (species_expansion) is the StrainScan same-panel head-to-head on its own DBs; a further
-  Linux-built oral-DB concordance run folds into the Fig 8 saliva chapter.
+- **Framing = two input modes**: (1) native 2bRAD-M → low-biomass/high-host strain analysis;
+  (2) in-silico-digested shotgun → community-scale throughput vs StrainScan. Shared foundation
+  (accuracy, robustness, 2bRAD-vs-16S motivation) precedes the two pillars. Full section→evidence map in
+  `docs/manuscript_organization.md`.
+- Figure map (10 main): 1 overview, 2 mash_2brad_vs_16s, 3 cross_species(+depth), 4 robustness
+  (panelsize+refqual), 5 enzyme_sweep, 6 mock_hostcontam, 7 saliva (individual+temporal_ml), 8
+  saliva_concordance, 9 efficiency (performance+scalability+community_throughput), 10 species_expansion.
+  Supp: mash_2brad_vs_16s_scatter, mock_msa1002_titration, gate_calibration, clinical_exploratory,
+  genome_qc_16s_panel.
+- All numbers regenerated with the corrected-enzyme binary; 2bRAD-native results on real error-containing
+  reads; simulated benchmarks are closed-world (stated in Discussion).
