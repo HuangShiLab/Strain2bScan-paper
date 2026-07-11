@@ -1,0 +1,6 @@
+sample	n_2brad_strains	n_wms_strains	wms_confirmed_by_2brad	2brad_only	med_relab_shared	med_relab_2bradonly
+S11-7	164	23	23	141	0.01462	0.00298
+S17-1	160	32	32	128	0.00712	0.00261
+S17-14	173	10	10	163	0.01549	0.00296
+#wms_confirmed	65/65	-	-	-	0.00973	0.00293
+#mannwhitney_p	1.204e-23
