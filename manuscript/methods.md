@@ -38,6 +38,17 @@ cost from O(n²·m) to O(n²·k) with *k* ≪ *m* and yields partitions identica
 data (Results). Clusters are the finest reliable resolution unit: strains within one cluster
 are too similar to separate from short reads.
 
+**Containment clustering for uneven-completeness panels (`--containment`).** Jaccard penalises
+incompleteness: an incomplete genome's markers are approximately a *subset* of a complete relative's,
+so |A∩B|/|A∪B| falls below τ and the two spuriously split. The optional `--containment` mode instead
+links on **max-containment**, |A∩B| / min(|A|,|B|), which stays ≈ 1 when one marker set is contained in
+the other — the containment estimator used by Mash-screen and sourmash for uneven-completeness genomes.
+It is exact for small panels; for large panels the intersection is estimated from the MinHash-sketch
+Jaccard and the exact set sizes (|A∩B| = J·(|A|+|B|)/(1+J)), then divided by min(|A|,|B|). Because
+max-containment ≥ Jaccard it merges at least as much, so it is opt-in (for reference sets of mixed
+completeness) while the default stays Jaccard; the assembly-quality filter below is the
+complementary first line of defence.
+
 **Marker classification.** Within a species, each tag is labelled by its within-species
 incidence — present in all clusters (*species-core*; detects the species, not strains), in one
 cluster with ≥2 genomes (*cluster-specific*), in a single genome (*strain-specific*), or in

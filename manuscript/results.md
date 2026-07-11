@@ -54,23 +54,27 @@ over-detect near-identical strains. Recall, not precision, is the species-depend
 missing it only at 0.1× — the **same detection onset as StrainScan** (Fig 3B) — so the sparse marker set
 carries no low-depth penalty at realistic coverage.
 
-Reference-genome **completeness** is the dominant control on strain-identification accuracy, and we
-tested it across **all 15 species** (Fig 4). Holding the sample reads fixed and progressively degrading
-the truth strains' reference genomes (completeness 100 → 50 %, with co-varying contamination and
-fragmentation), **precision is 1.0 for every species at 100 % completeness** (median recall 0.96) and
-then falls as references degrade — across the 14 **resolvable** species, **median precision 1.0 → 0.84
-(90 %) → 0.71 (70 %) → 0.52 (50 %)** and median recall 0.96 → 0.80 → 0.74 → 0.70 (Fig 4A precision, 4B
-recall). Fragmented, incomplete genomes split clusters and shed the unique markers that distinguish
-strains, so complete/near-complete references are required for reliable strain calls — motivating the
-built-in assembly-quality filter that flags low-quality references before clustering (and the
-complete-genome restriction used throughout, e.g. Fig 2). One species behaves qualitatively differently
-and is reported separately: near-clonal ***M. tuberculosis*** collapses to recall ≈ 0.05 the moment its
-references are degraded (its pool forms a **single 0.95 cluster**, so degradation shatters it into
-spurious singletons and the truth spans clusters that the reads — from complete genomes — no longer
-match). This is a cluster-relabeling artifact of near-clonality rather than a graded completeness effect,
-so *M. tuberculosis* is excluded from the median (dashed line, Fig 4); it echoes its intrinsic
-near-clonal limit seen elsewhere (Fig 10). Among resolvable species the effect is mildest for diverse
-*Salmonella enterica* and *S. pneumoniae*.
+Reference-genome **completeness** limits strain-identification accuracy — and Strain2bScan provides a
+clustering mode that addresses it, tested across **all 15 species** (Fig 4). Holding the sample reads
+fixed and progressively degrading the truth strains' reference genomes (completeness 100 → 50 %, with
+co-varying contamination and fragmentation), default **Jaccard** clustering loses accuracy as
+completeness falls — across the 14 **resolvable** species, median precision 1.0 → 0.84 (90 %) → 0.71
+(70 %) and recall 0.96 → 0.80 (90 %) → 0.74 (70 %) — because an incomplete genome's markers are (approx.)
+a **subset** of its complete relative's, dropping their Jaccard below the 0.95 cut and spuriously
+splitting them into new singleton clusters. The **`--containment` clustering mode** dissolves this:
+max-containment = |A∩B| / min(|A|,|B|) stays ≈ 1 when one genome is a subset of another (the estimator
+Mash-screen/sourmash use), so incomplete genomes cluster with their complete relatives instead of
+fragmenting. With `--containment`, median **precision rises to 0.98 / 0.92 and recall to 0.95 / 0.92 at
+95 % / 90 % completeness** and stays ahead of Jaccard down to ~80 %, converging only at ≤ 70 % where the
+references are genuinely low-quality (MIMAG-low; heavy contamination + hundreds of contigs). It also
+**removes the near-clonal *M. tuberculosis* artifact**: its single 0.95 cluster stays intact, so recall
+holds at 1.0 to 90 % under containment versus collapsing to ≈ 0.05 under Jaccard the moment references
+degrade (Fig 4 inset) — confirming that collapse was cluster fragmentation, not a true completeness
+effect. Because max-containment merges slightly more aggressively (it can coarsen clusters on
+already-complete panels), it is an **opt-in mode for reference panels of uneven completeness**; the
+default remains Jaccard, complemented by the built-in assembly-quality filter (`--min-tag-fraction` /
+`--max-contigs`) that drops low-quality genomes before clustering and the complete-genome practice used
+elsewhere (e.g. Fig 2).
 
 ## Part I — Native 2bRAD-M for low-biomass, high-host microbiomes
 

@@ -48,11 +48,16 @@ claim. Resolving to clusters does not cost precision (it stayed 1.0 even for low
 number, from every other cluster — eliminates false-unique markers from single-copy filtering and keeps
 precision 1.0 in similar-strain species. MinHash-sketch clustering scales database construction while
 producing partitions identical to exact Jaccard and to StrainScan's own pre-built *P. copri* clustering
-(112 → 51 clusters; `results/panelsize_prevotella.tsv`). Assembly-quality filtering counters the
-completeness bias of Jaccard clustering, which matters: degrading reference genomes lowers
-strain-identification precision *and* recall across all 15 species (Fig 4), and the same completeness
-concern motivated restricting the Fig 2 motivation panel to complete/near-complete genomes, where the
-2bRAD-over-16S advantage is unchanged (median 0.90→0.94), confirming it is not a draft-assembly artifact. The enzyme count is an explicit resolution/cost control
+(112 → 51 clusters; `results/panelsize_prevotella.tsv`). Reference incompleteness is the one factor that
+genuinely degrades strain identification under Jaccard — an incomplete genome's markers are a subset of a
+complete relative's, so the two fall below the 0.95 similarity cut and split (Fig 4). We address this two
+ways: the built-in assembly-quality filter drops low-quality genomes before clustering
+(`--min-tag-fraction`/`--max-contigs`), and the optional **`--containment` clustering mode**
+(max-containment) keeps subset genomes with their complete relatives, restoring precision/recall down to
+~80 % completeness and removing the near-clonal *M. tuberculosis* cluster-fragmentation artifact (Fig 4).
+The same completeness concern motivated restricting the Fig 2 motivation panel to complete/near-complete
+genomes, where the 2bRAD-over-16S advantage is unchanged (median 0.90→0.94), confirming it is not a
+draft-assembly artifact. The enzyme count is an explicit resolution/cost control
 (~4 enzymes captures most recall; Fig 5), and single-enzyme BcgI operation is what enables native
 2bRAD-M libraries.
 

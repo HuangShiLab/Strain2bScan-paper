@@ -16,6 +16,9 @@ OUTDIR = f"{WORK}/sim/refqual15"; os.makedirs(OUTDIR, exist_ok=True)
 SET14 = "CspCI,AloI,BsaXI,BaeI,BcgI,CjeI,PpiI,PsrI,BplI,FalI,Bsp24I,CjePI,AlfI,BslFI"
 LEVELS = [(1.00, 0.00, 1), (0.95, 0.01, 20), (0.90, 0.02, 50), (0.80, 0.05, 100), (0.70, 0.08, 200), (0.50, 0.10, 400)]
 DEPTH = "5"   # fixed sample depth for the completeness sweep
+CONTAINMENT = os.environ.get("CONTAINMENT", "") not in ("", "0")   # cluster on max-containment
+CLUSTER_FLAGS = ["--containment"] if CONTAINMENT else []
+OUTNAME = "refqual_15species_containment.tsv" if CONTAINMENT else "refqual_15species.tsv"
 env = {**os.environ, "STRAIN2BSCAN_THREADS": "16"}
 
 species = sorted(os.path.basename(d.rstrip("/")) for d in glob.glob(f"{POOL}/*/"))
@@ -41,7 +44,7 @@ def combined_reads(sp, name):
             with gzip.open(p, "rb") as fi: shutil.copyfileobj(fi, fo, 1 << 22)
     return tmp
 
-out = open(f"{OUTDIR}/refqual_15species.tsv", "w")
+out = open(f"{OUTDIR}/{OUTNAME}", "w")
 out.write("species\tconfig\tn_truth_strains\tcompleteness\tcontamination\tn_contigs\tn_clusters\tprecision\trecall\tbray_curtis\n")
 for sp in species:
     cfg = pick_config(sp)
@@ -78,7 +81,7 @@ for sp in species:
         for g in background:
             os.symlink(os.path.abspath(f"{POOL}/{sp}/{g}.fna"), f"{pdir}/{g}.fna")
         db = f"{OUTDIR}/{sp}_db_{tag}.tsv"
-        r = subprocess.run([BIN, "cluster", "--genomes", pdir, "--enzyme", SET14, "--out", db, "--similarity", "0.95"],
+        r = subprocess.run([BIN, "cluster", "--genomes", pdir, "--enzyme", SET14, "--out", db, "--similarity", "0.95"] + CLUSTER_FLAGS,
                            capture_output=True, text=True, env=env)
         ncl = int(m.group(1)) if (m := re.search(r"into (\d+) cluster", r.stdout)) else 0
         g2c = {}

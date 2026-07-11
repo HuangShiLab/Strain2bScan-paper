@@ -70,29 +70,30 @@ and **detection onset 0.5× coverage matching StrainScan** — no low-depth pena
 
 ---
 
-## Figure 4 — Reference-genome completeness controls strain-identification accuracy (all 15 species)
+## Figure 4 — Reference-genome completeness limits strain ID under Jaccard; the `--containment` mode restores it
 **1. Data source.**
 - *Data type:* simulation — ART PE250 reads from the 15-species pool (same dataset as Figs 3/5/9/10);
-  reference genomes are degraded assemblies.
+  reference genomes are degraded assemblies. Two clustering modes compared.
 - *Production/collection:* per species, a fixed multi-strain sample (2/3/5-strain uneven community at 5×,
   5 reps) is profiled while the truth strains' reference genomes are degraded across a completeness ladder
-  **100/95/90/80/70/50 %**, with co-varying contamination (0→10 %) and fragmentation (1→400 contigs;
-  `scripts/degrade.py`); the DB is rebuilt at each level and the same reads re-profiled.
+  **100/95/90/80/70/50 %** (contamination 0→10 %, fragmentation 1→400 contigs; `scripts/degrade.py`); the
+  DB is rebuilt at each level under **Jaccard** and under **`--containment`** and the same reads re-profiled.
 - *Raw data (local):* reads under `figure_raw_data/sim_single_species/`; genome pool by accession
-  (`sim_pool_manifest.tsv`); result `results/refqual_15species.tsv`.
-**2. Key issue & conclusion.** How does reference-genome completeness affect strain identification, across
-species? Conclusion: **precision is 1.0 for all 15 species with complete references**, and both precision
-and recall **decline as references degrade** — across the 14 resolvable species, median precision
-1.0→0.84→0.71→0.52 and recall 0.96→0.80→0.74→0.70 across 100→90→70→50 %. Degraded, fragmented genomes
-split clusters and shed unique markers, so complete/near-complete references are required — motivating the
-assembly-quality filter. Near-clonal *M. tuberculosis* (single 0.95 cluster) is reported separately.
+  (`sim_pool_manifest.tsv`); results `results/refqual_15species.tsv` (Jaccard) and
+  `results/refqual_15species_containment.tsv`.
+**2. Key issue & conclusion.** Does reference incompleteness break strain ID, and does the tool address it?
+Conclusion: under default **Jaccard**, precision and recall decline as references degrade (median precision
+1.0→0.84→0.71, recall 0.96→0.80→0.74 at 100→90→70 %) because incomplete genomes split from complete
+relatives. The **`--containment`** mode (max-containment) keeps them clustered, restoring median precision
+to 0.98/0.92 and recall to 0.95/0.92 at 95/90 % completeness, converging with Jaccard only at ≤70 %
+(genuinely low-quality). It also removes the near-clonal *M. tuberculosis* artifact. Containment is opt-in
+(merges more aggressively); default stays Jaccard + the assembly-quality filter.
 **3. Results by subfigure.**
-- **(A)** Precision vs reference completeness — one labeled coloured line per species + bold median (14
-  resolvable species); all species 1.0 at 100 %, spreading down as completeness falls.
-- **(B)** Recall vs reference completeness — same layout. *M. tuberculosis* (dashed, excluded from median):
-  recall drops to ≈0.05 the moment references degrade because its single cluster shatters into spurious
-  singletons — a cluster-relabeling artifact of near-clonality, not a graded completeness effect. Diverse
-  species (*S. enterica*, *S. pneumoniae*) are most robust.
+- **(A)** Median precision vs completeness: Jaccard (grey dashed) vs `--containment` (solid), shaded gap;
+  faint per-species containment lines show the spread.
+- **(B)** Median recall vs completeness, same layout. **Inset:** *M. tuberculosis* recall — Jaccard collapses
+  to ≈0.05 on any degradation (its single cluster shatters into spurious singletons), `--containment` holds
+  1.0 to 90 % (the near-clonal cluster-fragmentation artifact is fixed).
 
 ---
 
