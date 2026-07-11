@@ -1,0 +1,6 @@
+metric	strain	species
+within_subject_BC_mean	0.1859	-
+between_subject_BC_mean	0.4444	-
+within_vs_between_mannwhitney_p	5.004e-25	-
+leave_one_timepoint_out_subject_accuracy	1.0000	0.9375
+n_subjects	8	-
