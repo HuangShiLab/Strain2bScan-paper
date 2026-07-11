@@ -82,15 +82,17 @@ and **detection onset 0.5× coverage matching StrainScan** — no low-depth pena
   (`sim_pool_manifest.tsv`); result `results/refqual_15species.tsv`.
 **2. Key issue & conclusion.** How does reference-genome completeness affect strain identification, across
 species? Conclusion: **precision is 1.0 for all 15 species with complete references**, and both precision
-and recall **decline as references degrade** — median precision 1.0→0.87→0.71→0.52 and recall
-0.96→0.80→0.72→0.68 across 100→90→70→50 %. Degraded, fragmented genomes split clusters and shed unique
-markers, so complete/near-complete references are required — motivating the assembly-quality filter.
+and recall **decline as references degrade** — across the 14 resolvable species, median precision
+1.0→0.84→0.71→0.52 and recall 0.96→0.80→0.74→0.70 across 100→90→70→50 %. Degraded, fragmented genomes
+split clusters and shed unique markers, so complete/near-complete references are required — motivating the
+assembly-quality filter. Near-clonal *M. tuberculosis* (single 0.95 cluster) is reported separately.
 **3. Results by subfigure.**
-- **(A)** Precision vs reference completeness — 15 per-species lines (grey) + bold median; all species 1.0
-  at 100 %, spreading down as completeness falls.
-- **(B)** Recall vs reference completeness — same layout; near-clonal *M. tuberculosis* collapses to 0.08
-  at 70 % (its few distinguishing markers are lost first), diverse species (*S. enterica*, *S. pneumoniae*)
-  most robust.
+- **(A)** Precision vs reference completeness — one labeled coloured line per species + bold median (14
+  resolvable species); all species 1.0 at 100 %, spreading down as completeness falls.
+- **(B)** Recall vs reference completeness — same layout. *M. tuberculosis* (dashed, excluded from median):
+  recall drops to ≈0.05 the moment references degrade because its single cluster shatters into spurious
+  singletons — a cluster-relabeling artifact of near-clonality, not a graded completeness effect. Diverse
+  species (*S. enterica*, *S. pneumoniae*) are most robust.
 
 ---
 

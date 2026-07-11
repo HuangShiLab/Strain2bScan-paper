@@ -58,14 +58,19 @@ Reference-genome **completeness** is the dominant control on strain-identificati
 tested it across **all 15 species** (Fig 4). Holding the sample reads fixed and progressively degrading
 the truth strains' reference genomes (completeness 100 → 50 %, with co-varying contamination and
 fragmentation), **precision is 1.0 for every species at 100 % completeness** (median recall 0.96) and
-then falls species-dependently as references degrade: **median precision 1.0 → 0.87 (90 %) → 0.71 (70 %)
-→ 0.52 (50 %)** and median recall 0.96 → 0.80 → 0.72 → 0.68 (Fig 4A precision, 4B recall). Fragmented,
-incomplete genomes split clusters and shed the unique markers that distinguish strains, so
-complete/near-complete references are required for reliable strain calls — motivating the built-in
-assembly-quality filter that flags low-quality references before clustering (and the complete-genome
-restriction used throughout, e.g. Fig 2). The effect is sharpest for near-clonal *M. tuberculosis*,
-whose recall collapses to 0.08 at 70 % completeness (its few distinguishing markers are the first lost),
-and mildest for diverse species such as *Salmonella enterica* and *S. pneumoniae*.
+then falls as references degrade — across the 14 **resolvable** species, **median precision 1.0 → 0.84
+(90 %) → 0.71 (70 %) → 0.52 (50 %)** and median recall 0.96 → 0.80 → 0.74 → 0.70 (Fig 4A precision, 4B
+recall). Fragmented, incomplete genomes split clusters and shed the unique markers that distinguish
+strains, so complete/near-complete references are required for reliable strain calls — motivating the
+built-in assembly-quality filter that flags low-quality references before clustering (and the
+complete-genome restriction used throughout, e.g. Fig 2). One species behaves qualitatively differently
+and is reported separately: near-clonal ***M. tuberculosis*** collapses to recall ≈ 0.05 the moment its
+references are degraded (its pool forms a **single 0.95 cluster**, so degradation shatters it into
+spurious singletons and the truth spans clusters that the reads — from complete genomes — no longer
+match). This is a cluster-relabeling artifact of near-clonality rather than a graded completeness effect,
+so *M. tuberculosis* is excluded from the median (dashed line, Fig 4); it echoes its intrinsic
+near-clonal limit seen elsewhere (Fig 10). Among resolvable species the effect is mildest for diverse
+*Salmonella enterica* and *S. pneumoniae*.
 
 ## Part I — Native 2bRAD-M for low-biomass, high-host microbiomes
 

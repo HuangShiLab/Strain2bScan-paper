@@ -41,12 +41,14 @@ Sources: `results/cross_species.tsv`, `results/depth_sensitivity.tsv`; docs: `do
 **Figure 4. Reference-genome completeness controls strain-identification accuracy (all 15 species).**
 `figures/refqual_figure.{png,pdf}`. Sample reads held fixed while the truth strains' reference genomes are
 degraded (completeness 100→50 %, with co-varying contamination + fragmentation), DB rebuilt and re-profiled.
-(A) precision vs completeness; (B) recall vs completeness — grey = per species (15), bold = median.
-Precision 1.0 for all species at 100 %; median precision 1.0→0.87→0.71→0.52 and recall 0.96→0.80→0.72→0.68
-as completeness falls 100→90→70→50 %. Near-clonal *M. tuberculosis* recall collapses to 0.08 at 70 %.
-Source: `results/refqual_15species.tsv`; generator `scripts/run_refqual_15species.py`, `plot_refqual15.py`;
-doc: `docs/refgenome_quality.md`. (The former panel-size panel, Fig 4A, was retired after the both-strand
-digestion fix.)
+(A) precision vs completeness; (B) recall vs completeness — one coloured, labeled line per species,
+bold black = median over the 14 **resolvable** species. Precision 1.0 for all species at 100 %; median
+precision 1.0→0.84→0.71→0.52 and recall 0.96→0.80→0.74→0.70 as completeness falls 100→90→70→50 %.
+Near-clonal ***M. tuberculosis*** (single 0.95 cluster) is drawn separately (dashed) and excluded from the
+median: once degraded, its cluster shatters into spurious singletons (a cluster-relabeling artifact, not a
+completeness gradient) so recall drops to ≈0.05. Source: `results/refqual_15species.tsv`; generators
+`scripts/run_refqual_15species.py`, `scripts/plot_refqual15.py`; doc: `docs/refgenome_quality.md`.
+(The former panel-size panel, Fig 4A, was retired after the both-strand digestion fix.)
 
 **Figure 5. The 2bRAD enzyme set is a resolution/cost knob enabling native BcgI operation.**
 `figures/enzyme_sweep.{png,pdf}` — on *C. acnes*, precision/recall, strain-specific marker count and
