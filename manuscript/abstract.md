@@ -46,10 +46,10 @@ figures: https://github.com/HuangShiLab/Strain2bScan-paper.
   (2) in-silico-digested shotgun → community-scale throughput vs StrainScan. Shared foundation
   (accuracy, robustness, 2bRAD-vs-16S motivation) precedes the two pillars. Full section→evidence map in
   `docs/manuscript_organization.md`.
-- Figure map (10 main): 1 overview, 2 mash_2brad_vs_16s, 3 cross_species(+depth), 4 robustness
-  (panelsize+refqual), 5 enzyme_sweep, 6 mock_hostcontam, 7 saliva (individual+temporal_ml), 8
-  saliva_concordance, 9 efficiency (performance+scalability+community_throughput), 10 species_expansion.
-  Supp: mash_2brad_vs_16s_scatter, mock_msa1002_titration, gate_calibration, clinical_exploratory,
-  genome_qc_16s_panel.
+- Figure map (10 main): 1 overview, 2 mash_2brad_vs_16s (A bars + B 3×5 rank–rank scatter, combined),
+  3 cross_species(+depth), 4 robustness (panelsize+refqual), 5 enzyme_sweep, 6 mock_hostcontam,
+  7 saliva (individual+temporal_ml), 8 saliva_concordance, 9 efficiency (performance+scalability+
+  community_throughput), 10 species_expansion. Supp: S1 mock_msa1002_titration, S2 gate_calibration,
+  Table S3 clinical_exploratory, Table S4 genome_qc_16s_panel. (Former Fig S1 scatter is now Fig 2B.)
 - All numbers regenerated with the corrected-enzyme binary; 2bRAD-native results on real error-containing
   reads; simulated benchmarks are closed-world (stated in Discussion).

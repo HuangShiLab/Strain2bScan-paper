@@ -21,9 +21,9 @@ MAIN = {
     "10": ["species_expansion"],
 }
 SUPP = {
-    "S1": ["mash_2brad_vs_16s_scatter"],
-    "S2": ["mock_msa1002_titration"],
-    "S3": ["gate_calibration"],
+    # (former S1 rank-rank scatter is now Fig 2 panel B — see scripts/plot_fig2_combined.py)
+    "S1": ["mock_msa1002_titration"],
+    "S2": ["gate_calibration"],
 }
 
 def montage(tag, sources):

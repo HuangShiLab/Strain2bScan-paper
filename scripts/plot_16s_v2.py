@@ -48,7 +48,9 @@ ax.set_title("2bRAD captures strain-level signal that 16S cannot\n"
              "error bars = 95% CI over genome subsamples)", fontsize=11.5)
 ax.legend(loc="lower left", fontsize=10, framealpha=0.95); ax.grid(alpha=0.25, axis="x")
 fig.tight_layout()
-fig.savefig(f"{PAPER}/figures/mash_2brad_vs_16s.png", dpi=150)
-fig.savefig(f"{PAPER}/figures/mash_2brad_vs_16s.pdf")
+# NOTE: the canonical Fig 2 is now the combined bars+scatter (scripts/plot_fig2_combined.py ->
+# figures/mash_2brad_vs_16s.png). This script produces the standalone bar panel as a component only.
+fig.savefig(f"{PAPER}/figures/mash_2brad_vs_16s_bars.png", dpi=150)
+fig.savefig(f"{PAPER}/figures/mash_2brad_vs_16s_bars.pdf")
 print(f"wrote figures/mash_2brad_vs_16s.png + .pdf")
 print(f"2bRAD median {med2:.3f} vs 16S median {med16:.3f}; genomes/species {min(ns)}-{max(ns)}")

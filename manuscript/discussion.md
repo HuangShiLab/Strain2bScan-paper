@@ -8,7 +8,7 @@ accuracy** — across every species tested it held precision 1.0, matched Strain
 0.5× coverage (Fig 3), and matched or exceeded StrainScan's recall on StrainScan's own databases
 (Fig 10). The foundation for a strain-level *2bRAD* method is that its tags, unlike the 16S gene, carry
 genome-wide strain signal: across 15 species 2bRAD between-strain distances tracked the whole genome
-(median Spearman 0.94) while 16S did not (0.36), several 16S intervals overlapping zero (Fig 2, Fig S1).
+(median Spearman 0.94) while 16S did not (0.36), several 16S intervals overlapping zero (Fig 2A,B).
 16S resolves species; 2bRAD tags resolve strains.
 
 **Native 2bRAD for low-biomass, high-host microbiomes.** The distinctive advantage of the native-2bRAD

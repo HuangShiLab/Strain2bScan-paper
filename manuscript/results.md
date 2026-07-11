@@ -35,7 +35,7 @@ and 16S distance vectors against the whole-genome vector (Spearman; 95 % CIs fro
 2bRAD tracks the genome in every species (**median Spearman 0.94**, range 0.59–0.99), whereas **16S is
 weak to useless (median 0.36)**, with several confidence intervals overlapping zero — *M. tuberculosis*
 −0.04, *L. plantarum* 0.02, *Phocaeicola dorei* −0.13 (Fig 2). Every 2bRAD CI is high and non-overlapping
-with its species' 16S CI. The per-pair rank–rank scatter (Fig S1) shows the mechanism: 2bRAD distances
+with its species' 16S CI. The per-pair rank–rank scatter (Fig 2B) shows the mechanism: 2bRAD distances
 order strain pairs the same way the whole genome does, while 16S collapses to a few discrete distances
 shared by many unrelated pairs. **16S resolves species, not strains; the 2bRAD tag set carries
 genome-wide strain signal at ~1 % of the sequencing.**
@@ -87,7 +87,7 @@ recall at 99 % host**, whereas shotgun fell to **12/20** (Fig 6A). The mechanism
 native 2bRAD delivers ~340–370k usable BcgI markers regardless of host fraction — the reduction happens at
 the wet-lab step, before host swamps the library — while digesting an already host-dominated shotgun
 library in silico yields only 96k → 53k → 33k markers as host rises. In a separate DNA-input titration,
-native 2bRAD held precision 1.0 with full recall down to **0.1 ng** input (Fig S2). This is the
+native 2bRAD held precision 1.0 with full recall down to **0.1 ng** input (Fig S1). This is the
 low-biomass niche, quantified on real data: the wet-lab 2bRAD reduction preserves the strain-informative
 markers that host contamination otherwise destroys.
 
@@ -120,7 +120,7 @@ that native 2bRAD contradicts, establishing that the two input modes agree at th
 only the most abundant, ubiquitous strains; native 2bRAD confirms all of those *and* resolves the
 low-abundance tail — the same enrichment advantage seen on the controlled mock (Fig 6), now on real
 clinical material. (Strain2bScan runs directly on an oral clinical cohort — 15–17 species, ~2 s per
-sample — as an application demonstration; Fig S4.)
+sample — as an application demonstration; Table S3.)
 
 ## Part II — Conventional metagenomes at community scale
 

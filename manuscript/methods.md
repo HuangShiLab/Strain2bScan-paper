@@ -130,7 +130,7 @@ matching the *C. acnes* design). (iv) A reference-degradation gradient in which 
 strains' database genomes are degraded to completeness 100→50 % (with co-varying contamination
 0→10 % and fragmentation), samples held fixed. All simulated reads are error-free 150 bp.
 
-**Real-data and motivation datasets.** (v) *2bRAD-vs-16S motivation* (Fig 2, Fig S1): 15
+**Real-data and motivation datasets.** (v) *2bRAD-vs-16S motivation* (Fig 2): 15
 pathogenic/commensal species, ~50 genomes each from NCBI accession lists (ENA FASTA), **restricted to
 complete/near-complete assemblies** (CheckM completeness ≥ 97 %, contamination ≤ 5 %, assembly level
 Complete Genome/Chromosome; `data/genome_qc_16s_panel.tsv`). Between-strain distance was computed in
@@ -138,7 +138,7 @@ three spaces — whole-genome (bottom-3000 canonical 21-mer MinHash), 2bRAD (Str
 tags) and 16S (longest gene per genome via barrnap 0.9 + HMMER, 21-mer Jaccard) — all with the Mash
 transform D(J) = −ln(2J/(1+J)); per species the 2bRAD and 16S pairwise vectors were correlated (Spearman)
 against the whole-genome vector, with 95 % CIs from 500 genome subsamples. (vi) *DNA mock,
-host-contamination series* (Fig 6, Fig S2): ATCC MSA-1002 20-strain even mock — native BcgI 2bRAD (SRA
+host-contamination series* (Fig 6, Fig S1): ATCC MSA-1002 20-strain even mock — native BcgI 2bRAD (SRA
 PRJNA1131785, 0/90/99 % human DNA; Figshare 12272360 DNA-input titration) and shotgun WMS of the same
 mock — profiled with `multi-profile --enzyme BcgI` against a reconstructed 62-species BcgI panel (20
 mock + 42 decoys), scored against the 20-species truth. (vii) *Real saliva* (Fig 7, Fig 8): native BcgI
