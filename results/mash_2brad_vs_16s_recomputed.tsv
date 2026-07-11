@@ -1,0 +1,20 @@
+# 2bRAD-tag AND 16S vs whole-genome between-strain distance concordance, recomputed with
+# Strain2bScan. WGS: bottom-3000 canonical 21-mer MinHash (Mash). 2bRAD: Strain2bScan build
+# BcgI tag sets. 16S: longest barrnap 16S gene, exact canonical 21-mer Jaccard. distance
+# = -ln(2J/(1+J)); Spearman of pairwise distance vector vs whole-genome. PYTHONHASHSEED=0.
+species	n_genomes	n_pairs	spearman_wgs_2brad	spearman_wgs_16s	n_16s_found
+Akkermansia_muciniphila	48	1128	0.958	0.648	50
+Clostridioides_difficile	49	1176	0.942	0.356	50
+Cutibacterium_acnes	50	1225	0.977	0.47	50
+Escherichia_coli	50	1225	0.989	0.36	50
+Fusobacterium_nucleatum	50	1192	0.813	0.782	50
+Klebsiella_pneumoniae	49	1160	0.734	0.239	49
+Lactiplantibacillus_plantarum	48	1068	0.867	0.023	49
+Mycobacterium_tuberculosis	50	1225	0.895	-0.135	50
+Phocaeicola_dorei	35	595	0.896	0.179	36
+Porphyromonas_gingivalis	39	741	0.865	0.419	45
+Prevotella_copri	29	406	0.976	0.37	31
+Salmonella_enterica	50	1125	0.976	0.608	50
+Staphylococcus_aureus	50	1225	0.983	0.086	50
+Staphylococcus_epidermidis	50	1225	0.9	0.205	50
+Streptococcus_pneumoniae	50	1225	0.589	0.203	50
