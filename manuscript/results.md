@@ -54,14 +54,18 @@ over-detect near-identical strains. Recall, not precision, is the species-depend
 missing it only at 0.1× — the **same detection onset as StrainScan** (Fig 3B) — so the sparse marker set
 carries no low-depth penalty at realistic coverage.
 
-Strain2bScan was also robust to reference-database imperfection (Fig 4). On nested *P. copri* panels of
-40/80/112 genomes it held **precision 1.0** at every size (recall 1.0/0.95/1.0; 23/43/51 clusters), and
-the 112-genome partition matched the clustering of StrainScan's own pre-built *P. copri* database — an
-external check on the MinHash clustering (Fig 4A). Robustness to reference *quality* has a defined floor
-(Fig 4B): degrading the truth strains' genomes held precision 1.0 down to **70 % completeness** (recall
-falling from 0.75 to 0.19), with detection collapsing only at 50 % completeness / 10 % contamination /
-400 contigs — motivating the built-in assembly-quality filter that flags low-quality references before
-clustering.
+Reference-genome **completeness** is the dominant control on strain-identification accuracy, and we
+tested it across **all 15 species** (Fig 4). Holding the sample reads fixed and progressively degrading
+the truth strains' reference genomes (completeness 100 → 50 %, with co-varying contamination and
+fragmentation), **precision is 1.0 for every species at 100 % completeness** (median recall 0.96) and
+then falls species-dependently as references degrade: **median precision 1.0 → 0.87 (90 %) → 0.71 (70 %)
+→ 0.52 (50 %)** and median recall 0.96 → 0.80 → 0.72 → 0.68 (Fig 4A precision, 4B recall). Fragmented,
+incomplete genomes split clusters and shed the unique markers that distinguish strains, so
+complete/near-complete references are required for reliable strain calls — motivating the built-in
+assembly-quality filter that flags low-quality references before clustering (and the complete-genome
+restriction used throughout, e.g. Fig 2). The effect is sharpest for near-clonal *M. tuberculosis*,
+whose recall collapses to 0.08 at 70 % completeness (its few distinguishing markers are the first lost),
+and mildest for diverse species such as *Salmonella enterica* and *S. pneumoniae*.
 
 ## Part I — Native 2bRAD-M for low-biomass, high-host microbiomes
 

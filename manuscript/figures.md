@@ -38,11 +38,15 @@ distance (y): 2bRAD hugs the diagonal in every species, 16S forms flat rank-band
 Sources: `results/cross_species.tsv`, `results/depth_sensitivity.tsv`; docs: `docs/cross_species.md`,
 `docs/depth_sensitivity.md`.
 
-**Figure 4. Robustness to reference panel size and reference quality.** (A) `figures/panelsize_prevotella.{png,pdf}`
-— *P. copri* panels of 40/80/112 genomes: precision 1.0 at every size; 112→51 clusters matches
-StrainScan's own DB. (B) `figures/refqual_figure.{png,pdf}` — reference-degradation gradient: precision
-1.0 to 70 % completeness, collapse at 50 %/10 %/400-contigs. Sources: `results/panelsize_prevotella.tsv`,
-`results/refqual_degradation.tsv`; doc: `docs/refgenome_quality.md`.
+**Figure 4. Reference-genome completeness controls strain-identification accuracy (all 15 species).**
+`figures/refqual_figure.{png,pdf}`. Sample reads held fixed while the truth strains' reference genomes are
+degraded (completeness 100→50 %, with co-varying contamination + fragmentation), DB rebuilt and re-profiled.
+(A) precision vs completeness; (B) recall vs completeness — grey = per species (15), bold = median.
+Precision 1.0 for all species at 100 %; median precision 1.0→0.87→0.71→0.52 and recall 0.96→0.80→0.72→0.68
+as completeness falls 100→90→70→50 %. Near-clonal *M. tuberculosis* recall collapses to 0.08 at 70 %.
+Source: `results/refqual_15species.tsv`; generator `scripts/run_refqual_15species.py`, `plot_refqual15.py`;
+doc: `docs/refgenome_quality.md`. (The former panel-size panel, Fig 4A, was retired after the both-strand
+digestion fix.)
 
 **Figure 5. The 2bRAD enzyme set is a resolution/cost knob enabling native BcgI operation.**
 `figures/enzyme_sweep.{png,pdf}` — on *C. acnes*, precision/recall, strain-specific marker count and

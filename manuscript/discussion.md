@@ -48,10 +48,11 @@ claim. Resolving to clusters does not cost precision (it stayed 1.0 even for low
 number, from every other cluster — eliminates false-unique markers from single-copy filtering and keeps
 precision 1.0 in similar-strain species. MinHash-sketch clustering scales database construction while
 producing partitions identical to exact Jaccard and to StrainScan's own pre-built *P. copri* clustering
-(112 → 51 clusters; Fig 4A). Assembly-quality filtering counters the completeness bias of Jaccard
-clustering; the same completeness concern motivated restricting the Fig 2 motivation panel to
-complete/near-complete genomes, where the 2bRAD-over-16S advantage is unchanged (median 0.90→0.94),
-confirming it is not a draft-assembly artifact. The enzyme count is an explicit resolution/cost control
+(112 → 51 clusters; `results/panelsize_prevotella.tsv`). Assembly-quality filtering counters the
+completeness bias of Jaccard clustering, which matters: degrading reference genomes lowers
+strain-identification precision *and* recall across all 15 species (Fig 4), and the same completeness
+concern motivated restricting the Fig 2 motivation panel to complete/near-complete genomes, where the
+2bRAD-over-16S advantage is unchanged (median 0.90→0.94), confirming it is not a draft-assembly artifact. The enzyme count is an explicit resolution/cost control
 (~4 enzymes captures most recall; Fig 5), and single-enzyme BcgI operation is what enables native
 2bRAD-M libraries.
 

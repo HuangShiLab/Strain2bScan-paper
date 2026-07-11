@@ -70,21 +70,27 @@ and **detection onset 0.5× coverage matching StrainScan** — no low-depth pena
 
 ---
 
-## Figure 4 — Robustness to reference panel size and reference quality
+## Figure 4 — Reference-genome completeness controls strain-identification accuracy (all 15 species)
 **1. Data source.**
-- *Data type:* simulation (reads from real reference genomes; closed-world).
-- *Production/collection:* (A) nested *P. copri* panels of 40/80/112 NCBI genomes; (B) the truth strains'
-  reference genomes degraded to 100→50 % completeness (co-varying contamination 0→10 %, fragmentation),
-  samples held fixed. Error-free 150 bp reads.
-- *Raw data (local):* regenerated from scripts + `data/accessions/prevotella_copri_*`; not stored as reads.
-**2. Key issue & conclusion.** Is clustering/detection stable under database imperfection? Conclusion:
-**precision 1.0 across panel sizes** (clustering matches StrainScan's own *P. copri* DB) and **to 70 %
-reference completeness**, with a defined collapse floor that motivates the built-in assembly-quality filter.
+- *Data type:* simulation — ART PE250 reads from the 15-species pool (same dataset as Figs 3/5/9/10);
+  reference genomes are degraded assemblies.
+- *Production/collection:* per species, a fixed multi-strain sample (2/3/5-strain uneven community at 5×,
+  5 reps) is profiled while the truth strains' reference genomes are degraded across a completeness ladder
+  **100/95/90/80/70/50 %**, with co-varying contamination (0→10 %) and fragmentation (1→400 contigs;
+  `scripts/degrade.py`); the DB is rebuilt at each level and the same reads re-profiled.
+- *Raw data (local):* reads under `figure_raw_data/sim_single_species/`; genome pool by accession
+  (`sim_pool_manifest.tsv`); result `results/refqual_15species.tsv`.
+**2. Key issue & conclusion.** How does reference-genome completeness affect strain identification, across
+species? Conclusion: **precision is 1.0 for all 15 species with complete references**, and both precision
+and recall **decline as references degrade** — median precision 1.0→0.87→0.71→0.52 and recall
+0.96→0.80→0.72→0.68 across 100→90→70→50 %. Degraded, fragmented genomes split clusters and shed unique
+markers, so complete/near-complete references are required — motivating the assembly-quality filter.
 **3. Results by subfigure.**
-- **(A)** Precision/recall and cluster count vs panel size (40/80/112 → 23/43/51 clusters); precision 1.0
-  throughout; 112→51 matches StrainScan's clustering.
-- **(B)** Precision/recall vs reference completeness; precision 1.0 to 70 % (recall 0.75→0.19), detection
-  collapses at 50 %/10 %/400-contigs.
+- **(A)** Precision vs reference completeness — 15 per-species lines (grey) + bold median; all species 1.0
+  at 100 %, spreading down as completeness falls.
+- **(B)** Recall vs reference completeness — same layout; near-clonal *M. tuberculosis* collapses to 0.08
+  at 70 % (its few distinguishing markers are lost first), diverse species (*S. enterica*, *S. pneumoniae*)
+  most robust.
 
 ---
 

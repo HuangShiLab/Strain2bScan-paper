@@ -12,7 +12,7 @@ MAIN = {
     "01": ["overview"],
     "02": ["mash_2brad_vs_16s"],
     "03": ["cross_species", "depth_sensitivity"],
-    "04": ["panelsize_prevotella", "refqual_figure"],
+    "04": ["refqual_figure"],
     "05": ["enzyme_sweep"],
     "06": ["mock_hostcontam"],
     "07": ["saliva_individual_discrimination", "saliva_temporal_ml"],
