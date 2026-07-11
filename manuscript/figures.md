@@ -4,6 +4,11 @@ Figure numbering follows `docs/manuscript_organization.md` (two-input-mode struc
 the figure file(s) in `figures/`, the source table(s) in `results/`, and the per-experiment doc in
 `docs/`. Multi-panel figures list the panel→file mapping.
 
+**Numbered figure set:** `figures/numbered/Fig01…Fig10` and `FigS1…FigS3` (PNG + PDF) are the
+manuscript-ordered figures, one file per figure number (multi-panel figures are montaged vertically,
+one source panel per row). Regenerate with `python scripts/number_figures.py` after any panel figure
+changes.
+
 ## Main figures
 
 **Figure 1. Strain2bScan overview and the two input modes.** `figures/overview.{png,pdf}`
