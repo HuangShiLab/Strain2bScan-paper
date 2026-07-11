@@ -47,3 +47,13 @@ Restricting to complete genomes and adding CIs **does not change the conclusion*
 Strain2bfunc slide-deck finding with Strain2bScan tags + an open 16S pipeline. This is the
 Introduction/Fig-2 motivation: **16S resolves species, not strains; 2bRAD's reduced tags carry
 genome-wide strain signal at ~1% of the sequencing.**
+
+## Supplementary — per-species rank–rank scatter (`figures/mash_2brad_vs_16s_scatter.*`)
+The panel figure shows *why* the Spearman values differ: for each species, the rank of each strain
+pair's whole-genome distance (x) vs the rank of its 2bRAD (blue) and 16S (red) distance (data in
+`results/pairdist/<species>.tsv`). **2bRAD hugs the diagonal in every species** (its distance orders
+strain pairs the same way the whole genome does); **16S forms flat horizontal rank-bands** — a
+handful of discrete 16S distances shared by many unrelated pairs, uncorrelated with genome distance.
+The discrepancy is most extreme in *Phocaeicola dorei* and *M. tuberculosis*: 16S collapses to a
+single flat band (nearly all pairs have identical 16S → zero strain resolution) while 2bRAD still
+recovers the genome-wide ordering. This is the pair-level view behind the summary bar chart.
