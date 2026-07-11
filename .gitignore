@@ -27,3 +27,4 @@ figure_raw_data/**/reads/
 *.tar.gz
 .DS_Store
 __pycache__/
+figure_raw_data/**/truth/
