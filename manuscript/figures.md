@@ -41,13 +41,18 @@ Sources: `results/cross_species.tsv`, `results/depth_sensitivity.tsv`; docs: `do
 **Figure 4. Reference-genome completeness controls strain-identification accuracy (all 15 species).**
 `figures/refqual_figure.{png,pdf}`. Sample reads held fixed while the truth strains' reference genomes are
 degraded (completeness 100→50 %, with co-varying contamination + fragmentation), DB rebuilt and re-profiled.
-Problem → solution. (A) median precision, (B) median recall vs reference completeness (14 resolvable
+Problem → mechanism → solution. **(A)** schematic (`figures/containment_mechanism.*`): an incomplete
+genome's tags are a subset of a complete relative's, so Jaccard (6/10 = 0.60) drops below the 0.95 cut and
+splits them — the shared tags land in two clusters and are demoted to non-discriminating *SharedPartial*;
+max-containment (6/6 = 1.0) merges them into one cluster whose marker set is the **union** of members, so
+the discriminating *ClusterSpecific* tags (and the complete member's markers) are preserved. **(B)** median
+precision, **(C)** median recall vs reference completeness (14 resolvable
 species; faint lines = per-species containment), comparing **default Jaccard** clustering (grey dashed)
 with the **`--containment`** mode (solid, shaded gap). Degrading references collapses Jaccard accuracy
 (precision 1.0→0.84→0.71, recall 0.96→0.80→0.74 at 100→90→70 %) because incomplete genomes split from
 complete relatives; `--containment` (max-containment) keeps them together, restoring precision to
 0.98/0.92 and recall to 0.95/0.92 at 95/90 %, converging with Jaccard only at ≤70 % (genuinely
-low-quality). Inset (B): near-clonal ***M. tuberculosis*** recall — Jaccard collapses to ≈0.05 on any
+low-quality). Inset (C): near-clonal ***M. tuberculosis*** recall — Jaccard collapses to ≈0.05 on any
 degradation (single cluster shatters), containment holds 1.0 to 90 % (artifact fixed). Sources:
 `results/refqual_15species.tsv` (Jaccard), `results/refqual_15species_containment.tsv`; generators
 `scripts/run_refqual_15species.py` (set `CONTAINMENT=1`), `scripts/plot_refqual15.py`; the `--containment`

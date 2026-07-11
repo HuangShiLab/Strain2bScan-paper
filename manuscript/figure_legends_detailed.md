@@ -89,9 +89,12 @@ to 0.98/0.92 and recall to 0.95/0.92 at 95/90 % completeness, converging with Ja
 (genuinely low-quality). It also removes the near-clonal *M. tuberculosis* artifact. Containment is opt-in
 (merges more aggressively); default stays Jaccard + the assembly-quality filter.
 **3. Results by subfigure.**
-- **(A)** Median precision vs completeness: Jaccard (grey dashed) vs `--containment` (solid), shaded gap;
+- **(A)** Schematic of the mechanism: an incomplete genome is a subset of a complete relative → Jaccard
+  splits them (shared tags demoted to non-discriminating *SharedPartial*) → max-containment merges them
+  (one cluster, marker set = union of members → discriminating tags preserved).
+- **(B)** Median precision vs completeness: Jaccard (grey dashed) vs `--containment` (solid), shaded gap;
   faint per-species containment lines show the spread.
-- **(B)** Median recall vs completeness, same layout. **Inset:** *M. tuberculosis* recall — Jaccard collapses
+- **(C)** Median recall vs completeness, same layout. **Inset:** *M. tuberculosis* recall — Jaccard collapses
   to ≈0.05 on any degradation (its single cluster shatters into spurious singletons), `--containment` holds
   1.0 to 90 % (the near-clonal cluster-fragmentation artifact is fixed).
 

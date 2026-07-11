@@ -71,7 +71,21 @@ pathogen panel with few genomes per species gave no saliva signal because real s
 across arbitrary clusters, whereas a genome-rich oral panel recovered the full individual-discrimination
 signal — panel design is a real determinant of strain-level performance on open-world data.
 (iii) **Host-limited shotgun** cannot reach the low-abundance strain tail on high-host samples; this is a
-property of the input, not the tool, and is precisely the gap the native-2bRAD mode fills. (iv) Aside
+property of the input, not the tool, and is precisely the gap the native-2bRAD mode fills.
+(iv) **Reference incompleteness is improved but not fully solved.** The `--containment` clustering mode
+recovers accuracy when an incomplete genome has a complete relative in the panel (Fig 4), but it cannot
+recover markers that are simply *absent* — a strain whose only reference is a partial assembly — nor undo
+contamination that injects foreign tags, so it converges with Jaccard below ~70 % completeness; and
+because it merges more aggressively it trades a little resolution on complete panels (hence opt-in, not
+the default). Making strain identification *more resistant* to incomplete references is a clear direction:
+a **completeness-aware detection gate** (scale the unique-marker floor by each genome's estimated
+completeness, or gate on a *fraction* of a cluster's available markers rather than an absolute count —
+analogous to the Layer-1 breadth term) so incomplete strains are not gated out; a
+**best-quality-representative** marker set per cluster (define the cluster's markers from its most-complete
+member); **upstream completeness/contamination estimation and decontamination** (CheckM2 / GUNC) feeding
+the quality filter; and **pangenome-based imputation** of missing markers from complete conspecifics. The
+irreducible case — a strain represented only by a low-completeness, contaminated genome — is a data limit
+no clustering can overcome. (v) Aside
 from the mock and saliva chapters, the accuracy benchmarks are simulated, error-free and closed-world.
 Extensions include oral-cancer case/control analysis (needs the study's sample labels), FFPE and
 degraded material, deeper multi-tool comparison (sylph, StrainGE), and completing the Fast2bRAD-M species
