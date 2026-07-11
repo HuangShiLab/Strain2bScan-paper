@@ -4,6 +4,24 @@ Paste this as the opening message on Mac Studio to continue. The two git repos a
 state; scratchpad intermediates (genomes, mock reads, DBs) are ephemeral but reproducible from the
 committed scripts + accession/manifest files.
 
+## UPDATE 2026-07-11 (Mac Studio session) — real-data figures done
+Environment: **NCBI is NOT blocked on Mac Studio** (unlike the old MacBook); ENA/Figshare/NCBI all
+reachable. Tool reads **plain FASTQ only** (decompress .gz first). macOS bash 3.2 (no `declare -A`).
+No sci-Python; use `scratchpad/venv`. **4 new commits (unpushed — HTTPS creds unavailable in the
+agent env; user must `git push origin main`):**
+- **Fig 9 mock host-contamination** (`docs/mock_hostcontam.md`): native 2bRAD vs shotgun across
+  0/90/99% human. Precision 1.0 for both at all levels; 2bRAD 20/20 recall at 99% host vs shotgun
+  12/20 (2bRAD keeps ~10× more usable markers). Reconstructed 62-sp BcgI mock DB (`dl_genomes.py`).
+- **Fig 10 saliva** — three docs: individual-discrimination (subject strain R²=0.833>species 0.822,
+  p=2e-4; *Rothia mucilaginosa* R²=0.921), shotgun↔2bRAD concordance (100% of WMS strains confirmed
+  by 2bRAD; 2bRAD adds 128–163 low-abundance strains WMS misses, p=1.2e-23), temporal stability +
+  ML host-ID (within 0.19<between 0.44; leave-one-timepoint-out subject ID **100%** strain vs 94%
+  species). Oral panel builder `dl_oral_panel.py` (19 sp × ≤25 genomes; **many genomes/species is
+  essential** — the generic pathogen panel gave a null).
+- Saliva alias `S<time>-<subject>`: prefix S9/S11/S13/S17 = time of day, suffix = the 8 subjects.
+- Still open: full-depth saliva WMS (13.8 GB/file, download-unstable; partials sufficed); oral
+  cancer/ECC (`S_########` samples, need supp case/control labels); 16S motivation (barrnap+mash).
+
 ## Repos (clone both on Mac Studio)
 - **Software:** `github.com/HuangShiLab/Strain2bScan` (Rust profiler; formerly "Strain2bfunc").
 - **Paper:** `github.com/HuangShiLab/Strain2bScan-paper` (manuscript, benchmarks, figures).
