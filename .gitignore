@@ -13,8 +13,12 @@ depthsweep/
 StrainScan/
 *.fq
 *.fq.gz
+*.fastq
+*.fastq.gz
 *.fna
 *.fasta
+# figure_raw_data: keep manifests/READMEs, ignore the large sequencing data
+figure_raw_data/**/reads/
 *.db.tsv
 *.db.members.tsv
 *.iibdb
