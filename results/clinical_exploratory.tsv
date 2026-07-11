@@ -1,0 +1,5 @@
+sample	markers	species_resolved	strain_calls	runtime_s	top_species
+S_0313206	271322	15	115	2.3	Neisseria_subflava; Haemophilus_parainfluenzae; Actinomyces_odontolyticus
+S_1413231	288019	17	129	1.8	Neisseria_subflava; Streptococcus_mitis; Actinomyces_odontolyticus
+S_8123213	370379	16	149	2.0	Actinomyces_odontolyticus; Neisseria_subflava; Haemophilus_parainfluenzae
+S_8221232	488180	17	158	1.8	Actinomyces_odontolyticus; Neisseria_subflava; Rothia_mucilaginosa

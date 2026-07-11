@@ -82,14 +82,14 @@ the paper. All were generated with **Strain2bfunc** (the earlier heavy Python to
 2bRAD-representation result is tool-agnostic and reusable as-is; the two data-driven results should
 be **re-run with Strain2bScan** to show it reproduces them at a fraction of the compute.
 
-**New motivation figure — 2bRAD captures strain-level signal that 16S cannot.** Across 15 common
-pathogenic/probiotic species, the correlation of between-strain distances with whole-genome (Mash)
-distance is **0.68–0.99 for 2bRAD (median ~0.90) vs 0.002–0.73 for 16S (median ~0.28)** — e.g.
-*S. aureus* 0.970 vs 0.114, *M. tuberculosis* 0.957 vs 0.002, *C. acnes* 0.985 vs 0.354 (slide 23),
-with example dendrograms (whole-genome / 2bRAD / 16S) for *A. actinomycetemcomitans*,
-*P. gingivalis*, *K. pneumoniae*, *L. plantarum* (slides 22, 24). This is the "why 2bRAD for
-strains" motivation — StrainScan's Fig 1 analog. Tool-agnostic (a property of the 2bRAD
-representation); recomputable directly from Strain2bScan's tags.
+**New motivation figure — 2bRAD captures strain-level signal that 16S cannot. ✅ DONE (all 15
+species, recomputed with Strain2bScan).** `docs/motivation_16s.md`,
+`results/mash_2brad_vs_16s_recomputed.tsv`, `figures/mash_2brad_vs_16s.*`. Between-strain distance
+vs whole-genome (Spearman): **2bRAD median 0.90 (0.59–0.99) vs 16S median 0.36 (−0.14 to 0.78)** —
+e.g. *M. tuberculosis* 0.90 vs −0.14, *S. aureus* 0.98 vs 0.09, *L. plantarum* 0.87 vs 0.02. WGS =
+bottom-3000 21-mer MinHash; 2bRAD = Strain2bScan BcgI tags; 16S = longest barrnap gene, 21-mer
+Jaccard. Reproduces the slide-deck finding. This is the "why 2bRAD for strains" motivation
+(StrainScan's Fig 1 analog).
 
 **New figure — DNA mock community, real DNA with known truth (low-biomass niche). ✅ DONE (2bRAD
 side) with Strain2bScan.** Raw ATCC MSA-1002 native BcgI 2bRAD reads obtained from Figshare
