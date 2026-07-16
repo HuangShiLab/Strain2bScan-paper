@@ -1,6 +1,0 @@
-# Strain2bScan re-measured with the strand-fixed binary (DB scans both strands, ~2x
-# markers). StrainScan side unchanged (its pipeline was unaffected by our bug).
-tool	profile_time_s	profile_rss_mb
-Strain2bScan	1.25	115
-StrainScan	7.06	828.0
-mean	1.25	115	7.06	828.0

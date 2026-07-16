@@ -1,7 +1,0 @@
-# Detection vs per-strain depth, C. acnes strain GCF_009737125 vs the 64-genome DB.
-# STRAND-FIXED binary (both strands ~2x markers). StrainScan side unchanged (carried).
-depth_x	s2bscan_floor10	s2bscan_floor3	strainscan
-0.1	0	0	0
-0.5	1	1	1
-1.0	1	1	1
-5.0	1	1	1

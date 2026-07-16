@@ -1,4 +1,0 @@
-species	n_genomes	n_clusters	build_s	build_rss_mb	s2b_profile_s	s2b_rss_mb	s2b_precision	s2b_recall
-Akkermansia_muciniphila	40	19	2.38	152.0	0.75	71.0	1.0	0.929
-Prevotella_copri	40	23	3.0	150.0	0.68	81.0	1.0	0.941
-Mycobacterium_tuberculosis	40	5	5.16	230.0	0.89	85.0	1.0	0.25
