@@ -19,6 +19,7 @@ MAIN = {
     "08": ["saliva_concordance"],
     "09": ["performance", "scalability", "community_throughput"],
     "10": ["species_expansion"],
+    "11": ["sim_headtohead"],
 }
 SUPP = {
     # (former S1 rank-rank scatter is now Fig 2 panel B — see scripts/plot_fig2_combined.py)

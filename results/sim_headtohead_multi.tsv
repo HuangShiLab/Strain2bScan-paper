@@ -1,0 +1,4 @@
+depth	n	s2b_prec	s2b_recall	s2b_f1	s2b_wall_s	s2b_rss_mb	ss_prec	ss_recall	ss_f1	ss_total_wall_s	ss_max_rss_mb
+depth_low	4	0.926	0.678	0.782	0.96	311	0.898	0.767	0.827	100.4	1112
+depth_med	4	0.863	0.853	0.869	4.33	670	0.911	0.856	0.895	228.2	1696
+depth_high	4	0.773	0.872	0.819	8.70	1119	0.814	0.972	0.895	397.9	2028

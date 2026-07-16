@@ -165,3 +165,43 @@ The validity of this in-silico (shotgun) mode is established independently in Pa
 species from the mock at 0 % host (Fig 6) and its saliva strain calls are a confirmed subset of the
 native-2bRAD calls (Fig 8) — so the fast shotgun mode and the sensitive 2bRAD mode are two faces of one
 validated method.
+
+### Systematic head-to-head on a 15-species simulated benchmark (Fig 11, Table 1)
+
+Where Fig 10 compares the tools on StrainScan's own curated databases, we also ran both tools **end to
+end on a common, controlled benchmark**: the same 15-species reference pool, the same simulated reads,
+and databases built by each tool from the same genomes. Single-species communities span 2/3/5 co-present
+strains (from the same or different clusters) across a **0.5–10× per-strain coverage ladder** (2 025
+samples); multi-species communities span **~18 co-present species** across three depth gradients (60
+samples). Because the two tools cluster genomes independently, each is scored **in its own cluster space**
+(the honest resolution unit for short reads; Methods). StrainScan is Linux-x86-only and ran under
+`linux/amd64` emulation on Apple Silicon, so its wall-clock is emulation-inflated; to remove that
+confound from the speed comparison we also ran a `linux/amd64` build of Strain2bScan **in the same
+container**, giving a same-environment ratio (Fig 11E).
+
+**Accuracy: equal precision, higher recall (Fig 11A–C, Table 1).** Across 14 resolvable species and 204
+depth-matched samples, **both tools held median precision 1.0** — but only Strain2bScan held precision
+1.0 in *every* species, whereas StrainScan dropped to 0.80–0.83 in four (*A. muciniphila*, *C. difficile*,
+*P. dorei*, *S. enterica*), making occasional false cluster calls. Strain2bScan also **recovered
+low-coverage strains at shallower depth**: median recall reached 1.0 by **3× coverage** versus **10×** for
+StrainScan, and overall median recall/F1 were **0.80 / 0.89 (Strain2bScan) vs 0.67 / 0.75 (StrainScan)**.
+Near-clonal *M. tuberculosis*, whose 29 genomes collapse to a single 0.95 cluster, was resolved correctly
+by both (precision and recall 1.0 at the cluster level — the honest claim for a species short reads cannot
+sub-resolve). On the multi-species communities the two tools were **comparable in accuracy** (StrainScan
+marginally higher recall on the deepest communities, Strain2bScan higher precision at low depth; Table 1).
+
+**Cost: two-to-three orders of magnitude cheaper (Fig 11D–F, Table 1).** The gap is largest in **database
+construction**: Strain2bScan built each species' database in **0.7–5.1 s using 0.1–0.4 GB**, whereas
+StrainScan required **5–43 min and 8–28 GB** — **249–614× faster and 43–138× lighter** per species
+(e.g. *E. coli*: 4.3 s / 0.34 GB vs 43 min / 28 GB). The single heaviest species, *K. pneumoniae*
+(47 genomes × 5.5 Mb), **StrainScan failed to build at all** (killed after >100 min, and stalled again
+past 1 h 40 min in the k-mer-matrix step on a longer retry), while Strain2bScan built it in 5.1 s;
+it is therefore excluded from the paired accuracy set. **Per-sample profiling** in the same emulated
+environment was **4–33× faster and 5–39× lighter** for Strain2bScan (0.16–1.7 s / 20–160 MB vs
+3.5–6.9 s / ~830 MB; Fig 11E). The advantage compounds at community scale (Fig 11F): because StrainScan
+has no multi-species mode, each community must be profiled once per species, so its per-sample cost was
+the **sum of 14 runs — 100–398 s — versus 1–9 s for Strain2bScan's single digest-once pass (46–105×
+faster)**, consistent with the structural *S*-fold argument of Fig 9C. In short, on a common benchmark
+Strain2bScan **matches or exceeds StrainScan's strain-identification accuracy while building databases
+2–3 orders of magnitude faster and lighter and profiling 1–2 orders faster** — and completes the one
+species StrainScan could not build.

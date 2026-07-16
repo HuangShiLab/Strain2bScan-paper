@@ -5,8 +5,10 @@ single engine serving **two input modes**: native 2bRAD-M libraries and in-silic
 conventional shotgun. By porting StrainScan's clustering-plus-unique-marker framework onto 2bRAD tags in
 Rust, it turns a ~50–100× smaller marker database into large, structural gains **without sacrificing
 accuracy** — across every species tested it held precision 1.0, matched StrainScan's detection onset at
-0.5× coverage (Fig 3), and matched or exceeded StrainScan's recall on StrainScan's own databases
-(Fig 10). The foundation for a strain-level *2bRAD* method is that its tags, unlike the 16S gene, carry
+0.5× coverage (Fig 3), and matched or exceeded StrainScan's recall both on StrainScan's own databases
+(Fig 10) and on a common 15-species simulated benchmark where the two tools built databases from the same
+genomes and profiled the same reads (median recall 0.80 vs 0.67 at equal precision, while building
+databases 249–614× faster and profiling 4–105× faster; Fig 11). The foundation for a strain-level *2bRAD* method is that its tags, unlike the 16S gene, carry
 genome-wide strain signal: across 15 species 2bRAD between-strain distances tracked the whole genome
 (median Spearman 0.94) while 16S did not (0.36), several 16S intervals overlapping zero (Fig 2A,B).
 16S resolves species; 2bRAD tags resolve strains.

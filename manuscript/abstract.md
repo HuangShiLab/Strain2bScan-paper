@@ -29,9 +29,12 @@ timepoint-out host-ID **100 %**), are temporally stable, and recover **128–163
 sample that host-limited shotgun misses**. **(2) Conventional metagenomes at scale:** the sample is
 digested once and matched against every species database, so per-sample cost is independent of the
 number of species — **~8× faster and ~11× lighter** than StrainScan per sample and **~130–146× faster on
-a 55-species community**, while matching or exceeding StrainScan's recall on its own databases and
-completing near-clonal *Mycobacterium tuberculosis* in ~1 s where StrainScan does not (>3 h, >25 GB). The
-two modes agree, so one tool spans both regimes.
+a 55-species community**. On a common 15-species simulated benchmark (both tools building databases from
+the same genomes and profiling the same reads), Strain2bScan **matched StrainScan's precision (1.0) and
+exceeded its recall** (median 0.80 vs 0.67, full recall by 3× vs 10×) while building databases
+**249–614× faster and 43–138× lighter** and profiling **4–105× faster** — and it completed the one
+species (*Klebsiella pneumoniae*) StrainScan could not build. The two modes agree, so one tool spans both
+regimes.
 
 **Conclusions.** Strain2bScan delivers accurate, genome-resolved strain profiling from a sparse marker
 set: it uniquely enables strain-level analysis of low-biomass, high-host 2bRAD-M data, and scales
@@ -47,10 +50,12 @@ figures: https://github.com/HuangShiLab/Strain2bScan-paper.
   (2) in-silico-digested shotgun → community-scale throughput vs StrainScan. Shared foundation
   (accuracy, robustness, 2bRAD-vs-16S motivation) precedes the two pillars. Full section→evidence map in
   `docs/manuscript_organization.md`.
-- Figure map (10 main): 1 overview, 2 mash_2brad_vs_16s (A bars + B 3×5 rank–rank scatter, combined),
+- Figure map (11 main): 1 overview, 2 mash_2brad_vs_16s (A bars + B 3×5 rank–rank scatter, combined),
   3 cross_species(+depth), 4 reference-genome completeness (refqual, all 15 species), 5 enzyme_sweep, 6 mock_hostcontam,
   7 saliva (individual+temporal_ml), 8 saliva_concordance, 9 efficiency (performance+scalability+
-  community_throughput), 10 species_expansion. Supp: S1 mock_msa1002_titration, S2 gate_calibration,
-  Table S3 clinical_exploratory, Table S4 genome_qc_16s_panel. (Former Fig S1 scatter is now Fig 2B.)
+  community_throughput), 10 species_expansion, 11 sim_headtohead (systematic 15-species head-to-head:
+  accuracy + build/profile/multi cost). Supp: S1 mock_msa1002_titration, S2 gate_calibration,
+  Table 1–3 sim head-to-head (`manuscript/tables.md`), Table S3 clinical_exploratory,
+  Table S4 genome_qc_16s_panel. (Former Fig S1 scatter is now Fig 2B.)
 - All numbers regenerated with the corrected-enzyme binary; 2bRAD-native results on real error-containing
   reads; simulated benchmarks are closed-world (stated in Discussion).

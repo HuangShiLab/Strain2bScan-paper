@@ -223,6 +223,33 @@ StrainScan does not** (>3.3 h, >25 GB).
 
 ---
 
+## Figure 11 — Systematic head-to-head on the 15-species simulated benchmark
+**1. Data source.**
+- *Data type:* simulation on a fixed 15-species genome pool (15–50 complete/near-complete NCBI genomes
+  each; closed-world, error-modelled ART reads, 150 bp PE).
+- *Production/collection:* single-species communities (2/3/5 co-present strains, same- or
+  different-cluster, 0.5–10× per-strain ladder, 5 reps = 2 025 samples) and multi-species communities
+  (~18 species, 3 depth gradients = 60 samples). Both tools build databases from the **same** pool and
+  profile the **same** reads. Strain2bScan native (arm64); StrainScan v1.0.14 under Docker `linux/amd64`
+  (QEMU) with a `linux/amd64` Strain2bScan run in the same container for the emulation-free speed ratio.
+  Time/memory with `/usr/bin/time` (`-l` native, `-v` in container).
+- *Scoring:* each tool in its own 0.95-cluster space (truth strains mapped to the tool's clusters);
+  precision/recall/F1 per sample over cluster sets.
+- *Raw data (local):* `figure_raw_data/sim_headtohead/*_persample.tsv`; aggregates
+  `results/sim_headtohead_*.tsv`; tables `manuscript/tables.md`.
+**2. Key issue & conclusion.** On a common, controlled benchmark, does Strain2bScan match StrainScan's
+accuracy at far lower cost across many species and depths? Conclusion: **both hold precision 1.0**
+(Strain2bScan in every species; StrainScan 0.80–0.83 in four), Strain2bScan **reaches full recall by 3×
+vs StrainScan's 10×** (median R 0.80 vs 0.67, F1 0.89 vs 0.75), builds databases **249–614× faster /
+43–138× lighter**, profiles **4–33× faster** (same env), and is **46–105× faster on multi-species
+communities**; StrainScan **failed to build *K. pneumoniae*** entirely, which Strain2bScan built in 5.1 s.
+**3. Results by subfigure.** (A–C) single-species precision/recall/F1 vs depth, both tools (14 species,
+204 paired samples). (D) per-species DB build time (log), Strain2bScan vs StrainScan. (E) per-sample
+profile time vs depth, same emulated container. (F) multi-species profiling time per community sample —
+Strain2bScan one pass vs StrainScan Σ per-species runs, annotated with the fold-difference.
+
+---
+
 ## Figure S1 — ATCC MSA-1002 DNA-input titration (native 2bRAD)
 **1. Data source.** Real native BcgI 2bRAD of the ATCC MSA-1002 mock across a DNA-input titration
 (0.001–100 ng); reads from **Figshare article 12272360** (2B-RAD-M unique-tags DB). Raw data: Figshare

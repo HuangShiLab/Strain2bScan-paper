@@ -1,0 +1,15 @@
+species	n	s2b_precision	s2b_recall	s2b_f1	ss_precision	ss_recall	ss_f1
+Akkermansia_muciniphila	14	1.000	0.800	0.889	0.833	0.667	0.667
+Clostridioides_difficile	15	1.000	0.800	0.889	0.800	0.667	0.667
+Cutibacterium_acnes	15	1.000	0.667	0.800	1.000	0.667	0.800
+Escherichia_coli	15	1.000	1.000	1.000	1.000	0.600	0.667
+Fusobacterium_nucleatum	15	1.000	1.000	1.000	1.000	0.667	0.800
+Lactiplantibacillus_plantarum	15	1.000	1.000	1.000	1.000	0.600	0.750
+Mycobacterium_tuberculosis	15	1.000	1.000	1.000	1.000	1.000	1.000
+Phocaeicola_dorei	10	1.000	0.667	0.800	0.833	0.583	0.667
+Porphyromonas_gingivalis	15	1.000	0.667	0.800	1.000	0.667	0.800
+Prevotella_copri	15	1.000	1.000	1.000	1.000	0.667	0.800
+Salmonella_enterica	15	1.000	1.000	1.000	0.833	0.800	0.800
+Staphylococcus_aureus	15	1.000	0.667	0.800	1.000	0.500	0.667
+Staphylococcus_epidermidis	15	1.000	0.667	0.800	1.000	0.600	0.750
+Streptococcus_pneumoniae	15	1.000	0.667	0.800	1.000	0.600	0.750

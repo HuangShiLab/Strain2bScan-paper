@@ -160,10 +160,46 @@ abundances → Bray–Curtis → PERMANOVA (adonis, subject/timepoint factors) a
 per-dataset procedures and accessions are in `docs/` (`motivation_16s.md`, `mock_hostcontam.md`,
 `saliva_individual_discrimination.md`, `saliva_temporal_ml.md`, `saliva_concordance.md`).
 
-**Comparison to StrainScan.** StrainScan (v1.0) was run on the same *C. acnes* samples with
-its low-depth modes for the depth series. StrainScan's DB build requires Linux-only
-dependencies (dashing); the same-panel build-and-profile comparison is provided as a Linux
-script.
+**Systematic head-to-head on a 15-species simulated benchmark (Fig 11, Table 1–3).** A common
+benchmark was built from a fixed pool of 15 pathogenic/commensal species (15–50 complete/near-complete
+NCBI genomes each; `figure_raw_data/sim_pool_manifest.tsv`). *Single-species* samples were generated for
+every species as 2/3/5 co-present strains drawn either from the same or from different 0.95 clusters, at
+per-strain coverages 0.5/1/3/5/10× with uneven abundance ratios (following StrainScan's simulation
+design), 5 replicates per cell — 2 025 samples. *Multi-species* samples mixed ~18 co-present species
+(one to a few strains each) across three community depth gradients — 60 samples. Reads were simulated
+with ART (`art_illumina`, 150 bp paired-end) from the truth genomes; truth tables record each strain's
+species, genome accession and 0.95-cluster assignment.
+
+Both tools built their databases from the **same genome pool** and profiled the **same reads**.
+Strain2bScan databases were built with `cluster --enzyme all --similarity 0.95` and profiled with
+`profile` / `multi-profile --enzyme all` (reads decompressed, R1+R2 concatenated). StrainScan (v1.0.14,
+bioconda) is Linux-x86-only — it ships `dashing_s128` and `jellyfish-linux` ELF binaries, a Python-3.7
+`.so`, and an R reclustering step — so it was run inside a Docker `linux/amd64` container (QEMU emulation
+on Apple Silicon; `strainscan_build`, then `strainscan -i R1 -j R2 -d DB`). Because the two tools cluster
+genomes independently, **each tool was scored in its own cluster space**: predicted clusters were compared
+against the truth strains mapped into that tool's clusters — for Strain2bScan via the truth `cluster`
+column, for StrainScan via its `Cluster_Result/hclsMap_95_recls.txt` (report `Cluster_ID` = `C`+cluster
+id) — and precision/recall/F1 computed over the cluster sets per sample. Strain2bScan profiled all 2 025 +
+60 samples; StrainScan profiled a matched subset (different-cluster mixtures, k = 2/3/5, one replicate, all
+depths; near-clonal *M. tuberculosis* via its same-cluster samples) — 204 depth-matched paired
+single-species samples across 14 species, plus 4 multi-species samples per depth. StrainScan has no
+multi-species mode, so each community sample was profiled once per species database and the per-sample
+cost taken as the sum of wall-clock over species (peak RSS as the maximum).
+
+*Timing.* Strain2bScan build and profile times are native (arm64). To compare profiling speed free of the
+emulation confound, a `linux/amd64` Strain2bScan binary (zero-dependency `cargo build`) was run **inside
+the same container** on the same subset, giving the same-environment ratio of Fig 11E/Table 2; StrainScan
+build times are reported in the emulated environment (an upper bound). DB build for *K. pneumoniae*
+(47 genomes × 5.5 Mb) did not complete under StrainScan (killed at a 100-min cap; still in the k-mer-matrix
+step past 1 h 40 min on a longer retry), and that species is omitted from the paired accuracy set. The
+container's VM memory was raised to 56 GB because StrainScan's build peaks at ~28 GB (vs ≤0.4 GB for
+Strain2bScan). Scripts: `scripts/plot_sim_headtohead.py` and the drivers under `scratchpad/eval/`
+(`run_s2b_{single,multi}.py`, `run_strainscan_{single,multi}.py`, `run_s2b_emulated_single.py`,
+`analyze_headtohead.py`); raw per-sample tables in `figure_raw_data/sim_headtohead/`.
+
+**Comparison to StrainScan (curated-DB and per-sample benchmarks).** In addition to the common benchmark
+above, StrainScan (v1.0) was run on its **own** reference databases (Fig 10) and on the same *C. acnes*
+per-sample profiling comparison (Fig 9A), using its low-depth modes for the depth series.
 
 **Metrics.** Detection precision, recall and F1 at a 0.01 presence threshold; abundance error
 by L1 distance and Bray–Curtis dissimilarity over the union of predicted and true labels,
