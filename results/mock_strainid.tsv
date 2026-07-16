@@ -1,0 +1,12 @@
+part	mode	sample	mock	condition	strains_resolved	false_positives
+I	native_2bRAD	BcgI_MSA1002_90_100ng_1	MSA1002	90% host	19	1
+I	native_2bRAD	BcgI_MSA1002_95_100ng_1	MSA1002	95% host	19	0
+I	native_2bRAD	BcgI_MSA1002_99_100ng_1	MSA1002	99% host	19	0
+I	native_2bRAD	BcgI_MSA1002_99.9_100ng_1	MSA1002	99.9% host	11	0
+I	native_2bRAD	BcgI_MSA1002_0_0.001ng_1	MSA1002	0.001 ng	0	0
+I	native_2bRAD	BcgI_MSA1002_0_0.01ng_1	MSA1002	0.01 ng	16	0
+I	native_2bRAD	BcgI_MSA1002_0_0.1ng_1	MSA1002	0.1 ng	19	0
+I	native_2bRAD	BcgI_MSA1002_0_1ng_1	MSA1002	1 ng	19	0
+I	native_2bRAD	BcgI_MSA1003_0_100ng_1	MSA1003	staggered 100 ng	17	0
+II	in_silico_shotgun	combined_WMS_MSA1002_0_100ng_2	MSA1002	even 100 ng	20	0
+II	in_silico_shotgun	combined_WMS_MSA1003_0_100ng_1	MSA1003	staggered 100 ng	20	0
