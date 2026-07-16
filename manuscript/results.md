@@ -80,12 +80,16 @@ elsewhere (e.g. Fig 2).
 
 ### A tunable enzyme set enables native BcgI 2bRAD operation (Fig 5)
 
-Because each added type-IIB enzyme releases more tags, the enzyme set is a resolution/cost knob. On
-*C. acnes*, **BcgI alone** (one enzyme) already gave precision 1.0 with recall 0.56; recall rose to 0.75
-by **four enzymes** then plateaued, while strain-specific marker count and build time kept rising roughly
-linearly (882 → 1 524 → 7 400 markers; 0.6 → 1.8 → 6.4 s from 1 → 4 → 14 enzymes; Fig 5). Cluster count
-was unchanged (16 throughout): more enzymes add markers and recall, not resolution. A **~4-enzyme set is
-the sweet spot** — and, decisively for this pillar, **single-enzyme BcgI operation is what lets native
+Because each added type-IIB enzyme releases more tags, the enzyme set is a resolution/cost knob — and
+this holds **across all 14 resolvable species** of the simulation pool, not just one species (Fig 5).
+Sweeping the enzyme set from 1 → 14 enzymes, **precision stayed 1.0 at every step in every species**,
+while median **recall rose monotonically — 0.50 (BcgI alone) → 0.61 → 0.72 → 0.89 → 1.00** at 1/2/4/8/14
+enzymes — as the strain-specific marker yield grew ~13-fold (median 976 → 12 647 markers; Fig 5A,B).
+Cluster count was invariant with enzyme number (more enzymes add markers and recall, not resolution),
+confirming the single-species observation generalises. The recall/enzyme trade-off is species-dependent
+(BcgI alone suffices for diverse species but under-resolves near-clonal ones), so **~4 enzymes is a
+practical sweet spot** that recovers most recall at a fraction of the markers, with full recall available
+at higher enzyme counts. Decisively for this pillar, **single-enzyme BcgI operation is what lets native
 BcgI 2bRAD-M experimental libraries be profiled directly**, since their reads are BcgI tags.
 
 ### 2bRAD holds strain recovery under host contamination where shotgun collapses (Fig 6)
