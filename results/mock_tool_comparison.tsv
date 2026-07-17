@@ -1,0 +1,7 @@
+sample	tool	env	strains_resolved	false_positive	wall_time_s	max_rss_gb	note
+WMS_MSA1002_0_100ng_2	Strain2bScan	native	20	0	66	7.8	combined 120-genome all-enzyme tree
+WMS_MSA1002_0_100ng_2	StrainScan	emulated	20	0	2121	0.85	20 per-species DBs (Docker linux/amd64)
+WMS_MSA1002_0_100ng_2	inStrain	native	20	near-clone	3120	NA	bowtie2 map + inStrain profile
+WMS_MSA1003_0_100ng_1	Strain2bScan	native	20	0	66	7.8	staggered
+WMS_MSA1003_0_100ng_1	StrainScan	emulated	profiling	NA	slow	NA	running (14/20 species)
+WMS_MSA1003_0_100ng_1	inStrain	native	DNF	NA	>21600	NA	35% at 1h08; ~5-6h projected; stopped

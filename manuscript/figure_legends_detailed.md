@@ -116,7 +116,7 @@ count constant at 16).
 
 ---
 
-## Figure 6 — DNA mock, host-contamination series: native 2bRAD holds strain recovery where shotgun collapses
+## Figure S3 — DNA mock, host-contamination series: native 2bRAD holds strain recovery where shotgun collapses
 **1. Data source.**
 - *Data type:* **real 2bRAD data + real shotgun metagenome** (known-truth mock community).
 - *Production/collection:* ATCC **MSA-1002** 20-strain even mock genomic DNA, prepared as native BcgI

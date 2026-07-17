@@ -17,7 +17,7 @@ genome-wide strain signal: across 15 species 2bRAD between-strain distances trac
 mode is that the reduction happens at the bench, before host DNA can swamp the library. On the ATCC
 MSA-1002 mock at 99 % human DNA, native 2bRAD held precision 1.0 and full 20/20 strain recall where
 in-silico-digested shotgun of the same material dropped to 12/20, because 2bRAD preserves ~10× more
-usable markers under host load (Fig 6). On real saliva this translated into biology: strain-level
+usable markers under host load (Fig S3). On real saliva this translated into biology: strain-level
 profiles discriminated individuals better than species-level profiles (PERMANOVA R² 0.83 vs 0.82;
 leave-one-timepoint-out host-ID 100 % vs 94 %), were temporally stable within subject, and — validated
 against paired shotgun of the same samples — recovered 128–163 low-abundance strains per sample that
@@ -34,7 +34,7 @@ samples the cost is ≈ *N × (digest + S·ε)* versus ≈ *N × S ×* (k-mer co
 tool run per species — an *S*-fold structural advantage that, measured on a 55-species community, reached
 **~132× at 100 samples and ~146× beyond** (minutes versus projected hours) and grows with community
 richness (Fig 9C). The two modes are not separate tools: the shotgun mode is validated by the mock
-(20/20 at 0 % host, Fig 6) and by the saliva concordance (its calls are a confirmed subset of the
+(20/20 at 0 % host, Fig S3) and by the saliva concordance (its calls are a confirmed subset of the
 native-2bRAD calls, Fig 8), so the fast shotgun mode and the sensitive 2bRAD mode are two faces of one
 method.
 
