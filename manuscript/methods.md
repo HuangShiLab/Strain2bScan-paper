@@ -148,16 +148,26 @@ Complete Genome/Chromosome; `data/genome_qc_16s_panel.tsv`). Between-strain dist
 three spaces — whole-genome (bottom-3000 canonical 21-mer MinHash), 2bRAD (Strain2bScan `build` BcgI
 tags) and 16S (longest gene per genome via barrnap 0.9 + HMMER, 21-mer Jaccard) — all with the Mash
 transform D(J) = −ln(2J/(1+J)); per species the 2bRAD and 16S pairwise vectors were correlated (Spearman)
-against the whole-genome vector, with 95 % CIs from 500 genome subsamples. (vi) *DNA mock,
-host-contamination series* (Fig S3, Fig S1): ATCC MSA-1002 20-strain even mock — native BcgI 2bRAD (SRA
-PRJNA1131785, 0/90/99 % human DNA; Figshare 12272360 DNA-input titration) and shotgun WMS of the same
-mock — profiled with `multi-profile --enzyme BcgI` against a reconstructed 62-species BcgI panel (20
-mock + 42 decoys), scored against the 20-species truth. (vii) *Real saliva* (Fig 7, Fig 8): native BcgI
+against the whole-genome vector, with 95 % CIs from 500 genome subsamples. (vi) *ATCC DNA mocks,
+strain-level (Fig 6, Fig 12, Fig S3, Fig S4)*: four whole-cell mocks — MSA-1002 (20 strains,
+even; native BcgI 2bRAD and shotgun WMS across a 0/90/95/99/99.9 % human-DNA ladder and a 1→0.001 ng
+low-biomass ladder, SRA PRJNA1131785), MSA-1003 (20 strains, staggered), MSA-1005 and MSA-1007 (6 strains
+each). A single unified combined tree was built from **28 species × up to 6 genomes = 164 genomes** (each
+mock species = its ATCC genome + up to 5 high-quality conspecific decoys, CheckM completeness ≥ 90 %,
+contamination ≤ 5 %, within-species ANI 95–99.9 % to the ATCC reference by skani), clustered at 0.95
+similarity with `--containment`; native 2bRAD used the BcgI tree and shotgun used the all-enzyme tree.
+Strain2bScan was run with `--min-abundance 0 --min-coverage 0.2`. On the shotgun samples it was compared
+against **StrainScan** 1.0.14 (per-species databases, `linux/amd64` container) and **inStrain** 1.10.0
+(bowtie2 → `inStrain profile` against a 98 %-ANI dereplicated reference; the non-dereplicated reference is
+shown as a control in Fig S4). Each tool was scored in its own 0.95-similarity cluster space
+against the mock ground truth (`Ground_truth/*`, sequence abundance), reporting precision, recall, F1,
+AUPR (abundance-threshold sweep, Ye et al. 2019), and Bray–Curtis and L2 similarity to the truth profile
+(2bRAD-M, 2021); scorer `scripts/score_all.py`, figures `scripts/plot_figs_h.py`. (vii) *Real saliva* (Fig 7, Fig 8): native BcgI
 2bRAD (and paired shotgun WMS) saliva from PRJNA1131785, 8 subjects × 4 within-day timepoints, profiled
 against a 19-species oral-commensal panel (up to 25 genomes/species). Strain- and species-level relative
 abundances → Bray–Curtis → PERMANOVA (adonis, subject/timepoint factors) and leave-one-timepoint-out
 1-NN host classification; shotgun R1 (in-silico BcgI) compared to native 2bRAD calls per sample. Full
-per-dataset procedures and accessions are in `docs/` (`motivation_16s.md`, `mock_hostcontam.md`,
+per-dataset procedures and accessions are in `docs/` (`motivation_16s.md`,
 `saliva_individual_discrimination.md`, `saliva_temporal_ml.md`, `saliva_concordance.md`).
 
 **Systematic head-to-head on a 15-species simulated benchmark (Fig 11, Table 1–3).** A common

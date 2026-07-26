@@ -116,27 +116,6 @@ count constant at 16).
 
 ---
 
-## Figure S3 — DNA mock, host-contamination series: native 2bRAD holds strain recovery where shotgun collapses
-**1. Data source.**
-- *Data type:* **real 2bRAD data + real shotgun metagenome** (known-truth mock community).
-- *Production/collection:* ATCC **MSA-1002** 20-strain even mock genomic DNA, prepared as native BcgI
-  **2bRAD-M** libraries and as **shotgun (WMS)** libraries, spiked with human DNA to **0/90/99 %**
-  contamination (SRA BioProject **PRJNA1131785**; 2bRAD on Illumina, WMS on DNBSEQ). Profiled against a
-  reconstructed 62-species BcgI panel (20 mock + 42 decoys) and scored vs the 20-species truth.
-- *Raw data (local):* **available** — `figure_raw_data/Fig06_mock_hostcontam/reads/` (4 native-2bRAD +
-  3 shotgun R1/R2 FASTQ) with `manifest.tsv` (SRR ↔ contamination level). Table `results/mock_hostcontam.tsv`.
-**2. Key issue & conclusion.** Does native 2bRAD's wet-lab reduction preserve strain recovery under heavy
-host contamination where shotgun cannot? Conclusion: **precision 1.0 for both data types at every host
-level**, but native 2bRAD keeps **20/20 recall at 99 % host** while shotgun drops to **12/20** — because
-2bRAD preserves ~10× more usable markers under host load.
-**3. Results by subfigure.**
-- **(A)** Species recall vs % human DNA (0/90/99) for native 2bRAD vs in-silico-digested shotgun;
-  precision annotated 1.0 throughout; 2bRAD flat at 20/20, shotgun falls to 12/20 at 99 %.
-- **(B)** Usable BcgI marker yield vs % host (log): 2bRAD ~340–370k regardless of host; shotgun
-  96k→53k→33k as host rises — the mechanism of the recall gap.
-
----
-
 ## Figure 7 — Real saliva: strain profiles discriminate individuals and are temporally stable
 **1. Data source.**
 - *Data type:* **real native BcgI 2bRAD metagenome** (human saliva).

@@ -14,19 +14,20 @@ MAIN = {
     "03": ["cross_species", "depth_sensitivity"],
     "04": ["containment_mechanism", "refqual_figure"],
     "05": ["enzyme_sweep"],
-    "06": ["mock_native2brad"],
+    "06": ["fig6_2brad"],
     "07": ["saliva_individual_discrimination", "saliva_temporal_ml"],
     "08": ["saliva_concordance"],
     "09": ["performance", "scalability", "community_throughput"],
     "10": ["species_expansion"],
     "11": ["sim_headtohead"],
-    "12": ["mock_shotgun"],
+    "12": ["fig12_wms_toolcompare"],
 }
 SUPP = {
     # (former S1 rank-rank scatter is now Fig 2 panel B — see scripts/plot_fig2_combined.py)
     "S1": ["mock_msa1002_titration"],
     "S2": ["gate_calibration"],
-    "S3": ["mock_hostcontam"],   # was Fig 6 (62-species DNA mock, host-contamination series)
+    "S3": ["figS_tree_expansion"],    # DB-expansion cost: 20- vs 28-species combined tree
+    "S4": ["figS_instrain_derep"],    # inStrain requires a dereplicated reference (control)
 }
 
 def montage(tag, sources):

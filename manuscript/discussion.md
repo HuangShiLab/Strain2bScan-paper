@@ -15,9 +15,10 @@ genome-wide strain signal: across 15 species 2bRAD between-strain distances trac
 
 **Native 2bRAD for low-biomass, high-host microbiomes.** The distinctive advantage of the native-2bRAD
 mode is that the reduction happens at the bench, before host DNA can swamp the library. On the ATCC
-MSA-1002 mock at 99 % human DNA, native 2bRAD held precision 1.0 and full 20/20 strain recall where
-in-silico-digested shotgun of the same material dropped to 12/20, because 2bRAD preserves ~10× more
-usable markers under host load (Fig S3). On real saliva this translated into biology: strain-level
+MSA-1002 mock at 99 % human DNA, Strain2bScan held F1 = 1.0 with accurate abundance, and was the **only**
+profiler tested to preserve both strain detection and quantification: on the matched shotgun samples
+StrainScan kept detection but its abundance estimate collapsed (Bray–Curtis similarity 0.03) while
+inStrain lost detection (recall 0.20), each failing in a complementary way (Fig 12). On real saliva this translated into biology: strain-level
 profiles discriminated individuals better than species-level profiles (PERMANOVA R² 0.83 vs 0.82;
 leave-one-timepoint-out host-ID 100 % vs 94 %), were temporally stable within subject, and — validated
 against paired shotgun of the same samples — recovered 128–163 low-abundance strains per sample that
@@ -33,8 +34,8 @@ marginal cost of an additional species is a hash lookup rather than a re-count. 
 samples the cost is ≈ *N × (digest + S·ε)* versus ≈ *N × S ×* (k-mer count + search) for a full k-mer
 tool run per species — an *S*-fold structural advantage that, measured on a 55-species community, reached
 **~132× at 100 samples and ~146× beyond** (minutes versus projected hours) and grows with community
-richness (Fig 9C). The two modes are not separate tools: the shotgun mode is validated by the mock
-(20/20 at 0 % host, Fig S3) and by the saliva concordance (its calls are a confirmed subset of the
+richness (Fig 9C). The two modes are not separate tools: the shotgun mode is validated by the mocks
+(all strains recovered across MSA-1002/1003/1005/1007, Fig 12) and by the saliva concordance (its calls are a confirmed subset of the
 native-2bRAD calls, Fig 8), so the fast shotgun mode and the sensitive 2bRAD mode are two faces of one
 method.
 

@@ -92,44 +92,33 @@ practical sweet spot** that recovers most recall at a fraction of the markers, w
 at higher enzyme counts. Decisively for this pillar, **single-enzyme BcgI operation is what lets native
 BcgI 2bRAD-M experimental libraries be profiled directly**, since their reads are BcgI tags.
 
-### Strain-level identification and quantification on a real 20-strain DNA mock (Fig 6)
+### Strain-level identification and quantification across four DNA mocks (Fig 6)
 
-Fig S3 established species-level recovery under host load; here we test whether native 2bRAD **resolves
-and quantifies the individual strains** of the ATCC MSA-1002 (even) and MSA-1003 (staggered) mocks. We
-built a single **combined 120-genome database** in which each of the 20 mock species carries its true
-ATCC genome plus **5 additional conspecific strains** (high-quality, within-species ANI > 95 %), so a
-correct call must pick the right genome out of six same-species candidates; the mocks contain only the
-ATCC strain, so any other cluster is a false call. Against this database Strain2bScan resolved **19/20
-strains** to their correct ATCC cluster at 90–99 % human DNA (100 ng) with near-zero false strain calls
-(Fig 6A). The one exception, *L. gasseri*, has fewer than 10 unique BcgI tags in the combined tree —
-a single-enzyme resolution limit (Fig 5) — and is still detected at species level. Detection scaled with
-DNA input, reaching 19/20 by 0.1 ng (Fig 6B). Species abundance, read from each cluster's marker
-**depth** (∝ genome copy number) normalised across species, recovered the mock design: roughly uniform
-for the even MSA-1002 mix and spanning three orders of magnitude for the staggered MSA-1003 mix
-(Fig 6C). Because the > 95 %-ANI decoys are near-clonal, they fragment the sparse single-enzyme BcgI
-tree and strip unique markers; **`--containment` clustering (Fig 4) merges them and restores detection** —
-the same mechanism, now on real 2bRAD reads. Crucially, this native-2bRAD accuracy is **on par with
-conventional shotgun of the same mock**: in-silico-digested shotgun resolves 20/20 strains and the
-shotgun k-mer/mapping tools StrainScan and inStrain likewise resolve 20/20 (Fig 12) — so 2bRAD's ~50–100×
-reduced marker set costs essentially nothing in strain-identification accuracy, while the wet-lab
-reduction is what preserves that accuracy under the host contamination and low input where shotgun fails
-(Fig 6A,B; Fig S3).
+Having established the enzyme-tunable native BcgI mode (Fig 5), we tested whether native 2bRAD **resolves
+and quantifies individual strains** on four ATCC whole-cell mocks: MSA-1002 (20 strains, even), MSA-1003
+(20 strains, staggered over ~three orders of magnitude), and MSA-1005 / MSA-1007 (6 strains each). All
+were profiled against a single **unified 28-species / 164-genome combined tree** in which every mock
+species carries its ATCC genome plus up to five high-quality conspecific decoys (within-species
+ANI > 95 %), so a correct call must select the right genome from several same-species candidates and any
+other cluster is a false call. Reads were digested for BcgI and clustered with `--containment` — which
+merges the near-clonal decoys that otherwise fragment the sparse single-enzyme tree and strip unique
+markers (Fig 4) — with the abundance floor disabled (`--min-abundance 0`) and `--min-coverage 0.2`.
 
-### 2bRAD holds strain recovery under host contamination where shotgun collapses (Fig S3)
-
-We tested the low-biomass claim on the ATCC MSA-1002 20-strain even mock with **real DNA and known
-truth**, profiled against a 62-species BcgI panel (20 mock + 42 decoys). Across a **host-contamination
-series (0/90/99 % human DNA)**, native BcgI 2bRAD and in-silico-digested shotgun (WMS) of the same mock
-were profiled with the same database. **Precision was 1.0 for both data types at every contamination
-level** — zero false strain calls even at 99 % human DNA, with out-of-panel relatives correctly held in
-the detected-not-resolvable tier. But recall diverged sharply: native 2bRAD retained **full 20/20 species
-recall at 99 % host**, whereas shotgun fell to **12/20** (Fig S3A). The mechanism is marker yield (Fig S3B):
-native 2bRAD delivers ~340–370k usable BcgI markers regardless of host fraction — the reduction happens at
-the wet-lab step, before host swamps the library — while digesting an already host-dominated shotgun
-library in silico yields only 96k → 53k → 33k markers as host rises. In a separate DNA-input titration,
-native 2bRAD held precision 1.0 with full recall down to **0.1 ng** input (Fig S1). This is the
-low-biomass niche, quantified on real data: the wet-lab 2bRAD reduction preserves the strain-informative
-markers that host contamination otherwise destroys.
+On the even MSA-1002 mock Strain2bScan held **precision and recall ≈ 0.95–1.0** across a human-DNA
+contamination ladder (90/95/99 %) and a low-biomass ladder down to **0.01 ng** input; only the 0.001 ng
+sample (below the marker-detection floor) and the extreme 99.9 %-host sample degraded (recall 0.55)
+(Fig 6, MSA-1002). Abundance was read from each cluster's marker **depth** (∝ genome copy number),
+giving Bray–Curtis and L2 similarity ≈ 0.8–0.95 to the ground-truth mass profile. On the staggered
+MSA-1003 and the 6-strain MSA-1005/1007 mocks recall stayed high (0.75–1.0) and AUPR 0.78–0.98, but
+single-threshold precision dropped (0.38–0.83). The cause is a **~1× marker-depth noise floor**: true
+strains sit at hundreds-fold depth whereas spurious near-sibling calls sit at exactly 1× (~0.02 %
+relative abundance), so no fixed cutoff separates them — but because those false calls are
+abundance-negligible, the abundance-threshold-swept **AUPR recovers to ≈ 0.95** and the profiles remain
+quantitatively accurate. In short, strains above ~2× marker depth are resolved essentially perfectly;
+strains at ≤ 1× depth (≈ 0.02 % of a 100 ng library) fall at the detection limit. This floor is a
+property of the *unified* database: on a per-mock 20-species tree, MSA-1003 precision returns to 1.0
+with no loss of AUPR (**Fig S3**, database-expansion cost), quantifying the trade-off of one shared
+database against per-mock databases.
 
 ### Real saliva: individual-specific, temporally stable strain signatures (Fig 7)
 
@@ -158,7 +147,7 @@ that native 2bRAD contradicts, establishing that the two input modes agree at th
 2bRAD-only strains were **significantly lower-abundance** (median community relative abundance 0.0029 vs
 0.0097 for shared strains; Mann–Whitney p = 1.2×10⁻²³; Fig 8). On host-dominated saliva, shotgun reaches
 only the most abundant, ubiquitous strains; native 2bRAD confirms all of those *and* resolves the
-low-abundance tail — the same enrichment advantage seen on the controlled mock (Fig S3), now on real
+low-abundance tail — the same enrichment advantage seen on the controlled mock (Fig 6), now on real
 clinical material. (Strain2bScan runs directly on an oral clinical cohort — 15–17 species, ~2 s per
 sample — as an application demonstration; Table S3.)
 
@@ -188,8 +177,8 @@ or exceeded StrainScan's recall** (0.93 vs 0.24; 0.94 vs 0.90) while running **~
 whereas Strain2bScan finished in 0.89 s; its low recall there (0.25) reflects the intrinsic near-clonality
 of the species — a resolution limit, not a tool failure — and is reported at precision 1.0.
 
-The validity of this in-silico (shotgun) mode is established independently in Part I: it recovers 20/20
-species from the mock at 0 % host (Fig S3) and its saliva strain calls are a confirmed subset of the
+The validity of this in-silico (shotgun) mode is established independently: it recovers all strains from
+the ATCC mocks (Fig 12) and its saliva strain calls are a confirmed subset of the
 native-2bRAD calls (Fig 8) — so the fast shotgun mode and the sensitive 2bRAD mode are two faces of one
 validated method.
 
@@ -233,28 +222,35 @@ Strain2bScan **matches or exceeds StrainScan's strain-identification accuracy wh
 2–3 orders of magnitude faster and lighter and profiling 1–2 orders faster** — and completes the one
 species StrainScan could not build.
 
-### The same strain-level identification via in-silico shotgun (Fig 12)
+### Strain-level profiling on shotgun, and the advantage under host contamination (Fig 12)
 
-Digesting conventional shotgun of the **same** MSA-1002/1003 mocks in silico (all 16 enzymes) and matching
-against the all-enzyme combined 120-genome tree, Strain2bScan resolved **20/20 strains** to their correct
-ATCC cluster with **zero false positives** on both the even and staggered mixes (Fig 12A) — the richer
-all-enzyme marker set avoids the sparse-tree fragmentation seen with single-enzyme BcgI. Depth-based
-species abundances again recovered the community structure: uniform for MSA-1002 and spanning
-*E. coli* 25 % → *Bifidobacterium* 0.02 % (by mass) for the staggered MSA-1003 (Fig 12B). With
-`--min-abundance 0` (no low-abundance floor, so no true strain is dropped) precision is governed by
-marker **coverage**: every true cluster retains ≥ 28 % breadth while the occasional near-sibling
-cross-call sits at ~10 %, so `--min-coverage 0.2` removes all false positives while keeping every strain.
-The native-2bRAD (Fig 6) and shotgun (Fig 12) modes thus deliver the same strain-level identification and
-abundance on a real DNA mock from one combined database — two entry points to one method.
+We next compared Strain2bScan with the two standard shotgun strain tools — **StrainScan** (reference
+k-mer) and **inStrain** (read-mapping + microdiversity) — on whole-metagenome shotgun (WMS) of the same
+four mocks, focusing on **host-contaminated samples**, the regime 2bRAD is built for. Strain2bScan
+profiled in-silico all-enzyme digests against the 164-genome tree; StrainScan used its per-species
+databases; inStrain mapped to a **dereplicated** reference, as its documentation requires — on the
+non-dereplicated 164-genome set inStrain multi-maps reads across the > 95 %-ANI decoys and reports 48
+false positives even at 0 % host (Fig S4). Each tool was scored in its own 0.95-similarity
+cluster space against the same ground truth.
 
-We benchmarked the shotgun mode head-to-head against the two standard shotgun strain tools,
-**StrainScan** (reference k-mer) and **inStrain** (read-mapping + microdiversity), on the same
-MSA-1002-even shotgun sample and 120-genome reference (Fig 12C,D). **All three resolved 20/20 strains**
-— accuracy is comparable — but the compute cost differs by orders of magnitude: Strain2bScan profiled the
-sample in **~66 s** (one digest-once pass over the combined tree) versus StrainScan **~35 min** (20
-per-species k-mer runs; Docker `linux/amd64` emulation) and inStrain **~52 min** (bowtie2 mapping of
-~19 M read pairs + microdiversity profiling). On the more diverse staggered MSA-1003 sample **inStrain did
-not finish** (35 % after 1 h 08, ~5–6 h projected), whereas Strain2bScan completed it in ~66 s. So on
-conventional shotgun Strain2bScan matches the accuracy of both established tools at a fraction of the wall
-time (`results/mock_tool_comparison.tsv`) — the compute advantage that makes it practical for
-host-contaminated and cohort-scale shotgun where per-sample cost dominates.
+On clean samples all three tools performed well (MSA-1002 0 % host and MSA-1003/1005/1007:
+Strain2bScan and StrainScan F1 = 1.0; inStrain F1 = 1.0 on the dereplicated reference). They **separated
+under host contamination** (MSA-1002 90/95/99 % human DNA). Strain2bScan held **F1 = 1.0 with accurate
+abundance (Bray–Curtis similarity ≥ 0.72, L2 similarity ≥ 0.86) at every level**. StrainScan kept perfect
+detection but its abundance estimate diverged as coverage fell: at 99 % host a single cluster
+(*H. pylori*, ~1.5× coverage) absorbed nearly the entire profile (predicted depth ~3.6 × 10⁴), collapsing
+quantification to **Bray–Curtis similarity 0.03 / L2 similarity 0.29**. inStrain degraded in the opposite
+axis — detection: recall fell 1.0 → 0.95 → 0.90 → **0.20** across the ladder (F1 0.33 at 99 % host), as
+only 1/120 genomes retained ≥ 50 % breadth once host dominated the library. Thus on host-contaminated
+shotgun **Strain2bScan is the only tool that preserves both strain detection and quantification**, while
+the two established tools fail in complementary ways — StrainScan loses abundance, inStrain loses
+detection (Fig 12, MSA-1002). MSA-1005/1007 reproduced the clean-sample concordance across all three
+tools, confirming the pattern generalises beyond MSA-1002/1003.
+
+This host-contamination advantage comes on top of matched clean-sample accuracy at a fraction of the
+compute: in dedicated serial runs Strain2bScan profiled a sample in ~66 s (one digest-once pass) versus
+StrainScan ~35 min (per-species k-mer runs, `linux/amd64` emulation) and inStrain ~52 min (bowtie2
+mapping + microdiversity), and it completed the diverse staggered MSA-1003 that inStrain did not finish
+(> 6 h). Together, Fig 6 and Fig 12 show one combined database serving both a native-2bRAD and an
+in-silico-shotgun entry point, with the decisive gain — retained strain detection *and* quantification —
+appearing exactly where microbiome samples are hardest: high host, low biomass.

@@ -22,8 +22,8 @@ complete references across all 15 species (declining as references degrade — c
 genomes matter), and — unlike 16S, whose between-strain distances
 are uncorrelated with genome divergence (median Spearman 0.36 across 15 species) — its tags track
 whole-genome strain distance (median 0.94). **(1) Native 2bRAD-M for low-biomass microbiomes:** on the
-ATCC MSA-1002 mock, native 2bRAD holds precision 1.0 and **20/20 strain recall at 99 % human DNA** where
-in-silico-digested shotgun drops to 12/20; on real saliva (8 subjects × 4 timepoints) strain-level
+ATCC MSA-1002 mock, native 2bRAD holds precision 1.0 with **full strain recall and accurate abundance at
+99 % human DNA**; on real saliva (8 subjects × 4 timepoints) strain-level
 profiles discriminate individuals better than species-level (PERMANOVA **R² 0.83 > 0.82**; leave-one-
 timepoint-out host-ID **100 %**), are temporally stable, and recover **128–163 low-abundance strains per
 sample that host-limited shotgun misses**. **(2) Conventional metagenomes at scale:** the sample is
@@ -33,8 +33,11 @@ a 55-species community**. On a common 15-species simulated benchmark (both tools
 the same genomes and profiling the same reads), Strain2bScan **matched StrainScan's precision (1.0) and
 exceeded its recall** (median 0.80 vs 0.67, full recall by 3× vs 10×) while building databases
 **249–614× faster and 43–138× lighter** and profiling **4–105× faster** — and it completed the one
-species (*Klebsiella pneumoniae*) StrainScan could not build. The two modes agree, so one tool spans both
-regimes.
+species (*Klebsiella pneumoniae*) StrainScan could not build. On **host-contaminated** shotgun of the
+ATCC mocks, Strain2bScan is the **only profiler tested that preserves both strain detection and abundance
+at 99 % human DNA** — StrainScan keeps detection but its abundance estimate collapses (Bray–Curtis
+similarity 0.03) and inStrain loses detection (recall 0.20), each failing in a complementary way. The two
+modes agree, so one tool spans both regimes.
 
 **Conclusions.** Strain2bScan delivers accurate, genome-resolved strain profiling from a sparse marker
 set: it uniquely enables strain-level analysis of low-biomass, high-host 2bRAD-M data, and scales
@@ -50,11 +53,14 @@ figures: https://github.com/HuangShiLab/Strain2bScan-paper.
   (2) in-silico-digested shotgun → community-scale throughput vs StrainScan. Shared foundation
   (accuracy, robustness, 2bRAD-vs-16S motivation) precedes the two pillars. Full section→evidence map in
   `docs/manuscript_organization.md`.
-- Figure map (11 main): 1 overview, 2 mash_2brad_vs_16s (A bars + B 3×5 rank–rank scatter, combined),
-  3 cross_species(+depth), 4 reference-genome completeness (refqual, all 15 species), 5 enzyme_sweep, 6 mock_hostcontam,
+- Figure map (12 main): 1 overview, 2 mash_2brad_vs_16s (A bars + B 3×5 rank–rank scatter, combined),
+  3 cross_species(+depth), 4 reference-genome completeness (refqual, all 15 species), 5 enzyme_sweep,
+  6 native-2bRAD strain-ID + abundance across four ATCC mocks (fig6_2brad),
   7 saliva (individual+temporal_ml), 8 saliva_concordance, 9 efficiency (performance+scalability+
   community_throughput), 10 species_expansion, 11 sim_headtohead (systematic 15-species head-to-head:
-  accuracy + build/profile/multi cost). Supp: S1 mock_msa1002_titration, S2 gate_calibration,
+  accuracy + build/profile/multi cost), 12 shotgun strain-ID vs StrainScan/inStrain, incl. high host
+  contamination (fig12_wms_toolcompare). Supp: S-tree DB-expansion cost (20 vs 28 species),
+  S-inStrain dereplication control, S1 mock_msa1002_titration, S2 gate_calibration,
   Table 1–3 sim head-to-head (`manuscript/tables.md`), Table S3 clinical_exploratory,
   Table S4 genome_qc_16s_panel. (Former Fig S1 scatter is now Fig 2B.)
 - All numbers regenerated with the corrected-enzyme binary; 2bRAD-native results on real error-containing
