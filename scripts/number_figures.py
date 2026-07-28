@@ -3,10 +3,12 @@
 manuscript numbering in manuscript/figures.md. Single-source figures are copied; multi-source figures
 are montaged vertically (one source figure per row). Re-run after any panel figure is regenerated."""
 import os, shutil, matplotlib; matplotlib.use("Agg")
+from pathlib import Path
 import matplotlib.pyplot as plt, matplotlib.image as mpimg
 
-FIG = os.path.expanduser("~/Downloads/Strain2bScan-paper/figures")
-OUT = f"{FIG}/numbered"; os.makedirs(OUT, exist_ok=True)
+PAPER = Path(__file__).resolve().parent.parent
+FIG = PAPER / "figures"
+OUT = FIG / "numbered"; os.makedirs(OUT, exist_ok=True)
 
 MAIN = {
     "01": ["overview"],

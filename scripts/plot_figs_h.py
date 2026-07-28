@@ -8,22 +8,25 @@ L2_similarity (=1-L2/sqrt2). Rows are grouped mock -> tool/data-type -> conditio
 Ground-Truth reference row (profile only) at the top of each mock.
 """
 import csv, json, os, re, math
+from pathlib import Path
 import numpy as np
 import matplotlib; matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from matplotlib.patches import Patch
 from matplotlib import colormaps
 
-SP = "/Users/macstudio/Downloads/Strain2bScan-raw-data/wms_analysis"
-RAW = "/Users/macstudio/Downloads/Strain2bScan-raw-data"
-FIGDIR = os.path.expanduser("~/Downloads/Strain2bScan-paper/figures")
+PAPER = Path(__file__).resolve().parent.parent
+SP = PAPER / "data"
+RAW = PAPER / "work" / "mock_retest" / "Strain2bScan-raw-data"
+FIGDIR = PAPER / "figures"
+os.makedirs(FIGDIR, exist_ok=True)
 
 INK = "#222222"; MUTED = "#6b6b6b"; BARGREY = "#c9c9c9"; FPBLACK = "#1a1a1a"; GROUPLINE = "#888888"
 METRICS = [("precision", "Precision"), ("recall", "Recall"), ("f1", "F1"),
            ("aupr", "AUPR"), ("bc_sim", "BC_similarity"), ("l2_sim", "L2_similarity")]
 
-profiles = json.load(open(f"{SP}/all_profiles.json"))
-rows = list(csv.DictReader(open(f"{SP}/all_metrics.tsv"), delimiter="\t"))
+profiles = json.load(open(SP / "fig6_fig12_profiles.json"))
+rows = list(csv.DictReader(open(SP / "fig6_fig12_metrics.tsv"), delimiter="\t"))
 
 def metric_row(sample, tool, variant):
     for r in rows:
