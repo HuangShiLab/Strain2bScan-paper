@@ -4,8 +4,8 @@ results, regenerate Fig6/Fig12 metrics + profiles, and rebuild the manuscript fi
 
 Inputs (populated by rsync from HPC):
   work/mock_retest/Strain2bScan-raw-data/
-    MSA_combined164_all.members.tsv
-    MSA1002_combined_all.members.tsv
+    MSA_combined164_all_flat.members.tsv
+    MSA1002_combined_all_flat.members.tsv
     MSA_combined164_bcgi_cont.members.tsv
     MSA1002_combined_bcgi_cont.members.tsv
     Ground_truth/{MSA1002,MSA1003,MSA1005,MSA1007}_ground_truth.txt
@@ -43,8 +43,8 @@ def rep_of(members):
     return a[0] if a else sorted(members)[0]
 
 MEMBERS = {
-    "164_all":  load_members(RAW / "MSA_combined164_all.members.tsv"),
-    "120_all":  load_members(RAW / "MSA1002_combined_all.members.tsv"),
+    "164_all":  load_members(RAW / "MSA_combined164_all_flat.members.tsv"),
+    "120_all":  load_members(RAW / "MSA1002_combined_all_flat.members.tsv"),
     "164_bcgi": load_members(RAW / "MSA_combined164_bcgi_cont.members.tsv"),
     "120_bcgi": load_members(RAW / "MSA1002_combined_bcgi_cont.members.tsv"),
 }
@@ -172,11 +172,11 @@ def collect_new_s2b(pr):
 
 # ------------------------------------------------------------------ main
 def main():
-    if not (RAW / "MSA_combined164_all.members.tsv").exists():
+    if not (RAW / "MSA_combined164_all_flat.members.tsv").exists():
         print(f"ERROR: HPC mirror not found at {RAW}")
         print("Run rsync from HPC first:")
         print("  rsync -av shihuang@hpc2021.hku.hk:/lustre1/g/aos_shihuang/LU/Strain2bScan-raw-data/"
-              "\{MSA_combined164_all.members.tsv,MSA1002_combined_all.members.tsv,"
+              "\{MSA_combined164_all_flat.members.tsv,MSA1002_combined_all_flat.members.tsv,"
               "MSA_combined164_bcgi_cont.members.tsv,MSA1002_combined_bcgi_cont.members.tsv,"
               "Ground_truth,wms_analysis\} work/mock_retest/Strain2bScan-raw-data/")
         sys.exit(1)
