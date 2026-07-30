@@ -190,7 +190,14 @@ def main():
     for pr in ALL:
         mock = pr["mock"]
         for (tool, variant), prof in collect_new_s2b(pr).items():
-            genomes = genome_set("120_all") if (tool == "Strain2bScan" and variant == "120") else GENOMES164
+            if tool != "Strain2bScan":
+                genomes = GENOMES164
+            elif pr["kind"] == "2bRAD":
+                key = "120_bcgi" if variant == "120" else "164_bcgi"
+                genomes = genome_set(key)
+            else:
+                key = "120_all" if variant == "120" else "164_all"
+                genomes = genome_set(key)
             truth = atcc_genomes(mock, genomes)
             m = metrics(prof, truth, genomes)
             m.update(sample=pr["sample"], mock=mock, kind=pr["kind"], tool=tool, variant=variant)
