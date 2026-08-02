@@ -190,6 +190,28 @@ def build_wms():
                 r = rowspec(mock, f"WMS ({tag})", clabel, pkey, s, tool, variant)
                 r["_truthkey"] = truth_key(s)
                 rl.append(r)
+        # strainscan-port WMS results
+        for tool, variant, tag in [("Strain2bScan-port", "164-default", "S2bS-port default"),
+                                    ("Strain2bScan-port", "164-layers", "S2bS-port layers")]:
+            for scode, clabel in samps:
+                s = f"WMS_{mock}_{scode}"
+                pkey = f"{s}|{tool}|{variant}"
+                if pkey not in profiles:
+                    continue
+                r = rowspec(mock, f"WMS ({tag})", clabel, pkey, s, tool, variant)
+                r["_truthkey"] = truth_key(s)
+                rl.append(r)
+        if mock in ("MSA1002", "MSA1003"):
+            for tool, variant, tag in [("Strain2bScan-port", "120-default", "S2bS-port default (120)"),
+                                        ("Strain2bScan-port", "120-layers", "S2bS-port layers (120)")]:
+                for scode, clabel in samps:
+                    s = f"WMS_{mock}_{scode}"
+                    pkey = f"{s}|{tool}|{variant}"
+                    if pkey not in profiles:
+                        continue
+                    r = rowspec(mock, f"WMS ({tag})", clabel, pkey, s, tool, variant)
+                    r["_truthkey"] = truth_key(s)
+                    rl.append(r)
     return rl
 
 # ---------------- assemble Fig 6 (2bRAD) ----------------

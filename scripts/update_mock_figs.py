@@ -25,6 +25,7 @@ from pathlib import Path
 
 PAPER = Path(__file__).resolve().parent.parent
 RAW = PAPER / "work" / "mock_retest" / "Strain2bScan-raw-data"
+PORT_RAW = PAPER / "work" / "mock_retest" / "Strain2bScan-port-results"
 DATA = PAPER / "data"
 FIG = PAPER / "figures"
 
@@ -168,6 +169,12 @@ def collect_new_s2b(pr):
         res[("Strain2bScan", "164")] = read_s2b(RAW / "wms_analysis" / "wms164" / f"{s}.pred", "164_all")
         if mock in ("MSA1002", "MSA1003"):
             res[("Strain2bScan", "120")] = read_s2b(RAW / "wms_analysis" / "shot120" / f"{s}.pred", "120_all")
+        # strainscan-port WMS results
+        res[("Strain2bScan-port", "164-default")] = read_s2b(PORT_RAW / "mock" / "wms164_port_default" / f"{s}.pred", "164_all")
+        res[("Strain2bScan-port", "164-layers")] = read_s2b(PORT_RAW / "mock" / "wms164_port_layers" / f"{s}.pred", "164_all")
+        if mock in ("MSA1002", "MSA1003"):
+            res[("Strain2bScan-port", "120-default")] = read_s2b(PORT_RAW / "mock" / "shot120_port_default" / f"{s}.pred", "120_all")
+            res[("Strain2bScan-port", "120-layers")] = read_s2b(PORT_RAW / "mock" / "shot120_port_layers" / f"{s}.pred", "120_all")
     return {k: v for k, v in res.items() if v is not None}
 
 # ------------------------------------------------------------------ main
@@ -190,13 +197,20 @@ def main():
     for pr in ALL:
         mock = pr["mock"]
         for (tool, variant), prof in collect_new_s2b(pr).items():
-            if tool != "Strain2bScan":
+            if tool == "Strain2bScan":
+                base = variant
+            elif tool == "Strain2bScan-port":
+                base = variant.split("-")[0]
+            else:
+                base = None
+
+            if base is None:
                 genomes = GENOMES164
             elif pr["kind"] == "2bRAD":
-                key = "120_bcgi" if variant == "120" else "164_bcgi"
+                key = "120_bcgi" if base == "120" else "164_bcgi"
                 genomes = genome_set(key)
             else:
-                key = "120_all" if variant == "120" else "164_all"
+                key = "120_all" if base == "120" else "164_all"
                 genomes = genome_set(key)
             truth = atcc_genomes(mock, genomes)
             m = metrics(prof, truth, genomes)
