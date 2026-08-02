@@ -48,9 +48,17 @@ def species_of(g):
         return m.group(1)
     return g
 
-def atcc_num(g):
-    m = re.search(r"ATCC_(\d+)", g)
-    return m.group(1) if m else None
+def atcc_token(g):
+    """Return the terminal ATCC identifier, e.g. ATCC_17978 or ATCC_BAA_816."""
+    m = re.search(r"ATCC_[A-Za-z0-9_]+$", g)
+    return m.group(0) if m else None
+
+def is_true_pred(g, true_set, true_tokens):
+    """Match by exact name or by terminal ATCC token (handles 120 vs 164 naming)."""
+    if g in true_set:
+        return True
+    tok = atcc_token(g)
+    return tok is not None and tok in true_tokens
 
 def sp_label(g):
     return species_of(g).replace("_", " ")
@@ -98,17 +106,17 @@ def draw_figure(rowlist, title, outbase, legend_species):
         prof = profiles.get(r["pkey"], {})
         tot = sum(prof.values()) or 1.0
         tg = set(g for g, v in profiles.get(truth_key_of(r), {}).items() if v > 0)
-        true_atccs = {atcc_num(g) for g in tg if atcc_num(g)}
+        true_tokens = {atcc_token(g) for g in tg if atcc_token(g)}
         left = 0.0
-        # draw true-positive segments (match by ATCC number to tolerate 120/164 naming)
+        # draw true-positive segments (match by exact name or terminal ATCC token)
         for g in sorted(prof, key=sp_label):
-            if atcc_num(g) in true_atccs:
+            if is_true_pred(g, tg, true_tokens):
                 v = prof[g] / tot
                 if v > 0:
                     axP.barh(yy, v, left=left, height=0.78, color=pal[species_of(g)],
                              edgecolor="white", linewidth=0.4)
                     left += v
-        fp = sum(v for g, v in prof.items() if atcc_num(g) not in true_atccs) / tot
+        fp = sum(v for g, v in prof.items() if not is_true_pred(g, tg, true_tokens)) / tot
         if fp > 0:
             axP.barh(yy, fp, left=left, height=0.78, color=FPBLACK, edgecolor="white", linewidth=0.4)
         # metric bars — but if the tool detected nothing (empty profile), P/R are undefined, not 0
