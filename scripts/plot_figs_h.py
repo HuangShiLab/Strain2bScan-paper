@@ -38,7 +38,19 @@ def metric_row(sample, tool, variant):
     return None
 
 def species_of(g):
-    return re.sub(r"__(ATCC_|GCF_).*", "", g)
+    # 164-panel style: "Genus_species__ATCC_Genus_species_ATCC_12345"
+    s = re.sub(r"__(ATCC_|GCF_).*", "", g)
+    if s != g:
+        return s
+    # 120-panel style: "ATCC_Genus_species_ATCC_12345" (no species prefix)
+    m = re.match(r"ATCC_(.+?)_ATCC_", g)
+    if m:
+        return m.group(1)
+    return g
+
+def atcc_num(g):
+    m = re.search(r"ATCC_(\d+)", g)
+    return m.group(1) if m else None
 
 def sp_label(g):
     return species_of(g).replace("_", " ")
@@ -53,8 +65,8 @@ def build_palette(all_true):
     return pal
 
 # ------- row model -------------------------------------------------------------
-def truth_key(sample):  # both trees share the same truth genomes; 164 always present
-    return f"{sample}|truth|164"
+def truth_key(sample, variant="164"):  # per-variant truth; 164 is the richest/default
+    return f"{sample}|truth|{variant}"
 
 def rowspec(mock, group, cond, pkey, sample=None, tool=None, variant=None):
     m = metric_row(sample, tool, variant) if sample else None
@@ -86,14 +98,17 @@ def draw_figure(rowlist, title, outbase, legend_species):
         prof = profiles.get(r["pkey"], {})
         tot = sum(prof.values()) or 1.0
         tg = set(g for g, v in profiles.get(truth_key_of(r), {}).items() if v > 0)
+        true_atccs = {atcc_num(g) for g in tg if atcc_num(g)}
         left = 0.0
-        for g in sorted(tg, key=sp_label):
-            v = prof.get(g, 0.0) / tot
-            if v > 0:
-                axP.barh(yy, v, left=left, height=0.78, color=pal[species_of(g)],
-                         edgecolor="white", linewidth=0.4)
-                left += v
-        fp = sum(v for g, v in prof.items() if g not in tg) / tot
+        # draw true-positive segments (match by ATCC number to tolerate 120/164 naming)
+        for g in sorted(prof, key=sp_label):
+            if atcc_num(g) in true_atccs:
+                v = prof[g] / tot
+                if v > 0:
+                    axP.barh(yy, v, left=left, height=0.78, color=pal[species_of(g)],
+                             edgecolor="white", linewidth=0.4)
+                    left += v
+        fp = sum(v for g, v in prof.items() if atcc_num(g) not in true_atccs) / tot
         if fp > 0:
             axP.barh(yy, fp, left=left, height=0.78, color=FPBLACK, edgecolor="white", linewidth=0.4)
         # metric bars — but if the tool detected nothing (empty profile), P/R are undefined, not 0
@@ -188,7 +203,7 @@ def build_wms():
                 if pkey not in profiles:
                     continue
                 r = rowspec(mock, f"WMS ({tag})", clabel, pkey, s, tool, variant)
-                r["_truthkey"] = truth_key(s)
+                r["_truthkey"] = truth_key(s, variant)
                 rl.append(r)
         # strainscan-port WMS results
         for tool, variant, tag in [("Strain2bScan-port", "164-default", "S2bS-port default"),
@@ -199,7 +214,7 @@ def build_wms():
                 if pkey not in profiles:
                     continue
                 r = rowspec(mock, f"WMS ({tag})", clabel, pkey, s, tool, variant)
-                r["_truthkey"] = truth_key(s)
+                r["_truthkey"] = truth_key(s, variant)
                 rl.append(r)
         if mock in ("MSA1002", "MSA1003"):
             for tool, variant, tag in [("Strain2bScan-port", "120-default", "S2bS-port default (120)"),
@@ -210,7 +225,7 @@ def build_wms():
                     if pkey not in profiles:
                         continue
                     r = rowspec(mock, f"WMS ({tag})", clabel, pkey, s, tool, variant)
-                    r["_truthkey"] = truth_key(s)
+                    r["_truthkey"] = truth_key(s, variant)
                     rl.append(r)
     return rl
 
@@ -255,7 +270,7 @@ def build_supp():
                 if pkey not in profiles:
                     continue
                 r = rowspec(mock, tag, clabel, pkey, s, "Strain2bScan", variant)
-                r["_truthkey"] = truth_key(s)
+                r["_truthkey"] = truth_key(s, variant)
                 rl.append(r)
     return rl
 
