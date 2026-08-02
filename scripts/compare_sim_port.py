@@ -2,7 +2,7 @@
 """Compare Strain2bScan-port simulation predictions against ground truth.
 
 Inputs:
-  work/mock_retest/Strain2bScan-port-results/sim/{single,multi}/{default,layers}/*.pred
+  work/mock_retest/Strain2bScan-port-results/sim/{single,multi}/{mode}/*.pred
   figure_raw_data/sim_single_species/<Species>/truth/<sample>.truth.tsv
   figure_raw_data/sim_multi_species/<depth>/truth/<sample>.truth.tsv
 
@@ -175,10 +175,19 @@ def aggregate(rows):
     return out
 
 
+def discover_modes(dataset):
+    """Return sorted list of mode subdirectory names under sim/{dataset}."""
+    d = PRED_ROOT / dataset
+    if not d.exists():
+        return []
+    return sorted(p.name for p in d.iterdir() if p.is_dir())
+
+
 def main():
     rows = []
-    for mode in ("default", "layers"):
+    for mode in discover_modes("single"):
         rows.extend(compare_single(mode))
+    for mode in discover_modes("multi"):
         rows.extend(compare_multi(mode))
 
     OUT_DIR.mkdir(parents=True, exist_ok=True)
