@@ -37,6 +37,23 @@ def load_members(path):
             continue
         g, c = ln.rstrip("\n").split("\t")[:2]
         c2g.setdefault(c, []).append(g)
+    # Some all-enzyme DB members files were written with per-species cluster
+    # names (e.g. "Acinetobacter_baumannii__C0") while the DB/prediction uses
+    # global bare IDs ("C0", "C1", ...). Re-map to bare IDs by sorting species
+    # alphabetically and clusters numerically within each species.
+    if c2g and all("__C" in c for c in c2g) and not any(c.startswith("C") and c[1:].isdigit() for c in c2g):
+        from collections import defaultdict
+        by_sp = defaultdict(list)
+        for c in c2g:
+            sp, cid = c.rsplit("__", 1)
+            by_sp[sp].append((int(cid[1:]), c))
+        new_c2g = {}
+        idx = 0
+        for sp in sorted(by_sp):
+            for _, old_c in sorted(by_sp[sp]):
+                new_c2g[f"C{idx}"] = c2g[old_c]
+                idx += 1
+        c2g = new_c2g
     return c2g
 
 def rep_of(members):
