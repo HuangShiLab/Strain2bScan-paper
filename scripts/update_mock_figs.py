@@ -151,6 +151,16 @@ def average_precision(pred, truth):
         prev_recall = recall
     return ap
 
+def pr_at_threshold(pred, truth, genomes, threshold):
+    """Precision/recall/F1 when presence requires abundance >= threshold."""
+    pos = {g for g in genomes if truth.get(g, 0) > 0}
+    det = {g for g, v in pred.items() if v >= threshold}
+    tp, fp, fn = len(det & pos), len(det - pos), len(pos - det)
+    prec = tp / (tp + fp) if tp + fp else 0.0
+    rec = tp / (tp + fn) if tp + fn else 0.0
+    f1 = 2 * prec * rec / (prec + rec) if prec + rec else 0.0
+    return prec, rec, f1
+
 def metrics(pred, truth, genomes):
     pos = {g for g in genomes if truth.get(g, 0) > 0}
     det = {g for g, v in pred.items() if v > 0}
@@ -170,7 +180,9 @@ def metrics(pred, truth, genomes):
         p = p / p.sum()
     l2 = float(np.sqrt(((p - t) ** 2).sum()))
     bc = float(np.abs(p - t).sum() / (p + t).sum()) if (p + t).sum() else 1.0
+    pt, rt, f1t = pr_at_threshold(pred, truth, genomes, 1e-4)
     return dict(TP=tp, FP=fp, FN=fn, precision=prec, recall=rec, f1=f1, aupr=aupr,
+                precision_at_1e_4=pt, recall_at_1e_4=rt, f1_at_1e_4=f1t,
                 bray_curtis=bc, l2=l2)
 
 # ------------------------------------------------------------------ sample manifest
@@ -263,6 +275,25 @@ def main():
     merged_profiles = {k: v for k, v in old_profiles.items() if k not in new_profile_keys and not k.split("|")[1] in s2bs_tools}
     merged_profiles.update(profiles)
 
+    # Recompute threshold-based metrics for every row from the merged profiles so
+    # comparison tools (StrainScan, inStrain) get the new columns too.
+    def genomes_for_row(r):
+        if r["kind"] == "2bRAD":
+            key = "120_bcgi" if r["variant"] == "120" else "164_bcgi"
+            return genome_set(key)
+        # WMS: comparison tools always use the 164 panel in this dataset.
+        return GENOMES164
+
+    for r in merged_metrics:
+        pkey = f"{r['sample']}|{r['tool']}|{r['variant']}"
+        tkey = f"{r['sample']}|truth|{r['variant']}"
+        if pkey in merged_profiles and tkey in merged_profiles:
+            genomes = genomes_for_row(r)
+            pt, rt, f1t = pr_at_threshold(merged_profiles[pkey], merged_profiles[tkey], genomes, 1e-4)
+            r["precision_at_1e_4"] = pt
+            r["recall_at_1e_4"] = rt
+            r["f1_at_1e_4"] = f1t
+
     def _fmt(v):
         if isinstance(v, float):
             if math.isnan(v):
@@ -271,7 +302,9 @@ def main():
         return v
 
     cols = ["kind", "mock", "sample", "tool", "variant", "TP", "FP", "FN",
-            "precision", "recall", "f1", "aupr", "bray_curtis", "l2"]
+            "precision", "recall", "f1", "aupr",
+            "precision_at_1e_4", "recall_at_1e_4", "f1_at_1e_4",
+            "bray_curtis", "l2"]
     with open(DATA / "fig6_fig12_metrics.tsv", "w", newline="") as fh:
         w = csv.DictWriter(fh, fieldnames=cols, delimiter="\t"); w.writeheader()
         for r in sorted(merged_metrics, key=lambda x: (x["kind"], x["mock"], x["sample"], x["tool"], x["variant"])):

@@ -22,8 +22,9 @@ FIGDIR = PAPER / "figures"
 os.makedirs(FIGDIR, exist_ok=True)
 
 INK = "#222222"; MUTED = "#6b6b6b"; BARGREY = "#c9c9c9"; FPBLACK = "#1a1a1a"; GROUPLINE = "#888888"
-METRICS = [("precision", "Precision"), ("recall", "Recall"), ("f1", "F1"),
-           ("aupr", "AUPR"), ("bc_sim", "BC sim"), ("l2_sim", "L2 sim")]
+METRICS = [("aupr", "AUPR"), ("precision_at_1e_4", "P@1e-4"),
+           ("recall_at_1e_4", "R@1e-4"), ("f1_at_1e_4", "F1@1e-4"),
+           ("bc_sim", "BC sim"), ("l2_sim", "L2 sim")]
 
 profiles = json.load(open(SP / "fig6_fig12_profiles.json"))
 rows = list(csv.DictReader(open(SP / "fig6_fig12_metrics.tsv"), delimiter="\t"))
@@ -32,8 +33,15 @@ def metric_row(sample, tool, variant):
     for r in rows:
         if r["sample"] == sample and r["tool"] == tool and r["variant"] == variant:
             l2, bc = float(r["l2"]), float(r["bray_curtis"])
-            return {"precision": float(r["precision"]), "recall": float(r["recall"]),
-                    "f1": float(r["f1"]), "aupr": float(r["aupr"]),
+            def _f(k):
+                try:
+                    return float(r[k])
+                except (KeyError, ValueError):
+                    return float("nan")
+            return {"aupr": _f("aupr"),
+                    "precision_at_1e_4": _f("precision_at_1e_4"),
+                    "recall_at_1e_4": _f("recall_at_1e_4"),
+                    "f1_at_1e_4": _f("f1_at_1e_4"),
                     "bc_sim": max(0.0, 1 - bc), "l2_sim": max(0.0, 1 - l2 / math.sqrt(2))}
     return None
 

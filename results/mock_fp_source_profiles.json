@@ -1,0 +1,927 @@
+{
+  "profiles": {
+    "WMS_MSA1003_0_100ng_1": [
+      {
+        "genome": "Lactobacillus_jensenii__ATCC_Lactobacillus_jensenii_ATCC_25258",
+        "species": "Lactobacillus_jensenii",
+        "abundance": 0.000322,
+        "class": "other_mock_atcc"
+      },
+      {
+        "genome": "Prevotella_bivia__ATCC_Prevotella_bivia_ATCC_29303",
+        "species": "Prevotella_bivia",
+        "abundance": 0.000277,
+        "class": "other_mock_atcc"
+      },
+      {
+        "genome": "Metamycoplasma_hominis__ATCC_Metamycoplasma_hominis_ATCC_23114",
+        "species": "Metamycoplasma_hominis",
+        "abundance": 0.000259,
+        "class": "other_mock_atcc"
+      },
+      {
+        "genome": "Gardnerella_vaginalis__ATCC_Gardnerella_vaginalis_ATCC_14019",
+        "species": "Gardnerella_vaginalis",
+        "abundance": 0.000258,
+        "class": "other_mock_atcc"
+      },
+      {
+        "genome": "Streptococcus_mitis__ATCC_Streptococcus_mitis_ATCC_49456",
+        "species": "Streptococcus_mitis",
+        "abundance": 9.5e-05,
+        "class": "other_mock_atcc"
+      },
+      {
+        "genome": "Corynebacterium_striatum__ATCC_Corynebacterium_striatum_ATCC_6940",
+        "species": "Corynebacterium_striatum",
+        "abundance": 8e-05,
+        "class": "other_mock_atcc"
+      },
+      {
+        "genome": "Acinetobacter_johnsonii__ATCC_Acinetobacter_johnsonii_ATCC_17909",
+        "species": "Acinetobacter_johnsonii",
+        "abundance": 7.6e-05,
+        "class": "other_mock_atcc"
+      },
+      {
+        "genome": "Micrococcus_luteus__ATCC_Micrococcus_luteus_ATCC_4698",
+        "species": "Micrococcus_luteus",
+        "abundance": 5.9e-05,
+        "class": "other_mock_atcc"
+      },
+      {
+        "genome": "Streptococcus_mutans__GCF_009738105.1",
+        "species": "Streptococcus_mutans",
+        "abundance": 4.4e-05,
+        "class": "same_species_decoy"
+      },
+      {
+        "genome": "Porphyromonas_gingivalis__GCF_002753935.1",
+        "species": "Porphyromonas_gingivalis",
+        "abundance": 4.3e-05,
+        "class": "same_species_decoy"
+      },
+      {
+        "genome": "Streptococcus_mutans__GCF_014621675.1",
+        "species": "Streptococcus_mutans",
+        "abundance": 3.8e-05,
+        "class": "same_species_decoy"
+      },
+      {
+        "genome": "Porphyromonas_gingivalis__GCF_002753955.1",
+        "species": "Porphyromonas_gingivalis",
+        "abundance": 3.6e-05,
+        "class": "same_species_decoy"
+      },
+      {
+        "genome": "Staphylococcus_epidermidis__GCF_000759555.1",
+        "species": "Staphylococcus_epidermidis",
+        "abundance": 3.4e-05,
+        "class": "same_species_decoy"
+      }
+    ],
+    "WMS_MSA1003_0_100ng_2": [
+      {
+        "genome": "Prevotella_bivia__ATCC_Prevotella_bivia_ATCC_29303",
+        "species": "Prevotella_bivia",
+        "abundance": 8.9e-05,
+        "class": "other_mock_atcc"
+      },
+      {
+        "genome": "Lactobacillus_jensenii__ATCC_Lactobacillus_jensenii_ATCC_25258",
+        "species": "Lactobacillus_jensenii",
+        "abundance": 8.9e-05,
+        "class": "other_mock_atcc"
+      },
+      {
+        "genome": "Gardnerella_vaginalis__ATCC_Gardnerella_vaginalis_ATCC_14019",
+        "species": "Gardnerella_vaginalis",
+        "abundance": 8.3e-05,
+        "class": "other_mock_atcc"
+      },
+      {
+        "genome": "Streptococcus_mitis__ATCC_Streptococcus_mitis_ATCC_49456",
+        "species": "Streptococcus_mitis",
+        "abundance": 7.8e-05,
+        "class": "other_mock_atcc"
+      },
+      {
+        "genome": "Corynebacterium_striatum__ATCC_Corynebacterium_striatum_ATCC_6940",
+        "species": "Corynebacterium_striatum",
+        "abundance": 7.2e-05,
+        "class": "other_mock_atcc"
+      },
+      {
+        "genome": "Acinetobacter_johnsonii__ATCC_Acinetobacter_johnsonii_ATCC_17909",
+        "species": "Acinetobacter_johnsonii",
+        "abundance": 6.9e-05,
+        "class": "other_mock_atcc"
+      },
+      {
+        "genome": "Metamycoplasma_hominis__ATCC_Metamycoplasma_hominis_ATCC_23114",
+        "species": "Metamycoplasma_hominis",
+        "abundance": 5.4e-05,
+        "class": "other_mock_atcc"
+      },
+      {
+        "genome": "Micrococcus_luteus__ATCC_Micrococcus_luteus_ATCC_4698",
+        "species": "Micrococcus_luteus",
+        "abundance": 4.7e-05,
+        "class": "other_mock_atcc"
+      },
+      {
+        "genome": "Streptococcus_mutans__GCF_014621675.1",
+        "species": "Streptococcus_mutans",
+        "abundance": 4.2e-05,
+        "class": "same_species_decoy"
+      },
+      {
+        "genome": "Streptococcus_mutans__GCF_009738105.1",
+        "species": "Streptococcus_mutans",
+        "abundance": 3.5e-05,
+        "class": "same_species_decoy"
+      }
+    ],
+    "WMS_MSA1003_0_100ng_3": [
+      {
+        "genome": "Lactobacillus_jensenii__ATCC_Lactobacillus_jensenii_ATCC_25258",
+        "species": "Lactobacillus_jensenii",
+        "abundance": 9.7e-05,
+        "class": "other_mock_atcc"
+      },
+      {
+        "genome": "Prevotella_bivia__ATCC_Prevotella_bivia_ATCC_29303",
+        "species": "Prevotella_bivia",
+        "abundance": 9.5e-05,
+        "class": "other_mock_atcc"
+      },
+      {
+        "genome": "Gardnerella_vaginalis__ATCC_Gardnerella_vaginalis_ATCC_14019",
+        "species": "Gardnerella_vaginalis",
+        "abundance": 9.5e-05,
+        "class": "other_mock_atcc"
+      },
+      {
+        "genome": "Streptococcus_mitis__ATCC_Streptococcus_mitis_ATCC_49456",
+        "species": "Streptococcus_mitis",
+        "abundance": 8.8e-05,
+        "class": "other_mock_atcc"
+      },
+      {
+        "genome": "Acinetobacter_johnsonii__ATCC_Acinetobacter_johnsonii_ATCC_17909",
+        "species": "Acinetobacter_johnsonii",
+        "abundance": 7.9e-05,
+        "class": "other_mock_atcc"
+      },
+      {
+        "genome": "Corynebacterium_striatum__ATCC_Corynebacterium_striatum_ATCC_6940",
+        "species": "Corynebacterium_striatum",
+        "abundance": 7.8e-05,
+        "class": "other_mock_atcc"
+      },
+      {
+        "genome": "Metamycoplasma_hominis__ATCC_Metamycoplasma_hominis_ATCC_23114",
+        "species": "Metamycoplasma_hominis",
+        "abundance": 6.2e-05,
+        "class": "other_mock_atcc"
+      },
+      {
+        "genome": "Micrococcus_luteus__ATCC_Micrococcus_luteus_ATCC_4698",
+        "species": "Micrococcus_luteus",
+        "abundance": 5.5e-05,
+        "class": "other_mock_atcc"
+      },
+      {
+        "genome": "Streptococcus_mutans__GCF_014621675.1",
+        "species": "Streptococcus_mutans",
+        "abundance": 3.6e-05,
+        "class": "same_species_decoy"
+      }
+    ],
+    "WMS_MSA1005_0_100ng_1": [
+      {
+        "genome": "Streptococcus_mutans__ATCC_Streptococcus_mutans_ATCC_700610",
+        "species": "Streptococcus_mutans",
+        "abundance": 0.000211,
+        "class": "other_mock_atcc"
+      },
+      {
+        "genome": "Lactobacillus_gasseri__ATCC_Lactobacillus_gasseri_ATCC_33323",
+        "species": "Lactobacillus_gasseri",
+        "abundance": 0.000185,
+        "class": "other_mock_atcc"
+      },
+      {
+        "genome": "Porphyromonas_gingivalis__ATCC_Porphyromonas_gingivalis_ATCC_33277",
+        "species": "Porphyromonas_gingivalis",
+        "abundance": 0.000185,
+        "class": "other_mock_atcc"
+      },
+      {
+        "genome": "Escherichia_coli__ATCC_Escherichia_coli_ATCC_700926",
+        "species": "Escherichia_coli",
+        "abundance": 0.00017,
+        "class": "other_mock_atcc"
+      },
+      {
+        "genome": "Streptococcus_agalactiae__ATCC_Streptococcus_agalactiae_ATCC_BAA_611",
+        "species": "Streptococcus_agalactiae",
+        "abundance": 0.000141,
+        "class": "other_mock_atcc"
+      },
+      {
+        "genome": "Cereibacter_sphaeroides__ATCC_Cereibacter_sphaeroides_ATCC_17029",
+        "species": "Cereibacter_sphaeroides",
+        "abundance": 0.000133,
+        "class": "other_mock_atcc"
+      },
+      {
+        "genome": "Gardnerella_vaginalis__ATCC_Gardnerella_vaginalis_ATCC_14019",
+        "species": "Gardnerella_vaginalis",
+        "abundance": 0.000126,
+        "class": "other_mock_atcc"
+      },
+      {
+        "genome": "Prevotella_bivia__ATCC_Prevotella_bivia_ATCC_29303",
+        "species": "Prevotella_bivia",
+        "abundance": 0.000122,
+        "class": "other_mock_atcc"
+      },
+      {
+        "genome": "Metamycoplasma_hominis__ATCC_Metamycoplasma_hominis_ATCC_23114",
+        "species": "Metamycoplasma_hominis",
+        "abundance": 9.8e-05,
+        "class": "other_mock_atcc"
+      },
+      {
+        "genome": "Lactobacillus_jensenii__ATCC_Lactobacillus_jensenii_ATCC_25258",
+        "species": "Lactobacillus_jensenii",
+        "abundance": 7.5e-05,
+        "class": "other_mock_atcc"
+      },
+      {
+        "genome": "Staphylococcus_aureus__ATCC_Staphylococcus_aureus_ATCC_BAA_1556",
+        "species": "Staphylococcus_aureus",
+        "abundance": 6.2e-05,
+        "class": "other_mock_atcc"
+      },
+      {
+        "genome": "Cutibacterium_acnes__GCF_001469655.1",
+        "species": "Cutibacterium_acnes",
+        "abundance": 4.4e-05,
+        "class": "same_species_decoy"
+      },
+      {
+        "genome": "Bacillus_pacificus__ATCC_Bacillus_pacificus_ATCC_10987",
+        "species": "Bacillus_pacificus",
+        "abundance": 2.7e-05,
+        "class": "other_mock_atcc"
+      }
+    ],
+    "WMS_MSA1005_0_100ng_2": [
+      {
+        "genome": "Lactobacillus_gasseri__ATCC_Lactobacillus_gasseri_ATCC_33323",
+        "species": "Lactobacillus_gasseri",
+        "abundance": 0.000168,
+        "class": "other_mock_atcc"
+      },
+      {
+        "genome": "Lactobacillus_jensenii__ATCC_Lactobacillus_jensenii_ATCC_25258",
+        "species": "Lactobacillus_jensenii",
+        "abundance": 0.000162,
+        "class": "other_mock_atcc"
+      },
+      {
+        "genome": "Streptococcus_mutans__ATCC_Streptococcus_mutans_ATCC_700610",
+        "species": "Streptococcus_mutans",
+        "abundance": 0.000149,
+        "class": "other_mock_atcc"
+      },
+      {
+        "genome": "Porphyromonas_gingivalis__ATCC_Porphyromonas_gingivalis_ATCC_33277",
+        "species": "Porphyromonas_gingivalis",
+        "abundance": 0.00013,
+        "class": "other_mock_atcc"
+      },
+      {
+        "genome": "Escherichia_coli__ATCC_Escherichia_coli_ATCC_700926",
+        "species": "Escherichia_coli",
+        "abundance": 0.000127,
+        "class": "other_mock_atcc"
+      },
+      {
+        "genome": "Streptococcus_agalactiae__ATCC_Streptococcus_agalactiae_ATCC_BAA_611",
+        "species": "Streptococcus_agalactiae",
+        "abundance": 0.000115,
+        "class": "other_mock_atcc"
+      },
+      {
+        "genome": "Cereibacter_sphaeroides__ATCC_Cereibacter_sphaeroides_ATCC_17029",
+        "species": "Cereibacter_sphaeroides",
+        "abundance": 0.000104,
+        "class": "other_mock_atcc"
+      },
+      {
+        "genome": "Prevotella_bivia__ATCC_Prevotella_bivia_ATCC_29303",
+        "species": "Prevotella_bivia",
+        "abundance": 8.9e-05,
+        "class": "other_mock_atcc"
+      },
+      {
+        "genome": "Gardnerella_vaginalis__ATCC_Gardnerella_vaginalis_ATCC_14019",
+        "species": "Gardnerella_vaginalis",
+        "abundance": 7.8e-05,
+        "class": "other_mock_atcc"
+      },
+      {
+        "genome": "Metamycoplasma_hominis__ATCC_Metamycoplasma_hominis_ATCC_23114",
+        "species": "Metamycoplasma_hominis",
+        "abundance": 6.9e-05,
+        "class": "other_mock_atcc"
+      },
+      {
+        "genome": "Cutibacterium_acnes__GCF_001469655.1",
+        "species": "Cutibacterium_acnes",
+        "abundance": 3.6e-05,
+        "class": "same_species_decoy"
+      },
+      {
+        "genome": "Staphylococcus_aureus__ATCC_Staphylococcus_aureus_ATCC_BAA_1556",
+        "species": "Staphylococcus_aureus",
+        "abundance": 3e-05,
+        "class": "other_mock_atcc"
+      }
+    ],
+    "WMS_MSA1005_0_100ng_3": [
+      {
+        "genome": "Lactobacillus_gasseri__ATCC_Lactobacillus_gasseri_ATCC_33323",
+        "species": "Lactobacillus_gasseri",
+        "abundance": 0.000202,
+        "class": "other_mock_atcc"
+      },
+      {
+        "genome": "Streptococcus_mutans__ATCC_Streptococcus_mutans_ATCC_700610",
+        "species": "Streptococcus_mutans",
+        "abundance": 0.00015,
+        "class": "other_mock_atcc"
+      },
+      {
+        "genome": "Streptococcus_agalactiae__ATCC_Streptococcus_agalactiae_ATCC_BAA_611",
+        "species": "Streptococcus_agalactiae",
+        "abundance": 0.000146,
+        "class": "other_mock_atcc"
+      },
+      {
+        "genome": "Porphyromonas_gingivalis__ATCC_Porphyromonas_gingivalis_ATCC_33277",
+        "species": "Porphyromonas_gingivalis",
+        "abundance": 0.000141,
+        "class": "other_mock_atcc"
+      },
+      {
+        "genome": "Prevotella_bivia__ATCC_Prevotella_bivia_ATCC_29303",
+        "species": "Prevotella_bivia",
+        "abundance": 0.000139,
+        "class": "other_mock_atcc"
+      },
+      {
+        "genome": "Escherichia_coli__ATCC_Escherichia_coli_ATCC_700926",
+        "species": "Escherichia_coli",
+        "abundance": 0.000127,
+        "class": "other_mock_atcc"
+      },
+      {
+        "genome": "Gardnerella_vaginalis__ATCC_Gardnerella_vaginalis_ATCC_14019",
+        "species": "Gardnerella_vaginalis",
+        "abundance": 0.000127,
+        "class": "other_mock_atcc"
+      },
+      {
+        "genome": "Metamycoplasma_hominis__ATCC_Metamycoplasma_hominis_ATCC_23114",
+        "species": "Metamycoplasma_hominis",
+        "abundance": 0.000109,
+        "class": "other_mock_atcc"
+      },
+      {
+        "genome": "Lactobacillus_jensenii__ATCC_Lactobacillus_jensenii_ATCC_25258",
+        "species": "Lactobacillus_jensenii",
+        "abundance": 9.7e-05,
+        "class": "other_mock_atcc"
+      },
+      {
+        "genome": "Cereibacter_sphaeroides__ATCC_Cereibacter_sphaeroides_ATCC_17029",
+        "species": "Cereibacter_sphaeroides",
+        "abundance": 9.6e-05,
+        "class": "other_mock_atcc"
+      },
+      {
+        "genome": "Staphylococcus_aureus__ATCC_Staphylococcus_aureus_ATCC_BAA_1556",
+        "species": "Staphylococcus_aureus",
+        "abundance": 5e-05,
+        "class": "other_mock_atcc"
+      }
+    ],
+    "WMS_MSA1007_0_100ng_1": [
+      {
+        "genome": "Staphylococcus_epidermidis__ATCC_Staphylococcus_epidermidis_ATCC_12228",
+        "species": "Staphylococcus_epidermidis",
+        "abundance": 0.000647,
+        "class": "other_mock_atcc"
+      },
+      {
+        "genome": "Streptococcus_mutans__ATCC_Streptococcus_mutans_ATCC_700610",
+        "species": "Streptococcus_mutans",
+        "abundance": 0.000143,
+        "class": "other_mock_atcc"
+      },
+      {
+        "genome": "Porphyromonas_gingivalis__ATCC_Porphyromonas_gingivalis_ATCC_33277",
+        "species": "Porphyromonas_gingivalis",
+        "abundance": 0.00012,
+        "class": "other_mock_atcc"
+      },
+      {
+        "genome": "Escherichia_coli__ATCC_Escherichia_coli_ATCC_700926",
+        "species": "Escherichia_coli",
+        "abundance": 0.000118,
+        "class": "other_mock_atcc"
+      },
+      {
+        "genome": "Cereibacter_sphaeroides__ATCC_Cereibacter_sphaeroides_ATCC_17029",
+        "species": "Cereibacter_sphaeroides",
+        "abundance": 9.7e-05,
+        "class": "other_mock_atcc"
+      },
+      {
+        "genome": "Streptococcus_mitis__ATCC_Streptococcus_mitis_ATCC_49456",
+        "species": "Streptococcus_mitis",
+        "abundance": 7.5e-05,
+        "class": "other_mock_atcc"
+      },
+      {
+        "genome": "Acinetobacter_johnsonii__ATCC_Acinetobacter_johnsonii_ATCC_17909",
+        "species": "Acinetobacter_johnsonii",
+        "abundance": 6.7e-05,
+        "class": "other_mock_atcc"
+      },
+      {
+        "genome": "Cutibacterium_acnes__ATCC_Cutibacterium_acnes_ATCC_11828",
+        "species": "Cutibacterium_acnes",
+        "abundance": 6.5e-05,
+        "class": "other_mock_atcc"
+      },
+      {
+        "genome": "Corynebacterium_striatum__ATCC_Corynebacterium_striatum_ATCC_6940",
+        "species": "Corynebacterium_striatum",
+        "abundance": 6.1e-05,
+        "class": "other_mock_atcc"
+      },
+      {
+        "genome": "Streptococcus_agalactiae__GCF_001266635.1",
+        "species": "Streptococcus_agalactiae",
+        "abundance": 4.7e-05,
+        "class": "same_species_decoy"
+      },
+      {
+        "genome": "Micrococcus_luteus__ATCC_Micrococcus_luteus_ATCC_4698",
+        "species": "Micrococcus_luteus",
+        "abundance": 4.6e-05,
+        "class": "other_mock_atcc"
+      },
+      {
+        "genome": "Gardnerella_vaginalis__GCF_002861945.1",
+        "species": "Gardnerella_vaginalis",
+        "abundance": 3.1e-05,
+        "class": "same_species_decoy"
+      },
+      {
+        "genome": "Staphylococcus_aureus__ATCC_Staphylococcus_aureus_ATCC_BAA_1556",
+        "species": "Staphylococcus_aureus",
+        "abundance": 3.1e-05,
+        "class": "other_mock_atcc"
+      },
+      {
+        "genome": "Gardnerella_vaginalis__GCF_023277625.1",
+        "species": "Gardnerella_vaginalis",
+        "abundance": 2.8e-05,
+        "class": "same_species_decoy"
+      },
+      {
+        "genome": "Metamycoplasma_hominis__GCF_016809635.1",
+        "species": "Metamycoplasma_hominis",
+        "abundance": 2.7e-05,
+        "class": "same_species_decoy"
+      },
+      {
+        "genome": "Gardnerella_vaginalis__GCF_003397605.1",
+        "species": "Gardnerella_vaginalis",
+        "abundance": 2.5e-05,
+        "class": "same_species_decoy"
+      },
+      {
+        "genome": "Prevotella_bivia__GCF_977089825.1",
+        "species": "Prevotella_bivia",
+        "abundance": 2.5e-05,
+        "class": "same_species_decoy"
+      },
+      {
+        "genome": "Prevotella_bivia__GCF_055453515.1",
+        "species": "Prevotella_bivia",
+        "abundance": 2.4e-05,
+        "class": "same_species_decoy"
+      }
+    ],
+    "WMS_MSA1007_0_100ng_2": [
+      {
+        "genome": "Staphylococcus_epidermidis__ATCC_Staphylococcus_epidermidis_ATCC_12228",
+        "species": "Staphylococcus_epidermidis",
+        "abundance": 0.000831,
+        "class": "other_mock_atcc"
+      },
+      {
+        "genome": "Streptococcus_mutans__ATCC_Streptococcus_mutans_ATCC_700610",
+        "species": "Streptococcus_mutans",
+        "abundance": 0.000183,
+        "class": "other_mock_atcc"
+      },
+      {
+        "genome": "Porphyromonas_gingivalis__ATCC_Porphyromonas_gingivalis_ATCC_33277",
+        "species": "Porphyromonas_gingivalis",
+        "abundance": 0.000159,
+        "class": "other_mock_atcc"
+      },
+      {
+        "genome": "Escherichia_coli__ATCC_Escherichia_coli_ATCC_700926",
+        "species": "Escherichia_coli",
+        "abundance": 0.000151,
+        "class": "other_mock_atcc"
+      },
+      {
+        "genome": "Cereibacter_sphaeroides__ATCC_Cereibacter_sphaeroides_ATCC_17029",
+        "species": "Cereibacter_sphaeroides",
+        "abundance": 0.000123,
+        "class": "other_mock_atcc"
+      },
+      {
+        "genome": "Streptococcus_mitis__ATCC_Streptococcus_mitis_ATCC_49456",
+        "species": "Streptococcus_mitis",
+        "abundance": 8.4e-05,
+        "class": "other_mock_atcc"
+      },
+      {
+        "genome": "Corynebacterium_striatum__ATCC_Corynebacterium_striatum_ATCC_6940",
+        "species": "Corynebacterium_striatum",
+        "abundance": 7.3e-05,
+        "class": "other_mock_atcc"
+      },
+      {
+        "genome": "Cutibacterium_acnes__ATCC_Cutibacterium_acnes_ATCC_11828",
+        "species": "Cutibacterium_acnes",
+        "abundance": 7.1e-05,
+        "class": "other_mock_atcc"
+      },
+      {
+        "genome": "Acinetobacter_johnsonii__ATCC_Acinetobacter_johnsonii_ATCC_17909",
+        "species": "Acinetobacter_johnsonii",
+        "abundance": 7.1e-05,
+        "class": "other_mock_atcc"
+      },
+      {
+        "genome": "Micrococcus_luteus__ATCC_Micrococcus_luteus_ATCC_4698",
+        "species": "Micrococcus_luteus",
+        "abundance": 5.6e-05,
+        "class": "other_mock_atcc"
+      },
+      {
+        "genome": "Streptococcus_agalactiae__GCF_001266635.1",
+        "species": "Streptococcus_agalactiae",
+        "abundance": 4.5e-05,
+        "class": "same_species_decoy"
+      },
+      {
+        "genome": "Staphylococcus_aureus__ATCC_Staphylococcus_aureus_ATCC_BAA_1556",
+        "species": "Staphylococcus_aureus",
+        "abundance": 3.7e-05,
+        "class": "other_mock_atcc"
+      },
+      {
+        "genome": "Metamycoplasma_hominis__GCF_016809635.1",
+        "species": "Metamycoplasma_hominis",
+        "abundance": 3.6e-05,
+        "class": "same_species_decoy"
+      },
+      {
+        "genome": "Gardnerella_vaginalis__GCF_002861945.1",
+        "species": "Gardnerella_vaginalis",
+        "abundance": 3.2e-05,
+        "class": "same_species_decoy"
+      },
+      {
+        "genome": "Bacillus_pacificus__ATCC_Bacillus_pacificus_ATCC_10987",
+        "species": "Bacillus_pacificus",
+        "abundance": 2.8e-05,
+        "class": "other_mock_atcc"
+      },
+      {
+        "genome": "Gardnerella_vaginalis__GCF_003397605.1",
+        "species": "Gardnerella_vaginalis",
+        "abundance": 2.7e-05,
+        "class": "same_species_decoy"
+      },
+      {
+        "genome": "Prevotella_bivia__GCF_055453515.1",
+        "species": "Prevotella_bivia",
+        "abundance": 2.5e-05,
+        "class": "same_species_decoy"
+      },
+      {
+        "genome": "Prevotella_bivia__GCF_977089855.1",
+        "species": "Prevotella_bivia",
+        "abundance": 2.4e-05,
+        "class": "same_species_decoy"
+      },
+      {
+        "genome": "Prevotella_bivia__GCF_977089825.1",
+        "species": "Prevotella_bivia",
+        "abundance": 2.4e-05,
+        "class": "same_species_decoy"
+      },
+      {
+        "genome": "Gardnerella_vaginalis__GCF_023277625.1",
+        "species": "Gardnerella_vaginalis",
+        "abundance": 2.4e-05,
+        "class": "same_species_decoy"
+      },
+      {
+        "genome": "Lactobacillus_gasseri__GCF_020991205.1",
+        "species": "Lactobacillus_gasseri",
+        "abundance": 2.4e-05,
+        "class": "same_species_decoy"
+      }
+    ],
+    "WMS_MSA1007_0_100ng_3": [
+      {
+        "genome": "Staphylococcus_epidermidis__ATCC_Staphylococcus_epidermidis_ATCC_12228",
+        "species": "Staphylococcus_epidermidis",
+        "abundance": 0.000525,
+        "class": "other_mock_atcc"
+      },
+      {
+        "genome": "Streptococcus_mutans__ATCC_Streptococcus_mutans_ATCC_700610",
+        "species": "Streptococcus_mutans",
+        "abundance": 0.00018,
+        "class": "other_mock_atcc"
+      },
+      {
+        "genome": "Escherichia_coli__ATCC_Escherichia_coli_ATCC_700926",
+        "species": "Escherichia_coli",
+        "abundance": 0.000166,
+        "class": "other_mock_atcc"
+      },
+      {
+        "genome": "Porphyromonas_gingivalis__ATCC_Porphyromonas_gingivalis_ATCC_33277",
+        "species": "Porphyromonas_gingivalis",
+        "abundance": 0.000159,
+        "class": "other_mock_atcc"
+      },
+      {
+        "genome": "Cereibacter_sphaeroides__ATCC_Cereibacter_sphaeroides_ATCC_17029",
+        "species": "Cereibacter_sphaeroides",
+        "abundance": 0.000121,
+        "class": "other_mock_atcc"
+      },
+      {
+        "genome": "Staphylococcus_aureus__ATCC_Staphylococcus_aureus_ATCC_BAA_1556",
+        "species": "Staphylococcus_aureus",
+        "abundance": 4.7e-05,
+        "class": "other_mock_atcc"
+      },
+      {
+        "genome": "Streptococcus_agalactiae__GCF_001266635.1",
+        "species": "Streptococcus_agalactiae",
+        "abundance": 4.5e-05,
+        "class": "same_species_decoy"
+      },
+      {
+        "genome": "Gardnerella_vaginalis__GCF_002861945.1",
+        "species": "Gardnerella_vaginalis",
+        "abundance": 3.2e-05,
+        "class": "same_species_decoy"
+      },
+      {
+        "genome": "Metamycoplasma_hominis__GCF_016809635.1",
+        "species": "Metamycoplasma_hominis",
+        "abundance": 3.2e-05,
+        "class": "same_species_decoy"
+      },
+      {
+        "genome": "Prevotella_bivia__GCF_055453515.1",
+        "species": "Prevotella_bivia",
+        "abundance": 2.8e-05,
+        "class": "same_species_decoy"
+      },
+      {
+        "genome": "Bacillus_pacificus__ATCC_Bacillus_pacificus_ATCC_10987",
+        "species": "Bacillus_pacificus",
+        "abundance": 2.7e-05,
+        "class": "other_mock_atcc"
+      },
+      {
+        "genome": "Prevotella_bivia__GCF_977089855.1",
+        "species": "Prevotella_bivia",
+        "abundance": 2.6e-05,
+        "class": "same_species_decoy"
+      },
+      {
+        "genome": "Gardnerella_vaginalis__GCF_003397605.1",
+        "species": "Gardnerella_vaginalis",
+        "abundance": 2.5e-05,
+        "class": "same_species_decoy"
+      },
+      {
+        "genome": "Metamycoplasma_hominis__GCF_016809545.1",
+        "species": "Metamycoplasma_hominis",
+        "abundance": 2.4e-05,
+        "class": "same_species_decoy"
+      },
+      {
+        "genome": "Gardnerella_vaginalis__GCF_023277625.1",
+        "species": "Gardnerella_vaginalis",
+        "abundance": 2.3e-05,
+        "class": "same_species_decoy"
+      }
+    ]
+  },
+  "summary": {
+    "WMS_MSA1003_0_100ng_1": {
+      "mock": "MSA1003",
+      "other_mock_atcc": {
+        "count": 8,
+        "total_abundance": 0.0014260000000000002
+      },
+      "same_species_decoy": {
+        "count": 5,
+        "total_abundance": 0.00019500000000000002
+      },
+      "other_mock_gcf": {
+        "count": 0,
+        "total_abundance": 0
+      },
+      "other": {
+        "count": 0,
+        "total_abundance": 0
+      }
+    },
+    "WMS_MSA1003_0_100ng_2": {
+      "mock": "MSA1003",
+      "other_mock_atcc": {
+        "count": 8,
+        "total_abundance": 0.0005809999999999999
+      },
+      "same_species_decoy": {
+        "count": 2,
+        "total_abundance": 7.7e-05
+      },
+      "other_mock_gcf": {
+        "count": 0,
+        "total_abundance": 0
+      },
+      "other": {
+        "count": 0,
+        "total_abundance": 0
+      }
+    },
+    "WMS_MSA1003_0_100ng_3": {
+      "mock": "MSA1003",
+      "other_mock_atcc": {
+        "count": 8,
+        "total_abundance": 0.000649
+      },
+      "same_species_decoy": {
+        "count": 1,
+        "total_abundance": 3.6e-05
+      },
+      "other_mock_gcf": {
+        "count": 0,
+        "total_abundance": 0
+      },
+      "other": {
+        "count": 0,
+        "total_abundance": 0
+      }
+    },
+    "WMS_MSA1005_0_100ng_1": {
+      "mock": "MSA1005",
+      "other_mock_atcc": {
+        "count": 12,
+        "total_abundance": 0.001535
+      },
+      "same_species_decoy": {
+        "count": 1,
+        "total_abundance": 4.4e-05
+      },
+      "other_mock_gcf": {
+        "count": 0,
+        "total_abundance": 0
+      },
+      "other": {
+        "count": 0,
+        "total_abundance": 0
+      }
+    },
+    "WMS_MSA1005_0_100ng_2": {
+      "mock": "MSA1005",
+      "other_mock_atcc": {
+        "count": 11,
+        "total_abundance": 0.0012209999999999999
+      },
+      "same_species_decoy": {
+        "count": 1,
+        "total_abundance": 3.6e-05
+      },
+      "other_mock_gcf": {
+        "count": 0,
+        "total_abundance": 0
+      },
+      "other": {
+        "count": 0,
+        "total_abundance": 0
+      }
+    },
+    "WMS_MSA1005_0_100ng_3": {
+      "mock": "MSA1005",
+      "other_mock_atcc": {
+        "count": 11,
+        "total_abundance": 0.0013839999999999998
+      },
+      "same_species_decoy": {
+        "count": 0,
+        "total_abundance": 0
+      },
+      "other_mock_gcf": {
+        "count": 0,
+        "total_abundance": 0
+      },
+      "other": {
+        "count": 0,
+        "total_abundance": 0
+      }
+    },
+    "WMS_MSA1007_0_100ng_1": {
+      "mock": "MSA1007",
+      "other_mock_atcc": {
+        "count": 11,
+        "total_abundance": 0.0014700000000000002
+      },
+      "same_species_decoy": {
+        "count": 7,
+        "total_abundance": 0.00020700000000000004
+      },
+      "other_mock_gcf": {
+        "count": 0,
+        "total_abundance": 0
+      },
+      "other": {
+        "count": 0,
+        "total_abundance": 0
+      }
+    },
+    "WMS_MSA1007_0_100ng_2": {
+      "mock": "MSA1007",
+      "other_mock_atcc": {
+        "count": 12,
+        "total_abundance": 0.0018670000000000006
+      },
+      "same_species_decoy": {
+        "count": 9,
+        "total_abundance": 0.000261
+      },
+      "other_mock_gcf": {
+        "count": 0,
+        "total_abundance": 0
+      },
+      "other": {
+        "count": 0,
+        "total_abundance": 0
+      }
+    },
+    "WMS_MSA1007_0_100ng_3": {
+      "mock": "MSA1007",
+      "other_mock_atcc": {
+        "count": 7,
+        "total_abundance": 0.001225
+      },
+      "same_species_decoy": {
+        "count": 8,
+        "total_abundance": 0.000235
+      },
+      "other_mock_gcf": {
+        "count": 0,
+        "total_abundance": 0
+      },
+      "other": {
+        "count": 0,
+        "total_abundance": 0
+      }
+    }
+  }
+}
