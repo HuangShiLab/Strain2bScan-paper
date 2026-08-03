@@ -106,9 +106,9 @@ def draw_figure(rowlist, title, outbase, legend_species):
     all_true = set(g for r in rowlist for g, v in profiles.get(truth_key_of(r), {}).items() if v > 0)
     pal = build_palette(all_true)
 
-    fig = plt.figure(figsize=(16.0, 0.34 * len(rowlist) + 2.2))
+    fig = plt.figure(figsize=(18.5, 0.34 * len(rowlist) + 2.2))
     gs = fig.add_gridspec(1, 1 + len(METRICS), width_ratios=[7.2] + [1.0] * len(METRICS),
-                          wspace=0.20, left=0.50, right=0.88, top=0.94, bottom=0.06)
+                          wspace=0.28, left=0.52, right=0.90, top=0.94, bottom=0.06)
     axP = fig.add_subplot(gs[0, 0])
     axM = [fig.add_subplot(gs[0, 1 + j], sharey=axP) for j in range(len(METRICS))]
 
@@ -141,10 +141,10 @@ def draw_figure(rowlist, title, outbase, legend_species):
                 axM[j].barh(yy, val, height=0.78, color=BARGREY, edgecolor="none")
                 axM[j].text(min(val, 0.98), yy, f"{val:.2f}", va="center",
                             ha="right" if val > 0.18 else "left",
-                            fontsize=6.3, color=INK, clip_on=True)
+                            fontsize=5.6, color=INK, clip_on=True)
 
     axP.set_xlim(0, 1); axP.set_ylim(-0.8, H)
-    axP.set_xticks([0, .25, .5, .75, 1.0]); axP.set_xlabel("Relative abundance", fontsize=9, color=INK, labelpad=12)
+    axP.set_xticks([0, .25, .5, .75, 1.0]); axP.set_xlabel("Relative abundance", fontsize=9, color=INK, labelpad=14)
     axP.xaxis.set_label_position("top"); axP.xaxis.tick_top()
     axP.set_yticks(ys); axP.set_yticklabels([r["cond"] for r in rowlist], fontsize=7.2, color=INK)
     axP.tick_params(axis="x", labelsize=7, colors=MUTED)
@@ -154,7 +154,7 @@ def draw_figure(rowlist, title, outbase, legend_species):
     for j, (mk, mlabel) in enumerate(METRICS):
         ax = axM[j]; ax.set_xlim(0, 1)
         ax.set_facecolor("none")  # transparent so a spanning "below detection" label shows through
-        ax.set_title(mlabel, fontsize=7.3, color=INK, pad=8)
+        ax.set_title(mlabel, fontsize=6.6, color=INK, pad=10)
         ax.set_xticks([]); ax.tick_params(axis="y", left=False, labelleft=False)
         for s in ("top", "right", "left", "bottom"): ax.spines[s].set_visible(False)
         ax.axvline(0, color="#eeeeee", lw=0.8)
