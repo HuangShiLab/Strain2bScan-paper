@@ -37,23 +37,13 @@ def load_members(path):
             continue
         g, c = ln.rstrip("\n").split("\t")[:2]
         c2g.setdefault(c, []).append(g)
-    # Some all-enzyme DB members files were written with per-species cluster
-    # names (e.g. "Acinetobacter_baumannii__C0") while the DB/prediction uses
-    # global bare IDs ("C0", "C1", ...). Re-map to bare IDs by sorting species
-    # alphabetically and clusters numerically within each species.
-    if c2g and all("__C" in c for c in c2g) and not any(c.startswith("C") and c[1:].isdigit() for c in c2g):
-        from collections import defaultdict
-        by_sp = defaultdict(list)
-        for c in c2g:
-            sp, cid = c.rsplit("__", 1)
-            by_sp[sp].append((int(cid[1:]), c))
-        new_c2g = {}
-        idx = 0
-        for sp in sorted(by_sp):
-            for _, old_c in sorted(by_sp[sp]):
-                new_c2g[f"C{idx}"] = c2g[old_c]
-                idx += 1
-        c2g = new_c2g
+    # Guard against the stale per-species cluster naming. Those files silently
+    # broke the pred -> members mapping; fail hard rather than guess.
+    if c2g and any("__C" in c for c in c2g):
+        raise ValueError(
+            f"{path} contains per-species cluster names (e.g. 'Species__C0'). "
+            "Regenerate the members file so cluster IDs match the DB bare IDs (C0, C1, ...)."
+        )
     return c2g
 
 def rep_of(members):
@@ -90,11 +80,22 @@ def load_truth(mock):
 def atcc_genomes(mock, all_genomes):
     t = load_truth(mock)
     out = {}
+    missing = []
     for atcc, ab in t.items():
         num = re.sub(r"^ATCC[_ ]*", "", atcc).strip()
-        hit = [g for g in all_genomes if "ATCC_" in g and re.search(rf"{re.escape(num)}(_|$)", g)]
-        if hit:
-            out[hit[0]] = out.get(hit[0], 0.0) + ab
+        # anchored match: the ATCC number must be preceded by an underscore (or
+        # string start) so ATCC_6940 does not collide with ATCC_16940.
+        pat = rf"(?:^|_){re.escape(num)}(_|$)"
+        hit = [g for g in all_genomes if "ATCC_" in g and re.search(pat, g)]
+        if not hit:
+            missing.append(atcc)
+            continue
+        out[hit[0]] = out.get(hit[0], 0.0) + ab
+    if missing:
+        raise ValueError(
+            f"{mock}: truth ATCC(s) not found in panel genome set: {missing}. "
+            "Check that the members file matches the mock community."
+        )
     s = sum(out.values())
     return {k: v / s for k, v in out.items()} if s else out
 
@@ -105,6 +106,7 @@ def read_s2b(pred, members_key):
     if not os.path.exists(pred):
         return None
     in_tsv = False
+    unmatched = set()
     for ln in open(pred):
         if ln.startswith("#cluster"):
             in_tsv = True
@@ -119,33 +121,49 @@ def read_s2b(pred, members_key):
             ab = float(ab)
         except ValueError:
             continue
-        if c in c2g:
-            r = rep_of(c2g[c])
-            out[r] = out.get(r, 0.0) + ab
+        if c not in c2g:
+            unmatched.add(c)
+            continue
+        r = rep_of(c2g[c])
+        out[r] = out.get(r, 0.0) + ab
+    if unmatched:
+        raise ValueError(
+            f"{pred}: {len(unmatched)} cluster(s) not present in members '{members_key}': "
+            f"{sorted(unmatched)[:5]}{'...' if len(unmatched) > 5 else ''}"
+        )
     return out
 
 # ------------------------------------------------------------------ metrics
+def average_precision(pred, truth):
+    """Step-function AP over the precision-recall curve (sklearn convention)."""
+    pos = {g for g, v in truth.items() if v > 0}
+    if not pos:
+        return 0.0
+    scores = sorted({v for v in pred.values() if v > 0}, reverse=True)
+    prev_recall = 0.0
+    ap = 0.0
+    for t in scores:
+        d = {g for g, v in pred.items() if v >= t and v > 0}
+        tp_ = len(d & pos)
+        precision = tp_ / len(d) if d else 0.0
+        recall = tp_ / len(pos)
+        ap += max(0.0, recall - prev_recall) * precision
+        prev_recall = recall
+    return ap
+
 def metrics(pred, truth, genomes):
     pos = {g for g in genomes if truth.get(g, 0) > 0}
     det = {g for g, v in pred.items() if v > 0}
     tp, fp, fn = len(det & pos), len(det - pos), len(pos - det)
-    prec = tp / (tp + fp) if tp + fp else 0.0
-    rec = tp / (tp + fn) if tp + fn else 0.0
-    f1 = 2 * prec * rec / (prec + rec) if prec + rec else 0.0
-    pts = []
-    for t in [0.0] + sorted({v for v in pred.values() if v > 0}):
-        d = {g for g, v in pred.items() if v >= t and v > 0}
-        if not d:
-            continue
-        tp_ = len(d & pos)
-        pts.append((tp_ / len(pos) if pos else 0.0, tp_ / len(d)))
-    pts = sorted(set(pts))
-    aupr = 0.0
-    if pts:
-        rs = [p[0] for p in pts]; ps = [p[1] for p in pts]
-        if rs[0] > 0:
-            rs = [0.0] + rs; ps = [ps[0]] + ps
-        aupr = float(np.trapz(ps, rs))
+    detected_any = sum(pred.values()) > 0
+    if detected_any:
+        prec = tp / (tp + fp) if tp + fp else 0.0
+        rec = tp / (tp + fn) if tp + fn else 0.0
+        f1 = 2 * prec * rec / (prec + rec) if prec + rec else 0.0
+        aupr = average_precision(pred, truth)
+    else:
+        # Empty profile: precision/recall/f1/aupr are undefined, not 0.
+        prec = rec = f1 = aupr = float("nan")
     p = np.array([pred.get(g, 0.0) for g in genomes], float)
     t = np.array([truth.get(g, 0.0) for g in genomes], float)
     if p.sum() > 0:
@@ -186,11 +204,10 @@ def collect_new_s2b(pr):
         res[("Strain2bScan", "164")] = read_s2b(RAW / "wms_analysis" / "wms164" / f"{s}.pred", "164_all")
         if mock in ("MSA1002", "MSA1003"):
             res[("Strain2bScan", "120")] = read_s2b(RAW / "wms_analysis" / "shot120" / f"{s}.pred", "120_all")
-        # strainscan-port WMS results
-        res[("Strain2bScan-port", "164-default")] = read_s2b(PORT_RAW / "mock" / "wms164_port_default" / f"{s}.pred", "164_all")
+        # strainscan-port layers only: the default path is identical to the
+        # Strain2bScan default, so plotting it again would duplicate rows.
         res[("Strain2bScan-port", "164-layers")] = read_s2b(PORT_RAW / "mock" / "wms164_port_layers" / f"{s}.pred", "164_all")
         if mock in ("MSA1002", "MSA1003"):
-            res[("Strain2bScan-port", "120-default")] = read_s2b(PORT_RAW / "mock" / "shot120_port_default" / f"{s}.pred", "120_all")
             res[("Strain2bScan-port", "120-layers")] = read_s2b(PORT_RAW / "mock" / "shot120_port_layers" / f"{s}.pred", "120_all")
     return {k: v for k, v in res.items() if v is not None}
 
@@ -236,22 +253,31 @@ def main():
             profiles[f"{pr['sample']}|{tool}|{variant}"] = prof
             profiles[f"{pr['sample']}|truth|{variant}"] = truth
 
-    # merge: keep old non-Strain2bScan entries and truth, add new Strain2bScan
-    new_metric_keys = {(r["sample"], r["tool"], r["variant"]) for r in rows}
-    merged_metrics = [r for r in old_metrics if (r["sample"], r["tool"], r["variant"]) not in new_metric_keys]
+    # merge: drop all old Strain2bScan / Strain2bScan-port rows (they are
+    # regenerated from raw pred here), keep old comparison-tool rows and truth.
+    s2bs_tools = {"Strain2bScan", "Strain2bScan-port"}
+    merged_metrics = [r for r in old_metrics if r["tool"] not in s2bs_tools]
     merged_metrics += rows
 
     new_profile_keys = set(profiles.keys())
-    merged_profiles = {k: v for k, v in old_profiles.items() if k not in new_profile_keys}
+    merged_profiles = {k: v for k, v in old_profiles.items() if k not in new_profile_keys and not k.split("|")[1] in s2bs_tools}
     merged_profiles.update(profiles)
+
+    def _fmt(v):
+        if isinstance(v, float):
+            if math.isnan(v):
+                return "nan"
+            return round(v, 4)
+        return v
 
     cols = ["kind", "mock", "sample", "tool", "variant", "TP", "FP", "FN",
             "precision", "recall", "f1", "aupr", "bray_curtis", "l2"]
     with open(DATA / "fig6_fig12_metrics.tsv", "w", newline="") as fh:
         w = csv.DictWriter(fh, fieldnames=cols, delimiter="\t"); w.writeheader()
         for r in sorted(merged_metrics, key=lambda x: (x["kind"], x["mock"], x["sample"], x["tool"], x["variant"])):
-            w.writerow({k: (round(r[k], 4) if isinstance(r[k], float) else r[k]) for k in cols})
-    json.dump(merged_profiles, open(DATA / "fig6_fig12_profiles.json", "w"))
+            w.writerow({k: _fmt(r[k]) for k in cols})
+    with open(DATA / "fig6_fig12_profiles.json", "w") as fh:
+        json.dump(merged_profiles, fh)
 
     print(f"wrote {DATA / 'fig6_fig12_metrics.tsv'}")
     print(f"wrote {DATA / 'fig6_fig12_profiles.json'}")

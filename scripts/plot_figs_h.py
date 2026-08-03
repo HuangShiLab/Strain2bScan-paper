@@ -23,7 +23,7 @@ os.makedirs(FIGDIR, exist_ok=True)
 
 INK = "#222222"; MUTED = "#6b6b6b"; BARGREY = "#c9c9c9"; FPBLACK = "#1a1a1a"; GROUPLINE = "#888888"
 METRICS = [("precision", "Precision"), ("recall", "Recall"), ("f1", "F1"),
-           ("aupr", "AUPR"), ("bc_sim", "BC_similarity"), ("l2_sim", "L2_similarity")]
+           ("aupr", "AUPR"), ("bc_sim", "BC sim"), ("l2_sim", "L2 sim")]
 
 profiles = json.load(open(SP / "fig6_fig12_profiles.json"))
 rows = list(csv.DictReader(open(SP / "fig6_fig12_metrics.tsv"), delimiter="\t"))
@@ -50,6 +50,8 @@ def species_of(g):
 
 def atcc_token(g):
     """Return the terminal ATCC identifier, e.g. ATCC_17978 or ATCC_BAA_816."""
+    if "_ATCC_" in g:
+        return "ATCC_" + g.rsplit("_ATCC_", 1)[-1]
     m = re.search(r"ATCC_[A-Za-z0-9_]+$", g)
     return m.group(0) if m else None
 
@@ -96,9 +98,9 @@ def draw_figure(rowlist, title, outbase, legend_species):
     all_true = set(g for r in rowlist for g, v in profiles.get(truth_key_of(r), {}).items() if v > 0)
     pal = build_palette(all_true)
 
-    fig = plt.figure(figsize=(15.5, 0.34 * len(rowlist) + 2.2))
+    fig = plt.figure(figsize=(16.0, 0.34 * len(rowlist) + 2.2))
     gs = fig.add_gridspec(1, 1 + len(METRICS), width_ratios=[7.2] + [1.0] * len(METRICS),
-                          wspace=0.12, left=0.46, right=0.88, top=0.94, bottom=0.06)
+                          wspace=0.20, left=0.50, right=0.88, top=0.94, bottom=0.06)
     axP = fig.add_subplot(gs[0, 0])
     axM = [fig.add_subplot(gs[0, 1 + j], sharey=axP) for j in range(len(METRICS))]
 
@@ -131,10 +133,10 @@ def draw_figure(rowlist, title, outbase, legend_species):
                 axM[j].barh(yy, val, height=0.78, color=BARGREY, edgecolor="none")
                 axM[j].text(min(val, 0.98), yy, f"{val:.2f}", va="center",
                             ha="right" if val > 0.18 else "left",
-                            fontsize=6.3, color=INK)
+                            fontsize=6.3, color=INK, clip_on=True)
 
     axP.set_xlim(0, 1); axP.set_ylim(-0.8, H)
-    axP.set_xticks([0, .25, .5, .75, 1.0]); axP.set_xlabel("Relative abundance", fontsize=9, color=INK)
+    axP.set_xticks([0, .25, .5, .75, 1.0]); axP.set_xlabel("Relative abundance", fontsize=9, color=INK, labelpad=12)
     axP.xaxis.set_label_position("top"); axP.xaxis.tick_top()
     axP.set_yticks(ys); axP.set_yticklabels([r["cond"] for r in rowlist], fontsize=7.2, color=INK)
     axP.tick_params(axis="x", labelsize=7, colors=MUTED)
@@ -213,9 +215,8 @@ def build_wms():
                 r = rowspec(mock, f"WMS ({tag})", clabel, pkey, s, tool, variant)
                 r["_truthkey"] = truth_key(s, variant)
                 rl.append(r)
-        # strainscan-port WMS results
-        for tool, variant, tag in [("Strain2bScan-port", "164-default", "S2bS-port default"),
-                                    ("Strain2bScan-port", "164-layers", "S2bS-port layers")]:
+        # strainscan-port WMS results (layers only; default path is identical to Strain2bScan)
+        for tool, variant, tag in [("Strain2bScan-port", "164-layers", "S2bS-port layers")]:
             for scode, clabel in samps:
                 s = f"WMS_{mock}_{scode}"
                 pkey = f"{s}|{tool}|{variant}"
@@ -225,8 +226,7 @@ def build_wms():
                 r["_truthkey"] = truth_key(s, variant)
                 rl.append(r)
         if mock in ("MSA1002", "MSA1003"):
-            for tool, variant, tag in [("Strain2bScan-port", "120-default", "S2bS-port default (120)"),
-                                        ("Strain2bScan-port", "120-layers", "S2bS-port layers (120)")]:
+            for tool, variant, tag in [("Strain2bScan-port", "120-layers", "S2bS-port layers (120)")]:
                 for scode, clabel in samps:
                     s = f"WMS_{mock}_{scode}"
                     pkey = f"{s}|{tool}|{variant}"
@@ -282,29 +282,7 @@ def build_supp():
                 rl.append(r)
     return rl
 
-# ---------------- assemble Fig S-inStrain: native vs dereplicated reference ----------------
-def build_supp_instrain():
-    rl = []
-    conds = [("0_100ng_2", "0% host"), ("90_100ng_1", "90% host"),
-             ("95_100ng_1", "95% host"), ("99_100ng_1", "99% host")]
-    add_truth(rl, "MSA1002", "WMS_MSA1002_0_100ng_2")
-    for variant, tag in [("native", "inStrain (native 120-genome ref)"),
-                         ("derep98", "inStrain (dereplicated ref)")]:
-        for scode, clabel in conds:
-            s = f"WMS_MSA1002_{scode}"
-            pkey = f"{s}|inStrain|{variant}"
-            if pkey not in profiles:
-                continue
-            r = rowspec("MSA1002", tag, clabel, pkey, s, "inStrain", variant)
-            r["_truthkey"] = truth_key(s)
-            rl.append(r)
-    return rl
-
 if __name__ == "__main__":
-    supp_is = build_supp_instrain()
-    legend_sp = {species_of(g) for r in supp_is for g, v in profiles.get(r["_truthkey"], {}).items() if v > 0}
-    draw_figure(supp_is, "Figure S — inStrain requires a dereplicated reference (MSA-1002 shotgun)",
-                f"{FIGDIR}/figS_instrain_derep", legend_sp)
     supp = build_supp()
     legend_sp = {species_of(g) for r in supp for g, v in profiles.get(r["_truthkey"], {}).items() if v > 0}
     draw_figure(supp, "Figure S — Database-expansion cost: 20- vs 28-species tree",
