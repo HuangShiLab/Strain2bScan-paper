@@ -29,6 +29,8 @@ SUPP = {
     "S1": ["mock_msa1002_titration"],
     "S2": ["gate_calibration"],
     "S3": ["figS_tree_expansion"],    # DB-expansion cost: 20- vs 28-species combined tree
+    "S4": ["sim_tracegap"],           # default vs --trace-gap on simulated communities
+    "S5": ["sim_toolcompare"],        # Strain2bScan vs StrainScan vs inStrain on simulated communities
 }
 
 def montage(tag, sources):

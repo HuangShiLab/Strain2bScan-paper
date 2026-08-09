@@ -210,12 +210,16 @@ def collect_new_s2b(pr):
     res = {}
     if kind == "2bRAD":
         res[("Strain2bScan", "164")] = read_s2b(RAW / "wms_analysis" / "brad164" / f"{s}.pred", "164_bcgi")
+        res[("Strain2bScan-port", "164-tracegap")] = read_s2b(RAW / "wms_analysis_tracegap" / "brad164" / f"{s}.pred", "164_bcgi")
         if mock in ("MSA1002", "MSA1003"):
             res[("Strain2bScan", "120")] = read_s2b(RAW / "wms_analysis" / "brad120" / f"{s}.pred", "120_bcgi")
+            res[("Strain2bScan-port", "120-tracegap")] = read_s2b(RAW / "wms_analysis_tracegap" / "brad120" / f"{s}.pred", "120_bcgi")
     else:
         res[("Strain2bScan", "164")] = read_s2b(RAW / "wms_analysis" / "wms164" / f"{s}.pred", "164_all")
+        res[("Strain2bScan-port", "164-tracegap")] = read_s2b(RAW / "wms_analysis_tracegap" / "wms164" / f"{s}.pred", "164_all")
         if mock in ("MSA1002", "MSA1003"):
             res[("Strain2bScan", "120")] = read_s2b(RAW / "wms_analysis" / "shot120" / f"{s}.pred", "120_all")
+            res[("Strain2bScan-port", "120-tracegap")] = read_s2b(RAW / "wms_analysis_tracegap" / "shot120" / f"{s}.pred", "120_all")
         # strainscan-port layers only: the default path is identical to the
         # Strain2bScan default, so plotting it again would duplicate rows.
         res[("Strain2bScan-port", "164-layers")] = read_s2b(PORT_RAW / "mock" / "wms164_port_layers" / f"{s}.pred", "164_all")
