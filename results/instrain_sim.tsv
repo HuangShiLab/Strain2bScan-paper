@@ -1,0 +1,10 @@
+kind	sample	tool	n_truth	n_pred	TP	FP	FN	precision	recall	F1
+single	Akkermansia_muciniphila__same_k2_rep1_d5	inStrain	1	20	1	19	0	0.05	1.0	0.0952
+single	Cutibacterium_acnes__diff_k2_rep1_d5	inStrain	2	12	2	10	0	0.1667	1.0	0.2857
+single	Escherichia_coli__diff_k2_rep1_d5	inStrain	2	8	2	6	0	0.25	1.0	0.4
+single	Escherichia_coli__same_k2_rep1_d5	inStrain	1	39	1	38	0	0.0256	1.0	0.05
+single	Prevotella_copri__diff_k2_rep1_d5	inStrain	2	5	2	3	0	0.4	1.0	0.5714
+single	Staphylococcus_epidermidis__diff_k2_rep1_d5	inStrain	2	50	2	48	0	0.04	1.0	0.0769
+multi	depth_high_sample01	inStrain	15	16	13	3	2	0.8125	0.8667	0.8387
+multi	depth_low_sample01	inStrain	15	7	6	1	9	0.8571	0.4	0.5455
+multi	depth_med_sample01	inStrain	15	16	13	3	2	0.8125	0.8667	0.8387
