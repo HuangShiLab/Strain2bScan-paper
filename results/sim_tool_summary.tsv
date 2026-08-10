@@ -1,0 +1,10 @@
+category	tool	precision	recall	F1
+Single-species	Strain2bScan	1.000	0.875	0.917
+Single-species	StrainScan	1.000	0.500	0.667
+Single-species	inStrain	0.214	1.000	0.334
+Multi-species	Strain2bScan	1.000	0.778	0.868
+Multi-species	StrainScan	0.854	0.760	0.797
+Multi-species	inStrain	0.827	0.711	0.741
+Overall	Strain2bScan	1.000	0.833	0.896
+Overall	StrainScan	0.937	0.612	0.723
+Overall	inStrain	0.477	0.876	0.508
