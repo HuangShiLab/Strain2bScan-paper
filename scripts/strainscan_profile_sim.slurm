@@ -10,8 +10,8 @@
 #SBATCH --output=ss_profile_sim_%A_%a.out
 #SBATCH --error=ss_profile_sim_%A_%a.err
 
-export PATH=/group/aos_shihuang/conda/bin:$PATH
-conda activate strainscan
+source /group/aos_shihuang/conda/etc/profile.d/conda.sh
+conda activate /lustre1/g/aos_shihuang/tools/StrainScan/conda_envs/strainscan
 
 export MODE=profile
 python3 /lustre1/g/aos_shihuang/LU/Strain2bScan-raw-data/sim_benchmark/run_strainscan_sim_hpc.py

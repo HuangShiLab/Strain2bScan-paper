@@ -38,24 +38,52 @@ SINGLE_SAMPLES = [
 ]
 MULTI_DEPTHS = ["depth_low", "depth_med", "depth_high"]
 
+SPECIES_SYNONYMS = {
+    "Propionibacterium acnes": "Cutibacterium acnes",
+    "Bacteroides dorei": "Phocaeicola dorei",
+    "Segatella copri": "Prevotella copri",
+    "Peptoclostridium difficile": "Clostridioides difficile",
+    "Lactobacillus plantarum": "Lactiplantibacillus plantarum",
+}
+
+
+def normalize_species(name):
+    name = name.strip()
+    name = SPECIES_SYNONYMS.get(name, name)
+    return name.replace(" ", "_")
+
 
 def load_genome_to_species():
     path = PAPER / "results" / "genome_to_species.tsv"
     out = {}
     if path.exists():
         for row in csv.DictReader(open(path), delimiter="\t"):
-            out[row["genome"]] = row["species"]
+            out[row["genome"]] = normalize_species(row["species"])
     return out
 
 
 def read_final_report(path):
-    """Return list of dicts from a StrainScan final_report.txt."""
+    """Return list of dicts from a StrainScan final_report.txt.
+
+    StrainScan writes two header variants:
+      - single-cluster: Strain_ID, Strain_Name, Cluster_ID,
+        Relative_Abundance_Inside_Cluster, Predicted_Depth, ...
+      - multi-cluster: ID, Strain_Name, Cluster_ID, Relative_Abundance,
+        Predicted_Depth (Enet), Predicted_Depth (Ab*cls_depth), ...
+    """
     rows = []
     if not path.exists():
         return rows
     with open(path) as fh:
         reader = csv.DictReader(fh, delimiter="\t")
         for row in reader:
+            # Normalise depth column name.
+            depth = row.get("Predicted_Depth (Ab*cls_depth)", "")
+            if depth == "":
+                depth = row.get("Predicted_Depth", "")
+            if depth == "":
+                depth = row.get("Predicted_Depth (Enet)", "")
+            row["_depth"] = depth
             rows.append(row)
     return rows
 
@@ -75,7 +103,7 @@ def aggregate_single(res_root):
         for report_path in sample_dir.rglob("final_report.txt"):
             for row in read_final_report(report_path):
                 strain = row.get("Strain_Name", "").strip()
-                depth = parse_depth(row.get("Predicted_Depth (Ab*cls_depth)", "0"))
+                depth = parse_depth(row.get("_depth", "0"))
                 if strain and depth > 0:
                     depths[strain] += depth
         total = sum(depths.values())
@@ -102,7 +130,7 @@ def aggregate_multi(res_root, genome_to_species):
             for report_path in species_dir.rglob("final_report.txt"):
                 for row in read_final_report(report_path):
                     strain = row.get("Strain_Name", "").strip()
-                    depth_val = parse_depth(row.get("Predicted_Depth (Ab*cls_depth)", "0"))
+                    depth_val = parse_depth(row.get("_depth", "0"))
                     if not strain or depth_val <= 0:
                         continue
                     sp = genome_to_species.get(strain)

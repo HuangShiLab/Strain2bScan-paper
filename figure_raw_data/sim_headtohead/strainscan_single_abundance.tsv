@@ -1,0 +1,5 @@
+sample	species	strain	predicted_depth	relative_abundance
+Escherichia_coli__diff_k2_rep1_d5	Escherichia_coli	GCA_000005845	3.37273	1
+Cutibacterium_acnes__diff_k2_rep1_d5	Cutibacterium_acnes	GCA_000231215	3.38916	1
+Staphylococcus_epidermidis__diff_k2_rep1_d5	Staphylococcus_epidermidis	GCA_024204785	3.54831	1
+Prevotella_copri__diff_k2_rep1_d5	Prevotella_copri	GCA_015074785	3.62423	1

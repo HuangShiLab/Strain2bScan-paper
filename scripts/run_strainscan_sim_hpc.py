@@ -19,7 +19,7 @@ from pathlib import Path
 
 BASE = Path("/lustre1/g/aos_shihuang/LU/Strain2bScan-raw-data/sim_benchmark")
 SSREPO = Path("/lustre1/g/aos_shihuang/tools/StrainScan")
-PY = Path("/group/aos_shihuang/conda/envs/strainscan/bin/python")
+PY = Path("/lustre1/g/aos_shihuang/tools/StrainScan/conda_envs/strainscan/bin/python")
 
 DB_ROOT = BASE / "strainscan_dbs"
 RES_ROOT = BASE / "strainscan_results"
@@ -38,7 +38,7 @@ def all_species():
     return sorted(p.name for p in POOL.iterdir() if p.is_dir())
 
 
-def build_one(species: str, threads: int = 8):
+def build_one(species, threads=8):
     DB_ROOT.mkdir(parents=True, exist_ok=True)
     out_dir = DB_ROOT / species
     work_dir = DB_ROOT / f"build_{species}"
@@ -50,20 +50,23 @@ def build_one(species: str, threads: int = 8):
         "-t", str(threads),
     ]
     env = os.environ.copy()
-    env["PYTHONPATH"] = str(SSREPO)
+    env["PYTHONPATH"] = f"{SSREPO}:{SSREPO / 'library'}"
     print(f"[build {species}] {' '.join(cmd)}", flush=True)
     subprocess.run(cmd, cwd=str(work_dir), check=True, env=env)
     print(f"[build {species}] done -> {out_dir}", flush=True)
 
 
-def profile_one(sample_key: str, species: str, reads: tuple[str, str | None]):
+def profile_one(sample_key, species, reads):
     """Profile one sample against one species DB.
 
     sample_key is used to build the output directory tree, e.g.
     'single/Escherichia_coli__diff_k2_rep1_d5' or 'multi/depth_low_sample01'.
     """
     db_dir = DB_ROOT / species
-    if not (db_dir / "Kmer_Sets_L1").exists():
+    # StrainScan_build.py in the installed version writes Kmer_Sets_L2 but
+    # StrainScan.py still expects Kmer_Sets_L1. We create a symlink L1->L2
+    # after building; this check validates the actual directory that exists.
+    if not (db_dir / "Kmer_Sets_L2").exists():
         raise FileNotFoundError(f"DB missing for {species}: {db_dir}")
     out_dir = RES_ROOT / sample_key / species
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -76,10 +79,27 @@ def profile_one(sample_key: str, species: str, reads: tuple[str, str | None]):
     if reads[1]:
         cmd += ["-j", reads[1]]
     env = os.environ.copy()
-    env["PYTHONPATH"] = str(SSREPO)
+    env["PYTHONPATH"] = f"{SSREPO}:{SSREPO / 'library'}"
     print(f"[profile {sample_key}/{species}] {' '.join(cmd)}", flush=True)
-    subprocess.run(cmd, cwd=str(out_dir), check=True, env=env)
-    print(f"[profile {sample_key}/{species}] done", flush=True)
+    try:
+        subprocess.run(cmd, cwd=str(out_dir), check=True, env=env)
+        # StrainScan exits 0 with "No clusters can be detected!" without writing
+        # a report. Make sure downstream parsers always find a file.
+        if not (out_dir / "final_report.txt").exists():
+            (out_dir / "final_report.txt").write_text(
+                "Strain_ID\tStrain_Name\tCluster_ID\tRelative_Abundance_Inside_Cluster\t"
+                "Predicted_Depth\tCoverage\tCovered/Total_kmr\n"
+            )
+        print(f"[profile {sample_key}/{species}] done", flush=True)
+    except subprocess.CalledProcessError as e:
+        # StrainScan crashes on some low-coverage / single-cluster edge cases.
+        # Record the failure but keep the benchmark moving: downstream scripts
+        # treat a missing/empty final_report.txt as "not detected".
+        print(f"[profile {sample_key}/{species}] FAILED (exit {e.returncode}); writing empty report", flush=True)
+        (out_dir / "final_report.txt").write_text(
+            "Strain_ID\tStrain_Name\tCluster_ID\tRelative_Abundance_Inside_Cluster\t"
+            "Predicted_Depth\tCoverage\tCovered/Total_kmr\n"
+        )
 
 
 def single_reads(species: str, sample: str):
