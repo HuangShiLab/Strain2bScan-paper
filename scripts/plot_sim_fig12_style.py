@@ -40,6 +40,7 @@ FIGRAW = PAPER / "figure_raw_data" / "sim_headtohead"
 TRUTH_SINGLE = PAPER / "figure_raw_data" / "sim_single_species"
 TRUTH_MULTI = PAPER / "figure_raw_data" / "sim_multi_species"
 PRED_ROOT = PAPER / "work" / "mock_retest" / "Strain2bScan-raw-data" / "sim_benchmark" / "results"
+INSTRAIN_ROOT = PRED_ROOT / "instrain"
 
 SINGLE_SAMPLES = [
     ("Escherichia_coli__diff_k2_rep1_d5", "E. coli diff-k2"),
@@ -83,6 +84,20 @@ def load_truth_single(sample_id):
             p = ln.rstrip().split("\t")
             if len(p) >= 3:
                 out[p[1]] = float(p[2])  # cluster -> relative_abundance
+    return out
+
+
+def load_truth_single_mapping(sample_id):
+    """Return genome ID -> cluster ID for a single-species sample."""
+    species = sample_id.split("__")[0]
+    path = TRUTH_SINGLE / species / "truth" / f"{sample_id}.truth.tsv"
+    out = {}
+    with open(path) as fh:
+        next(fh)  # header
+        for ln in fh:
+            p = ln.rstrip().split("\t")
+            if len(p) >= 3:
+                out[p[0]] = p[1]  # genome -> cluster
     return out
 
 
@@ -134,6 +149,62 @@ def build_color_map(all_entries):
     for i, entry in enumerate(sorted(all_entries)):
         out[entry] = PALETTE[i % len(PALETTE)]
     return out
+
+
+def load_genome_to_species():
+    """Map genome ID to species name from results/genome_to_species.tsv."""
+    out = {}
+    path = RES / "genome_to_species.tsv"
+    if path.exists():
+        for row in load(path):
+            out[row["genome"]] = row["species"]
+    return out
+
+
+def load_instrain_abundance(sample_id, group_name, genome_to_species, min_cov=0.1, min_breadth=0.05):
+    """Estimate relative abundance from inStrain genomeCoverage.csv.
+
+    For single-species samples, each detected genome is treated as a strain.
+    For multi-species samples, coverage is summed per species.  Only genomes
+    passing coverage/breadth filters are included.  The resulting coverage
+    vector is normalised to sum to 1 and should be interpreted as an
+    approximation (coverage is already length-normalised).
+    """
+    if group_name == "Single-species":
+        species = sample_id.split("__")[0]
+        path = INSTRAIN_ROOT / "single" / sample_id / "genomeCoverage.csv"
+    else:
+        depth = sample_id.replace("_sample01", "")
+        path = INSTRAIN_ROOT / "multi" / sample_id / "genomeCoverage.csv"
+
+    if not path.exists():
+        return {}
+
+    raw = defaultdict(float)
+    with open(path) as fh:
+        reader = csv.DictReader(fh)
+        for row in reader:
+            try:
+                cov = float(row.get("coverage", 0))
+                breadth = float(row.get("breadth", 0))
+            except ValueError:
+                continue
+            if cov < min_cov or breadth < min_breadth:
+                continue
+            genome = row.get("genome", "")
+            if not genome:
+                continue
+            if group_name == "Single-species":
+                raw[genome] += cov
+            else:
+                sp = genome_to_species.get(genome)
+                if sp:
+                    raw[sp] += cov
+
+    total = sum(raw.values())
+    if total == 0:
+        return {}
+    return {k: v / total for k, v in raw.items()}
 
 
 def get_s2b():
@@ -188,10 +259,12 @@ def main():
 
     all_groups = [("Single-species", SINGLE_SAMPLES), ("Multi-species", MULTI_SAMPLES)]
 
-    # Load truth and pred profiles, and build a global color map
+    # Load truth, S2bS pred, and inStrain estimated-abundance profiles
     truth_profiles = {}
     pred_profiles = {}
+    instrain_profiles = {}
     all_entries = set()
+    genome_to_species = load_genome_to_species()
     for group_name, samples in all_groups:
         for sample_id, _ in samples:
             if group_name == "Single-species":
@@ -200,10 +273,19 @@ def main():
             else:
                 truth = load_truth_multi(sample_id)
                 pred = load_pred_multi(sample_id)
+            ins = load_instrain_abundance(sample_id, group_name, genome_to_species)
+            if group_name == "Single-species":
+                genome_to_cluster = load_truth_single_mapping(sample_id)
+                ins = {
+                    genome_to_cluster.get(k, k): v
+                    for k, v in ins.items()
+                }
             truth_profiles[sample_id] = truth
             pred_profiles[sample_id] = pred
+            instrain_profiles[sample_id] = ins
             all_entries.update(truth.keys())
             all_entries.update(pred.keys())
+            all_entries.update(ins.keys())
 
     color_map = build_color_map(all_entries)
 
@@ -237,33 +319,40 @@ def main():
             sample_ids_flat.append(sid)
 
     # --- left abundance bars ---
-    bar_height = 0.28
+    bar_height = 0.22
     for yi, sample_id in enumerate(sample_ids_flat):
         y0 = y_positions[yi]
         truth = truth_profiles[sample_id]
         pred = pred_profiles[sample_id]
+        ins = instrain_profiles[sample_id]
 
-        # Truth bar (upper)
+        # Truth bar (top)
         t_entries = sorted(truth.keys(), key=lambda k: truth[k], reverse=True)
         t_vals = [truth[k] for k in t_entries]
-        stacked_bar(ax_left, y0 - 0.15, bar_height, t_entries, t_vals, color_map)
+        stacked_bar(ax_left, y0 - 0.25, bar_height, t_entries, t_vals, color_map)
 
-        # S2bS pred bar (lower)
+        # S2bS pred bar (middle)
         p_entries = sorted(pred.keys(), key=lambda k: pred[k], reverse=True)
         p_vals = [pred[k] for k in p_entries]
-        stacked_bar(ax_left, y0 + 0.15, bar_height, p_entries, p_vals, color_map)
+        stacked_bar(ax_left, y0, bar_height, p_entries, p_vals, color_map)
+
+        # inStrain estimated abundance bar (bottom)
+        if ins:
+            i_entries = sorted(ins.keys(), key=lambda k: ins[k], reverse=True)
+            i_vals = [ins[k] for k in i_entries]
+            stacked_bar(ax_left, y0 + 0.25, bar_height, i_entries, i_vals, color_map)
 
     ax_left.set_yticks(y_positions)
     ax_left.set_yticklabels(y_labels, fontsize=8)
     ax_left.set_xlim(0, 1.05)
     ax_left.set_xlabel("Relative abundance", fontsize=9)
-    ax_left.set_title("Ground truth vs Strain2bScan prediction", fontsize=11, pad=10)
+    ax_left.set_title("Ground truth vs predictions", fontsize=11, pad=10)
     ax_left.invert_yaxis()
 
     # annotation for abundance bars
     ax_left.text(
         0.98, 0.98,
-        "Upper bar = ground truth\nLower bar = Strain2bScan\nGrey = prediction-only (FP)",
+        "Top = ground truth\nMid = Strain2bScan\nBot = inStrain (coverage-based estimate)\nGrey = prediction-only (FP)",
         ha="right", va="top", fontsize=7,
         transform=ax_left.transAxes,
         bbox=dict(boxstyle="round,pad=0.3", facecolor="white", edgecolor="0.8", alpha=0.9),
