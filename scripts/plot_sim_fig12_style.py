@@ -2,14 +2,10 @@
 """Fig12-style tool comparison for simulated communities.
 
 Layout mirrors Fig12_wms_toolcompare:
-  - Left: stacked relative-abundance bars for Ground Truth and Strain2bScan
-    prediction, one row per sample.
+  - Left: stacked relative-abundance bars for Ground Truth, Strain2bScan,
+    StrainScan and inStrain, one row per sample.
   - Right: horizontal stacked P/R/F1 bars for Strain2bScan, StrainScan and
     inStrain.
-
-Note: Only Strain2bScan produces per-sample abundance profiles in this
-benchmark. StrainScan and inStrain outputs are summarised by precision/recall/F1
-on the right-hand side.
 
 Inputs:
   figure_raw_data/sim_single_species/<species>/truth/<sample>.truth.tsv
@@ -18,6 +14,8 @@ Inputs:
   results/sim_port_comparison.tsv
   figure_raw_data/sim_headtohead/strainscan_single_persample.tsv
   figure_raw_data/sim_headtohead/strainscan_multi_persample.tsv
+  figure_raw_data/sim_headtohead/strainscan_single_abundance.tsv  (optional)
+  figure_raw_data/sim_headtohead/strainscan_multi_species_abundance.tsv  (optional)
   results/instrain_sim.tsv
 
 Outputs:
@@ -41,6 +39,8 @@ TRUTH_SINGLE = PAPER / "figure_raw_data" / "sim_single_species"
 TRUTH_MULTI = PAPER / "figure_raw_data" / "sim_multi_species"
 PRED_ROOT = PAPER / "work" / "mock_retest" / "Strain2bScan-raw-data" / "sim_benchmark" / "results"
 INSTRAIN_ROOT = PRED_ROOT / "instrain"
+SS_SINGLE_ABUND = FIGRAW / "strainscan_single_abundance.tsv"
+SS_MULTI_ABUND = FIGRAW / "strainscan_multi_species_abundance.tsv"
 
 SINGLE_SAMPLES = [
     ("Escherichia_coli__diff_k2_rep1_d5", "E. coli diff-k2"),
@@ -207,6 +207,35 @@ def load_instrain_abundance(sample_id, group_name, genome_to_species, min_cov=0.
     return {k: v / total for k, v in raw.items()}
 
 
+def load_strainscan_abundance(sample_id, group_name, genome_to_cluster=None):
+    """Load StrainScan estimated relative abundance from HPC output tables.
+
+    For single-species samples the strain names are mapped to the truth cluster
+    IDs whenever possible so that the stacked bars use consistent colours.
+    """
+    if group_name == "Single-species":
+        if not SS_SINGLE_ABUND.exists():
+            return {}
+        raw = defaultdict(float)
+        for row in load(SS_SINGLE_ABUND):
+            if row["sample"] != sample_id:
+                continue
+            strain = row["strain"]
+            if genome_to_cluster and strain in genome_to_cluster:
+                strain = genome_to_cluster[strain]
+            raw[strain] += float(row.get("relative_abundance", 0))
+        return dict(raw)
+    else:
+        if not SS_MULTI_ABUND.exists():
+            return {}
+        raw = defaultdict(float)
+        for row in load(SS_MULTI_ABUND):
+            if row["sample"] != sample_id:
+                continue
+            raw[row["species"]] += float(row.get("relative_abundance", 0))
+        return dict(raw)
+
+
 def get_s2b():
     rows = load(RES / "sim_port_comparison.tsv")
     out = {}
@@ -259,9 +288,9 @@ def main():
 
     all_groups = [("Single-species", SINGLE_SAMPLES), ("Multi-species", MULTI_SAMPLES)]
 
-    # Load truth, S2bS pred, and inStrain estimated-abundance profiles
     truth_profiles = {}
     pred_profiles = {}
+    strainscan_profiles = {}
     instrain_profiles = {}
     all_entries = set()
     genome_to_species = load_genome_to_species()
@@ -270,29 +299,30 @@ def main():
             if group_name == "Single-species":
                 truth = load_truth_single(sample_id)
                 pred = load_pred_single(sample_id)
+                genome_to_cluster = load_truth_single_mapping(sample_id)
             else:
                 truth = load_truth_multi(sample_id)
                 pred = load_pred_multi(sample_id)
+                genome_to_cluster = None
+            ss = load_strainscan_abundance(sample_id, group_name, genome_to_cluster)
             ins = load_instrain_abundance(sample_id, group_name, genome_to_species)
             if group_name == "Single-species":
-                genome_to_cluster = load_truth_single_mapping(sample_id)
-                ins = {
-                    genome_to_cluster.get(k, k): v
-                    for k, v in ins.items()
-                }
+                ins = {genome_to_cluster.get(k, k): v for k, v in ins.items()}
             truth_profiles[sample_id] = truth
             pred_profiles[sample_id] = pred
+            strainscan_profiles[sample_id] = ss
             instrain_profiles[sample_id] = ins
             all_entries.update(truth.keys())
             all_entries.update(pred.keys())
+            all_entries.update(ss.keys())
             all_entries.update(ins.keys())
 
     color_map = build_color_map(all_entries)
 
     n_rows = sum(len(samples) for _, samples in all_groups)
-    fig = plt.figure(figsize=(16, 0.85 * n_rows + 2.5))
+    fig = plt.figure(figsize=(16, 0.95 * n_rows + 2.5))
 
-    # Left axes: truth + S2bS pred abundance bars
+    # Left axes: abundance bars
     ax_left = fig.add_axes([0.13, 0.08, 0.37, 0.84])
     # Right axes: P/R/F1 performance bars
     ax_right = fig.add_axes([0.54, 0.08, 0.20, 0.84])
@@ -319,28 +349,36 @@ def main():
             sample_ids_flat.append(sid)
 
     # --- left abundance bars ---
-    bar_height = 0.22
+    bar_height = 0.16
+    offsets = [-0.30, -0.10, 0.10, 0.30]  # truth, S2bS, StrainScan, inStrain
     for yi, sample_id in enumerate(sample_ids_flat):
         y0 = y_positions[yi]
         truth = truth_profiles[sample_id]
         pred = pred_profiles[sample_id]
+        ss = strainscan_profiles[sample_id]
         ins = instrain_profiles[sample_id]
 
         # Truth bar (top)
         t_entries = sorted(truth.keys(), key=lambda k: truth[k], reverse=True)
         t_vals = [truth[k] for k in t_entries]
-        stacked_bar(ax_left, y0 - 0.25, bar_height, t_entries, t_vals, color_map)
+        stacked_bar(ax_left, y0 + offsets[0], bar_height, t_entries, t_vals, color_map)
 
-        # S2bS pred bar (middle)
+        # Strain2bScan pred bar
         p_entries = sorted(pred.keys(), key=lambda k: pred[k], reverse=True)
         p_vals = [pred[k] for k in p_entries]
-        stacked_bar(ax_left, y0, bar_height, p_entries, p_vals, color_map)
+        stacked_bar(ax_left, y0 + offsets[1], bar_height, p_entries, p_vals, color_map)
+
+        # StrainScan estimated abundance bar
+        if ss:
+            s_entries = sorted(ss.keys(), key=lambda k: ss[k], reverse=True)
+            s_vals = [ss[k] for k in s_entries]
+            stacked_bar(ax_left, y0 + offsets[2], bar_height, s_entries, s_vals, color_map)
 
         # inStrain estimated abundance bar (bottom)
         if ins:
             i_entries = sorted(ins.keys(), key=lambda k: ins[k], reverse=True)
             i_vals = [ins[k] for k in i_entries]
-            stacked_bar(ax_left, y0 + 0.25, bar_height, i_entries, i_vals, color_map)
+            stacked_bar(ax_left, y0 + offsets[3], bar_height, i_entries, i_vals, color_map)
 
     ax_left.set_yticks(y_positions)
     ax_left.set_yticklabels(y_labels, fontsize=8)
@@ -352,7 +390,7 @@ def main():
     # annotation for abundance bars
     ax_left.text(
         0.98, 0.98,
-        "Top = ground truth\nMid = Strain2bScan\nBot = inStrain (coverage-based estimate)\nGrey = prediction-only (FP)",
+        "Top = ground truth\nS2bS = Strain2bScan\nSS = StrainScan (depth-based estimate)\ninStrain = coverage-based estimate\nGrey = prediction-only (FP)",
         ha="right", va="top", fontsize=7,
         transform=ax_left.transAxes,
         bbox=dict(boxstyle="round,pad=0.3", facecolor="white", edgecolor="0.8", alpha=0.9),
