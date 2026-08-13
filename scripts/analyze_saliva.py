@@ -8,6 +8,8 @@ import os
 import numpy as np
 import matplotlib
 matplotlib.use("Agg")
+matplotlib.rcParams["font.family"] = "sans-serif"
+matplotlib.rcParams["font.sans-serif"] = ["Helvetica", "Arial"]
 import matplotlib.pyplot as plt
 from pathlib import Path
 

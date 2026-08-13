@@ -7,6 +7,8 @@ import os
 import numpy as np
 import matplotlib
 matplotlib.use("Agg")
+matplotlib.rcParams["font.family"] = "sans-serif"
+matplotlib.rcParams["font.sans-serif"] = ["Helvetica", "Arial"]
 import matplotlib.pyplot as plt
 from pathlib import Path
 from scipy.stats import mannwhitneyu
@@ -139,7 +141,7 @@ ax_ml.set_xlim(-0.35, 0.9)
 ax_ml.set_ylim(0, 1.08)
 ax_ml.set_ylabel("subject-ID accuracy", fontsize=11)
 ax_ml.tick_params(labelsize=10)
-ax_ml.set_title("Leave-one-timepoint-out\nhost-ID accuracy\n(train 3 → predict 4th)",
+ax_ml.set_title("Leave-one-timepoint-out\nhost-ID accuracy\n(train 3, predict 4th)",
                 fontsize=11.5)
 for i, v in zip(bar_x, [acc_species, acc_strain]):
     ax_ml.text(i, v + 0.02, f"{v:.0%}", ha="center", fontsize=12, weight="bold")
