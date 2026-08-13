@@ -108,7 +108,7 @@ def draw_figure(rowlist, title, outbase, legend_species):
 
     fig = plt.figure(figsize=(18.5, 0.34 * len(rowlist) + 2.2))
     gs = fig.add_gridspec(1, 1 + len(METRICS), width_ratios=[7.2] + [1.0] * len(METRICS),
-                          wspace=0.28, left=0.52, right=0.90, top=0.94, bottom=0.06)
+                          wspace=0.28, left=0.34, right=0.86, top=0.94, bottom=0.06)
     axP = fig.add_subplot(gs[0, 0])
     axM = [fig.add_subplot(gs[0, 1 + j], sharey=axP) for j in range(len(METRICS))]
 
@@ -170,20 +170,20 @@ def draw_figure(rowlist, title, outbase, legend_species):
         return out
     for a, b in blocks("group"):
         yc = (ys[a] + ys[b]) / 2
-        axP.annotate(rowlist[a]["group"], xy=(-0.175, yc), xycoords=("axes fraction", "data"),
-                     ha="right", va="center", fontsize=7.4, color=INK)
-        axP.plot([-0.16, -0.16], [ys[b] - 0.4, ys[a] + 0.4],
+        axP.annotate(rowlist[a]["group"], xy=(-0.08, yc), xycoords=("axes fraction", "data"),
+                     ha="right", va="center", fontsize=7.0, color=INK)
+        axP.plot([-0.065, -0.065], [ys[b] - 0.4, ys[a] + 0.4],
                  transform=axP.get_yaxis_transform(), color=GROUPLINE, lw=0.9, clip_on=False)
     for a, b in blocks("mock"):
         yc = (ys[a] + ys[b]) / 2
-        axP.annotate(rowlist[a]["mock"], xy=(-0.55, yc), xycoords=("axes fraction", "data"),
+        axP.annotate(rowlist[a]["mock"], xy=(-0.28, yc), xycoords=("axes fraction", "data"),
                      ha="center", va="center", fontsize=11, fontweight="bold", color=INK, rotation=90)
 
     fig.suptitle(title, fontsize=12.5, fontweight="bold", color=INK, x=0.02, y=0.995, ha="left")
     handles = [Patch(facecolor=pal[s], label=s.replace("_", " ")) for s in
                sorted(pal, key=lambda x: x.replace("_", " ")) if s in legend_species]
     handles.append(Patch(facecolor=FPBLACK, label="False positive / decoy"))
-    fig.legend(handles=handles, loc="center left", bbox_to_anchor=(0.885, 0.5),
+    fig.legend(handles=handles, loc="center left", bbox_to_anchor=(0.92, 0.5),
                fontsize=6.6, frameon=False, handlelength=1.0, labelspacing=0.35)
     for ext in ("png", "pdf"):
         fig.savefig(f"{outbase}.{ext}", dpi=180, bbox_inches="tight")
