@@ -106,9 +106,9 @@ def draw_figure(rowlist, title, outbase, legend_species):
     all_true = set(g for r in rowlist for g, v in profiles.get(truth_key_of(r), {}).items() if v > 0)
     pal = build_palette(all_true)
 
-    fig = plt.figure(figsize=(18.5, 0.34 * len(rowlist) + 2.2))
+    fig = plt.figure(figsize=(16.0, 0.34 * len(rowlist) + 2.2))
     gs = fig.add_gridspec(1, 1 + len(METRICS), width_ratios=[7.2] + [1.0] * len(METRICS),
-                          wspace=0.28, left=0.34, right=0.86, top=0.94, bottom=0.06)
+                          wspace=0.28, left=0.24, right=0.86, top=0.94, bottom=0.06)
     axP = fig.add_subplot(gs[0, 0])
     axM = [fig.add_subplot(gs[0, 1 + j], sharey=axP) for j in range(len(METRICS))]
 
@@ -144,8 +144,8 @@ def draw_figure(rowlist, title, outbase, legend_species):
                             fontsize=5.6, color=INK, clip_on=True)
 
     axP.set_xlim(0, 1); axP.set_ylim(-0.8, H)
-    axP.set_xticks([0, .25, .5, .75, 1.0]); axP.set_xlabel("Relative abundance", fontsize=9, color=INK, labelpad=14)
-    axP.xaxis.set_label_position("top"); axP.xaxis.tick_top()
+    axP.set_xticks([0, .25, .5, .75, 1.0]); axP.set_xlabel("Relative abundance", fontsize=9, color=INK, labelpad=8)
+    axP.xaxis.tick_bottom()
     axP.set_yticks(ys); axP.set_yticklabels([r["cond"] for r in rowlist], fontsize=7.2, color=INK)
     axP.tick_params(axis="x", labelsize=7, colors=MUTED)
     for s in ("right", "left", "bottom"): axP.spines[s].set_visible(False)
@@ -170,16 +170,16 @@ def draw_figure(rowlist, title, outbase, legend_species):
         return out
     for a, b in blocks("group"):
         yc = (ys[a] + ys[b]) / 2
-        axP.annotate(rowlist[a]["group"], xy=(-0.08, yc), xycoords=("axes fraction", "data"),
+        axP.annotate(rowlist[a]["group"], xy=(-0.10, yc), xycoords=("axes fraction", "data"),
                      ha="right", va="center", fontsize=7.0, color=INK)
-        axP.plot([-0.065, -0.065], [ys[b] - 0.4, ys[a] + 0.4],
+        axP.plot([-0.085, -0.085], [ys[b] - 0.4, ys[a] + 0.4],
                  transform=axP.get_yaxis_transform(), color=GROUPLINE, lw=0.9, clip_on=False)
     for a, b in blocks("mock"):
         yc = (ys[a] + ys[b]) / 2
-        axP.annotate(rowlist[a]["mock"], xy=(-0.28, yc), xycoords=("axes fraction", "data"),
+        axP.annotate(rowlist[a]["mock"], xy=(-0.38, yc), xycoords=("axes fraction", "data"),
                      ha="center", va="center", fontsize=11, fontweight="bold", color=INK, rotation=90)
 
-    fig.suptitle(title, fontsize=12.5, fontweight="bold", color=INK, x=0.02, y=0.995, ha="left")
+    fig.suptitle(title, fontsize=11.5, fontweight="bold", color=INK, x=0.01, y=0.998, ha="left")
     handles = [Patch(facecolor=pal[s], label=s.replace("_", " ")) for s in
                sorted(pal, key=lambda x: x.replace("_", " ")) if s in legend_species]
     handles.append(Patch(facecolor=FPBLACK, label="False positive / decoy"))
