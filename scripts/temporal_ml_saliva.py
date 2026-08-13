@@ -128,9 +128,6 @@ ax_species.legend(fontsize=8, loc="lower right")
 
 # Right: leave-one-timepoint-out accuracy (narrower bars)
 ax_ml.bar([0, 1], [acc_species, acc_strain], color=["#9467bd", "#1f77b4"], width=0.35)
-ax_ml.axhline(1 / len(set(subj)), color="k", ls="--", lw=1)
-ax_ml.text(0.5, 1 / len(set(subj)) + 0.03, f"chance = {1/len(set(subj)):.0%}",
-           ha="center", fontsize=8.5, color="#333")
 ax_ml.set_xticks([0, 1])
 ax_ml.set_xticklabels(["species", "strain"])
 ax_ml.set_ylim(0, 1.08)
