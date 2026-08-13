@@ -99,9 +99,9 @@ strain_community_r2 = None
 with open(WORK / "saliva_permanova.tsv") as f:
     header = next(f)
     for line in f:
-        factor, level, *_rest, r2 = line.rstrip("\n").split("\t")
-        if factor == "subject" and level == "strain":
-            strain_community_r2 = float(r2)
+        fields = line.rstrip("\n").split("\t")
+        if fields[0] == "subject" and fields[1] == "strain":
+            strain_community_r2 = float(fields[4])
             break
 
 # ---- figure: bottom row of Fig 7 ----
