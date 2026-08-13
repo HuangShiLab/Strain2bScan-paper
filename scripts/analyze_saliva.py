@@ -156,7 +156,7 @@ subs = sorted(set(subject.values()), key=int)
 palette = ["#1f77b4", "#d62728", "#2ca02c", "#9467bd", "#ff7f0e", "#8c564b",
            "#17becf", "#e377c2", "#bcbd22", "#7f7f7f"]
 colors = {s: palette[i % len(palette)] for i, s in enumerate(subs)}
-fig, axes = plt.subplots(1, 2, figsize=(12.0, 4.8))
+fig, axes = plt.subplots(1, 2, figsize=(10.5, 4.8))
 for ax, level in zip(axes, ("species", "strain")):
     M, D, R2, F, p, acc = res[level]
     coords, ev = pcoa(D)
@@ -165,13 +165,14 @@ for ax, level in zip(axes, ("species", "strain")):
         ax.scatter(coords[idx, 0], coords[idx, 1], s=70, color=colors[s],
                    label=f"subject {s}", edgecolor="k", linewidth=0.5, alpha=0.9)
     ax.set_title(f"{level.capitalize()}-level  (R²={R2:.2f}, p={p:.3f}, 1-NN acc={acc:.0%})",
-                 fontsize=11)
-    ax.set_xlabel(f"PCo1 ({ev[0]*100:.0f}%)")
-    ax.set_ylabel(f"PCo2 ({ev[1]*100:.0f}%)")
+                 fontsize=12)
+    ax.set_xlabel(f"PCo1 ({ev[0]*100:.0f}%)", fontsize=11)
+    ax.set_ylabel(f"PCo2 ({ev[1]*100:.0f}%)", fontsize=11)
+    ax.tick_params(labelsize=10)
     ax.grid(alpha=0.25)
-axes[0].legend(fontsize=8, loc="best", ncol=2)
+axes[0].legend(fontsize=9, loc="best", ncol=2)
 fig.suptitle("Saliva 2bRAD (Strain2bScan): strain-level profiles discriminate individuals — 8 subjects × 4 timepoints",
-             fontsize=12)
+             fontsize=13)
 fig.tight_layout(rect=[0, 0, 1, 0.96])
 fig.savefig(OUT_FIG / "saliva_individual_discrimination.png", dpi=150)
 fig.savefig(OUT_FIG / "saliva_individual_discrimination.pdf")

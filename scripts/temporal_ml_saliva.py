@@ -105,7 +105,10 @@ with open(WORK / "saliva_permanova.tsv") as f:
             break
 
 # ---- figure: bottom row of Fig 7 ----
-fig, (ax_species, ax_ml) = plt.subplots(1, 2, figsize=(12.0, 4.6))
+fig, (ax_species, ax_ml) = plt.subplots(
+    1, 2, figsize=(10.5, 4.6),
+    gridspec_kw={"width_ratios": [2.2, 1.2]}
+)
 
 # Left: per-species strain-level subject R^2 (horizontal bars)
 names = [x[0].replace("_", " ") for x in perspec][::-1]
@@ -116,30 +119,34 @@ bar_colors = ["#2ca02c" if "Rothia mucilaginosa" in n else ("#1f77b4" if s else 
               for n, s in zip(names, sig)]
 ax_species.barh(list(ypos), r2s, color=bar_colors, edgecolor="k", linewidth=0.3)
 ax_species.set_yticks(list(ypos))
-ax_species.set_yticklabels(names, fontsize=7.5)
-ax_species.set_xlabel("strain-level PERMANOVA R² (subject)")
+ax_species.set_yticklabels(names, fontsize=10.5)
+ax_species.set_xlabel("strain-level PERMANOVA R² (subject)", fontsize=11)
 ax_species.set_xlim(0, 1)
+ax_species.tick_params(labelsize=10)
 ax_species.axvline(strain_community_r2, color="k", ls="--", lw=1,
                    label=f"whole-community strain R²={strain_community_r2:.2f}")
 ax_species.set_title("Per-species strain-level individual signal\n(green = R. mucilaginosa; grey = ns)",
-                     fontsize=10)
+                     fontsize=12)
 ax_species.grid(alpha=0.25, axis="x")
-ax_species.legend(fontsize=8, loc="lower right")
+ax_species.legend(fontsize=9, loc="lower right")
 
-# Right: leave-one-timepoint-out accuracy (narrower bars)
-ax_ml.bar([0, 1], [acc_species, acc_strain], color=["#9467bd", "#1f77b4"], width=0.35)
-ax_ml.set_xticks([0, 1])
-ax_ml.set_xticklabels(["species", "strain"])
+# Right: leave-one-timepoint-out accuracy (narrower bars, closer spacing)
+bar_x = [0, 0.55]
+ax_ml.bar(bar_x, [acc_species, acc_strain], color=["#9467bd", "#1f77b4"], width=0.30)
+ax_ml.set_xticks(bar_x)
+ax_ml.set_xticklabels(["species", "strain"], fontsize=10)
+ax_ml.set_xlim(-0.35, 0.9)
 ax_ml.set_ylim(0, 1.08)
-ax_ml.set_ylabel("subject-ID accuracy")
-ax_ml.set_title("Leave-one-timepoint-out host ID\n(train 3 timepoints → predict the 4th)",
-                fontsize=10.5)
-for i, v in enumerate([acc_species, acc_strain]):
-    ax_ml.text(i, v + 0.02, f"{v:.0%}", ha="center", fontsize=10, weight="bold")
+ax_ml.set_ylabel("subject-ID accuracy", fontsize=11)
+ax_ml.tick_params(labelsize=10)
+ax_ml.set_title("Leave-one-timepoint-out\nhost-ID accuracy\n(train 3 → predict 4th)",
+                fontsize=11.5)
+for i, v in zip(bar_x, [acc_species, acc_strain]):
+    ax_ml.text(i, v + 0.02, f"{v:.0%}", ha="center", fontsize=12, weight="bold")
 ax_ml.grid(alpha=0.25, axis="y")
 
 fig.suptitle("Saliva 2bRAD: strain profiles are individual-specific and temporally stable (8 subjects × 4 timepoints)",
-             fontsize=11.5)
+             fontsize=13)
 fig.tight_layout(rect=[0, 0, 1, 0.95])
 fig.savefig(OUT_FIG / "saliva_temporal_ml.png", dpi=150)
 fig.savefig(OUT_FIG / "saliva_temporal_ml.pdf")
