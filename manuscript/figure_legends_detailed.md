@@ -11,15 +11,27 @@ manifests provided, not stored as reads).
 
 ---
 
-## Figure 1 — Strain2bScan overview and the two input modes
-**1. Data source.** Schematic; no sequencing data.
-**2. Key issue & conclusion.** How one engine resolves strains from a sparse 2bRAD marker set and accepts
-two input modes. Conclusion: reference genomes → 2bRAD tags → within-species clusters → cluster×marker DB;
-a sample is digested once and profiled by a species gate (Layer-1) then within-species strain scoring
-(Layer-2); the same tag space serves in-silico-digested shotgun and native BcgI 2bRAD, and is shared with
-the Fast2bRAD-M species layer.
-**3. Results by subfigure.** (A) Database construction pipeline. (B) Per-sample profiling pipeline and the
-two data modes entering the shared tag space.
+## Figure 1 — Strain2bScan algorithm overview
+**1. Data source.** Schematic; no sequencing data. Panel C plots the closed-form expectation
+`1 - e^(-lambda)` and two measured points from the shadow-cluster experiment.
+**2. Key issue & conclusion.** How one engine resolves strains from a ~1-2 % genomic subsample,
+accepts both in-silico-digested shotgun and native BcgI 2bRAD through the same tag space, and
+decides which calls to keep. Conclusion: reference genomes -> single-copy 2bRAD tags -> within-
+species clusters -> cluster x marker database; a sample is digested **once** and matched against
+every species database, gated at species level (Layer-1), restricted to panel-wide
+species-specific markers, then scored within species (Layer-2); abundance is reported at three
+scopes because per-species fractions cannot be concatenated into a community composition.
+**3. Results by subfigure.** (A) Database construction, with the clustering threshold and the
+occurrence-based definition of a unique marker. (B) Per-sample profiling: the two input modes, the
+species gate with its depth-reachability scaling, the cross-species marker restriction, the three
+Layer-2 detection criteria, the zero-inclusive depth estimator, and the three abundance scopes.
+(C) The discriminator that a coverage floor cannot provide. Under Poisson sampling a genuinely
+present cluster at depth lambda must show breadth `1 - e^(-lambda)` (blue curve). A genuine rare
+strain at 0.44x with breadth 0.39 sits on the curve; a shadow -- a cluster called because the
+strain in the sample carries a fraction of its distinguishing loci, so those markers appear at
+full depth across only part of the panel -- sits far below it at 7.7x with breadth 0.35. The two
+have near-identical breadth and differ 17x in depth, which is why the ratio, not the breadth, is
+the test. Both points are measured.
 
 ---
 

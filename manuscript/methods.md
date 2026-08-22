@@ -14,10 +14,17 @@ database, gated by a species-level Layer-1 check.
 ## 2bRAD tag extraction
 
 Type-IIB restriction enzymes cut on both sides of their recognition site, releasing a
-fixed-length fragment (the 2bRAD tag, 32–38 bp). Each of the 16 enzymes in the Fast2bRAD-M
-table is modelled as a set of anchored sequence patterns; scanning every offset of a sequence
-and testing the anchors reproduces the enzyme's digestion sites (forward and reverse patterns
-allow scanning a single strand). Each tag is canonicalised (the lexicographically smaller of
+fixed-length fragment (the 2bRAD tag, 25–33 bp depending on enzyme). Each of the 16 enzymes in
+the Fast2bRAD-M table is modelled as a set of anchored sequence patterns — literal motifs at
+fixed offsets within the tag window, plus, for the three IUPAC-degenerate enzymes (BaeI, HaeIV,
+Hin4I), single positions restricted to a base class; unanchored positions are unconstrained but
+must be A/C/G/T, which excludes tags spanning ambiguity codes. Scanning every offset and testing
+the anchors reproduces the enzyme's digestion sites. Only the forward strand is scanned: each
+enzyme carries forward and reverse patterns that are exact reverse-complement pairs at its tag
+length (the palindromic enzymes BplI, FalI and AlfI carry a single self-complementary pattern),
+so one pass finds sites in either orientation. Digestion is therefore strand-invariant —
+digest(*S*) = digest(revcomp(*S*)) — without scanning both strands and without doubling the
+marker set; this is asserted for every enzyme by a regression test. Each tag is canonicalised (the lexicographically smaller of
 the tag and its reverse complement) and hashed to a 64-bit integer marker (FNV-1a; genome and
 sample tags use the same hash, so marker values are internally consistent). Two input modes
 are supported: **BcgI only** for 2bRAD experimental libraries whose reads already are tags, or
@@ -57,7 +64,10 @@ Layer-2 markers. Crucially these are derived from **all** tags of the species' g
 from a pre-built species-unique database: species-unique markers (a genome compared against
 genomes of *other* species) are computed for species detection and are orthogonal to
 within-species strain structure. Each cluster's database is the union of its member genomes'
-single-copy tags; a marker is *unique* to a cluster iff it occurs in exactly one cluster.
+single-copy tags. A marker is *unique* to a cluster iff it is absent — **at any copy number** —
+from every other cluster's genomes. The weaker test (degree 1 over the single-copy sets alone)
+mislabels a tag as unique when it is multi-copy, and therefore filtered, in another cluster while
+still being reachable from that cluster's reads.
 
 **Assembly-quality filtering.** Variable reference completeness biases Jaccard clustering
 toward spurious splits: an incomplete genome's marker set is approximately a subset of its
@@ -67,23 +77,82 @@ contig count (`--max-contigs`), and single-copy tag count relative to the conspe
 (`--min-tag-fraction`, a completeness proxy). Genomes far below the median are always flagged;
 they are removed only when a threshold is set.
 
-## Layer-2 strain profiling
+## Layer-2: detection and abundance
 
 Sample reads are digested with the database's enzyme set (recorded in the database header) to
-give per-marker counts. A cluster is called **present** iff at least *N* of its unique markers
-are observed at count ≥ 2 (default *N* = 10, in tag units; the full-k-mer StrainScan floor
-of ~1240 k-mers is inappropriate for the ~50–100× sparser tag set). Using only unique markers
-makes detection immune to the shared-marker cross-talk that otherwise lets a greedy set-cover
-over a large conspecific panel strip shared markers and starve true strains. Each present
-cluster's **relative abundance** is estimated from the median sample count over its detected
-unique markers — robust to repeat and contamination outliers, and less prone than a joint
-regression over shared markers to mis-attributing signal between very similar co-present
-strains (a non-negative Elastic Net solver is also provided). Calls are then filtered by a
-minimum coverage fraction of their unique markers (`--min-coverage`, default 0.1; suppresses
-spurious detection of large, similar clusters whose absolute unique-marker count clears the
-floor at a tiny coverage fraction) and a minimum relative abundance (0.02), and renormalised.
-When no cluster passes, Strain2bScan reports the species as detectable but not
-strain-resolvable with the given enzyme set.
+give per-marker counts *c*<sub>*m*</sub>. For cluster *j* with discriminating panel *U*<sub>*j*</sub>:
+
+&nbsp;&nbsp;&nbsp;&nbsp;*N*<sub>*j*</sub> = |*U*<sub>*j*</sub>| &nbsp;(panel size), &nbsp;
+*D*<sub>*j*</sub> = |{*m* ∈ *U*<sub>*j*</sub> : *c*<sub>*m*</sub> ≥ 1}|, &nbsp;
+coverage<sub>*j*</sub> = *D*<sub>*j*</sub> / *N*<sub>*j*</sub>
+
+**Depth-adaptive singleton policy.** Evidence is counted at a threshold *t*<sub>*j*</sub> that
+depends on the estimated depth: *t* = 2 at or above 3 reads/tag, *t* = 1 below it. At high depth a
+genuine marker is essentially never observed exactly once, so *c* = 1 is dominated by sequencing
+error and is filtered, as in StrainScan. At low depth the reverse holds — under Poisson(λ) the
+share of *detected* markers seen exactly once is λ/(e<sup>λ</sup> − 1), 78 % at λ = 0.5 — so a fixed
+*c* ≥ 2 rule discards most of the signal precisely where signal is scarce. Sequencing errors
+generate essentially random tags, which almost never coincide with one specific cluster's panel,
+so admitting singletons there costs little specificity while the support floor still requires many
+independent hits on that one panel.
+
+**Detection.** A cluster is called present when support<sub>*j*</sub> = |{*m* ∈ *U*<sub>*j*</sub> :
+*c*<sub>*m*</sub> ≥ *t*<sub>*j*</sub>}| ≥ 8 (`--min-support`) and coverage<sub>*j*</sub> ≥ 0.1
+(`--min-coverage`). The support floor follows from the arithmetic of the marker space rather than
+being chosen round: support tracks *N* · (1 − e<sup>−λ</sup>), and on 2bRAD both factors are small —
+a discriminating panel is a few dozen tags (median 53 across a 419-cluster *C. acnes* panel), and a
+strain at 5 % of a sample sequenced to ~5× per tag sits at λ ≈ 0.27, where only ~24 % of any panel
+is observable, giving ~8 expected observations.
+
+**Depth–breadth consistency.** A cluster is rejected when
+
+&nbsp;&nbsp;&nbsp;&nbsp;coverage<sub>*j*</sub> / (1 − e<sup>−depth<sub>*j*</sub></sup>) &lt; 0.5 &nbsp;(`--min-consistency`)
+
+Under Poisson sampling a genuinely present cluster at depth λ must show breadth 1 − e<sup>−λ</sup>,
+so this ratio is ≈ 1 for a real cluster at any depth. It is ≈ *f* for a **shadow** — a cluster
+called because the strain in the sample happens to carry a fraction *f* of its distinguishing loci,
+so those markers appear at the sample strain's full depth across only *f* of the panel. No coverage
+floor can separate the two, because a shadow and a genuinely rare strain have the same breadth and
+differ only in depth: on a constructed shadow the spurious cluster showed breadth 0.350 against
+0.392 for a genuinely present cluster at 0.4×, while their depths were 7.68× and 0.44×. Swept
+synthetically, genuine clusters scored 0.949–1.018 across 0.3×–20× and shadows
+0.200/0.300/0.495/0.691/0.897 at *f* = 0.2/0.3/0.5/0.7/0.9.
+
+**Abundance.** Each called cluster's depth is the **zero-inclusive** mean count over its whole
+discriminating panel, with the top 1 % of non-zero observations winsorized to the 99th percentile:
+
+&nbsp;&nbsp;&nbsp;&nbsp;depth<sub>*j*</sub> = (1/*N*<sub>*j*</sub>) Σ<sub>*m* ∈ *U*<sub>*j*</sub></sub> min(*c*<sub>*m*</sub>, κ<sub>*j*</sub>)
+
+Both halves are load-bearing. Averaging over the whole panel — zeros included — is what keeps the
+estimate proportional to true depth; an estimator restricted to *detected* markers (for example
+their median) pins a rare cluster near 1 read/tag however rare it is, compressing the ratio between
+an abundant and a rare cluster and flattening the whole composition. Winsorizing rather than
+discarding, and taking the fraction of the *non-zero* observations rather than of the panel,
+prevents the guard against collapsed repeats from deleting real signal when few markers are
+detected. Because single-copy tags are one per genome copy, reads-per-tag cancels genome size, so
+depth is proportional to cell (taxonomic) abundance and depth × *G*<sub>*j*</sub> — where
+*G*<sub>*j*</sub> is the cluster's tag count — is proportional to DNA mass.
+
+**Three abundance scopes** are reported, because per-species fractions cannot be concatenated into
+a community composition:
+
+| column | definition | denominator | interpretation |
+|---|---|---|---|
+| `abundance` | depth<sub>*j*</sub> / Σ<sub>*k* ∈ species</sub> depth<sub>*k*</sub> | this species | within-species split (primary) |
+| `global_abundance` | depth<sub>*j*</sub> / Σ<sub>*k*</sub> depth<sub>*k*</sub> | clusters this run resolved | community composition, **cell** fraction |
+| `sample_fraction` | depth<sub>*j*</sub> · *G*<sub>*j*</sub> / Σ<sub>*m*</sub> *c*<sub>*m*</sub> | all tag observations | share of the sequencing, **DNA** fraction |
+
+The first two compose exactly — global_abundance<sub>*j*</sub> = species_abundance<sub>*s*(*j*)</sub>
+× abundance<sub>*j*</sub> — so an externally computed species layer (for example Fast2bRAD-M's) can
+be substituted for the species term. `sample_fraction` is the only column whose denominator is
+fixed by the sequencing rather than by how well profiling went, and is therefore the only one
+comparable *between* samples; the unclassified remainder is reported rather than hidden. Ground
+truth stated as taxonomic abundance (as in the ATCC MSA standards) should be compared against
+`global_abundance`, and truth stated as genomic DNA against `sample_fraction`; the two differ by
+genome size, which spans >6× within a single mock community.
+
+When no cluster passes, Strain2bScan reports the species as detectable but not strain-resolvable
+with the given enzyme set.
 
 ## Multi-species profiling and species selection
 
@@ -99,7 +168,19 @@ depth). Let *total* be the species-specific markers a species carries — tags u
 species across the panel, the same tag space as the Fast2bRAD-M species layer — and *present* the
 subset observed in the sample at count ≥ 2. The gate is
 
-&nbsp;&nbsp;&nbsp;&nbsp;*resolve_gate* = max(*G*, ⌈*f* · *total*⌉), &nbsp; *detect_gate* = min(*d*, *resolve_gate*)
+&nbsp;&nbsp;&nbsp;&nbsp;*r* = max(1 − e<sup>−λ<sub>*s*</sub></sup>, 0.25) &nbsp;(the reachable fraction of the panel)
+
+&nbsp;&nbsp;&nbsp;&nbsp;*resolve_gate* = max(⌈*G*·*r*⌉, ⌈*f*·*total*·*r*⌉, *d*, 1), &nbsp; *detect_gate* = min(*d*, *resolve_gate*)
+
+where λ<sub>*s*</sub> is the species' estimated per-tag depth, taken as the zero-inclusive mean
+count over its species-specific markers — a quantity that does not presuppose the species passed
+any gate, so the rule is not circular. Scaling by *r* is what keeps a fixed 200-marker bar from
+being **unreachable by construction** in a low-input or high-host sample: at 0.05× depth only ~5 %
+of any panel is observable, so an unscaled floor files a genuinely present species as absent
+however clean the data is. The scaling is clamped at 25 % of the configured floor because an
+unbounded version is self-cancelling — the observed count is itself proportional to *r*, so
+*present* ≥ *G*·*r* reduces to *total* ≥ *G* at every depth, leaving *d* as the only real
+threshold.
 
 with an absolute floor *G* (`--min-species-markers`, default 200), a breadth fraction *f*
 (`--min-species-marker-frac`, default 0) that scales the bar to each species' panel size, and a
@@ -121,12 +202,93 @@ grows large enough for a fixed floor to be outrun by leakage — a small *f* (�
 precision to 1.0 at negligible recall cost, because it raises the bar in proportion to panel size,
 where large-panel leakage concentrates (Results; `docs/gate_calibration.md`).
 
+## Cross-species restriction on quantification
+
+Cluster-uniqueness is defined only *within* one species database, so a tag can be unique to a
+cluster there and still occur in a congener's genomes. When that congener is co-present, its reads
+land on the tag and inflate the cluster's depth. Panels routinely contain such pairs —
+*S. aureus*/*S. epidermidis*, three streptococci and two lactobacilli in ATCC MSA-1002, and most
+oral communities — so this is a systematic abundance error rather than a rare accident.
+
+Under `multi-profile`, detection and depth are therefore restricted to markers that are specific
+to their species **across the whole panel**, using the same species-degree index the Layer-1 gate
+is built from. On a two-congener mock the affected cluster's depth was overstated 3× (29.9×
+against a true 10×); with the restriction it is 10.2×. The proportion of markers excluded is
+reported per run, and `--no-cross-species-filter` disables it for comparison. Single-species
+`profile` carries no such information and cannot apply it — a database on its own knows nothing
+about the rest of the panel.
+
+## Ported StrainScan layers, and why neither is the default
+
+Both stages of StrainScan's resolution framework are implemented and selectable, so the
+architectural choice can be tested rather than asserted. Neither is default, on measurement.
+
+**Layer-1 — Cluster Search Tree (`--layer1 cst`).** A strictly binary hierarchy is built above the
+clusters; each node stores the markers core to its subtree and absent from every genome outside it.
+The descent prunes a whole subtree on one test and, at a leaf, pools the markers of every ancestor
+whose sibling branch was never entered — which is what lets a leaf with too few markers of its own
+be called at all. `--layer1` defaults to **`auto`**, which reads off the database whether a tree can
+help *here*: descend only if some cluster falls below the support floor (the only case pooling can
+change an outcome) **and** some internal node carries enough markers to pool. On a dense
+conspecific panel the second condition fails — of 542 internal nodes on 543 *C. acnes* genomes, 373
+carry zero group-specific markers, because clustering at τ has already merged anything similar
+enough for a clade to have a distinct core. Whether a tree helps is a property of the panel, not of
+the software, so the decision is made per database and printed with the counts behind it.
+
+**Layer-2 — joint non-negative ElasticNet (`--layer2 enet`).** A design matrix over the *shared*
+markers, which the unique-only estimator discards, fitted jointly across co-present clusters. It
+can in principle resolve a cluster whose tag set is contained in a relative's — one with no unique
+markers at all, invisible to the flat path. Measured on identical detections it is worse:
+Bray–Curtis 0.035 → 0.127 and mean absolute relative error 0.183 → 0.794. The cause is structural
+collinearity rather than tuning — each cluster carries ~33 100 markers of which only 29–115 are
+unique, so design columns are ~99.7 % identical and the shared rows constrain the *sum* of two
+near-identical clusters while saying almost nothing about the split. Penalising makes it
+monotonically worse (Bray–Curtis 0.127 / 0.145 / 0.223 / 0.330 / 0.360 at α = 0 / 0.001 / 0.01 /
+0.1 / 1.0).
+
+These are results about the marker space, not about the implementation: both mechanisms assume a
+dense k-mer set, and their preconditions do not hold on a ~1–2 % genomic subsample. The few unique
+markers carry the split directly; the many shared ones do not.
+
 ## Implementation
 
-Strain2bScan is written in Rust with no third-party dependencies. Data-parallelism (genome
-digestion, sketch construction, pairwise clustering, read digestion) uses scoped `std` threads
-(`STRAIN2BSCAN_THREADS`; default = all cores). Databases are stored as sparse strain×marker
-tables with an inverted unique-marker index and the enzyme set in the header.
+Strain2bScan is written in Rust with **no third-party dependencies**, which keeps the build
+reproducible and the binary self-contained. Data-parallelism (genome digestion, sketch
+construction, the pairwise similarity scan, read digestion) uses scoped `std` threads
+(`STRAIN2BSCAN_THREADS`; default = all cores).
+
+**Database.** Sparse: per cluster, the set of marker hashes it carries, plus an inverted
+marker → cluster-degree index and the enzyme set in the header. A dense strain × marker matrix
+reaches tens of GB at real panel sizes.
+
+**Digestion hot path.** Allocation-free end to end. Enzyme scanning is case-insensitive, so
+sequences are read directly from the input buffer with no upper-cased copy per read (this also
+handles soft-masked reference genomes correctly); canonicalisation chooses the orientation by
+comparing the forward strand against its reverse complement one base at a time and hashes the
+winner in place, with no reverse-complement buffer; counts land directly in a hash map with no
+intermediate vector per sequence. Because marker keys are `u64`, the maps use an inlined FxHash
+rather than the default SipHash — marker *values* are unchanged (FNV-1a of the canonical tag), so
+only in-memory bucket assignment differs and databases remain readable across versions.
+
+**I/O.** FASTA and FASTQ are streamed, plain or gzipped, with decompression piped through `gzip`
+so the zero-dependency property is preserved. Peak memory is one batch rather than the whole file,
+which is what makes multi-GB samples tractable.
+
+**Measured.** On 4 M reads (289 MB) against a two-species panel with all 16 enzymes, wall time is
+0.51 s and peak resident memory 11 MB (1.71 s / 282 MB before these optimisations); gzipped input
+costs no additional wall-clock. Tree construction scales as ~O(*n*<sup>1.6</sup>) after replacing a
+per-merge recomputation of max-linkage with an incrementally updated cluster-level similarity
+matrix, and a per-node set-subtraction with a single carrier-set index; on 543 genomes the
+pairwise similarity scan that dominates a large build is parallel, taking the build from 71.4 s to
+58.4 s. Every optimisation was verified to leave output unchanged — for the tree, node for node
+against the serial build at *n* = 543.
+
+Two intuitive optimisations were **rejected on measurement** and are recorded here because both
+are commonly assumed to help: replacing the hash-set Jaccard with a sorted-vector two-pointer
+intersection is 0.82× — slower, because a hash lookup on `u64` is cheap while the two-pointer must
+traverse both arrays — although it would halve the memory; and fusing the multi-enzyme scan into a
+single pass is 1.43× on a 2.5 Mb contig but 0.93× on 150 bp reads, so it would have to be
+dispatched on sequence length rather than applied globally.
 
 ## Benchmarking
 
