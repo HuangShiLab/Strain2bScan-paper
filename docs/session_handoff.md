@@ -13,7 +13,8 @@ agent env; user must `git push origin main`):**
   0/90/99% human. Precision 1.0 for both at all levels; 2bRAD 20/20 recall at 99% host vs shotgun
   12/20 (2bRAD keeps ~10× more usable markers). Reconstructed 62-sp BcgI mock DB (`dl_genomes.py`).
 - **Fig 10 saliva** — three docs: individual-discrimination (subject strain R²=0.833>species 0.822,
-  p=2e-4; *Rothia mucilaginosa* R²=0.921), shotgun↔2bRAD concordance (100% of WMS strains confirmed
+  p=2e-4; *Rothia mucilaginosa* R²=0.921) — **these numbers are STALE**: they were computed on the
+  `support` column (a marker count), not an abundance; see `rerun_status.md` §2 — shotgun↔2bRAD concordance (100% of WMS strains confirmed
   by 2bRAD; 2bRAD adds 128–163 low-abundance strains WMS misses, p=1.2e-23), temporal stability +
   ML host-ID (within 0.19<between 0.44; leave-one-timepoint-out subject ID **100%** strain vs 94%
   species). Oral panel builder `dl_oral_panel.py` (19 sp × ≤25 genomes; **many genomes/species is
