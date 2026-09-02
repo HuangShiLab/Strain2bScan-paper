@@ -17,11 +17,14 @@ def parse_calls(stdout):
         if len(p) >= 5: s.add(f"{p[0]}|{p[1]}")
     return s
 
-# 2bRAD strain calls with community relative abundance (support / total support per sample)
-rows = [l.rstrip("\n").split("\t") for l in open(f"{WORK}/results/saliva_strain_long.tsv")][1:]
-brad = {}   # sample -> {strain_key: support}
+# 2bRAD strain calls with community relative abundance. This used `support` -- a marker
+# count, not an abundance -- normalised per sample; `sample_fraction` is the quantity that
+# is actually comparable across species.
+from saliva_table import read_long, COMMUNITY_ABUNDANCE
+rows = read_long(f"{WORK}/results/saliva_strain_long.tsv", require=(COMMUNITY_ABUNDANCE,))
+brad = {}   # sample -> {strain_key: sample_fraction}
 for r in rows:
-    brad.setdefault(r[0], {})[f"{r[3]}|{r[4]}"] = float(r[7])
+    brad.setdefault(r["sample"], {})[f"{r['species']}|{r['cluster']}"] = float(r[COMMUNITY_ABUNDANCE])
 brad_relab = {s: {k: v / sum(d.values()) for k, v in d.items()} for s, d in brad.items()}
 
 # WMS calls from cache

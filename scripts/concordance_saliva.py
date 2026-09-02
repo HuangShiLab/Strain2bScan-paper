@@ -43,10 +43,11 @@ def profile_wms(reads):
     return parse_calls(out.stdout)
 
 # native 2bRAD strain calls per sample
-rows = [l.rstrip("\n").split("\t") for l in open(f"{WORK}/results/saliva_strain_long.tsv")][1:]
+from saliva_table import read_long
+rows = read_long(f"{WORK}/results/saliva_strain_long.tsv")
 brad = {}
 for r in rows:
-    brad.setdefault(r[0], {})[f"{r[3]}|{r[4]}"] = 1.0
+    brad.setdefault(r["sample"], {})[f"{r['species']}|{r['cluster']}"] = 1.0
 brad_sp = {s: set(k.split("|")[0] for k in d) for s, d in brad.items()}
 
 wms = {}

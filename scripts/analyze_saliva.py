@@ -13,19 +13,25 @@ matplotlib.rcParams["font.sans-serif"] = ["Helvetica", "Arial"]
 import matplotlib.pyplot as plt
 from pathlib import Path
 
+from saliva_table import read_long, COMMUNITY_ABUNDANCE
+
 PAPER = Path(__file__).resolve().parent.parent
 WORK = PAPER / "results"
 OUT_FIG = PAPER / "figures"
 rng = np.random.default_rng(42)
 
-rows = [l.rstrip("\n").split("\t") for l in open(WORK / "saliva_strain_long.tsv")][1:]
-samples = sorted(set(r[0] for r in rows))
+# Read by column name. The cross-species matrices below MUST be built on `sample_fraction`:
+# the previous code took index 7, which is `support` -- a marker count that scales with the
+# cluster's database size and the sequencing depth, not with abundance.
+rows = read_long(WORK / "saliva_strain_long.tsv",
+                 require=(COMMUNITY_ABUNDANCE, "within_abund"))
+samples = sorted(set(r["sample"] for r in rows))
 # alias S<timepoint>-<subject>: prefix (S9/S11/S13/S17) = time of day; suffix (1..14) = subject.
 subject   = {s: s.split("-")[1] for s in samples}
 timepoint = {s: s.split("-")[0] for s in samples}
 # feature keys
-strain_feats  = sorted(set(f"{r[3]}|{r[4]}" for r in rows))
-species_feats = sorted(set(r[3] for r in rows))
+strain_feats  = sorted(set(f"{r['species']}|{r['cluster']}" for r in rows))
+species_feats = sorted(set(r["species"] for r in rows))
 si = {s: i for i, s in enumerate(samples)}
 
 def build(level):
@@ -33,9 +39,8 @@ def build(level):
     fi = {f: j for j, f in enumerate(feats)}
     M = np.zeros((len(samples), len(feats)))
     for r in rows:
-        sup = float(r[7])
-        key = f"{r[3]}|{r[4]}" if level == "strain" else r[3]
-        M[si[r[0]], fi[key]] += sup
+        key = f"{r['species']}|{r['cluster']}" if level == "strain" else r["species"]
+        M[si[r["sample"]], fi[key]] += float(r[COMMUNITY_ABUNDANCE])
     # row-normalize to relative abundance
     rs = M.sum(1, keepdims=True)
     rs[rs == 0] = 1
@@ -113,18 +118,20 @@ open(WORK / "saliva_permanova.tsv", "w").write("\n".join(out) + "\n")
 
 # ---- per-species strain-level subject discrimination (used in Fig 7 bottom-left) ----
 def species_matrix(sp):
-    feats = sorted(set(r[4] for r in rows if r[3] == sp))
+    # One species at a time, so `within_abund` -- which sums to 1.0 inside a species -- is the
+    # right quantity here, unlike the cross-species matrices above.
+    feats = sorted(set(r["cluster"] for r in rows if r["species"] == sp))
     fi = {f: j for j, f in enumerate(feats)}
     M = np.zeros((len(samples), len(feats)))
     for r in rows:
-        if r[3] == sp:
-            M[si[r[0]], fi[r[4]]] += float(r[7])
+        if r["species"] == sp:
+            M[si[r["sample"]], fi[r["cluster"]]] += float(r["within_abund"])
     rs = M.sum(1, keepdims=True)
     rs[rs == 0] = 1
     return M / rs
 
 perspec = []
-for sp in sorted(set(r[3] for r in rows)):
+for sp in sorted(set(r["species"] for r in rows)):
     M = species_matrix(sp)
     pres = int((M.sum(1) > 0).sum())
     if pres < 12:

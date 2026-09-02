@@ -3,19 +3,24 @@
 import numpy as np
 WORK = "/private/tmp/claude-501/-Users-macstudio-Downloads-YangJiazhen/091459b5-4e03-49b6-8502-3f2acf59ff13/scratchpad"
 rng = np.random.default_rng(0)
-rows = [l.rstrip("\n").split("\t") for l in open(f"{WORK}/results/saliva_strain_long.tsv")][1:]
-samples = sorted(set(r[0] for r in rows))
-subject = {r[0]: r[1] for r in rows}
-timepoint = {r[0]: r[2] for r in rows}
+from saliva_table import read_long, COMMUNITY_ABUNDANCE
+rows = read_long(f"{WORK}/results/saliva_strain_long.tsv",
+                 require=(COMMUNITY_ABUNDANCE, "within_abund"))
+samples = sorted(set(r["sample"] for r in rows))
+subject = {r["sample"]: r["subject"] for r in rows}
+timepoint = {r["sample"]: r["timepoint"] for r in rows}
 si = {s: i for i, s in enumerate(samples)}
 
 def matrix(feat_of, subset=None):
-    feats = sorted(set(feat_of(r) for r in rows if subset is None or r[3] == subset))
+    # Restricted to one species, `within_abund` is the right quantity (it sums to 1 inside a
+    # species); across species only `sample_fraction` is comparable.
+    col = "within_abund" if subset is not None else COMMUNITY_ABUNDANCE
+    feats = sorted(set(feat_of(r) for r in rows if subset is None or r["species"] == subset))
     fi = {f: j for j, f in enumerate(feats)}
     M = np.zeros((len(samples), len(feats)))
     for r in rows:
-        if subset is not None and r[3] != subset: continue
-        M[si[r[0]], fi[feat_of(r)]] += float(r[7])
+        if subset is not None and r["species"] != subset: continue
+        M[si[r["sample"]], fi[feat_of(r)]] += float(r[col])
     rs = M.sum(1, keepdims=True); rs[rs == 0] = 1
     return M / rs
 
@@ -43,22 +48,22 @@ def permanova(D, labels, perms=1999):
 
 subj = [subject[s] for s in samples]; tp = [timepoint[s] for s in samples]
 print("=== sanity ===")
-Mst = matrix(lambda r: f"{r[3]}|{r[4]}")
+Mst = matrix(lambda r: f"{r['species']}|{r['cluster']}")
 print(f"strain matrix {Mst.shape}, zero-rows={int((Mst.sum(1)==0).sum())}, NaN={int(np.isnan(Mst).sum())}")
 D = bc(Mst); print(f"BC NaN={int(np.isnan(D).sum())}, max={np.nanmax(D):.3f}")
 
 print("\n=== whole-community PERMANOVA ===")
-for name, M in [("species", matrix(lambda r: r[3])), ("strain", Mst)]:
+for name, M in [("species", matrix(lambda r: r["species"])), ("strain", Mst)]:
     D = bc(M)
     for fac, lab in [("subject", subj), ("timepoint", tp)]:
         R2, F, p = permanova(D, lab)
         print(f"{name:8s} ~ {fac:9s}  R2={R2:.3f} F={F:.2f} p={p:.3f}")
 
 print("\n=== per-species strain PERMANOVA ~ subject (which species carry individual signal?) ===")
-species = sorted(set(r[3] for r in rows))
+species = sorted(set(r["species"] for r in rows))
 res = []
 for sp in species:
-    M = matrix(lambda r: r[4], subset=sp)
+    M = matrix(lambda r: r["cluster"], subset=sp)
     present = int((M.sum(1) > 0).sum())
     if present < 12: continue
     D = bc(M); R2, F, p = permanova(D, subj, perms=999)

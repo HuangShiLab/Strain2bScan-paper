@@ -2,7 +2,7 @@
 """Profile the 32 diurnal saliva 2bRAD samples (4 subjects x 8 timepoints) against the
 62-species BcgI DB. Emit a long-format strain-abundance table for the individual-discrimination
 analysis (Fig 10)."""
-import subprocess, os, glob, time, gzip
+import subprocess, os, glob, time, gzip, sys
 
 WORK = "/private/tmp/claude-501/-Users-macstudio-Downloads-YangJiazhen/091459b5-4e03-49b6-8502-3f2acf59ff13/scratchpad"
 BIN  = "/Users/macstudio/Downloads/Strain2bScan/target/release/strain2bscan"
@@ -28,7 +28,14 @@ def profile(reads):
     os.remove(tmp)
     return out.stdout, out.stderr
 
-long_rows = []   # sample, subject, timepoint, species, cluster, within_abund, coverage, support
+# Columns are looked up by NAME from multi-profile's own header line, never by position.
+# The previous positional parse stopped at index 4 and so silently dropped depth,
+# global_abundance and sample_fraction -- which left the downstream community matrices with
+# no cross-species abundance to use, and they fell back to `support` (a marker count).
+WANT = ["cluster", "abundance", "coverage", "support", "depth",
+        "global_abundance", "sample_fraction"]
+
+long_rows = []   # sample, subject, timepoint, species, then WANT in order
 detected_rows = []
 print(f"{'sample':10s} {'markers':>8s} {'resolved':>8s} {'strains':>7s} {'detect':>6s} {'t_s':>5s}")
 for r in READS:
@@ -45,9 +52,18 @@ for r in READS:
         continue
     open(f"{OUTDIR}/{alias}.txt", "w").write(so)
     nmark = "?"; nres = 0; nstrain = 0; ndet = 0
+    hdr = None
     for line in so.splitlines():
         if line.startswith("sample:"):
             nmark = line.split()[1]
+        if line.startswith("#species\t"):
+            hdr = {n: i for i, n in enumerate(line.lstrip("#").split("\t"))}
+            missing = [c for c in WANT if c not in hdr]
+            if missing:
+                sys.exit(f"{alias}: multi-profile output has no {missing} column(s); "
+                         f"header was {sorted(hdr)}. Refusing to write a table that would "
+                         f"silently lose them.")
+            continue
         if not line.startswith("  "):
             continue
         parts = line.strip().split("\t")
@@ -57,16 +73,22 @@ for r in READS:
             detected_rows.append((alias, subj, tp, sp))
         elif "[strain-resolved, no cluster" in line:
             nres += 1
-        elif len(parts) >= 5:            # species, cluster, within_abund, coverage, support
-            nres_add = 1
-            long_rows.append((alias, subj, tp, sp, parts[1], parts[2], parts[3], parts[4]))
+        elif hdr is not None and len(parts) == len(hdr):
+            long_rows.append((alias, subj, tp, sp, *(parts[hdr[c]] for c in WANT)))
             nstrain += 1
+    if hdr is None:
+        sys.exit(f"{alias}: no '#species' header in multi-profile output -- the output format "
+                 f"changed. Fix the parser rather than letting rows be dropped.")
     # count distinct resolved species
     nres = len(set(row[3] for row in long_rows if row[0] == alias))
     print(f"{alias:10s} {nmark:>8s} {nres:>8d} {nstrain:>7d} {ndet:>6d} {dt:>5.1f}")
 
 with open(f"{WORK}/results/saliva_strain_long.tsv", "w") as w:
-    w.write("sample\tsubject\ttimepoint\tspecies\tcluster\twithin_abund\tcoverage\tsupport\n")
+    # Append-only: the first eight columns keep their historical positions and names, so a
+    # table written by an older run stays readable; the three that were being dropped go on
+    # the end. `sample_fraction` is the one to use for a cross-species community matrix.
+    w.write("sample\tsubject\ttimepoint\tspecies\tcluster\twithin_abund\tcoverage\tsupport"
+            "\tdepth\tglobal_abundance\tsample_fraction\n")
     for r in long_rows:
         w.write("\t".join(str(x) for x in r) + "\n")
 with open(f"{WORK}/results/saliva_detected_long.tsv", "w") as w:

@@ -17,20 +17,22 @@ PAPER = Path(__file__).resolve().parent.parent
 WORK = PAPER / "results"
 OUT_FIG = PAPER / "figures"
 
-rows = [l.rstrip("\n").split("\t") for l in open(WORK / "saliva_strain_long.tsv")][1:]
-samples = sorted(set(r[0] for r in rows))
+from saliva_table import read_long, COMMUNITY_ABUNDANCE
+rows = read_long(WORK / "saliva_strain_long.tsv", require=(COMMUNITY_ABUNDANCE,))
+samples = sorted(set(r["sample"] for r in rows))
 si = {s: i for i, s in enumerate(samples)}
 subject = {s: s.split("-")[1] for s in samples}
 timepoint = {s: s.split("-")[0] for s in samples}
 
 
 def build(level):
-    key = (lambda r: f"{r[3]}|{r[4]}") if level == "strain" else (lambda r: r[3])
+    key = ((lambda r: f"{r['species']}|{r['cluster']}") if level == "strain"
+           else (lambda r: r["species"]))
     feats = sorted(set(key(r) for r in rows))
     fi = {f: j for j, f in enumerate(feats)}
     M = np.zeros((len(samples), len(feats)))
     for r in rows:
-        M[si[r[0]], fi[key(r)]] += float(r[7])
+        M[si[r["sample"]], fi[key(r)]] += float(r[COMMUNITY_ABUNDANCE])
     rs = M.sum(1, keepdims=True)
     rs[rs == 0] = 1
     return M / rs

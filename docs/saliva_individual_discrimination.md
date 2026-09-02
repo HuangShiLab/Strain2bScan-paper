@@ -1,5 +1,25 @@
 # Saliva case study (Fig 10) — strain-level individual discrimination
 
+> **The committed numbers for this analysis are stale and must not be quoted.**
+> `results/saliva_strain_long.tsv`, `results/saliva_permanova.tsv` and the figure built from
+> them used the `support` column — a raw marker count — as the community abundance. `support`
+> scales with how many markers a cluster happens to carry in the database and with sequencing
+> depth, so two clusters at the same true abundance get different values. The cause was a
+> positional parse in `profile_saliva.py` that stopped at index 4 and never captured
+> `depth`, `global_abundance` or `sample_fraction` (see below). All the scripts now read the
+> table by column name and use `sample_fraction`, the only cross-species-comparable quantity,
+> and they refuse to run against the stale table rather than silently substituting a column.
+> **Re-running `scripts/profile_saliva.py` on the saliva reads is required** before any number
+> here is used; the reads are not in this repo.
+>
+> Why it matters for the claim: on the stale table, strain-level R² (0.8328) edged out
+> species-level (0.8222), which is the paper's point. Rebuilt on `within_abund` — the only
+> abundance the stale table actually contains, and itself not a cross-species quantity — the
+> order reverses (0.6886 vs 0.7101). The correct comparison, on `sample_fraction`, has not
+> been run. A 299-permutation null was checked and rules out one alternative explanation: the
+> feature-count difference (229 strain features vs 18 species) does not inflate R², with null
+> medians 0.2261 and 0.2289. So the column choice, not dimensionality, is what decides this.
+
 Real-data case study closing the "all-simulated" gap: does **strain-level** 2bRAD profiling
 distinguish individuals better than species-level? Reproduces the prior Strain2bfunc result with the
 fast/light Strain2bScan.
@@ -26,7 +46,7 @@ adiacens, Porphyromonas gingivalis, Fusobacterium nucleatum.*
 ## Analysis
 `multi-profile --enzyme BcgI --min-species-markers 50 --min-species-detect 5` on all 32 samples
 (each ~4–18 s; up to 18 species resolved, 40–188 strain calls/sample). Strain- and species-level
-relative-abundance matrices (cluster support, per-sample normalized) → Bray–Curtis → PERMANOVA
+relative-abundance matrices (`sample_fraction`, per-sample normalized) → Bray–Curtis → PERMANOVA
 (adonis, 4999 perms) + leave-one-out 1-NN subject classification. `scripts/profile_saliva.py`,
 `scripts/analyze_saliva.py`.
 
