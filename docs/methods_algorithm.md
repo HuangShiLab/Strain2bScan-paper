@@ -6,7 +6,7 @@ can be re-verified against the code it describes.
 
 ---
 
-## 1. Markers: what a 2bRAD tag becomes
+## 1. Markers: what a 2bRAD tag (or a sketched k-mer) becomes
 
 **Digestion.** A type-IIB restriction enzyme cuts on both sides of its recognition site and
 releases a short fixed-length fragment — the 2bRAD tag. All 16 enzymes from the Fast2bRAD-M
@@ -37,6 +37,40 @@ is fixed: databases built by any version remain readable.
 identity; the same restriction is applied by StrainScan and by Fast2bRAD-M's `remove_redundant`.
 This is what makes per-tag depth proportional to genome copy number, and it is the assumption
 every abundance quantity below rests on.
+
+**Shared loci across enzymes** (`markers.rs`, `already_emitted`). Ten of the sixteen enzymes emit
+27 bp tags and their sites genuinely coincide, so a multi-enzyme scan that counts every hit gives
+one locus an apparent copy number of 2–3 and the single-copy filter drops it. Deduplication is on
+`(position, tag length)` — not on the marker, because two enzymes of *different* tag lengths at
+the same offset cut different loci and must both count. Measured: `recommended` recovers 1,109 of
+16,421 single-copy markers (6.8%) on 2 Mb, `all` 1,370 of 24,065 (5.7%). Single-enzyme databases
+are byte-identical to before; multi-enzyme ones need rebuilding. This is panel recovery, not an
+abundance correction — on a 19-cluster *E. coli* panel, abundance moves ≤0.09 percentage points
+(see `rerun_status.md`).
+
+**A second marker source** (`markers.rs`, `sketch_threshold` / `count_kmers_into`;
+`--marker-source kmer`). Nothing downstream of extraction refers to restriction sites — clustering,
+the tree, detection and abundance all consume `Marker = u64` and its count — so a canonical *k*-mer
+kept iff `hash <= u64::MAX / scale` substitutes directly. That is the FracMinHash rule: like
+digestion and unlike minimizers it is context-free, so marker identity is stable across genomes.
+The mode and its `(k, scale)` are recorded in the database header as a `kmer<K>s<S>` token
+(`markers.rs`, `kmer_db_token`) and read back by `profile`; mixing marker spaces across a panel,
+or between build and profile, is a hard error.
+
+Verified to behave as the rule requires, on *E. coli* K-12 (4,641,652 bp):
+
+- density tracks 1/scale — relative to the unsketched set, ratios 0.9984 / 0.9954 / 1.0008 /
+  1.0082 / 0.9991 / 0.9991 at scale 10 / 100 / 500 / 1,000 / 2,000 / 5,000, within sampling noise
+- FNV-1a collides on none of the 989,962 distinct canonical 31-mers of a 1 Mb window (0.027
+  expected for a uniform 64-bit hash), so the dependency-free hash is adequate here and
+  MurmurHash3 is not needed
+- the shortfall against genome length (4,523,995 markers from 4,641,622 windows) is the
+  single-copy filter removing exactly the 30,274 multi-copy 31-mers, matched against an
+  independent count
+
+Why it exists: an enzyme panel gives 1/2/4/16 discrete density steps and `all` is the ceiling;
+the sketch scale is continuous. The Cluster Search Tree needs density the enzyme ceiling does not
+reach — see §2.
 
 ---
 
@@ -74,6 +108,29 @@ inside it. Leaves deliberately take the **union** of their members' markers rath
 intersection, matching what the flat path scores the same cluster on; the intersection makes the
 tree a weaker competitor rather than an extension, and empties entirely for clusters whose
 members disagree (on real data, a 5-genome *C. acnes* cluster went from 115 markers to 0).
+
+**Why the tree starves, and what fixes it.** K(v) is squeezed from both sides as a panel grows:
+the subtree core is an *intersection*, so one member missing a marker loses it, while the set to
+subtract is a *union* over everything outside and only grows. Clusters do not suffer this — they
+are unions — so a panel can have marker-rich clusters and empty internal nodes at the same time,
+which is exactly the observed failure. `diagnose-tree` reports both, and on a 28-genome panel:
+
+| marker source | cluster markers (median) | clusters below the support floor | node group-specific (median) | verdict |
+|---|---|---|---|---|
+| BcgI | 650 | 0/25 | 2 | not viable |
+| `recommended` (14) | 11,711 | 0/26 | 32 | marginal |
+| `all` (16, the ceiling) | 16,008 | 0/26 | 45 | marginal |
+| `kmer` scale 100 | 18,991 | 0/26 | 40 | marginal |
+| `kmer` scale 30 | 63,554 | 0/26 | 134 | **viable** |
+| `kmer` scale 10 | 189,986 | 0/26 | 372 | **viable** |
+
+At matched density the two sources agree (16,008 → 45 against 18,991 → 40), so this is a property
+of density rather than of restriction chemistry. But `all` is the whole enzyme table and its
+node median is still below the usable threshold: the enzyme path's ceiling sits under the
+requirement. The sketch has no ceiling and clears it at scale 30, for ~3.5× the database size
+(76 MB against 22 MB for `all`, 28 genomes; 2.8 s against 1.4 s to build). This is the mechanism
+behind the 543-genome *C. acnes* observation in §3 — 373 of 542 internal nodes carrying zero
+group-specific markers — and it is why `--layer1 auto` decides per database.
 
 ---
 

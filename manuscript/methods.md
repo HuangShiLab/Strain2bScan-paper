@@ -29,9 +29,65 @@ the tag and its reverse complement) and hashed to a 64-bit integer marker (FNV-1
 sample tags use the same hash, so marker values are internally consistent). Two input modes
 are supported: **BcgI only** for 2bRAD experimental libraries whose reads already are tags, or
 a user-chosen enzyme set (`--enzyme all` for all 16) for in-silico digestion of conventional
-shotgun reads, which enriches the marker set ~*n*-fold for *n* enzymes. For reference genomes
+shotgun reads, which enriches the marker set ~*n*-fold for *n* enzymes. Pooling several enzymes
+requires care: ten of the sixteen emit 27 bp tags and their recognition sites genuinely coincide
+(every AloI site with a C at offset 16 is also a BsaXI site, and a PpiI site as well if offset 19
+is C; on 2 Mb of sequence 64 of 257 AloI sites are all three). A locus is therefore counted once
+however many enzymes recognise it, deduplicating on (position, tag length) rather than on the
+marker, since two enzymes of different tag lengths at the same offset cut genuinely different
+loci. Counting per enzyme instead gives such a locus an apparent copy number of 2–3, and the
+single-copy filter then discards it — a systematic 6–7% hole in multi-enzyme panels. For reference genomes
 we retain only **single-copy** tags (occurring exactly once in the genome), following
 StrainScan's and Fast2bRAD-M's use of single-copy markers for unbiased quantification.
+
+## An alternative marker source: FracMinHash sketching
+
+Everything downstream of extraction consumes only a set of 64-bit marker identities and their
+per-sample counts; nothing in clustering, the search tree, detection or abundance refers to
+restriction sites. Strain2bScan therefore accepts a second, purely computational marker source
+(`--marker-source kmer`): every canonical *k*-mer (default *k* = 31) is hashed with the same
+function used for tags, and kept iff its hash falls below 2^64 / *S* for a user-chosen scale *S*,
+so approximately 1 / *S* of the *k*-mers survive. This is the FracMinHash rule, and like
+restriction digestion — but unlike minimizers — it is *context-free*: whether a locus is selected
+depends on that locus alone, never on its neighbours, so marker identity is stable across
+genomes. The single-copy restriction, clustering, tree construction and both identification
+layers are applied unchanged.
+
+The two sources are not interchangeable in practice and are not offered as competitors. 2bRAD is
+a wet-lab protocol that delivers markers directly from a mixed sample without assembly;
+FracMinHash is an in-silico rule that needs assembled genomes for the reference side. The sketch
+is therefore for shotgun analysis, not for native 2bRAD libraries.
+
+What it buys is **density**. An enzyme panel offers 1, 2, 4 or at most 16 discrete steps; the
+sketch scale is continuous. This matters because the Cluster Search Tree's internal nodes are
+defined by intersection over a subtree minus the union of everything outside it, and are squeezed
+from both sides as a panel grows: a marker absent from any one member of the subtree is lost from
+the intersection, and the union to subtract only grows. On a 28-genome panel, where every cluster
+comfortably clears the support floor on its own markers, the internal nodes do not:
+
+| marker source | markers per cluster (median) | internal-node group-specific markers (median) | tree usable? |
+|---|---|---|---|
+| BcgI (1 enzyme) | 650 | 2 | no |
+| `recommended` (14) | 11,711 | 32 | marginal |
+| `all` (16 — the ceiling) | 16,008 | 45 | marginal |
+| sketch *S* = 100 | 18,991 | 40 | marginal |
+| sketch *S* = 30 | 63,554 | 134 | yes |
+| sketch *S* = 10 | 189,986 | 372 | yes |
+
+Two things follow. At matched density the two sources are equivalent (16,008 markers → 45 versus
+18,991 → 40), which is the expected result if the tree mathematics is a property of the metric
+rather than of restriction enzymes. But the enzyme path has a ceiling — `all` is all sixteen
+enzymes and there is nothing above it — and that ceiling sits below the density at which the tree
+becomes descendable. The sketch has no ceiling, and reaches it at *S* = 30 for ~3.5× the database
+size (76 MB versus 22 MB for `all`, on 28 genomes). This is the mechanism behind the tree being
+inert on dense same-species panels, reported in Results.
+
+The sketch was verified to behave as FracMinHash requires. Marker count tracks 1 / *S* to within
+sampling noise across three decades of scale (ratios 0.995–1.008 relative to the unsketched set,
+on *E. coli* K-12), and the FNV-1a hash produces no collisions on the 989,962 distinct canonical
+31-mers of a 1 Mb window, against 0.027 expected for a uniform 64-bit hash. The apparent
+shortfall against genome length (4,523,995 markers from 4,641,622 windows) is entirely the
+single-copy filter removing the 30,274 multi-copy 31-mers, matching an independent count exactly.
 
 ## Reference database construction
 
@@ -249,6 +305,14 @@ monotonically worse (Bray–Curtis 0.127 / 0.145 / 0.223 / 0.330 / 0.360 at α =
 These are results about the marker space, not about the implementation: both mechanisms assume a
 dense k-mer set, and their preconditions do not hold on a ~1–2 % genomic subsample. The few unique
 markers carry the split directly; the many shared ones do not.
+
+The sketch marker source lets that claim be tested rather than argued, by sweeping density with
+the panel, the clustering and both layers held fixed. It holds for Layer-1: internal-node marker
+counts rise monotonically with density and the tree crosses from unusable to usable between
+sketch scales 100 and 30 (median 40 → 134 group-specific markers), a density the enzyme path
+cannot reach at all. The Layer-2 result was not re-measured at higher density and no claim is
+made about it here; the collinearity that defeats the ElasticNet is a property of how much of
+each cluster's marker set is *shared*, which denser sampling need not change.
 
 ## Implementation
 
