@@ -4,8 +4,9 @@
 analysis (Fig 10)."""
 import subprocess, os, glob, time, gzip, sys
 
-WORK = "/private/tmp/claude-501/-Users-macstudio-Downloads-YangJiazhen/091459b5-4e03-49b6-8502-3f2acf59ff13/scratchpad"
-BIN  = "/Users/macstudio/Downloads/Strain2bScan/target/release/strain2bscan"
+PAPER = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+WORK = os.environ.get("S2BS_SALIVA_WORK", f"{PAPER}/work/saliva_rerun")
+BIN = os.environ.get("S2BS_BIN", f"{os.path.dirname(PAPER)}/Strain2bScan/target/release/strain2bscan")
 DBS  = os.environ.get("DBS", f"{WORK}/dbs/bcgi")
 GATE = os.environ.get("GATE", "50")
 DETECT = os.environ.get("DETECT", "5")
