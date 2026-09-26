@@ -1,0 +1,45 @@
+warning: /Users/macstudio/Downloads/Strain2bScan-raw-data/MSA1002_db_bcgi/Phocaeicola_vulgatus.tsv: legacy database header without per-strain marker counts; truncation of legacy databases is not fully detectable (rebuild the database to enable it)
+cross-species filter: 80186/80232 markers usable for quantification (0.1% shared with another species in the panel, excluded)
+sample: 234545 distinct tag markers; 20 species DBs; resolve-gate≥max(200, 0%×panel), detect-gate≥10 (threads: 16)
+#species	cluster	abundance	coverage	support	depth	global_abundance	sample_fraction
+  Acinetobacter_baumannii	C0	1.000000	0.71	195	37.953	0.002094	0.001341
+  Bacillus_pacificus	C0	1.000000	0.98	49	260.260	0.014362	0.008401
+  Cereibacter_sphaeroides	C0	1.000000	1.00	1861	3027.007	0.167036	0.441714
+  Clostridium_beijerinckii	C0	1.000000	0.98	169	214.624	0.011843	0.002655
+  Cutibacterium_acnes	C0	1.000000	0.65	684	34.594	0.001909	0.002399
+  Escherichia_coli	C0	1.000000	0.97	418	2845.288	0.157009	0.216023
+  Lactobacillus_gasseri	C0	1.000000	0.74	14	44.579	0.002460	0.000447
+  Neisseria_meningitidis	C0	1.000000	0.65	292	30.142	0.001663	0.001527
+  Porphyromonas_gingivalis	C0	1.000000	0.98	197	2889.677	0.159458	0.147051
+  Pseudomonas_paraeruginosa	C0	1.000000	0.95	522	305.692	0.016869	0.054063
+  Staphylococcus_aureus	C0	1.000000	1.00	14	226.357	0.012491	0.002968
+  Staphylococcus_epidermidis	C0	1.000000	1.00	10	5105.200	0.281715	0.046561
+  Streptococcus_agalactiae	C0	1.000000	1.00	25	276.960	0.015283	0.002394
+  Streptococcus_mutans	C0	1.000000	1.00	19	2823.526	0.155808	0.025826
+  Acinetobacter_baumannii	layer1=unique (auto — this DB carries no tree)
+  Bacillus_pacificus	layer1=unique (auto — this DB carries no tree)
+  Bifidobacterium_adolescentis	layer1=unique (auto — this DB carries no tree)
+  Bifidobacterium_adolescentis	[strain-resolved, no cluster above threshold]	markers=467/5914 (depth 1.23x)
+  Cereibacter_sphaeroides	layer1=unique (auto — this DB carries no tree)
+  Clostridium_beijerinckii	layer1=unique (auto — this DB carries no tree)
+  Cutibacterium_acnes	layer1=unique (auto — this DB carries no tree)
+  Deinococcus_radiodurans	layer1=unique (auto — this DB carries no tree)
+  Deinococcus_radiodurans	[strain-resolved, no cluster above threshold]	markers=530/2935 (depth 2.70x)
+  Enterococcus_faecalis	[detected, not strain-resolvable]	markers=112/1374 (8.2%, depth 1.16x)
+  Escherichia_coli	layer1=unique (auto — this DB carries no tree)
+  Helicobacter_pylori	[detected, not strain-resolvable]	markers=134/890 (15.1%, depth 8.16x)
+  Lactobacillus_gasseri	layer1=unique (auto — this DB carries no tree)
+  Neisseria_meningitidis	layer1=unique (auto — this DB carries no tree)
+  Phocaeicola_vulgatus	layer1=unique (auto — this DB carries no tree)
+  Phocaeicola_vulgatus	[strain-resolved, no cluster above threshold]	markers=320/2997 (depth 1.72x)
+  Porphyromonas_gingivalis	layer1=unique (auto — this DB carries no tree)
+  Pseudomonas_paraeruginosa	layer1=unique (auto — this DB carries no tree)
+  Schaalia_odontolytica	layer1=unique (auto — this DB carries no tree)
+  Schaalia_odontolytica	[strain-resolved, no cluster above threshold]	markers=530/13754 (depth 0.60x)
+  Staphylococcus_aureus	layer1=unique (auto — this DB carries no tree)
+  Staphylococcus_epidermidis	layer1=unique (auto — this DB carries no tree)
+  Streptococcus_agalactiae	layer1=unique (auto — this DB carries no tree)
+  Streptococcus_mutans	layer1=unique (auto — this DB carries no tree)
+summary: 18/20 species strain-resolved (14 strain calls), 2 detected-not-resolvable, 0 absent
+coverage of sample: strain calls account for 95.3% of 37827851 tag observations (4.7% unclassified — unresolved species, no reference, host, error)
+predictions -> MSA1003_multi_default.pred
