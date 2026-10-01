@@ -1,0 +1,7 @@
+sample	expected	observed	correct	coverage	support	depth	sample_fraction
+LHCA45	Escherichia_coli|C0	Escherichia_coli|C0	True	1.0000	7842	25.1572	0.964047
+LHCA56	Escherichia_coli|C1	Escherichia_coli|C1	True	1.0000	5533	25.6356	0.796484
+LHCA72	Escherichia_coli|C2	Escherichia_coli|C2	True	0.9998	5746	16.3273	0.816417
+B_longum_LHCA43	Bifidobacterium_longum|Bifidobacterium_longum_LHCA43	Bifidobacterium_longum|Bifidobacterium_longum_LHCA43	True	0.9995	15949	9.7554	0.799987
+B_breve_LHCA81	Bifidobacterium_breve|Bifidobacterium_breve_LHCA81	Bifidobacterium_breve|Bifidobacterium_breve_LHCA81	True	1.0000	17029	24.7082	0.835125
+B_bifidum_LHCA82	Bifidobacterium_bifidum|Bifidobacterium_bifidum_LHCA82	Bifidobacterium_bifidum|Bifidobacterium_bifidum_LHCA82	True	1.0000	17311	22.8871	0.812597

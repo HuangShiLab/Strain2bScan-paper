@@ -88,11 +88,12 @@ analogous to the Layer-1 breadth term) so incomplete strains are not gated out; 
 member); **upstream completeness/contamination estimation and decontamination** (CheckM2 / GUNC) feeding
 the quality filter; and **pangenome-based imputation** of missing markers from complete conspecifics. The
 irreducible case — a strain represented only by a low-completeness, contaminated genome — is a data limit
-no clustering can overcome. (v) Aside
-from the mock and saliva chapters, the accuracy benchmarks are simulated, error-free and closed-world.
-Extensions include oral-cancer case/control analysis (needs the study's sample labels), FFPE and
-degraded material, deeper multi-tool comparison (sylph, StrainGE), and completing the Fast2bRAD-M species
-layer so species and strain calls come from one 2bRAD digest.
+no clustering can overcome. (v) The public-cohort experiment in Table 4 adds real WGS profiling of longitudinal, multi-site and
+low-biomass samples, and Table 5 adds isolate-derived panel validation. These are application-oriented
+subsets rather than closed-world truth benchmarks: read sets used to build the isolate panel were also
+used for self-recovery, and the real metagenomes lack exhaustive strain truth. Deeper external
+validation, oral-cancer case/control analysis, FFPE and degraded material, broader multi-tool
+comparison (sylph, StrainGE), and completing the Fast2bRAD-M species layer remain future work.
 
 **Conclusion.** Reduced-representation 2bRAD markers, combined with a StrainScan-style resolution
 framework and a fast Rust implementation, make accurate strain-level profiling practical at a fraction of

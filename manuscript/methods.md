@@ -443,3 +443,27 @@ evaluated at cluster resolution (ground-truth strains mapped to their clusters).
 time and peak resident set size were measured with `/usr/bin/time -l` on a 16-core Apple
 silicon machine. All scripts, pinned accession lists, result tables and figure code are in the
 Strain2bScan-paper repository; every figure is regenerable with `make figures`.
+### Public real-metagenome cohorts and isolate-derived panels
+
+To supplement the controlled analyses, we profiled representative paired-end WGS subsets from four
+public BioProjects: PRJNA288562 (pregnancy saliva/vagina/distal-gut time series), PRJNA1517970 (preterm
+vaginal and meconium metagenomes), PRJNA1191223 (preterm-infant stool time series) and PRJNA1191225
+(preterm-infant isolate WGS). These were exploratory application subsets selected to test multi-site
+stability, low-biomass specificity and isolate-derived strain recovery; they were not complete
+epidemiological cohorts. For the generic-panel screen we used the existing 20-species MSA database in
+`all`-enzyme mode with `--min-species-markers 20 --min-species-detect 2 --min-support 2
+--min-coverage 0.01 --min-abundance 0`. PRJNA288562 analyses used subject T23 at gestational days 84 and
+273 for all three body sites. PRJNA1517970 analyses used three vaginal, three meconium and one negative
+extraction-control library.
+
+For cohort-specific validation, six PRJNA1191225 isolate read sets were assembled with SPAdes 4.3.0
+(`--isolate`, 8 threads). Three *E. coli* assemblies were clustered at 0.95 similarity into three
+resolvable units; one assembly each from *B. longum*, *B. breve* and *B. bifidum* was built as a
+single-genome species database. Panels used `--enzyme recommended`. All six isolate read sets were then
+profiled with the cohort panel using `--min-species-markers 50 --min-species-detect 3 --min-support 2
+--min-coverage 0.01 --min-abundance 0`. Because these reads also generated the assemblies, the 6/6
+self-recovery is a panel/read compatibility check, not an independent classification benchmark. P08
+W1–W3 metagenomes were reprofiled with the same cohort panel using `--min-species-markers 20
+--min-species-detect 2` and otherwise the gates above. Timings were measured on a local Apple Silicon
+workstation; full command lines and per-sample outputs are provided in
+`results/realworld_cohort_benchmark/`.

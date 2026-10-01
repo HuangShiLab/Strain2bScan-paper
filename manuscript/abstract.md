@@ -37,7 +37,9 @@ species (*Klebsiella pneumoniae*) StrainScan could not build. On **host-contamin
 ATCC mocks, Strain2bScan is the **only profiler tested that preserves both strain detection and abundance
 at 99 % human DNA** — StrainScan keeps detection but its abundance estimate collapses (Bray–Curtis
 similarity 0.03) and inStrain loses detection (recall 0.20), each failing in a complementary way. The two
-modes agree, so one tool spans both regimes.
+modes agree, so one tool spans both regimes. In public longitudinal WGS cohorts, the same implementation
+profiled 22 libraries in 100.6 s and 343 MiB; a cohort-specific isolate panel returned the expected
+self-call for all six study isolates and tracked a persistent *B. bifidum* strain across three weekly infant stool samples.
 
 **Conclusions.** Strain2bScan delivers accurate, genome-resolved strain profiling from a sparse marker
 set: it uniquely enables strain-level analysis of low-biomass, high-host 2bRAD-M data, and scales

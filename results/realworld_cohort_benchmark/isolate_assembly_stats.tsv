@@ -1,0 +1,7 @@
+isolate	species	contigs	total_bp	N50_bp	panel_unit	panel_markers	self_call_correct
+LHCA45	Escherichia coli	185	4962385	239924	Escherichia_coli	C0	yes
+LHCA56	Escherichia coli	448	5147585	222606	Escherichia_coli	C1	yes
+LHCA72	Escherichia coli	457	5040433	159193	Escherichia_coli	C2	yes
+LHCA43	Bifidobacterium longum	164	2355114	55550	Bifidobacterium_longum_LHCA43	18426	yes
+LHCA81	Bifidobacterium breve	90	2393363	228295	Bifidobacterium_breve_LHCA81	19214	yes
+LHCA82	Bifidobacterium bifidum	180	2299850	75562	Bifidobacterium_bifidum_LHCA82	17985	yes

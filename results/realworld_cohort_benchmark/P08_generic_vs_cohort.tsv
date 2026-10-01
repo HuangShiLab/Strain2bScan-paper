@@ -1,0 +1,4 @@
+week	generic_panel_calls	cohort_panel_calls
+W1	Staphylococcus_aureus|C3@frac=6.50e-05	Bifidobacterium_bifidum|Bifidobacterium_bifidum_LHCA82@frac=6.46e-01
+W2	Escherichia_coli|C0@frac=6.10e-05;Escherichia_coli|C2@frac=5.70e-05	Bifidobacterium_bifidum|Bifidobacterium_bifidum_LHCA82@frac=5.83e-01;Escherichia_coli|C0|C1|C2@frac=1.40e-04
+W3	Enterococcus_faecalis|C5@frac=1.20e-04;Enterococcus_faecalis|C1@frac=9.00e-05;Enterococcus_faecalis|C3@frac=7.10e-05;Enterococcus_faecalis|C0@frac=5.00e-05;Enterococcus_faecalis|C4@frac=4.40e-05;Enterococcus_faecalis|C2@frac=3.80e-05	Bifidobacterium_bifidum|Bifidobacterium_bifidum_LHCA82@frac=6.10e-01

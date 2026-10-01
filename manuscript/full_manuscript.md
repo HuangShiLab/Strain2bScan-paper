@@ -446,17 +446,62 @@ analogous to the Layer-1 breadth term) so incomplete strains are not gated out; 
 member); **upstream completeness/contamination estimation and decontamination** (CheckM2 / GUNC) feeding
 the quality filter; and **pangenome-based imputation** of missing markers from complete conspecifics. The
 irreducible case — a strain represented only by a low-completeness, contaminated genome — is a data limit
-no clustering can overcome. (v) Aside
-from the mock and saliva chapters, the accuracy benchmarks are simulated, error-free and closed-world.
-Extensions include oral-cancer case/control analysis (needs the study's sample labels), FFPE and
-degraded material, deeper multi-tool comparison (sylph, StrainGE), and completing the Fast2bRAD-M species
-layer so species and strain calls come from one 2bRAD digest.
+no clustering can overcome. (v) The public-cohort experiment in Table 4 adds real WGS profiling of longitudinal, multi-site and
+low-biomass samples, and Table 5 adds isolate-derived panel validation. These are application-oriented
+subsets rather than closed-world truth benchmarks: read sets used to build the isolate panel were also
+used for self-recovery, and the real metagenomes lack exhaustive strain truth. Deeper external
+validation, oral-cancer case/control analysis, FFPE and degraded material, broader multi-tool
+comparison (sylph, StrainGE), and completing the Fast2bRAD-M species layer remain future work.
 
 **Conclusion.** Reduced-representation 2bRAD markers, combined with a StrainScan-style resolution
 framework and a fast Rust implementation, make accurate strain-level profiling practical at a fraction of
 the compute and memory of full-k-mer methods. Uniquely, the same tool spans two regimes: native 2bRAD-M
 for strain-level analysis of low-biomass, high-host microbiomes, and in-silico-digested shotgun for
 strain profiling across communities of many species and many samples.
+
+
+### Real-world WGS cohorts: longitudinal tracking, low-biomass specificity, and isolate-validated panels (Tables 4–6)
+
+To test whether the same implementation operates on public human metagenomes rather than controlled
+mocks, we profiled representative paired-end WGS subsets from PRJNA288562, PRJNA1517970, PRJNA1191223
+and PRJNA1191225 (Methods). These were application-oriented subsets, not complete epidemiological
+cohorts. With a legacy 20-species MSA panel in all-enzyme mode, 22 real libraries completed in
+**100.6 s** and **343 MiB** peak RSS (**4.57 s/sample**); the smallest vaginal library alone required
+**0.44 s** and **191 MiB**.
+
+In PRJNA288562, subject T23 had WGS from saliva, vaginal swab and distal gut at gestational days 84
+and 273. Five of six libraries produced **34 strain calls** spanning six panel species. The signal was
+body-site specific: saliva contained 13 and 11 calls at the two timepoints, gut contained 7 and 2, and
+vagina contained no call at GD84 and one low-depth *S. epidermidis* call at GD273. Strain-level
+structure also retained within-host structure over months: four *Neisseria* clusters and four
+*Schaalia* clusters were shared between early and late saliva, whereas gut *Bifidobacterium
+adolescentis* C4 persisted while three other *Bifidobacterium* clusters and all three *E. coli*
+clusters were present only at GD84. Thus the same run captured both short-term persistence and strain
+turnover without requiring a separate database per sample (Table 4).
+
+PRJNA1517970 tested vaginal and meconium libraries, including one extraction blank. Under the generic
+panel no strain calls were made in six vaginal/meconium libraries or the blank. Marker observations
+ranged from 464 in the blank to 116,410 in meconium, so this result should be interpreted as panel and
+gate limitation rather than runtime failure; nevertheless, the absence of calls in the blank provides a
+specificity check at very low marker input (Table 4).
+
+For direct gut strain tracking, we assembled six public isolate genomes from PRJNA1191225 (three
+*E. coli*, one *B. longum*, one *B. breve* and one *B. bifidum*; assembly sizes 2.30–5.15 Mb; N50
+55.5–239.9 kb) and built a cohort-specific panel. The *E. coli* panel resolved three clusters with
+47,410 total and 19,122 unique markers; the three Bifidobacterium species panels contained 17,985–19,214
+markers. All six isolate read sets recovered their expected panel unit (**6/6**) with breadth 0.9995–1.0,
+depth 9.8–25.6× and within-species abundance 0.80–0.96 (Table 5). This validation took 9.53 s and 55.7
+MiB peak RSS.
+
+Reprofiling preterm-infant P08 across weeks 1–3 with the cohort panel showed persistent colonization by
+***Bifidobacterium bifidum* LHCA82**: breadth 0.764/0.773/0.792, depth 237×/214×/238× and within-panel
+abundance 64.6%/58.3%/61.0% at W1/W2/W3. *E. coli* was detected only at W2, at 0.029× depth and
+sample fraction 1.40 × 10⁻⁴; because coverage was too low to distinguish the three study isolates, the
+tool reported the conservative merged unit `C0|C1|C2` rather than assigning a single isolate. The
+generic MSA panel detected the W2 *E. coli* signal but missed the dominant *B. bifidum* strain because
+its Bifidobacterium database contained *B. adolescentis* rather than the cohort-specific species. This
+experiment therefore demonstrates both the value of cohort-specific panels and the value of leaving a
+low-support strain unresolved instead of forcing a false isolate assignment (Table 6).
 
 ## Methods
 
@@ -680,6 +725,32 @@ Strain2bScan-paper repository; every figure is regenerable with `make figures`.
 
 ## Figure legends
 
+
+### Public real-metagenome cohorts and isolate-derived panels
+
+To supplement the controlled analyses, we profiled representative paired-end WGS subsets from four
+public BioProjects: PRJNA288562 (pregnancy saliva/vagina/distal-gut time series), PRJNA1517970 (preterm
+vaginal and meconium metagenomes), PRJNA1191223 (preterm-infant stool time series) and PRJNA1191225
+(preterm-infant isolate WGS). These were exploratory application subsets selected to test multi-site
+stability, low-biomass specificity and isolate-derived strain recovery; they were not complete
+epidemiological cohorts. For the generic-panel screen we used the existing 20-species MSA database in
+`all`-enzyme mode with `--min-species-markers 20 --min-species-detect 2 --min-support 2
+--min-coverage 0.01 --min-abundance 0`. PRJNA288562 analyses used subject T23 at gestational days 84 and
+273 for all three body sites. PRJNA1517970 analyses used three vaginal, three meconium and one negative
+extraction-control library.
+
+For cohort-specific validation, six PRJNA1191225 isolate read sets were assembled with SPAdes 4.3.0
+(`--isolate`, 8 threads). Three *E. coli* assemblies were clustered at 0.95 similarity into three
+resolvable units; one assembly each from *B. longum*, *B. breve* and *B. bifidum* was built as a
+single-genome species database. Panels used `--enzyme recommended`. All six isolate read sets were then
+profiled with the cohort panel using `--min-species-markers 50 --min-species-detect 3 --min-support 2
+--min-coverage 0.01 --min-abundance 0`. Because these reads also generated the assemblies, the 6/6
+self-recovery is a panel/read compatibility check, not an independent classification benchmark. P08
+W1–W3 metagenomes were reprofiled with the same cohort panel using `--min-species-markers 20
+--min-species-detect 2` and otherwise the gates above. Timings were measured on a local Apple Silicon
+workstation; full command lines and per-sample outputs are provided in
+`results/realworld_cohort_benchmark/`.
+
 ### Main figures
 
 **Figure 1. Strain2bScan overview and the two input modes.**
@@ -854,6 +925,45 @@ assembly level, CheckM completeness/contamination, contig count and length per g
 | low | 0.926/0.678/0.782 | 0.898/0.767/0.827 | 1.0 s / 311 MB | 100 s / 1112 MB |
 | med | 0.863/0.853/0.869 | 0.911/0.856/0.895 | 4.3 s / 670 MB | 228 s / 1696 MB |
 | high | 0.773/0.872/0.819 | 0.814/0.972/0.895 | 8.7 s / 1119 MB | 398 s / 2028 MB |
+
+**Table 4. Public real-metagenome application subsets profiled with Strain2bScan.** These were
+informative application subsets rather than complete cohort analyses. The generic panel was the legacy
+20-species MSA database; calls used all-enzyme mode with `--min-species-markers 20
+--min-species-detect 2 --min-support 2 --min-coverage 0.01 --min-abundance 0`.
+
+| Project | Design and selected libraries | Calls | Observation |
+|---|---|--:|---|
+| PRJNA288562 | Pregnancy subject T23; saliva, vaginal swab and distal gut at GD84 and GD273 (6 WGS libraries) | 34 calls in 5/6 libraries | Saliva was cluster-rich; four *Neisseria* and four *Schaalia* clusters were shared across timepoints. Gut *B. adolescentis* C4 persisted, whereas three other *Bifidobacterium* clusters and three *E. coli* clusters were GD84-only. |
+| PRJNA1517970 | Preterm-birth vaginal/meconium subset plus extraction blank (7 WGS libraries) | 0 calls | Marker observations ranged from 464 (blank) to 116,410 (meconium). No blank call was observed, supporting specificity under these gates. |
+| PRJNA1191223 | Preterm infant P08 stool at W1, W2 and W3 (3 WGS libraries) | 9 generic-panel calls | Generic panel showed weekly turnover: one *S. aureus* cluster (W1), two *E. coli* clusters (W2), and six *E. faecalis* clusters (W3). |
+| PRJNA1191225 | Six preterm-infant isolate WGS read sets used for cohort-panel validation | 6/6 expected self-calls | The cohort-specific panel recovered all expected *E. coli* clusters or Bifidobacterium species units. |
+
+**Table 5. Isolate assemblies and cohort-specific panel validation.** Isolates were assembled with
+SPAdes `--isolate`. *E. coli* assemblies were clustered at 0.95 similarity; each Bifidobacterium
+species was built as a single-genome database. All isolate read sets recovered the expected panel unit.
+
+| Isolate | Species | Contigs | Assembly (Mb) | N50 (kb) | Panel unit | Panel markers | Self-call |
+|---|---|--:|--:|--:|---|--:|:--:|
+| LHCA45 | *Escherichia coli* | 185 | 4.96 | 240.0 | C0 | 7,786 unique | ✓ |
+| LHCA56 | *Escherichia coli* | 448 | 5.15 | 222.6 | C1 | 5,466 unique | ✓ |
+| LHCA72 | *Escherichia coli* | 457 | 5.04 | 159.2 | C2 | 5,665 unique | ✓ |
+| LHCA43 | *Bifidobacterium longum* | 164 | 2.36 | 55.6 | LHCA43 | 18,426 | ✓ |
+| LHCA81 | *Bifidobacterium breve* | 90 | 2.39 | 228.3 | LHCA81 | 19,214 | ✓ |
+| LHCA82 | *Bifidobacterium bifidum* | 180 | 2.30 | 75.6 | LHCA82 | 17,985 | ✓ |
+
+**Table 6. P08 weekly stool profiling with the cohort-specific isolate panel.** Breadth is database
+coverage; abundance is within-species abundance in Strain2bScan output.
+
+| Week | Species | Panel unit | Breadth | Depth (×) | Abundance | Fraction of sample |
+|--:|---|---|--:|--:|--:|--:|
+| W1 | *Bifidobacterium bifidum* | LHCA82 | 0.764 | 236.7 | 1.000 | 0.6456 |
+| W2 | *Bifidobacterium bifidum* | LHCA82 | 0.773 | 213.9 | 1.000 | 0.5834 |
+| W2 | *Escherichia coli* | C0\|C1\|C2 | 0.026 | 0.029 | 1.000 | 0.000140 |
+| W3 | *Bifidobacterium bifidum* | LHCA82 | 0.792 | 238.2 | 1.000 | 0.6099 |
+
+The generic MSA panel detected the W2 *E. coli* signal as two low-abundance generic clusters
+(fraction 6.1 × 10⁻⁵ and 5.7 × 10⁻⁵) but did not contain the persistent *B. bifidum* LHCA82 unit. This
+contrast illustrates why body-site- or cohort-specific panels are needed for biological interpretation.
 
 ## References
 

@@ -254,3 +254,45 @@ mapping + microdiversity), and it completed the diverse staggered MSA-1003 that 
 (> 6 h). Together, Fig 6 and Fig 12 show one combined database serving both a native-2bRAD and an
 in-silico-shotgun entry point, with the decisive gain — retained strain detection *and* quantification —
 appearing exactly where microbiome samples are hardest: high host, low biomass.
+### Real-world WGS cohorts: longitudinal tracking, low-biomass specificity, and isolate-validated panels (Tables 4–6)
+
+To test whether the same implementation operates on public human metagenomes rather than controlled
+mocks, we profiled representative paired-end WGS subsets from PRJNA288562, PRJNA1517970, PRJNA1191223
+and PRJNA1191225 (Methods). These were application-oriented subsets, not complete epidemiological
+cohorts. With a legacy 20-species MSA panel in all-enzyme mode, 22 real libraries completed in
+**100.6 s** and **343 MiB** peak RSS (**4.57 s/sample**); the smallest vaginal library alone required
+**0.44 s** and **191 MiB**.
+
+In PRJNA288562, subject T23 had WGS from saliva, vaginal swab and distal gut at gestational days 84
+and 273. Five of six libraries produced **34 strain calls** spanning six panel species. The signal was
+body-site specific: saliva contained 13 and 11 calls at the two timepoints, gut contained 7 and 2, and
+vagina contained no call at GD84 and one low-depth *S. epidermidis* call at GD273. Strain-level
+structure also retained within-host structure over months: four *Neisseria* clusters and four
+*Schaalia* clusters were shared between early and late saliva, whereas gut *Bifidobacterium
+adolescentis* C4 persisted while three other *Bifidobacterium* clusters and all three *E. coli*
+clusters were present only at GD84. Thus the same run captured both short-term persistence and strain
+turnover without requiring a separate database per sample (Table 4).
+
+PRJNA1517970 tested vaginal and meconium libraries, including one extraction blank. Under the generic
+panel no strain calls were made in six vaginal/meconium libraries or the blank. Marker observations
+ranged from 464 in the blank to 116,410 in meconium, so this result should be interpreted as panel and
+gate limitation rather than runtime failure; nevertheless, the absence of calls in the blank provides a
+specificity check at very low marker input (Table 4).
+
+For direct gut strain tracking, we assembled six public isolate genomes from PRJNA1191225 (three
+*E. coli*, one *B. longum*, one *B. breve* and one *B. bifidum*; assembly sizes 2.30–5.15 Mb; N50
+55.5–239.9 kb) and built a cohort-specific panel. The *E. coli* panel resolved three clusters with
+47,410 total and 19,122 unique markers; the three Bifidobacterium species panels contained 17,985–19,214
+markers. All six isolate read sets recovered their expected panel unit (**6/6**) with breadth 0.9995–1.0,
+depth 9.8–25.6× and within-species abundance 0.80–0.96 (Table 5). This validation took 9.53 s and 55.7
+MiB peak RSS.
+
+Reprofiling preterm-infant P08 across weeks 1–3 with the cohort panel showed persistent colonization by
+***Bifidobacterium bifidum* LHCA82**: breadth 0.764/0.773/0.792, depth 237×/214×/238× and within-panel
+abundance 64.6%/58.3%/61.0% at W1/W2/W3. *E. coli* was detected only at W2, at 0.029× depth and
+sample fraction 1.40 × 10⁻⁴; because coverage was too low to distinguish the three study isolates, the
+tool reported the conservative merged unit `C0|C1|C2` rather than assigning a single isolate. The
+generic MSA panel detected the W2 *E. coli* signal but missed the dominant *B. bifidum* strain because
+its Bifidobacterium database contained *B. adolescentis* rather than the cohort-specific species. This
+experiment therefore demonstrates both the value of cohort-specific panels and the value of leaving a
+low-support strain unresolved instead of forcing a false isolate assignment (Table 6).

@@ -1,0 +1,5 @@
+project	design	selected_libraries	positive_libraries	strain_calls	panel	interpretation
+PRJNA288562	pregnancy saliva/vagina/distal gut, T23 GD84 and GD273	6	5	34	MSA 20-species, all-enzyme	Site-specific profiles; eight strain clusters shared across saliva timepoints; B. adolescentis C4 persisted in gut; three E. coli clusters were GD84-only
+PRJNA1517970	preterm vaginal/meconium plus extraction blank	7	0	0	MSA 20-species, all-enzyme	No strain calls and no blank call; marker observations ranged from 464 to 116410, indicating panel/threshold limitation rather than runtime failure
+PRJNA1191223	preterm infant P08 weekly stool W1-W3	3	3	9 generic; 4 cohort-panel calls	MSA generic and PRJNA1191225 cohort panel	Generic panel detected weekly turnover; cohort panel resolved persistent B. bifidum LHCA82 and low-abundance E. coli at W2
+PRJNA1191225	six preterm-infant isolate genomes/read sets	6	6	6 correct self-calls	cohort-specific isolate panel	All six isolate read sets recovered their expected strain cluster; 9.53 s and 55.7 MiB peak RSS

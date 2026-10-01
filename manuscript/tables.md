@@ -38,3 +38,42 @@
 | low | 0.926/0.678/0.782 | 0.898/0.767/0.827 | 1.0 s / 311 MB | 100 s / 1112 MB |
 | med | 0.863/0.853/0.869 | 0.911/0.856/0.895 | 4.3 s / 670 MB | 228 s / 1696 MB |
 | high | 0.773/0.872/0.819 | 0.814/0.972/0.895 | 8.7 s / 1119 MB | 398 s / 2028 MB |
+
+**Table 4. Public real-metagenome application subsets profiled with Strain2bScan.** These were
+informative application subsets rather than complete cohort analyses. The generic panel was the legacy
+20-species MSA database; calls used all-enzyme mode with `--min-species-markers 20
+--min-species-detect 2 --min-support 2 --min-coverage 0.01 --min-abundance 0`.
+
+| Project | Design and selected libraries | Calls | Observation |
+|---|---|--:|---|
+| PRJNA288562 | Pregnancy subject T23; saliva, vaginal swab and distal gut at GD84 and GD273 (6 WGS libraries) | 34 calls in 5/6 libraries | Saliva was cluster-rich; four *Neisseria* and four *Schaalia* clusters were shared across timepoints. Gut *B. adolescentis* C4 persisted, whereas three other *Bifidobacterium* clusters and three *E. coli* clusters were GD84-only. |
+| PRJNA1517970 | Preterm-birth vaginal/meconium subset plus extraction blank (7 WGS libraries) | 0 calls | Marker observations ranged from 464 (blank) to 116,410 (meconium). No blank call was observed, supporting specificity under these gates. |
+| PRJNA1191223 | Preterm infant P08 stool at W1, W2 and W3 (3 WGS libraries) | 9 generic-panel calls | Generic panel showed weekly turnover: one *S. aureus* cluster (W1), two *E. coli* clusters (W2), and six *E. faecalis* clusters (W3). |
+| PRJNA1191225 | Six preterm-infant isolate WGS read sets used for cohort-panel validation | 6/6 expected self-calls | The cohort-specific panel recovered all expected *E. coli* clusters or Bifidobacterium species units. |
+
+**Table 5. Isolate assemblies and cohort-specific panel validation.** Isolates were assembled with
+SPAdes `--isolate`. *E. coli* assemblies were clustered at 0.95 similarity; each Bifidobacterium
+species was built as a single-genome database. All isolate read sets recovered the expected panel unit.
+
+| Isolate | Species | Contigs | Assembly (Mb) | N50 (kb) | Panel unit | Panel markers | Self-call |
+|---|---|--:|--:|--:|---|--:|:--:|
+| LHCA45 | *Escherichia coli* | 185 | 4.96 | 240.0 | C0 | 7,786 unique | ✓ |
+| LHCA56 | *Escherichia coli* | 448 | 5.15 | 222.6 | C1 | 5,466 unique | ✓ |
+| LHCA72 | *Escherichia coli* | 457 | 5.04 | 159.2 | C2 | 5,665 unique | ✓ |
+| LHCA43 | *Bifidobacterium longum* | 164 | 2.36 | 55.6 | LHCA43 | 18,426 | ✓ |
+| LHCA81 | *Bifidobacterium breve* | 90 | 2.39 | 228.3 | LHCA81 | 19,214 | ✓ |
+| LHCA82 | *Bifidobacterium bifidum* | 180 | 2.30 | 75.6 | LHCA82 | 17,985 | ✓ |
+
+**Table 6. P08 weekly stool profiling with the cohort-specific isolate panel.** Breadth is database
+coverage; abundance is within-species abundance in Strain2bScan output.
+
+| Week | Species | Panel unit | Breadth | Depth (×) | Abundance | Fraction of sample |
+|--:|---|---|--:|--:|--:|--:|
+| W1 | *Bifidobacterium bifidum* | LHCA82 | 0.764 | 236.7 | 1.000 | 0.6456 |
+| W2 | *Bifidobacterium bifidum* | LHCA82 | 0.773 | 213.9 | 1.000 | 0.5834 |
+| W2 | *Escherichia coli* | C0\|C1\|C2 | 0.026 | 0.029 | 1.000 | 0.000140 |
+| W3 | *Bifidobacterium bifidum* | LHCA82 | 0.792 | 238.2 | 1.000 | 0.6099 |
+
+The generic MSA panel detected the W2 *E. coli* signal as two low-abundance generic clusters
+(fraction 6.1 × 10⁻⁵ and 5.7 × 10⁻⁵) but did not contain the persistent *B. bifidum* LHCA82 unit. This
+contrast illustrates why body-site- or cohort-specific panels are needed for biological interpretation.
