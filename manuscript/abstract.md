@@ -1,52 +1,46 @@
-# Strain2bScan — Abstract (draft)
+# Strain2bScan; Abstract (draft)
 
 **Working title:** *Strain2bScan: strain-level profiling from 2bRAD-reduced markers for low-biomass
 microbiomes and community-scale metagenomes.*
 
 ## Abstract
 
-**Background.** Strain-level variation drives clinically important microbial phenotypes, but 16S
-surveys cannot resolve strains and shotgun k-mer methods, while accurate, are held back from two
-increasingly important settings: they are computationally heavy across the many-species, many-sample
-cohorts of modern studies, and they fail on low-biomass, host-contaminated samples (saliva, tumour/FFPE,
-skin) where most DNA is human. Reduced-representation 2bRAD sequencing samples a sparse, reproducible
-subset of the genome, is robust to low input and host contamination, and has been used for species-level
-profiling — but not for strain resolution.
+**Background.** Strain-level variation drives clinically important microbial phenotypes. Although 16S
+surveys resolve species, they generally cannot resolve strains. Shotgun k-mer methods recover strain
+information but face two practical barriers: per-sample cost grows when many species must be queried, and
+host-dominated low-biomass specimens contain too little microbial DNA for robust detection. 2bRAD sequencing
+samples a sparse, reproducible fraction of the genome, is compatible with low-input and host-contaminated
+specimens, and has previously been used mainly for species-level profiling.
 
-**Results.** We present **Strain2bScan**, a dependency-free Rust strain profiler that ports the
-StrainScan resolution framework (within-species clustering plus unique-marker scoring) onto **2bRAD
-markers** — the 32–38 bp tags released by type-IIB restriction digestion — and uniquely accepts **two
-input modes**. As a shared foundation it is accurate (**precision 1.0** across species, high recall, low
-abundance error), detects strains to **0.5× coverage matching StrainScan**, achieves precision 1.0 with
-complete references across all 15 species (declining as references degrade — complete/near-complete
-genomes matter), and — unlike 16S, whose between-strain distances
-are uncorrelated with genome divergence (median Spearman 0.36 across 15 species) — its tags track
-whole-genome strain distance (median 0.94). **(1) Native 2bRAD-M for low-biomass microbiomes:** on the
-ATCC MSA-1002 mock, native 2bRAD holds precision 1.0 with **full strain recall and accurate abundance at
-99 % human DNA**; on real saliva (8 subjects × 4 timepoints) strain-level
-profiles discriminate individuals better than species-level (PERMANOVA **R² 0.83 > 0.82**; leave-one-
-timepoint-out host-ID **100 %**), are temporally stable, and recover **128–163 low-abundance strains per
-sample that host-limited shotgun misses**. **(2) Conventional metagenomes at scale:** the sample is
-digested once and matched against every species database, so per-sample cost is independent of the
-number of species — **~8× faster and ~11× lighter** than StrainScan per sample and **~130–146× faster on
-a 55-species community**. On a common 15-species simulated benchmark (both tools building databases from
-the same genomes and profiling the same reads), Strain2bScan **matched StrainScan's precision (1.0) and
-exceeded its recall** (median 0.80 vs 0.67, full recall by 3× vs 10×) while building databases
-**249–614× faster and 43–138× lighter** and profiling **4–105× faster** — and it completed the one
-species (*Klebsiella pneumoniae*) StrainScan could not build. On **host-contaminated** shotgun of the
-ATCC mocks, Strain2bScan is the **only profiler tested that preserves both strain detection and abundance
-at 99 % human DNA** — StrainScan keeps detection but its abundance estimate collapses (Bray–Curtis
-similarity 0.03) and inStrain loses detection (recall 0.20), each failing in a complementary way. The two
-modes agree, so one tool spans both regimes. In public longitudinal WGS cohorts, the same implementation
-profiled 22 libraries in 100.6 s and 343 MiB; a cohort-specific isolate panel returned the expected
-self-call for all six study isolates and tracked a persistent *B. bifidum* strain across three weekly infant stool samples.
+**Results.** We present Strain2bScan, a Rust strain profiler that implements within-species clustering and
+unique-marker scoring on 2bRAD markers, the 32–38 bp tags produced by type-IIB restriction digestion. It
+accepts both native 2bRAD-M libraries and in-silico-digested shotgun metagenomes. 2bRAD-marker distances
+tracked whole-genome strain distances (median Spearman ρ = 0.94), whereas 16S distances were much weaker
+(median ρ = 0.36). With complete references, precision was 1.0 across simulated single-species benchmarks,
+detection reached 0.5× coverage, and accuracy depended strongly on reference completeness. In native BcgI
+2bRAD mode, Strain2bScan retained precision 1.0, full strain recall and accurate abundance at 99% human DNA.
+On real saliva, leave-one-timepoint-out host identification reached 100% with strain features versus 78.1%
+with species features; strain and species PERMANOVA R² values were comparable (0.757 versus 0.755), so the
+advantage was strongest for subject identification and low-abundance strain recovery. Native 2bRAD confirmed
+65/65 shotgun strain calls and recovered 128–163 additional low-abundance strains per sample. For
+conventional shotgun input, digest-once profiling reduced cost relative to per-species k-mer querying:
+Strain2bScan was approximately 8× faster and 11× lighter per sample and 130–146× faster on a 55-species
+community. On a matched 15-species benchmark it matched StrainScan precision (1.0), improved median recall
+(0.80 versus 0.67), built databases 249–614× faster and 43–138× lighter, and completed *Klebsiella
+pneumoniae*, which StrainScan could not build. On host-contaminated shotgun mocks, it was the only tool
+tested that preserved both detection and abundance at 99% human DNA. In public WGS cohorts, 22 libraries
+were profiled in 100.6 s using 343 MiB peak RSS; a cohort-specific isolate panel recovered all six expected
+isolate self-calls and tracked a persistent *Bifidobacterium bifidum* strain across three weekly infant
+stool samples.
 
-**Conclusions.** Strain2bScan delivers accurate, genome-resolved strain profiling from a sparse marker
-set: it uniquely enables strain-level analysis of low-biomass, high-host 2bRAD-M data, and scales
-conventional-metagenome strain profiling to communities of many species across many samples.
+**Conclusions.** Strain2bScan makes genome-resolved strain profiling practical for both native
+low-biomass/high-host 2bRAD-M data and community-scale shotgun cohorts. Its accuracy depends on reference
+completeness and panel design, so niche-appropriate or cohort-specific panels are essential for
+biological interpretation.
 
-**Availability.** Rust source: https://github.com/HuangShiLab/Strain2bScan · reproducible benchmarks and
-figures: https://github.com/HuangShiLab/Strain2bScan-paper.
+**Availability.** Rust source: https://github.com/HuangShiLab/Strain2bScan. Public reads: PRJNA1131785,
+PRJNA288562, PRJNA1517970, PRJNA1191223 and PRJNA1191225. Derived outputs and reproducibility artifacts:
+https://github.com/HuangShiLab/Strain2bScan-paper.
 
 ---
 

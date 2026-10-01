@@ -1,0 +1,8 @@
+run	site	distinct_markers	body_site_panel_calls	diagnostic_evidence
+SRR40410528	meconium	86980	0	At 1-marker gate, Cutibacterium acnes had 3/39811 markers; no strain call
+SRR40410567	vagina	7394	0	no panel species passed diagnostic gate
+SRR40410657	meconium	22466	0	no panel species passed diagnostic gate
+SRR40410734	vagina	18228	0	no panel species passed diagnostic gate
+SRR40410753	vagina	11628	0	no panel species passed diagnostic gate
+SRR40410776	extraction blank	340	0	no call
+SRR40410851	meconium	17542	0	no panel species passed diagnostic gate

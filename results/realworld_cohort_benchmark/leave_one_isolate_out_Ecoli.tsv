@@ -1,0 +1,4 @@
+heldout_isolate	panel_species	panel_ecoli_genomes	observed_ecoli_unit	coverage	depth	sample_fraction	interpretation
+LHCA45	Escherichia coli	2	C0|C1	0.7988	7.8718	0.611619	True isolate absent; markers assigned to merged relatives rather than a false third cluster
+LHCA56	Escherichia coli	2	C0|C1	0.9110	10.5476	0.649022	True isolate absent; markers assigned to merged relatives rather than a false third cluster
+LHCA72	Escherichia coli	2	C0|C1	0.8905	7.2538	0.729066	True isolate absent; markers assigned to merged relatives rather than a false third cluster

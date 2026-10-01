@@ -1,4 +1,4 @@
-# Strain2bScan — Manuscript tables (simulated head-to-head)
+# Strain2bScan; Manuscript tables (simulated head-to-head)
 
 **Table 1. Strain2bScan vs StrainScan on the 15-species simulated benchmark, per species.** Single-species accuracy is the median over depth-matched paired samples (2/3/5-strain mixtures across the 0.5–10× ladder), each tool scored in its own cluster space. Database build cost is per species (Strain2bScan native, arm64; StrainScan `linux/amd64` under emulation). n = genomes in the pool.
 
@@ -47,7 +47,7 @@ informative application subsets rather than complete cohort analyses. The generi
 | Project | Design and selected libraries | Calls | Observation |
 |---|---|--:|---|
 | PRJNA288562 | Pregnancy subject T23; saliva, vaginal swab and distal gut at GD84 and GD273 (6 WGS libraries) | 34 calls in 5/6 libraries | Saliva was cluster-rich; four *Neisseria* and four *Schaalia* clusters were shared across timepoints. Gut *B. adolescentis* C4 persisted, whereas three other *Bifidobacterium* clusters and three *E. coli* clusters were GD84-only. |
-| PRJNA1517970 | Preterm-birth vaginal/meconium subset plus extraction blank (7 WGS libraries) | 0 calls | Marker observations ranged from 464 (blank) to 116,410 (meconium). No blank call was observed, supporting specificity under these gates. |
+| PRJNA1517970 | Preterm-birth vaginal/meconium subset plus extraction blank (7 WGS libraries) | 0 calls with the MSA panel; 0 calls with a 13-species body-site panel | The blank had 340 distinct markers, and selected libraries had 7,394–86,980. At a one-marker diagnostic gate, one meconium library showed only three *C. acnes* markers, supporting specificity while also indicating incomplete niche coverage. |
 | PRJNA1191223 | Preterm infant P08 stool at W1, W2 and W3 (3 WGS libraries) | 9 generic-panel calls | Generic panel showed weekly turnover: one *S. aureus* cluster (W1), two *E. coli* clusters (W2), and six *E. faecalis* clusters (W3). |
 | PRJNA1191225 | Six preterm-infant isolate WGS read sets used for cohort-panel validation | 6/6 expected self-calls | The cohort-specific panel recovered all expected *E. coli* clusters or Bifidobacterium species units. |
 
@@ -77,3 +77,18 @@ coverage; abundance is within-species abundance in Strain2bScan output.
 The generic MSA panel detected the W2 *E. coli* signal as two low-abundance generic clusters
 (fraction 6.1 × 10⁻⁵ and 5.7 × 10⁻⁵) but did not contain the persistent *B. bifidum* LHCA82 unit. This
 contrast illustrates why body-site- or cohort-specific panels are needed for biological interpretation.
+
+
+**Table 7. Leave-one-isolate-out behaviour for the three *Escherichia coli* panel isolates.** For each test, the
+held-out isolate was absent from the database. Reads were profiled against a panel containing the other
+two *E. coli* assemblies and the three Bifidobacterium species controls.
+
+| Held-out isolate | *E. coli* genomes in panel | Observed *E. coli* unit | Breadth | Depth (×) | Fraction of sample | Interpretation |
+|---|--:|---|--:|--:|--:|---|
+| LHCA45 | 2 | C0\|C1 | 0.799 | 7.87 | 0.612 | Reads from the absent isolate were assigned to merged relatives rather than creating a false third cluster. |
+| LHCA56 | 2 | C0\|C1 | 0.911 | 10.55 | 0.649 | Same conspecific-assignment behaviour. |
+| LHCA72 | 2 | C0\|C1 | 0.891 | 7.25 | 0.729 | Same conspecific-assignment behaviour. |
+
+This test shows that closed panels can misattribute a truly absent conspecific strain to near relatives.
+It therefore supports the paper's conservative treatment of the low-coverage W2 *E. coli* signal as an
+unresolved `C0|C1|C2` unit rather than assigning it to one isolate.

@@ -1,0 +1,14 @@
+species	genomes	total_markers	unique_markers	unique_fraction	avg_markers_per_unit
+Bifidobacterium_adolescentis	6	34031	13659	0.401	17077
+Cutibacterium_acnes	6	39813	4024	0.101	24516
+Enterococcus_faecalis	6	29189	10700	0.367	15436
+Escherichia_coli	6	49028	5283	0.108	29088
+Gardnerella_vaginalis	6	15840	4580	0.289	9130
+Lactobacillus_gasseri	6	19537	8809	0.451	9392
+Lactobacillus_jensenii	6	9587	1049	0.109	8070
+Prevotella_bivia	6	21456	5635	0.263	13492
+Staphylococcus_aureus	6	16055	4876	0.304	10306
+Staphylococcus_epidermidis	6	17587	4770	0.271	9207
+Streptococcus_agalactiae	6	17848	6086	0.341	10361
+Streptococcus_mitis	2	20407	15646	0.767	12584
+Streptococcus_mutans	6	16463	4265	0.259	10403

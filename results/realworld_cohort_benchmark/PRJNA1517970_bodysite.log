@@ -1,0 +1,34 @@
+cross-species filter: 304731/306841 markers usable for quantification (0.7% shared with another species in the panel, excluded)
+[batch 1/7] sample SRR40410528: /Volumes/MoneyCat/Data/Strain2bScan_realdata_20261001/fastq/PRJNA1517970/SRR40410528_1.fastq.gz + /Volumes/MoneyCat/Data/Strain2bScan_realdata_20261001/fastq/PRJNA1517970/SRR40410528_2.fastq.gz
+[batch 1/7] sample SRR40410528: 86980 distinct markers, 0 strain call(s)
+[batch 2/7] sample SRR40410567: /Volumes/MoneyCat/Data/Strain2bScan_realdata_20261001/fastq/PRJNA1517970/SRR40410567_1.fastq.gz + /Volumes/MoneyCat/Data/Strain2bScan_realdata_20261001/fastq/PRJNA1517970/SRR40410567_2.fastq.gz
+[batch 2/7] sample SRR40410567: 7394 distinct markers, 0 strain call(s)
+[batch 3/7] sample SRR40410657: /Volumes/MoneyCat/Data/Strain2bScan_realdata_20261001/fastq/PRJNA1517970/SRR40410657_1.fastq.gz + /Volumes/MoneyCat/Data/Strain2bScan_realdata_20261001/fastq/PRJNA1517970/SRR40410657_2.fastq.gz
+[batch 3/7] sample SRR40410657: 22466 distinct markers, 0 strain call(s)
+[batch 4/7] sample SRR40410734: /Volumes/MoneyCat/Data/Strain2bScan_realdata_20261001/fastq/PRJNA1517970/SRR40410734_1.fastq.gz + /Volumes/MoneyCat/Data/Strain2bScan_realdata_20261001/fastq/PRJNA1517970/SRR40410734_2.fastq.gz
+[batch 4/7] sample SRR40410734: 18228 distinct markers, 0 strain call(s)
+[batch 5/7] sample SRR40410753: /Volumes/MoneyCat/Data/Strain2bScan_realdata_20261001/fastq/PRJNA1517970/SRR40410753_1.fastq.gz + /Volumes/MoneyCat/Data/Strain2bScan_realdata_20261001/fastq/PRJNA1517970/SRR40410753_2.fastq.gz
+[batch 5/7] sample SRR40410753: 11628 distinct markers, 0 strain call(s)
+[batch 6/7] sample SRR40410776: /Volumes/MoneyCat/Data/Strain2bScan_realdata_20261001/fastq/PRJNA1517970/SRR40410776_1.fastq.gz + /Volumes/MoneyCat/Data/Strain2bScan_realdata_20261001/fastq/PRJNA1517970/SRR40410776_2.fastq.gz
+[batch 6/7] sample SRR40410776: 340 distinct markers, 0 strain call(s)
+[batch 7/7] sample SRR40410851: /Volumes/MoneyCat/Data/Strain2bScan_realdata_20261001/fastq/PRJNA1517970/SRR40410851_1.fastq.gz + /Volumes/MoneyCat/Data/Strain2bScan_realdata_20261001/fastq/PRJNA1517970/SRR40410851_2.fastq.gz
+[batch 7/7] sample SRR40410851: 17542 distinct markers, 0 strain call(s)
+predictions (7 samples) -> /Volumes/MoneyCat/Data/Strain2bScan_realdata_20261001/results/PRJNA1517970_bodysite.pred.tsv
+        2.92 real         8.84 user         0.23 sys
+            88080384  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+                8852  page reclaims
+                  16  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                3452  voluntary context switches
+               21689  involuntary context switches
+         91330427966  instructions retired
+         30223384173  cycles elapsed
+            87114184  peak memory footprint

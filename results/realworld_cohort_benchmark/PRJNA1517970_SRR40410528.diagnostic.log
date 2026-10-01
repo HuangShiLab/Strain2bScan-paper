@@ -1,0 +1,8 @@
+cross-species filter: 304731/306841 markers usable for quantification (0.7% shared with another species in the panel, excluded)
+sample: 48472 distinct tag markers; 13 species DBs; resolve-gate≥max(1, 0%×panel), detect-gate≥1 (threads: 16)
+#species	cluster	abundance	coverage	support	depth	global_abundance	sample_fraction
+  Cutibacterium_acnes	layer1=unique (auto — this DB carries no tree)
+  Cutibacterium_acnes	[strain-resolved, no cluster above threshold]	markers=3/39811 (depth 0.00x)
+summary: 1/13 species strain-resolved (0 strain calls), 0 detected-not-resolvable, 12 absent
+coverage of sample: strain calls account for -0.0% of 90296 tag observations (100.0% unclassified — unresolved species, no reference, host, error)
+predictions -> /Volumes/MoneyCat/Data/Strain2bScan_realdata_20261001/results/PRJNA1517970_SRR40410528.diagnostic.pred.tsv
