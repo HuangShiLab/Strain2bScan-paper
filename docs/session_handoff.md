@@ -4,21 +4,25 @@ Paste this as the opening message on Mac Studio to continue. The two git repos a
 state; scratchpad intermediates (genomes, mock reads, DBs) are ephemeral but reproducible from the
 committed scripts + accession/manifest files.
 
-## UPDATE 2026-07-11 (Mac Studio session) — real-data figures done
+## UPDATE 2026-10-03 — manuscript consistency pass
+Current manuscript is a 12-figure paper (Fig 1–12 + Fig S1–S4). Native 2bRAD terminology is
+**native BcgI 2bRAD-M**; conventional shotgun input is **in-silico-digested shotgun (WMS)**;
+StrainScan version is **v1.0.14**. Tag lengths are **25–33 bp** everywhere. Saliva stats are
+corrected `sample_fraction` values: subject PERMANOVA R² **0.757 strain / 0.755 species**
+(p = 2 × 10⁻⁴), leave-one-timepoint-out host-ID **100 % strain / 78.1 % species**, *Neisseria
+subflava* R² **0.808**.
+
+## 2026-07-11 (Mac Studio session) — real-data figures done
 Environment: **NCBI is NOT blocked on Mac Studio** (unlike the old MacBook); ENA/Figshare/NCBI all
 reachable. Tool reads **plain FASTQ only** (decompress .gz first). macOS bash 3.2 (no `declare -A`).
-No sci-Python; use `scratchpad/venv`. **4 new commits (unpushed — HTTPS creds unavailable in the
-agent env; user must `git push origin main`):**
-- **Fig 9 mock host-contamination** (`docs/mock_hostcontam.md`): native 2bRAD vs shotgun across
-  0/90/99% human. Precision 1.0 for both at all levels; 2bRAD 20/20 recall at 99% host vs shotgun
-  12/20 (2bRAD keeps ~10× more usable markers). Reconstructed 62-sp BcgI mock DB (`dl_genomes.py`).
-- **Fig 10 saliva** — three docs: individual-discrimination (subject strain R²=0.833>species 0.822,
-  p=2e-4; *Rothia mucilaginosa* R²=0.921) — **these numbers are STALE**: they were computed on the
-  `support` column (a marker count), not an abundance; see `rerun_status.md` §2 — shotgun↔2bRAD concordance (100% of WMS strains confirmed
-  by 2bRAD; 2bRAD adds 128–163 low-abundance strains WMS misses, p=1.2e-23), temporal stability +
-  ML host-ID (within 0.19<between 0.44; leave-one-timepoint-out subject ID **100%** strain vs 94%
-  species). Oral panel builder `dl_oral_panel.py` (19 sp × ≤25 genomes; **many genomes/species is
-  essential** — the generic pathogen panel gave a null).
+No sci-Python; use `scratchpad/venv`.
+- **Fig 6 native 2bRAD mock host-contamination** (`docs/mock_hostcontam.md`): native BcgI 2bRAD-M vs
+  shotgun across 0/90/95/99/99.9% human. Precision 1.0; native 2bRAD-M 20/20 recall at 99% host.
+- **Fig 7 saliva** — three docs: individual-discrimination (subject strain R²=0.757 vs species 0.755,
+  p=2e-4; *Neisseria subflava* R²=0.808; host-ID 100% strain vs 78.1% species) — **corrected**
+  `sample_fraction` values; Fig 8 shotgun↔2bRAD concordance (100% of WMS strains confirmed by
+  native 2bRAD; 2bRAD adds 128–163 low-abundance strains/sample WMS misses, p=1.2e-23). Oral panel
+  builder `dl_oral_panel.py` (19 sp × ≤25 genomes; **many genomes/species is essential**).
 - Saliva alias `S<time>-<subject>`: prefix S9/S11/S13/S17 = time of day, suffix = the 8 subjects.
 - Still open: full-depth saliva WMS (13.8 GB/file, download-unstable; partials sufficed); oral
   cancer/ECC (`S_########` samples, need supp case/control labels); 16S motivation (barrnap+mash).
@@ -29,10 +33,11 @@ agent env; user must `git push origin main`):**
 - Build: `cargo build --release` (zero deps). Binary: `target/release/strain2bscan`.
 
 ## What Strain2bScan is
-Fast/light Rust strain profiler on **2bRAD-reduced markers** (32–38 bp type-IIB tags). Ports
+Fast/light Rust strain profiler on **2bRAD-reduced markers** (25–33 bp type-IIB tags). Ports
 StrainScan's clustering + unique-marker scoring onto 2bRAD; tags are **interoperable with
-Fast2bRAD-M / 2bRADExtraction.pl**. Two input modes: native BcgI 2bRAD libraries, or in-silico
-digestion of shotgun. Two-layer: Layer-1 species gate → Layer-2 within-species strain resolution.
+Fast2bRAD-M / 2bRADExtraction.pl**. Two input modes: native BcgI 2bRAD-M libraries, or in-silico
+digestion of conventional shotgun (WMS). Two-layer: Layer-1 species gate → Layer-2 within-species
+strain resolution.
 
 ## Software state (all committed + pushed)
 - Latest: **Layer-1 gate = breadth-fraction term + three-tier reporting** (`species_tier` in
@@ -43,7 +48,8 @@ digestion of shotgun. Two-layer: Layer-1 species gate → Layer-2 within-species
   `src/identify.rs` (Layer-2), `src/markers.rs` (digest+canonical), `src/db.rs`, `src/cst.rs`.
 
 ## Paper state
-- **Figure plan:** `docs/results_figure_plan.md` (10-figure sequence).
+- **Figure plan:** 12-figure sequence documented in `docs/manuscript_organization.md` and
+  `manuscript/figures.md` (Figs 1–12 main + Figs S1–S4 supplement).
 - **Done:** Fig 1 schematic (`figures/overview.*`); all simulated benchmarks (cross-species, depth,
   enzyme knob, robustness=panelsize+refqual, efficiency+55-species community scale, head-to-head vs
   StrainScan); **Fig 9 real-DNA mock** (`figures/mock_msa1002_titration.*`, `docs/mock_msa1002.md`);

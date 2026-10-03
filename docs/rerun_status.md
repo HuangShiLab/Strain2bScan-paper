@@ -57,9 +57,9 @@ now refuse to run against the stale table rather than silently substituting a co
 
 **Any number in this repo or in the manuscript that came from `saliva_permanova.tsv`,
 `saliva_strain_long.tsv` or the concordance/temporal analyses is stale until that happens** —
-including the "strain R² 0.833 > species 0.822" claim, which reverses on the only abundance the
-stale table contains (0.6886 vs 0.7101 on `within_abund`). Note this is the one place where §1
-also bites: `support` is precisely the column that moves ~6% with the engine change.
+including the old "strain R² 0.833 > species 0.822" claim. After re-running with `sample_fraction`,
+the corrected values are strain R² = 0.757 versus species R² = 0.755, 100% strain host-ID versus 78.1%
+species host-ID, and *Neisseria subflava* R² = 0.808. These corrected values are now in the manuscript.
 
 ## 3. `--marker-source kmer` is undocumented in the manuscript
 

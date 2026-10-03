@@ -13,7 +13,7 @@ samples a sparse, reproducible fraction of the genome, is compatible with low-in
 specimens, and has previously been used mainly for species-level profiling.
 
 **Results.** We present Strain2bScan, a Rust strain profiler that implements within-species clustering and
-unique-marker scoring on 2bRAD markers, the 32–38 bp tags produced by type-IIB restriction digestion. It
+unique-marker scoring on 2bRAD markers, the 25–33 bp tags produced by type-IIB restriction digestion. It
 accepts both native 2bRAD-M libraries and in-silico-digested shotgun metagenomes. 2bRAD-marker distances
 tracked whole-genome strain distances (median Spearman ρ = 0.94), whereas 16S distances were much weaker
 (median ρ = 0.36). With complete references, precision was 1.0 across simulated single-species benchmarks,

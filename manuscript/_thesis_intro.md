@@ -58,7 +58,7 @@ recover reads that were never generated.
 
 Reduced-representation sequencing offers a route around both obstacles. Type-IIB restriction enzymes
 (the basis of the "2bRAD" method) cut on *both* sides of a short, degenerate recognition site, excising a
-fixed-length fragment (the 2bRAD tag, here 32–38 bp) at every occurrence of the site in a genome. The
+fixed-length fragment (the 2bRAD tag, here 25–33 bp) at every occurrence of the site in a genome. The
 result is a sparse, reproducible, genome-wide sample of roughly 1–2 % of the genome. Because the tag set
 is defined by the recognition sequence rather than by abundance, the *same* loci are recovered from any
 genome that contains them, making tags directly comparable across samples and reference genomes.

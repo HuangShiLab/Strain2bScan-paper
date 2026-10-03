@@ -16,7 +16,7 @@ profiling; but not for strain resolution.
 
 **Results.** We present **Strain2bScan**, a dependency-free Rust strain profiler that ports the
 StrainScan resolution framework (within-species clustering plus unique-marker scoring) onto **2bRAD
-markers** (the 32–38 bp tags released by type-IIB restriction digestion) and uniquely accepts **two
+markers** (the 25–33 bp tags released by type-IIB restriction digestion) and uniquely accepts **two
 input modes**. As a shared foundation it is accurate (**precision 1.0** across species, high recall, low
 abundance error), detects strains to **0.5× coverage matching StrainScan**, achieves precision 1.0 with
 complete references across all 15 species (declining as references degrade; complete/near-complete
@@ -111,7 +111,7 @@ recover reads that were never generated.
 
 Reduced-representation sequencing offers a route around both obstacles. Type-IIB restriction enzymes
 (the basis of the "2bRAD" method) cut on *both* sides of a short, degenerate recognition site, excising a
-fixed-length fragment (the 2bRAD tag, here 32–38 bp) at every occurrence of the site in a genome. The
+fixed-length fragment (the 2bRAD tag, here 25–33 bp) at every occurrence of the site in a genome. The
 result is a sparse, reproducible, genome-wide sample of roughly 1–2 % of the genome. Because the tag set
 is defined by the recognition sequence rather than by abundance, the *same* loci are recovered from any
 genome that contains them, making tags directly comparable across samples and reference genomes.
@@ -170,7 +170,7 @@ simulated benchmark that isolates the accuracy and the cost of the two approache
 
 Strain2bScan resolves within-species strains from the sparse marker set released by type-IIB restriction
 (2bRAD) digestion rather than from a full k-mer profile. For each species, reference genomes are digested
-in silico with up to 16 type-IIB enzymes into single-copy 32–38 bp tags; roughly 1–2 % of the genome and
+in silico with up to 16 type-IIB enzymes into single-copy 25–33 bp tags; roughly 1–2 % of the genome and
 50–100× sparser than a full k-mer index; clustered into within-species groups at 0.95 Jaccard similarity
 (MinHash-accelerated), and reduced to a cluster × marker database of species-core, cluster-specific and
 strain-specific tags (Fig 1A). A sample is profiled by digesting its reads **once**, counting canonical
@@ -612,7 +612,7 @@ database, gated by a species-level Layer-1 check.
 ### 2bRAD tag extraction
 
 Type-IIB restriction enzymes cut on both sides of their recognition site, releasing a
-fixed-length fragment (the 2bRAD tag, 32–38 bp). Each of the 16 enzymes in the Fast2bRAD-M
+fixed-length fragment (the 2bRAD tag, 25–33 bp). Each of the 16 enzymes in the Fast2bRAD-M
 table is modelled as a set of anchored sequence patterns; scanning every offset of a sequence
 and testing the anchors reproduces the enzyme's digestion sites (forward and reverse patterns
 allow scanning a single strand). Each tag is canonicalised (the lexicographically smaller of
@@ -806,7 +806,7 @@ Strain2bScan). Scripts: `scripts/plot_sim_headtohead.py` and the drivers under `
 `analyze_headtohead.py`); raw per-sample tables in `figure_raw_data/sim_headtohead/`.
 
 **Comparison to StrainScan (curated-DB and per-sample benchmarks).** In addition to the common benchmark
-above, StrainScan (v1.0) was run on its **own** reference databases (Fig 10) and on the same *C. acnes*
+above, StrainScan v1.0.14 was run on its **own** reference databases (Fig 10) and on the same *C. acnes*
 per-sample profiling comparison (Fig 9A), using its low-depth modes for the depth series.
 
 **Metrics.** Detection precision, recall and F1 at a 0.01 presence threshold; abundance error
@@ -827,7 +827,7 @@ Each type-IIB restriction enzyme recognises a short, partially degenerate motif 
 distance to either side, releasing a tag of constant length. An enzyme is modelled as a triple
 (*upstream gap*, *anchored pattern set*, *downstream gap*): for BcgI the excised fragment is 32 bp with a
 central `CGA…TGC`-type recognition anchor and *N*-runs on either flank; the sixteen enzymes of the
-Fast2bRAD-M table differ in tag length (32–38 bp) and anchor. Digestion scans every offset of a sequence
+Fast2bRAD-M table differ in tag length (25–33 bp) and anchor. Digestion scans every offset of a sequence
 and tests the anchor set; because type-IIB sites are palindromically constrained, providing both the
 forward and reverse anchor patterns lets a single left-to-right pass over one strand recover the tags that
 would be produced from both strands, which halves the work and (importantly) yields exactly one canonical
@@ -990,7 +990,7 @@ calls on the benchmark samples.
 
 **Figure 1. Strain2bScan overview and the two input modes.**
 Pipeline schematic. (A) Reference construction: type-IIB (2bRAD) digestion of reference genomes into
-single-copy 32–38 bp tags → within-species clustering at 0.95 Jaccard (MinHash-accelerated) → a
+single-copy 25–33 bp tags → within-species clustering at 0.95 Jaccard (MinHash-accelerated) → a
 cluster × marker database of species-core, cluster-specific and strain-specific markers. (B) Profiling:
 a sample is digested once into canonical markers, gated on species-specific markers (Layer-1), and
 strains are detected and quantified within each present species from unique markers (Layer-2). The two

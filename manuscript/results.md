@@ -13,7 +13,7 @@
 
 Strain2bScan resolves within-species strains from the sparse marker set released by type-IIB restriction
 (2bRAD) digestion rather than from a full k-mer profile. For each species, reference genomes are digested
-in silico with up to 16 type-IIB enzymes into single-copy 32–38 bp tags; roughly 1–2 % of the genome and
+in silico with up to 16 type-IIB enzymes into single-copy 25–33 bp tags; roughly 1–2 % of the genome and
 50–100× sparser than a full k-mer index; clustered into within-species groups at 0.95 Jaccard similarity
 (MinHash-accelerated), and reduced to a cluster × marker database of species-core, cluster-specific and
 strain-specific tags (Fig 1A). A sample is profiled by digesting its reads **once**, counting canonical

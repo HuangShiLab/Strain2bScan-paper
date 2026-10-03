@@ -14,15 +14,15 @@ samples a sparse, reproducible fraction of the genome, is compatible with low-in
 specimens, and has previously been used mainly for species-level profiling.
 
 **Results.** We present Strain2bScan, a Rust strain profiler that implements within-species clustering and
-unique-marker scoring on 2bRAD markers, the 32–38 bp tags produced by type-IIB restriction digestion. It
-accepts both native 2bRAD-M libraries and in-silico-digested shotgun metagenomes. 2bRAD-marker distances
+unique-marker scoring on 2bRAD markers, the 25–33 bp tags produced by type-IIB restriction digestion. It
+accepts both native BcgI 2bRAD-M libraries and in-silico-digested shotgun (WMS) metagenomes. 2bRAD-marker distances
 tracked whole-genome strain distances (median Spearman ρ = 0.94), whereas 16S distances were much weaker
 (median ρ = 0.36). With complete references, precision was 1.0 across simulated single-species benchmarks,
 detection reached 0.5× coverage, and accuracy depended strongly on reference completeness. In native BcgI
-2bRAD mode, Strain2bScan retained precision 1.0, full strain recall and accurate abundance at 99% human DNA.
+2bRAD-M mode, Strain2bScan retained precision 1.0, full strain recall and accurate abundance at 99% human DNA.
 On real saliva, leave-one-timepoint-out host identification reached 100% with strain features versus 78.1%
 with species features; strain and species PERMANOVA R² values were comparable (0.757 versus 0.755), so the
-advantage was strongest for subject identification and low-abundance strain recovery. Native 2bRAD confirmed
+advantage was strongest for subject identification and low-abundance strain recovery. Native BcgI 2bRAD-M confirmed
 65/65 shotgun strain calls and recovered 128–163 additional low-abundance strains per sample. For
 conventional shotgun input, digest-once profiling reduced cost relative to per-species k-mer querying:
 Strain2bScan was approximately 8× faster and 11× lighter per sample and 130–146× faster on a 55-species
@@ -101,7 +101,7 @@ exactly, so the tags are interoperable with the Fast2bRAD-M species layer, and S
 The two modes are shown to agree (in-silico and native digestion recover the same strains), so a single
 tool, on one 2bRAD tag space, spans both the low-biomass clinical regime and the cohort-scale regime.
 **Benchmark scope and scientific value.** This study is both a method paper and a reproducible evaluation
-framework. The evaluation axis is defined by input modality (native 2bRAD versus in-silico-digested
+framework. The evaluation axis is defined by input modality (native BcgI 2bRAD-M versus in-silico-digested
 shotgun), marker density, reference completeness, host fraction, community size and cohort scale. Controlled
 simulations and ATCC mocks supply strain-level ground truth; real saliva and public WGS cohorts test the
 operating conditions that motivate the method. This design separates three claims that are often conflated:
@@ -116,13 +116,13 @@ profiling scalable; and useful strain resolution requires reference panels match
 
 Strain2bScan resolves within-species strains from the sparse marker set released by type-IIB restriction
 (2bRAD) digestion rather than from a full k-mer profile. For each species, reference genomes are digested
-in silico with up to 16 type-IIB enzymes into single-copy 32–38 bp tags; roughly 1–2 % of the genome and
+in silico with up to 16 type-IIB enzymes into single-copy 25–33 bp tags; roughly 1–2 % of the genome and
 50–100× sparser than a full k-mer index; clustered into within-species groups at 0.95 Jaccard similarity
 (MinHash-accelerated), and reduced to a cluster × marker database of species-core, cluster-specific and
 strain-specific tags (Fig 1A). A sample is profiled by digesting its reads **once**, counting canonical
 markers, gating on species-specific markers (Layer-1), and detecting and quantifying strains within each
 present species from unique markers (Layer-2), returning a strain-level profile (Fig 1B). Crucially, the
-pipeline accepts **two input modes**: in-silico digestion of conventional shotgun metagenomes, or **native
+pipeline accepts **two input modes**: in-silico digestion of conventional shotgun (WMS) metagenomes, or **native
 BcgI 2bRAD experimental libraries whose reads *are* the tags**. Because the tag lengths and recognition
 patterns are identical to Fast2bRAD-M / `2bRADExtraction.pl`, the Fast2bRAD-M species layer and the
 Strain2bScan strain layer operate in one shared tag space (Fig 1, band).
@@ -173,14 +173,14 @@ references are genuinely low-quality (MIMAG-low; heavy contamination + hundreds 
 holds at 1.0 to 90 % under containment versus collapsing to ≈ 0.05 under Jaccard the moment references
 degrade (Fig 4 inset); confirming that collapse was cluster fragmentation, not a true completeness
 effect. Because max-containment merges slightly more aggressively (it can coarsen clusters on
-already-complete panels), it is an **opt-in mode for reference panels of uneven completeness**. the
+already-complete panels), it is an **opt-in mode for reference panels of uneven completeness**. The
 default remains Jaccard, complemented by the built-in assembly-quality filter (`--min-tag-fraction` /
 `--max-contigs`) that drops low-quality genomes before clustering and the complete-genome practice used
 elsewhere (e.g. Fig 2).
 
 ### Part I; Native 2bRAD-M for low-biomass, high-host microbiomes
 
-#### A tunable enzyme set enables native BcgI 2bRAD operation (Fig 5)
+#### A tunable enzyme set enables native BcgI 2bRAD-M operation (Fig 5)
 
 Because each added type-IIB enzyme releases more tags, the enzyme set is a resolution/cost knob; and
 this holds **across all 14 resolvable species** of the simulation pool, not just one species (Fig 5).
@@ -196,7 +196,7 @@ BcgI 2bRAD-M experimental libraries be profiled directly**, since their reads ar
 
 #### Strain-level identification and quantification across four DNA mocks (Fig 6)
 
-Having established the enzyme-tunable native BcgI mode (Fig 5), we tested whether native 2bRAD **resolves
+Having established the enzyme-tunable native BcgI 2bRAD-M mode (Fig 5), we tested whether native BcgI 2bRAD-M **resolves
 and quantifies individual strains** on four ATCC whole-cell mocks: MSA-1002 (20 strains, even), MSA-1003
 (20 strains, staggered over ~three orders of magnitude), and MSA-1005 / MSA-1007 (6 strains each). All
 were profiled against a single **unified 28-species / 164-genome combined tree** in which every mock
@@ -206,10 +206,10 @@ other cluster is a false call. Reads were digested for BcgI and clustered with `
 merges the near-clonal decoys that otherwise fragment the sparse single-enzyme tree and strip unique
 markers (Fig 4); with the abundance floor disabled (`--min-abundance 0`) and `--min-coverage 0.2`.
 
-On the even MSA-1002 mock Strain2bScan held **precision and recall ≈ 0.95–1.0** across a human-DNA
-contamination ladder (90/95/99 %) and a low-biomass ladder down to **0.01 ng** input; only the 0.001 ng
-sample (below the marker-detection floor) and the extreme 99.9 %-host sample degraded (recall 0.55)
-(Fig 6, MSA-1002). Abundance was read from each cluster's marker **depth** (∝ genome copy number),
+On the even MSA-1002 mock Strain2bScan held **precision 1.0** with recall 19/20 at **0.01 ng** and full
+20/20 recall at **≥0.1 ng** across the low-biomass ladder, and held precision/recall ≈0.95–1.0 across the
+human-DNA contamination ladder (90/95/99 %); only the 0.001 ng sample (below the marker-detection floor)
+and the extreme 99.9 %-host sample degraded (recall 0.55) (Fig 6, MSA-1002). Abundance was read from each cluster's marker **depth** (∝ genome copy number),
 giving Bray–Curtis and L2 similarity ≈ 0.8–0.95 to the ground-truth mass profile. On the staggered
 MSA-1003 and the 6-strain MSA-1005/1007 mocks recall stayed high (0.75–1.0) and AUPR 0.78–0.98, but
 single-threshold precision dropped (0.38–0.83). The cause is a **~1× marker-depth noise floor**: true
@@ -224,7 +224,7 @@ database against per-mock databases.
 
 #### Real saliva: individual-specific, temporally stable strain signatures (Fig 7)
 
-Moving to real, error-containing, open-world data, we profiled native BcgI 2bRAD saliva from **8 subjects
+Moving to real, error-containing, open-world data, we profiled native BcgI 2bRAD-M saliva from **8 subjects
 sampled at 4 times of day (32 libraries)** against a 19-species oral-commensal reference panel. Panel choice
 mattered: a generic pathogen panel with few genomes per species gave no signal, whereas a genome-rich oral
 panel recovered strain structure. Subject PERMANOVA R² was similar for strain and species profiles
@@ -241,15 +241,60 @@ the corrected `sample_fraction` abundance field and can be reproduced from
 
 Paired shotgun (WMS) of the same saliva samples let us validate the two modes against each other and
 quantify the 2bRAD sensitivity advantage on real high-host material. **Every strain the shotgun mode
-called was confirmed by native 2bRAD (65/65, 100 %)**. the in-silico digestion produces no strain calls
-that native 2bRAD contradicts, establishing that the two input modes agree at the call level. Native
-2bRAD additionally recovered **128–163 strains per sample that host-limited shotgun missed**, and these
+called was confirmed by native BcgI 2bRAD-M (65/65, 100 %)**. The in-silico digestion produces no strain calls
+that native BcgI 2bRAD-M contradicts, establishing that the two input modes agree at the call level. Native
+BcgI 2bRAD-M additionally recovered **128–163 strains per sample (3 paired samples with usable bacterial recovery) that host-limited shotgun missed**, and these
 2bRAD-only strains were **significantly lower-abundance** (median community relative abundance 0.0029 vs
 0.0097 for shared strains; Mann–Whitney p = 1.2×10⁻²³; Fig 8). On host-dominated saliva, shotgun reaches
-only the most abundant, ubiquitous strains; native 2bRAD confirms all of those *and* resolves the
+only the most abundant, ubiquitous strains; native BcgI 2bRAD-M confirms all of those *and* resolves the
 low-abundance tail; the same enrichment advantage seen on the controlled mock (Fig 6), now on real
-clinical material. (Strain2bScan runs directly on an oral clinical cohort; 15–17 species, ~2 s per
-sample; as an application demonstration; Table S3.)
+clinical material. (Strain2bScan also runs directly on an oral clinical cohort: 15–17 species and 115–158 strain calls per sample in ~2 s/sample; Table S3.)
+
+
+### Real-world WGS cohorts: longitudinal tracking, low-biomass specificity, and isolate-validated panels (Tables 4–6)
+
+To test whether the same implementation operates on public human metagenomes rather than controlled
+mocks, we profiled representative paired-end WGS subsets from PRJNA288562, PRJNA1517970, PRJNA1191223
+and PRJNA1191225 (Methods). These were application-oriented subsets, not complete epidemiological
+cohorts. With a legacy 20-species MSA panel in all-enzyme mode, 22 real libraries completed in
+**100.6 s** and **343 MiB** peak RSS (**4.57 s/sample**); the smallest vaginal library alone required
+**0.44 s** and **191 MiB**.
+
+In PRJNA288562, subject T23 had WGS from saliva, vaginal swab and distal gut at gestational days 84
+and 273. Five of six libraries produced **34 strain calls** spanning six panel species. The signal was
+body-site specific: saliva contained 13 and 11 calls at the two timepoints, gut contained 7 and 2, and
+vagina contained no call at GD84 and one low-depth *S. epidermidis* call at GD273. Strain-level
+structure also retained within-host structure over months: four *Neisseria* clusters and four
+*Schaalia* clusters were shared between early and late saliva, whereas gut *Bifidobacterium
+adolescentis* C4 persisted while three other *Bifidobacterium* clusters and all three *E. coli*
+clusters were present only at GD84. Thus the same run captured both short-term persistence and strain
+turnover without requiring a separate database per sample (Table 4).
+
+PRJNA1517970 tested vaginal and meconium libraries, including one extraction blank. Under the generic
+panel no strain calls were made in six vaginal/meconium libraries or the blank. A new 13-species
+body-site-oriented panel also produced no strain calls; the blank yielded 340 distinct markers, while
+meconium and vaginal libraries yielded 7,394–86,980. At a one-marker diagnostic gate, the largest
+meconium library showed only three *Cutibacterium acnes* markers out of 39,811 panel markers. These
+results therefore indicate sparse signal and incomplete niche coverage rather than runtime failure, while
+the negative blank supports specificity at very low marker input.
+
+For direct gut strain tracking, we assembled six public isolate genomes from PRJNA1191225 (three
+*E. coli*, one *B. longum*, one *B. breve* and one *B. bifidum*; assembly sizes 2.30–5.15 Mb; N50
+55.5–239.9 kb) and built a cohort-specific panel. The *E. coli* panel resolved three clusters with
+47,410 total and 19,122 unique markers; the three Bifidobacterium species panels contained 17,985–19,214
+markers. All six isolate read sets recovered their expected panel unit (**6/6**) with breadth 0.9995–1.0,
+depth 9.8–25.6× and within-species abundance 0.80–0.96 (Table 5). This validation took 9.53 s and 55.7
+MiB peak RSS.
+
+Reprofiling preterm-infant P08 across weeks 1–3 with the cohort panel showed persistent colonization by
+***Bifidobacterium bifidum* LHCA82**: breadth 0.764/0.773/0.792, depth 237×/214×/238× and within-panel
+abundance 64.6%/58.3%/61.0% at W1/W2/W3. *E. coli* was detected only at W2, at 0.029× depth and
+sample fraction 1.40 × 10⁻⁴; because coverage was too low to distinguish the three study isolates, the
+tool reported the conservative merged unit `C0|C1|C2` rather than assigning a single isolate. The
+generic MSA panel detected the W2 *E. coli* signal but missed the dominant *B. bifidum* strain because
+its Bifidobacterium database contained *B. adolescentis* rather than the cohort-specific species. This
+experiment therefore demonstrates both the value of cohort-specific panels and the value of leaving a
+low-support strain unresolved instead of forcing a false isolate assignment (Table 6).
 
 ### Part II; Conventional metagenomes at community scale
 
@@ -296,15 +341,16 @@ confound from the speed comparison we also ran a `linux/amd64` build of Strain2b
 container**, giving a same-environment ratio (Fig 11E).
 
 **Accuracy: equal precision, higher recall (Fig 11A–C, Table 1).** Across 14 resolvable species and 204
-depth-matched samples, **both tools held median precision 1.0**. but only Strain2bScan held precision
+depth-matched samples, **both tools held median precision 1.0**, but only Strain2bScan held precision
 1.0 in *every* species, whereas StrainScan dropped to 0.80–0.83 in four (*A. muciniphila*, *C. difficile*,
 *P. dorei*, *S. enterica*), making occasional false cluster calls. Strain2bScan also **recovered
 low-coverage strains at shallower depth**: median recall reached 1.0 by **3× coverage** versus **10×** for
 StrainScan, and overall median recall/F1 were **0.80 / 0.89 (Strain2bScan) vs 0.67 / 0.75 (StrainScan)**.
 Near-clonal *M. tuberculosis*, whose 29 genomes collapse to a single 0.95 cluster, was resolved correctly
 by both (precision and recall 1.0 at the cluster level; the honest claim for a species short reads cannot
-sub-resolve). On the multi-species communities the two tools were **comparable in accuracy** (StrainScan
-marginally higher recall on the deepest communities, Strain2bScan higher precision at low depth; Table 1).
+sub-resolve). On the multi-species communities the two tools were **comparable in accuracy**, with
+StrainScan reaching higher precision and recall at high depth, while Strain2bScan was more precise at
+low depth (Table 3).
 
 **Cost: two-to-three orders of magnitude cheaper (Fig 11D–F, Table 1).** The gap is largest in **database
 construction**: Strain2bScan built each species' database in **0.7–5.1 s using 0.1–0.4 GB**, whereas
@@ -319,7 +365,7 @@ has no multi-species mode, each community must be profiled once per species, so 
 the **sum of 14 runs (100–398 s) versus 1–9 s for Strain2bScan's single digest-once pass (46–105×
 faster)**, consistent with the structural *S*-fold argument of Fig 9C. In short, on a common benchmark
 Strain2bScan **matches or exceeds StrainScan's strain-identification accuracy while building databases
-2–3 orders of magnitude faster and lighter and profiling 1–2 orders faster**. and completes the one
+2–3 orders of magnitude faster and lighter and profiling 1–2 orders faster**, and completes the one
 species StrainScan could not build.
 
 #### Strain-level profiling on shotgun, and the advantage under host contamination (Fig 12)
@@ -339,7 +385,7 @@ under host contamination** (MSA-1002 90/95/99 % human DNA). Strain2bScan held **
 abundance (Bray–Curtis similarity ≥ 0.72, L2 similarity ≥ 0.86) at every level**. StrainScan kept perfect
 detection but its abundance estimate diverged as coverage fell: at 99 % host a single cluster
 (*H. pylori*, ~1.5× coverage) absorbed nearly the entire profile (predicted depth ~3.6 × 10⁴), collapsing
-quantification to **Bray–Curtis similarity 0.03 / L2 similarity 0.29**. inStrain degraded in the opposite
+quantification to **Bray–Curtis similarity 0.03 / L2 similarity 0.29**. InStrain degraded in the opposite
 axis; detection: recall fell 1.0 → 0.95 → 0.90 → **0.20** across the ladder (F1 0.33 at 99 % host), as
 only 1/120 genomes retained ≥ 50 % breadth once host dominated the library. Thus on host-contaminated
 shotgun **Strain2bScan is the only tool that preserves both strain detection and quantification**, while
@@ -357,10 +403,10 @@ in-silico-shotgun entry point, with the decisive gain (retained strain detection
 ## Discussion
 
 Strain2bScan reframes strain-level profiling around a sparse, reproducible marker set, and does so as a
-single engine serving **two input modes**: native 2bRAD-M libraries and in-silico digestion of
+single engine serving **two input modes**: native BcgI 2bRAD-M libraries and in-silico digestion of
 conventional shotgun. By porting StrainScan's clustering-plus-unique-marker framework onto 2bRAD tags in
 Rust, it turns a ~50–100× smaller marker database into large, structural gains **without sacrificing
-accuracy**. across every species tested it held precision 1.0, matched StrainScan's detection onset at
+accuracy** across every species tested: it held precision 1.0, matched StrainScan's detection onset at
 0.5× coverage (Fig 3), and matched or exceeded StrainScan's recall both on StrainScan's own databases
 (Fig 10) and on a common 15-species simulated benchmark where the two tools built databases from the same
 genomes and profiled the same reads (median recall 0.80 vs 0.67 at equal precision, while building
@@ -377,11 +423,12 @@ StrainScan kept detection but its abundance estimate collapsed (Bray–Curtis si
 inStrain lost detection (recall 0.20), each failing in a complementary way (Fig 12). On real saliva this translated into practical subject discrimination: leave-one-timepoint-out
 host-ID accuracy was 100% for strain profiles versus 78.1% for species profiles, although global
 PERMANOVA R² was similar (0.757 versus 0.755). Profiles were temporally stable within subject, and
-validated against paired shotgun of the same samples; recovered 128–163 low-abundance strains per sample that
-host-limited shotgun could not reach, while calling nothing the shotgun mode contradicted (Fig 7, Fig 8).
+validated against paired shotgun of the same samples; recovered 128–163 low-abundance strains per sample
+(3 paired samples with usable bacterial recovery) that host-limited shotgun could not reach, while calling
+nothing the shotgun mode contradicted (Fig 7, Fig 8).
 This is the setting where strain resolution matters most (oral, tumour/FFPE, skin) and where shotgun is
 weakest; a wet-lab reduction that concentrates sequencing on informative tags is the natural fit, and
-Strain2bScan is, to our knowledge, the first tool to make native 2bRAD strain-resolved.
+Strain2bScan is, to our knowledge, the first tool to make native BcgI 2bRAD-M strain-resolved.
 
 **Conventional metagenomes at community scale.** In the shotgun mode, the decisive gains are per-sample
 speed and memory (~8× faster, ~11× lighter than StrainScan; Fig 9A) and, above all, scaling in the
@@ -460,6 +507,23 @@ therefore requires broader pangenome panels and explicit absent-strain models. D
 oral-cancer case/control analysis, FFPE and degraded material, broader multi-tool comparison (sylph,
 StrainGE), and completing the Fast2bRAD-M species layer remain future work.
 
+
+(viii) We further tested behaviour when a true *E. coli* strain was absent. In leave-one-isolate-out runs, each
+of the three *E. coli* read sets was profiled against a database containing only the other two isolates.
+The held-out reads produced broad coverage of the remaining relatives (0.799–0.911) but were always
+reported as a merged `C0|C1` signal rather than creating a false third cluster. This is the expected
+limitation of closed panels: conspecific signal can be misassigned to a near relative, so absence of the
+true strain cannot be inferred from a generic nearest-relative call.
+(ix) **Strain-level profiling did not improve case/control prediction over species-level on two
+native BcgI 2bRAD-M oral datasets** (ECC caries vs healthy, and Lim_ORPI clean vs unclean denture;
+`results/real_data_strain_benchmark.md`). Species-level classifiers outperformed strain-level
+(AUROC 0.81 vs 0.59 for ECC, 0.72 vs 0.52 for Lim_ORPI), largely because BcgI single-enzyme marker
+density produced too few strain calls (9–18 prevalent clusters) for stable ML, and the phenotypes
+appeared driven more by species presence than by strain identity. This is a marker-density limit of
+the native BcgI protocol, not a failure of the resolution framework: in-silico multi-enzyme or k-mer
+marker sources would be needed to test whether strain-level resolution can outperform species-level
+classification on these phenotypes.
+
 **Conclusion.** Reduced-representation 2bRAD markers, combined with a StrainScan-style resolution
 framework and a fast Rust implementation, make accurate strain-level profiling practical at a fraction of
 the compute and memory of full-k-mer methods. Uniquely, the same tool spans two regimes: native 2bRAD-M
@@ -467,54 +531,11 @@ for strain-level analysis of low-biomass, high-host microbiomes, and in-silico-d
 strain profiling across communities of many species and many samples.
 
 
-### Real-world WGS cohorts: longitudinal tracking, low-biomass specificity, and isolate-validated panels (Tables 4–6)
-
-To test whether the same implementation operates on public human metagenomes rather than controlled
-mocks, we profiled representative paired-end WGS subsets from PRJNA288562, PRJNA1517970, PRJNA1191223
-and PRJNA1191225 (Methods). These were application-oriented subsets, not complete epidemiological
-cohorts. With a legacy 20-species MSA panel in all-enzyme mode, 22 real libraries completed in
-**100.6 s** and **343 MiB** peak RSS (**4.57 s/sample**); the smallest vaginal library alone required
-**0.44 s** and **191 MiB**.
-
-In PRJNA288562, subject T23 had WGS from saliva, vaginal swab and distal gut at gestational days 84
-and 273. Five of six libraries produced **34 strain calls** spanning six panel species. The signal was
-body-site specific: saliva contained 13 and 11 calls at the two timepoints, gut contained 7 and 2, and
-vagina contained no call at GD84 and one low-depth *S. epidermidis* call at GD273. Strain-level
-structure also retained within-host structure over months: four *Neisseria* clusters and four
-*Schaalia* clusters were shared between early and late saliva, whereas gut *Bifidobacterium
-adolescentis* C4 persisted while three other *Bifidobacterium* clusters and all three *E. coli*
-clusters were present only at GD84. Thus the same run captured both short-term persistence and strain
-turnover without requiring a separate database per sample (Table 4).
-
-PRJNA1517970 tested vaginal and meconium libraries, including one extraction blank. Under the generic
-panel no strain calls were made in six vaginal/meconium libraries or the blank. A new 13-species
-body-site-oriented panel also produced no strain calls; the blank yielded 340 distinct markers, while
-meconium and vaginal libraries yielded 7,394–86,980. At a one-marker diagnostic gate, the largest
-meconium library showed only three *Cutibacterium acnes* markers out of 39,811 panel markers. These
-results therefore indicate sparse signal and incomplete niche coverage rather than runtime failure, while
-the negative blank supports specificity at very low marker input.
-
-For direct gut strain tracking, we assembled six public isolate genomes from PRJNA1191225 (three
-*E. coli*, one *B. longum*, one *B. breve* and one *B. bifidum*; assembly sizes 2.30–5.15 Mb; N50
-55.5–239.9 kb) and built a cohort-specific panel. The *E. coli* panel resolved three clusters with
-47,410 total and 19,122 unique markers; the three Bifidobacterium species panels contained 17,985–19,214
-markers. All six isolate read sets recovered their expected panel unit (**6/6**) with breadth 0.9995–1.0,
-depth 9.8–25.6× and within-species abundance 0.80–0.96 (Table 5). This validation took 9.53 s and 55.7
-MiB peak RSS.
-
-Reprofiling preterm-infant P08 across weeks 1–3 with the cohort panel showed persistent colonization by
-***Bifidobacterium bifidum* LHCA82**: breadth 0.764/0.773/0.792, depth 237×/214×/238× and within-panel
-abundance 64.6%/58.3%/61.0% at W1/W2/W3. *E. coli* was detected only at W2, at 0.029× depth and
-sample fraction 1.40 × 10⁻⁴; because coverage was too low to distinguish the three study isolates, the
-tool reported the conservative merged unit `C0|C1|C2` rather than assigning a single isolate. The
-generic MSA panel detected the W2 *E. coli* signal but missed the dominant *B. bifidum* strain because
-its Bifidobacterium database contained *B. adolescentis* rather than the cohort-specific species. This
-experiment therefore demonstrates both the value of cohort-specific panels and the value of leaving a
-low-support strain unresolved instead of forcing a false isolate assignment (Table 6).
 
 ## Methods
 
-### Overview
+
+## Overview
 
 Strain2bScan reimplements the two-layer StrainScan strategy; cluster near-identical strains,
 then score samples on markers unique to a strain or cluster; but replaces the full k-mer set
@@ -525,22 +546,35 @@ sample by detecting present clusters from their unique markers and estimating th
 (iv) at the community level, digest each sample once and match it against every per-species
 database, gated by a species-level Layer-1 check.
 
-### 2bRAD tag extraction
+## 2bRAD tag extraction
 
 Type-IIB restriction enzymes cut on both sides of their recognition site, releasing a
-fixed-length fragment (the 2bRAD tag, 32–38 bp). Each of the 16 enzymes in the Fast2bRAD-M
-table is modelled as a set of anchored sequence patterns; scanning every offset of a sequence
-and testing the anchors reproduces the enzyme's digestion sites (forward and reverse patterns
-allow scanning a single strand). Each tag is canonicalised (the lexicographically smaller of
+fixed-length fragment (the 2bRAD tag, 25–33 bp depending on enzyme). Each of the 16 enzymes in
+the Fast2bRAD-M table is modelled as a set of anchored sequence patterns; literal motifs at
+fixed offsets within the tag window, plus, for the three IUPAC-degenerate enzymes (BaeI, HaeIV,
+Hin4I), single positions restricted to a base class; unanchored positions are unconstrained but
+must be A/C/G/T, which excludes tags spanning ambiguity codes. Scanning every offset and testing
+the anchors reproduces the enzyme's digestion sites. Only the forward strand is scanned: each
+enzyme carries forward and reverse patterns that are exact reverse-complement pairs at its tag
+length (the palindromic enzymes BplI, FalI and AlfI carry a single self-complementary pattern),
+so one pass finds sites in either orientation. Digestion is therefore strand-invariant (digest(*S*) = digest(revcomp(*S*))) without scanning both strands and without doubling the
+marker set; this is asserted for every enzyme by a regression test. Each tag is canonicalised (the lexicographically smaller of
 the tag and its reverse complement) and hashed to a 64-bit integer marker (FNV-1a; genome and
 sample tags use the same hash, so marker values are internally consistent). Two input modes
 are supported: **BcgI only** for 2bRAD experimental libraries whose reads already are tags, or
 a user-chosen enzyme set (`--enzyme all` for all 16) for in-silico digestion of conventional
-shotgun reads, which enriches the marker set ~*n*-fold for *n* enzymes. For reference genomes
+shotgun reads, which enriches the marker set ~*n*-fold for *n* enzymes. Pooling several enzymes
+requires care: ten of the sixteen emit 27 bp tags and their recognition sites genuinely coincide
+(every AloI site with a C at offset 16 is also a BsaXI site, and a PpiI site as well if offset 19
+is C; on 2 Mb of sequence 64 of 257 AloI sites are all three). A locus is therefore counted once
+however many enzymes recognise it, deduplicating on (position, tag length) rather than on the
+marker, since two enzymes of different tag lengths at the same offset cut genuinely different
+loci. Counting per enzyme instead gives such a locus an apparent copy number of 2–3, and the
+single-copy filter then discards it; a systematic 6–7% hole in multi-enzyme panels. For reference genomes
 we retain only **single-copy** tags (occurring exactly once in the genome), following
 StrainScan's and Fast2bRAD-M's use of single-copy markers for unbiased quantification.
 
-### Reference database construction
+## Reference database construction
 
 **Within-species clustering.** For each species, genomes are grouped by single-linkage
 hierarchical clustering at 0.95 marker-set similarity (0.05 distance), matching StrainScan's
@@ -571,7 +605,9 @@ Layer-2 markers. Crucially these are derived from **all** tags of the species' g
 from a pre-built species-unique database: species-unique markers (a genome compared against
 genomes of *other* species) are computed for species detection and are orthogonal to
 within-species strain structure. Each cluster's database is the union of its member genomes'
-single-copy tags; a marker is *unique* to a cluster iff it occurs in exactly one cluster.
+single-copy tags. A marker is *unique* to a cluster iff it is absent (**at any copy number**) from every other cluster's genomes. The weaker test (degree 1 over the single-copy sets alone)
+mislabels a tag as unique when it is multi-copy, and therefore filtered, in another cluster while
+still being reachable from that cluster's reads.
 
 **Assembly-quality filtering.** Variable reference completeness biases Jaccard clustering
 toward spurious splits: an incomplete genome's marker set is approximately a subset of its
@@ -581,25 +617,84 @@ contig count (`--max-contigs`), and single-copy tag count relative to the conspe
 (`--min-tag-fraction`, a completeness proxy). Genomes far below the median are always flagged;
 they are removed only when a threshold is set.
 
-### Layer-2 strain profiling
+## Layer-2: detection and abundance
 
 Sample reads are digested with the database's enzyme set (recorded in the database header) to
-give per-marker counts. A cluster is called **present** iff at least *N* of its unique markers
-are observed at count ≥ 2 (default *N* = 10, in tag units; the full-k-mer StrainScan floor
-of ~1240 k-mers is inappropriate for the ~50–100× sparser tag set). Using only unique markers
-makes detection immune to the shared-marker cross-talk that otherwise lets a greedy set-cover
-over a large conspecific panel strip shared markers and starve true strains. Each present
-cluster's **relative abundance** is estimated from the median sample count over its detected
-unique markers; robust to repeat and contamination outliers, and less prone than a joint
-regression over shared markers to mis-attributing signal between very similar co-present
-strains (a non-negative Elastic Net solver is also provided). Calls are then filtered by a
-minimum coverage fraction of their unique markers (`--min-coverage`, default 0.1; suppresses
-spurious detection of large, similar clusters whose absolute unique-marker count clears the
-floor at a tiny coverage fraction) and a minimum relative abundance (0.02), and renormalised.
-When no cluster passes, Strain2bScan reports the species as detectable but not
-strain-resolvable with the given enzyme set.
+give per-marker counts *c*<sub>*m*</sub>. For cluster *j* with discriminating panel *U*<sub>*j*</sub>:
 
-### Multi-species profiling and species selection
+&nbsp;&nbsp;&nbsp;&nbsp; *N*<sub>*j*</sub> = |*U*<sub>*j*</sub>| &nbsp;(panel size), &nbsp;
+*D*<sub>*j*</sub> = |{*m* ∈ *U*<sub>*j*</sub> : *c*<sub>*m*</sub> ≥ 1}|, &nbsp;
+coverage<sub>*j*</sub> = *D*<sub>*j*</sub> / *N*<sub>*j*</sub>
+
+**Depth-adaptive singleton policy.** Evidence is counted at a threshold *t*<sub>*j*</sub> that
+depends on the estimated depth: *t* = 2 at or above 3 reads/tag, *t* = 1 below it. At high depth a
+genuine marker is essentially never observed exactly once, so *c* = 1 is dominated by sequencing
+error and is filtered, as in StrainScan. At low depth the reverse holds; under Poisson(λ) the
+share of *detected* markers seen exactly once is λ/(e<sup>λ</sup> − 1), 78 % at λ = 0.5; so a fixed
+*c* ≥ 2 rule discards most of the signal precisely where signal is scarce. Sequencing errors
+generate essentially random tags, which almost never coincide with one specific cluster's panel,
+so admitting singletons there costs little specificity while the support floor still requires many
+independent hits on that one panel.
+
+**Detection.** A cluster is called present when support<sub>*j*</sub> = |{*m* ∈ *U*<sub>*j*</sub> :
+*c*<sub>*m*</sub> ≥ *t*<sub>*j*</sub>}| ≥ 8 (`--min-support`) and coverage<sub>*j*</sub> ≥ 0.1
+(`--min-coverage`). The support floor follows from the arithmetic of the marker space rather than
+being chosen round: support tracks *N* · (1 − e<sup>−λ</sup>), and on 2bRAD both factors are small;
+a discriminating panel is a few dozen tags (median 53 across a 419-cluster *C. acnes* panel), and a
+strain at 5 % of a sample sequenced to ~5× per tag sits at λ ≈ 0.27, where only ~24 % of any panel
+is observable, giving ~8 expected observations.
+
+**Depth–breadth consistency.** A cluster is rejected when
+
+&nbsp;&nbsp;&nbsp;&nbsp; coverage<sub>*j*</sub> / (1 − e<sup>−depth<sub>*j*</sub></sup>) &lt; 0.5 &nbsp;(`--min-consistency`)
+
+Under Poisson sampling a genuinely present cluster at depth λ must show breadth 1 − e<sup>−λ</sup>,
+so this ratio is ≈ 1 for a real cluster at any depth. It is ≈ *f* for a **shadow**. a cluster
+called because the strain in the sample happens to carry a fraction *f* of its distinguishing loci,
+so those markers appear at the sample strain's full depth across only *f* of the panel. No coverage
+floor can separate the two, because a shadow and a genuinely rare strain have the same breadth and
+differ only in depth: on a constructed shadow the spurious cluster showed breadth 0.350 against
+0.392 for a genuinely present cluster at 0.4×, while their depths were 7.68× and 0.44×. Swept
+synthetically, genuine clusters scored 0.949–1.018 across 0.3×–20× and shadows
+0.200/0.300/0.495/0.691/0.897 at *f* = 0.2/0.3/0.5/0.7/0.9.
+
+**Abundance.** Each called cluster's depth is the **zero-inclusive** mean count over its whole
+discriminating panel, with the top 1 % of non-zero observations winsorized to the 99th percentile:
+
+&nbsp;&nbsp;&nbsp;&nbsp; depth<sub>*j*</sub> = (1/*N*<sub>*j*</sub>) Σ<sub>*m* ∈ *U*<sub>*j*</sub></sub> min(*c*<sub>*m*</sub>, κ<sub>*j*</sub>)
+
+Both halves are load-bearing. Averaging over the whole panel (zeros included) is what keeps the
+estimate proportional to true depth; an estimator restricted to *detected* markers (for example
+their median) pins a rare cluster near 1 read/tag however rare it is, compressing the ratio between
+an abundant and a rare cluster and flattening the whole composition. Winsorizing rather than
+discarding, and taking the fraction of the *non-zero* observations rather than of the panel,
+prevents the guard against collapsed repeats from deleting real signal when few markers are
+detected. Because single-copy tags are one per genome copy, reads-per-tag cancels genome size, so
+depth is proportional to cell (taxonomic) abundance and depth × *G*<sub>*j*</sub>; where
+*G*<sub>*j*</sub> is the cluster's tag count; is proportional to DNA mass.
+
+**Three abundance scopes** are reported, because per-species fractions cannot be concatenated into
+a community composition:
+
+| column | definition | denominator | interpretation |
+|---|---|---|---|
+| `abundance` | depth<sub>*j*</sub> / Σ<sub>*k* ∈ species</sub> depth<sub>*k*</sub> | this species | within-species split (primary) |
+| `global_abundance` | depth<sub>*j*</sub> / Σ<sub>*k*</sub> depth<sub>*k*</sub> | clusters this run resolved | community composition, **cell** fraction |
+| `sample_fraction` | depth<sub>*j*</sub> · *G*<sub>*j*</sub> / Σ<sub>*m*</sub> *c*<sub>*m*</sub> | all tag observations | share of the sequencing, **DNA** fraction |
+
+The first two compose exactly; global_abundance<sub>*j*</sub> = species_abundance<sub>*s*(*j*)</sub>
+× abundance<sub>*j*</sub>; so an externally computed species layer (for example Fast2bRAD-M's) can
+be substituted for the species term. `sample_fraction` is the only column whose denominator is
+fixed by the sequencing rather than by how well profiling went, and is therefore the only one
+comparable *between* samples; the unclassified remainder is reported rather than hidden. Ground
+truth stated as taxonomic abundance (as in the ATCC MSA standards) should be compared against
+`global_abundance`, and truth stated as genomic DNA against `sample_fraction`; the two differ by
+genome size, which spans >6× within a single mock community.
+
+When no cluster passes, Strain2bScan reports the species as detectable but not strain-resolvable
+with the given enzyme set.
+
+## Multi-species profiling and species selection
 
 For community samples, the reads are digested **once** into a shared set of tag counts, matched
 against every per-species cluster database in parallel; the per-species marginal cost is a
@@ -613,9 +708,21 @@ depth). Let *total* be the species-specific markers a species carries; tags uniq
 species across the panel, the same tag space as the Fast2bRAD-M species layer; and *present* the
 subset observed in the sample at count ≥ 2. The gate is
 
-&nbsp;&nbsp;&nbsp;&nbsp; *resolve_gate* = max(*G*, ⌈*f* · *total*⌉), &nbsp; *detect_gate* = min(*d*, *resolve_gate*)
+&nbsp;&nbsp;&nbsp;&nbsp; *r* = max(1 − e<sup>−λ<sub>*s*</sub></sup>, 0.25) &nbsp;(the reachable fraction of the panel)
 
-with an absolute floor *G* (`--min-species-markers`, default 200), a breadth fraction *f*
+&nbsp;&nbsp;&nbsp;&nbsp; *resolve_gate* = max(⌈*G*·*r*⌉, ⌈*f*·*total*·*r*⌉, *d*, 1), &nbsp; *detect_gate* = min(*d*, *resolve_gate*)
+
+where λ<sub>*s*</sub> is the species' estimated per-tag depth, taken as the zero-inclusive mean
+count over its species-specific markers; a quantity that does not presuppose the species passed
+any gate, so the rule is not circular. Scaling by *r* is what keeps a fixed 200-marker bar from
+being **unreachable by construction** in a low-input or high-host sample: at 0.05× depth only ~5 %
+of any panel is observable, so an unscaled floor files a genuinely present species as absent
+however clean the data is. The scaling is clamped at 25 % of the configured floor because an
+unbounded version is self-cancelling; the observed count is itself proportional to *r*, so
+*present* ≥ *G*·*r* reduces to *total* ≥ *G* at every depth, leaving *d* as the only real
+threshold.
+
+With an absolute floor *G* (`--min-species-markers`, default 200), a breadth fraction *f*
 (`--min-species-marker-frac`, default 0) that scales the bar to each species' panel size, and a
 low detection floor *d* (`--min-species-detect`, default 10). This yields three outcomes per
 species: **strain-resolved** (*present* ≥ *resolve_gate*; Layer-2 runs), **detected but not
@@ -635,14 +742,64 @@ grows large enough for a fixed floor to be outrun by leakage; a small *f* (≈0.
 precision to 1.0 at negligible recall cost, because it raises the bar in proportion to panel size,
 where large-panel leakage concentrates (Results; `docs/gate_calibration.md`).
 
-### Implementation
+## Cross-species restriction on quantification
 
-Strain2bScan is written in Rust with no third-party dependencies. Data-parallelism (genome
-digestion, sketch construction, pairwise clustering, read digestion) uses scoped `std` threads
-(`STRAIN2BSCAN_THREADS`; default = all cores). Databases are stored as sparse strain×marker
-tables with an inverted unique-marker index and the enzyme set in the header.
+Cluster-uniqueness is defined only *within* one species database, so a tag can be unique to a
+cluster there and still occur in a congener's genomes. When that congener is co-present, its reads
+land on the tag and inflate the cluster's depth. Panels routinely contain such pairs;
+*S. aureus*/*S. epidermidis*, three streptococci and two lactobacilli in ATCC MSA-1002, and most
+oral communities; so this is a systematic abundance error rather than a rare accident.
 
-### Benchmarking
+Under `multi-profile`, detection and depth are therefore restricted to markers that are specific
+to their species **across the whole panel**, using the same species-degree index the Layer-1 gate
+is built from. On a two-congener mock the affected cluster's depth was overstated 3× (29.9×
+against a true 10×); with the restriction it is 10.2×. The proportion of markers excluded is
+reported per run, and `--no-cross-species-filter` disables it for comparison. Single-species
+`profile` carries no such information and cannot apply it; a database on its own knows nothing
+about the rest of the panel.
+
+
+## Implementation
+
+Strain2bScan is written in Rust with **no third-party dependencies**, which keeps the build
+reproducible and the binary self-contained. Data-parallelism (genome digestion, sketch
+construction, the pairwise similarity scan, read digestion) uses scoped `std` threads
+(`STRAIN2BSCAN_THREADS`; default = all cores).
+
+**Database.** Sparse: per cluster, the set of marker hashes it carries, plus an inverted
+marker → cluster-degree index and the enzyme set in the header. A dense strain × marker matrix
+reaches tens of GB at real panel sizes.
+
+**Digestion hot path.** Allocation-free end to end. Enzyme scanning is case-insensitive, so
+sequences are read directly from the input buffer with no upper-cased copy per read (this also
+handles soft-masked reference genomes correctly); canonicalisation chooses the orientation by
+comparing the forward strand against its reverse complement one base at a time and hashes the
+winner in place, with no reverse-complement buffer; counts land directly in a hash map with no
+intermediate vector per sequence. Because marker keys are `u64`, the maps use an inlined FxHash
+rather than the default SipHash; marker *values* are unchanged (FNV-1a of the canonical tag), so
+only in-memory bucket assignment differs and databases remain readable across versions.
+
+**I/O.** FASTA and FASTQ are streamed, plain or gzipped, with decompression piped through `gzip`
+so the zero-dependency property is preserved. Peak memory is one batch rather than the whole file,
+which is what makes multi-GB samples tractable.
+
+**Measured.** On 4 M reads (289 MB) against a two-species panel with all 16 enzymes, wall time is
+0.51 s and peak resident memory 11 MB (1.71 s / 282 MB before these optimisations); gzipped input
+costs no additional wall-clock. Tree construction scales as ~O(*n*<sup>1.6</sup>) after replacing a
+per-merge recomputation of max-linkage with an incrementally updated cluster-level similarity
+matrix, and a per-node set-subtraction with a single carrier-set index; on 543 genomes the
+pairwise similarity scan that dominates a large build is parallel, taking the build from 71.4 s to
+58.4 s. Every optimisation was verified to leave output unchanged; for the tree, node for node
+against the serial build at *n* = 543.
+
+Two intuitive optimisations were **rejected on measurement** and are recorded here because both
+are commonly assumed to help: replacing the hash-set Jaccard with a sorted-vector two-pointer
+intersection is 0.82×; slower, because a hash lookup on `u64` is cheap while the two-pointer must
+traverse both arrays; although it would halve the memory; and fusing the multi-enzyme scan into a
+single pass is 1.43× on a 2.5 Mb contig but 0.93× on 150 bp reads, so it would have to be
+dispatched on sequence length rather than applied globally.
+
+## Benchmarking
 
 **Datasets.** (i) A real *C. acnes* benchmark: a 64-genome reference panel (14 ground-truth
 strains + 50 background, NCBI accessions pinned) and five paired-end mock samples from
@@ -664,12 +821,12 @@ tags) and 16S (longest gene per genome via barrnap 0.9 + HMMER, 21-mer Jaccard);
 transform D(J) = −ln(2J/(1+J)); per species the 2bRAD and 16S pairwise vectors were correlated (Spearman)
 against the whole-genome vector, with 95 % CIs from 500 genome subsamples. (vi) *ATCC DNA mocks,
 strain-level (Fig 6, Fig 12, Fig S3, Fig S4)*: four whole-cell mocks; MSA-1002 (20 strains,
-even; native BcgI 2bRAD and shotgun WMS across a 0/90/95/99/99.9 % human-DNA ladder and a 1→0.001 ng
+even; native BcgI 2bRAD-M and shotgun WMS across a 0/90/95/99/99.9 % human-DNA ladder and a 1→0.001 ng
 low-biomass ladder, SRA PRJNA1131785), MSA-1003 (20 strains, staggered), MSA-1005 and MSA-1007 (6 strains
 each). A single unified combined tree was built from **28 species × up to 6 genomes = 164 genomes** (each
 mock species = its ATCC genome + up to 5 high-quality conspecific decoys, CheckM completeness ≥ 90 %,
 contamination ≤ 5 %, within-species ANI 95–99.9 % to the ATCC reference by skani), clustered at 0.95
-similarity with `--containment`; native 2bRAD used the BcgI tree and shotgun used the all-enzyme tree.
+similarity with `--containment`; native BcgI 2bRAD-M used the BcgI tree and shotgun used the all-enzyme tree.
 Strain2bScan was run with `--min-abundance 0 --min-coverage 0.2`. On the shotgun samples it was compared
 against **StrainScan** 1.0.14 (per-species databases, `linux/amd64` container) and **inStrain** 1.10.0
 (bowtie2 → `inStrain profile` against a 98 %-ANI dereplicated reference; the non-dereplicated reference is
@@ -677,10 +834,10 @@ shown as a control in Fig S4). Each tool was scored in its own 0.95-similarity c
 against the mock ground truth (`Ground_truth/*`, sequence abundance), reporting precision, recall, F1,
 AUPR (abundance-threshold sweep, Ye et al. 2019), and Bray–Curtis and L2 similarity to the truth profile
 (2bRAD-M, 2021); scorer `scripts/score_all.py`, figures `scripts/plot_figs_h.py`. (vii) *Real saliva* (Fig 7, Fig 8): native BcgI
-2bRAD (and paired shotgun WMS) saliva from PRJNA1131785, 8 subjects × 4 within-day timepoints, profiled
+2bRAD-M (and paired shotgun WMS) saliva from PRJNA1131785, 8 subjects × 4 within-day timepoints, profiled
 against a 19-species oral-commensal panel (up to 25 genomes/species). Strain- and species-level relative
 abundances → Bray–Curtis → PERMANOVA (adonis, subject/timepoint factors) and leave-one-timepoint-out
-1-NN host classification; shotgun R1 (in-silico BcgI) compared to native 2bRAD calls per sample. Full
+1-NN host classification; shotgun R1 (in-silico BcgI) compared to native BcgI 2bRAD-M calls per sample. Full
 per-dataset procedures and accessions are in `docs/` (`motivation_16s.md`,
 `saliva_individual_discrimination.md`, `saliva_temporal_ml.md`, `saliva_concordance.md`).
 
@@ -722,18 +879,16 @@ Strain2bScan). Scripts: `scripts/plot_sim_headtohead.py` and the drivers under `
 `analyze_headtohead.py`); raw per-sample tables in `figure_raw_data/sim_headtohead/`.
 
 **Comparison to StrainScan (curated-DB and per-sample benchmarks).** In addition to the common benchmark
-above, StrainScan (v1.0) was run on its **own** reference databases (Fig 10) and on the same *C. acnes*
+above, StrainScan v1.0.14 was run on its **own** reference databases (Fig 10) and on the same *C. acnes*
 per-sample profiling comparison (Fig 9A), using its low-depth modes for the depth series.
 
 **Metrics.** Detection precision, recall and F1 at a 0.01 presence threshold; abundance error
 by L1 distance and Bray–Curtis dissimilarity over the union of predicted and true labels,
-evaluated at cluster resolution (ground-truth strains mapped to their clusters). Wall-clock
-time and peak resident set size were measured with `/usr/bin/time -l` on a 16-core Apple
-silicon machine. All scripts, pinned accession lists, result tables and figure code are in the
-Strain2bScan-paper repository; every figure is regenerable with `make figures`.
-
-## Figure legends
-
+evaluated at cluster resolution (ground-truth strains mapped to their clusters). **Bray–Curtis
+similarity is reported as 1 − Bray–Curtis dissimilarity.** Wall-clock time and peak resident set
+size were measured with `/usr/bin/time -l` on a 16-core Apple silicon machine. All scripts, pinned
+accession lists, result tables and figure code are in the Strain2bScan-paper repository; every
+figure is regenerable with `make figures`.
 
 ### Public real-metagenome cohorts and isolate-derived panels
 
@@ -759,16 +914,54 @@ W1–W3 metagenomes were reprofiled with the same cohort panel using `--min-spec
 --min-species-detect 2` and otherwise the gates above. Timings were measured on a local Apple Silicon
 workstation; full command lines and per-sample outputs are provided in
 `results/realworld_cohort_benchmark/`.
+To avoid reference mismatch in PRJNA1517970, we built a body-site-oriented panel from 13 species commonly
+representing vaginal, neonatal-gut and meconium communities: *Bifidobacterium adolescentis*,
+*Cutibacterium acnes*, *Enterococcus faecalis*, *Escherichia coli*, *Gardnerella vaginalis*,
+*Lactobacillus gasseri*, *Lactobacillus jensenii*, *Prevotella bivia*, *Staphylococcus aureus*,
+*Staphylococcus epidermidis*, *Streptococcus agalactiae*, *Streptococcus mitis* and *Streptococcus
+mutans*. We used up to six RefSeq or ATCC genomes per species (146 genomes; two *S. mitis* genomes were
+available). Databases were built with `--enzyme recommended` and profiled with the same thresholds as the
+generic-panel screen. To test behaviour when a true strain is absent from the panel, we also built three
+leave-one-isolate-out *E. coli* databases, each containing only the other two *E. coli* assemblies plus
+the three Bifidobacterium controls, and profiled the held-out isolate reads.
+
+### Public real-metagenome cohorts and isolate-derived panels
+
+To supplement the controlled analyses, we profiled representative paired-end WGS subsets from four
+public BioProjects: PRJNA288562 (pregnancy saliva/vagina/distal-gut time series), PRJNA1517970 (preterm
+vaginal and meconium metagenomes), PRJNA1191223 (preterm-infant stool time series) and PRJNA1191225
+(preterm-infant isolate WGS). These were exploratory application subsets selected to test multi-site
+stability, low-biomass specificity and isolate-derived strain recovery; they were not complete
+epidemiological cohorts. For the generic-panel screen we used the existing 20-species MSA database in
+`all`-enzyme mode with `--min-species-markers 20 --min-species-detect 2 --min-support 2
+--min-coverage 0.01 --min-abundance 0`. PRJNA288562 analyses used subject T23 at gestational days 84 and
+273 for all three body sites. PRJNA1517970 analyses used three vaginal, three meconium and one negative
+extraction-control library.
+
+For cohort-specific validation, six PRJNA1191225 isolate read sets were assembled with SPAdes 4.3.0
+(`--isolate`, 8 threads). Three *E. coli* assemblies were clustered at 0.95 similarity into three
+resolvable units; one assembly each from *B. longum*, *B. breve* and *B. bifidum* was built as a
+single-genome species database. Panels used `--enzyme recommended`. All six isolate read sets were then
+profiled with the cohort panel using `--min-species-markers 50 --min-species-detect 3 --min-support 2
+--min-coverage 0.01 --min-abundance 0`. Because these reads also generated the assemblies, the 6/6
+self-recovery is a panel/read compatibility check, not an independent classification benchmark. P08
+W1–W3 metagenomes were reprofiled with the same cohort panel using `--min-species-markers 20
+--min-species-detect 2` and otherwise the gates above. Timings were measured on a local Apple Silicon
+workstation; full command lines and per-sample outputs are provided in
+`results/realworld_cohort_benchmark/`.
+## Figure legends
+
+
 
 ### Main figures
 
 **Figure 1. Strain2bScan overview and the two input modes.**
 Pipeline schematic. (A) Reference construction: type-IIB (2bRAD) digestion of reference genomes into
-single-copy 32–38 bp tags → within-species clustering at 0.95 Jaccard (MinHash-accelerated) → a
+single-copy 25–33 bp tags → within-species clustering at 0.95 Jaccard (MinHash-accelerated) → a
 cluster × marker database of species-core, cluster-specific and strain-specific markers. (B) Profiling:
 a sample is digested once into canonical markers, gated on species-specific markers (Layer-1), and
 strains are detected and quantified within each present species from unique markers (Layer-2). The two
-input modes; in-silico digestion of conventional shotgun, or native BcgI 2bRAD libraries whose reads
+input modes; in-silico digestion of conventional shotgun (WMS), or native BcgI 2bRAD-M libraries whose reads
 are the tags; enter the same tag space, shared with the Fast2bRAD-M species layer.
 
 **Figure 2. 2bRAD tags track genome-wide strain distance; 16S does not.** **(A)** Per-species Spearman correlation between
@@ -799,7 +992,7 @@ complete relatives; `--containment` (max-containment) keeps them together, resto
 low-quality). Inset (C): near-clonal ***M. tuberculosis*** recall; Jaccard collapses to ≈0.05 on any
 degradation (single cluster shatters), containment holds 1.0 to 90 % (artifact fixed).
 
-**Figure 5. The 2bRAD enzyme set is a resolution/cost knob (14 species).** Enzyme ladder 1/2/4/8/14 across all 14 resolvable sim-pool species. **(A)** median precision (1.0 throughout) and recall (0.50→1.00) vs enzyme number, faint lines per species. **(B)** strain-specific marker yield vs enzyme number (median 976→12 647). Cluster count is invariant. Single-enzyme BcgI enables native 2bRAD-M.
+**Figure 5. The 2bRAD enzyme set is a resolution/cost knob (14 species).** Enzyme ladder 1/2/4/8/14 across all 14 resolvable sim-pool species. **(A)** median precision (1.0 throughout) and recall (0.50→1.00) vs enzyme number, faint lines per species. **(B)** strain-specific marker yield vs enzyme number (median 976→12 647). Cluster count is invariant. Single-enzyme BcgI enables native BcgI 2bRAD-M.
 
 **Figure 6. Native 2bRAD strain-level identification and abundance across four ATCC DNA mocks.** Native BcgI 2bRAD reads
 profiled against the unified **28-species / 164-genome combined tree** (`--enzyme BcgI --containment
@@ -811,27 +1004,28 @@ MSA-1005 and MSA-1007 (even 6-strain, n = 3 each). **Left**, stacked per-genome 
 (truth vs Strain2bScan; ground-truth genomes coloured, false-positive/decoy genomes hatched grey);
 for MSA-1002/1003 the 20-species (`120`) and 28-species (`164`) trees are shown side by side. **Right**,
 six metrics vs ground truth; precision, recall, F1, AUPR (abundance-threshold sweep, Ye et al. 2019),
-Bray–Curtis and L2 to the sequence-abundance profile (2bRAD-M, 2021). MSA-1002 holds precision/recall
-≈ 0.95–1.0 down to 0.01 ng and to 99 % host; the 0.001 ng sample is below the detection floor. The
+Bray–Curtis and L2 to the sequence-abundance profile (2bRAD-M, 2021). MSA-1002 holds precision 1.0 with
+recall 19/20 at 0.01 ng (full 20/20 recall at ≥0.1 ng) and precision/recall ≈0.95–1.0 to 99 % host; the
+0.001 ng sample is below the detection floor. The
 28-species tree costs precision at the ~1× marker-depth noise floor (e.g. MSA-1003's 0.02 % tier), which
 the 20-species tree and the AUPR sweep both recover.
 
 **Figure 7. Real saliva: strain profiles discriminate individuals and are temporally stable.**
-(A–C); PCoA (species vs strain) coloured by subject,
-and per-species strain-level subject R² (8 subjects × 4 timepoints; strain R² 0.757 versus species 0.755,
-p 2e-4; *Neisseria subflava* R² 0.808; 13/13 testable species significant). (D–E);  within- vs between-subject strain distance (0.327 vs 0.696, p 8.05e-19) and leave-one-timepoint-out host-ID
-accuracy (100 % strain vs 78.1 % species).
+**(A–C)** PCoA (species vs strain) coloured by subject, and per-species strain-level subject R²
+(8 subjects × 4 timepoints; strain R² 0.757 versus species 0.755, p 2e-4; *Neisseria subflava* R² 0.808;
+13/13 testable species significant). **(D–E)** Within- vs between-subject strain distance
+(0.327 vs 0.696, p 8.05e-19) and leave-one-timepoint-out host-ID accuracy (100 % strain vs 78.1 % species).
 
-**Figure 8. Native 2bRAD confirms all shotgun strains and recovers the low-abundance ones shotgun misses.**. paired shotgun↔2bRAD on the same saliva samples. (A) Per sample,
-strains detected: shotgun-confirmed (100 % of shotgun calls, 65/65, are in native 2bRAD) plus 2bRAD-only
-(128–163/sample). (B) Community relative abundance of shared vs 2bRAD-only strains (2bRAD-only
+**Figure 8. Native 2bRAD confirms all shotgun strains and recovers the low-abundance ones shotgun misses.** Paired shotgun↔2bRAD on the same saliva samples. **(A)** Per sample,
+strains detected: shotgun-confirmed (100 % of shotgun calls, 65/65, are in native BcgI 2bRAD-M) plus 2bRAD-only
+(128–163/sample). **(B)** Community relative abundance of shared vs 2bRAD-only strains (2bRAD-only
 significantly lower, p 1.2e-23).
 
-**Figure 9. Fast, light, and scalable to whole communities.** (A) (per-sample time/memory vs StrainScan (~8×/~11×). (B)) thread scaling of
-build and profile (8.5×/6.5× to 16 threads). (C); 55-species
+**Figure 9. Fast, light, and scalable to whole communities.** **(A)** Per-sample time/memory vs StrainScan (~8×/~11×). **(B)** Thread scaling of
+build and profile (8.5×/6.5× to 16 threads). **(C)** 55-species
 community: per-sample cost flat in #species, ~121–146× faster than a per-species tool run once per species.
 
-**Figure 10. Matches or exceeds StrainScan on its own databases.**. head-to-head on StrainScan's reference sets: *A. muciniphila*, *P. copri* (precision 1.0 both; recall
+**Figure 10. Matches or exceeds StrainScan on its own databases.** Head-to-head on StrainScan's reference sets: *A. muciniphila*, *P. copri* (precision 1.0 both; recall
 0.93 vs 0.24, 0.94 vs 0.90; ~17–23× faster, ~15–24× lighter) and near-clonal *M. tuberculosis*, where
 StrainScan did not complete (>3.3 h, >25 GB) and Strain2bScan finished in 0.89 s.
 
@@ -845,7 +1039,7 @@ samples): both hold precision 1.0, Strain2bScan reaches full recall by 3× vs St
 StrainScan's sum over 14 per-species runs (46–105×).
 
 **Figure 12. Strain-level profiling on shotgun (WMS) mocks: Strain2bScan vs StrainScan and inStrain,
-including high host contamination.**  . Whole-metagenome shotgun reads of the four ATCC mocks profiled by all
+including high host contamination.** Whole-metagenome shotgun reads of the four ATCC mocks were profiled by all
 three tools, each scored in its own 0.95-similarity cluster space against the same ground truth.
 Strain2bScan uses in-silico all-enzyme digestion against the 164-genome tree; StrainScan uses its
 per-species databases; inStrain maps to a **dereplicated** reference (its documented requirement; the
@@ -868,16 +1062,16 @@ DB expansion costs nothing when strains are well above the marker-depth floor, e
 20-species tree, while AUPR stays ≈ 0.96 either way; the cost is confined to the ~1× noise floor.
 
 **Figure S4. inStrain requires a dereplicated reference (MSA-1002 shotgun).** inStrain on the
-non-dereplicated 164-genome reference vs a 98 %-ANI dereplicated reference (), across
+non-dereplicated 164-genome reference vs a 98 %-ANI dereplicated reference, across
 the MSA-1002 host ladder. The non-dereplicated reference multi-maps reads across the > 95 %-ANI decoys
 and inflates false positives (precision 0.29 at 0 % host); dereplication restores precision to 1.0. This
 is why Fig 12 reports inStrain on its documented dereplicated reference.
 
 (The former Fig S1 (per-species rank–rank scatter) is now **Fig 2 panel B**.)
 
-**Figure S1. ATCC MSA-1002 DNA-input titration (native 2bRAD).**. precision 1.0 and full recall to 0.1 ng input.
+**Figure S1. ATCC MSA-1002 DNA-input titration (native BcgI 2bRAD-M).** Precision 1.0 and full recall to 0.1 ng input.
 
-**Figure S2. Layer-1 gate calibration on the 55-species panel.**. species precision/recall vs the marker floor at normal and low depth.
+**Figure S2. Layer-1 gate calibration on the 55-species panel.** Species precision/recall vs the marker floor at normal and low depth.
 
 **Table S3. Exploratory clinical oral cohort profiling.**. 4 clinical
 oral 2bRAD samples, 15–17 species and 115–158 strain calls each, ~2 s/sample (no case/control labels
@@ -985,50 +1179,45 @@ unresolved `C0|C1|C2` unit rather than assigning it to one isolate.
 verify exact volume/issue/page numbers and publication years against the primary sources before
 submission; DOIs/accession numbers should be added.*
 
-1. Liao H, Ji Y, Sun Y. **StrainScan: a highly accurate and sensitive computational tool for strain-level
-   detection of the microbiome.** *Microbiome* 2023; 11:186.
+1. Liao H, Ji Y, Sun Y. **High-resolution strain-level microbiome composition analysis from short reads.**
+   *Microbiome* 2023; 11:183. doi:10.1186/s40168-023-01615-w.
 2. Sun Z, Huang S, Zhu P, *et al.* **Species-resolved sequencing of low-biomass or degraded microbiomes
-   using 2bRAD-M.** *Genome Biology* 2022; 23:36.
+   using 2bRAD-M.** *Genome Biology* 2022; 23:36. doi:10.1186/s13059-022-02633-6.
 3. Wang S, Meyer E, McKay JK, Matz MV. **2b-RAD: a simple and flexible method for genome-wide
-   genotyping.** *Nature Methods* 2012; 9(8):808–810.
+   genotyping.** *Nature Methods* 2012; 9(8):808–810. doi:10.1038/nmeth.2025.
 4. Truong DT, Tett A, Pasolli E, Huttenhower C, Segata N. **Microbial strain-level population structure
-   and genetic diversity from metagenomes.** *Genome Research* 2017; 27(4):626–638.
+   and genetic diversity from metagenomes.** *Genome Research* 2017; 27(4):626–638. doi:10.1101/gr.216242.116.
 5. van Dijk LR, Walker BJ, Straub TJ, *et al.* **StrainGE: a toolkit to track and characterize
-   low-abundance strains in complex microbial communities.** *Genome Biology* 2022; 23:74.
+   low-abundance strains in complex microbial communities.** *Genome Biology* 2022; 23:74. doi:10.1186/s13059-022-02629-2.
 6. Shaw J, Yu YW. **Rapid species-level metagenome profiling and containment estimation with sylph.**
-   *Nature Biotechnology* 2024 (advance online).
+   *Nature Biotechnology* 2024; doi:10.1038/s41587-024-02412-y.
 7. Ondov BD, Treangen TJ, Melsted P, *et al.* **Mash: fast genome and metagenome distance estimation using
-   MinHash.** *Genome Biology* 2016; 17:132.
+   MinHash.** *Genome Biology* 2016; 17:132. doi:10.1186/s13059-016-0997-x.
 8. Ondov BD, Starrett GJ, Sappington A, *et al.* **Mash Screen: high-throughput sequence containment
-   estimation for genome discovery.** *Genome Biology* 2019; 20:232.
+   estimation for genome discovery.** *Genome Biology* 2019; 20:232. doi:10.1186/s13059-019-1841-x.
 9. Brown CT, Irber L. **sourmash: a library for MinHash sketching of DNA.** *Journal of Open Source
-   Software* 2016; 1(5):27.
+   Software* 2016; 1(5):27. doi:10.21105/joss.00027.
 10. Parks DH, Imelfort M, Skennerton CT, Hugenholtz P, Tyson GW. **CheckM: assessing the quality of
     microbial genomes recovered from isolates, single cells, and metagenomes.** *Genome Research*
-    2015; 25(7):1043–1055.
+    2015; 25(7):1043–1055. doi:10.1101/gr.186072.114.
 11. Chklovski A, Parks DH, Woodcroft BJ, Tyson GW. **CheckM2: a rapid, scalable and accurate tool for
     assessing microbial genome quality using machine learning.** *Nature Methods* 2023; 20(8):1203–1212.
+    doi:10.1038/s41592-023-01940-w.
 12. Orakov A, Fullam A, Coelho LP, *et al.* **GUNC: detection of chimerism and contamination in
-    prokaryotic genomes.** *Genome Biology* 2021; 22:178.
+    prokaryotic genomes.** *Genome Biology* 2021; 22:178. doi:10.1186/s13059-021-02393-1.
 13. Bowers RM, Kyrpides NC, Stepanauskas R, *et al.* **Minimum information about a single amplified genome
     (MISAG) and a metagenome-assembled genome (MIMAG) of bacteria and archaea.** *Nature Biotechnology*
-    2017; 35(8):725–731.
+    2017; 35(8):725–731. doi:10.1038/nbt.3893.
 14. Huang W, Li L, Myers JR, Marth GT. **ART: a next-generation sequencing read simulator.**
-    *Bioinformatics* 2012; 28(4):593–594.
+    *Bioinformatics* 2012; 28(4):593–594. doi:10.1093/bioinformatics/btr708.
 15. Marçais G, Kingsford C. **A fast, lock-free approach for efficient parallel counting of occurrences of
-    k-mers.** *Bioinformatics* 2011; 27(6):764–770.
+    k-mers.** *Bioinformatics* 2011; 27(6):764–770. doi:10.1093/bioinformatics/btr011.
 16. Baker DN, Langmead B. **Dashing: fast and accurate genomic distances with HyperLogLog.** *Genome
-    Biology* 2019; 20:265.
+    Biology* 2019; 20:265. doi:10.1186/s13059-019-1875-0.
 17. Minkin I, Medvedev P. **Scalable multiple whole-genome alignment and locally collinear block
-    construction with SibeliaZ.** *Nature Communications* 2020; 11:6327.
+    construction with SibeliaZ.** *Nature Communications* 2020; 11:6327. doi:10.1038/s41467-020-19777-9.
 18. Eddy SR. **Accelerated profile HMM searches.** *PLoS Computational Biology* 2011; 7(10):e1002195.
+    doi:10.1371/journal.pcbi.1002195.
 19. Seemann T. **Barrnap: basic rapid ribosomal RNA predictor.** Software, https://github.com/tseemann/barrnap.
 20. Anderson MJ. **A new method for non-parametric multivariate analysis of variance.** *Austral Ecology*
-    2001; 26(1):32–46. (PERMANOVA)
-
-We further tested behaviour when a true *E. coli* strain was absent. In leave-one-isolate-out runs, each
-of the three *E. coli* read sets was profiled against a database containing only the other two isolates.
-The held-out reads produced broad coverage of the remaining relatives (0.799–0.911) but were always
-reported as a merged `C0|C1` signal rather than creating a false third cluster. This is the expected
-limitation of closed panels: conspecific signal can be misassigned to a near relative, so absence of the
-true strain cannot be inferred from a generic nearest-relative call.
+    2001; 26(1):32–46. doi:10.1111/j.1442-9993.2001.01070.pp.x. (PERMANOVA)

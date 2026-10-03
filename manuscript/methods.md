@@ -432,7 +432,7 @@ Strain2bScan). Scripts: `scripts/plot_sim_headtohead.py` and the drivers under `
 `analyze_headtohead.py`); raw per-sample tables in `figure_raw_data/sim_headtohead/`.
 
 **Comparison to StrainScan (curated-DB and per-sample benchmarks).** In addition to the common benchmark
-above, StrainScan (v1.0) was run on its **own** reference databases (Fig 10) and on the same *C. acnes*
+above, StrainScan v1.0.14 was run on its **own** reference databases (Fig 10) and on the same *C. acnes*
 per-sample profiling comparison (Fig 9A), using its low-depth modes for the depth series.
 
 **Metrics.** Detection precision, recall and F1 at a 0.01 presence threshold; abundance error

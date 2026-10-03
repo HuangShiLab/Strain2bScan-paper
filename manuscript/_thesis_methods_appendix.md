@@ -7,7 +7,7 @@ Each type-IIB restriction enzyme recognises a short, partially degenerate motif 
 distance to either side, releasing a tag of constant length. An enzyme is modelled as a triple
 (*upstream gap*, *anchored pattern set*, *downstream gap*): for BcgI the excised fragment is 32 bp with a
 central `CGA…TGC`-type recognition anchor and *N*-runs on either flank; the sixteen enzymes of the
-Fast2bRAD-M table differ in tag length (32–38 bp) and anchor. Digestion scans every offset of a sequence
+Fast2bRAD-M table differ in tag length (25–33 bp) and anchor. Digestion scans every offset of a sequence
 and tests the anchor set; because type-IIB sites are palindromically constrained, providing both the
 forward and reverse anchor patterns lets a single left-to-right pass over one strand recover the tags that
 would be produced from both strands, which halves the work and (importantly) yields exactly one canonical

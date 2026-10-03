@@ -22,12 +22,12 @@ A shared foundation (concept, why-2bRAD-not-16S, core accuracy) precedes the two
 
 Abstract arc: strain variation matters → 16S can't resolve it and shotgun is heavy at scale and fails
 on low-biomass/high-host samples → 2bRAD reduced-representation solves low-biomass but was species-only
-→ **Strain2bScan** ports strain resolution onto 2bRAD tags and accepts **both** native 2bRAD and
-in-silico-digested shotgun → (1) precision 1.0, robust, depth-matched to StrainScan; (2) low-biomass
-pillar: 20/20 recall at 99 % host vs shotgun 12/20; real saliva strain-level individual discrimination
-(R² 0.83 > species 0.82; 100 % host-ID) and recovery of low-abundance strains shotgun misses;
-(3) scale pillar: ~8×/~11× per sample, ~130–146× at community scale, completes near-clonal *M. tb*
-where StrainScan does not.
+→ **Strain2bScan** ports strain resolution onto 2bRAD tags and accepts **both** native BcgI 2bRAD-M and
+in-silico-digested shotgun (WMS) → (1) precision 1.0, robust, depth-matched to StrainScan; (2) low-biomass
+pillar: 20/20 recall at 99 % host vs shotgun collapse; real saliva strain-level individual discrimination
+(R² 0.757 versus species 0.755; 100 % host-ID; *Neisseria subflava* R² 0.808) and recovery of low-abundance
+strains shotgun misses; (3) scale pillar: ~8×/~11× per sample, ~130–146× at community scale, completes
+near-clonal *M. tb* where StrainScan does not.
 
 ---
 
@@ -88,19 +88,21 @@ Claim (the low-biomass payoff, real DNA, known truth):
   `docs/mock_msa1002.md`. ✅
 
 ### §6  Real saliva case study: individual-specific, temporally stable strain signatures — **Fig 7** (multi-panel: `saliva_individual_discrimination.png`, `saliva_temporal_ml.png`) + **Fig 8** concordance (`saliva_concordance.png`)
-Native BcgI 2bRAD saliva, 8 subjects × 4 timepoints, oral-commensal panel. The biological headline:
-- **Individual discrimination**: subject strain-level PERMANOVA **R² 0.833 > species 0.822**
-  (p 2e-4), LOO 1-NN 90.6 %; per-species ***Rothia mucilaginosa* R² 0.921**, 17/18 species significant.
+Native BcgI 2bRAD-M saliva, 8 subjects × 4 timepoints, oral-commensal panel. The biological headline:
+- **Individual discrimination**: subject strain-level PERMANOVA **R² 0.757 versus species 0.755**
+  (p 2e-4), leave-one-timepoint-out host-ID **100 % strain vs 78.1 % species**; per-species
+  ***Neisseria subflava* R² 0.808**, 13/13 testable species significant.
   `saliva_permanova.tsv`, `saliva_perspecies_subject.tsv`, `docs/saliva_individual_discrimination.md`. ✅
-- **Temporal stability + host-ID**: within-subject distance 0.19 ≪ between 0.44 (p 5e-25);
-  leave-one-timepoint-out subject ID **100 % strain vs 94 % species**. `saliva_temporal_ml.tsv`,
-  `docs/saliva_temporal_ml.md`. ✅
+- **Temporal stability**: within-subject Bray–Curtis distance 0.327 ≪ between 0.696 (p 8.05e-19);
+  time of day non-significant. `saliva_temporal_ml.tsv`, `docs/saliva_temporal_ml.md`. ✅
 - **Paired shotgun↔2bRAD concordance** (self-validation + 2bRAD sensitivity): 100 % of shotgun strain
   calls confirmed by native 2bRAD, and native 2bRAD additionally recovers **128–163 low-abundance
-  strains/sample that host-limited shotgun misses** (median rel-ab 0.003 vs 0.010, p 1.2e-23).
+  strains/sample (3 paired samples with usable bacterial recovery) that host-limited shotgun misses**
+  (median community rel-ab 0.0029 vs 0.0097, p 1.2e-23).
   `saliva_concordance.tsv`, `docs/saliva_concordance.md`. ✅
-- Clinical oral cohort profiles cleanly (15–17 species, ~2 s/sample) — **Supp / brief mention**; no
-  case/control labels public. `clinical_exploratory.tsv`, `docs/clinical_oral_exploratory.md`. ✅
+- Clinical oral cohort profiles cleanly (15–17 species, 115–158 strain calls/sample, ~2 s/sample) —
+  **Supp / brief mention**; no case/control labels public. `clinical_exploratory.tsv`,
+  `docs/clinical_oral_exploratory.md`. ✅
 
 ---
 
@@ -127,13 +129,15 @@ recovers 20/20 at 0 % host) and §6 (shotgun calls ⊆ native-2bRAD calls) — i
 ---
 
 ## Discussion — beats
-- Two-mode positioning: 2bRAD-native for **low-biomass/high-host** (saliva, FFPE, skin, ancient/degraded);
-  in-silico shotgun for **cohort-scale** where k-mer tools don't scale. One tool, one tag space.
+- Two-mode positioning: native BcgI 2bRAD-M for **low-biomass/high-host** (saliva, FFPE, skin, ancient/degraded);
+  in-silico-digested shotgun (WMS) for **cohort-scale** where k-mer tools don't scale. One tool, one tag space.
 - Interoperability with Fast2bRAD-M species layer (shared tags) → species+strain in one pipeline.
 - Limitations: recall bounded by **genuine near-clonality** (*M. tb*); host-limited shotgun can't reach
   the low-abundance tail (which is exactly the 2bRAD advantage); strain resolution needs a
   **niche-appropriate, genome-rich reference panel** (the generic-vs-oral-panel lesson);
-  all non-real benchmarks simulated/closed-world.
+  native BcgI 2bRAD-M strain-level profiling did not improve case/control prediction over species-level
+  on the ECC/Lim_ORPI datasets, likely because BcgI marker density limits strain calling in real
+  metagenomes (`results/real_data_strain_benchmark.md`).
 - Future: oral-cancer case/control (needs labels), FFPE/degraded, deeper multi-tool comparison
   (sylph/StrainGE), 16S species-layer half.
 

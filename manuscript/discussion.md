@@ -4,7 +4,7 @@ Strain2bScan reframes strain-level profiling around a sparse, reproducible marke
 single engine serving **two input modes**: native 2bRAD-M libraries and in-silico digestion of
 conventional shotgun. By porting StrainScan's clustering-plus-unique-marker framework onto 2bRAD tags in
 Rust, it turns a ~50–100× smaller marker database into large, structural gains **without sacrificing
-accuracy**. across every species tested it held precision 1.0, matched StrainScan's detection onset at
+accuracy** across every species tested: it held precision 1.0, matched StrainScan's detection onset at
 0.5× coverage (Fig 3), and matched or exceeded StrainScan's recall both on StrainScan's own databases
 (Fig 10) and on a common 15-species simulated benchmark where the two tools built databases from the same
 genomes and profiled the same reads (median recall 0.80 vs 0.67 at equal precision, while building
@@ -21,11 +21,12 @@ StrainScan kept detection but its abundance estimate collapsed (Bray–Curtis si
 inStrain lost detection (recall 0.20), each failing in a complementary way (Fig 12). On real saliva this translated into practical subject discrimination: leave-one-timepoint-out
 host-ID accuracy was 100% for strain profiles versus 78.1% for species profiles, although global
 PERMANOVA R² was similar (0.757 versus 0.755). Profiles were temporally stable within subject, and
-validated against paired shotgun of the same samples; recovered 128–163 low-abundance strains per sample that
-host-limited shotgun could not reach, while calling nothing the shotgun mode contradicted (Fig 7, Fig 8).
+validated against paired shotgun of the same samples; recovered 128–163 low-abundance strains per sample
+(3 paired samples with usable bacterial recovery) that host-limited shotgun could not reach, while calling
+nothing the shotgun mode contradicted (Fig 7, Fig 8).
 This is the setting where strain resolution matters most (oral, tumour/FFPE, skin) and where shotgun is
 weakest; a wet-lab reduction that concentrates sequencing on informative tags is the natural fit, and
-Strain2bScan is, to our knowledge, the first tool to make native 2bRAD strain-resolved.
+Strain2bScan is, to our knowledge, the first tool to make native BcgI 2bRAD-M strain-resolved.
 
 **Conventional metagenomes at community scale.** In the shotgun mode, the decisive gains are per-sample
 speed and memory (~8× faster, ~11× lighter than StrainScan; Fig 9A) and, above all, scaling in the
@@ -100,9 +101,16 @@ solve low-marker input; panel completeness and sequencing depth remain limiting.
 *E. coli* tests showed that reads from an absent isolate were assigned to a merged cluster formed by the
 two closest available relatives. This behaviour avoids inventing a false isolate-specific call but also
 means that absence of the true strain cannot be inferred from a nearest-relative assignment. Future work
-therefore requires broader pangenome panels and explicit absent-strain models. Deeper external validation,
-oral-cancer case/control analysis, FFPE and degraded material, broader multi-tool comparison (sylph,
-StrainGE), and completing the Fast2bRAD-M species layer remain future work.
+therefore requires broader pangenome panels and explicit absent-strain models.
+(viii) **Strain-level profiling did not improve case/control prediction over species-level on two
+native BcgI 2bRAD-M oral datasets** (ECC caries vs healthy, and Lim_ORPI clean vs unclean denture;
+`results/real_data_strain_benchmark.md`). Species-level classifiers outperformed strain-level
+(AUROC 0.81 vs 0.59 for ECC, 0.72 vs 0.52 for Lim_ORPI), largely because BcgI single-enzyme marker
+density produced too few strain calls (9–18 prevalent clusters) for stable ML, and the phenotypes
+appeared driven more by species presence than by strain identity. This is a marker-density limit of
+the native BcgI protocol, not a failure of the resolution framework: in-silico multi-enzyme or k-mer
+marker sources would be needed to test whether strain-level resolution can outperform species-level
+classification on these phenotypes.
 
 **Conclusion.** Reduced-representation 2bRAD markers, combined with a StrainScan-style resolution
 framework and a fast Rust implementation, make accurate strain-level profiling practical at a fraction of

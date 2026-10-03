@@ -9,23 +9,23 @@ native BcgI 2bRAD, oral panel, strain-level abundances. `scripts/temporal_ml_sal
 Strain-level Bray–Curtis distance **within subject** (across the 4 times of day) vs **between
 subjects**:
 
-- within-subject mean **0.186** vs between-subject **0.444** (Mann–Whitney p = 5 × 10⁻²⁵).
+- within-subject mean **0.327** vs between-subject **0.696** (Mann–Whitney p = 8.05 × 10⁻¹⁹).
 
-An individual's salivary strain profile is ~2.4× more similar across the day than to anyone else's —
+An individual's salivary strain profile is ~2.1× more similar across the day than to anyone else's —
 the profile is a **stable, person-specific signature**, not a transient snapshot. (Consistent with
-timepoint being non-significant in the whole-community PERMANOVA, R² ≈ 0.05.)
+timepoint being non-significant in the whole-community PERMANOVA, R² = 0.038, p = 0.99.)
 
 ## ML host identification — leave-one-timepoint-out
 Train a subject classifier on 3 timepoints, predict the held-out 4th (1-NN on Bray–Curtis), cycling
 all 4 folds; 8-way problem (chance 12.5%):
 
-- **strain-level accuracy = 100%** (32/32), species-level 93.8%.
+- **strain-level accuracy = 100%** (32/32), species-level 78.1%.
 
 Predicting the held-out timepoint means the classifier never sees the test day for that subject, so
 this is genuine generalization, not memorization. **Strain-level features identify the host with
 perfect accuracy**, beating species-level — reproducing the Strain2bfunc result ("100% host-ID from
 strain-level features") with the fast/light Strain2bScan.
 
-Together with the PERMANOVA (strain R²=0.833>0.822) and the *Rothia mucilaginosa* R²=0.921, this
-establishes salivary strain signatures as individual-specific and temporally stable, resolvable in
-~1 s/sample from native 2bRAD.
+Together with the PERMANOVA (strain R² = 0.757 versus species R² = 0.755) and the *Neisseria subflava*
+R² = 0.808, this establishes salivary strain signatures as individual-specific and temporally stable,
+resolvable in ~1 s/sample from native 2bRAD.
