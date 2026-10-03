@@ -16,8 +16,8 @@ Outputs:
   data/fig6_fig12_profiles.json
   figures/fig6_2brad.{png,pdf}
   figures/fig12_wms_toolcompare.{png,pdf}
-  figures/numbered/Fig06_fig6_2brad.{png,pdf}
-  figures/numbered/Fig12_fig12_wms_toolcompare.{png,pdf}
+  figures/numbered/Fig06_native_2brad_mocks.{png,pdf}
+  figures/numbered/Fig12_wms_toolcompare.{png,pdf}
 """
 import argparse, csv, glob, json, os, re, sys, math
 import numpy as np

@@ -271,3 +271,24 @@ Raw data: **available**. `figure_raw_data/TableS3_clinical_oral/reads/` with `ma
 complete/near-complete genomes (CheckM ≥97 %/≤5 %, Complete/Chromosome) were used.
 **3. Results.** Per genome: species, accession, assembly level, CheckM completeness/contamination, contig
 count, length, high-quality flag.
+
+
+---
+
+## Figure S3; Cost of unified-database expansion (20- vs 28-species combined tree)
+- *Data type:* whole-metagenome shotgun (WMS) ATCC mock communities.
+- *Comparison:* Strain2bScan on the 20-species (`120`) versus 28-species (`164`) combined tree.
+- *Samples:* MSA-1002 at 0/90/95/99% host and MSA-1003 triplicates.
+- *Result:* MSA-1002 is unchanged across database sizes; MSA-1003 loses single-threshold precision
+  on the larger tree, while AUPR remains approximately 0.96.
+- *File:* `figures/numbered/FigS3_tree_expansion.{png,pdf}`.
+
+---
+
+## Figure S4; inStrain requires a dereplicated reference (MSA-1002 shotgun)
+- *Data type:* whole-metagenome shotgun ATCC MSA-1002 host-contamination ladder.
+- *Comparison:* inStrain on the non-dereplicated 164-genome reference versus a 98%-ANI
+  dereplicated reference.
+- *Result:* the non-dereplicated reference inflates false positives; dereplication restores
+  detection and precision. This is why Fig 12 uses the dereplicated inStrain reference.
+- *File:* `figures/numbered/FigS4_instrain_derep.{png,pdf}`.

@@ -27,5 +27,7 @@ figure_raw_data/**/reads/
 *.tar.gz
 .DS_Store
 __pycache__/
+*.pid
+*.bak
 figure_raw_data/**/truth/
 .venv/

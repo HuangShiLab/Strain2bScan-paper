@@ -1,7 +1,11 @@
 #!/usr/bin/env python3
-"""Produce a numbered figure set (figures/numbered/Fig01.png … Fig10.png, FigS1–S3) that matches the
-manuscript numbering in manuscript/figures.md. Single-source figures are copied; multi-source figures
-are montaged vertically (one source figure per row). Re-run after any panel figure is regenerated."""
+"""Produce the draft-backed numbered figure set.
+
+Outputs are Figures 1-12 and S1-S4 in ``figures/numbered`` and match
+``figures/numbered/MANIFEST.tsv``. Single-source figures copy the vector PDF;
+multi-source figures are montaged vertically from their source PNGs. Re-run after
+regenerating any panel figure.
+"""
 import os, shutil
 from pathlib import Path
 from PIL import Image
@@ -29,8 +33,17 @@ SUPP = {
     "S1": ["mock_msa1002_titration"],
     "S2": ["gate_calibration"],
     "S3": ["figS_tree_expansion"],    # DB-expansion cost: 20- vs 28-species combined tree
-    "S4": ["sim_tracegap"],           # default vs --trace-gap on simulated communities
-    "S5": ["sim_fig12_style"],        # Strain2bScan vs StrainScan vs inStrain on simulated communities (Fig12-style)
+    "S4": ["figS_instrain_derep"],   # non-dereplicated vs dereplicated inStrain reference
+}
+
+# Human-readable output labels. By default the source stems are joined with '+';
+# these overrides avoid redundant names such as Fig12_fig12_wms_toolcompare.
+LABELS = {
+    "06": "native_2brad_mocks",
+    "10": "species_expansion_strainscan",
+    "12": "wms_toolcompare",
+    "S3": "tree_expansion",
+    "S4": "instrain_derep",
 }
 
 def montage(tag, sources):
@@ -53,7 +66,8 @@ def montage(tag, sources):
     for im in resized:
         canvas.paste(im, (0, y))
         y += im.height
-    base = f"{OUT}/Fig{tag}_" + "+".join(sources)
+    label = LABELS.get(tag, "+".join(sources))
+    base = f"{OUT}/Fig{tag}_{label}"
     canvas.save(base + ".png", "PNG")
     # PDF: keep the original vector PDF for single-panel figures; raster montage for multi-panel
     if len(sources) == 1 and os.path.exists(f"{FIG}/{sources[0]}.pdf"):
