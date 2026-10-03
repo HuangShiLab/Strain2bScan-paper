@@ -28,3 +28,4 @@ figure_raw_data/**/reads/
 .DS_Store
 __pycache__/
 figure_raw_data/**/truth/
+.venv/

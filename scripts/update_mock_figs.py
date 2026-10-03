@@ -19,15 +19,37 @@ Outputs:
   figures/numbered/Fig06_fig6_2brad.{png,pdf}
   figures/numbered/Fig12_fig12_wms_toolcompare.{png,pdf}
 """
-import csv, glob, json, os, re, sys, math
+import argparse, csv, glob, json, os, re, sys, math
 import numpy as np
 from pathlib import Path
 
 PAPER = Path(__file__).resolve().parent.parent
-RAW = PAPER / "work" / "mock_retest" / "Strain2bScan-raw-data"
-PORT_RAW = PAPER / "work" / "mock_retest" / "Strain2bScan-port-results"
 DATA = PAPER / "data"
 FIG = PAPER / "figures"
+
+# Allow retests against a different raw-data mirror (e.g. a version-specific
+# retest directory) without changing the script.
+RAW = PAPER / "work" / "mock_retest" / "Strain2bScan-raw-data"
+PORT_RAW = PAPER / "work" / "mock_retest" / "Strain2bScan-port-results"
+
+def set_raw_dirs(raw=None, port_raw=None):
+    global RAW, PORT_RAW
+    if raw:
+        RAW = Path(raw).resolve()
+    if port_raw:
+        PORT_RAW = Path(port_raw).resolve()
+    elif raw and not port_raw:
+        PORT_RAW = RAW / "Strain2bScan-port-results"
+
+def load_members_all():
+    global MEMBERS, GENOMES164
+    MEMBERS = {
+        "164_all":  load_members(RAW / "MSA_combined164_all_flat.members.tsv"),
+        "120_all":  load_members(RAW / "MSA1002_combined_all_flat.members.tsv"),
+        "164_bcgi": load_members(RAW / "MSA_combined164_bcgi_cont.members.tsv"),
+        "120_bcgi": load_members(RAW / "MSA1002_combined_bcgi_cont.members.tsv"),
+    }
+    GENOMES164 = genome_set("164_all")
 
 # ------------------------------------------------------------------ members / clusters
 def load_members(path):
@@ -229,6 +251,14 @@ def collect_new_s2b(pr):
 
 # ------------------------------------------------------------------ main
 def main():
+    ap = argparse.ArgumentParser(description="Regenerate Fig6/Fig12 metrics and figures")
+    ap.add_argument("--raw-dir", help="Override Strain2bScan-raw-data directory")
+    ap.add_argument("--port-raw-dir", help="Override Strain2bScan-port-results directory")
+    ap.add_argument("--skip-figures", action="store_true", help="Only update metrics/profiles, do not regenerate figures")
+    args = ap.parse_args()
+    set_raw_dirs(args.raw_dir, args.port_raw_dir)
+    load_members_all()
+
     if not (RAW / "MSA_combined164_all_flat.members.tsv").exists():
         print(f"ERROR: HPC mirror not found at {RAW}")
         print("Run rsync from HPC first:")
@@ -320,10 +350,11 @@ def main():
     print(f"wrote {DATA / 'fig6_fig12_profiles.json'}")
 
     # regenerate figures
-    import subprocess
-    for cmd in ["python3 scripts/plot_figs_h.py", "python3 scripts/number_figures.py"]:
-        print(f"\n$ {cmd}")
-        subprocess.run(cmd, shell=True, cwd=PAPER, check=True)
+    if not args.skip_figures:
+        import subprocess
+        for cmd in ["python3 scripts/plot_figs_h.py", "python3 scripts/number_figures.py"]:
+            print(f"\n$ {cmd}")
+            subprocess.run(cmd, shell=True, cwd=PAPER, check=True)
 
 if __name__ == "__main__":
     main()
