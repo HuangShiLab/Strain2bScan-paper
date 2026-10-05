@@ -1,0 +1,1550 @@
+Profiling 76 samples against /lustre1/g/aos_shihuang/Strain2bScan/work/ecc_strain/dbs_v2
+RUN S_0313206
+cross-species filter: 41582/102474 markers usable for quantification (59.4% shared with another species in the panel, excluded)
+sample: 271322 distinct tag markers; 27 species DBs; resolve-gate≥max(50, 0%×panel), detect-gate≥3 (threads: 16)
+#species	cluster	abundance	coverage	support	depth	global_abundance	sample_fraction
+  Prevotella_histicola.db	C0	1.000000	0.57	447	16.615	0.037310	0.001931
+  Prevotella_melaninogenica.db	C0|C2|C3|C4|C5|C6|C7|C10	1.000000	0.91	32	311.229	0.698892	0.043270
+  Rothia_aeria.db	C0|C1	1.000000	0.57	113	28.556	0.064124	0.005831
+  Rothia_dentocariosa.db	C1|C2|C3|C4	1.000000	0.49	43	1.875	0.004210	0.000462
+  Streptococcus_parasanguinis_B.db	C3|C4	0.506928	0.60	61	27.356	0.061431	0.002210
+  Streptococcus_parasanguinis_B.db	C0|C1|C2	0.493072	0.68	78	26.609	0.059752	0.002333
+  Streptococcus_sanguinis.db	C11	1.000000	0.56	57	9.277	0.020833	0.000891
+  Veillonella_atypica.db	C0	1.000000	0.61	360	23.801	0.053446	0.002020
+  Gemella_haemolysans_B.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Gemella_haemolysans_B.db	[strain-resolved, no cluster above threshold]	markers=78/382 (depth 3.71x)
+  Gemella_sanguinis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Gemella_sanguinis.db	[strain-resolved, no cluster above threshold]	markers=50/131 (depth 17.42x)
+  Lautropia_mirabilis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Lautropia_mirabilis.db	[strain-resolved, no cluster above threshold]	markers=1163/3350 (depth 6.01x)
+  Neisseria_flavescens_B.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Neisseria_flavescens_B.db	[strain-resolved, no cluster above threshold]	markers=71/734 (depth 42.05x)
+  Neisseria_mucosa.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Neisseria_mucosa.db	[strain-resolved, no cluster above threshold]	markers=811/2557 (depth 83.33x)
+  Prevotella_histicola.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Prevotella_melaninogenica.db	layer1=cst (auto — 0 cluster(s) below the support floor, 3 informative internal node(s), 2 fallback node(s))
+  Rothia_aeria.db	layer1=cst (auto — 0 cluster(s) below the support floor, 2 informative internal node(s), 2 fallback node(s))
+  Rothia_dentocariosa.db	layer1=cst (auto — 0 cluster(s) below the support floor, 4 informative internal node(s), 4 fallback node(s))
+  Streptococcus_oralis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_oralis.db	[strain-resolved, no cluster above threshold]	markers=642/4512 (depth 1.72x)
+  Streptococcus_parasanguinis_B.db	layer1=cst (auto — 0 cluster(s) below the support floor, 4 informative internal node(s), 4 fallback node(s))
+  Streptococcus_pneumoniae_D.db	layer1=unique (auto — 172 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_pneumoniae_D.db	[strain-resolved, no cluster above threshold]	markers=91/1707 (depth 1.07x)
+  Streptococcus_pseudopneumoniae_O.db	[detected, not strain-resolvable]	markers=15/137 (10.9%, depth 3.07x)
+  Streptococcus_salivarius.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_salivarius.db	[strain-resolved, no cluster above threshold]	markers=720/3116 (depth 8.90x)
+  Streptococcus_sanguinis.db	layer1=cst (auto — 0 cluster(s) below the support floor, 5 informative internal node(s), 4 fallback node(s))
+  Veillonella_atypica.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+summary: 15/27 species strain-resolved (8 strain calls), 1 detected-not-resolvable, 11 absent
+coverage of sample: strain calls account for 5.9% of 7811245 tag observations (94.1% unclassified — unresolved species, no reference, host, error)
+predictions -> /lustre1/g/aos_shihuang/Strain2bScan/work/ecc_strain/preds/S_0313206.pred.tsv
+RUN S_0313207
+cross-species filter: 41582/102474 markers usable for quantification (59.4% shared with another species in the panel, excluded)
+sample: 401895 distinct tag markers; 27 species DBs; resolve-gate≥max(50, 0%×panel), detect-gate≥3 (threads: 16)
+#species	cluster	abundance	coverage	support	depth	global_abundance	sample_fraction
+  Gemella_haemolysans_B.db	C1	1.000000	0.54	87	15.263	0.054768	0.000463
+  Gemella_sanguinis.db	C0	1.000000	0.51	64	16.748	0.060096	0.000337
+  Neisseria_mucosa.db	C0	1.000000	0.81	1530	150.680	0.540676	0.049744
+  Prevotella_histicola.db	C0	1.000000	0.58	448	11.689	0.041941	0.001580
+  Prevotella_melaninogenica.db	C0|C2|C3|C4|C5|C6|C7|C10	1.000000	0.86	30	42.171	0.151321	0.006817
+  Rothia_aeria.db	C0|C1	1.000000	0.56	110	9.131	0.032765	0.002168
+  Rothia_dentocariosa.db	C1|C2|C3|C4	1.000000	0.50	44	3.398	0.012192	0.000973
+  Streptococcus_parasanguinis_B.db	C3|C4	1.000000	0.59	60	17.594	0.063132	0.001652
+  Veillonella_atypica.db	C0	1.000000	0.56	323	12.014	0.043108	0.001186
+  Gemella_haemolysans_B.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Gemella_sanguinis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Lautropia_mirabilis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Lautropia_mirabilis.db	[strain-resolved, no cluster above threshold]	markers=1337/3350 (depth 22.40x)
+  Neisseria_flavescens_B.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Neisseria_flavescens_B.db	[strain-resolved, no cluster above threshold]	markers=83/734 (depth 9.35x)
+  Neisseria_mucosa.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Prevotella_histicola.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Prevotella_melaninogenica.db	layer1=cst (auto — 0 cluster(s) below the support floor, 3 informative internal node(s), 2 fallback node(s))
+  Rothia_aeria.db	layer1=cst (auto — 0 cluster(s) below the support floor, 2 informative internal node(s), 2 fallback node(s))
+  Rothia_dentocariosa.db	layer1=cst (auto — 0 cluster(s) below the support floor, 4 informative internal node(s), 4 fallback node(s))
+  Streptococcus_mutans.db	layer1=cst (auto — 3 cluster(s) below the support floor, 1 informative internal node(s), 0 fallback node(s))
+  Streptococcus_mutans.db	[strain-resolved, no cluster above threshold]	markers=13/798 (depth 0.04x)
+  Streptococcus_oralis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_oralis.db	[strain-resolved, no cluster above threshold]	markers=854/4512 (depth 4.15x)
+  Streptococcus_parasanguinis_B.db	layer1=cst (auto — 0 cluster(s) below the support floor, 4 informative internal node(s), 4 fallback node(s))
+  Streptococcus_pneumoniae_D.db	layer1=unique (auto — 172 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_pneumoniae_D.db	[strain-resolved, no cluster above threshold]	markers=131/1707 (depth 2.78x)
+  Streptococcus_pseudopneumoniae_O.db	[detected, not strain-resolvable]	markers=15/137 (10.9%, depth 4.74x)
+  Streptococcus_salivarius.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_salivarius.db	[strain-resolved, no cluster above threshold]	markers=647/3116 (depth 9.37x)
+  Streptococcus_sanguinis.db	layer1=cst (auto — 0 cluster(s) below the support floor, 5 informative internal node(s), 4 fallback node(s))
+  Streptococcus_sanguinis.db	[strain-resolved, no cluster above threshold]	markers=1545/6874 (depth 5.08x)
+  Streptococcus_sobrinus.db	[detected, not strain-resolvable]	markers=3/733 (0.4%, depth 0.06x)
+  Veillonella_atypica.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+summary: 16/27 species strain-resolved (9 strain calls), 2 detected-not-resolvable, 9 absent
+coverage of sample: strain calls account for 6.5% of 6718579 tag observations (93.5% unclassified — unresolved species, no reference, host, error)
+predictions -> /lustre1/g/aos_shihuang/Strain2bScan/work/ecc_strain/preds/S_0313207.pred.tsv
+RUN S_0313216
+cross-species filter: 41582/102474 markers usable for quantification (59.4% shared with another species in the panel, excluded)
+sample: 418352 distinct tag markers; 27 species DBs; resolve-gate≥max(50, 0%×panel), detect-gate≥3 (threads: 16)
+#species	cluster	abundance	coverage	support	depth	global_abundance	sample_fraction
+  Gemella_haemolysans_B.db	C1	1.000000	0.59	104	13.274	0.041577	0.000376
+  Neisseria_mucosa.db	C0	1.000000	0.65	1174	113.591	0.355801	0.034987
+  Prevotella_melaninogenica.db	C0|C2|C3|C4|C5|C6|C7|C10	1.000000	0.94	33	42.457	0.132988	0.006403
+  Rothia_aeria.db	C0|C1	1.000000	0.70	139	65.273	0.204453	0.014457
+  Rothia_dentocariosa.db	C1|C2|C3|C4	1.000000	0.64	56	12.591	0.039438	0.003362
+  Streptococcus_mutans.db	C15	1.000000	0.62	10	8.188	0.025646	0.000407
+  Streptococcus_parasanguinis_B.db	C0|C1|C2|C3|C4	1.000000	0.59	32	14.778	0.046288	0.001406
+  Streptococcus_sanguinis.db	C11|C34	1.000000	0.60	40	49.104	0.153809	0.005114
+  Gemella_haemolysans_B.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Gemella_sanguinis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Gemella_sanguinis.db	[strain-resolved, no cluster above threshold]	markers=53/131 (depth 11.92x)
+  Lautropia_mirabilis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Lautropia_mirabilis.db	[strain-resolved, no cluster above threshold]	markers=1401/3350 (depth 20.48x)
+  Neisseria_flavescens_B.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Neisseria_flavescens_B.db	[strain-resolved, no cluster above threshold]	markers=89/734 (depth 12.64x)
+  Neisseria_mucosa.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Prevotella_histicola.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Prevotella_histicola.db	[strain-resolved, no cluster above threshold]	markers=257/867 (depth 1.43x)
+  Prevotella_melaninogenica.db	layer1=cst (auto — 0 cluster(s) below the support floor, 3 informative internal node(s), 2 fallback node(s))
+  Rothia_aeria.db	layer1=cst (auto — 0 cluster(s) below the support floor, 2 informative internal node(s), 2 fallback node(s))
+  Rothia_dentocariosa.db	layer1=cst (auto — 0 cluster(s) below the support floor, 4 informative internal node(s), 4 fallback node(s))
+  Streptococcus_mutans.db	layer1=cst (auto — 3 cluster(s) below the support floor, 1 informative internal node(s), 0 fallback node(s))
+  Streptococcus_oralis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_oralis.db	[strain-resolved, no cluster above threshold]	markers=1009/4512 (depth 4.50x)
+  Streptococcus_parasanguinis_B.db	layer1=cst (auto — 0 cluster(s) below the support floor, 4 informative internal node(s), 4 fallback node(s))
+  Streptococcus_pneumoniae_D.db	layer1=unique (auto — 172 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_pneumoniae_D.db	[strain-resolved, no cluster above threshold]	markers=118/1707 (depth 1.92x)
+  Streptococcus_pseudopneumoniae_O.db	[detected, not strain-resolvable]	markers=15/137 (10.9%, depth 2.28x)
+  Streptococcus_salivarius.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_salivarius.db	[strain-resolved, no cluster above threshold]	markers=530/3116 (depth 2.01x)
+  Streptococcus_sanguinis.db	layer1=cst (auto — 0 cluster(s) below the support floor, 5 informative internal node(s), 4 fallback node(s))
+  Veillonella_atypica.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Veillonella_atypica.db	[strain-resolved, no cluster above threshold]	markers=187/662 (depth 4.25x)
+summary: 16/27 species strain-resolved (8 strain calls), 1 detected-not-resolvable, 10 absent
+coverage of sample: strain calls account for 6.7% of 7201220 tag observations (93.3% unclassified — unresolved species, no reference, host, error)
+predictions -> /lustre1/g/aos_shihuang/Strain2bScan/work/ecc_strain/preds/S_0313216.pred.tsv
+RUN S_0313218
+cross-species filter: 41582/102474 markers usable for quantification (59.4% shared with another species in the panel, excluded)
+sample: 354508 distinct tag markers; 27 species DBs; resolve-gate≥max(50, 0%×panel), detect-gate≥3 (threads: 16)
+#species	cluster	abundance	coverage	support	depth	global_abundance	sample_fraction
+  Gemella_sanguinis.db	C0	1.000000	0.56	67	33.725	0.098170	0.000578
+  Neisseria_mucosa.db	C0	1.000000	0.68	1194	28.058	0.081673	0.007905
+  Prevotella_histicola.db	C0	1.000000	0.64	523	34.662	0.100897	0.003998
+  Prevotella_melaninogenica.db	C0|C2|C3|C4|C5|C6|C7|C10	1.000000	0.97	34	158.314	0.460833	0.021840
+  Rothia_aeria.db	C0|C1	1.000000	0.58	115	8.904	0.025919	0.001804
+  Rothia_dentocariosa.db	C1|C2|C3|C4	1.000000	0.69	61	13.523	0.039363	0.003303
+  Streptococcus_parasanguinis_B.db	C3|C4	0.649907	0.60	61	23.218	0.067584	0.001861
+  Streptococcus_parasanguinis_B.db	C0|C2	0.350093	0.61	43	12.507	0.036406	0.001088
+  Veillonella_atypica.db	C0	1.000000	0.66	410	30.628	0.089155	0.002580
+  Gemella_haemolysans_B.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Gemella_haemolysans_B.db	[strain-resolved, no cluster above threshold]	markers=131/382 (depth 2.86x)
+  Gemella_sanguinis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Lautropia_mirabilis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Lautropia_mirabilis.db	[strain-resolved, no cluster above threshold]	markers=1130/3350 (depth 2.33x)
+  Neisseria_flavescens_B.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Neisseria_flavescens_B.db	[strain-resolved, no cluster above threshold]	markers=73/734 (depth 18.10x)
+  Neisseria_mucosa.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Prevotella_histicola.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Prevotella_melaninogenica.db	layer1=cst (auto — 0 cluster(s) below the support floor, 3 informative internal node(s), 2 fallback node(s))
+  Rothia_aeria.db	layer1=cst (auto — 0 cluster(s) below the support floor, 2 informative internal node(s), 2 fallback node(s))
+  Rothia_dentocariosa.db	layer1=cst (auto — 0 cluster(s) below the support floor, 4 informative internal node(s), 4 fallback node(s))
+  Streptococcus_mutans.db	layer1=cst (auto — 3 cluster(s) below the support floor, 1 informative internal node(s), 0 fallback node(s))
+  Streptococcus_mutans.db	[strain-resolved, no cluster above threshold]	markers=136/798 (depth 0.60x)
+  Streptococcus_oralis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_oralis.db	[strain-resolved, no cluster above threshold]	markers=624/4512 (depth 3.52x)
+  Streptococcus_parasanguinis_B.db	layer1=cst (auto — 0 cluster(s) below the support floor, 4 informative internal node(s), 4 fallback node(s))
+  Streptococcus_pneumoniae_D.db	layer1=unique (auto — 172 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_pneumoniae_D.db	[strain-resolved, no cluster above threshold]	markers=115/1707 (depth 2.62x)
+  Streptococcus_pseudopneumoniae_O.db	[detected, not strain-resolvable]	markers=11/137 (8.0%, depth 4.98x)
+  Streptococcus_salivarius.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_salivarius.db	[strain-resolved, no cluster above threshold]	markers=637/3116 (depth 10.36x)
+  Streptococcus_sanguinis.db	layer1=cst (auto — 0 cluster(s) below the support floor, 5 informative internal node(s), 4 fallback node(s))
+  Streptococcus_sanguinis.db	[strain-resolved, no cluster above threshold]	markers=985/6874 (depth 1.09x)
+  Veillonella_atypica.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+summary: 16/27 species strain-resolved (9 strain calls), 1 detected-not-resolvable, 10 absent
+coverage of sample: strain calls account for 4.5% of 7872073 tag observations (95.5% unclassified — unresolved species, no reference, host, error)
+predictions -> /lustre1/g/aos_shihuang/Strain2bScan/work/ecc_strain/preds/S_0313218.pred.tsv
+RUN S_0313222
+cross-species filter: 41582/102474 markers usable for quantification (59.4% shared with another species in the panel, excluded)
+sample: 289409 distinct tag markers; 27 species DBs; resolve-gate≥max(50, 0%×panel), detect-gate≥3 (threads: 16)
+#species	cluster	abundance	coverage	support	depth	global_abundance	sample_fraction
+  Gemella_sanguinis.db	C0	1.000000	0.56	64	22.427	0.087533	0.000352
+  Neisseria_mucosa.db	C0	1.000000	0.65	1184	62.386	0.243488	0.016066
+  Prevotella_melaninogenica.db	C0|C2|C3|C4|C5|C6|C7|C10	1.000000	0.97	34	129.886	0.506936	0.016377
+  Rothia_aeria.db	C0|C1	1.000000	0.53	105	5.742	0.022412	0.001063
+  Rothia_dentocariosa.db	C1|C2|C3|C4	1.000000	0.23	20	0.591	0.002306	0.000132
+  Streptococcus_parasanguinis_B.db	C3|C4	0.664948	0.63	64	23.396	0.091313	0.001714
+  Streptococcus_parasanguinis_B.db	C0|C2	0.335052	0.63	45	11.789	0.046011	0.000938
+  Gemella_haemolysans_B.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Gemella_haemolysans_B.db	[strain-resolved, no cluster above threshold]	markers=62/382 (depth 6.47x)
+  Gemella_sanguinis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Lautropia_mirabilis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Lautropia_mirabilis.db	[strain-resolved, no cluster above threshold]	markers=1039/3350 (depth 4.80x)
+  Neisseria_flavescens_B.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Neisseria_flavescens_B.db	[strain-resolved, no cluster above threshold]	markers=61/734 (depth 9.76x)
+  Neisseria_mucosa.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Prevotella_histicola.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Prevotella_histicola.db	[strain-resolved, no cluster above threshold]	markers=326/867 (depth 8.34x)
+  Prevotella_melaninogenica.db	layer1=cst (auto — 0 cluster(s) below the support floor, 3 informative internal node(s), 2 fallback node(s))
+  Rothia_aeria.db	layer1=cst (auto — 0 cluster(s) below the support floor, 2 informative internal node(s), 2 fallback node(s))
+  Rothia_dentocariosa.db	layer1=cst (auto — 0 cluster(s) below the support floor, 4 informative internal node(s), 4 fallback node(s))
+  Streptococcus_mutans.db	[detected, not strain-resolvable]	markers=3/798 (0.4%, depth 0.01x)
+  Streptococcus_oralis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_oralis.db	[strain-resolved, no cluster above threshold]	markers=735/4512 (depth 3.81x)
+  Streptococcus_parasanguinis_B.db	layer1=cst (auto — 0 cluster(s) below the support floor, 4 informative internal node(s), 4 fallback node(s))
+  Streptococcus_pneumoniae_D.db	layer1=unique (auto — 172 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_pneumoniae_D.db	[strain-resolved, no cluster above threshold]	markers=92/1707 (depth 1.08x)
+  Streptococcus_pseudopneumoniae_O.db	[detected, not strain-resolvable]	markers=7/137 (5.1%, depth 1.36x)
+  Streptococcus_salivarius.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_salivarius.db	[strain-resolved, no cluster above threshold]	markers=602/3116 (depth 4.40x)
+  Streptococcus_sanguinis.db	layer1=cst (auto — 0 cluster(s) below the support floor, 5 informative internal node(s), 4 fallback node(s))
+  Streptococcus_sanguinis.db	[strain-resolved, no cluster above threshold]	markers=1177/6874 (depth 1.51x)
+  Veillonella_atypica.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Veillonella_atypica.db	[strain-resolved, no cluster above threshold]	markers=228/662 (depth 8.41x)
+summary: 15/27 species strain-resolved (7 strain calls), 2 detected-not-resolvable, 10 absent
+coverage of sample: strain calls account for 3.7% of 8612785 tag observations (96.3% unclassified — unresolved species, no reference, host, error)
+predictions -> /lustre1/g/aos_shihuang/Strain2bScan/work/ecc_strain/preds/S_0313222.pred.tsv
+RUN S_1211209
+cross-species filter: 41582/102474 markers usable for quantification (59.4% shared with another species in the panel, excluded)
+sample: 336701 distinct tag markers; 27 species DBs; resolve-gate≥max(50, 0%×panel), detect-gate≥3 (threads: 16)
+#species	cluster	abundance	coverage	support	depth	global_abundance	sample_fraction
+  Lautropia_mirabilis.db	C0	1.000000	0.51	1578	16.678	0.085029	0.009175
+  Neisseria_mucosa.db	C0	1.000000	0.71	1355	89.578	0.456704	0.032628
+  Prevotella_melaninogenica.db	C0|C2|C3|C4|C5|C6|C7|C10	1.000000	0.63	22	9.029	0.046031	0.001610
+  Rothia_aeria.db	C0|C1	1.000000	0.54	106	31.263	0.159390	0.008189
+  Rothia_dentocariosa.db	C1|C2|C3|C4	1.000000	0.61	54	8.852	0.045133	0.002796
+  Streptococcus_parasanguinis_B.db	C0|C1|C2|C3|C4	1.000000	0.65	35	13.741	0.070056	0.001546
+  Streptococcus_sanguinis.db	C5	1.000000	0.73	46	27.000	0.137657	0.003157
+  Gemella_haemolysans_B.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Gemella_haemolysans_B.db	[strain-resolved, no cluster above threshold]	markers=138/382 (depth 27.47x)
+  Gemella_sanguinis.db	[detected, not strain-resolvable]	markers=43/131 (32.8%, depth 3.49x)
+  Lautropia_mirabilis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Neisseria_flavescens_B.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Neisseria_flavescens_B.db	[strain-resolved, no cluster above threshold]	markers=100/734 (depth 16.54x)
+  Neisseria_mucosa.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Prevotella_histicola.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Prevotella_histicola.db	[strain-resolved, no cluster above threshold]	markers=134/867 (depth 0.74x)
+  Prevotella_melaninogenica.db	layer1=cst (auto — 0 cluster(s) below the support floor, 3 informative internal node(s), 2 fallback node(s))
+  Rothia_aeria.db	layer1=cst (auto — 0 cluster(s) below the support floor, 2 informative internal node(s), 2 fallback node(s))
+  Rothia_dentocariosa.db	layer1=cst (auto — 0 cluster(s) below the support floor, 4 informative internal node(s), 4 fallback node(s))
+  Streptococcus_mutans.db	layer1=cst (auto — 3 cluster(s) below the support floor, 1 informative internal node(s), 0 fallback node(s))
+  Streptococcus_mutans.db	[strain-resolved, no cluster above threshold]	markers=98/798 (depth 0.53x)
+  Streptococcus_oralis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_oralis.db	[strain-resolved, no cluster above threshold]	markers=998/4512 (depth 9.08x)
+  Streptococcus_parasanguinis_B.db	layer1=cst (auto — 0 cluster(s) below the support floor, 4 informative internal node(s), 4 fallback node(s))
+  Streptococcus_pneumoniae_D.db	layer1=unique (auto — 172 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_pneumoniae_D.db	[strain-resolved, no cluster above threshold]	markers=115/1707 (depth 5.73x)
+  Streptococcus_pseudopneumoniae_O.db	[detected, not strain-resolvable]	markers=19/137 (13.9%, depth 13.04x)
+  Streptococcus_salivarius.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_salivarius.db	[strain-resolved, no cluster above threshold]	markers=498/3116 (depth 3.42x)
+  Streptococcus_sanguinis.db	layer1=cst (auto — 0 cluster(s) below the support floor, 5 informative internal node(s), 4 fallback node(s))
+  Veillonella_atypica.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Veillonella_atypica.db	[strain-resolved, no cluster above threshold]	markers=86/662 (depth 1.26x)
+summary: 15/27 species strain-resolved (7 strain calls), 2 detected-not-resolvable, 10 absent
+coverage of sample: strain calls account for 5.9% of 6089367 tag observations (94.1% unclassified — unresolved species, no reference, host, error)
+predictions -> /lustre1/g/aos_shihuang/Strain2bScan/work/ecc_strain/preds/S_1211209.pred.tsv
+RUN S_1211212
+cross-species filter: 41582/102474 markers usable for quantification (59.4% shared with another species in the panel, excluded)
+sample: 459556 distinct tag markers; 27 species DBs; resolve-gate≥max(50, 0%×panel), detect-gate≥3 (threads: 16)
+#species	cluster	abundance	coverage	support	depth	global_abundance	sample_fraction
+  Gemella_haemolysans_B.db	C1	1.000000	0.63	109	14.874	0.036580	0.000510
+  Gemella_sanguinis.db	C0	1.000000	0.60	73	24.901	0.061241	0.000565
+  Neisseria_mucosa.db	C0	1.000000	0.69	1305	45.672	0.112327	0.017040
+  Prevotella_histicola.db	C0	1.000000	0.73	600	33.555	0.082525	0.005125
+  Prevotella_melaninogenica.db	C0|C2|C3|C4|C5|C6|C7|C10	1.000000	1.00	35	158.943	0.390905	0.029035
+  Rothia_aeria.db	C0|C1	1.000000	0.59	116	23.566	0.057958	0.006322
+  Rothia_dentocariosa.db	C1|C2|C3|C4	1.000000	0.76	67	20.193	0.049663	0.006532
+  Streptococcus_parasanguinis_B.db	C3|C4	0.574940	0.66	67	26.366	0.064846	0.002798
+  Streptococcus_parasanguinis_B.db	C0|C2	0.425060	0.73	52	19.493	0.047941	0.002246
+  Veillonella_atypica.db	C0	1.000000	0.76	489	39.039	0.096014	0.004354
+  Gemella_haemolysans_B.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Gemella_sanguinis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Lautropia_mirabilis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Lautropia_mirabilis.db	[strain-resolved, no cluster above threshold]	markers=1325/3350 (depth 7.10x)
+  Neisseria_flavescens_B.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Neisseria_flavescens_B.db	[strain-resolved, no cluster above threshold]	markers=89/734 (depth 2.97x)
+  Neisseria_mucosa.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Prevotella_histicola.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Prevotella_melaninogenica.db	layer1=cst (auto — 0 cluster(s) below the support floor, 3 informative internal node(s), 2 fallback node(s))
+  Rothia_aeria.db	layer1=cst (auto — 0 cluster(s) below the support floor, 2 informative internal node(s), 2 fallback node(s))
+  Rothia_dentocariosa.db	layer1=cst (auto — 0 cluster(s) below the support floor, 4 informative internal node(s), 4 fallback node(s))
+  Streptococcus_mutans.db	[detected, not strain-resolvable]	markers=8/798 (1.0%, depth 0.10x)
+  Streptococcus_oralis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_oralis.db	[strain-resolved, no cluster above threshold]	markers=1115/4512 (depth 5.69x)
+  Streptococcus_parasanguinis_B.db	layer1=cst (auto — 0 cluster(s) below the support floor, 4 informative internal node(s), 4 fallback node(s))
+  Streptococcus_pneumoniae_D.db	layer1=unique (auto — 172 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_pneumoniae_D.db	[strain-resolved, no cluster above threshold]	markers=148/1707 (depth 2.85x)
+  Streptococcus_pseudopneumoniae_O.db	[detected, not strain-resolvable]	markers=23/137 (16.8%, depth 10.40x)
+  Streptococcus_salivarius.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_salivarius.db	[strain-resolved, no cluster above threshold]	markers=1218/3116 (depth 29.72x)
+  Streptococcus_sanguinis.db	layer1=cst (auto — 0 cluster(s) below the support floor, 5 informative internal node(s), 4 fallback node(s))
+  Streptococcus_sanguinis.db	[strain-resolved, no cluster above threshold]	markers=1051/6874 (depth 3.19x)
+  Streptococcus_sobrinus.db	[detected, not strain-resolvable]	markers=6/733 (0.8%, depth 0.51x)
+  Veillonella_atypica.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+summary: 15/27 species strain-resolved (10 strain calls), 3 detected-not-resolvable, 9 absent
+coverage of sample: strain calls account for 7.5% of 5945037 tag observations (92.5% unclassified — unresolved species, no reference, host, error)
+predictions -> /lustre1/g/aos_shihuang/Strain2bScan/work/ecc_strain/preds/S_1211212.pred.tsv
+RUN S_1212203
+cross-species filter: 41582/102474 markers usable for quantification (59.4% shared with another species in the panel, excluded)
+sample: 275755 distinct tag markers; 27 species DBs; resolve-gate≥max(50, 0%×panel), detect-gate≥3 (threads: 16)
+#species	cluster	abundance	coverage	support	depth	global_abundance	sample_fraction
+  Neisseria_mucosa.db	C0	1.000000	0.59	1129	73.203	0.397701	0.025814
+  Prevotella_melaninogenica.db	C0|C2|C3|C4|C5|C6|C7|C10	1.000000	0.69	24	15.771	0.085684	0.002723
+  Rothia_aeria.db	C0|C1	1.000000	0.52	102	32.919	0.178845	0.008348
+  Rothia_dentocariosa.db	C1|C2|C3|C4	1.000000	0.58	51	39.227	0.213116	0.011993
+  Streptococcus_parasanguinis_B.db	C0|C1|C2|C3|C4	1.000000	0.69	37	22.944	0.124654	0.002499
+  Gemella_haemolysans_B.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Gemella_haemolysans_B.db	[strain-resolved, no cluster above threshold]	markers=121/382 (depth 41.98x)
+  Gemella_sanguinis.db	[detected, not strain-resolvable]	markers=34/131 (26.0%, depth 3.99x)
+  Lautropia_mirabilis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Lautropia_mirabilis.db	[strain-resolved, no cluster above threshold]	markers=1182/3350 (depth 13.13x)
+  Neisseria_flavescens_B.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Neisseria_flavescens_B.db	[strain-resolved, no cluster above threshold]	markers=110/734 (depth 24.43x)
+  Neisseria_mucosa.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Prevotella_histicola.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Prevotella_histicola.db	[strain-resolved, no cluster above threshold]	markers=229/867 (depth 3.92x)
+  Prevotella_melaninogenica.db	layer1=cst (auto — 0 cluster(s) below the support floor, 3 informative internal node(s), 2 fallback node(s))
+  Rothia_aeria.db	layer1=cst (auto — 0 cluster(s) below the support floor, 2 informative internal node(s), 2 fallback node(s))
+  Rothia_dentocariosa.db	layer1=cst (auto — 0 cluster(s) below the support floor, 4 informative internal node(s), 4 fallback node(s))
+  Streptococcus_mutans.db	layer1=cst (auto — 3 cluster(s) below the support floor, 1 informative internal node(s), 0 fallback node(s))
+  Streptococcus_mutans.db	[strain-resolved, no cluster above threshold]	markers=74/798 (depth 0.44x)
+  Streptococcus_oralis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_oralis.db	[strain-resolved, no cluster above threshold]	markers=841/4512 (depth 8.66x)
+  Streptococcus_parasanguinis_B.db	layer1=cst (auto — 0 cluster(s) below the support floor, 4 informative internal node(s), 4 fallback node(s))
+  Streptococcus_pneumoniae_D.db	layer1=unique (auto — 172 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_pneumoniae_D.db	[strain-resolved, no cluster above threshold]	markers=125/1707 (depth 2.91x)
+  Streptococcus_pseudopneumoniae_O.db	[detected, not strain-resolvable]	markers=17/137 (12.4%, depth 12.22x)
+  Streptococcus_salivarius.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_salivarius.db	[strain-resolved, no cluster above threshold]	markers=641/3116 (depth 7.88x)
+  Streptococcus_sanguinis.db	layer1=cst (auto — 0 cluster(s) below the support floor, 5 informative internal node(s), 4 fallback node(s))
+  Streptococcus_sanguinis.db	[strain-resolved, no cluster above threshold]	markers=867/6874 (depth 7.08x)
+  Veillonella_atypica.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Veillonella_atypica.db	[strain-resolved, no cluster above threshold]	markers=204/662 (depth 7.87x)
+summary: 15/27 species strain-resolved (5 strain calls), 2 detected-not-resolvable, 10 absent
+coverage of sample: strain calls account for 5.1% of 6289713 tag observations (94.9% unclassified — unresolved species, no reference, host, error)
+predictions -> /lustre1/g/aos_shihuang/Strain2bScan/work/ecc_strain/preds/S_1212203.pred.tsv
+RUN S_1213209
+cross-species filter: 41582/102474 markers usable for quantification (59.4% shared with another species in the panel, excluded)
+sample: 208572 distinct tag markers; 27 species DBs; resolve-gate≥max(50, 0%×panel), detect-gate≥3 (threads: 16)
+#species	cluster	abundance	coverage	support	depth	global_abundance	sample_fraction
+  Lautropia_mirabilis.db	C0	1.000000	0.50	1610	29.430	0.307900	0.012770
+  Prevotella_melaninogenica.db	C0|C2|C3|C4|C5|C6|C7|C10	1.000000	0.77	27	48.829	0.510858	0.006868
+  Rothia_aeria.db	C0|C1|C2	1.000000	0.54	293	17.323	0.181242	0.003579
+  Gemella_haemolysans_B.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Gemella_haemolysans_B.db	[strain-resolved, no cluster above threshold]	markers=20/382 (depth 0.21x)
+  Gemella_sanguinis.db	[detected, not strain-resolvable]	markers=38/131 (29.0%, depth 9.02x)
+  Lautropia_mirabilis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Neisseria_flavescens_B.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Neisseria_flavescens_B.db	[strain-resolved, no cluster above threshold]	markers=77/734 (depth 28.65x)
+  Neisseria_mucosa.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Neisseria_mucosa.db	[strain-resolved, no cluster above threshold]	markers=693/2557 (depth 15.09x)
+  Prevotella_histicola.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Prevotella_histicola.db	[strain-resolved, no cluster above threshold]	markers=57/867 (depth 0.90x)
+  Prevotella_melaninogenica.db	layer1=cst (auto — 0 cluster(s) below the support floor, 3 informative internal node(s), 2 fallback node(s))
+  Rothia_aeria.db	layer1=cst (auto — 0 cluster(s) below the support floor, 2 informative internal node(s), 2 fallback node(s))
+  Rothia_dentocariosa.db	layer1=cst (auto — 0 cluster(s) below the support floor, 4 informative internal node(s), 4 fallback node(s))
+  Rothia_dentocariosa.db	[strain-resolved, no cluster above threshold]	markers=283/4237 (depth 0.77x)
+  Streptococcus_oralis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_oralis.db	[strain-resolved, no cluster above threshold]	markers=266/4512 (depth 0.62x)
+  Streptococcus_parasanguinis_B.db	layer1=cst (auto — 0 cluster(s) below the support floor, 4 informative internal node(s), 4 fallback node(s))
+  Streptococcus_parasanguinis_B.db	[strain-resolved, no cluster above threshold]	markers=298/1860 (depth 3.01x)
+  Streptococcus_pneumoniae_D.db	layer1=unique (auto — 172 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_pneumoniae_D.db	[strain-resolved, no cluster above threshold]	markers=41/1707 (depth 0.18x)
+  Streptococcus_pseudopneumoniae_O.db	[detected, not strain-resolvable]	markers=8/137 (5.8%, depth 0.81x)
+  Streptococcus_salivarius.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_salivarius.db	[strain-resolved, no cluster above threshold]	markers=598/3116 (depth 10.22x)
+  Streptococcus_sanguinis.db	layer1=cst (auto — 0 cluster(s) below the support floor, 5 informative internal node(s), 4 fallback node(s))
+  Streptococcus_sanguinis.db	[strain-resolved, no cluster above threshold]	markers=1256/6874 (depth 5.32x)
+  Veillonella_atypica.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Veillonella_atypica.db	[strain-resolved, no cluster above threshold]	markers=277/662 (depth 13.38x)
+summary: 14/27 species strain-resolved (3 strain calls), 2 detected-not-resolvable, 11 absent
+coverage of sample: strain calls account for 2.3% of 7720460 tag observations (97.7% unclassified — unresolved species, no reference, host, error)
+predictions -> /lustre1/g/aos_shihuang/Strain2bScan/work/ecc_strain/preds/S_1213209.pred.tsv
+RUN S_1213211
+cross-species filter: 41582/102474 markers usable for quantification (59.4% shared with another species in the panel, excluded)
+sample: 122164 distinct tag markers; 27 species DBs; resolve-gate≥max(50, 0%×panel), detect-gate≥3 (threads: 16)
+#species	cluster	abundance	coverage	support	depth	global_abundance	sample_fraction
+  Gemella_haemolysans_B.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Gemella_haemolysans_B.db	[strain-resolved, no cluster above threshold]	markers=53/382 (depth 27.09x)
+  Gemella_sanguinis.db	[detected, not strain-resolvable]	markers=15/131 (11.5%, depth 17.12x)
+  Lautropia_mirabilis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Lautropia_mirabilis.db	[strain-resolved, no cluster above threshold]	markers=567/3350 (depth 22.86x)
+  Neisseria_flavescens_B.db	[detected, not strain-resolvable]	markers=25/734 (3.4%, depth 6.55x)
+  Neisseria_mucosa.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Neisseria_mucosa.db	[strain-resolved, no cluster above threshold]	markers=291/2557 (depth 27.68x)
+  Prevotella_histicola.db	[detected, not strain-resolvable]	markers=29/867 (3.3%, depth 3.57x)
+  Prevotella_melaninogenica.db	layer1=cst (auto — 0 cluster(s) below the support floor, 3 informative internal node(s), 2 fallback node(s))
+  Prevotella_melaninogenica.db	[strain-resolved, no cluster above threshold]	markers=375/6426 (depth 8.63x)
+  Rothia_aeria.db	layer1=cst (auto — 0 cluster(s) below the support floor, 2 informative internal node(s), 2 fallback node(s))
+  Rothia_aeria.db	[strain-resolved, no cluster above threshold]	markers=331/2499 (depth 17.72x)
+  Rothia_dentocariosa.db	layer1=cst (auto — 0 cluster(s) below the support floor, 4 informative internal node(s), 4 fallback node(s))
+  Rothia_dentocariosa.db	[strain-resolved, no cluster above threshold]	markers=296/4237 (depth 7.89x)
+  Streptococcus_oralis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_oralis.db	[strain-resolved, no cluster above threshold]	markers=197/4512 (depth 6.06x)
+  Streptococcus_parasanguinis_B.db	layer1=cst (auto — 0 cluster(s) below the support floor, 4 informative internal node(s), 4 fallback node(s))
+  Streptococcus_parasanguinis_B.db	[strain-resolved, no cluster above threshold]	markers=209/1860 (depth 16.70x)
+  Streptococcus_pneumoniae_D.db	[detected, not strain-resolvable]	markers=30/1707 (1.8%, depth 4.62x)
+  Streptococcus_pseudopneumoniae_O.db	[detected, not strain-resolvable]	markers=6/137 (4.4%, depth 8.78x)
+  Streptococcus_salivarius.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_salivarius.db	[strain-resolved, no cluster above threshold]	markers=161/3116 (depth 7.40x)
+  Streptococcus_sanguinis.db	layer1=cst (auto — 0 cluster(s) below the support floor, 5 informative internal node(s), 4 fallback node(s))
+  Streptococcus_sanguinis.db	[strain-resolved, no cluster above threshold]	markers=535/6874 (depth 12.64x)
+  Veillonella_atypica.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Veillonella_atypica.db	[strain-resolved, no cluster above threshold]	markers=63/662 (depth 11.70x)
+summary: 11/27 species strain-resolved (0 strain calls), 5 detected-not-resolvable, 11 absent
+coverage of sample: strain calls account for -0.0% of 7103910 tag observations (100.0% unclassified — unresolved species, no reference, host, error)
+predictions -> /lustre1/g/aos_shihuang/Strain2bScan/work/ecc_strain/preds/S_1213211.pred.tsv
+RUN S_1213218
+cross-species filter: 41582/102474 markers usable for quantification (59.4% shared with another species in the panel, excluded)
+sample: 135955 distinct tag markers; 27 species DBs; resolve-gate≥max(50, 0%×panel), detect-gate≥3 (threads: 16)
+#species	cluster	abundance	coverage	support	depth	global_abundance	sample_fraction
+  Prevotella_melaninogenica.db	C0|C2|C3|C4|C5|C6|C7|C10	1.000000	0.51	18	53.286	0.566152	0.011182
+  Streptococcus_parasanguinis_B.db	C0|C1|C2|C3|C4	1.000000	0.61	33	40.833	0.433848	0.005405
+  Gemella_haemolysans_B.db	[detected, not strain-resolvable]	markers=31/382 (8.1%, depth 3.88x)
+  Gemella_sanguinis.db	[detected, not strain-resolvable]	markers=38/131 (29.0%, depth 25.97x)
+  Lautropia_mirabilis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Lautropia_mirabilis.db	[strain-resolved, no cluster above threshold]	markers=1010/3350 (depth 26.73x)
+  Neisseria_flavescens_B.db	[detected, not strain-resolvable]	markers=26/734 (3.5%, depth 2.82x)
+  Neisseria_mucosa.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Neisseria_mucosa.db	[strain-resolved, no cluster above threshold]	markers=816/2557 (depth 66.50x)
+  Prevotella_histicola.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Prevotella_histicola.db	[strain-resolved, no cluster above threshold]	markers=145/867 (depth 9.14x)
+  Prevotella_melaninogenica.db	layer1=cst (auto — 0 cluster(s) below the support floor, 3 informative internal node(s), 2 fallback node(s))
+  Rothia_aeria.db	layer1=cst (auto — 0 cluster(s) below the support floor, 2 informative internal node(s), 2 fallback node(s))
+  Rothia_aeria.db	[strain-resolved, no cluster above threshold]	markers=514/2499 (depth 12.49x)
+  Rothia_dentocariosa.db	layer1=cst (auto — 0 cluster(s) below the support floor, 4 informative internal node(s), 4 fallback node(s))
+  Rothia_dentocariosa.db	[strain-resolved, no cluster above threshold]	markers=659/4237 (depth 8.87x)
+  Streptococcus_mutans.db	layer1=cst (auto — 3 cluster(s) below the support floor, 1 informative internal node(s), 0 fallback node(s))
+  Streptococcus_mutans.db	[strain-resolved, no cluster above threshold]	markers=120/798 (depth 8.63x)
+  Streptococcus_oralis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_oralis.db	[strain-resolved, no cluster above threshold]	markers=360/4512 (depth 5.28x)
+  Streptococcus_parasanguinis_B.db	layer1=cst (auto — 0 cluster(s) below the support floor, 4 informative internal node(s), 4 fallback node(s))
+  Streptococcus_pneumoniae_D.db	layer1=unique (auto — 172 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_pneumoniae_D.db	[strain-resolved, no cluster above threshold]	markers=54/1707 (depth 2.57x)
+  Streptococcus_pseudopneumoniae_O.db	[detected, not strain-resolvable]	markers=10/137 (7.3%, depth 9.06x)
+  Streptococcus_salivarius.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_salivarius.db	[strain-resolved, no cluster above threshold]	markers=405/3116 (depth 32.15x)
+  Streptococcus_sanguinis.db	layer1=cst (auto — 0 cluster(s) below the support floor, 5 informative internal node(s), 4 fallback node(s))
+  Streptococcus_sanguinis.db	[strain-resolved, no cluster above threshold]	markers=739/6874 (depth 9.35x)
+  Veillonella_atypica.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Veillonella_atypica.db	[strain-resolved, no cluster above threshold]	markers=216/662 (depth 35.30x)
+summary: 13/27 species strain-resolved (2 strain calls), 4 detected-not-resolvable, 10 absent
+coverage of sample: strain calls account for 1.7% of 5175016 tag observations (98.3% unclassified — unresolved species, no reference, host, error)
+predictions -> /lustre1/g/aos_shihuang/Strain2bScan/work/ecc_strain/preds/S_1213218.pred.tsv
+RUN S_1311202
+cross-species filter: 41582/102474 markers usable for quantification (59.4% shared with another species in the panel, excluded)
+sample: 215990 distinct tag markers; 27 species DBs; resolve-gate≥max(50, 0%×panel), detect-gate≥3 (threads: 16)
+#species	cluster	abundance	coverage	support	depth	global_abundance	sample_fraction
+  Lautropia_mirabilis.db	C0	1.000000	0.53	1722	112.186	0.227777	0.053901
+  Neisseria_mucosa.db	C0	1.000000	0.60	1148	220.737	0.448176	0.070219
+  Prevotella_melaninogenica.db	C0|C2|C3|C4|C5|C6|C7|C10	1.000000	0.74	26	57.343	0.116427	0.008932
+  Rothia_aeria.db	C0|C1|C2	1.000000	0.70	374	43.546	0.088415	0.009962
+  Streptococcus_oralis.db	C19	1.000000	0.64	98	24.045	0.048819	0.001790
+  Streptococcus_parasanguinis_B.db	C0|C1|C2|C3|C4	1.000000	0.78	42	34.667	0.070386	0.003406
+  Gemella_haemolysans_B.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Gemella_haemolysans_B.db	[strain-resolved, no cluster above threshold]	markers=68/382 (depth 5.16x)
+  Gemella_sanguinis.db	[detected, not strain-resolvable]	markers=40/131 (30.5%, depth 15.12x)
+  Lautropia_mirabilis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Neisseria_flavescens_B.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Neisseria_flavescens_B.db	[strain-resolved, no cluster above threshold]	markers=67/734 (depth 24.22x)
+  Neisseria_mucosa.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Prevotella_histicola.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Prevotella_histicola.db	[strain-resolved, no cluster above threshold]	markers=387/867 (depth 20.67x)
+  Prevotella_melaninogenica.db	layer1=cst (auto — 0 cluster(s) below the support floor, 3 informative internal node(s), 2 fallback node(s))
+  Rothia_aeria.db	layer1=cst (auto — 0 cluster(s) below the support floor, 2 informative internal node(s), 2 fallback node(s))
+  Rothia_dentocariosa.db	layer1=cst (auto — 0 cluster(s) below the support floor, 4 informative internal node(s), 4 fallback node(s))
+  Rothia_dentocariosa.db	[strain-resolved, no cluster above threshold]	markers=603/4237 (depth 4.14x)
+  Streptococcus_mutans.db	layer1=cst (auto — 3 cluster(s) below the support floor, 1 informative internal node(s), 0 fallback node(s))
+  Streptococcus_mutans.db	[strain-resolved, no cluster above threshold]	markers=59/798 (depth 0.89x)
+  Streptococcus_oralis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_parasanguinis_B.db	layer1=cst (auto — 0 cluster(s) below the support floor, 4 informative internal node(s), 4 fallback node(s))
+  Streptococcus_pneumoniae_D.db	layer1=unique (auto — 172 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_pneumoniae_D.db	[strain-resolved, no cluster above threshold]	markers=64/1707 (depth 2.21x)
+  Streptococcus_pseudopneumoniae_O.db	[detected, not strain-resolvable]	markers=17/137 (12.4%, depth 5.33x)
+  Streptococcus_salivarius.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_salivarius.db	[strain-resolved, no cluster above threshold]	markers=472/3116 (depth 4.95x)
+  Streptococcus_sanguinis.db	layer1=cst (auto — 0 cluster(s) below the support floor, 5 informative internal node(s), 4 fallback node(s))
+  Streptococcus_sanguinis.db	[strain-resolved, no cluster above threshold]	markers=651/6874 (depth 24.43x)
+  Veillonella_atypica.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Veillonella_atypica.db	[strain-resolved, no cluster above threshold]	markers=256/662 (depth 20.96x)
+summary: 15/27 species strain-resolved (6 strain calls), 2 detected-not-resolvable, 10 absent
+coverage of sample: strain calls account for 14.8% of 6972431 tag observations (85.2% unclassified — unresolved species, no reference, host, error)
+predictions -> /lustre1/g/aos_shihuang/Strain2bScan/work/ecc_strain/preds/S_1311202.pred.tsv
+RUN S_1313202
+cross-species filter: 41582/102474 markers usable for quantification (59.4% shared with another species in the panel, excluded)
+sample: 289969 distinct tag markers; 27 species DBs; resolve-gate≥max(50, 0%×panel), detect-gate≥3 (threads: 16)
+#species	cluster	abundance	coverage	support	depth	global_abundance	sample_fraction
+  Lautropia_mirabilis.db	C0	1.000000	0.52	1559	16.161	0.022561	0.008502
+  Neisseria_mucosa.db	C0	1.000000	0.65	1187	51.970	0.072548	0.018103
+  Prevotella_histicola.db	C0	1.000000	0.65	536	85.787	0.119756	0.012233
+  Prevotella_melaninogenica.db	C0|C2|C3|C4|C5|C6|C7|C10	1.000000	1.00	35	257.171	0.359004	0.043861
+  Rothia_aeria.db	C0|C1	1.000000	0.50	99	15.955	0.022272	0.003996
+  Streptococcus_parasanguinis_B.db	C3|C4	0.750342	0.76	77	124.198	0.173377	0.012308
+  Streptococcus_parasanguinis_B.db	C0|C2	0.249658	0.59	42	41.324	0.057687	0.004445
+  Veillonella_atypica.db	C0	1.000000	0.68	433	123.781	0.172795	0.012888
+  Gemella_haemolysans_B.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Gemella_haemolysans_B.db	[strain-resolved, no cluster above threshold]	markers=72/382 (depth 1.52x)
+  Gemella_sanguinis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Gemella_sanguinis.db	[strain-resolved, no cluster above threshold]	markers=51/131 (depth 12.29x)
+  Lautropia_mirabilis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Neisseria_flavescens_B.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Neisseria_flavescens_B.db	[strain-resolved, no cluster above threshold]	markers=61/734 (depth 2.34x)
+  Neisseria_mucosa.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Prevotella_histicola.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Prevotella_melaninogenica.db	layer1=cst (auto — 0 cluster(s) below the support floor, 3 informative internal node(s), 2 fallback node(s))
+  Rothia_aeria.db	layer1=cst (auto — 0 cluster(s) below the support floor, 2 informative internal node(s), 2 fallback node(s))
+  Rothia_dentocariosa.db	layer1=cst (auto — 0 cluster(s) below the support floor, 4 informative internal node(s), 4 fallback node(s))
+  Rothia_dentocariosa.db	[strain-resolved, no cluster above threshold]	markers=411/4237 (depth 0.83x)
+  Streptococcus_mutans.db	layer1=cst (auto — 3 cluster(s) below the support floor, 1 informative internal node(s), 0 fallback node(s))
+  Streptococcus_mutans.db	[strain-resolved, no cluster above threshold]	markers=14/798 (depth 0.04x)
+  Streptococcus_oralis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_oralis.db	[strain-resolved, no cluster above threshold]	markers=768/4512 (depth 5.32x)
+  Streptococcus_parasanguinis_B.db	layer1=cst (auto — 0 cluster(s) below the support floor, 4 informative internal node(s), 4 fallback node(s))
+  Streptococcus_pneumoniae_D.db	layer1=unique (auto — 172 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_pneumoniae_D.db	[strain-resolved, no cluster above threshold]	markers=105/1707 (depth 1.91x)
+  Streptococcus_pseudopneumoniae_O.db	[detected, not strain-resolvable]	markers=10/137 (7.3%, depth 1.10x)
+  Streptococcus_salivarius.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_salivarius.db	[strain-resolved, no cluster above threshold]	markers=1106/3116 (depth 115.10x)
+  Streptococcus_sanguinis.db	layer1=cst (auto — 0 cluster(s) below the support floor, 5 informative internal node(s), 4 fallback node(s))
+  Streptococcus_sanguinis.db	[strain-resolved, no cluster above threshold]	markers=1448/6874 (depth 9.34x)
+  Streptococcus_sobrinus.db	layer1=cst (auto — 0 cluster(s) below the support floor, 2 informative internal node(s), 2 fallback node(s))
+  Streptococcus_sobrinus.db	[strain-resolved, no cluster above threshold]	markers=14/733 (depth 0.04x)
+  Veillonella_atypica.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+summary: 17/27 species strain-resolved (8 strain calls), 1 detected-not-resolvable, 9 absent
+coverage of sample: strain calls account for 11.6% of 6367543 tag observations (88.4% unclassified — unresolved species, no reference, host, error)
+predictions -> /lustre1/g/aos_shihuang/Strain2bScan/work/ecc_strain/preds/S_1313202.pred.tsv
+RUN S_1313218
+cross-species filter: 41582/102474 markers usable for quantification (59.4% shared with another species in the panel, excluded)
+sample: 438495 distinct tag markers; 27 species DBs; resolve-gate≥max(50, 0%×panel), detect-gate≥3 (threads: 16)
+#species	cluster	abundance	coverage	support	depth	global_abundance	sample_fraction
+  Gemella_sanguinis.db	C0	1.000000	0.60	78	22.771	0.082292	0.000572
+  Lautropia_mirabilis.db	C0	1.000000	0.53	1550	11.327	0.040933	0.007066
+  Neisseria_mucosa.db	C0	1.000000	0.81	1546	99.539	0.359721	0.041111
+  Prevotella_histicola.db	C0	1.000000	0.54	393	6.247	0.022575	0.001056
+  Prevotella_melaninogenica.db	C0|C2|C3|C4|C5|C6|C7|C10	1.000000	1.00	35	69.000	0.249358	0.013953
+  Rothia_aeria.db	C0|C1	1.000000	0.54	106	31.606	0.114221	0.009387
+  Rothia_dentocariosa.db	C1|C2|C3|C4	1.000000	0.51	45	5.534	0.020000	0.001982
+  Streptococcus_parasanguinis_B.db	C3|C4	0.709303	0.61	62	10.069	0.036389	0.001183
+  Streptococcus_parasanguinis_B.db	C0|C2	0.290697	0.55	39	4.127	0.014914	0.000526
+  Streptococcus_sanguinis.db	C18	1.000000	0.48	108	2.858	0.010330	0.000383
+  Veillonella_atypica.db	C0	1.000000	0.62	365	13.633	0.049268	0.001683
+  Gemella_haemolysans_B.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Gemella_haemolysans_B.db	[strain-resolved, no cluster above threshold]	markers=138/382 (depth 8.98x)
+  Gemella_sanguinis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Lautropia_mirabilis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Neisseria_flavescens_B.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Neisseria_flavescens_B.db	[strain-resolved, no cluster above threshold]	markers=98/734 (depth 7.29x)
+  Neisseria_mucosa.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Prevotella_histicola.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Prevotella_melaninogenica.db	layer1=cst (auto — 0 cluster(s) below the support floor, 3 informative internal node(s), 2 fallback node(s))
+  Rothia_aeria.db	layer1=cst (auto — 0 cluster(s) below the support floor, 2 informative internal node(s), 2 fallback node(s))
+  Rothia_dentocariosa.db	layer1=cst (auto — 0 cluster(s) below the support floor, 4 informative internal node(s), 4 fallback node(s))
+  Streptococcus_mutans.db	layer1=cst (auto — 3 cluster(s) below the support floor, 1 informative internal node(s), 0 fallback node(s))
+  Streptococcus_mutans.db	[strain-resolved, no cluster above threshold]	markers=40/798 (depth 0.09x)
+  Streptococcus_oralis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_oralis.db	[strain-resolved, no cluster above threshold]	markers=1440/4512 (depth 14.30x)
+  Streptococcus_parasanguinis_B.db	layer1=cst (auto — 0 cluster(s) below the support floor, 4 informative internal node(s), 4 fallback node(s))
+  Streptococcus_pneumoniae_D.db	layer1=unique (auto — 172 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_pneumoniae_D.db	[strain-resolved, no cluster above threshold]	markers=104/1707 (depth 1.50x)
+  Streptococcus_pseudopneumoniae_O.db	[detected, not strain-resolvable]	markers=12/137 (8.8%, depth 1.78x)
+  Streptococcus_salivarius.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_salivarius.db	[strain-resolved, no cluster above threshold]	markers=655/3116 (depth 2.50x)
+  Streptococcus_sanguinis.db	layer1=cst (auto — 0 cluster(s) below the support floor, 5 informative internal node(s), 4 fallback node(s))
+  Veillonella_atypica.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+summary: 16/27 species strain-resolved (11 strain calls), 1 detected-not-resolvable, 10 absent
+coverage of sample: strain calls account for 7.9% of 5370315 tag observations (92.1% unclassified — unresolved species, no reference, host, error)
+predictions -> /lustre1/g/aos_shihuang/Strain2bScan/work/ecc_strain/preds/S_1313218.pred.tsv
+RUN S_1313221
+cross-species filter: 41582/102474 markers usable for quantification (59.4% shared with another species in the panel, excluded)
+sample: 193412 distinct tag markers; 27 species DBs; resolve-gate≥max(50, 0%×panel), detect-gate≥3 (threads: 16)
+#species	cluster	abundance	coverage	support	depth	global_abundance	sample_fraction
+  Neisseria_mucosa.db	C0	1.000000	0.70	1354	167.209	0.627579	0.070025
+  Rothia_aeria.db	C0|C1|C2	1.000000	0.65	349	77.485	0.290822	0.023335
+  Streptococcus_parasanguinis_B.db	C0|C1|C2|C3|C4	1.000000	0.56	30	21.741	0.081599	0.002812
+  Gemella_haemolysans_B.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Gemella_haemolysans_B.db	[strain-resolved, no cluster above threshold]	markers=91/382 (depth 11.85x)
+  Gemella_sanguinis.db	[detected, not strain-resolvable]	markers=26/131 (19.8%, depth 8.55x)
+  Lautropia_mirabilis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Lautropia_mirabilis.db	[strain-resolved, no cluster above threshold]	markers=660/3350 (depth 5.69x)
+  Neisseria_flavescens_B.db	[detected, not strain-resolvable]	markers=37/734 (5.0%, depth 3.30x)
+  Neisseria_mucosa.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Prevotella_histicola.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Prevotella_histicola.db	[strain-resolved, no cluster above threshold]	markers=153/867 (depth 4.75x)
+  Prevotella_melaninogenica.db	layer1=cst (auto — 0 cluster(s) below the support floor, 3 informative internal node(s), 2 fallback node(s))
+  Prevotella_melaninogenica.db	[strain-resolved, no cluster above threshold]	markers=591/6426 (depth 3.07x)
+  Rothia_aeria.db	layer1=cst (auto — 0 cluster(s) below the support floor, 2 informative internal node(s), 2 fallback node(s))
+  Rothia_dentocariosa.db	layer1=cst (auto — 0 cluster(s) below the support floor, 4 informative internal node(s), 4 fallback node(s))
+  Rothia_dentocariosa.db	[strain-resolved, no cluster above threshold]	markers=395/4237 (depth 2.29x)
+  Streptococcus_mutans.db	layer1=cst (auto — 3 cluster(s) below the support floor, 1 informative internal node(s), 0 fallback node(s))
+  Streptococcus_mutans.db	[strain-resolved, no cluster above threshold]	markers=50/798 (depth 1.34x)
+  Streptococcus_oralis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_oralis.db	[strain-resolved, no cluster above threshold]	markers=462/4512 (depth 5.30x)
+  Streptococcus_parasanguinis_B.db	layer1=cst (auto — 0 cluster(s) below the support floor, 4 informative internal node(s), 4 fallback node(s))
+  Streptococcus_pneumoniae_D.db	layer1=unique (auto — 172 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_pneumoniae_D.db	[strain-resolved, no cluster above threshold]	markers=71/1707 (depth 3.57x)
+  Streptococcus_pseudopneumoniae_O.db	[detected, not strain-resolvable]	markers=14/137 (10.2%, depth 11.44x)
+  Streptococcus_salivarius.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_salivarius.db	[strain-resolved, no cluster above threshold]	markers=316/3116 (depth 2.80x)
+  Streptococcus_sanguinis.db	layer1=cst (auto — 0 cluster(s) below the support floor, 5 informative internal node(s), 4 fallback node(s))
+  Streptococcus_sanguinis.db	[strain-resolved, no cluster above threshold]	markers=987/6874 (depth 11.33x)
+  Veillonella_atypica.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Veillonella_atypica.db	[strain-resolved, no cluster above threshold]	markers=87/662 (depth 5.14x)
+summary: 14/27 species strain-resolved (3 strain calls), 3 detected-not-resolvable, 10 absent
+coverage of sample: strain calls account for 9.6% of 5296251 tag observations (90.4% unclassified — unresolved species, no reference, host, error)
+predictions -> /lustre1/g/aos_shihuang/Strain2bScan/work/ecc_strain/preds/S_1313221.pred.tsv
+RUN S_1313223
+cross-species filter: 41582/102474 markers usable for quantification (59.4% shared with another species in the panel, excluded)
+sample: 278891 distinct tag markers; 27 species DBs; resolve-gate≥max(50, 0%×panel), detect-gate≥3 (threads: 16)
+#species	cluster	abundance	coverage	support	depth	global_abundance	sample_fraction
+  Gemella_sanguinis.db	C0	1.000000	0.53	63	47.901	0.086876	0.001152
+  Prevotella_histicola.db	C0	1.000000	0.56	467	160.419	0.290945	0.025941
+  Prevotella_melaninogenica.db	C0|C2|C3|C4|C5|C6|C7|C10	1.000000	1.00	35	104.771	0.190020	0.020263
+  Rothia_aeria.db	C0|C1	1.000000	0.53	104	10.556	0.019144	0.002998
+  Rothia_dentocariosa.db	C1|C2|C3|C4	1.000000	0.74	65	12.341	0.022382	0.004226
+  Streptococcus_parasanguinis_B.db	C3|C4	0.700926	0.71	72	110.911	0.201154	0.012464
+  Streptococcus_parasanguinis_B.db	C0|C2	0.299074	0.76	54	47.324	0.085829	0.005773
+  Veillonella_atypica.db	C0	1.000000	0.71	438	57.150	0.103650	0.006748
+  Gemella_haemolysans_B.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Gemella_haemolysans_B.db	[strain-resolved, no cluster above threshold]	markers=115/382 (depth 2.93x)
+  Gemella_sanguinis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Lautropia_mirabilis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Lautropia_mirabilis.db	[strain-resolved, no cluster above threshold]	markers=1120/3350 (depth 10.05x)
+  Neisseria_flavescens_B.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Neisseria_flavescens_B.db	[strain-resolved, no cluster above threshold]	markers=59/734 (depth 2.80x)
+  Neisseria_mucosa.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Neisseria_mucosa.db	[strain-resolved, no cluster above threshold]	markers=929/2557 (depth 67.02x)
+  Prevotella_histicola.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Prevotella_melaninogenica.db	layer1=cst (auto — 0 cluster(s) below the support floor, 3 informative internal node(s), 2 fallback node(s))
+  Rothia_aeria.db	layer1=cst (auto — 0 cluster(s) below the support floor, 2 informative internal node(s), 2 fallback node(s))
+  Rothia_dentocariosa.db	layer1=cst (auto — 0 cluster(s) below the support floor, 4 informative internal node(s), 4 fallback node(s))
+  Streptococcus_mutans.db	layer1=cst (auto — 3 cluster(s) below the support floor, 1 informative internal node(s), 0 fallback node(s))
+  Streptococcus_mutans.db	[strain-resolved, no cluster above threshold]	markers=26/798 (depth 0.05x)
+  Streptococcus_oralis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_oralis.db	[strain-resolved, no cluster above threshold]	markers=704/4512 (depth 5.13x)
+  Streptococcus_parasanguinis_B.db	layer1=cst (auto — 0 cluster(s) below the support floor, 4 informative internal node(s), 4 fallback node(s))
+  Streptococcus_pneumoniae_D.db	layer1=unique (auto — 172 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_pneumoniae_D.db	[strain-resolved, no cluster above threshold]	markers=75/1707 (depth 1.02x)
+  Streptococcus_pseudopneumoniae_O.db	[detected, not strain-resolvable]	markers=11/137 (8.0%, depth 0.83x)
+  Streptococcus_salivarius.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_salivarius.db	[strain-resolved, no cluster above threshold]	markers=1217/3116 (depth 120.77x)
+  Streptococcus_sanguinis.db	layer1=cst (auto — 0 cluster(s) below the support floor, 5 informative internal node(s), 4 fallback node(s))
+  Streptococcus_sanguinis.db	[strain-resolved, no cluster above threshold]	markers=1117/6874 (depth 13.85x)
+  Veillonella_atypica.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+summary: 16/27 species strain-resolved (8 strain calls), 1 detected-not-resolvable, 10 absent
+coverage of sample: strain calls account for 8.0% of 5615142 tag observations (92.0% unclassified — unresolved species, no reference, host, error)
+predictions -> /lustre1/g/aos_shihuang/Strain2bScan/work/ecc_strain/preds/S_1313223.pred.tsv
+RUN S_1313229
+cross-species filter: 41582/102474 markers usable for quantification (59.4% shared with another species in the panel, excluded)
+sample: 296372 distinct tag markers; 27 species DBs; resolve-gate≥max(50, 0%×panel), detect-gate≥3 (threads: 16)
+#species	cluster	abundance	coverage	support	depth	global_abundance	sample_fraction
+  Neisseria_mucosa.db	C0	1.000000	0.80	1524	159.948	0.334566	0.062839
+  Prevotella_histicola.db	C0	1.000000	0.54	428	34.562	0.072293	0.005559
+  Prevotella_melaninogenica.db	C0|C2|C3|C4|C5|C6|C7|C10	1.000000	0.89	31	135.457	0.283338	0.026057
+  Rothia_aeria.db	C0|C1|C2	1.000000	0.76	407	87.260	0.182524	0.024653
+  Rothia_dentocariosa.db	C1|C2|C3|C4	1.000000	0.70	62	24.205	0.050629	0.008244
+  Streptococcus_parasanguinis_B.db	C3|C4	1.000000	0.69	70	21.168	0.044278	0.002366
+  Veillonella_atypica.db	C0	1.000000	0.51	296	15.476	0.032371	0.001817
+  Gemella_haemolysans_B.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Gemella_haemolysans_B.db	[strain-resolved, no cluster above threshold]	markers=125/382 (depth 11.19x)
+  Gemella_sanguinis.db	[detected, not strain-resolvable]	markers=48/131 (36.6%, depth 11.28x)
+  Lautropia_mirabilis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Lautropia_mirabilis.db	[strain-resolved, no cluster above threshold]	markers=1322/3350 (depth 10.37x)
+  Neisseria_flavescens_B.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Neisseria_flavescens_B.db	[strain-resolved, no cluster above threshold]	markers=71/734 (depth 6.76x)
+  Neisseria_mucosa.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Prevotella_histicola.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Prevotella_melaninogenica.db	layer1=cst (auto — 0 cluster(s) below the support floor, 3 informative internal node(s), 2 fallback node(s))
+  Rothia_aeria.db	layer1=cst (auto — 0 cluster(s) below the support floor, 2 informative internal node(s), 2 fallback node(s))
+  Rothia_dentocariosa.db	layer1=cst (auto — 0 cluster(s) below the support floor, 4 informative internal node(s), 4 fallback node(s))
+  Streptococcus_oralis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_oralis.db	[strain-resolved, no cluster above threshold]	markers=685/4512 (depth 5.06x)
+  Streptococcus_parasanguinis_B.db	layer1=cst (auto — 0 cluster(s) below the support floor, 4 informative internal node(s), 4 fallback node(s))
+  Streptococcus_pneumoniae_D.db	layer1=unique (auto — 172 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_pneumoniae_D.db	[strain-resolved, no cluster above threshold]	markers=69/1707 (depth 0.91x)
+  Streptococcus_pseudopneumoniae_O.db	[detected, not strain-resolvable]	markers=9/137 (6.6%, depth 0.70x)
+  Streptococcus_salivarius.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_salivarius.db	[strain-resolved, no cluster above threshold]	markers=847/3116 (depth 14.67x)
+  Streptococcus_sanguinis.db	layer1=cst (auto — 0 cluster(s) below the support floor, 5 informative internal node(s), 4 fallback node(s))
+  Streptococcus_sanguinis.db	[strain-resolved, no cluster above threshold]	markers=1364/6874 (depth 9.27x)
+  Veillonella_atypica.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+summary: 14/27 species strain-resolved (7 strain calls), 2 detected-not-resolvable, 11 absent
+coverage of sample: strain calls account for 13.2% of 5645625 tag observations (86.8% unclassified — unresolved species, no reference, host, error)
+predictions -> /lustre1/g/aos_shihuang/Strain2bScan/work/ecc_strain/preds/S_1313229.pred.tsv
+RUN S_1411224
+cross-species filter: 41582/102474 markers usable for quantification (59.4% shared with another species in the panel, excluded)
+sample: 418434 distinct tag markers; 27 species DBs; resolve-gate≥max(50, 0%×panel), detect-gate≥3 (threads: 16)
+#species	cluster	abundance	coverage	support	depth	global_abundance	sample_fraction
+  Gemella_haemolysans_B.db	C1	1.000000	0.50	86	13.395	0.057689	0.000484
+  Gemella_sanguinis.db	C0	1.000000	0.60	72	14.939	0.064339	0.000357
+  Lautropia_mirabilis.db	C0	1.000000	0.57	1782	24.601	0.105950	0.014597
+  Neisseria_mucosa.db	C0	1.000000	0.65	1238	80.762	0.347825	0.031729
+  Prevotella_melaninogenica.db	C0|C2|C3|C4|C5|C6|C7|C10	1.000000	1.00	35	40.914	0.176210	0.007870
+  Rothia_aeria.db	C0|C1	1.000000	0.73	144	35.283	0.151956	0.009968
+  Rothia_dentocariosa.db	C1|C2|C3|C4	1.000000	0.73	64	8.534	0.036755	0.002907
+  Streptococcus_parasanguinis_B.db	C3|C4	1.000000	0.50	51	8.554	0.036842	0.000956
+  Streptococcus_sanguinis.db	C11|C34	1.000000	0.55	37	5.209	0.022434	0.000692
+  Gemella_haemolysans_B.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Gemella_sanguinis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Lautropia_mirabilis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Neisseria_flavescens_B.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Neisseria_flavescens_B.db	[strain-resolved, no cluster above threshold]	markers=70/734 (depth 10.87x)
+  Neisseria_mucosa.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Prevotella_histicola.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Prevotella_histicola.db	[strain-resolved, no cluster above threshold]	markers=125/867 (depth 0.57x)
+  Prevotella_melaninogenica.db	layer1=cst (auto — 0 cluster(s) below the support floor, 3 informative internal node(s), 2 fallback node(s))
+  Rothia_aeria.db	layer1=cst (auto — 0 cluster(s) below the support floor, 2 informative internal node(s), 2 fallback node(s))
+  Rothia_dentocariosa.db	layer1=cst (auto — 0 cluster(s) below the support floor, 4 informative internal node(s), 4 fallback node(s))
+  Streptococcus_mutans.db	layer1=cst (auto — 3 cluster(s) below the support floor, 1 informative internal node(s), 0 fallback node(s))
+  Streptococcus_mutans.db	[strain-resolved, no cluster above threshold]	markers=307/798 (depth 5.62x)
+  Streptococcus_oralis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_oralis.db	[strain-resolved, no cluster above threshold]	markers=1113/4512 (depth 9.15x)
+  Streptococcus_parasanguinis_B.db	layer1=cst (auto — 0 cluster(s) below the support floor, 4 informative internal node(s), 4 fallback node(s))
+  Streptococcus_pneumoniae_D.db	layer1=unique (auto — 172 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_pneumoniae_D.db	[strain-resolved, no cluster above threshold]	markers=113/1707 (depth 1.52x)
+  Streptococcus_pseudopneumoniae_O.db	[detected, not strain-resolvable]	markers=14/137 (10.2%, depth 7.07x)
+  Streptococcus_salivarius.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_salivarius.db	[strain-resolved, no cluster above threshold]	markers=568/3116 (depth 7.98x)
+  Streptococcus_sanguinis.db	layer1=cst (auto — 0 cluster(s) below the support floor, 5 informative internal node(s), 4 fallback node(s))
+  Veillonella_atypica.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Veillonella_atypica.db	[strain-resolved, no cluster above threshold]	markers=181/662 (depth 4.08x)
+summary: 16/27 species strain-resolved (9 strain calls), 1 detected-not-resolvable, 10 absent
+coverage of sample: strain calls account for 7.0% of 5645649 tag observations (93.0% unclassified — unresolved species, no reference, host, error)
+predictions -> /lustre1/g/aos_shihuang/Strain2bScan/work/ecc_strain/preds/S_1411224.pred.tsv
+RUN S_1413216
+cross-species filter: 41582/102474 markers usable for quantification (59.4% shared with another species in the panel, excluded)
+sample: 326064 distinct tag markers; 27 species DBs; resolve-gate≥max(50, 0%×panel), detect-gate≥3 (threads: 16)
+#species	cluster	abundance	coverage	support	depth	global_abundance	sample_fraction
+  Neisseria_mucosa.db	C0	1.000000	0.64	1159	31.496	0.216381	0.012081
+  Prevotella_melaninogenica.db	C0|C2|C3|C4|C5|C6|C7|C10	1.000000	0.83	29	19.343	0.132889	0.003633
+  Rothia_aeria.db	C0|C1	1.000000	0.58	115	17.874	0.122796	0.004930
+  Rothia_dentocariosa.db	C1|C2|C3|C4	1.000000	0.66	58	15.432	0.106019	0.005132
+  Streptococcus_parasanguinis_B.db	C3|C4	0.525095	0.65	66	32.248	0.221546	0.003519
+  Streptococcus_parasanguinis_B.db	C0|C1|C2	0.474905	0.65	75	29.165	0.200370	0.003455
+  Gemella_haemolysans_B.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Gemella_haemolysans_B.db	[strain-resolved, no cluster above threshold]	markers=119/382 (depth 27.98x)
+  Gemella_sanguinis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Gemella_sanguinis.db	[strain-resolved, no cluster above threshold]	markers=52/131 (depth 10.01x)
+  Lautropia_mirabilis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Lautropia_mirabilis.db	[strain-resolved, no cluster above threshold]	markers=1269/3350 (depth 9.71x)
+  Neisseria_flavescens_B.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Neisseria_flavescens_B.db	[strain-resolved, no cluster above threshold]	markers=59/734 (depth 9.43x)
+  Neisseria_mucosa.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Prevotella_histicola.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Prevotella_histicola.db	[strain-resolved, no cluster above threshold]	markers=345/867 (depth 7.28x)
+  Prevotella_melaninogenica.db	layer1=cst (auto — 0 cluster(s) below the support floor, 3 informative internal node(s), 2 fallback node(s))
+  Rothia_aeria.db	layer1=cst (auto — 0 cluster(s) below the support floor, 2 informative internal node(s), 2 fallback node(s))
+  Rothia_dentocariosa.db	layer1=cst (auto — 0 cluster(s) below the support floor, 4 informative internal node(s), 4 fallback node(s))
+  Streptococcus_mutans.db	[detected, not strain-resolvable]	markers=9/798 (1.1%, depth 0.22x)
+  Streptococcus_oralis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_oralis.db	[strain-resolved, no cluster above threshold]	markers=1038/4512 (depth 13.16x)
+  Streptococcus_parasanguinis_B.db	layer1=cst (auto — 0 cluster(s) below the support floor, 4 informative internal node(s), 4 fallback node(s))
+  Streptococcus_pneumoniae_D.db	layer1=unique (auto — 172 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_pneumoniae_D.db	[strain-resolved, no cluster above threshold]	markers=122/1707 (depth 8.76x)
+  Streptococcus_pseudopneumoniae_O.db	[detected, not strain-resolvable]	markers=21/137 (15.3%, depth 33.88x)
+  Streptococcus_salivarius.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_salivarius.db	[strain-resolved, no cluster above threshold]	markers=1056/3116 (depth 20.67x)
+  Streptococcus_sanguinis.db	layer1=cst (auto — 0 cluster(s) below the support floor, 5 informative internal node(s), 4 fallback node(s))
+  Streptococcus_sanguinis.db	[strain-resolved, no cluster above threshold]	markers=789/6874 (depth 3.01x)
+  Veillonella_atypica.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Veillonella_atypica.db	[strain-resolved, no cluster above threshold]	markers=201/662 (depth 5.51x)
+summary: 15/27 species strain-resolved (6 strain calls), 2 detected-not-resolvable, 10 absent
+coverage of sample: strain calls account for 3.3% of 5782338 tag observations (96.7% unclassified — unresolved species, no reference, host, error)
+predictions -> /lustre1/g/aos_shihuang/Strain2bScan/work/ecc_strain/preds/S_1413216.pred.tsv
+RUN S_1413221
+cross-species filter: 41582/102474 markers usable for quantification (59.4% shared with another species in the panel, excluded)
+sample: 381186 distinct tag markers; 27 species DBs; resolve-gate≥max(50, 0%×panel), detect-gate≥3 (threads: 16)
+#species	cluster	abundance	coverage	support	depth	global_abundance	sample_fraction
+  Gemella_haemolysans_B.db	C1	1.000000	0.63	116	61.026	0.194117	0.002039
+  Neisseria_mucosa.db	C0	1.000000	0.67	1213	24.000	0.076341	0.008718
+  Prevotella_melaninogenica.db	C0|C2|C3|C4|C5|C6|C7|C10	1.000000	0.89	31	58.029	0.184582	0.010321
+  Rothia_aeria.db	C0|C1	1.000000	0.61	121	16.985	0.054027	0.004437
+  Rothia_dentocariosa.db	C1|C2|C3|C4	1.000000	0.74	65	19.818	0.063039	0.006241
+  Streptococcus_parasanguinis_B.db	C0|C2	0.502133	0.55	39	9.437	0.030017	0.001059
+  Streptococcus_parasanguinis_B.db	C3|C4	0.497867	0.59	60	9.356	0.029762	0.000967
+  Streptococcus_pneumoniae_D.db	C33	1.000000	0.50	9	115.727	0.368115	0.008339
+  Gemella_haemolysans_B.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Gemella_sanguinis.db	[detected, not strain-resolvable]	markers=45/131 (34.4%, depth 8.17x)
+  Lautropia_mirabilis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Lautropia_mirabilis.db	[strain-resolved, no cluster above threshold]	markers=1308/3350 (depth 14.63x)
+  Neisseria_flavescens_B.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Neisseria_flavescens_B.db	[strain-resolved, no cluster above threshold]	markers=60/734 (depth 3.79x)
+  Neisseria_mucosa.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Prevotella_histicola.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Prevotella_histicola.db	[strain-resolved, no cluster above threshold]	markers=161/867 (depth 1.43x)
+  Prevotella_melaninogenica.db	layer1=cst (auto — 0 cluster(s) below the support floor, 3 informative internal node(s), 2 fallback node(s))
+  Rothia_aeria.db	layer1=cst (auto — 0 cluster(s) below the support floor, 2 informative internal node(s), 2 fallback node(s))
+  Rothia_dentocariosa.db	layer1=cst (auto — 0 cluster(s) below the support floor, 4 informative internal node(s), 4 fallback node(s))
+  Streptococcus_mutans.db	[detected, not strain-resolvable]	markers=5/798 (0.6%, depth 0.04x)
+  Streptococcus_oralis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_oralis.db	[strain-resolved, no cluster above threshold]	markers=875/4512 (depth 14.87x)
+  Streptococcus_parasanguinis_B.db	layer1=cst (auto — 0 cluster(s) below the support floor, 4 informative internal node(s), 4 fallback node(s))
+  Streptococcus_pneumoniae_D.db	layer1=unique (auto — 172 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_pseudopneumoniae_O.db	[detected, not strain-resolvable]	markers=19/137 (13.9%, depth 19.34x)
+  Streptococcus_salivarius.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_salivarius.db	[strain-resolved, no cluster above threshold]	markers=788/3116 (depth 6.32x)
+  Streptococcus_sanguinis.db	layer1=cst (auto — 0 cluster(s) below the support floor, 5 informative internal node(s), 4 fallback node(s))
+  Streptococcus_sanguinis.db	[strain-resolved, no cluster above threshold]	markers=1116/6874 (depth 2.36x)
+  Veillonella_atypica.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Veillonella_atypica.db	[strain-resolved, no cluster above threshold]	markers=217/662 (depth 6.95x)
+summary: 14/27 species strain-resolved (8 strain calls), 3 detected-not-resolvable, 10 absent
+coverage of sample: strain calls account for 4.2% of 6106002 tag observations (95.8% unclassified — unresolved species, no reference, host, error)
+predictions -> /lustre1/g/aos_shihuang/Strain2bScan/work/ecc_strain/preds/S_1413221.pred.tsv
+RUN S_1413229
+cross-species filter: 41582/102474 markers usable for quantification (59.4% shared with another species in the panel, excluded)
+sample: 311743 distinct tag markers; 27 species DBs; resolve-gate≥max(50, 0%×panel), detect-gate≥3 (threads: 16)
+#species	cluster	abundance	coverage	support	depth	global_abundance	sample_fraction
+  Neisseria_mucosa.db	C0	1.000000	0.64	1151	29.262	0.343697	0.011679
+  Prevotella_melaninogenica.db	C0|C2|C3|C4|C5|C6|C7|C10	1.000000	0.77	27	19.314	0.226858	0.003774
+  Rothia_aeria.db	C0|C1|C2	1.000000	0.65	351	20.238	0.237706	0.005808
+  Rothia_dentocariosa.db	C0|C1|C2|C3|C4	1.000000	0.55	190	6.213	0.072978	0.002150
+  Streptococcus_parasanguinis_B.db	C0|C1|C2|C3|C4	1.000000	0.59	32	10.111	0.118761	0.001246
+  Gemella_haemolysans_B.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Gemella_haemolysans_B.db	[strain-resolved, no cluster above threshold]	markers=130/382 (depth 8.51x)
+  Gemella_sanguinis.db	[detected, not strain-resolvable]	markers=45/131 (34.4%, depth 6.71x)
+  Lautropia_mirabilis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Lautropia_mirabilis.db	[strain-resolved, no cluster above threshold]	markers=1391/3350 (depth 17.93x)
+  Neisseria_flavescens_B.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Neisseria_flavescens_B.db	[strain-resolved, no cluster above threshold]	markers=101/734 (depth 9.74x)
+  Neisseria_mucosa.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Prevotella_histicola.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Prevotella_histicola.db	[strain-resolved, no cluster above threshold]	markers=206/867 (depth 1.51x)
+  Prevotella_melaninogenica.db	layer1=cst (auto — 0 cluster(s) below the support floor, 3 informative internal node(s), 2 fallback node(s))
+  Rothia_aeria.db	layer1=cst (auto — 0 cluster(s) below the support floor, 2 informative internal node(s), 2 fallback node(s))
+  Rothia_dentocariosa.db	layer1=cst (auto — 0 cluster(s) below the support floor, 4 informative internal node(s), 4 fallback node(s))
+  Streptococcus_mutans.db	layer1=cst (auto — 3 cluster(s) below the support floor, 1 informative internal node(s), 0 fallback node(s))
+  Streptococcus_mutans.db	[strain-resolved, no cluster above threshold]	markers=51/798 (depth 0.19x)
+  Streptococcus_oralis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_oralis.db	[strain-resolved, no cluster above threshold]	markers=743/4512 (depth 6.25x)
+  Streptococcus_parasanguinis_B.db	layer1=cst (auto — 0 cluster(s) below the support floor, 4 informative internal node(s), 4 fallback node(s))
+  Streptococcus_pneumoniae_D.db	layer1=unique (auto — 172 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_pneumoniae_D.db	[strain-resolved, no cluster above threshold]	markers=106/1707 (depth 3.53x)
+  Streptococcus_pseudopneumoniae_O.db	[detected, not strain-resolvable]	markers=15/137 (10.9%, depth 13.95x)
+  Streptococcus_salivarius.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_salivarius.db	[strain-resolved, no cluster above threshold]	markers=772/3116 (depth 6.96x)
+  Streptococcus_sanguinis.db	layer1=cst (auto — 0 cluster(s) below the support floor, 5 informative internal node(s), 4 fallback node(s))
+  Streptococcus_sanguinis.db	[strain-resolved, no cluster above threshold]	markers=997/6874 (depth 3.39x)
+  Streptococcus_sobrinus.db	[detected, not strain-resolvable]	markers=4/733 (0.5%, depth 0.04x)
+  Veillonella_atypica.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Veillonella_atypica.db	[strain-resolved, no cluster above threshold]	markers=136/662 (depth 2.05x)
+summary: 15/27 species strain-resolved (5 strain calls), 3 detected-not-resolvable, 9 absent
+coverage of sample: strain calls account for 2.5% of 5557315 tag observations (97.5% unclassified — unresolved species, no reference, host, error)
+predictions -> /lustre1/g/aos_shihuang/Strain2bScan/work/ecc_strain/preds/S_1413229.pred.tsv
+RUN S_1413230
+cross-species filter: 41582/102474 markers usable for quantification (59.4% shared with another species in the panel, excluded)
+sample: 393637 distinct tag markers; 27 species DBs; resolve-gate≥max(50, 0%×panel), detect-gate≥3 (threads: 16)
+#species	cluster	abundance	coverage	support	depth	global_abundance	sample_fraction
+  Gemella_haemolysans_B.db	C1	1.000000	0.63	107	28.163	0.054079	0.000842
+  Gemella_sanguinis.db	C0	1.000000	0.58	65	26.733	0.051333	0.000529
+  Lautropia_mirabilis.db	C0	1.000000	0.51	1433	8.713	0.016731	0.004276
+  Neisseria_mucosa.db	C0	1.000000	0.71	1313	86.649	0.166385	0.028156
+  Prevotella_histicola.db	C0	1.000000	0.57	478	122.114	0.234486	0.016244
+  Prevotella_melaninogenica.db	C0|C2|C3|C4|C5|C6|C7|C10	1.000000	0.97	34	104.829	0.201294	0.016678
+  Rothia_aeria.db	C0|C1	1.000000	0.58	114	28.652	0.055017	0.006695
+  Rothia_dentocariosa.db	C1|C2|C3|C4	1.000000	0.76	67	23.500	0.045125	0.006620
+  Streptococcus_parasanguinis_B.db	C3|C4	0.585368	0.70	71	21.554	0.041389	0.001993
+  Streptococcus_parasanguinis_B.db	C0|C2	0.414632	0.73	52	15.268	0.029317	0.001532
+  Streptococcus_sanguinis.db	C18	1.000000	0.55	124	3.518	0.006755	0.000371
+  Veillonella_atypica.db	C0	1.000000	0.69	416	51.082	0.098088	0.004962
+  Gemella_haemolysans_B.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Gemella_sanguinis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Lautropia_mirabilis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Neisseria_flavescens_B.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Neisseria_flavescens_B.db	[strain-resolved, no cluster above threshold]	markers=77/734 (depth 8.65x)
+  Neisseria_mucosa.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Prevotella_histicola.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Prevotella_melaninogenica.db	layer1=cst (auto — 0 cluster(s) below the support floor, 3 informative internal node(s), 2 fallback node(s))
+  Rothia_aeria.db	layer1=cst (auto — 0 cluster(s) below the support floor, 2 informative internal node(s), 2 fallback node(s))
+  Rothia_dentocariosa.db	layer1=cst (auto — 0 cluster(s) below the support floor, 4 informative internal node(s), 4 fallback node(s))
+  Streptococcus_mutans.db	layer1=cst (auto — 3 cluster(s) below the support floor, 1 informative internal node(s), 0 fallback node(s))
+  Streptococcus_mutans.db	[strain-resolved, no cluster above threshold]	markers=145/798 (depth 0.62x)
+  Streptococcus_oralis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_oralis.db	[strain-resolved, no cluster above threshold]	markers=1199/4512 (depth 9.63x)
+  Streptococcus_parasanguinis_B.db	layer1=cst (auto — 0 cluster(s) below the support floor, 4 informative internal node(s), 4 fallback node(s))
+  Streptococcus_pneumoniae_D.db	layer1=unique (auto — 172 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_pneumoniae_D.db	[strain-resolved, no cluster above threshold]	markers=131/1707 (depth 5.08x)
+  Streptococcus_pseudopneumoniae_O.db	[detected, not strain-resolvable]	markers=15/137 (10.9%, depth 6.46x)
+  Streptococcus_salivarius.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_salivarius.db	[strain-resolved, no cluster above threshold]	markers=936/3116 (depth 20.87x)
+  Streptococcus_sanguinis.db	layer1=cst (auto — 0 cluster(s) below the support floor, 5 informative internal node(s), 4 fallback node(s))
+  Streptococcus_sobrinus.db	[detected, not strain-resolvable]	markers=10/733 (1.4%, depth 0.57x)
+  Veillonella_atypica.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+summary: 16/27 species strain-resolved (12 strain calls), 2 detected-not-resolvable, 9 absent
+coverage of sample: strain calls account for 8.9% of 6825864 tag observations (91.1% unclassified — unresolved species, no reference, host, error)
+predictions -> /lustre1/g/aos_shihuang/Strain2bScan/work/ecc_strain/preds/S_1413230.pred.tsv
+RUN S_1413231
+cross-species filter: 41582/102474 markers usable for quantification (59.4% shared with another species in the panel, excluded)
+sample: 288019 distinct tag markers; 27 species DBs; resolve-gate≥max(50, 0%×panel), detect-gate≥3 (threads: 16)
+#species	cluster	abundance	coverage	support	depth	global_abundance	sample_fraction
+  Neisseria_mucosa.db	C0	1.000000	0.66	1253	131.756	0.574165	0.047009
+  Prevotella_melaninogenica.db	C0|C2|C3|C4|C5|C6|C7|C10	1.000000	0.63	22	9.771	0.042582	0.001707
+  Rothia_aeria.db	C0|C1|C2	1.000000	0.58	313	17.100	0.074520	0.004388
+  Rothia_dentocariosa.db	C1|C2|C3|C4	1.000000	0.75	66	51.920	0.226258	0.016061
+  Streptococcus_parasanguinis_B.db	C0|C1|C2|C3|C4	1.000000	0.59	32	18.926	0.082475	0.002085
+  Gemella_haemolysans_B.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Gemella_haemolysans_B.db	[strain-resolved, no cluster above threshold]	markers=128/382 (depth 22.91x)
+  Gemella_sanguinis.db	[detected, not strain-resolvable]	markers=46/131 (35.1%, depth 7.65x)
+  Lautropia_mirabilis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Lautropia_mirabilis.db	[strain-resolved, no cluster above threshold]	markers=1243/3350 (depth 9.78x)
+  Neisseria_flavescens_B.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Neisseria_flavescens_B.db	[strain-resolved, no cluster above threshold]	markers=80/734 (depth 6.60x)
+  Neisseria_mucosa.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Prevotella_histicola.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Prevotella_histicola.db	[strain-resolved, no cluster above threshold]	markers=342/867 (depth 13.70x)
+  Prevotella_melaninogenica.db	layer1=cst (auto — 0 cluster(s) below the support floor, 3 informative internal node(s), 2 fallback node(s))
+  Rothia_aeria.db	layer1=cst (auto — 0 cluster(s) below the support floor, 2 informative internal node(s), 2 fallback node(s))
+  Rothia_dentocariosa.db	layer1=cst (auto — 0 cluster(s) below the support floor, 4 informative internal node(s), 4 fallback node(s))
+  Streptococcus_mutans.db	layer1=cst (auto — 3 cluster(s) below the support floor, 1 informative internal node(s), 0 fallback node(s))
+  Streptococcus_mutans.db	[strain-resolved, no cluster above threshold]	markers=118/798 (depth 0.95x)
+  Streptococcus_oralis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_oralis.db	[strain-resolved, no cluster above threshold]	markers=892/4512 (depth 10.70x)
+  Streptococcus_parasanguinis_B.db	layer1=cst (auto — 0 cluster(s) below the support floor, 4 informative internal node(s), 4 fallback node(s))
+  Streptococcus_pneumoniae_D.db	layer1=unique (auto — 172 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_pneumoniae_D.db	[strain-resolved, no cluster above threshold]	markers=139/1707 (depth 6.04x)
+  Streptococcus_pseudopneumoniae_O.db	[detected, not strain-resolvable]	markers=22/137 (16.1%, depth 9.76x)
+  Streptococcus_salivarius.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_salivarius.db	[strain-resolved, no cluster above threshold]	markers=730/3116 (depth 8.06x)
+  Streptococcus_sanguinis.db	layer1=cst (auto — 0 cluster(s) below the support floor, 5 informative internal node(s), 4 fallback node(s))
+  Streptococcus_sanguinis.db	[strain-resolved, no cluster above threshold]	markers=1328/6874 (depth 6.36x)
+  Streptococcus_sobrinus.db	layer1=cst (auto — 0 cluster(s) below the support floor, 2 informative internal node(s), 2 fallback node(s))
+  Streptococcus_sobrinus.db	[strain-resolved, no cluster above threshold]	markers=108/733 (depth 1.77x)
+  Veillonella_atypica.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Veillonella_atypica.db	[strain-resolved, no cluster above threshold]	markers=192/662 (depth 6.42x)
+summary: 16/27 species strain-resolved (5 strain calls), 2 detected-not-resolvable, 9 absent
+coverage of sample: strain calls account for 7.1% of 6216539 tag observations (92.9% unclassified — unresolved species, no reference, host, error)
+predictions -> /lustre1/g/aos_shihuang/Strain2bScan/work/ecc_strain/preds/S_1413231.pred.tsv
+RUN S_1413233
+cross-species filter: 41582/102474 markers usable for quantification (59.4% shared with another species in the panel, excluded)
+sample: 282953 distinct tag markers; 27 species DBs; resolve-gate≥max(50, 0%×panel), detect-gate≥3 (threads: 16)
+#species	cluster	abundance	coverage	support	depth	global_abundance	sample_fraction
+  Gemella_sanguinis.db	C0	1.000000	0.64	79	27.389	0.098759	0.000517
+  Prevotella_histicola.db	C0	1.000000	0.56	446	45.015	0.162312	0.005720
+  Prevotella_melaninogenica.db	C0|C2|C3|C4|C5|C6|C7|C10	1.000000	0.91	32	54.086	0.195019	0.008220
+  Rothia_aeria.db	C0|C1	1.000000	0.54	106	42.242	0.152315	0.009429
+  Rothia_dentocariosa.db	C1|C2|C3|C4	1.000000	0.56	49	6.977	0.025158	0.001878
+  Streptococcus_parasanguinis_B.db	C3|C4	0.830725	0.74	75	58.683	0.211596	0.005182
+  Streptococcus_parasanguinis_B.db	C0|C2	0.169275	0.70	50	11.958	0.043117	0.001146
+  Veillonella_atypica.db	C0	1.000000	0.58	348	30.985	0.111723	0.002875
+  Gemella_haemolysans_B.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Gemella_haemolysans_B.db	[strain-resolved, no cluster above threshold]	markers=95/382 (depth 8.65x)
+  Gemella_sanguinis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Lautropia_mirabilis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Lautropia_mirabilis.db	[strain-resolved, no cluster above threshold]	markers=1267/3350 (depth 9.71x)
+  Neisseria_flavescens_B.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Neisseria_flavescens_B.db	[strain-resolved, no cluster above threshold]	markers=75/734 (depth 13.41x)
+  Neisseria_mucosa.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Neisseria_mucosa.db	[strain-resolved, no cluster above threshold]	markers=818/2557 (depth 50.17x)
+  Prevotella_histicola.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Prevotella_melaninogenica.db	layer1=cst (auto — 0 cluster(s) below the support floor, 3 informative internal node(s), 2 fallback node(s))
+  Rothia_aeria.db	layer1=cst (auto — 0 cluster(s) below the support floor, 2 informative internal node(s), 2 fallback node(s))
+  Rothia_dentocariosa.db	layer1=cst (auto — 0 cluster(s) below the support floor, 4 informative internal node(s), 4 fallback node(s))
+  Streptococcus_mutans.db	layer1=cst (auto — 3 cluster(s) below the support floor, 1 informative internal node(s), 0 fallback node(s))
+  Streptococcus_mutans.db	[strain-resolved, no cluster above threshold]	markers=48/798 (depth 0.12x)
+  Streptococcus_oralis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_oralis.db	[strain-resolved, no cluster above threshold]	markers=612/4512 (depth 4.82x)
+  Streptococcus_parasanguinis_B.db	layer1=cst (auto — 0 cluster(s) below the support floor, 4 informative internal node(s), 4 fallback node(s))
+  Streptococcus_pneumoniae_D.db	layer1=unique (auto — 172 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_pneumoniae_D.db	[strain-resolved, no cluster above threshold]	markers=94/1707 (depth 1.45x)
+  Streptococcus_pseudopneumoniae_O.db	[detected, not strain-resolvable]	markers=17/137 (12.4%, depth 9.64x)
+  Streptococcus_salivarius.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_salivarius.db	[strain-resolved, no cluster above threshold]	markers=818/3116 (depth 17.00x)
+  Streptococcus_sanguinis.db	layer1=cst (auto — 0 cluster(s) below the support floor, 5 informative internal node(s), 4 fallback node(s))
+  Streptococcus_sanguinis.db	[strain-resolved, no cluster above threshold]	markers=978/6874 (depth 2.99x)
+  Streptococcus_sobrinus.db	[detected, not strain-resolvable]	markers=3/733 (0.4%, depth 0.45x)
+  Veillonella_atypica.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+summary: 16/27 species strain-resolved (8 strain calls), 2 detected-not-resolvable, 9 absent
+coverage of sample: strain calls account for 3.5% of 7145445 tag observations (96.5% unclassified — unresolved species, no reference, host, error)
+predictions -> /lustre1/g/aos_shihuang/Strain2bScan/work/ecc_strain/preds/S_1413233.pred.tsv
+RUN S_8123202
+cross-species filter: 41582/102474 markers usable for quantification (59.4% shared with another species in the panel, excluded)
+sample: 418100 distinct tag markers; 27 species DBs; resolve-gate≥max(50, 0%×panel), detect-gate≥3 (threads: 16)
+#species	cluster	abundance	coverage	support	depth	global_abundance	sample_fraction
+  Gemella_haemolysans_B.db	C1	1.000000	0.52	93	20.537	0.081134	0.000751
+  Gemella_sanguinis.db	C0	1.000000	0.67	84	73.679	0.291084	0.001784
+  Neisseria_mucosa.db	C0	1.000000	0.71	1312	22.347	0.088287	0.008888
+  Prevotella_histicola.db	C0	1.000000	0.61	460	7.577	0.029933	0.001234
+  Prevotella_melaninogenica.db	C0|C2|C3|C4|C5|C6|C7|C10	1.000000	1.00	35	60.886	0.240540	0.011856
+  Rothia_aeria.db	C0|C1|C2	1.000000	0.77	414	10.132	0.040028	0.002898
+  Rothia_dentocariosa.db	C1|C2|C3|C4	1.000000	0.59	52	3.784	0.014950	0.001305
+  Streptococcus_parasanguinis_B.db	C3|C4	0.647957	0.57	58	24.455	0.096616	0.002767
+  Streptococcus_parasanguinis_B.db	C0|C1|C2	0.352043	0.56	64	13.287	0.052493	0.001632
+  Streptococcus_sobrinus.db	C0|C1	1.000000	0.45	218	1.305	0.005156	0.000136
+  Veillonella_atypica.db	C0	1.000000	0.62	362	15.131	0.059779	0.001799
+  Gemella_haemolysans_B.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Gemella_sanguinis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Lautropia_mirabilis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Lautropia_mirabilis.db	[strain-resolved, no cluster above threshold]	markers=1059/3350 (depth 1.29x)
+  Neisseria_flavescens_B.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Neisseria_flavescens_B.db	[strain-resolved, no cluster above threshold]	markers=88/734 (depth 3.85x)
+  Neisseria_mucosa.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Prevotella_histicola.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Prevotella_melaninogenica.db	layer1=cst (auto — 0 cluster(s) below the support floor, 3 informative internal node(s), 2 fallback node(s))
+  Rothia_aeria.db	layer1=cst (auto — 0 cluster(s) below the support floor, 2 informative internal node(s), 2 fallback node(s))
+  Rothia_dentocariosa.db	layer1=cst (auto — 0 cluster(s) below the support floor, 4 informative internal node(s), 4 fallback node(s))
+  Streptococcus_mutans.db	layer1=cst (auto — 3 cluster(s) below the support floor, 1 informative internal node(s), 0 fallback node(s))
+  Streptococcus_mutans.db	[strain-resolved, no cluster above threshold]	markers=186/798 (depth 0.71x)
+  Streptococcus_oralis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_oralis.db	[strain-resolved, no cluster above threshold]	markers=771/4512 (depth 6.64x)
+  Streptococcus_parasanguinis_B.db	layer1=cst (auto — 0 cluster(s) below the support floor, 4 informative internal node(s), 4 fallback node(s))
+  Streptococcus_pneumoniae_D.db	layer1=unique (auto — 172 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_pneumoniae_D.db	[strain-resolved, no cluster above threshold]	markers=133/1707 (depth 3.55x)
+  Streptococcus_pseudopneumoniae_O.db	[detected, not strain-resolvable]	markers=23/137 (16.8%, depth 8.61x)
+  Streptococcus_salivarius.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_salivarius.db	[strain-resolved, no cluster above threshold]	markers=1397/3116 (depth 31.61x)
+  Streptococcus_sanguinis.db	layer1=cst (auto — 0 cluster(s) below the support floor, 5 informative internal node(s), 4 fallback node(s))
+  Streptococcus_sanguinis.db	[strain-resolved, no cluster above threshold]	markers=1104/6874 (depth 1.16x)
+  Streptococcus_sobrinus.db	layer1=cst (auto — 0 cluster(s) below the support floor, 2 informative internal node(s), 2 fallback node(s))
+  Veillonella_atypica.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+summary: 17/27 species strain-resolved (11 strain calls), 1 detected-not-resolvable, 9 absent
+coverage of sample: strain calls account for 3.5% of 5577061 tag observations (96.5% unclassified — unresolved species, no reference, host, error)
+predictions -> /lustre1/g/aos_shihuang/Strain2bScan/work/ecc_strain/preds/S_8123202.pred.tsv
+RUN S_8123213
+cross-species filter: 41582/102474 markers usable for quantification (59.4% shared with another species in the panel, excluded)
+sample: 370379 distinct tag markers; 27 species DBs; resolve-gate≥max(50, 0%×panel), detect-gate≥3 (threads: 16)
+#species	cluster	abundance	coverage	support	depth	global_abundance	sample_fraction
+  Gemella_sanguinis.db	C0	1.000000	0.53	65	31.305	0.081141	0.000586
+  Neisseria_mucosa.db	C0	1.000000	0.66	1221	106.356	0.275667	0.032687
+  Prevotella_histicola.db	C0	1.000000	0.64	526	68.773	0.178254	0.008653
+  Prevotella_melaninogenica.db	C0|C2|C3|C4|C5|C6|C7|C10	1.000000	0.86	30	54.257	0.140630	0.008165
+  Rothia_aeria.db	C0|C1	1.000000	0.60	118	14.960	0.038774	0.003306
+  Rothia_dentocariosa.db	C1|C2|C3|C4	1.000000	0.49	43	2.773	0.007187	0.000739
+  Streptococcus_parasanguinis_B.db	C3|C4	0.749670	0.61	62	59.426	0.154027	0.005196
+  Streptococcus_parasanguinis_B.db	C0|C1|C2	0.250330	0.59	68	19.843	0.051433	0.001883
+  Streptococcus_sanguinis.db	C28	1.000000	0.51	40	6.769	0.017545	0.000690
+  Veillonella_atypica.db	C0	1.000000	0.60	341	21.352	0.055343	0.001962
+  Gemella_haemolysans_B.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Gemella_haemolysans_B.db	[strain-resolved, no cluster above threshold]	markers=112/382 (depth 3.84x)
+  Gemella_sanguinis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Lautropia_mirabilis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Lautropia_mirabilis.db	[strain-resolved, no cluster above threshold]	markers=1172/3350 (depth 9.69x)
+  Neisseria_flavescens_B.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Neisseria_flavescens_B.db	[strain-resolved, no cluster above threshold]	markers=78/734 (depth 29.79x)
+  Neisseria_mucosa.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Prevotella_histicola.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Prevotella_melaninogenica.db	layer1=cst (auto — 0 cluster(s) below the support floor, 3 informative internal node(s), 2 fallback node(s))
+  Rothia_aeria.db	layer1=cst (auto — 0 cluster(s) below the support floor, 2 informative internal node(s), 2 fallback node(s))
+  Rothia_dentocariosa.db	layer1=cst (auto — 0 cluster(s) below the support floor, 4 informative internal node(s), 4 fallback node(s))
+  Streptococcus_mutans.db	layer1=cst (auto — 3 cluster(s) below the support floor, 1 informative internal node(s), 0 fallback node(s))
+  Streptococcus_mutans.db	[strain-resolved, no cluster above threshold]	markers=112/798 (depth 0.41x)
+  Streptococcus_oralis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_oralis.db	[strain-resolved, no cluster above threshold]	markers=1088/4512 (depth 11.61x)
+  Streptococcus_parasanguinis_B.db	layer1=cst (auto — 0 cluster(s) below the support floor, 4 informative internal node(s), 4 fallback node(s))
+  Streptococcus_pneumoniae_D.db	layer1=unique (auto — 172 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_pneumoniae_D.db	[strain-resolved, no cluster above threshold]	markers=95/1707 (depth 4.15x)
+  Streptococcus_pseudopneumoniae_O.db	[detected, not strain-resolvable]	markers=12/137 (8.8%, depth 5.50x)
+  Streptococcus_salivarius.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_salivarius.db	[strain-resolved, no cluster above threshold]	markers=980/3116 (depth 14.82x)
+  Streptococcus_sanguinis.db	layer1=cst (auto — 0 cluster(s) below the support floor, 5 informative internal node(s), 4 fallback node(s))
+  Streptococcus_sobrinus.db	layer1=cst (auto — 0 cluster(s) below the support floor, 2 informative internal node(s), 2 fallback node(s))
+  Streptococcus_sobrinus.db	[strain-resolved, no cluster above threshold]	markers=169/733 (depth 1.04x)
+  Veillonella_atypica.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+summary: 17/27 species strain-resolved (10 strain calls), 1 detected-not-resolvable, 9 absent
+coverage of sample: strain calls account for 6.4% of 7216966 tag observations (93.6% unclassified — unresolved species, no reference, host, error)
+predictions -> /lustre1/g/aos_shihuang/Strain2bScan/work/ecc_strain/preds/S_8123213.pred.tsv
+RUN S_8123214
+cross-species filter: 41582/102474 markers usable for quantification (59.4% shared with another species in the panel, excluded)
+sample: 378245 distinct tag markers; 27 species DBs; resolve-gate≥max(50, 0%×panel), detect-gate≥3 (threads: 16)
+#species	cluster	abundance	coverage	support	depth	global_abundance	sample_fraction
+  Lautropia_mirabilis.db	C0	1.000000	0.56	1686	19.818	0.141500	0.014737
+  Prevotella_melaninogenica.db	C0|C2|C3|C4|C5|C6|C7|C10	1.000000	0.97	34	74.257	0.530188	0.017901
+  Rothia_aeria.db	C0|C1	1.000000	0.72	143	16.384	0.116979	0.005801
+  Rothia_dentocariosa.db	C1|C2|C3|C4	1.000000	0.49	43	3.568	0.025476	0.001523
+  Streptococcus_parasanguinis_B.db	C3|C4	0.666034	0.63	64	8.515	0.060795	0.001193
+  Streptococcus_parasanguinis_B.db	C0|C1|C2	0.333966	0.60	69	4.270	0.030484	0.000649
+  Veillonella_atypica.db	C0	1.000000	0.66	385	13.246	0.094577	0.001949
+  Gemella_haemolysans_B.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Gemella_haemolysans_B.db	[strain-resolved, no cluster above threshold]	markers=83/382 (depth 2.35x)
+  Gemella_sanguinis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Gemella_sanguinis.db	[strain-resolved, no cluster above threshold]	markers=57/131 (depth 6.70x)
+  Lautropia_mirabilis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Neisseria_flavescens_B.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Neisseria_flavescens_B.db	[strain-resolved, no cluster above threshold]	markers=78/734 (depth 4.69x)
+  Neisseria_mucosa.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Neisseria_mucosa.db	[strain-resolved, no cluster above threshold]	markers=857/2557 (depth 8.34x)
+  Prevotella_histicola.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Prevotella_histicola.db	[strain-resolved, no cluster above threshold]	markers=141/867 (depth 0.72x)
+  Prevotella_melaninogenica.db	layer1=cst (auto — 0 cluster(s) below the support floor, 3 informative internal node(s), 2 fallback node(s))
+  Rothia_aeria.db	layer1=cst (auto — 0 cluster(s) below the support floor, 2 informative internal node(s), 2 fallback node(s))
+  Rothia_dentocariosa.db	layer1=cst (auto — 0 cluster(s) below the support floor, 4 informative internal node(s), 4 fallback node(s))
+  Streptococcus_mutans.db	layer1=cst (auto — 3 cluster(s) below the support floor, 1 informative internal node(s), 0 fallback node(s))
+  Streptococcus_mutans.db	[strain-resolved, no cluster above threshold]	markers=14/798 (depth 0.06x)
+  Streptococcus_oralis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_oralis.db	[strain-resolved, no cluster above threshold]	markers=819/4512 (depth 3.19x)
+  Streptococcus_parasanguinis_B.db	layer1=cst (auto — 0 cluster(s) below the support floor, 4 informative internal node(s), 4 fallback node(s))
+  Streptococcus_pneumoniae_D.db	layer1=unique (auto — 172 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_pneumoniae_D.db	[strain-resolved, no cluster above threshold]	markers=100/1707 (depth 0.82x)
+  Streptococcus_pseudopneumoniae_O.db	[detected, not strain-resolvable]	markers=12/137 (8.8%, depth 3.21x)
+  Streptococcus_salivarius.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_salivarius.db	[strain-resolved, no cluster above threshold]	markers=781/3116 (depth 4.69x)
+  Streptococcus_sanguinis.db	layer1=cst (auto — 0 cluster(s) below the support floor, 5 informative internal node(s), 4 fallback node(s))
+  Streptococcus_sanguinis.db	[strain-resolved, no cluster above threshold]	markers=948/6874 (depth 10.40x)
+  Veillonella_atypica.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+summary: 16/27 species strain-resolved (7 strain calls), 1 detected-not-resolvable, 10 absent
+coverage of sample: strain calls account for 4.4% of 4504906 tag observations (95.6% unclassified — unresolved species, no reference, host, error)
+predictions -> /lustre1/g/aos_shihuang/Strain2bScan/work/ecc_strain/preds/S_8123214.pred.tsv
+RUN S_8123218
+cross-species filter: 41582/102474 markers usable for quantification (59.4% shared with another species in the panel, excluded)
+sample: 210326 distinct tag markers; 27 species DBs; resolve-gate≥max(50, 0%×panel), detect-gate≥3 (threads: 16)
+#species	cluster	abundance	coverage	support	depth	global_abundance	sample_fraction
+  Neisseria_mucosa.db	C0	1.000000	0.57	1087	86.007	0.275454	0.030714
+  Prevotella_melaninogenica.db	C0|C2|C3|C4|C5|C6|C7|C10	1.000000	0.89	31	155.971	0.499531	0.027272
+  Streptococcus_parasanguinis_B.db	C3|C4	1.000000	0.53	54	70.257	0.225014	0.007138
+  Gemella_haemolysans_B.db	[detected, not strain-resolvable]	markers=43/382 (11.3%, depth 4.93x)
+  Gemella_sanguinis.db	[detected, not strain-resolvable]	markers=21/131 (16.0%, depth 9.02x)
+  Lautropia_mirabilis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Lautropia_mirabilis.db	[strain-resolved, no cluster above threshold]	markers=742/3350 (depth 7.40x)
+  Neisseria_flavescens_B.db	[detected, not strain-resolvable]	markers=44/734 (6.0%, depth 5.33x)
+  Neisseria_mucosa.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Prevotella_histicola.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Prevotella_histicola.db	[strain-resolved, no cluster above threshold]	markers=406/867 (depth 59.33x)
+  Prevotella_melaninogenica.db	layer1=cst (auto — 0 cluster(s) below the support floor, 3 informative internal node(s), 2 fallback node(s))
+  Rothia_aeria.db	layer1=cst (auto — 0 cluster(s) below the support floor, 2 informative internal node(s), 2 fallback node(s))
+  Rothia_aeria.db	[strain-resolved, no cluster above threshold]	markers=294/2499 (depth 2.79x)
+  Rothia_dentocariosa.db	layer1=cst (auto — 0 cluster(s) below the support floor, 4 informative internal node(s), 4 fallback node(s))
+  Rothia_dentocariosa.db	[strain-resolved, no cluster above threshold]	markers=660/4237 (depth 5.56x)
+  Streptococcus_oralis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_oralis.db	[strain-resolved, no cluster above threshold]	markers=739/4512 (depth 10.74x)
+  Streptococcus_parasanguinis_B.db	layer1=cst (auto — 0 cluster(s) below the support floor, 4 informative internal node(s), 4 fallback node(s))
+  Streptococcus_pneumoniae_D.db	layer1=unique (auto — 172 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_pneumoniae_D.db	[strain-resolved, no cluster above threshold]	markers=80/1707 (depth 2.66x)
+  Streptococcus_pseudopneumoniae_O.db	[detected, not strain-resolvable]	markers=12/137 (8.8%, depth 8.91x)
+  Streptococcus_salivarius.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_salivarius.db	[strain-resolved, no cluster above threshold]	markers=789/3116 (depth 35.35x)
+  Streptococcus_sanguinis.db	layer1=cst (auto — 0 cluster(s) below the support floor, 5 informative internal node(s), 4 fallback node(s))
+  Streptococcus_sanguinis.db	[strain-resolved, no cluster above threshold]	markers=915/6874 (depth 7.95x)
+  Veillonella_atypica.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Veillonella_atypica.db	[strain-resolved, no cluster above threshold]	markers=249/662 (depth 40.06x)
+summary: 12/27 species strain-resolved (3 strain calls), 4 detected-not-resolvable, 11 absent
+coverage of sample: strain calls account for 6.5% of 6210893 tag observations (93.5% unclassified — unresolved species, no reference, host, error)
+predictions -> /lustre1/g/aos_shihuang/Strain2bScan/work/ecc_strain/preds/S_8123218.pred.tsv
+RUN S_8123220
+cross-species filter: 41582/102474 markers usable for quantification (59.4% shared with another species in the panel, excluded)
+sample: 287844 distinct tag markers; 27 species DBs; resolve-gate≥max(50, 0%×panel), detect-gate≥3 (threads: 16)
+#species	cluster	abundance	coverage	support	depth	global_abundance	sample_fraction
+  Prevotella_histicola.db	C0	1.000000	0.62	515	38.017	0.172152	0.005692
+  Prevotella_melaninogenica.db	C0|C2|C3|C4|C5|C6|C7|C10	1.000000	0.89	31	48.771	0.220849	0.008733
+  Rothia_aeria.db	C0|C1	1.000000	0.66	131	48.091	0.217768	0.012647
+  Rothia_dentocariosa.db	C1|C2|C3|C4	1.000000	0.82	72	31.602	0.143103	0.010020
+  Streptococcus_oralis.db	C19	1.000000	0.58	82	14.529	0.065789	0.001243
+  Streptococcus_parasanguinis_B.db	C3|C4	0.668268	0.70	71	26.614	0.120514	0.002769
+  Streptococcus_parasanguinis_B.db	C0|C2	0.331732	0.52	37	13.211	0.059824	0.001492
+  Gemella_haemolysans_B.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Gemella_haemolysans_B.db	[strain-resolved, no cluster above threshold]	markers=85/382 (depth 2.82x)
+  Gemella_sanguinis.db	[detected, not strain-resolvable]	markers=42/131 (32.1%, depth 13.47x)
+  Lautropia_mirabilis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Lautropia_mirabilis.db	[strain-resolved, no cluster above threshold]	markers=1594/3350 (depth 46.30x)
+  Neisseria_flavescens_B.db	[detected, not strain-resolvable]	markers=37/734 (5.0%, depth 3.58x)
+  Neisseria_mucosa.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Neisseria_mucosa.db	[strain-resolved, no cluster above threshold]	markers=974/2557 (depth 194.47x)
+  Prevotella_histicola.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Prevotella_melaninogenica.db	layer1=cst (auto — 0 cluster(s) below the support floor, 3 informative internal node(s), 2 fallback node(s))
+  Rothia_aeria.db	layer1=cst (auto — 0 cluster(s) below the support floor, 2 informative internal node(s), 2 fallback node(s))
+  Rothia_dentocariosa.db	layer1=cst (auto — 0 cluster(s) below the support floor, 4 informative internal node(s), 4 fallback node(s))
+  Streptococcus_mutans.db	layer1=cst (auto — 3 cluster(s) below the support floor, 1 informative internal node(s), 0 fallback node(s))
+  Streptococcus_mutans.db	[strain-resolved, no cluster above threshold]	markers=208/798 (depth 2.85x)
+  Streptococcus_oralis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_parasanguinis_B.db	layer1=cst (auto — 0 cluster(s) below the support floor, 4 informative internal node(s), 4 fallback node(s))
+  Streptococcus_pneumoniae_D.db	layer1=unique (auto — 172 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_pneumoniae_D.db	[strain-resolved, no cluster above threshold]	markers=91/1707 (depth 1.32x)
+  Streptococcus_pseudopneumoniae_O.db	[detected, not strain-resolvable]	markers=6/137 (4.4%, depth 0.49x)
+  Streptococcus_salivarius.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_salivarius.db	[strain-resolved, no cluster above threshold]	markers=1016/3116 (depth 19.62x)
+  Streptococcus_sanguinis.db	layer1=cst (auto — 0 cluster(s) below the support floor, 5 informative internal node(s), 4 fallback node(s))
+  Streptococcus_sanguinis.db	[strain-resolved, no cluster above threshold]	markers=1460/6874 (depth 49.08x)
+  Streptococcus_sobrinus.db	layer1=cst (auto — 0 cluster(s) below the support floor, 2 informative internal node(s), 2 fallback node(s))
+  Streptococcus_sobrinus.db	[strain-resolved, no cluster above threshold]	markers=17/733 (depth 0.07x)
+  Veillonella_atypica.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Veillonella_atypica.db	[strain-resolved, no cluster above threshold]	markers=302/662 (depth 29.29x)
+summary: 15/27 species strain-resolved (7 strain calls), 3 detected-not-resolvable, 9 absent
+coverage of sample: strain calls account for 4.3% of 6065007 tag observations (95.7% unclassified — unresolved species, no reference, host, error)
+predictions -> /lustre1/g/aos_shihuang/Strain2bScan/work/ecc_strain/preds/S_8123220.pred.tsv
+RUN S_8123225
+cross-species filter: 41582/102474 markers usable for quantification (59.4% shared with another species in the panel, excluded)
+sample: 117411 distinct tag markers; 27 species DBs; resolve-gate≥max(50, 0%×panel), detect-gate≥3 (threads: 16)
+#species	cluster	abundance	coverage	support	depth	global_abundance	sample_fraction
+  Gemella_haemolysans_B.db	[detected, not strain-resolvable]	markers=17/382 (4.5%, depth 2.16x)
+  Gemella_sanguinis.db	[detected, not strain-resolvable]	markers=16/131 (12.2%, depth 10.87x)
+  Lautropia_mirabilis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Lautropia_mirabilis.db	[strain-resolved, no cluster above threshold]	markers=959/3350 (depth 113.89x)
+  Neisseria_flavescens_B.db	[detected, not strain-resolvable]	markers=22/734 (3.0%, depth 3.63x)
+  Neisseria_mucosa.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Neisseria_mucosa.db	[strain-resolved, no cluster above threshold]	markers=367/2557 (depth 26.14x)
+  Prevotella_histicola.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Prevotella_histicola.db	[strain-resolved, no cluster above threshold]	markers=174/867 (depth 1.57x)
+  Prevotella_melaninogenica.db	layer1=cst (auto — 0 cluster(s) below the support floor, 3 informative internal node(s), 2 fallback node(s))
+  Prevotella_melaninogenica.db	[strain-resolved, no cluster above threshold]	markers=569/6426 (depth 2.74x)
+  Rothia_aeria.db	layer1=cst (auto — 0 cluster(s) below the support floor, 2 informative internal node(s), 2 fallback node(s))
+  Rothia_aeria.db	[strain-resolved, no cluster above threshold]	markers=357/2499 (depth 22.37x)
+  Rothia_dentocariosa.db	layer1=cst (auto — 0 cluster(s) below the support floor, 4 informative internal node(s), 4 fallback node(s))
+  Rothia_dentocariosa.db	[strain-resolved, no cluster above threshold]	markers=390/4237 (depth 13.63x)
+  Streptococcus_oralis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_oralis.db	[strain-resolved, no cluster above threshold]	markers=226/4512 (depth 2.92x)
+  Streptococcus_parasanguinis_B.db	layer1=cst (auto — 0 cluster(s) below the support floor, 4 informative internal node(s), 4 fallback node(s))
+  Streptococcus_parasanguinis_B.db	[strain-resolved, no cluster above threshold]	markers=105/1860 (depth 3.98x)
+  Streptococcus_pneumoniae_D.db	layer1=unique (auto — 172 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_pneumoniae_D.db	[strain-resolved, no cluster above threshold]	markers=30/1707 (depth 0.75x)
+  Streptococcus_pseudopneumoniae_O.db	[detected, not strain-resolvable]	markers=3/137 (2.2%, depth 0.41x)
+  Streptococcus_salivarius.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_salivarius.db	[strain-resolved, no cluster above threshold]	markers=200/3116 (depth 9.55x)
+  Streptococcus_sanguinis.db	layer1=cst (auto — 0 cluster(s) below the support floor, 5 informative internal node(s), 4 fallback node(s))
+  Streptococcus_sanguinis.db	[strain-resolved, no cluster above threshold]	markers=511/6874 (depth 10.39x)
+  Veillonella_atypica.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Veillonella_atypica.db	[strain-resolved, no cluster above threshold]	markers=62/662 (depth 5.70x)
+summary: 12/27 species strain-resolved (0 strain calls), 4 detected-not-resolvable, 11 absent
+coverage of sample: strain calls account for -0.0% of 6123585 tag observations (100.0% unclassified — unresolved species, no reference, host, error)
+predictions -> /lustre1/g/aos_shihuang/Strain2bScan/work/ecc_strain/preds/S_8123225.pred.tsv
+RUN S_8123226
+cross-species filter: 41582/102474 markers usable for quantification (59.4% shared with another species in the panel, excluded)
+sample: 339688 distinct tag markers; 27 species DBs; resolve-gate≥max(50, 0%×panel), detect-gate≥3 (threads: 16)
+#species	cluster	abundance	coverage	support	depth	global_abundance	sample_fraction
+  Gemella_sanguinis.db	C0	1.000000	0.53	62	10.779	0.021359	0.000243
+  Lautropia_mirabilis.db	C0	1.000000	0.57	1668	14.101	0.027942	0.007904
+  Neisseria_mucosa.db	C0	1.000000	0.63	1127	35.624	0.070593	0.013221
+  Prevotella_histicola.db	C0	1.000000	0.66	555	74.869	0.148359	0.011375
+  Prevotella_melaninogenica.db	C0|C2|C3|C4|C5|C6|C7|C10	1.000000	1.00	35	196.829	0.390033	0.035767
+  Rothia_aeria.db	C0|C1	1.000000	0.68	135	32.944	0.065282	0.008792
+  Rothia_dentocariosa.db	C1|C2|C3|C4	1.000000	0.89	78	46.943	0.093022	0.015105
+  Streptococcus_parasanguinis_B.db	C3|C4	0.718253	0.67	68	34.218	0.067806	0.003613
+  Streptococcus_parasanguinis_B.db	C0|C2	0.281747	0.66	47	13.423	0.026598	0.001538
+  Veillonella_atypica.db	C0	1.000000	0.64	385	44.917	0.089007	0.004983
+  Gemella_haemolysans_B.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Gemella_haemolysans_B.db	[strain-resolved, no cluster above threshold]	markers=100/382 (depth 2.42x)
+  Gemella_sanguinis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Lautropia_mirabilis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Neisseria_flavescens_B.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Neisseria_flavescens_B.db	[strain-resolved, no cluster above threshold]	markers=94/734 (depth 2.59x)
+  Neisseria_mucosa.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Prevotella_histicola.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Prevotella_melaninogenica.db	layer1=cst (auto — 0 cluster(s) below the support floor, 3 informative internal node(s), 2 fallback node(s))
+  Rothia_aeria.db	layer1=cst (auto — 0 cluster(s) below the support floor, 2 informative internal node(s), 2 fallback node(s))
+  Rothia_dentocariosa.db	layer1=cst (auto — 0 cluster(s) below the support floor, 4 informative internal node(s), 4 fallback node(s))
+  Streptococcus_mutans.db	layer1=cst (auto — 3 cluster(s) below the support floor, 1 informative internal node(s), 0 fallback node(s))
+  Streptococcus_mutans.db	[strain-resolved, no cluster above threshold]	markers=56/798 (depth 0.16x)
+  Streptococcus_oralis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_oralis.db	[strain-resolved, no cluster above threshold]	markers=770/4512 (depth 5.15x)
+  Streptococcus_parasanguinis_B.db	layer1=cst (auto — 0 cluster(s) below the support floor, 4 informative internal node(s), 4 fallback node(s))
+  Streptococcus_pneumoniae_D.db	layer1=unique (auto — 172 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_pneumoniae_D.db	[strain-resolved, no cluster above threshold]	markers=101/1707 (depth 1.01x)
+  Streptococcus_pseudopneumoniae_O.db	[detected, not strain-resolvable]	markers=17/137 (12.4%, depth 1.50x)
+  Streptococcus_salivarius.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_salivarius.db	[strain-resolved, no cluster above threshold]	markers=934/3116 (depth 17.13x)
+  Streptococcus_sanguinis.db	layer1=cst (auto — 0 cluster(s) below the support floor, 5 informative internal node(s), 4 fallback node(s))
+  Streptococcus_sanguinis.db	[strain-resolved, no cluster above threshold]	markers=1256/6874 (depth 4.82x)
+  Veillonella_atypica.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+summary: 16/27 species strain-resolved (10 strain calls), 1 detected-not-resolvable, 10 absent
+coverage of sample: strain calls account for 10.3% of 5976350 tag observations (89.7% unclassified — unresolved species, no reference, host, error)
+predictions -> /lustre1/g/aos_shihuang/Strain2bScan/work/ecc_strain/preds/S_8123226.pred.tsv
+RUN S_8123227
+cross-species filter: 41582/102474 markers usable for quantification (59.4% shared with another species in the panel, excluded)
+sample: 494099 distinct tag markers; 27 species DBs; resolve-gate≥max(50, 0%×panel), detect-gate≥3 (threads: 16)
+#species	cluster	abundance	coverage	support	depth	global_abundance	sample_fraction
+  Gemella_sanguinis.db	C0	1.000000	0.51	62	9.649	0.024753	0.000200
+  Lautropia_mirabilis.db	C0	1.000000	0.51	1418	5.101	0.013087	0.002629
+  Neisseria_mucosa.db	C0	1.000000	0.62	1108	36.411	0.093408	0.012422
+  Prevotella_histicola.db	C0	1.000000	0.68	566	33.220	0.085223	0.004640
+  Prevotella_melaninogenica.db	C0|C2|C3|C4|C5|C6|C7|C10	1.000000	1.00	35	97.657	0.250530	0.016313
+  Rothia_aeria.db	C0|C1	1.000000	0.53	105	10.889	0.027934	0.002671
+  Rothia_dentocariosa.db	C1|C2|C3|C4	1.000000	0.78	69	14.761	0.037869	0.004366
+  Streptococcus_parasanguinis_B.db	C3|C4	0.576631	0.76	77	61.079	0.156693	0.005928
+  Streptococcus_parasanguinis_B.db	C0|C2	0.423369	0.76	54	44.845	0.115046	0.004725
+  Streptococcus_salivarius.db	C10	1.000000	0.67	50	10.341	0.026528	0.000830
+  Veillonella_atypica.db	C0	1.000000	0.71	455	65.849	0.168929	0.006715
+  Gemella_haemolysans_B.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Gemella_haemolysans_B.db	[strain-resolved, no cluster above threshold]	markers=145/382 (depth 15.57x)
+  Gemella_sanguinis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Lautropia_mirabilis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Neisseria_flavescens_B.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Neisseria_flavescens_B.db	[strain-resolved, no cluster above threshold]	markers=93/734 (depth 7.17x)
+  Neisseria_mucosa.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Prevotella_histicola.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Prevotella_melaninogenica.db	layer1=cst (auto — 0 cluster(s) below the support floor, 3 informative internal node(s), 2 fallback node(s))
+  Rothia_aeria.db	layer1=cst (auto — 0 cluster(s) below the support floor, 2 informative internal node(s), 2 fallback node(s))
+  Rothia_dentocariosa.db	layer1=cst (auto — 0 cluster(s) below the support floor, 4 informative internal node(s), 4 fallback node(s))
+  Streptococcus_mutans.db	layer1=cst (auto — 3 cluster(s) below the support floor, 1 informative internal node(s), 0 fallback node(s))
+  Streptococcus_mutans.db	[strain-resolved, no cluster above threshold]	markers=274/798 (depth 4.15x)
+  Streptococcus_oralis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_oralis.db	[strain-resolved, no cluster above threshold]	markers=1138/4512 (depth 12.49x)
+  Streptococcus_parasanguinis_B.db	layer1=cst (auto — 0 cluster(s) below the support floor, 4 informative internal node(s), 4 fallback node(s))
+  Streptococcus_pneumoniae_D.db	layer1=unique (auto — 172 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_pneumoniae_D.db	[strain-resolved, no cluster above threshold]	markers=138/1707 (depth 4.64x)
+  Streptococcus_pseudopneumoniae_O.db	[detected, not strain-resolvable]	markers=25/137 (18.2%, depth 14.02x)
+  Streptococcus_salivarius.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_sanguinis.db	layer1=cst (auto — 0 cluster(s) below the support floor, 5 informative internal node(s), 4 fallback node(s))
+  Streptococcus_sanguinis.db	[strain-resolved, no cluster above threshold]	markers=1557/6874 (depth 2.55x)
+  Streptococcus_sobrinus.db	[detected, not strain-resolvable]	markers=3/733 (0.4%, depth 0.48x)
+  Veillonella_atypica.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+summary: 16/27 species strain-resolved (11 strain calls), 2 detected-not-resolvable, 9 absent
+coverage of sample: strain calls account for 6.1% of 6501162 tag observations (93.9% unclassified — unresolved species, no reference, host, error)
+predictions -> /lustre1/g/aos_shihuang/Strain2bScan/work/ecc_strain/preds/S_8123227.pred.tsv
+RUN S_8221213
+cross-species filter: 41582/102474 markers usable for quantification (59.4% shared with another species in the panel, excluded)
+sample: 414167 distinct tag markers; 27 species DBs; resolve-gate≥max(50, 0%×panel), detect-gate≥3 (threads: 16)
+#species	cluster	abundance	coverage	support	depth	global_abundance	sample_fraction
+  Lautropia_mirabilis.db	C0	1.000000	0.59	1922	114.671	0.301474	0.049064
+  Neisseria_mucosa.db	C0	1.000000	0.54	986	82.578	0.217101	0.023393
+  Prevotella_histicola.db	C0	1.000000	0.61	497	18.735	0.049254	0.002173
+  Prevotella_melaninogenica.db	C0|C2|C3|C4|C5|C6|C7|C10	1.000000	0.97	34	45.714	0.120185	0.006341
+  Rothia_aeria.db	C0|C1	1.000000	0.55	109	16.237	0.042689	0.003308
+  Rothia_dentocariosa.db	C1|C2|C3|C4	1.000000	0.60	53	4.807	0.012637	0.001181
+  Streptococcus_parasanguinis_B.db	C3|C4	0.774026	0.68	69	47.327	0.124424	0.003814
+  Streptococcus_parasanguinis_B.db	C0|C2	0.225974	0.58	41	13.817	0.036325	0.001209
+  Streptococcus_salivarius.db	C23	1.000000	0.61	26	24.841	0.065308	0.001520
+  Veillonella_atypica.db	C0	1.000000	0.59	343	11.640	0.030603	0.000986
+  Gemella_haemolysans_B.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Gemella_haemolysans_B.db	[strain-resolved, no cluster above threshold]	markers=124/382 (depth 8.91x)
+  Gemella_sanguinis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Gemella_sanguinis.db	[strain-resolved, no cluster above threshold]	markers=54/131 (depth 7.62x)
+  Lautropia_mirabilis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Neisseria_flavescens_B.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Neisseria_flavescens_B.db	[strain-resolved, no cluster above threshold]	markers=110/734 (depth 18.09x)
+  Neisseria_mucosa.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Prevotella_histicola.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Prevotella_melaninogenica.db	layer1=cst (auto — 0 cluster(s) below the support floor, 3 informative internal node(s), 2 fallback node(s))
+  Rothia_aeria.db	layer1=cst (auto — 0 cluster(s) below the support floor, 2 informative internal node(s), 2 fallback node(s))
+  Rothia_dentocariosa.db	layer1=cst (auto — 0 cluster(s) below the support floor, 4 informative internal node(s), 4 fallback node(s))
+  Streptococcus_mutans.db	layer1=cst (auto — 3 cluster(s) below the support floor, 1 informative internal node(s), 0 fallback node(s))
+  Streptococcus_mutans.db	[strain-resolved, no cluster above threshold]	markers=274/798 (depth 11.19x)
+  Streptococcus_oralis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_oralis.db	[strain-resolved, no cluster above threshold]	markers=702/4512 (depth 3.87x)
+  Streptococcus_parasanguinis_B.db	layer1=cst (auto — 0 cluster(s) below the support floor, 4 informative internal node(s), 4 fallback node(s))
+  Streptococcus_pneumoniae_D.db	layer1=unique (auto — 172 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_pneumoniae_D.db	[strain-resolved, no cluster above threshold]	markers=266/1707 (depth 2.42x)
+  Streptococcus_pseudopneumoniae_O.db	[detected, not strain-resolvable]	markers=14/137 (10.2%, depth 11.39x)
+  Streptococcus_salivarius.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_sanguinis.db	layer1=cst (auto — 0 cluster(s) below the support floor, 5 informative internal node(s), 4 fallback node(s))
+  Streptococcus_sanguinis.db	[strain-resolved, no cluster above threshold]	markers=1757/6874 (depth 20.40x)
+  Veillonella_atypica.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+summary: 16/27 species strain-resolved (10 strain calls), 1 detected-not-resolvable, 10 absent
+coverage of sample: strain calls account for 9.3% of 7829528 tag observations (90.7% unclassified — unresolved species, no reference, host, error)
+predictions -> /lustre1/g/aos_shihuang/Strain2bScan/work/ecc_strain/preds/S_8221213.pred.tsv
+RUN S_8221222
+cross-species filter: 41582/102474 markers usable for quantification (59.4% shared with another species in the panel, excluded)
+sample: 361026 distinct tag markers; 27 species DBs; resolve-gate≥max(50, 0%×panel), detect-gate≥3 (threads: 16)
+#species	cluster	abundance	coverage	support	depth	global_abundance	sample_fraction
+  Gemella_haemolysans_B.db	C1	1.000000	0.65	118	28.458	0.247625	0.001299
+  Gemella_sanguinis.db	C0	1.000000	0.56	65	12.244	0.106543	0.000370
+  Lautropia_mirabilis.db	C0	1.000000	0.55	1624	11.932	0.103823	0.008945
+  Prevotella_melaninogenica.db	C0|C2|C3|C4|C5|C6|C7|C10	1.000000	0.80	28	31.771	0.276458	0.007721
+  Rothia_aeria.db	C0|C1	1.000000	0.71	141	17.737	0.154341	0.006331
+  Rothia_dentocariosa.db	C0|C1|C2|C3|C4	1.000000	0.61	211	3.305	0.028762	0.001422
+  Streptococcus_parasanguinis_B.db	C3|C4	1.000000	0.57	58	9.475	0.082448	0.001338
+  Gemella_haemolysans_B.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Gemella_sanguinis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Lautropia_mirabilis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Neisseria_flavescens_B.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Neisseria_flavescens_B.db	[strain-resolved, no cluster above threshold]	markers=81/734 (depth 7.05x)
+  Neisseria_mucosa.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Neisseria_mucosa.db	[strain-resolved, no cluster above threshold]	markers=1062/2557 (depth 38.25x)
+  Prevotella_histicola.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Prevotella_histicola.db	[strain-resolved, no cluster above threshold]	markers=315/867 (depth 4.15x)
+  Prevotella_melaninogenica.db	layer1=cst (auto — 0 cluster(s) below the support floor, 3 informative internal node(s), 2 fallback node(s))
+  Rothia_aeria.db	layer1=cst (auto — 0 cluster(s) below the support floor, 2 informative internal node(s), 2 fallback node(s))
+  Rothia_dentocariosa.db	layer1=cst (auto — 0 cluster(s) below the support floor, 4 informative internal node(s), 4 fallback node(s))
+  Streptococcus_mutans.db	[detected, not strain-resolvable]	markers=12/798 (1.5%, depth 0.03x)
+  Streptococcus_oralis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_oralis.db	[strain-resolved, no cluster above threshold]	markers=544/4512 (depth 3.20x)
+  Streptococcus_parasanguinis_B.db	layer1=cst (auto — 0 cluster(s) below the support floor, 4 informative internal node(s), 4 fallback node(s))
+  Streptococcus_pneumoniae_D.db	layer1=unique (auto — 172 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_pneumoniae_D.db	[strain-resolved, no cluster above threshold]	markers=102/1707 (depth 2.15x)
+  Streptococcus_pseudopneumoniae_O.db	[detected, not strain-resolvable]	markers=14/137 (10.2%, depth 10.66x)
+  Streptococcus_salivarius.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_salivarius.db	[strain-resolved, no cluster above threshold]	markers=824/3116 (depth 10.49x)
+  Streptococcus_sanguinis.db	layer1=cst (auto — 0 cluster(s) below the support floor, 5 informative internal node(s), 4 fallback node(s))
+  Streptococcus_sanguinis.db	[strain-resolved, no cluster above threshold]	markers=1120/6874 (depth 3.84x)
+  Veillonella_atypica.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Veillonella_atypica.db	[strain-resolved, no cluster above threshold]	markers=238/662 (depth 4.84x)
+summary: 15/27 species strain-resolved (7 strain calls), 2 detected-not-resolvable, 10 absent
+coverage of sample: strain calls account for 2.7% of 4468635 tag observations (97.3% unclassified — unresolved species, no reference, host, error)
+predictions -> /lustre1/g/aos_shihuang/Strain2bScan/work/ecc_strain/preds/S_8221222.pred.tsv
+RUN S_8221227
+cross-species filter: 41582/102474 markers usable for quantification (59.4% shared with another species in the panel, excluded)
+sample: 422197 distinct tag markers; 27 species DBs; resolve-gate≥max(50, 0%×panel), detect-gate≥3 (threads: 16)
+#species	cluster	abundance	coverage	support	depth	global_abundance	sample_fraction
+  Gemella_haemolysans_B.db	C1	1.000000	0.65	112	30.968	0.121840	0.001171
+  Gemella_sanguinis.db	C0	1.000000	0.50	60	4.786	0.018831	0.000120
+  Neisseria_mucosa.db	C0	1.000000	0.57	1040	82.979	0.326469	0.034114
+  Prevotella_histicola.db	C0	1.000000	0.65	537	29.938	0.117785	0.005039
+  Prevotella_melaninogenica.db	C0|C2|C3|C4|C5|C6|C7|C10	1.000000	0.94	33	38.543	0.151641	0.007759
+  Rothia_aeria.db	C0|C1	1.000000	0.68	134	13.192	0.051902	0.003900
+  Rothia_dentocariosa.db	C1|C2|C3|C4	1.000000	0.60	53	5.398	0.021237	0.001924
+  Streptococcus_parasanguinis_B.db	C3|C4	0.679367	0.66	67	21.158	0.083244	0.002475
+  Streptococcus_parasanguinis_B.db	C0|C2	0.320633	0.55	39	9.986	0.039288	0.001268
+  Veillonella_atypica.db	C0	1.000000	0.64	397	17.224	0.067763	0.002117
+  Gemella_haemolysans_B.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Gemella_sanguinis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Lautropia_mirabilis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Lautropia_mirabilis.db	[strain-resolved, no cluster above threshold]	markers=1331/3350 (depth 5.98x)
+  Neisseria_flavescens_B.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Neisseria_flavescens_B.db	[strain-resolved, no cluster above threshold]	markers=89/734 (depth 7.07x)
+  Neisseria_mucosa.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Prevotella_histicola.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Prevotella_melaninogenica.db	layer1=cst (auto — 0 cluster(s) below the support floor, 3 informative internal node(s), 2 fallback node(s))
+  Rothia_aeria.db	layer1=cst (auto — 0 cluster(s) below the support floor, 2 informative internal node(s), 2 fallback node(s))
+  Rothia_dentocariosa.db	layer1=cst (auto — 0 cluster(s) below the support floor, 4 informative internal node(s), 4 fallback node(s))
+  Streptococcus_mutans.db	layer1=cst (auto — 3 cluster(s) below the support floor, 1 informative internal node(s), 0 fallback node(s))
+  Streptococcus_mutans.db	[strain-resolved, no cluster above threshold]	markers=38/798 (depth 0.09x)
+  Streptococcus_oralis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_oralis.db	[strain-resolved, no cluster above threshold]	markers=946/4512 (depth 3.93x)
+  Streptococcus_parasanguinis_B.db	layer1=cst (auto — 0 cluster(s) below the support floor, 4 informative internal node(s), 4 fallback node(s))
+  Streptococcus_pneumoniae_D.db	layer1=unique (auto — 172 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_pneumoniae_D.db	[strain-resolved, no cluster above threshold]	markers=157/1707 (depth 3.61x)
+  Streptococcus_pseudopneumoniae_O.db	[detected, not strain-resolvable]	markers=21/137 (15.3%, depth 12.57x)
+  Streptococcus_salivarius.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_salivarius.db	[strain-resolved, no cluster above threshold]	markers=1156/3116 (depth 22.84x)
+  Streptococcus_sanguinis.db	layer1=cst (auto — 0 cluster(s) below the support floor, 5 informative internal node(s), 4 fallback node(s))
+  Streptococcus_sanguinis.db	[strain-resolved, no cluster above threshold]	markers=1264/6874 (depth 1.54x)
+  Veillonella_atypica.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+summary: 16/27 species strain-resolved (10 strain calls), 1 detected-not-resolvable, 10 absent
+coverage of sample: strain calls account for 6.0% of 5395038 tag observations (94.0% unclassified — unresolved species, no reference, host, error)
+predictions -> /lustre1/g/aos_shihuang/Strain2bScan/work/ecc_strain/preds/S_8221227.pred.tsv
+RUN S_8221231
+cross-species filter: 41582/102474 markers usable for quantification (59.4% shared with another species in the panel, excluded)
+sample: 194692 distinct tag markers; 27 species DBs; resolve-gate≥max(50, 0%×panel), detect-gate≥3 (threads: 16)
+#species	cluster	abundance	coverage	support	depth	global_abundance	sample_fraction
+  Prevotella_melaninogenica.db	C0|C2|C3|C4|C5|C6|C7|C10	1.000000	0.71	25	33.743	0.334449	0.007463
+  Streptococcus_parasanguinis_B.db	C0|C1|C2|C3|C4	1.000000	0.78	42	67.148	0.665551	0.009368
+  Gemella_haemolysans_B.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Gemella_haemolysans_B.db	[strain-resolved, no cluster above threshold]	markers=97/382 (depth 11.97x)
+  Gemella_sanguinis.db	[detected, not strain-resolvable]	markers=46/131 (35.1%, depth 21.57x)
+  Lautropia_mirabilis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Lautropia_mirabilis.db	[strain-resolved, no cluster above threshold]	markers=1483/3350 (depth 32.77x)
+  Neisseria_flavescens_B.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Neisseria_flavescens_B.db	[strain-resolved, no cluster above threshold]	markers=53/734 (depth 5.78x)
+  Neisseria_mucosa.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Neisseria_mucosa.db	[strain-resolved, no cluster above threshold]	markers=1033/2557 (depth 46.52x)
+  Prevotella_histicola.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Prevotella_histicola.db	[strain-resolved, no cluster above threshold]	markers=402/867 (depth 31.67x)
+  Prevotella_melaninogenica.db	layer1=cst (auto — 0 cluster(s) below the support floor, 3 informative internal node(s), 2 fallback node(s))
+  Rothia_aeria.db	layer1=cst (auto — 0 cluster(s) below the support floor, 2 informative internal node(s), 2 fallback node(s))
+  Rothia_aeria.db	[strain-resolved, no cluster above threshold]	markers=511/2499 (depth 8.00x)
+  Rothia_dentocariosa.db	layer1=cst (auto — 0 cluster(s) below the support floor, 4 informative internal node(s), 4 fallback node(s))
+  Rothia_dentocariosa.db	[strain-resolved, no cluster above threshold]	markers=330/4237 (depth 1.58x)
+  Streptococcus_oralis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_oralis.db	[strain-resolved, no cluster above threshold]	markers=361/4512 (depth 2.57x)
+  Streptococcus_parasanguinis_B.db	layer1=cst (auto — 0 cluster(s) below the support floor, 4 informative internal node(s), 4 fallback node(s))
+  Streptococcus_pneumoniae_D.db	layer1=unique (auto — 172 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_pneumoniae_D.db	[strain-resolved, no cluster above threshold]	markers=75/1707 (depth 1.98x)
+  Streptococcus_pseudopneumoniae_O.db	[detected, not strain-resolvable]	markers=16/137 (11.7%, depth 3.42x)
+  Streptococcus_salivarius.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_salivarius.db	[strain-resolved, no cluster above threshold]	markers=696/3116 (depth 16.06x)
+  Streptococcus_sanguinis.db	layer1=cst (auto — 0 cluster(s) below the support floor, 5 informative internal node(s), 4 fallback node(s))
+  Streptococcus_sanguinis.db	[strain-resolved, no cluster above threshold]	markers=1024/6874 (depth 11.64x)
+  Veillonella_atypica.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Veillonella_atypica.db	[strain-resolved, no cluster above threshold]	markers=299/662 (depth 32.39x)
+summary: 14/27 species strain-resolved (2 strain calls), 2 detected-not-resolvable, 11 absent
+coverage of sample: strain calls account for 1.7% of 4909901 tag observations (98.3% unclassified — unresolved species, no reference, host, error)
+predictions -> /lustre1/g/aos_shihuang/Strain2bScan/work/ecc_strain/preds/S_8221231.pred.tsv
+RUN S_8221232
+cross-species filter: 41582/102474 markers usable for quantification (59.4% shared with another species in the panel, excluded)
+sample: 488180 distinct tag markers; 27 species DBs; resolve-gate≥max(50, 0%×panel), detect-gate≥3 (threads: 16)
+#species	cluster	abundance	coverage	support	depth	global_abundance	sample_fraction
+  Gemella_sanguinis.db	C0	1.000000	0.53	51	3.588	0.006912	0.000080
+  Lautropia_mirabilis.db	C0	1.000000	0.71	2265	45.736	0.088115	0.025208
+  Neisseria_mucosa.db	C0	1.000000	0.81	1535	325.511	0.627127	0.118785
+  Prevotella_melaninogenica.db	C0|C2|C3|C4|C5|C6|C7|C10	1.000000	0.77	27	7.657	0.014752	0.001368
+  Rothia_aeria.db	C0|C1	0.693444	0.78	154	46.601	0.089781	0.012229
+  Rothia_aeria.db	C2	0.306556	0.50	240	20.601	0.039690	0.005393
+  Rothia_dentocariosa.db	C1|C4	0.708981	0.55	194	13.404	0.025824	0.004241
+  Rothia_dentocariosa.db	C2	0.291019	0.59	294	5.502	0.010600	0.001657
+  Streptococcus_parasanguinis_B.db	C3|C4	0.721659	0.63	64	6.208	0.011960	0.000644
+  Streptococcus_parasanguinis_B.db	C0|C2	0.278341	0.61	43	2.394	0.004613	0.000270
+  Streptococcus_sanguinis.db	C9	1.000000	0.62	48	30.295	0.058366	0.003743
+  Streptococcus_sobrinus.db	C0|C1|C2	1.000000	0.58	254	1.927	0.003712	0.000185
+  Veillonella_atypica.db	C0	1.000000	0.69	405	9.627	0.018547	0.001050
+  Gemella_haemolysans_B.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Gemella_haemolysans_B.db	[strain-resolved, no cluster above threshold]	markers=117/382 (depth 2.66x)
+  Gemella_sanguinis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Lautropia_mirabilis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Neisseria_flavescens_B.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Neisseria_flavescens_B.db	[strain-resolved, no cluster above threshold]	markers=143/734 (depth 20.60x)
+  Neisseria_mucosa.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Prevotella_histicola.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Prevotella_histicola.db	[strain-resolved, no cluster above threshold]	markers=322/867 (depth 3.19x)
+  Prevotella_melaninogenica.db	layer1=cst (auto — 0 cluster(s) below the support floor, 3 informative internal node(s), 2 fallback node(s))
+  Rothia_aeria.db	layer1=cst (auto — 0 cluster(s) below the support floor, 2 informative internal node(s), 2 fallback node(s))
+  Rothia_dentocariosa.db	layer1=cst (auto — 0 cluster(s) below the support floor, 4 informative internal node(s), 4 fallback node(s))
+  Streptococcus_mutans.db	layer1=cst (auto — 3 cluster(s) below the support floor, 1 informative internal node(s), 0 fallback node(s))
+  Streptococcus_mutans.db	[strain-resolved, no cluster above threshold]	markers=115/798 (depth 0.34x)
+  Streptococcus_oralis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_oralis.db	[strain-resolved, no cluster above threshold]	markers=882/4512 (depth 8.84x)
+  Streptococcus_parasanguinis_B.db	layer1=cst (auto — 0 cluster(s) below the support floor, 4 informative internal node(s), 4 fallback node(s))
+  Streptococcus_pneumoniae_D.db	layer1=unique (auto — 172 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_pneumoniae_D.db	[strain-resolved, no cluster above threshold]	markers=132/1707 (depth 1.92x)
+  Streptococcus_pseudopneumoniae_O.db	[detected, not strain-resolvable]	markers=14/137 (10.2%, depth 4.26x)
+  Streptococcus_salivarius.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_salivarius.db	[strain-resolved, no cluster above threshold]	markers=678/3116 (depth 1.12x)
+  Streptococcus_sanguinis.db	layer1=cst (auto — 0 cluster(s) below the support floor, 5 informative internal node(s), 4 fallback node(s))
+  Streptococcus_sobrinus.db	layer1=cst (auto — 0 cluster(s) below the support floor, 2 informative internal node(s), 2 fallback node(s))
+  Veillonella_atypica.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+summary: 17/27 species strain-resolved (13 strain calls), 1 detected-not-resolvable, 9 absent
+coverage of sample: strain calls account for 17.5% of 6078086 tag observations (82.5% unclassified — unresolved species, no reference, host, error)
+predictions -> /lustre1/g/aos_shihuang/Strain2bScan/work/ecc_strain/preds/S_8221232.pred.tsv
+RUN S_8222219
+cross-species filter: 41582/102474 markers usable for quantification (59.4% shared with another species in the panel, excluded)
+sample: 131097 distinct tag markers; 27 species DBs; resolve-gate≥max(50, 0%×panel), detect-gate≥3 (threads: 16)
+#species	cluster	abundance	coverage	support	depth	global_abundance	sample_fraction
+  Prevotella_melaninogenica.db	C0|C2|C3|C4|C5|C6|C7|C10	1.000000	0.66	23	65.657	0.351927	0.011155
+  Streptococcus_parasanguinis_B.db	C0|C1|C2|C3|C4	1.000000	0.72	39	120.907	0.648073	0.012957
+  Gemella_haemolysans_B.db	[detected, not strain-resolvable]	markers=27/382 (7.1%, depth 2.97x)
+  Gemella_sanguinis.db	[detected, not strain-resolvable]	markers=38/131 (29.0%, depth 68.95x)
+  Lautropia_mirabilis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Lautropia_mirabilis.db	[strain-resolved, no cluster above threshold]	markers=221/3350 (depth 2.03x)
+  Neisseria_flavescens_B.db	[detected, not strain-resolvable]	markers=21/734 (2.9%, depth 5.10x)
+  Neisseria_mucosa.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Neisseria_mucosa.db	[strain-resolved, no cluster above threshold]	markers=324/2557 (depth 19.53x)
+  Prevotella_histicola.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Prevotella_histicola.db	[strain-resolved, no cluster above threshold]	markers=232/867 (depth 29.12x)
+  Prevotella_melaninogenica.db	layer1=cst (auto — 0 cluster(s) below the support floor, 3 informative internal node(s), 2 fallback node(s))
+  Rothia_aeria.db	layer1=cst (auto — 0 cluster(s) below the support floor, 2 informative internal node(s), 2 fallback node(s))
+  Rothia_aeria.db	[strain-resolved, no cluster above threshold]	markers=167/2499 (depth 3.94x)
+  Rothia_dentocariosa.db	layer1=cst (auto — 0 cluster(s) below the support floor, 4 informative internal node(s), 4 fallback node(s))
+  Rothia_dentocariosa.db	[strain-resolved, no cluster above threshold]	markers=348/4237 (depth 5.95x)
+  Streptococcus_mutans.db	[detected, not strain-resolvable]	markers=3/798 (0.4%, depth 0.11x)
+  Streptococcus_oralis.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_oralis.db	[strain-resolved, no cluster above threshold]	markers=168/4512 (depth 2.50x)
+  Streptococcus_parasanguinis_B.db	layer1=cst (auto — 0 cluster(s) below the support floor, 4 informative internal node(s), 4 fallback node(s))
+  Streptococcus_pneumoniae_D.db	[detected, not strain-resolvable]	markers=25/1707 (1.5%, depth 1.16x)
+  Streptococcus_pseudopneumoniae_O.db	[detected, not strain-resolvable]	markers=7/137 (5.1%, depth 2.11x)
+  Streptococcus_salivarius.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Streptococcus_salivarius.db	[strain-resolved, no cluster above threshold]	markers=577/3116 (depth 28.81x)
+  Streptococcus_sanguinis.db	layer1=cst (auto — 0 cluster(s) below the support floor, 5 informative internal node(s), 4 fallback node(s))
+  Streptococcus_sanguinis.db	[strain-resolved, no cluster above threshold]	markers=184/6874 (depth 0.86x)
+  Veillonella_atypica.db	layer1=unique (auto — 0 cluster(s) below the support floor, 0 informative internal node(s), 0 fallback node(s))
+  Veillonella_atypica.db	[strain-resolved, no cluster above threshold]	markers=178/662 (depth 34.39x)
+summary: 11/27 species strain-resolved (2 strain calls), 6 detected-not-resolvable, 10 absent
+coverage of sample: strain calls account for 2.4% of 6392183 tag observations (97.6% unclassified — unresolved species, no reference, host, error)
+predictions -> /lustre1/g/aos_shihuang/Strain2bScan/work/ecc_strain/preds/S_8222219.pred.tsv
+SKIP S_0313206 (exists)
+SKIP S_0313207 (exists)
+SKIP S_0313216 (exists)
+SKIP S_0313218 (exists)
+SKIP S_0313222 (exists)
+SKIP S_1211209 (exists)
+SKIP S_1211212 (exists)
+SKIP S_1212203 (exists)
+SKIP S_1213209 (exists)
+SKIP S_1213211 (exists)
+SKIP S_1213218 (exists)
+SKIP S_1311202 (exists)
+SKIP S_1313202 (exists)
+SKIP S_1313218 (exists)
+SKIP S_1313221 (exists)
+SKIP S_1313223 (exists)
+SKIP S_1313229 (exists)
+SKIP S_1411224 (exists)
+SKIP S_1413216 (exists)
+SKIP S_1413221 (exists)
+SKIP S_1413229 (exists)
+SKIP S_1413230 (exists)
+SKIP S_1413231 (exists)
+SKIP S_1413233 (exists)
+SKIP S_8123202 (exists)
+SKIP S_8123213 (exists)
+SKIP S_8123214 (exists)
+SKIP S_8123218 (exists)
+SKIP S_8123220 (exists)
+SKIP S_8123225 (exists)
+SKIP S_8123226 (exists)
+SKIP S_8123227 (exists)
+SKIP S_8221213 (exists)
+SKIP S_8221222 (exists)
+SKIP S_8221227 (exists)
+SKIP S_8221231 (exists)
+SKIP S_8221232 (exists)
+SKIP S_8222219 (exists)
+Done. Outputs in /lustre1/g/aos_shihuang/Strain2bScan/work/ecc_strain/preds

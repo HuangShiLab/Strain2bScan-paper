@@ -1,0 +1,28 @@
+Metadata: 42 Unclean / 55 Clean
+
+=== Strain + detected-not-resolved species depth features ===
+Samples: 97, strain features: 9, detected-species features: 22
+  strain+detected RF: accuracy=0.691 AUROC=0.664 F1=0.595
+  strain+detected LR: accuracy=0.536 AUROC=0.560 F1=0.505
+
+=== Strain-only features ===
+  strain-only RF: accuracy=0.670 AUROC=0.604 F1=0.407
+  strain-only LR: accuracy=0.660 AUROC=0.598 F1=0.400
+
+=== Species-level features ===
+Common samples: 97, species: 1601
+  species RF: accuracy=0.670 AUROC=0.653 F1=0.484
+  species LR: accuracy=0.660 AUROC=0.640 F1=0.459
+  strain+detected RF: accuracy=0.691 AUROC=0.664 F1=0.595
+  strain+detected LR: accuracy=0.536 AUROC=0.560 F1=0.505
+  strain-only RF: accuracy=0.670 AUROC=0.604 F1=0.407
+  strain-only LR: accuracy=0.660 AUROC=0.598 F1=0.400
+
+=== Summary (5-fold CV, common samples) ===
+feature	clf	accuracy	AUROC	F1
+species	RF	0.670		0.653	0.484
+species	LR	0.660		0.640	0.459
+strain-only	RF	0.670		0.604	0.407
+strain-only	LR	0.660		0.598	0.400
+strain+detected	RF	0.691		0.664	0.595
+strain+detected	LR	0.536		0.560	0.505

@@ -1,0 +1,10 @@
+warning: /Users/macstudio/Downloads/Strain2bScan-raw-data/MSA_combined164_all.tsv: legacy database header without per-strain marker counts; truncation of legacy databases is not fully detectable (rebuild the database to enable it)
+sample: 5353999 distinct tag markers (enzymes: CspCI+AloI+BsaXI+BaeI+BcgI+CjeI+PpiI+PsrI+BplI+FalI+Bsp24I+HaeIV+CjePI+Hin4I+AlfI+BslFI, threads: 16)
+layer1: unique (auto — this DB carries no tree)
+  C115         abundance= 46.77%  depth=2362.084x  coverage=100.00%  support=693
+  C127         abundance= 12.23%  depth=617.501x  coverage=100.00%  support=10128
+  C29          abundance= 11.08%  depth=559.399x  coverage= 99.97%  support=3208
+  C6           abundance= 10.74%  depth=542.552x  coverage=100.00%  support=9061
+  C35          abundance= 10.47%  depth=528.822x  coverage= 98.84%  support=12214
+  C72          abundance=  8.70%  depth=439.575x  coverage= 99.90%  support=3978
+predictions -> /Users/macstudio/Downloads/Strain2bScan-paper/work/mock_retest/retest_f26f234/wms_analysis_tracegap/wms164/WMS_MSA1005_0_100ng_1.pred

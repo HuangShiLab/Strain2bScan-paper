@@ -1,0 +1,3 @@
+sample_accession	phenotype_binary	phenotype_detail	merged_fastq	n_runs	n_files	total_bytes
+SAMEA3879525	Healthy	Healthy	/Volumes/MoneyCat/Data/GMHI/strain_test/merged_reads/SAMEA3879525.fastq.gz	8	12	4078774841
+SAMEA3879530	Healthy	Healthy	/Volumes/MoneyCat/Data/GMHI/strain_test/merged_reads/SAMEA3879530.fastq.gz	8	12	4813018451

@@ -1,0 +1,25 @@
+warning: /Users/macstudio/Downloads/Strain2bScan-raw-data/MSA_combined164_all.tsv: legacy database header without per-strain marker counts; truncation of legacy databases is not fully detectable (rebuild the database to enable it)
+sample: 3308521 distinct tag markers (enzymes: CspCI+AloI+BsaXI+BaeI+BcgI+CjeI+PpiI+PsrI+BplI+FalI+Bsp24I+HaeIV+CjePI+Hin4I+AlfI+BslFI, threads: 16)
+layer1: unique (auto — this DB carries no tree)
+  C58          abundance= 25.97%  depth=1512.361x  coverage=100.00%  support=230
+  C96          abundance= 15.56%  depth=905.942x  coverage= 99.43%  support=2250
+  C121         abundance= 15.36%  depth=894.495x  coverage= 99.92%  support=1184
+  C50          abundance= 14.99%  depth=872.855x  coverage=100.00%  support=1160
+  C64          abundance= 14.81%  depth=862.238x  coverage= 97.62%  support=41
+  C68          abundance= 13.16%  depth=766.295x  coverage=100.00%  support=465
+  C115         abundance=  0.05%  depth=  3.055x  coverage= 66.96%  support=336
+  C129         abundance=  0.02%  depth=  1.047x  coverage= 58.49%  support=565
+  C47          abundance=  0.02%  depth=  0.964x  coverage= 55.24%  support=3358
+  C90          abundance=  0.02%  depth=  0.923x  coverage= 54.75%  support=1257
+  C24          abundance=  0.01%  depth=  0.706x  coverage= 45.86%  support=4095
+  C110         abundance=  0.00%  depth=  0.273x  coverage= 15.88%  support=67
+  C123         abundance=  0.00%  depth=  0.259x  coverage= 14.74%  support=341
+  C51          abundance=  0.00%  depth=  0.187x  coverage= 10.92%  support=127
+  C70          abundance=  0.00%  depth=  0.187x  coverage= 12.60%  support=62
+  C97          abundance=  0.00%  depth=  0.165x  coverage= 11.17%  support=256
+  C12          abundance=  0.00%  depth=  0.155x  coverage= 11.87%  support=186
+  C99          abundance=  0.00%  depth=  0.149x  coverage= 11.17%  support=245
+  C52          abundance=  0.00%  depth=  0.143x  coverage= 10.48%  support=115
+  C69          abundance=  0.00%  depth=  0.137x  coverage= 10.73%  support=50
+  C53          abundance=  0.00%  depth=  0.135x  coverage= 10.64%  support=45
+predictions -> /Users/macstudio/Downloads/Strain2bScan-paper/work/mock_retest/retest_f26f234/wms_analysis/wms164/WMS_MSA1007_0_100ng_3.pred

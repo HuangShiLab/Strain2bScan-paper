@@ -1,0 +1,7 @@
+#species	cluster	abundance	coverage	support	depth	global_abundance	sample_fraction	n_markers
+Granulicatella_adiacens.db	C0|C1	1.000000	0.5854	120	19.5122	0.033684	0.002340	500
+Neisseria_sp000186165.db	C1|C6	0.783933	0.5333	72	141.3926	0.244089	0.081170	2393
+Neisseria_sp000186165.db	C2|C4|C11	0.216067	0.6134	146	38.9706	0.067276	0.016342	1748
+Rothia_dentocariosa.db	C1|C2|C3|C4	1.000000	0.6818	60	44.6705	0.077115	0.020608	1923
+Streptococcus_parasanguinis_B.db	C3|C4	1.000000	0.5545	56	319.1089	0.550883	0.048305	631
+Veillonella_parvula_A.db	C1|C2|C3|C4|C5	1.000000	0.6129	19	15.6129	0.026953	0.002513	671

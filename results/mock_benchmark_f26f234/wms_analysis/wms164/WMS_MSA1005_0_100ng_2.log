@@ -1,0 +1,22 @@
+warning: /Users/macstudio/Downloads/Strain2bScan-raw-data/MSA_combined164_all.tsv: legacy database header without per-strain marker counts; truncation of legacy databases is not fully detectable (rebuild the database to enable it)
+sample: 5437887 distinct tag markers (enzymes: CspCI+AloI+BsaXI+BaeI+BcgI+CjeI+PpiI+PsrI+BplI+FalI+Bsp24I+HaeIV+CjePI+Hin4I+AlfI+BslFI, threads: 16)
+layer1: unique (auto — this DB carries no tree)
+  C115         abundance= 46.49%  depth=2385.662x  coverage=100.00%  support=693
+  C127         abundance= 12.35%  depth=633.473x  coverage=100.00%  support=10128
+  C29          abundance= 11.11%  depth=570.098x  coverage= 99.97%  support=3208
+  C6           abundance= 10.80%  depth=553.977x  coverage=100.00%  support=9061
+  C35          abundance= 10.52%  depth=539.700x  coverage= 98.94%  support=12219
+  C72          abundance=  8.61%  depth=441.698x  coverage= 99.90%  support=3978
+  C58          abundance=  0.02%  depth=  0.861x  coverage= 48.70%  support=112
+  C64          abundance=  0.02%  depth=  0.833x  coverage= 40.48%  support=17
+  C129         abundance=  0.01%  depth=  0.765x  coverage= 47.10%  support=455
+  C90          abundance=  0.01%  depth=  0.667x  coverage= 44.08%  support=1012
+  C47          abundance=  0.01%  depth=  0.654x  coverage= 43.05%  support=2617
+  C121         abundance=  0.01%  depth=  0.590x  coverage= 38.57%  support=457
+  C24          abundance=  0.01%  depth=  0.532x  coverage= 36.08%  support=3222
+  C96          abundance=  0.01%  depth=  0.457x  coverage= 31.10%  support=704
+  C50          abundance=  0.01%  depth=  0.398x  coverage= 29.40%  support=341
+  C68          abundance=  0.01%  depth=  0.355x  coverage= 25.81%  support=120
+  C39          abundance=  0.00%  depth=  0.187x  coverage= 14.51%  support=28
+  C110         abundance=  0.00%  depth=  0.156x  coverage= 13.03%  support=55
+predictions -> /Users/macstudio/Downloads/Strain2bScan-paper/work/mock_retest/retest_f26f234/wms_analysis/wms164/WMS_MSA1005_0_100ng_2.pred

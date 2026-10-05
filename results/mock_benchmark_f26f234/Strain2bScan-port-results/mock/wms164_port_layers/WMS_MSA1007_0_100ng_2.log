@@ -1,0 +1,18 @@
+warning: /Users/macstudio/Downloads/Strain2bScan-raw-data/MSA_combined164_all.tsv: legacy database header without per-strain marker counts; truncation of legacy databases is not fully detectable (rebuild the database to enable it)
+sample: 3167001 distinct tag markers (enzymes: CspCI+AloI+BsaXI+BaeI+BcgI+CjeI+PpiI+PsrI+BplI+FalI+Bsp24I+HaeIV+CjePI+Hin4I+AlfI+BslFI, threads: 16)
+  C64          abundance= 21.65%  depth=960.335x  coverage=100.00%  support=41
+  C121         abundance= 20.77%  depth=921.078x  coverage= 99.92%  support=1184
+  C50          abundance= 19.69%  depth=873.130x  coverage=100.00%  support=1160
+  C96          abundance= 19.58%  depth=868.612x  coverage= 99.60%  support=2254
+  C58          abundance= 18.08%  depth=801.734x  coverage=100.00%  support=230
+  C127         abundance=  0.06%  depth=  2.619x  coverage= 34.76%  support=3520
+  C129         abundance=  0.04%  depth=  1.614x  coverage= 60.46%  support=584
+  C115         abundance=  0.04%  depth=  1.563x  coverage= 79.37%  support=391
+  C90          abundance=  0.03%  depth=  1.243x  coverage= 55.66%  support=1278
+  C47          abundance=  0.02%  depth=  0.951x  coverage= 52.94%  support=3218
+  C24          abundance=  0.02%  depth=  0.695x  coverage= 46.94%  support=4192
+  C29          abundance=  0.01%  depth=  0.439x  coverage= 30.45%  support=977
+  C35          abundance=  0.01%  depth=  0.419x  coverage= 30.44%  support=3768
+  C6           abundance=  0.01%  depth=  0.409x  coverage= 28.99%  support=2627
+  C72          abundance=  0.01%  depth=  0.299x  coverage= 23.12%  support=921
+predictions -> /Users/macstudio/Downloads/Strain2bScan-paper/work/mock_retest/retest_f26f234/Strain2bScan-port-results/mock/wms164_port_layers/WMS_MSA1007_0_100ng_2.pred

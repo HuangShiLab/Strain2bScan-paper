@@ -48,7 +48,7 @@ accepts **two input modes** that map onto the two obstacles above:
 2. **In-silico digestion of conventional shotgun metagenomes**. enabling community-scale strain
    profiling. The sample is digested **once** and matched against every per-species database, so
    per-sample cost is independent of the number of species and linear in the number of samples: ~8×
-   faster and ~11× lighter per sample than StrainScan, and ~130–146× faster on a 55-species community,
+   faster and ~11× lighter per sample than StrainScan, and projected to be 121–146× lower in cost on a 55-species community,
    while matching StrainScan's precision, its 0.5× detection onset and its recall on its own databases;
    and completing near-clonal *Mycobacterium tuberculosis* in ~1 s where StrainScan does not finish.
 

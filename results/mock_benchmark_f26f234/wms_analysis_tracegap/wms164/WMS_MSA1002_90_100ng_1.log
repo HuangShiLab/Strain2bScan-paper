@@ -1,0 +1,24 @@
+warning: /Users/macstudio/Downloads/Strain2bScan-raw-data/MSA_combined164_all.tsv: legacy database header without per-strain marker counts; truncation of legacy databases is not fully detectable (rebuild the database to enable it)
+sample: 2746740 distinct tag markers (enzymes: CspCI+AloI+BsaXI+BaeI+BcgI+CjeI+PpiI+PsrI+BplI+FalI+Bsp24I+HaeIV+CjePI+Hin4I+AlfI+BslFI, threads: 16)
+layer1: unique (auto — this DB carries no tree)
+  C115         abundance= 10.57%  depth= 10.257x  coverage= 95.53%  support=600
+  C110         abundance=  7.77%  depth=  7.545x  coverage= 94.79%  support=358
+  C47          abundance=  7.06%  depth=  6.851x  coverage= 99.56%  support=5956
+  C40          abundance=  6.63%  depth=  6.439x  coverage= 98.76%  support=21721
+  C58          abundance=  6.45%  depth=  6.265x  coverage= 99.57%  support=222
+  C12          abundance=  5.20%  depth=  5.048x  coverage= 97.83%  support=1444
+  C35          abundance=  4.80%  depth=  4.663x  coverage= 96.24%  support=10982
+  C56          abundance=  4.65%  depth=  4.514x  coverage= 95.93%  support=4091
+  C78          abundance=  4.60%  depth=  4.467x  coverage= 96.99%  support=2972
+  C100         abundance=  4.41%  depth=  4.277x  coverage= 96.51%  support=4505
+  C0           abundance=  4.39%  depth=  4.258x  coverage= 97.29%  support=5669
+  C24          abundance=  4.16%  depth=  4.036x  coverage= 95.87%  support=7735
+  C84          abundance=  4.06%  depth=  3.941x  coverage= 96.49%  support=5195
+  C129         abundance=  3.91%  depth=  3.795x  coverage= 96.69%  support=848
+  C90          abundance=  3.79%  depth=  3.682x  coverage= 95.38%  support=1909
+  C18          abundance=  3.71%  depth=  3.597x  coverage= 94.05%  support=2826
+  C105         abundance=  3.65%  depth=  3.541x  coverage= 94.28%  support=4635
+  C121         abundance=  3.55%  depth=  3.445x  coverage= 94.35%  support=956
+  C28          abundance=  3.53%  depth=  3.425x  coverage= 93.32%  support=24093
+  C41          abundance=  3.13%  depth=  3.036x  coverage= 90.94%  support=1101
+predictions -> /Users/macstudio/Downloads/Strain2bScan-paper/work/mock_retest/retest_f26f234/wms_analysis_tracegap/wms164/WMS_MSA1002_90_100ng_1.pred

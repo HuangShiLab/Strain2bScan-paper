@@ -1,0 +1,10 @@
+warning: /Users/macstudio/Downloads/Strain2bScan-raw-data/MSA_combined164_bcgi_cont.tsv: legacy database header without per-strain marker counts; truncation of legacy databases is not fully detectable (rebuild the database to enable it)
+sample: 143260 distinct tag markers (enzymes: BcgI, threads: 16)
+layer1: unique (auto — this DB carries no tree)
+  C53          abundance= 40.78%  depth=31338.875x  coverage=100.00%  support=8
+  C87          abundance= 16.94%  depth=13014.151x  coverage= 99.16%  support=118
+  C45          abundance= 12.97%  depth=9965.519x  coverage=100.00%  support=77
+  C111         abundance= 11.48%  depth=8822.040x  coverage=100.00%  support=25
+  C59          abundance=  9.81%  depth=7535.188x  coverage= 78.12%  support=25
+  C61          abundance=  8.02%  depth=6165.267x  coverage= 90.00%  support=27
+predictions -> /Users/macstudio/Downloads/Strain2bScan-paper/work/mock_retest/retest_f26f234/wms_analysis_tracegap/brad164/BcgI_MSA1007_0_100ng_1.pred

@@ -1,0 +1,11 @@
+#species	cluster	abundance	coverage	support	depth	global_abundance	sample_fraction	n_markers
+Gemella_haemolysans_B.db	C1	1.000000	0.6263	109	14.8737	0.036580	0.000510	204
+Gemella_sanguinis.db	C0	1.000000	0.6031	73	24.9008	0.061241	0.000565	135
+Neisseria_mucosa.db	C0	1.000000	0.6937	1305	45.6724	0.112327	0.017040	2218
+Prevotella_histicola.db	C0	1.000000	0.7255	600	33.5548	0.082525	0.005125	908
+Prevotella_melaninogenica.db	C0|C2|C3|C4|C5|C6|C7|C10	1.000000	1.0000	35	158.9429	0.390905	0.029035	1086
+Rothia_aeria.db	C0|C1	1.000000	0.5859	116	23.5657	0.057958	0.006322	1595
+Rothia_dentocariosa.db	C1|C2|C3|C4	1.000000	0.7614	67	20.1932	0.049663	0.006532	1923
+Streptococcus_parasanguinis_B.db	C3|C4	0.574940	0.6634	67	26.3663	0.064846	0.002798	631
+Streptococcus_parasanguinis_B.db	C0|C2	0.425060	0.7324	52	19.4930	0.047941	0.002246	685
+Veillonella_atypica.db	C0	1.000000	0.7598	489	39.0393	0.096014	0.004354	663

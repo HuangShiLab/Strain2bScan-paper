@@ -1,0 +1,23 @@
+warning: /Users/macstudio/Downloads/Strain2bScan-raw-data/MSA_combined164_all.tsv: legacy database header without per-strain marker counts; truncation of legacy databases is not fully detectable (rebuild the database to enable it)
+sample: 5353999 distinct tag markers (enzymes: CspCI+AloI+BsaXI+BaeI+BcgI+CjeI+PpiI+PsrI+BplI+FalI+Bsp24I+HaeIV+CjePI+Hin4I+AlfI+BslFI, threads: 16)
+layer1: unique (auto — this DB carries no tree)
+  C115         abundance= 46.70%  depth=2362.084x  coverage=100.00%  support=693
+  C127         abundance= 12.21%  depth=617.501x  coverage=100.00%  support=10128
+  C29          abundance= 11.06%  depth=559.399x  coverage= 99.97%  support=3208
+  C6           abundance= 10.73%  depth=542.552x  coverage=100.00%  support=9061
+  C35          abundance= 10.46%  depth=528.822x  coverage= 98.84%  support=12214
+  C72          abundance=  8.69%  depth=439.575x  coverage= 99.90%  support=3978
+  C129         abundance=  0.02%  depth=  1.069x  coverage= 60.25%  support=582
+  C58          abundance=  0.02%  depth=  0.935x  coverage= 54.78%  support=126
+  C90          abundance=  0.02%  depth=  0.935x  coverage= 54.70%  support=1256
+  C47          abundance=  0.02%  depth=  0.861x  coverage= 52.39%  support=3185
+  C121         abundance=  0.01%  depth=  0.713x  coverage= 44.73%  support=530
+  C24          abundance=  0.01%  depth=  0.671x  coverage= 43.96%  support=3926
+  C50          abundance=  0.01%  depth=  0.635x  coverage= 42.84%  support=497
+  C96          abundance=  0.01%  depth=  0.615x  coverage= 39.00%  support=883
+  C68          abundance=  0.01%  depth=  0.495x  coverage= 35.05%  support=163
+  C64          abundance=  0.01%  depth=  0.381x  coverage= 23.81%  support=10
+  C110         abundance=  0.01%  depth=  0.313x  coverage= 19.67%  support=83
+  C39          abundance=  0.00%  depth=  0.223x  coverage= 16.06%  support=31
+  C12          abundance=  0.00%  depth=  0.135x  coverage= 10.98%  support=172
+predictions -> /Users/macstudio/Downloads/Strain2bScan-paper/work/mock_retest/retest_f26f234/wms_analysis/wms164/WMS_MSA1005_0_100ng_1.pred

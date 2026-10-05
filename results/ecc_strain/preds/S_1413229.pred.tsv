@@ -1,0 +1,6 @@
+#species	cluster	abundance	coverage	support	depth	global_abundance	sample_fraction	n_markers
+Neisseria_mucosa.db	C0	1.000000	0.6359	1151	29.2618	0.343697	0.011679	2218
+Prevotella_melaninogenica.db	C0|C2|C3|C4|C5|C6|C7|C10	1.000000	0.7714	27	19.3143	0.226858	0.003774	1086
+Rothia_aeria.db	C0|C1|C2	1.000000	0.6524	351	20.2379	0.237706	0.005808	1595
+Rothia_dentocariosa.db	C0|C1|C2|C3|C4	1.000000	0.5476	190	6.2133	0.072978	0.002150	1923
+Streptococcus_parasanguinis_B.db	C0|C1|C2|C3|C4	1.000000	0.5926	32	10.1111	0.118761	0.001246	685

@@ -1,0 +1,24 @@
+warning: /Users/macstudio/Downloads/Strain2bScan-raw-data/MSA_combined164_bcgi_cont.tsv: legacy database header without per-strain marker counts; truncation of legacy databases is not fully detectable (rebuild the database to enable it)
+sample: 452049 distinct tag markers (enzymes: BcgI, threads: 16)
+layer1: unique (auto — this DB carries no tree)
+  C105         abundance= 15.28%  depth=448.100x  coverage=100.00%  support=10
+  C53          abundance=  6.36%  depth=186.625x  coverage=100.00%  support=8
+  C35          abundance=  6.14%  depth=180.015x  coverage= 97.88%  support=2865
+  C32          abundance=  5.72%  depth=167.632x  coverage= 97.24%  support=1020
+  C75          abundance=  5.67%  depth=166.407x  coverage=100.00%  support=221
+  C0           abundance=  5.56%  depth=162.942x  coverage= 99.28%  support=274
+  C71          abundance=  4.93%  depth=144.681x  coverage= 96.68%  support=437
+  C91          abundance=  4.82%  depth=141.491x  coverage= 96.17%  support=527
+  C21          abundance=  4.65%  depth=136.394x  coverage= 97.53%  support=1186
+  C81          abundance=  4.53%  depth=132.711x  coverage= 93.03%  support=187
+  C101         abundance=  4.35%  depth=127.714x  coverage= 77.14%  support=27
+  C42          abundance=  4.28%  depth=125.460x  coverage= 94.42%  support=406
+  C111         abundance=  4.14%  depth=121.320x  coverage=100.00%  support=25
+  C36          abundance=  4.07%  depth=119.490x  coverage=100.00%  support=49
+  C119         abundance=  4.05%  depth=118.714x  coverage= 92.86%  support=26
+  C51          abundance=  3.69%  depth=108.290x  coverage= 71.51%  support=133
+  C96          abundance=  3.67%  depth=107.622x  coverage= 94.94%  support=637
+  C15          abundance=  3.66%  depth=107.275x  coverage= 95.99%  support=335
+  C25          abundance=  2.59%  depth= 75.925x  coverage= 99.15%  support=465
+  C11          abundance=  1.83%  depth= 53.793x  coverage= 93.10%  support=216
+predictions -> /Users/macstudio/Downloads/Strain2bScan-paper/work/mock_retest/retest_f26f234/wms_analysis_tracegap/brad164/BcgI_MSA1002_95_100ng_1.pred

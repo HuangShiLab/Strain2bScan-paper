@@ -1,0 +1,7 @@
+#species	cluster	abundance	coverage	support	depth	global_abundance	sample_fraction	n_markers
+Granulicatella_adiacens.db	C1	1.000000	0.5973	175	32.5256	0.028441	0.002899	500
+Haemophilus_D_parainfluenzae.db	C14|C15	1.000000	0.5270	39	301.1757	0.263355	0.040480	754
+Neisseria_sp000186165.db	C1|C6	1.000000	0.6000	81	111.1481	0.097191	0.047413	2393
+Streptococcus_parasanguinis_B.db	C3|C4	1.000000	0.5644	57	30.1782	0.026389	0.003394	631
+Veillonella_parvula_A.db	C1|C2|C3|C4|C5	0.562625	0.8387	26	376.1613	0.328924	0.044993	671
+Veillonella_parvula_A.db	C2|C3	0.437375	0.6579	25	292.4211	0.255700	0.034664	665

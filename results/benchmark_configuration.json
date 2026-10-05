@@ -1,0 +1,98 @@
+{
+  "configuration_version": "mock-primary-v1",
+  "generated": "2026-10-06",
+  "scope": "Figures 6 and 12 primary ATCC mock benchmark",
+  "strain2bscan": {
+    "repository": "https://github.com/HuangShiLab/Strain2bScan",
+    "source_commit": "f26f234b817ba7772a3f1df59ce720751e9b45b9",
+    "source_tree_git_sha1": "1bafa9db88fd60d8fc32e6e353663ee707f6e764",
+    "binary_sha256": "a4cf7a4043a06c55a99d6abf1e9fd312f6243aa5a5ca021bd41915636fb56b18",
+    "binary_build": "cargo build --locked --release",
+    "rustc": "rustc 1.97.0 (2d8144b78 2026-07-07)",
+    "cargo": "cargo 1.97.0 (c980f4866 2026-06-30)",
+    "note": "The mock outputs in results/mock_benchmark_f26f234 were generated at this source commit. Later commits were not used for the primary mock benchmark."
+  },
+  "primary_mock_variant": {
+    "tool": "Strain2bScan",
+    "reference_panel": "164",
+    "mode": "default",
+    "native_bcgI": {
+      "database": "MSA_combined164_bcgi_cont.tsv",
+      "enzyme": "BcgI",
+      "clustering": "containment",
+      "similarity": 0.95
+    },
+    "shotgun_wms": {
+      "database": "MSA_combined164_all.tsv",
+      "enzyme": "all",
+      "clustering": "containment",
+      "similarity": 0.95
+    },
+    "profile_options": "--min-abundance 0 --min-coverage 0.2",
+    "trace_gap": false,
+    "layer1_override": false,
+    "layer2_override": false
+  },
+  "primary_metrics": {
+    "detection": "precision, recall and F1 at abundance >= 1e-4",
+    "threshold_free_rank": "average precision (AUPR)",
+    "abundance": "Bray-Curtis dissimilarity and L2 against sequence-abundance truth; similarity is reported as 1 minus dissimilarity",
+    "resolution": "0.95-similarity cluster space"
+  },
+  "databases": [
+    {
+      "path": "MSA_combined164_all.tsv",
+      "sha256": "57d72e362dee9914774a690e17c00bc30f5b02a99fc6a9a18206dcfd412b50fa"
+    },
+    {
+      "path": "MSA_combined164_all.members.tsv",
+      "sha256": "d102d163fc8d9fc61d6ab734b97bdf9196176076d8544ec016ce55107feb353a"
+    },
+    {
+      "path": "MSA_combined164_bcgi_cont.tsv",
+      "sha256": "b1d7509fe1f2e56e690376e987e0a6623f04345b6948d527c66794f6b1414714"
+    },
+    {
+      "path": "MSA_combined164_bcgi_cont.members.tsv",
+      "sha256": "be467d4a32bf1b37310a91760a46ac86d6d7cc17bef4c64a4c6cf804be56fbb3"
+    }
+  ],
+  "derived_evidence": [
+    {
+      "path": "data/fig6_fig12_metrics.tsv",
+      "sha256": "d863898c36783f31269373cefe8ce52111509035e22b20990b6e75181f4ae3d9"
+    },
+    {
+      "path": "data/fig6_fig12_profiles.json",
+      "sha256": "a48963ae637cf42e8166f3308dbd082a79e09c558920f2d713a91b42461092bd"
+    },
+    {
+      "path": "results/mock_benchmark_f26f234/wms_analysis_manifest.csv",
+      "sha256": "1fd42f801017b2c553ae0e042e908f882d3868d6953ff92d55a11bdb3a752e91"
+    },
+    {
+      "path": "results/mock_benchmark_f26f234/checksums.sha256",
+      "sha256": "8b84b5c9be9ed0d9e779f96e83bf226cc4b006ed50e270be3f633c877adb90f7"
+    }
+  ],
+  "comparators": {
+    "StrainScan": {
+      "version": "v1.0.14",
+      "platform": "linux/amd64 container",
+      "container_name": "ss",
+      "container_id": "5c18934e920c",
+      "container_image": "mambaorg/micromamba:latest",
+      "container_image_digest": "sha256:fb18405d6004af757a38ec498a078240b4fd5549146990a484c28bb7e78aace4",
+      "source_snapshot_commit": "4d71605d61ae49a52a3902eb1b467119acfada82"
+    },
+    "inStrain": {
+      "version": "1.10.0",
+      "reference": "98% ANI dereplicated; non-dereplicated control is Figure S4"
+    }
+  },
+  "limitations": [
+    "StrainScan build timings were obtained under linux/amd64 emulation and are upper bounds.",
+    "55-species StrainScan throughput values are projections unless rerun natively.",
+    "The complete 15-species StrainScan per-sample artifacts and original scratchpad drivers remain unavailable and are declared as a reproducibility limitation."
+  ]
+}

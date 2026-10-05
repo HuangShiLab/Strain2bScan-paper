@@ -1,0 +1,2 @@
+f26f234
+f26f234 perf(db,identify): precompute quant panels and CST masked markers; avoid full sort

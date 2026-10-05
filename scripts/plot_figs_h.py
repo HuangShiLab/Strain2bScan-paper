@@ -223,26 +223,6 @@ def build_wms():
                 r = rowspec(mock, f"WMS ({tag})", clabel, pkey, s, tool, variant)
                 r["_truthkey"] = truth_key(s, variant)
                 rl.append(r)
-        # strainscan-port WMS results (layers only; default path is identical to Strain2bScan)
-        for tool, variant, tag in [("Strain2bScan-port", "164-layers", "S2bS-port layers")]:
-            for scode, clabel in samps:
-                s = f"WMS_{mock}_{scode}"
-                pkey = f"{s}|{tool}|{variant}"
-                if pkey not in profiles:
-                    continue
-                r = rowspec(mock, f"WMS ({tag})", clabel, pkey, s, tool, variant)
-                r["_truthkey"] = truth_key(s, variant)
-                rl.append(r)
-        if mock in ("MSA1002", "MSA1003"):
-            for tool, variant, tag in [("Strain2bScan-port", "120-layers", "S2bS-port layers (120)")]:
-                for scode, clabel in samps:
-                    s = f"WMS_{mock}_{scode}"
-                    pkey = f"{s}|{tool}|{variant}"
-                    if pkey not in profiles:
-                        continue
-                    r = rowspec(mock, f"WMS ({tag})", clabel, pkey, s, tool, variant)
-                    r["_truthkey"] = truth_key(s, variant)
-                    rl.append(r)
     return rl
 
 # ---------------- assemble Fig 6 (2bRAD) ----------------
@@ -297,9 +277,9 @@ if __name__ == "__main__":
                 f"{FIGDIR}/figS_tree_expansion", legend_sp)
     wms = build_wms()
     legend_sp = {species_of(g) for r in wms for g, v in profiles.get(r["_truthkey"], {}).items() if v > 0}
-    draw_figure(wms, "Figure 12 — Strain-level profiling on shotgun (WMS) mock communities",
+    draw_figure(wms, "Figure 12 — Primary WMS mock comparison (detection threshold 1e-4)",
                 f"{FIGDIR}/fig12_wms_toolcompare", legend_sp)
     brad = build_brad()
     legend_sp = {species_of(g) for r in brad for g, v in profiles.get(r["_truthkey"], {}).items() if v > 0}
-    draw_figure(brad, "Figure 6 — Strain-level profiling on native 2bRAD mock communities",
+    draw_figure(brad, "Figure 6 — Native BcgI 2bRAD mocks (detection threshold 1e-4)",
                 f"{FIGDIR}/fig6_2brad", legend_sp)

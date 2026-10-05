@@ -1,0 +1,28 @@
+Metadata: 19 Caries / 19 Healthy
+
+=== Strain + detected-not-resolved species depth features ===
+Samples: 38, strain features: 18, detected-species features: 18
+  strain+detected RF: accuracy=0.763 AUROC=0.864 F1=0.769
+  strain+detected LR: accuracy=0.632 AUROC=0.626 F1=0.588
+
+=== Strain-only features ===
+  strain-only RF: accuracy=0.579 AUROC=0.597 F1=0.579
+  strain-only LR: accuracy=0.658 AUROC=0.596 F1=0.649
+
+=== Species-level features ===
+Common samples: 38, species: 970
+  species RF: accuracy=0.816 AUROC=0.936 F1=0.821
+  species LR: accuracy=0.816 AUROC=0.873 F1=0.811
+  strain+detected RF: accuracy=0.763 AUROC=0.864 F1=0.769
+  strain+detected LR: accuracy=0.632 AUROC=0.626 F1=0.588
+  strain-only RF: accuracy=0.579 AUROC=0.597 F1=0.579
+  strain-only LR: accuracy=0.658 AUROC=0.596 F1=0.649
+
+=== Summary (5-fold CV, common samples) ===
+feature	clf	accuracy	AUROC	F1
+species	RF	0.816		0.936	0.821
+species	LR	0.816		0.873	0.811
+strain-only	RF	0.579		0.597	0.579
+strain-only	LR	0.658		0.596	0.649
+strain+detected	RF	0.763		0.864	0.769
+strain+detected	LR	0.632		0.626	0.588

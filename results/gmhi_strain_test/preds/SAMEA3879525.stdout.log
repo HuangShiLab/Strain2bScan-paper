@@ -1,0 +1,39 @@
+warning: --enzyme recommended is ignored: the panel is a k-mer sketch (k=31, scale=30)
+cross-species filter: 3321774/3329166 markers usable for quantification (0.2% shared with another species in the panel, excluded)
+sample: 11588883 distinct k-mer markers (k-mer sketch: k=31, scale=30); 7 species DBs; resolve-gate≥max(200, 0%×panel), detect-gate≥10 (threads: 16)
+#species	cluster	abundance	coverage	support	depth	global_abundance	sample_fraction
+  bifidobacterium	bifidobacterium_longum_GCF_005406285.1_ASM540628v1_genomic	1.000000	0.12	614	0.189	0.128374	0.000123
+  roseburia	roseburia_intestinalis_GCF_025151715.1_ASM2515171v1_genomic	1.000000	0.57	100	1.282	0.871626	0.001496
+  akkermansia	layer1=unique (auto — this DB carries no tree)
+  akkermansia	[strain-resolved, no cluster above threshold]	markers=78255/183035 (depth 5.54x)
+  bacteroides	layer1=unique (auto — this DB carries no tree)
+  bacteroides	[strain-resolved, no cluster above threshold]	markers=166913/524320 (depth 6.16x)
+  bifidobacterium	layer1=unique (auto — this DB carries no tree)
+  escherichia	layer1=unique (auto — this DB carries no tree)
+  escherichia	[strain-resolved, no cluster above threshold]	markers=2740/406204 (depth 0.01x)
+  faecalibacterium	layer1=unique (auto — this DB carries no tree)
+  faecalibacterium	[strain-resolved, no cluster above threshold]	markers=92873/975086 (depth 0.64x)
+  prevotella	layer1=unique (auto — this DB carries no tree)
+  prevotella	[strain-resolved, no cluster above threshold]	markers=81650/903206 (depth 12.31x)
+  roseburia	layer1=unique (auto — this DB carries no tree)
+summary: 7/7 species strain-resolved (2 strain calls), 0 detected-not-resolvable, 0 absent
+coverage of sample: strain calls account for 0.2% of 121231555 tag observations (99.8% unclassified — unresolved species, no reference, host, error)
+predictions -> /Volumes/MoneyCat/Data/GMHI/strain_test/preds/SAMEA3879525.pred.tsv
+       48.61 real       274.13 user         8.48 sys
+          1024507904  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+              109333  page reclaims
+                  45  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+              200036  voluntary context switches
+             2335358  involuntary context switches
+       1902615711862  instructions retired
+        964056246423  cycles elapsed
+           923485504  peak memory footprint

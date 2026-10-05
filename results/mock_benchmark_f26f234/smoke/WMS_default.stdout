@@ -1,0 +1,2 @@
+warning: /Users/macstudio/Downloads/Strain2bScan-raw-data/MSA_combined164_all.tsv: legacy database header without per-strain marker counts; truncation of legacy databases is not fully detectable (rebuild the database to enable it)
+error: --reads /var/folders/99/p0bp80g956s1c0yp9pcq7vcr0000gn/T/s2bs_smoke.XXXXXX.fq.gz.wEn5HL9PEF: unrecognized sequence format — expected .fa/.fasta/.fna/.fq/.fastq, optionally .gz. The reader selects FASTA or FASTQ by extension, so a misnamed file would be parsed as the wrong format with no error at all.

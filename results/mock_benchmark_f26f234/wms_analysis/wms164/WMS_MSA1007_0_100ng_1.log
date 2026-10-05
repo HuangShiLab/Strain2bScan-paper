@@ -1,0 +1,28 @@
+warning: /Users/macstudio/Downloads/Strain2bScan-raw-data/MSA_combined164_all.tsv: legacy database header without per-strain marker counts; truncation of legacy databases is not fully detectable (rebuild the database to enable it)
+sample: 3179149 distinct tag markers (enzymes: CspCI+AloI+BsaXI+BaeI+BcgI+CjeI+PpiI+PsrI+BplI+FalI+Bsp24I+HaeIV+CjePI+Hin4I+AlfI+BslFI, threads: 16)
+layer1: unique (auto — this DB carries no tree)
+  C58          abundance= 25.50%  depth=1565.139x  coverage=100.00%  support=230
+  C121         abundance= 17.11%  depth=1050.197x  coverage= 99.92%  support=1184
+  C96          abundance= 15.40%  depth=945.308x  coverage= 99.56%  support=2253
+  C50          abundance= 14.90%  depth=914.286x  coverage=100.00%  support=1160
+  C64          abundance= 14.51%  depth=890.643x  coverage= 97.62%  support=41
+  C68          abundance= 12.40%  depth=761.022x  coverage=100.00%  support=465
+  C115         abundance=  0.06%  depth=  3.971x  coverage= 73.02%  support=379
+  C129         abundance=  0.01%  depth=  0.879x  coverage= 53.62%  support=518
+  C90          abundance=  0.01%  depth=  0.737x  coverage= 48.34%  support=1110
+  C47          abundance=  0.01%  depth=  0.722x  coverage= 46.47%  support=2825
+  C24          abundance=  0.01%  depth=  0.595x  coverage= 38.99%  support=3482
+  C127         abundance=  0.01%  depth=  0.461x  coverage= 31.85%  support=3226
+  C6           abundance=  0.01%  depth=  0.414x  coverage= 28.54%  support=2586
+  C35          abundance=  0.01%  depth=  0.401x  coverage= 28.76%  support=3561
+  C29          abundance=  0.01%  depth=  0.376x  coverage= 27.42%  support=880
+  C123         abundance=  0.00%  depth=  0.289x  coverage= 14.53%  support=336
+  C72          abundance=  0.00%  depth=  0.279x  coverage= 20.76%  support=827
+  C51          abundance=  0.00%  depth=  0.189x  coverage= 10.92%  support=127
+  C110         abundance=  0.00%  depth=  0.187x  coverage= 14.45%  support=61
+  C53          abundance=  0.00%  depth=  0.173x  coverage= 11.82%  support=50
+  C70          abundance=  0.00%  depth=  0.169x  coverage= 14.02%  support=69
+  C52          abundance=  0.00%  depth=  0.153x  coverage= 11.03%  support=121
+  C98          abundance=  0.00%  depth=  0.151x  coverage= 10.25%  support=259
+  C97          abundance=  0.00%  depth=  0.148x  coverage= 10.08%  support=231
+predictions -> /Users/macstudio/Downloads/Strain2bScan-paper/work/mock_retest/retest_f26f234/wms_analysis/wms164/WMS_MSA1007_0_100ng_1.pred

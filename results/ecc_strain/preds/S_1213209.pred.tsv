@@ -1,0 +1,4 @@
+#species	cluster	abundance	coverage	support	depth	global_abundance	sample_fraction	n_markers
+Lautropia_mirabilis.db	C0	1.000000	0.5030	1610	29.4296	0.307900	0.012770	3350
+Prevotella_melaninogenica.db	C0|C2|C3|C4|C5|C6|C7|C10	1.000000	0.7714	27	48.8286	0.510858	0.006868	1086
+Rothia_aeria.db	C0|C1|C2	1.000000	0.5446	293	17.3234	0.181242	0.003579	1595

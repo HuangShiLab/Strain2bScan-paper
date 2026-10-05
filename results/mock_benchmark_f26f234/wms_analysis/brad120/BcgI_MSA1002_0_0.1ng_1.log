@@ -1,0 +1,26 @@
+warning: /Users/macstudio/Downloads/Strain2bScan-raw-data/MSA1002_combined_bcgi_cont.tsv: legacy database header without per-strain marker counts; truncation of legacy databases is not fully detectable (rebuild the database to enable it)
+sample: 70635 distinct tag markers (enzymes: BcgI, threads: 16)
+layer1: unique (auto — this DB carries no tree)
+  C71          abundance= 16.10%  depth=209.900x  coverage=100.00%  support=10
+  C35          abundance= 13.12%  depth=171.000x  coverage=100.00%  support=8
+  C83          abundance=  7.48%  depth= 97.464x  coverage= 92.86%  support=26
+  C77          abundance=  7.14%  depth= 93.038x  coverage= 96.15%  support=25
+  C0           abundance=  6.82%  depth= 88.935x  coverage= 94.20%  support=257
+  C19          abundance=  5.41%  depth= 70.490x  coverage= 95.95%  support=447
+  C67          abundance=  5.31%  depth= 69.200x  coverage= 77.14%  support=25
+  C24          abundance=  4.93%  depth= 64.286x  coverage= 95.92%  support=46
+  C45          abundance=  4.93%  depth= 64.267x  coverage= 92.31%  support=193
+  C33          abundance=  4.17%  depth= 54.339x  coverage= 63.98%  support=113
+  C41          abundance=  3.42%  depth= 44.538x  coverage= 85.18%  support=367
+  C51          abundance=  3.10%  depth= 40.438x  coverage= 81.59%  support=157
+  C30          abundance=  3.00%  depth= 39.126x  coverage= 83.02%  support=333
+  C20          abundance=  2.75%  depth= 35.910x  coverage= 79.79%  support=793
+  C5           abundance=  2.51%  depth= 32.677x  coverage= 88.36%  support=196
+  C57          abundance=  2.29%  depth= 29.901x  coverage= 71.90%  support=373
+  C9           abundance=  2.20%  depth= 28.633x  coverage= 76.50%  support=244
+  C23          abundance=  2.08%  depth= 27.054x  coverage= 71.13%  support=1847
+  C62          abundance=  1.82%  depth= 23.674x  coverage= 69.05%  support=414
+  C15          abundance=  1.39%  depth= 18.183x  coverage= 68.61%  support=731
+  C21          abundance=  0.02%  depth=  0.263x  coverage= 15.93%  support=86
+  C22          abundance=  0.01%  depth=  0.186x  coverage= 15.84%  support=35
+predictions -> /Users/macstudio/Downloads/Strain2bScan-paper/work/mock_retest/retest_f26f234/wms_analysis/brad120/BcgI_MSA1002_0_0.1ng_1.pred

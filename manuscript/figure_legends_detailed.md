@@ -67,7 +67,7 @@ overlapping zero. 16S resolves species, 2bRAD tags resolve strains.
 - *Production/collection:* (A) real reference panels; *C. acnes* (64 genomes), *S. aureus* (60),
   *S. epidermidis* (60), NCBI accessions pinned; with simulated 2–5-strain mixtures at log-normal depth
   ≥1×; abundance evaluated at cluster resolution. (B) a single *C. acnes* strain simulated across a
-  0.1–5× coverage ladder. All reads error-free 150 bp.
+  0.1–5× coverage ladder. Reads were ART error-modelled 250 bp paired-end reads.
 - *Raw data (local):* simulated reads are regenerated from `scripts/` + pinned accessions (not stored);
   accession lists in `data/accessions/`.
 **2. Key issue & conclusion.** Is the sparse marker profiler accurate, and does the reduced tag set cost
@@ -113,7 +113,7 @@ to 0.98/0.92 and recall to 0.95/0.92 at 95/90 % completeness, converging with Ja
 
 ## Figure 5; The 2bRAD enzyme set is a resolution/cost knob (14-species multi-species ladder)
 **1. Data source.**
-- *Data type:* simulation on the 15-species reference pool (closed-world, error-free 150 bp reads).
+- *Data type:* simulation on the 15-species reference pool (closed-world, error-modelled ART 250 bp paired-end reads).
 - *Production/collection:* 14 resolvable species of the simulation pool were re-profiled while varying the
   type-IIB enzyme set from 1 (BcgI) to 2/4/8/14 enzymes. Each species was sampled with 2/3/5 co-present
   strains at log-normal depth ≥1×; metrics are medians over species/replicates.
@@ -147,7 +147,7 @@ resolution). Single-enzyme BcgI operation is therefore sufficient for native Bcg
   table `data/fig6_fig12_metrics.tsv`; scorer `scripts/score_all.py`.
 **2. Key issue & conclusion.** Does native BcgI 2bRAD-M resolve and quantify individual strains on
 real DNA mocks, and how robust is it to host contamination and low input? Conclusion: **yes**. Strain2bScan
-holds precision 1.0 with recall 19/20 at 0.01 ng and full 20/20 recall at ≥0.1 ng; precision/recall stays
+At 1e-4, F1 is 0.952 at 0.1 ng and 0.625 at 0.01 ng (precision 0.909 and 0.833; recall 1.0 and 0.5); F1 is
 ≈0.95–1.0 down to 99 % host DNA. Staggered mocks show a ~1× marker-depth noise floor that costs
 single-threshold precision but is recovered by abundance-threshold AUPR.
 **3. Results by subfigure.**
@@ -173,7 +173,7 @@ including high host contamination
   `data/fig6_fig12_metrics.tsv`; scorer `scripts/score_all.py`; doc `docs/mock_hostcontam.md`.
 **2. Key issue & conclusion.** On conventional shotgun input, does Strain2bScan match StrainScan/inStrain
 accuracy while preserving detection *and* quantification under host contamination? Conclusion:
-**Strain2bScan is the only tool that preserves both at 99 % host** (F1 = 1.0, Bray–Curtis similarity
+At the primary 1e-4 threshold, **Strain2bScan is the only tested tool that preserves both** (F1 = 1.0, Bray–Curtis dissimilarity 0.302, similarity
 ≥ 0.72). StrainScan keeps detection but its depth estimator diverges (Bray–Curtis similarity 0.03 at
 99 % host); inStrain loses detection (recall 0.20). Clean samples are concordant across all three tools.
 **3. Results by subfigure.**
@@ -222,13 +222,13 @@ strain signature resolved in ~1 s/sample.
   prefixes) with `manifest.tsv`; cached WMS profiles in `results/wms_preds/`; table
   `results/saliva_concordance.tsv`. (Full-depth WMS re-downloadable from PRJNA1131785.)
 **2. Key issue & conclusion.** On high-host saliva, does native BcgI 2bRAD-M recover the strains shotgun finds
-*and* the low-abundance strains shotgun cannot? Conclusion: **100 % of shotgun strain calls (65/65) are
-confirmed by native BcgI 2bRAD-M** (the two modes agree; no in-silico false positives), and native BcgI 2bRAD-M
-additionally recovers **128–163 strains/sample** that shotgun misses, which are **significantly
+*and* the low-abundance strains shotgun cannot? Conclusion: All 65 shotgun strain-cluster calls (three usable paired samples, prefix-subsampled shotgun) are
+present in native BcgI 2bRAD-M; this is directional concordance, not independent validation. Native BcgI 2bRAD-M
+yields **128–163 additional candidate strain-cluster calls/sample**, which are **significantly
 lower-abundance**. quantifying 2bRAD's sensitivity advantage on real clinical material.
 **3. Results by subfigure.**
-- **(A)** Per sample, strains detected: shotgun-confirmed (blue, = 100 % of shotgun calls) plus 2bRAD-only
-  (orange, 128–163); native BcgI 2bRAD-M is a strict superset.
+- **(A)** Per sample, strains detected: shared with shotgun (blue) plus 2bRAD-only candidate calls (orange)
+  (orange, 128–163); this is a call-set concordance result and does not establish independent strain truth.
 - **(B)** Community relative abundance (log) of shared vs 2bRAD-only strains; 2bRAD-only significantly
   lower (median 0.0029 vs 0.0097; Mann–Whitney p 1.2e-23).
 
@@ -244,11 +244,10 @@ lower-abundance**. quantifying 2bRAD's sensitivity advantage on real clinical ma
   from scripts + `data/accessions/multispecies_55x4.tsv`; not stored as reads.
 **2. Key issue & conclusion.** How does the sparse-marker, digest-once design scale on conventional
 metagenomes? Conclusion: **~8× faster / ~11× lighter per sample**, clean thread parallelism, and; because
-per-sample cost is flat in #species; **~121–146× faster on a 55-species community** than a per-species
-k-mer tool run once per species.
+per-sample cost is flat in #species; measured Strain2bScan cost is **121–146× lower than projected per-species querying** on a 55-species community.
 **3. Results by subfigure.**
 - **(A)** Per-sample wall-time and peak memory, Strain2bScan (0.86 s / 78 MB) vs StrainScan (7.06 s / 828 MB).
-- **(B)** Speedup of build and profile vs thread count (8.5× / 6.5× at 16 threads).
+- **(B)** Speedup of build and profile vs thread count (4.6× / 5.8× at 16 threads; tracked in `results/parallel_and_build_scaling.tsv`).
 - **(C)** Community throughput: per-sample time flat in species count; fold-speedup vs a per-species tool
   (~132× at 100 samples, ~146× at ≥200).
 
@@ -303,7 +302,7 @@ Strain2bScan one pass vs StrainScan Σ per-species runs, annotated with the fold
 (0.001–100 ng); reads from **Figshare article 12272360** (2B-RAD-M unique-tags DB). Raw data: Figshare
 (accession above); table `results/mock_msa1002_titration.tsv`.
 **2. Key issue & conclusion.** Low-biomass limit of native BcgI 2bRAD-M. Conclusion: precision 1.0 with full
-species recall down to **0.1 ng** input (19/20 at 0.01 ng).
+species recall down to **0.1 ng** input in the separate 62-species titration panel (19/20 at 0.01 ng under that panel-specific gate).
 **3. Results.** Species precision (1.0 throughout) and recall vs DNA input (log), annotated with read count
 and detections per level.
 

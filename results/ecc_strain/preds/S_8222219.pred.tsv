@@ -1,0 +1,3 @@
+#species	cluster	abundance	coverage	support	depth	global_abundance	sample_fraction	n_markers
+Prevotella_melaninogenica.db	C0|C2|C3|C4|C5|C6|C7|C10	1.000000	0.6571	23	65.6571	0.351927	0.011155	1086
+Streptococcus_parasanguinis_B.db	C0|C1|C2|C3|C4	1.000000	0.7222	39	120.9074	0.648073	0.012957	685
