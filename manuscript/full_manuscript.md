@@ -74,29 +74,26 @@ taxonomically informative marker set, 50–100× smaller than the full k-mer set
 
 We present **Strain2bScan**, which ports the StrainScan resolution framework; within-species clustering
 into a search structure, followed by unique-marker scoring and abundance estimation; onto 2bRAD tags, in
-dependency-free Rust. Its tag lengths and recognition patterns match Fast2bRAD-M / `2bRADExtraction.pl`
-exactly, so the tags are interoperable with the Fast2bRAD-M species layer, and Strain2bScan uniquely
-accepts **two input modes** that map onto the two obstacles above:
+Rust. Its tag lengths and recognition patterns match Fast2bRAD-M / `2bRADExtraction.pl`
+exactly, so the tags are interoperable with the Fast2bRAD-M species layer, and Strain2bScan accepts **two input modes** that map onto the two obstacles above:
 
-1. **Native BcgI 2bRAD experimental libraries**. enabling, for the first time, strain-level analysis of
+1. **Native BcgI 2bRAD experimental libraries**, enabling strain-level analysis of
    low-biomass and high-host microbiomes. Because the reduction happens at the bench, Strain2bScan holds
    precision 1.0 and full strain recall at 99 % host DNA where in-silico-digested shotgun loses most of
    its strains, and on real saliva it resolves individual-specific, temporally stable strain signatures;
    recovering low-abundance strains that host-limited shotgun cannot reach.
 
-2. **In-silico digestion of conventional shotgun metagenomes**. enabling community-scale strain
+2. **In-silico digestion of conventional shotgun metagenomes**, enabling community-scale strain
    profiling. The sample is digested **once** and matched against every per-species database, so
    per-sample cost is independent of the number of species and linear in the number of samples: ~8×
    faster and ~11× lighter per sample than StrainScan, and projected to be 121–146× lower in cost on a 55-species community,
    while matching StrainScan's precision, its 0.5× detection onset and its recall on its own databases;
    and completing near-clonal *Mycobacterium tuberculosis* in ~1 s where StrainScan does not finish.
 
-The two modes are shown to agree (in-silico and native digestion recover the same strains), so a single
+The two modes are directionally concordant: in three usable paired samples, 65/65 shotgun strain-cluster calls were contained in native calls. Thus a single
 tool, on one 2bRAD tag space, spans both the low-biomass clinical regime and the cohort-scale regime.
 
 ## Results
-
-### Results
 
 #### Overview of Strain2bScan and its two data modes (Fig 1)
 
@@ -394,7 +391,7 @@ strain profiling across communities of many species and many samples.
 
 Strain2bScan reimplements the two-layer StrainScan strategy; cluster near-identical strains,
 then score samples on markers unique to a strain or cluster; but replaces the full k-mer set
-with **2bRAD tags**, and is written in dependency-free Rust for speed and parallelism. The
+with **2bRAD tags**, and implemented in Rust for speed and parallelism. The primary benchmark used the dependency-free release `benchmark-v0.1.0-f26f234`; later development versions are not part of that frozen configuration. The
 pipeline is: (i) digest reference genomes and sample reads into 2bRAD-tag markers; (ii) build,
 per species, a within-species cluster database annotated with unique markers; (iii) profile a
 sample by detecting present clusters from their unique markers and estimating their abundance;
@@ -704,8 +701,7 @@ each cluster's marker set is *shared*, which denser sampling need not change.
 
 ### Implementation
 
-Strain2bScan is written in Rust with **no third-party dependencies**, which keeps the build
-reproducible and the binary self-contained. Data-parallelism (genome digestion, sketch
+The benchmark release `benchmark-v0.1.0-f26f234` is written in Rust with no third-party dependencies, making that frozen binary self-contained. Current development versions may use additional dependencies and are not part of the frozen benchmark. Data-parallelism (genome digestion, sketch
 construction, the pairwise similarity scan, read digestion) uses scoped `std` threads
 (`STRAIN2BSCAN_THREADS`; default = all cores).
 

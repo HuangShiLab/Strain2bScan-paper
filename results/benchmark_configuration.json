@@ -10,7 +10,10 @@
     "binary_build": "cargo build --locked --release",
     "rustc": "rustc 1.97.0 (2d8144b78 2026-07-07)",
     "cargo": "cargo 1.97.0 (c980f4866 2026-06-30)",
-    "note": "The mock outputs in results/mock_benchmark_f26f234 were generated at this source commit. Later commits were not used for the primary mock benchmark."
+    "note": "The mock outputs in results/mock_benchmark_f26f234 were generated at this source commit. Later commits were not used for the primary mock benchmark.",
+    "benchmark_tag": "benchmark-v0.1.0-f26f234",
+    "source_archive": "results/software_release/Strain2bScan-benchmark-v0.1.0-f26f234-source.tar.gz",
+    "source_archive_sha256": "752c25fce35bd0b5892ab777b8fe652ea29c3017d4993862f876b37e0d1a3df6"
   },
   "primary_mock_variant": {
     "tool": "Strain2bScan",

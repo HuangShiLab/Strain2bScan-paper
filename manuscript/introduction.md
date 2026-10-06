@@ -1,4 +1,4 @@
-# Strain2bScan; Introduction (draft)
+# Introduction
 
 Microbial strains of the same species can differ sharply in phenotype; virulence, antibiotic
 resistance, metabolic capacity and host interaction; so resolving *which* strains are present, and at
@@ -35,22 +35,21 @@ taxonomically informative marker set, 50–100× smaller than the full k-mer set
 
 We present **Strain2bScan**, which ports the StrainScan resolution framework; within-species clustering
 into a search structure, followed by unique-marker scoring and abundance estimation; onto 2bRAD tags, in
-dependency-free Rust. Its tag lengths and recognition patterns match Fast2bRAD-M / `2bRADExtraction.pl`
-exactly, so the tags are interoperable with the Fast2bRAD-M species layer, and Strain2bScan uniquely
-accepts **two input modes** that map onto the two obstacles above:
+Rust. Its tag lengths and recognition patterns match Fast2bRAD-M / `2bRADExtraction.pl`
+exactly, so the tags are interoperable with the Fast2bRAD-M species layer, and Strain2bScan accepts **two input modes** that map onto the two obstacles above:
 
-1. **Native BcgI 2bRAD experimental libraries**. enabling, for the first time, strain-level analysis of
+1. **Native BcgI 2bRAD experimental libraries**, enabling strain-level analysis of
    low-biomass and high-host microbiomes. Because the reduction happens at the bench, Strain2bScan holds
    precision 1.0 and full strain recall at 99 % host DNA where in-silico-digested shotgun loses most of
    its strains, and on real saliva it resolves individual-specific, temporally stable strain signatures;
    recovering low-abundance strains that host-limited shotgun cannot reach.
 
-2. **In-silico digestion of conventional shotgun metagenomes**. enabling community-scale strain
+2. **In-silico digestion of conventional shotgun metagenomes**, enabling community-scale strain
    profiling. The sample is digested **once** and matched against every per-species database, so
    per-sample cost is independent of the number of species and linear in the number of samples: ~8×
    faster and ~11× lighter per sample than StrainScan, and projected to be 121–146× lower in cost on a 55-species community,
    while matching StrainScan's precision, its 0.5× detection onset and its recall on its own databases;
    and completing near-clonal *Mycobacterium tuberculosis* in ~1 s where StrainScan does not finish.
 
-The two modes are shown to agree (in-silico and native digestion recover the same strains), so a single
+The two modes are directionally concordant: in three usable paired samples, 65/65 shotgun strain-cluster calls were contained in native calls. Thus a single
 tool, on one 2bRAD tag space, spans both the low-biomass clinical regime and the cohort-scale regime.

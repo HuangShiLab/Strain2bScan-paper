@@ -152,8 +152,6 @@ simulated benchmark that isolates the accuracy and the cost of the two approache
 
 ## 2. Results
 
-### Results
-
 #### Overview of Strain2bScan and its two data modes (Fig 1)
 
 Strain2bScan reduces reference genomes to canonical, single-copy 2bRAD tags, clusters genomes within each
@@ -537,7 +535,7 @@ strain profiling across communities of many species and many samples.
 
 Strain2bScan reimplements the two-layer StrainScan strategy; cluster near-identical strains,
 then score samples on markers unique to a strain or cluster; but replaces the full k-mer set
-with **2bRAD tags**, and is written in dependency-free Rust for speed and parallelism. The
+with **2bRAD tags**, and implemented in Rust for speed and parallelism. The primary benchmark used the dependency-free release `benchmark-v0.1.0-f26f234`; later development versions are not part of that frozen configuration. The
 pipeline is: (i) digest reference genomes and sample reads into 2bRAD-tag markers; (ii) build,
 per species, a within-species cluster database annotated with unique markers; (iii) profile a
 sample by detecting present clusters from their unique markers and estimating their abundance;
@@ -847,8 +845,7 @@ each cluster's marker set is *shared*, which denser sampling need not change.
 
 ### Implementation
 
-Strain2bScan is written in Rust with **no third-party dependencies**, which keeps the build
-reproducible and the binary self-contained. Data-parallelism (genome digestion, sketch
+The benchmark release `benchmark-v0.1.0-f26f234` is written in Rust with no third-party dependencies, making that frozen binary self-contained. Current development versions may use additional dependencies and are not part of the frozen benchmark. Data-parallelism (genome digestion, sketch
 construction, the pairwise similarity scan, read digestion) uses scoped `std` threads
 (`STRAIN2BSCAN_THREADS`; default = all cores).
 

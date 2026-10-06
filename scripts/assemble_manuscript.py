@@ -15,7 +15,9 @@ def abstract():
     return re.search(r'## Abstract\s*\n(.*)', ab, re.S).group(1).strip()
 
 def results():
-    return re.sub(r'(?s)^\s*> .*?\n\n', '', body("manuscript/results.md"), count=1).strip()
+    text = re.sub(r'(?s)^\s*> .*?\n\n', '', body("manuscript/results.md"), count=1).strip()
+    # The assembler owns this section heading; modular Results begins at its first subsection.
+    return re.sub(r'^##\s+Results\s*\n+', '', text, flags=re.I).strip()
 
 def figure_legends():
     fl = read("manuscript/figures.md"); fl = fl[fl.find("## Main figures"):]

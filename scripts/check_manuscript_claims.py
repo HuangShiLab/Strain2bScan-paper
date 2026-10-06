@@ -32,6 +32,15 @@ def read(*parts):
     return "\n".join((ROOT / p).read_text() for p in parts)
 
 # 1. Frozen configuration and artifact integrity.
+full_manuscript = (ROOT / "manuscript/full_manuscript.md").read_text()
+if full_manuscript.count("\n## Results\n") != 1:
+    fail("assembled manuscript must contain exactly one top-level Results heading")
+if re.search(r"^##\s+Results\s*\n+###\s+Results\s*$", full_manuscript, flags=re.M):
+    fail("assembled manuscript contains a duplicated nested Results heading")
+for heading in ("## Introduction", "## Results", "## Discussion", "## Methods",
+                "## Figure legends", "## Tables", "## References"):
+    if full_manuscript.count("\n" + heading + "\n") != 1:
+        fail(f"assembled manuscript must contain exactly one {heading!r} heading")
 config_path = ROOT / "results/benchmark_configuration.json"
 try:
     cfg = json.loads(config_path.read_text())
@@ -46,6 +55,14 @@ for item in cfg.get("derived_evidence", []):
         fail(f"missing frozen evidence: {p}")
     elif sha(p) != item["sha256"]:
         fail(f"checksum mismatch: {p}")
+release = cfg.get("strain2bscan", {})
+release_archive = release.get("source_archive")
+if not release_archive or not (ROOT / release_archive).exists():
+    fail("benchmark source archive is missing")
+elif sha(release_archive) != release.get("source_archive_sha256"):
+    fail("benchmark source archive checksum mismatch")
+if release.get("benchmark_tag") != "benchmark-v0.1.0-f26f234":
+    fail("unexpected benchmark release tag")
 manifest_path = ROOT / "results/mock_benchmark_f26f234/checksums.sha256"
 if manifest_path.exists():
     for line in manifest_path.read_text().splitlines():
