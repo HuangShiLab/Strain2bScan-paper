@@ -1,0 +1,2 @@
+Strain_ID	Strain_Name	Cluster_ID	Relative_Abundance_Inside_Cluster	Predicted_Depth	Coverage	Covered/Total_kmr
+1	GCA_010230155	C19	1.0	3.468530341631112	0.9546819826815724	130316/136502

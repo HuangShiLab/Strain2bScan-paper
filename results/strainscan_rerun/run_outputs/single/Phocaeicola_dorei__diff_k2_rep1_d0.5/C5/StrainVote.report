@@ -1,0 +1,2 @@
+Strain_ID	Strain_Name	Cluster_ID	Relative_Abundance_Inside_Cluster	Predicted_Depth (Enet)	Predicted_Depth (Ab*cls_depth)	Coverage	Coverd/Total_kmr	Valid_kmr	Remain_Coverage	CV	Exist_Evidence
+1	GCA_013009675	C5	1	2.2568306010928962	1.1715343480049365	0.03973092285053605	378/9514	378	0.03973092285053605	

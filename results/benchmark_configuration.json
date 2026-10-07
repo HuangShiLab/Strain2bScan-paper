@@ -96,6 +96,7 @@
   "limitations": [
     "StrainScan build timings were obtained under linux/amd64 emulation and are upper bounds.",
     "55-species StrainScan throughput values are projections unless rerun natively.",
-    "The complete 15-species StrainScan per-sample artifacts and original scratchpad drivers remain unavailable and are declared as a reproducibility limitation."
+    "The original 15-species StrainScan per-sample artifacts and scratchpad drivers remain unavailable.",
+    "The 15-species StrainScan accuracy comparison now uses the archived reproducible rerun; archived timing/build evidence is reported separately and is not pooled with rerun accuracy."
   ]
 }

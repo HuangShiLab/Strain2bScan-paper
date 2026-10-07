@@ -1,0 +1,10 @@
+metric	value
+manifest_single_runs	1125
+published_matched_single_runs	225
+completed_single_runs	204
+paired_native_runs	204
+no_call_published_matched_single_runs	21
+unattempted_full_manifest_single_runs	900
+multi_samples	12
+strainscan_multi_reports	158
+strainscan_multi_expected_reports	180

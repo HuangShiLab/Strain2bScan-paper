@@ -1,0 +1,93 @@
+2026-10-06 15:42:50,565 - Constructing matrix with dashing (jaccard index)
+2026-10-06 15:42:50,921 - Hierarchical clustering
+2026-10-06 15:42:51,331 - Constructing the tree
+2026-10-06 15:45:12,532 - Inside cluster strains kmer sets construction
+/host/StrainScan
+1 8086654
+- The total running time of tree-based indexing struture building is  140.89224433898926  s
+
+2026-10-06 15:45:12 - StrainScan::build_DB::Step2-begin: Now we will extract kmers from unique region found by sibeliaz
+2026-10-06 15:45:12 - StrainScan::build_DB:: C1- Build k-mer dict
+Load kmer to dict...
+Process:  1 / 29
+Process:  2 / 29
+Process:  3 / 29
+Process:  4 / 29
+Process:  5 / 29
+Process:  6 / 29
+Process:  7 / 29
+Process:  8 / 29
+Process:  9 / 29
+Process:  10 / 29
+Process:  11 / 29
+Process:  12 / 29
+Process:  13 / 29
+Process:  14 / 29
+Process:  15 / 29
+Process:  16 / 29
+Process:  17 / 29
+Process:  18 / 29
+Process:  19 / 29
+Process:  20 / 29
+Process:  21 / 29
+Process:  22 / 29
+Process:  23 / 29
+Process:  24 / 29
+Process:  25 / 29
+Process:  26 / 29
+Process:  27 / 29
+Process:  28 / 29
+Process:  29 / 29
+2026-10-06 15:47:10 - StrainScan::build_DB:: C1- Merge genomes
+2026-10-06 15:47:11 - StrainScan::build_DB:: C1- Run Sibeliaz
+/opt/conda/envs/ss/bin/sibeliaz: line 108: free: command not found
+/opt/conda/envs/ss/bin/sibeliaz: line 56: [: : integer expression expected
+/opt/conda/envs/ss/bin/sibeliaz: line 60: [: : integer expression expected
+sibeliaz -n -m 100 -k 15 -a 4350 -o /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Mycobacterium_tuberculosis/Kmer_Sets_L2/Colinear_Block/C1/Blocks -t 8 /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Mycobacterium_tuberculosis/Kmer_Sets_L2/Colinear_Block/C1/Connect_Genomes/GCA_963525475.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Mycobacterium_tuberculosis/Kmer_Sets_L2/Colinear_Block/C1/Connect_Genomes/GCA_017901095.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Mycobacterium_tuberculosis/Kmer_Sets_L2/Colinear_Block/C1/Connect_Genomes/GCA_033124885.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Mycobacterium_tuberculosis/Kmer_Sets_L2/Colinear_Block/C1/Connect_Genomes/GCA_014899985.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Mycobacterium_tuberculosis/Kmer_Sets_L2/Colinear_Block/C1/Connect_Genomes/GCA_040208995.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Mycobacterium_tuberculosis/Kmer_Sets_L2/Colinear_Block/C1/Connect_Genomes/GCA_014899965.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Mycobacterium_tuberculosis/Kmer_Sets_L2/Colinear_Block/C1/Connect_Genomes/GCA_040208985.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Mycobacterium_tuberculosis/Kmer_Sets_L2/Colinear_Block/C1/Connect_Genomes/GCA_040209325.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Mycobacterium_tuberculosis/Kmer_Sets_L2/Colinear_Block/C1/Connect_Genomes/GCA_002116835.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Mycobacterium_tuberculosis/Kmer_Sets_L2/Colinear_Block/C1/Connect_Genomes/GCA_040209205.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Mycobacterium_tuberculosis/Kmer_Sets_L2/Colinear_Block/C1/Connect_Genomes/GCA_033125685.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Mycobacterium_tuberculosis/Kmer_Sets_L2/Colinear_Block/C1/Connect_Genomes/GCA_009730215.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Mycobacterium_tuberculosis/Kmer_Sets_L2/Colinear_Block/C1/Connect_Genomes/GCA_002116775.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Mycobacterium_tuberculosis/Kmer_Sets_L2/Colinear_Block/C1/Connect_Genomes/GCA_001708265.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Mycobacterium_tuberculosis/Kmer_Sets_L2/Colinear_Block/C1/Connect_Genomes/GCA_014900215.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Mycobacterium_tuberculosis/Kmer_Sets_L2/Colinear_Block/C1/Connect_Genomes/GCA_014900295.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Mycobacterium_tuberculosis/Kmer_Sets_L2/Colinear_Block/C1/Connect_Genomes/GCA_014900235.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Mycobacterium_tuberculosis/Kmer_Sets_L2/Colinear_Block/C1/Connect_Genomes/GCA_021559895.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Mycobacterium_tuberculosis/Kmer_Sets_L2/Colinear_Block/C1/Connect_Genomes/GCA_014900135.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Mycobacterium_tuberculosis/Kmer_Sets_L2/Colinear_Block/C1/Connect_Genomes/GCA_040209215.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Mycobacterium_tuberculosis/Kmer_Sets_L2/Colinear_Block/C1/Connect_Genomes/GCA_037942495.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Mycobacterium_tuberculosis/Kmer_Sets_L2/Colinear_Block/C1/Connect_Genomes/GCA_002072775.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Mycobacterium_tuberculosis/Kmer_Sets_L2/Colinear_Block/C1/Connect_Genomes/GCA_014900005.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Mycobacterium_tuberculosis/Kmer_Sets_L2/Colinear_Block/C1/Connect_Genomes/GCA_040209395.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Mycobacterium_tuberculosis/Kmer_Sets_L2/Colinear_Block/C1/Connect_Genomes/GCA_965124815.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Mycobacterium_tuberculosis/Kmer_Sets_L2/Colinear_Block/C1/Connect_Genomes/GCA_965122945.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Mycobacterium_tuberculosis/Kmer_Sets_L2/Colinear_Block/C1/Connect_Genomes/GCA_017901035.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Mycobacterium_tuberculosis/Kmer_Sets_L2/Colinear_Block/C1/Connect_Genomes/GCA_000277735.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Mycobacterium_tuberculosis/Kmer_Sets_L2/Colinear_Block/C1/Connect_Genomes/GCA_000195955.fasta
+2026-10-06 15:48:05 - StrainScan::build_DB:: C1- Extract blocks from Sibeliaz output
+2026-10-06 15:50:52 - StrainScan::build_DB:: C1- Unique k-mer extract
+::Scan unique kmer inside cluster and output
+Log: GCA_963525475 772 772 0
+Log: GCA_017901095 48170 48170 0
+Log: GCA_033124885 7106 7106 0
+Log: GCA_014899985 9606 9606 0
+Log: GCA_040208995 2246 2246 0
+Log: GCA_014899965 8256 8256 0
+Log: GCA_040208985 2856 2856 0
+Log: GCA_040209325 6764 6764 0
+Log: GCA_002116835 2244 2244 0
+Log: GCA_040209205 3348 3348 0
+Log: GCA_033125685 5610 5610 0
+Log: GCA_009730215 1168 1168 0
+Log: GCA_002116775 1772 1772 0
+Log: GCA_001708265 14526 14526 0
+Log: GCA_014900215 1310 1310 0
+Log: GCA_014900295 594 594 0
+Log: GCA_014900235 684 684 0
+Log: GCA_021559895 77470 77470 0
+Log: GCA_014900135 2026 2026 0
+Log: GCA_040209215 1278 1278 0
+Log: GCA_037942495 0 0 0
+Log: GCA_002072775 0 0 0
+Log: GCA_014900005 3502 3502 0
+Log: GCA_040209395 1450 1450 0
+Log: GCA_965124815 418 418 0
+Log: GCA_965122945 398 398 0
+Log: GCA_017901035 2754 2754 0
+Log: GCA_000277735 60 60 0
+Log: GCA_000195955 4908 4908 0
+Unique part -> kid_match: 211296 , kmatrix: 211296
+2026-10-06 15:51:38 - StrainScan::build_DB:: C1- Partial k-mer extract
+Partial Unique part -> kid_match: 459112 , kmatrix: 459112
+2026-10-06 15:51:47 - StrainScan::build_DB:: C1- Global k-mer extract and build matrix
+2026-10-06 15:53:56 - StrainScan::build_DB: C1- Fill the Sparse matrix: Row:  1148598  Column:  29
+2026-10-06 15:54:53 - StrainScan::build_DB: C1- Recluster matrix
+2026-10-06 15:54:55 - StrainScan::build_DB: C1- The current cluster is finished!
+2026-10-06 15:54:58 - StrainScan::build_DB:: Build sparse matices done - Current Memory Usage: 0.1269 GB
+2026-10-06 15:54:58 - StrainScan::build_DB:: - Build omatrix cls k-mer dict...
+2026-10-06 15:54:58,865 - Building Overlap matrix
+2026-10-06 15:56:54 - StrainScan::build_DB:: - Build omatrix cls k-mer dict... Done
+2026-10-06 15:56:54 - StrainScan::build_DB:: C1- Build overlap matrix...
+2026-10-06 15:57:33 - StrainScan::build_DB:: C1- Current Memory Usage: 3.4373 GB
+2026-10-06 15:57:33 - StrainScan::build_DB:: C1- Omatrix finished
+2026-10-06 15:57:33 - StrainScan::build_DB:: - All omatrices are finished now.

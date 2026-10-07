@@ -1,0 +1,224 @@
+2026-10-06 16:24:12,994 - Constructing matrix with dashing (jaccard index)
+2026-10-06 16:24:13,565 - Hierarchical clustering
+2026-10-06 16:24:13,983 - Constructing the tree
+2026-10-06 16:26:52,616 - Inside cluster strains kmer sets construction
+/host/StrainScan
+9 4745740 122302
+7 5335906 0
+8 5339414 0
+1 5417346 138118
+5 5363036 0
+2 5315386 404000
+6 5346366 0
+3 5432318 0
+4 5351148 0
+- The total running time of k-mer extraction is  150.7178909778595  s
+
+4 checking	149974
+3 checking	111412
+6 checking	97504
+2 checking	90398
+5 checking	141924
+1 checking	200076
+8 checking	175454
+7 checking	537016
+9 checking	258744
+- The total running time of re-clustering is  2.2757697105407715  s
+
+4 k-mer removing...
+3 k-mer removing...
+6 k-mer removing...
+2 k-mer removing...
+11 k-mer removing...
+10 k-mer removing...
+12 k-mer removing...
+5 k-mer removing...
+13 k-mer removing...
+1 k-mer removing...
+14 k-mer removing...
+8 k-mer removing...
+15 k-mer removing...
+7 k-mer removing...
+16 k-mer removing...
+9 k-mer removing...
+17 k-mer removing...
+4 k-mer set building...
+3 k-mer set building...
+6 k-mer set building...
+2 k-mer set building...
+11 k-mer set building...
+10 k-mer set building...
+12 k-mer set building...
+12 waiting for reconstruction...
+5 k-mer set building...
+13 k-mer set building...
+13 waiting for reconstruction...
+1 k-mer set building...
+14 k-mer set building...
+8 k-mer set building...
+15 k-mer set building...
+7 k-mer set building...
+16 k-mer set building...
+9 k-mer set building...
+17 k-mer set building...
+12 k-mer set rebuilding...
+13 k-mer set rebuilding...
+- The total running time of tree-based indexing struture building is  5.118836879730225  s
+
+2026-10-06 16:26:52 - StrainScan::build_DB::Step2-begin: Now we will extract kmers from unique region found by sibeliaz
+2026-10-06 16:26:52 - StrainScan::build_DB:: C2- Build k-mer dict
+2026-10-06 16:26:52 - StrainScan::build_DB:: C1- Build k-mer dict
+2026-10-06 16:26:52 - StrainScan::build_DB:: C9- Build k-mer dict
+Load kmer to dict...
+Process:  1 / 2
+Process:  2 / 2
+2026-10-06 16:26:58 - StrainScan::build_DB:: C9- Merge genomes
+2026-10-06 16:26:58 - StrainScan::build_DB:: C9- Run Sibeliaz
+/opt/conda/envs/ss/bin/sibeliaz: line 108: free: command not found
+/opt/conda/envs/ss/bin/sibeliaz: line 56: [: : integer expression expected
+/opt/conda/envs/ss/bin/sibeliaz: line 60: [: : integer expression expected
+sibeliaz -n -m 100 -k 15 -a 300 -o /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Staphylococcus_epidermidis/Kmer_Sets_L2/Colinear_Block/C9/Blocks -t 8 /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Staphylococcus_epidermidis/Kmer_Sets_L2/Colinear_Block/C9/Connect_Genomes/GCA_006094375.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Staphylococcus_epidermidis/Kmer_Sets_L2/Colinear_Block/C9/Connect_Genomes/GCA_006742205.fasta
+2026-10-06 16:27:03 - StrainScan::build_DB:: C9- Extract blocks from Sibeliaz output
+2026-10-06 16:27:06 - StrainScan::build_DB:: C9- Unique k-mer extract
+::Scan unique kmer inside cluster and output
+Log: GCA_006094375 100001 121138 0
+Log: GCA_006742205 3216 3216 0
+Unique part -> kid_match: 103217 , kmatrix: 103217
+2026-10-06 16:27:08 - StrainScan::build_DB:: C9- Partial k-mer extract
+Partial Unique part -> kid_match: 103217 , kmatrix: 103217
+2026-10-06 16:27:08 - StrainScan::build_DB:: C9- Global k-mer extract and build matrix
+Load kmer to dict...
+Process:  1 / 17
+Process:  2 / 17
+Process:  3 / 17
+Process:  4 / 17
+Process:  5 / 17
+Process:  6 / 17
+Process:  7 / 17
+Process:  8 / 17
+Process:  9 / 17
+Process:  10 / 17
+Process:  11 / 17
+Process:  12 / 17
+Process:  13 / 17
+Process:  14 / 17
+Process:  15 / 17
+Process:  16 / 17
+Process:  17 / 17
+2026-10-06 16:27:44 - StrainScan::build_DB:: C1- Merge genomes
+2026-10-06 16:27:44 - StrainScan::build_DB:: C1- Run Sibeliaz
+/opt/conda/envs/ss/bin/sibeliaz: line 108: free: command not found
+/opt/conda/envs/ss/bin/sibeliaz: line 56: [: : integer expression expected
+/opt/conda/envs/ss/bin/sibeliaz: line 60: [: : integer expression expected
+sibeliaz -n -m 100 -k 15 -a 2550 -o /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Staphylococcus_epidermidis/Kmer_Sets_L2/Colinear_Block/C1/Blocks -t 8 /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Staphylococcus_epidermidis/Kmer_Sets_L2/Colinear_Block/C1/Connect_Genomes/GCA_900086615.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Staphylococcus_epidermidis/Kmer_Sets_L2/Colinear_Block/C1/Connect_Genomes/GCA_045940975.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Staphylococcus_epidermidis/Kmer_Sets_L2/Colinear_Block/C1/Connect_Genomes/GCA_045939605.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Staphylococcus_epidermidis/Kmer_Sets_L2/Colinear_Block/C1/Connect_Genomes/GCA_045940075.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Staphylococcus_epidermidis/Kmer_Sets_L2/Colinear_Block/C1/Connect_Genomes/GCA_045939555.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Staphylococcus_epidermidis/Kmer_Sets_L2/Colinear_Block/C1/Connect_Genomes/GCA_045938865.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Staphylococcus_epidermidis/Kmer_Sets_L2/Colinear_Block/C1/Connect_Genomes/GCA_045944115.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Staphylococcus_epidermidis/Kmer_Sets_L2/Colinear_Block/C1/Connect_Genomes/GCA_045940705.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Staphylococcus_epidermidis/Kmer_Sets_L2/Colinear_Block/C1/Connect_Genomes/GCA_045936855.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Staphylococcus_epidermidis/Kmer_Sets_L2/Colinear_Block/C1/Connect_Genomes/GCA_045940065.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Staphylococcus_epidermidis/Kmer_Sets_L2/Colinear_Block/C1/Connect_Genomes/GCA_045933105.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Staphylococcus_epidermidis/Kmer_Sets_L2/Colinear_Block/C1/Connect_Genomes/GCA_045939955.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Staphylococcus_epidermidis/Kmer_Sets_L2/Colinear_Block/C1/Connect_Genomes/GCA_045942415.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Staphylococcus_epidermidis/Kmer_Sets_L2/Colinear_Block/C1/Connect_Genomes/GCA_045942175.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Staphylococcus_epidermidis/Kmer_Sets_L2/Colinear_Block/C1/Connect_Genomes/GCA_045937745.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Staphylococcus_epidermidis/Kmer_Sets_L2/Colinear_Block/C1/Connect_Genomes/GCA_045935645.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Staphylococcus_epidermidis/Kmer_Sets_L2/Colinear_Block/C1/Connect_Genomes/GCA_045786335.fasta
+2026-10-06 16:28:02 - StrainScan::build_DB:: C1- Extract blocks from Sibeliaz output
+Load kmer to dict...
+Process:  1 / 25
+Process:  2 / 25
+Process:  3 / 25
+Process:  4 / 25
+Process:  5 / 25
+Process:  6 / 25
+Process:  7 / 25
+Process:  8 / 25
+Process:  9 / 25
+Process:  10 / 25
+Process:  11 / 25
+Process:  12 / 25
+Process:  13 / 25
+Process:  14 / 25
+Process:  15 / 25
+Process:  16 / 25
+Process:  17 / 25
+Process:  18 / 25
+Process:  19 / 25
+Process:  20 / 25
+Process:  21 / 25
+Process:  22 / 25
+Process:  23 / 25
+Process:  24 / 25
+Process:  25 / 25
+2026-10-06 16:28:07 - StrainScan::build_DB:: C2- Merge genomes
+2026-10-06 16:28:08 - StrainScan::build_DB:: C2- Run Sibeliaz
+/opt/conda/envs/ss/bin/sibeliaz: line 108: free: command not found
+/opt/conda/envs/ss/bin/sibeliaz: line 56: [: : integer expression expected
+/opt/conda/envs/ss/bin/sibeliaz: line 60: [: : integer expression expected
+sibeliaz -n -m 100 -k 15 -a 3750 -o /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Staphylococcus_epidermidis/Kmer_Sets_L2/Colinear_Block/C2/Blocks -t 8 /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Staphylococcus_epidermidis/Kmer_Sets_L2/Colinear_Block/C2/Connect_Genomes/GCA_019329745.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Staphylococcus_epidermidis/Kmer_Sets_L2/Colinear_Block/C2/Connect_Genomes/GCA_019329665.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Staphylococcus_epidermidis/Kmer_Sets_L2/Colinear_Block/C2/Connect_Genomes/GCA_019329425.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Staphylococcus_epidermidis/Kmer_Sets_L2/Colinear_Block/C2/Connect_Genomes/GCA_045937765.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Staphylococcus_epidermidis/Kmer_Sets_L2/Colinear_Block/C2/Connect_Genomes/GCA_019329645.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Staphylococcus_epidermidis/Kmer_Sets_L2/Colinear_Block/C2/Connect_Genomes/GCA_019330245.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Staphylococcus_epidermidis/Kmer_Sets_L2/Colinear_Block/C2/Connect_Genomes/GCA_019330145.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Staphylococcus_epidermidis/Kmer_Sets_L2/Colinear_Block/C2/Connect_Genomes/GCA_019787665.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Staphylococcus_epidermidis/Kmer_Sets_L2/Colinear_Block/C2/Connect_Genomes/GCA_019330185.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Staphylococcus_epidermidis/Kmer_Sets_L2/Colinear_Block/C2/Connect_Genomes/GCA_900638695.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Staphylococcus_epidermidis/Kmer_Sets_L2/Colinear_Block/C2/Connect_Genomes/GCA_019329545.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Staphylococcus_epidermidis/Kmer_Sets_L2/Colinear_Block/C2/Connect_Genomes/GCA_019330105.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Staphylococcus_epidermidis/Kmer_Sets_L2/Colinear_Block/C2/Connect_Genomes/GCA_019329785.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Staphylococcus_epidermidis/Kmer_Sets_L2/Colinear_Block/C2/Connect_Genomes/GCA_019329505.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Staphylococcus_epidermidis/Kmer_Sets_L2/Colinear_Block/C2/Connect_Genomes/GCA_019329405.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Staphylococcus_epidermidis/Kmer_Sets_L2/Colinear_Block/C2/Connect_Genomes/GCA_019329365.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Staphylococcus_epidermidis/Kmer_Sets_L2/Colinear_Block/C2/Connect_Genomes/GCA_019329585.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Staphylococcus_epidermidis/Kmer_Sets_L2/Colinear_Block/C2/Connect_Genomes/GCA_019329565.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Staphylococcus_epidermidis/Kmer_Sets_L2/Colinear_Block/C2/Connect_Genomes/GCA_019329245.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Staphylococcus_epidermidis/Kmer_Sets_L2/Colinear_Block/C2/Connect_Genomes/GCA_019330225.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Staphylococcus_epidermidis/Kmer_Sets_L2/Colinear_Block/C2/Connect_Genomes/GCA_019329605.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Staphylococcus_epidermidis/Kmer_Sets_L2/Colinear_Block/C2/Connect_Genomes/GCA_019330165.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Staphylococcus_epidermidis/Kmer_Sets_L2/Colinear_Block/C2/Connect_Genomes/GCA_019329525.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Staphylococcus_epidermidis/Kmer_Sets_L2/Colinear_Block/C2/Connect_Genomes/GCA_019329705.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Staphylococcus_epidermidis/Kmer_Sets_L2/Colinear_Block/C2/Connect_Genomes/GCA_019329685.fasta
+2026-10-06 16:28:24 - StrainScan::build_DB:: C2- Extract blocks from Sibeliaz output
+2026-10-06 16:28:37 - StrainScan::build_DB:: C1- Unique k-mer extract
+::Scan unique kmer inside cluster and output
+Log: GCA_900086615 100001 102530 0
+Log: GCA_045940975 324 324 0
+Log: GCA_045939605 704 704 0
+Log: GCA_045940075 62 62 0
+Log: GCA_045939555 60 60 0
+Log: GCA_045938865 272 272 0
+Log: GCA_045944115 226 226 0
+Log: GCA_045940705 0 0 0
+Log: GCA_045936855 62 62 0
+Log: GCA_045940065 0 0 0
+Log: GCA_045933105 52 52 0
+Log: GCA_045939955 62 62 0
+Log: GCA_045942415 194 194 0
+Log: GCA_045942175 418 418 0
+Log: GCA_045937745 62 62 0
+Log: GCA_045935645 918 918 0
+Log: GCA_045786335 422 422 0
+Unique part -> kid_match: 103839 , kmatrix: 103839
+2026-10-06 16:28:57 - StrainScan::build_DB:: C1- Partial k-mer extract
+Partial Unique part -> kid_match: 192609 , kmatrix: 192609
+2026-10-06 16:29:00 - StrainScan::build_DB:: C1- Global k-mer extract and build matrix
+2026-10-06 16:29:06 - StrainScan::build_DB:: C2- Unique k-mer extract
+::Scan unique kmer inside cluster and output
+Log: GCA_019329745 22110 22110 0
+Log: GCA_019329665 82326 82326 0
+Log: GCA_019329425 30166 30166 0
+Log: GCA_045937765 100001 157484 0
+Log: GCA_019329645 1318 1318 0
+Log: GCA_019330245 3276 3276 0
+Log: GCA_019330145 5022 5022 0
+Log: GCA_019787665 354 354 0
+Log: GCA_019330185 716 716 0
+Log: GCA_900638695 27816 27816 0
+Log: GCA_019329545 1296 1296 0
+Log: GCA_019330105 2458 2458 0
+Log: GCA_019329785 724 724 0
+Log: GCA_019329505 250 250 0
+Log: GCA_019329405 540 540 0
+Log: GCA_019329365 502 502 0
+Log: GCA_019329585 226 226 0
+Log: GCA_019329565 206 206 0
+Log: GCA_019329245 62 62 0
+Log: GCA_019330225 0 0 0
+Log: GCA_019329605 50 50 0
+Log: GCA_019330165 254 254 0
+Log: GCA_019329525 158 158 0
+Log: GCA_019329705 62 62 0
+Log: GCA_019329685 144 144 0
+Unique part -> kid_match: 280037 , kmatrix: 280037
+2026-10-06 16:29:30 - StrainScan::build_DB:: C2- Partial k-mer extract
+Partial Unique part -> kid_match: 385897 , kmatrix: 385897
+2026-10-06 16:29:33 - StrainScan::build_DB:: C2- Global k-mer extract and build matrix
+2026-10-06 16:27:16 - StrainScan::build_DB: C9- Fill the Sparse matrix: Row:  103217  Column:  2
+2026-10-06 16:27:20 - StrainScan::build_DB: C9- Recluster matrix
+2026-10-06 16:27:21 - StrainScan::build_DB: C9- The current cluster is finished!
+2026-10-06 16:29:55 - StrainScan::build_DB: C1- Fill the Sparse matrix: Row:  231543  Column:  17
+2026-10-06 16:30:05 - StrainScan::build_DB: C1- Recluster matrix
+2026-10-06 16:30:06 - StrainScan::build_DB: C1- The current cluster is finished!
+2026-10-06 16:30:47 - StrainScan::build_DB: C2- Fill the Sparse matrix: Row:  444331  Column:  25
+2026-10-06 16:31:06 - StrainScan::build_DB: C2- Recluster matrix
+2026-10-06 16:31:07 - StrainScan::build_DB: C2- The current cluster is finished!
+2026-10-06 16:31:09,226 - Building Overlap matrix
+2026-10-06 16:31:09 - StrainScan::build_DB:: Build sparse matices done - Current Memory Usage: 0.3107 GB
+2026-10-06 16:31:09 - StrainScan::build_DB:: - Build omatrix cls k-mer dict...
+2026-10-06 16:33:13 - StrainScan::build_DB:: - Build omatrix cls k-mer dict... Done
+2026-10-06 16:33:13 - StrainScan::build_DB:: C2- Build overlap matrix...
+2026-10-06 16:33:30 - StrainScan::build_DB:: C2- Current Memory Usage: 3.6937 GB
+2026-10-06 16:33:30 - StrainScan::build_DB:: C2- Omatrix finished
+2026-10-06 16:33:31 - StrainScan::build_DB:: C1- Build overlap matrix...
+2026-10-06 16:33:41 - StrainScan::build_DB:: C1- Current Memory Usage: 3.6712 GB
+2026-10-06 16:33:41 - StrainScan::build_DB:: C1- Omatrix finished
+2026-10-06 16:33:41 - StrainScan::build_DB:: C9- Build overlap matrix...
+2026-10-06 16:33:45 - StrainScan::build_DB:: C9- Current Memory Usage: 3.6574 GB
+2026-10-06 16:33:45 - StrainScan::build_DB:: C9- Omatrix finished
+2026-10-06 16:33:45 - StrainScan::build_DB:: - All omatrices are finished now.

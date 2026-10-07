@@ -1,0 +1,53 @@
+{
+  "analysis": "StrainScan head-to-head reproducible rerun",
+  "date": "2026-10-07",
+  "Strain2bScan_accuracy_source": {
+    "single": "figure_raw_data/sim_headtohead/strain2bscan_single_native_persample.tsv",
+    "single_sha256": "de9ec793d6f7a771b6dc2fd449a4423cfdc3f087b0590ee4064bc392fc87e2df",
+    "multi": "figure_raw_data/sim_headtohead/strain2bscan_multi_native_persample.tsv",
+    "multi_sha256": "db59bdb4a4dd379fdc5c98c6b80b4cbf213e119a182297ee4dec8849d3d7f7ba"
+  },
+  "StrainScan": {
+    "version": "v1.0.14",
+    "platform": "linux/amd64 container",
+    "container_name": "ss",
+    "container_id": "5c18934e920c",
+    "container_image": "mambaorg/micromamba:latest",
+    "container_image_digest": "sha256:fb18405d6004af757a38ec498a078240b4fd5549146990a484c28bb7e78aace4",
+    "source_snapshot_commit": "4d71605d61ae49a52a3902eb1b467119acfada82"
+  },
+  "scope": {
+    "published_matched_single_runs": 225,
+    "completed_single_runs": 204,
+    "paired_runs": 204,
+    "no_call_matched_single_runs": 21,
+    "species_in_paired_accuracy": 14,
+    "multi_samples": 12,
+    "multi_reports_generated": 158,
+    "multi_report_opportunities": 180
+  },
+  "interpretation": {
+    "accuracy_primary": "run-level completed paired rerun, scored in each tool cluster space",
+    "cost_primary": "archived timing/build runs; not pooled with rerun accuracy",
+    "absent_report": "no detection for multi-species scoring",
+    "paired_bootstrap": {
+      "recall_difference": {
+        "point": -0.014212091503267974,
+        "ci_low": -0.06516424248768472,
+        "ci_high": 0.03269825358851674
+      },
+      "f1_difference": {
+        "point": -0.022808823529411767,
+        "ci_low": -0.0620185600744285,
+        "ci_high": 0.01289096235922152
+      }
+    }
+  },
+  "reproducibility": {
+    "manifest": "results/strainscan_rerun/run_manifest.tsv",
+    "scorer": "scripts/score_strainscan_rerun.py",
+    "aggregator": "scripts/aggregate_strainscan_rerun.py",
+    "bootstrap": "scripts/bootstrap_uncertainty.py",
+    "run_outputs": "results/strainscan_rerun/run_outputs/"
+  }
+}

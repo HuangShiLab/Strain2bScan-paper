@@ -108,22 +108,26 @@ abundance under host contamination in the primary MSA-1002 comparison (Fig 12), 
 contained in the native-2bRAD call set (Fig 8). These are concordance and stress-test results, not
 independent validations of strain identity.
 
-### Systematic head-to-head on a 15-species simulated benchmark (Fig 11, Table 1)
+### Systematic head-to-head on a 15-species simulated benchmark (Fig 11, Tables 1–3)
 
 On a common 15-species simulation pool, both tools built databases from the same genomes and profiled the
-same simulated reads. Each tool was scored in its own 0.95-similarity cluster space. Across 204 paired
-single-species samples from 14 resolvable species, median precision was 1.0 for both, but Strain2bScan
-reached full recall by 3× coverage versus 10× for StrainScan; median recall and F1 were 0.80 and 0.89 versus
-0.67 and 0.75 (Fig 11, Table 1). Strain2bScan held precision 1.0 in every species, whereas StrainScan fell
-to 0.80–0.83 in four species. Multi-species accuracy was comparable, with Strain2bScan stronger at low depth
-and StrainScan slightly stronger at high depth (Table 3).
+same simulated reads. Each tool was scored in its own 0.95-similarity cluster space. The reproducible
+comparator rerun comprised 225 matched single-species entries; 204 completed and were paired to the
+corresponding Strain2bScan runs, whereas 21 ended without calls, including all *Salmonella enterica*
+entries. Across the 204 completed runs from 14 species, species-median precision was 1.0 for both tools;
+species-median recall and F1 were 0.733 and 0.844 for Strain2bScan versus 0.667 and 0.800 for StrainScan
+(Fig 11, Table 1). In a species-cluster bootstrap, the paired mean differences in recall (−0.014; 95% CI
+−0.065 to 0.033) and F1 (−0.023; 95% CI −0.062 to 0.013) included zero. Strain2bScan reached full median
+recall at 3× and remained there, whereas StrainScan's depth profile was non-monotonic (Table 2).
+Multi-species F1 was lower for Strain2bScan at medium and high depth but higher at low depth (Table 3).
 
 The cost differences were largest during database construction: Strain2bScan used 0.7–5.1 s and 0.1–0.4 GB
 per species, versus 5–43 min and 8–28 GB for StrainScan, a 249–614× runtime and 43–138× memory advantage
 (Table 1). In the same emulated container, per-sample profiling was 4–33× faster and 5–39× lighter
 (Table 2). Because StrainScan lacks a multi-species mode, its community cost was the sum of 14 runs
 (100–398 s), versus 1–9 s for one digest-once pass (46–105× faster). StrainScan also failed to build
-*Klebsiella pneumoniae* within the resource cap, whereas Strain2bScan built it in 5.1 s. StrainScan build
+*Klebsiella pneumoniae* in the archived timing run; in the reproducible accuracy rerun, however, StrainScan
+built and profiled this species. This discrepancy underscores resource sensitivity. StrainScan build
 times were obtained under linux/amd64 emulation and are upper bounds.
 
 ### Strain-level profiling on shotgun, and the advantage under host contamination (Fig 12)

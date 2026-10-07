@@ -282,18 +282,22 @@ StrainScan does not** (>3.3 h, >25 GB).
   Time/memory with `/usr/bin/time` (`-l` native, `-v` in container).
 - *Scoring:* each tool in its own 0.95-cluster space (truth strains mapped to the tool's clusters);
   precision/recall/F1 per sample over cluster sets.
-- *Raw data (local):* `figure_raw_data/sim_headtohead/*_persample.tsv`; aggregates
-  `results/sim_headtohead_*.tsv`; tables `manuscript/tables.md`.
+- *Raw data (local):* `figure_raw_data/sim_headtohead/*_persample.tsv`; reproducible rerun aggregates
+  `results/strainscan_rerun/*.tsv`; archived cost/timing `results/sim_headtohead_*.tsv`; tables
+  `manuscript/tables.md`.
 **2. Key issue & conclusion.** On a common, controlled benchmark, does Strain2bScan match StrainScan's
-accuracy at far lower cost across many species and depths? Conclusion: **both hold precision 1.0**
-(Strain2bScan in every species; StrainScan 0.80–0.83 in four), Strain2bScan **reaches full recall by 3×
-vs StrainScan's 10×** (median R 0.80 vs 0.67, F1 0.89 vs 0.75), builds databases **249–614× faster /
-43–138× lighter**, profiles **4–33× faster** (same env), and is **46–105× faster on multi-species
-communities**. StrainScan **failed to build *K. pneumoniae*** entirely, which Strain2bScan built in 5.1 s.
-**3. Results by subfigure.** (A–C) single-species precision/recall/F1 vs depth, both tools (14 species,
-204 paired samples). (D) per-species DB build time (log), Strain2bScan vs StrainScan. (E) per-sample
-profile time vs depth, same emulated container. (F) multi-species profiling time per community sample;
-Strain2bScan one pass vs StrainScan Σ per-species runs, annotated with the fold-difference.
+accuracy at far lower cost across many species and depths? Conclusion: accuracy was broadly comparable.
+Species-median P/R/F1 was 1.0/0.733/0.844 for Strain2bScan and 1.0/0.667/0.800 for StrainScan; bootstrap
+CIs for paired mean differences included zero. Strain2bScan reached full median recall at 3× and remained
+there, whereas StrainScan was non-monotonic. Archived timing runs showed database builds **249–614×
+faster / 43–138× lighter**, same-environment profiling **4–33× faster**, and one-pass community profiling
+**46–105× faster**. StrainScan failed to build *K. pneumoniae* in the archived timing run but succeeded in
+the reproducible accuracy rerun, indicating resource sensitivity.
+**3. Results by subfigure.** (A–C) single-species median precision/recall/F1 vs depth, both tools (204
+completed paired samples across 14 species). (D) archived per-species DB build time (log), Strain2bScan vs
+StrainScan. (E) archived per-sample profile time vs depth, same emulated container. (F) archived
+multi-species profiling time per community sample; Strain2bScan one pass vs StrainScan Σ per-species runs,
+annotated with the fold-difference.
 
 ---
 

@@ -1,0 +1,58 @@
+__________________________________________________
+47:    1.339916 | 0.420300    30000
+__________________________________________________
+parent node: 47 ->
+46:    1.204533 | 0.294167    30000
+3:    1.084270 | 0.148333    30000
+__________________________________________________
+parent node: 46 ->
+45:    0.000000 | 0.000933    30000
+39:    1.217332 | 0.293100    30000
+__________________________________________________
+parent node: 39 ->
+38:    1.104985 | 0.257242    13256
+9:    1.005076 | 0.026267    30000
+__________________________________________________
+parent node: 38 ->
+37:    0.000000 | 0.000000    1204
+11:    1.176378 | 0.274033    30000
+- The total running time of tree search is  2.960998296737671  s
+
+defaultdict(<function identify_cluster.<locals>.<lambda> at 0x7fff99ecb598>, {3: {'cls_ab': 1.0842696629213484, 'cls_per': 0.4769939561377855, 'cls_cov': 0.14833333333333334, 'cls_total_num': 30000, 'cls_covered_num': 4450, 'strain': 'GCA_040616545', 's_ab': 1.0842696629213484}, 11: {'cls_ab': 1.1888611576464154, 'cls_per': 0.5230060438622144, 'cls_cov': 0.28326683195165414, 'cls_total_num': 103256, 'cls_covered_num': 29249, 'strain': 0, 's_ab': 0}})
+- Check L1 identification result firstly ...
+- 2 clusters are identified ...
+- Parallel strain-level identification ...
+/opt/conda/envs/ss/lib/python3.7/site-packages/numpy/core/fromnumeric.py:3257: RuntimeWarning: Mean of empty slice.
+  out=out, **kwargs)
+/opt/conda/envs/ss/lib/python3.7/site-packages/numpy/core/_methods.py:161: RuntimeWarning: invalid value encountered in double_scalars
+  ret = ret.dtype.type(ret / rcount)
+Traceback (most recent call last):
+  File "StrainScan.py", line 275, in <module>
+    sys.exit(main())
+  File "StrainScan.py", line 271, in main
+    Vote_Strain_L2_Lasso_new_sp.vote_strain_L2_batch(fq_dir,fq2, db_dir,out_dir,ksize,dict(cls_dict),l2,msn,pmode,emode)
+  File "/host/StrainScan/library/Vote_Strain_L2_Lasso_new_sp.py", line 296, in vote_strain_L2_batch
+    vote_strain_L2(item)
+  File "/host/StrainScan/library/Vote_Strain_L2_Lasso_new_sp.py", line 417, in vote_strain_L2
+    res,res2,strain_cov,strain_val,final_src=identify_strains_L2_Enet_Pscan_new_sp.detect_strains(db_dir+'/all_strains_re.npz',py_o,db_dir+'/id2strain_re.pkl',int(ksize),npp25,npp75,npp_outlier,cls_cov,db_dir+'/overlap_matrix.npz',all_cls,l2,msn,pmode,emode)
+  File "library/identify_strains_L2_Enet_Pscan_new_sp.py", line 375, in detect_strains
+    out_columns,out_strains,strain_cov,strain_val,final_src,dominat_avg_depth=Pre_Scan(pX,py,sid,cutoff,cls_cov,py_u,l2)
+  File "library/identify_strains_L2_Enet_Pscan_new_sp.py", line 282, in Pre_Scan
+    dominat_avg_depth=get_avg_depth(dominat,pX,py)
+  File "library/identify_strains_L2_Enet_Pscan_new_sp.py", line 114, in get_avg_depth
+    f25=np.percentile(doarr_noz,25,interpolation='nearest')
+  File "<__array_function__ internals>", line 6, in percentile
+  File "/opt/conda/envs/ss/lib/python3.7/site-packages/numpy/lib/function_base.py", line 3713, in percentile
+    a, q, axis, out, overwrite_input, interpolation, keepdims)
+  File "/opt/conda/envs/ss/lib/python3.7/site-packages/numpy/lib/function_base.py", line 3833, in _quantile_unchecked
+    interpolation=interpolation)
+  File "/opt/conda/envs/ss/lib/python3.7/site-packages/numpy/lib/function_base.py", line 3410, in _ureduce
+    r = func(a, **kwargs)
+  File "/opt/conda/envs/ss/lib/python3.7/site-packages/numpy/lib/function_base.py", line 3915, in _quantile_ureduce_func
+    r = take(ap, indices, axis=axis, out=out)
+  File "<__array_function__ internals>", line 6, in take
+  File "/opt/conda/envs/ss/lib/python3.7/site-packages/numpy/core/fromnumeric.py", line 194, in take
+    return _wrapfunc(a, 'take', indices, axis=axis, out=out, mode=mode)
+  File "/opt/conda/envs/ss/lib/python3.7/site-packages/numpy/core/fromnumeric.py", line 61, in _wrapfunc
+    return bound(*args, **kwds)
+IndexError: cannot do a non-empty take from an empty axes.

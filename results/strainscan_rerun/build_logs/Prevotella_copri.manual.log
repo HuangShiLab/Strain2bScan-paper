@@ -1,0 +1,10 @@
+2026-10-06 15:35:07,251 - Constructing matrix with dashing (jaccard index)
+/host/StrainScan
+Traceback (most recent call last):
+  File "StrainScan_build.py", line 162, in <module>
+    main()
+  File "StrainScan_build.py", line 103, in main
+    matrix = Cluster.construct_matrix(args.input_fa)
+  File "/host/StrainScan/library/Cluster.py", line 28, in construct_matrix
+    os.unlink('genome_path_tem.txt')
+FileNotFoundError: [Errno 2] No such file or directory: 'genome_path_tem.txt'

@@ -28,6 +28,12 @@ def figure_legends():
     for p in ('scripts', 'results', 'data'):
         fl = re.sub(r'`%s/[^`]+`' % p, '', fl)
     fl = re.sub(r'`\.\./[^`]+`', '', fl)
+    # Remove orphan punctuation left behind when source paths are stripped.
+    fl = re.sub(r'\*\*\s*:\s*', '** ', fl)
+    fl = re.sub(r'\(A\)\s*;\s*', '(A) ', fl)
+    fl = re.sub(r'\(B\)\s*;\s*', '(B) ', fl)
+    fl = re.sub(r'\*\*\s*;\s*', '** ', fl)
+    fl = re.sub(r'\s{2,}', ' ', fl)
     fl = re.sub(r'(\*\*Figure[^\n]*?\*\*)\s*\.\s*', r'\1 ', fl)
     fl = re.sub(r'\n[ \t]*\.\s*\n', '\n\n', fl)
     fl = re.sub(r'[ \t]+\n', '\n', fl); fl = re.sub(r'\n{3,}', '\n\n', fl)

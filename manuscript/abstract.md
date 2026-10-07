@@ -19,10 +19,12 @@ species features, although PERMANOVA R² was similar (0.757 versus 0.755). In th
 all 65 shotgun strain-cluster calls were also present in native BcgI 2bRAD-M, which yielded 128–163
 additional candidate strain-cluster calls per sample. In single-panel testing, Strain2bScan was
 approximately 8× faster and 11× lighter than StrainScan; a projected 55-species comparison was 121–146×
-lower in cost than per-species querying. On a matched 15-species benchmark it matched StrainScan precision
-(1.0), improved median recall (0.80 versus 0.67), built databases 249–614× faster and 43–138× lighter, and
-completed *Klebsiella pneumoniae*, which StrainScan could not build. In the primary host-contamination
-comparison, it was the only tested tool that preserved both detection and abundance at 99% human DNA. In
+lower in cost than per-species querying. In a run-level 15-species StrainScan rerun, species-median
+precision was 1.0 for both tools, Strain2bScan had higher median recall/F1 (0.733/0.844 versus
+0.667/0.800), and the 95% intervals for paired accuracy differences included zero; archived timing runs
+showed 249–614× faster and 43–138× lighter database construction. In the primary host-contamination
+comparison, Strain2bScan was the only tested tool that preserved both detection and abundance at 99% human
+DNA. In
 exploratory public WGS subsets, 22 libraries were profiled in 100.6 s using 343 MiB peak RSS; a
 cohort-specific isolate panel showed the expected 6/6 panel/read compatibility result and detected a
 persistent *Bifidobacterium bifidum* strain-resolved cluster across three weekly infant stool samples.

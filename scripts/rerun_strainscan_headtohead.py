@@ -75,7 +75,9 @@ def manifest() -> list[dict[str, str]]:
                         if not all(p.exists() for p in (r1, r2, truth)):
                             continue
                         rows.append({"kind": "single", "sample": stem, "species": sp,
-                                     "r1": str(r1), "r2": str(r2), "truth": str(truth)})
+                                     "r1": r1.relative_to(PAPER).as_posix(),
+                                     "r2": r2.relative_to(PAPER).as_posix(),
+                                     "truth": truth.relative_to(PAPER).as_posix()})
     for depth in ("low", "med", "high"):
         for n in range(1, 5):
             sample = f"depth_{depth}_sample{n:02d}"
@@ -84,11 +86,14 @@ def manifest() -> list[dict[str, str]]:
             truth = MULTI / f"depth_{depth}/truth/sample{n:02d}.truth.tsv"
             if all(p.exists() for p in (r1, r2, truth)):
                 rows.append({"kind": "multi", "sample": sample, "species": "multi",
-                             "r1": str(r1), "r2": str(r2), "truth": str(truth)})
+                             "r1": r1.relative_to(PAPER).as_posix(),
+                             "r2": r2.relative_to(PAPER).as_posix(),
+                             "truth": truth.relative_to(PAPER).as_posix()})
     return rows
 
 def host_to_container(path: str | Path) -> str:
-    return str(path).replace(str(PAPER), PAPERDIR, 1)
+    path = Path(path)
+    return str(path if path.is_absolute() else PAPER / path).replace(str(PAPER), PAPERDIR, 1)
 
 def build(species: list[str], threads: int) -> None:
     ensure_container()
@@ -109,6 +114,7 @@ def build(species: list[str], threads: int) -> None:
 
 def run(rows: list[dict[str, str]]) -> None:
     ensure_container()
+    failed = []
     for row in rows:
         out = WORK / "results" / row["kind"] / row["sample"]
         final = out / "final_report.txt"
@@ -123,9 +129,18 @@ def run(rows: list[dict[str, str]]) -> None:
         # StrainScan's low-depth Layer-1 mode is required for 0.5x and 1x samples.
         if row["kind"] == "single" and (row["sample"].endswith("_d0.5") or row["sample"].endswith("_d1")):
             args.extend(["-l", "1"])
-        sh(args, log=WORK / "results" / row["kind"] / f"{row['sample']}.log")
+        result = subprocess.run(args, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        if result.returncode:
+            failed.append(row["sample"])
+            print(f"[failed] {row['sample']} (returncode {result.returncode})", flush=True)
+            continue
         if not final.exists():
-            raise RuntimeError(f"StrainScan did not create final report for {row['sample']}")
+            failed.append(row["sample"])
+            print(f"[failed] {row['sample']} (no final report)", flush=True)
+            continue
+        print(f"[done] {row['sample']}", flush=True)
+    (WORK / "failed_runs.txt").write_text("\n".join(failed) + ("\n" if failed else ""))
+    print(f"profile completed: {len(rows)-len(failed)}/{len(rows)}; failed: {len(failed)}")
 
 def write_manifest(rows: list[dict[str, str]]) -> None:
     WORK.mkdir(parents=True, exist_ok=True)

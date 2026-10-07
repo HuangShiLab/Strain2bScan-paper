@@ -1,0 +1,6 @@
+analysis	metric	point	ci_low	ci_high
+saliva_leave_one_timepoint_out	strain_accuracy	1.0	1.0	1.0
+saliva_leave_one_timepoint_out	species_accuracy	0.78125	0.5625	1.0
+saliva_leave_one_timepoint_out	strain_minus_species_accuracy	0.21875	0.0	0.4375
+benchmark_paired_single_species	recall_difference	-0.014212091503267974	-0.06516424248768472	0.03269825358851674
+benchmark_paired_single_species	f1_difference	-0.022808823529411767	-0.0620185600744285	0.01289096235922152

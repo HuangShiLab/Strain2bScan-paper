@@ -1,0 +1,35 @@
+{
+  "generated": "2026-10-06",
+  "host": {
+    "model": "Apple Mac Studio (Mac16,9)",
+    "cpu": "Apple M4 Max",
+    "cores": "16 (12 performance, 4 efficiency)",
+    "memory_GB": 128,
+    "os": "macOS 26.5.1 (25F80)"
+  },
+  "docker": {
+    "client_version": "29.5.3",
+    "server_version": "29.5.3",
+    "engine_kernel": "6.12.76-linuxkit",
+    "container_name": "ss",
+    "container_id": "5c18934e920c5ef028384607cecaaea01f4d918adf523aad4f54d64e357207e9",
+    "image": "mambaorg/micromamba:latest",
+    "image_digest": "[mambaorg/micromamba@sha256:fb18405d6004af757a38ec498a078240b4fd5549146990a484c28bb7e78aace4]"
+  },
+  "strainscan_runtime": {
+    "reported_uname": "x86_64",
+    "python": "3.7.3",
+    "native_binaries": [
+      "dashing_s128",
+      "jellyfish-linux"
+    ],
+    "note": "Binaries and StrainScan extension modules are ELF x86-64 and executed through Docker Desktop binary translation on Apple silicon."
+  },
+  "rerun_scope": {
+    "single_manifest_runs": 225,
+    "completed_published_pairs": 204,
+    "no_call_published_single_runs": 21,
+    "multi_manifest_runs": 12,
+    "reason_225": "The matched subset contains 15 species with 15 intended depth/k/replicate entries each; 21 entries ended without StrainScan calls and were excluded from paired accuracy."
+  }
+}

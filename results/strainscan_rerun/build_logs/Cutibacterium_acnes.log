@@ -1,0 +1,248 @@
+2026-10-06 14:05:26,215 - Constructing matrix with dashing (jaccard index)
+2026-10-06 14:05:29,112 - Hierarchical clustering
+2026-10-06 14:05:31,798 - Constructing the tree
+2026-10-06 14:09:05,545 - Inside cluster strains kmer sets construction
+/host/StrainScan
+8 4917286 87952
+1 5038046 160498
+5 4891876 278556
+2 5065614 0
+7 4907346 98140
+3 5055764 0
+4 4944290 400674
+6 5047020 0
+- The total running time of k-mer extraction is  194.9766972064972  s
+
+6 checking	185966
+4 checking	106106
+3 checking	148052
+7 checking	163204
+2 checking	452430
+5 checking	267180
+1 checking	521672
+8 checking	1873446
+- The total running time of re-clustering is  1.9210026264190674  s
+
+6 k-mer removing...
+4 k-mer removing...
+9 k-mer removing...
+3 k-mer removing...
+10 k-mer removing...
+7 k-mer removing...
+11 k-mer removing...
+2 k-mer removing...
+12 k-mer removing...
+5 k-mer removing...
+13 k-mer removing...
+1 k-mer removing...
+14 k-mer removing...
+8 k-mer removing...
+15 k-mer removing...
+6 k-mer set building...
+4 k-mer set building...
+9 k-mer set building...
+3 k-mer set building...
+10 k-mer set building...
+7 k-mer set building...
+11 k-mer set building...
+2 k-mer set building...
+12 k-mer set building...
+5 k-mer set building...
+13 k-mer set building...
+1 k-mer set building...
+14 k-mer set building...
+8 k-mer set building...
+15 k-mer set building...
+- The total running time of tree-based indexing struture building is  16.08676052093506  s
+
+2026-10-06 14:09:05 - StrainScan::build_DB::Step2-begin: Now we will extract kmers from unique region found by sibeliaz
+2026-10-06 14:09:05 - StrainScan::build_DB:: C4- Build k-mer dict
+2026-10-06 14:09:05 - StrainScan::build_DB:: C1- Build k-mer dict
+2026-10-06 14:09:05 - StrainScan::build_DB:: C5- Build k-mer dict
+2026-10-06 14:09:05 - StrainScan::build_DB:: C7- Build k-mer dict
+2026-10-06 14:09:05 - StrainScan::build_DB:: C8- Build k-mer dict
+Load kmer to dict...
+Process:  1 / 2
+Process:  2 / 2
+2026-10-06 14:09:12 - StrainScan::build_DB:: C8- Merge genomes
+2026-10-06 14:09:12 - StrainScan::build_DB:: C8- Run Sibeliaz
+/opt/conda/envs/ss/bin/sibeliaz: line 108: free: command not found
+/opt/conda/envs/ss/bin/sibeliaz: line 56: [: : integer expression expected
+/opt/conda/envs/ss/bin/sibeliaz: line 60: [: : integer expression expected
+Load kmer to dict...
+Process:  1 / 3
+Process:  2 / 3
+Process:  3 / 3
+2026-10-06 14:09:15 - StrainScan::build_DB:: C7- Merge genomes
+2026-10-06 14:09:17 - StrainScan::build_DB:: C7- Run Sibeliaz
+/opt/conda/envs/ss/bin/sibeliaz: line 108: free: command not found
+/opt/conda/envs/ss/bin/sibeliaz: line 56: [: : integer expression expected
+/opt/conda/envs/ss/bin/sibeliaz: line 60: [: : integer expression expected
+Load kmer to dict...
+Process:  1 / 4
+Process:  2 / 4
+Process:  3 / 4
+Process:  4 / 4
+2026-10-06 14:09:21 - StrainScan::build_DB:: C5- Merge genomes
+2026-10-06 14:09:23 - StrainScan::build_DB:: C5- Run Sibeliaz
+/opt/conda/envs/ss/bin/sibeliaz: line 108: free: command not found
+/opt/conda/envs/ss/bin/sibeliaz: line 56: [: : integer expression expected
+/opt/conda/envs/ss/bin/sibeliaz: line 60: [: : integer expression expected
+sibeliaz -n -m 100 -k 15 -a 300 -o /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Cutibacterium_acnes/Kmer_Sets_L2/Colinear_Block/C8/Blocks -t 8 /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Cutibacterium_acnes/Kmer_Sets_L2/Colinear_Block/C8/Connect_Genomes/GCA_021010665.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Cutibacterium_acnes/Kmer_Sets_L2/Colinear_Block/C8/Connect_Genomes/GCA_000231215.fasta
+2026-10-06 14:09:27 - StrainScan::build_DB:: C8- Extract blocks from Sibeliaz output
+Load kmer to dict...
+Process:  1 / 6
+Process:  2 / 6
+Process:  3 / 6
+Process:  4 / 6
+Process:  5 / 6
+Process:  6 / 6
+2026-10-06 14:09:31 - StrainScan::build_DB:: C1- Merge genomes
+2026-10-06 14:09:33 - StrainScan::build_DB:: C1- Run Sibeliaz
+/opt/conda/envs/ss/bin/sibeliaz: line 108: free: command not found
+/opt/conda/envs/ss/bin/sibeliaz: line 56: [: : integer expression expected
+/opt/conda/envs/ss/bin/sibeliaz: line 60: [: : integer expression expected
+sibeliaz -n -m 100 -k 15 -a 450 -o /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Cutibacterium_acnes/Kmer_Sets_L2/Colinear_Block/C7/Blocks -t 8 /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Cutibacterium_acnes/Kmer_Sets_L2/Colinear_Block/C7/Connect_Genomes/GCA_003798465.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Cutibacterium_acnes/Kmer_Sets_L2/Colinear_Block/C7/Connect_Genomes/GCA_058182275.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Cutibacterium_acnes/Kmer_Sets_L2/Colinear_Block/C7/Connect_Genomes/GCA_057584865.fasta
+2026-10-06 14:09:35 - StrainScan::build_DB:: C7- Extract blocks from Sibeliaz output
+sibeliaz -n -m 100 -k 15 -a 600 -o /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Cutibacterium_acnes/Kmer_Sets_L2/Colinear_Block/C5/Blocks -t 8 /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Cutibacterium_acnes/Kmer_Sets_L2/Colinear_Block/C5/Connect_Genomes/GCA_056816635.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Cutibacterium_acnes/Kmer_Sets_L2/Colinear_Block/C5/Connect_Genomes/GCA_052398825.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Cutibacterium_acnes/Kmer_Sets_L2/Colinear_Block/C5/Connect_Genomes/GCA_030295305.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Cutibacterium_acnes/Kmer_Sets_L2/Colinear_Block/C5/Connect_Genomes/GCA_009177305.fasta
+2026-10-06 14:09:43 - StrainScan::build_DB:: C5- Extract blocks from Sibeliaz output
+sibeliaz -n -m 100 -k 15 -a 900 -o /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Cutibacterium_acnes/Kmer_Sets_L2/Colinear_Block/C1/Blocks -t 8 /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Cutibacterium_acnes/Kmer_Sets_L2/Colinear_Block/C1/Connect_Genomes/GCA_030166635.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Cutibacterium_acnes/Kmer_Sets_L2/Colinear_Block/C1/Connect_Genomes/GCA_021010715.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Cutibacterium_acnes/Kmer_Sets_L2/Colinear_Block/C1/Connect_Genomes/GCA_030166615.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Cutibacterium_acnes/Kmer_Sets_L2/Colinear_Block/C1/Connect_Genomes/GCA_001469595.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Cutibacterium_acnes/Kmer_Sets_L2/Colinear_Block/C1/Connect_Genomes/GCA_003390995.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Cutibacterium_acnes/Kmer_Sets_L2/Colinear_Block/C1/Connect_Genomes/GCA_029851605.fasta
+2026-10-06 14:09:49 - StrainScan::build_DB:: C1- Extract blocks from Sibeliaz output
+2026-10-06 14:09:53 - StrainScan::build_DB:: C8- Unique k-mer extract
+::Scan unique kmer inside cluster and output
+Log: GCA_021010665 46544 46544 0
+Log: GCA_000231215 42024 42024 0
+Unique part -> kid_match: 88568 , kmatrix: 88568
+2026-10-06 14:09:56 - StrainScan::build_DB:: C8- Partial k-mer extract
+Partial Unique part -> kid_match: 88568 , kmatrix: 88568
+2026-10-06 14:09:56 - StrainScan::build_DB:: C8- Global k-mer extract and build matrix
+2026-10-06 14:10:05 - StrainScan::build_DB:: C7- Unique k-mer extract
+::Scan unique kmer inside cluster and output
+Log: GCA_003798465 32762 32762 0
+Log: GCA_058182275 6466 6466 0
+Log: GCA_057584865 7198 7198 0
+Unique part -> kid_match: 46426 , kmatrix: 46426
+2026-10-06 14:10:09 - StrainScan::build_DB:: C7- Partial k-mer extract
+Partial Unique part -> kid_match: 56408 , kmatrix: 56408
+2026-10-06 14:10:09 - StrainScan::build_DB:: C7- Global k-mer extract and build matrix
+2026-10-06 14:10:17 - StrainScan::build_DB:: C5- Unique k-mer extract
+::Scan unique kmer inside cluster and output
+Log: GCA_056816635 100001 108556 0
+Log: GCA_052398825 16386 16386 0
+Log: GCA_030295305 77010 77010 0
+Log: GCA_009177305 15494 15494 0
+Unique part -> kid_match: 208891 , kmatrix: 208891
+2026-10-06 14:10:23 - StrainScan::build_DB:: C5- Partial k-mer extract
+Partial Unique part -> kid_match: 209235 , kmatrix: 209235
+2026-10-06 14:10:23 - StrainScan::build_DB:: C5- Global k-mer extract and build matrix
+Load kmer to dict...
+Process:  1 / 25
+Process:  2 / 25
+Process:  3 / 25
+Process:  4 / 25
+Process:  5 / 25
+Process:  6 / 25
+Process:  7 / 25
+Process:  8 / 25
+Process:  9 / 25
+Process:  10 / 25
+Process:  11 / 25
+Process:  12 / 25
+Process:  13 / 25
+Process:  14 / 25
+Process:  15 / 25
+Process:  16 / 25
+Process:  17 / 25
+Process:  18 / 25
+Process:  19 / 25
+Process:  20 / 25
+Process:  21 / 25
+Process:  22 / 25
+Process:  23 / 25
+Process:  24 / 25
+Process:  25 / 25
+2026-10-06 14:10:35 - StrainScan::build_DB:: C4- Merge genomes
+2026-10-06 14:10:36 - StrainScan::build_DB:: C1- Unique k-mer extract
+2026-10-06 14:10:37 - StrainScan::build_DB:: C4- Run Sibeliaz
+/opt/conda/envs/ss/bin/sibeliaz: line 108: free: command not found
+/opt/conda/envs/ss/bin/sibeliaz: line 56: [: : integer expression expected
+/opt/conda/envs/ss/bin/sibeliaz: line 60: [: : integer expression expected
+::Scan unique kmer inside cluster and output
+Log: GCA_030166635 3496 3496 0
+Log: GCA_021010715 15132 15132 0
+Log: GCA_030166615 3980 3980 0
+Log: GCA_001469595 14942 14942 0
+Log: GCA_003390995 15826 15826 0
+Log: GCA_029851605 14606 14606 0
+Unique part -> kid_match: 67982 , kmatrix: 67982
+2026-10-06 14:10:46 - StrainScan::build_DB:: C1- Partial k-mer extract
+Partial Unique part -> kid_match: 69786 , kmatrix: 69786
+2026-10-06 14:10:47 - StrainScan::build_DB:: C1- Global k-mer extract and build matrix
+sibeliaz -n -m 100 -k 15 -a 3750 -o /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Cutibacterium_acnes/Kmer_Sets_L2/Colinear_Block/C4/Blocks -t 8 /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Cutibacterium_acnes/Kmer_Sets_L2/Colinear_Block/C4/Connect_Genomes/GCA_057501535.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Cutibacterium_acnes/Kmer_Sets_L2/Colinear_Block/C4/Connect_Genomes/GCA_011399455.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Cutibacterium_acnes/Kmer_Sets_L2/Colinear_Block/C4/Connect_Genomes/GCA_058180565.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Cutibacterium_acnes/Kmer_Sets_L2/Colinear_Block/C4/Connect_Genomes/GCA_057584885.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Cutibacterium_acnes/Kmer_Sets_L2/Colinear_Block/C4/Connect_Genomes/GCA_057584875.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Cutibacterium_acnes/Kmer_Sets_L2/Colinear_Block/C4/Connect_Genomes/GCA_003030305.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Cutibacterium_acnes/Kmer_Sets_L2/Colinear_Block/C4/Connect_Genomes/GCA_057198235.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Cutibacterium_acnes/Kmer_Sets_L2/Colinear_Block/C4/Connect_Genomes/GCA_004136195.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Cutibacterium_acnes/Kmer_Sets_L2/Colinear_Block/C4/Connect_Genomes/GCA_058179315.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Cutibacterium_acnes/Kmer_Sets_L2/Colinear_Block/C4/Connect_Genomes/GCA_058178805.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Cutibacterium_acnes/Kmer_Sets_L2/Colinear_Block/C4/Connect_Genomes/GCA_029338475.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Cutibacterium_acnes/Kmer_Sets_L2/Colinear_Block/C4/Connect_Genomes/GCA_057584575.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Cutibacterium_acnes/Kmer_Sets_L2/Colinear_Block/C4/Connect_Genomes/GCA_057584585.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Cutibacterium_acnes/Kmer_Sets_L2/Colinear_Block/C4/Connect_Genomes/GCA_006739385.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Cutibacterium_acnes/Kmer_Sets_L2/Colinear_Block/C4/Connect_Genomes/GCA_057457945.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Cutibacterium_acnes/Kmer_Sets_L2/Colinear_Block/C4/Connect_Genomes/GCA_057457935.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Cutibacterium_acnes/Kmer_Sets_L2/Colinear_Block/C4/Connect_Genomes/GCA_003812785.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Cutibacterium_acnes/Kmer_Sets_L2/Colinear_Block/C4/Connect_Genomes/GCA_011399315.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Cutibacterium_acnes/Kmer_Sets_L2/Colinear_Block/C4/Connect_Genomes/GCA_057198265.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Cutibacterium_acnes/Kmer_Sets_L2/Colinear_Block/C4/Connect_Genomes/GCA_008728435.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Cutibacterium_acnes/Kmer_Sets_L2/Colinear_Block/C4/Connect_Genomes/GCA_058137405.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Cutibacterium_acnes/Kmer_Sets_L2/Colinear_Block/C4/Connect_Genomes/GCA_058182115.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Cutibacterium_acnes/Kmer_Sets_L2/Colinear_Block/C4/Connect_Genomes/GCA_057198095.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Cutibacterium_acnes/Kmer_Sets_L2/Colinear_Block/C4/Connect_Genomes/GCA_057584595.fasta /host/Strain2bScan-paper/work/strainscan_headtohead_rerun/db/Cutibacterium_acnes/Kmer_Sets_L2/Colinear_Block/C4/Connect_Genomes/GCA_057198105.fasta
+2026-10-06 14:11:27 - StrainScan::build_DB:: C4- Extract blocks from Sibeliaz output
+2026-10-06 14:12:57 - StrainScan::build_DB:: C4- Unique k-mer extract
+::Scan unique kmer inside cluster and output
+Log: GCA_057501535 100001 106306 0
+Log: GCA_011399455 2162 2162 0
+Log: GCA_058180565 19870 19870 0
+Log: GCA_057584885 508 508 0
+Log: GCA_057584875 560 560 0
+Log: GCA_003030305 406 406 0
+Log: GCA_057198235 13228 13228 0
+Log: GCA_004136195 58 58 0
+Log: GCA_058179315 530 530 0
+Log: GCA_058178805 342 342 0
+Log: GCA_029338475 1716 1716 0
+Log: GCA_057584575 658 658 0
+Log: GCA_057584585 860 860 0
+Log: GCA_006739385 456 456 0
+Log: GCA_057457945 1132 1132 0
+Log: GCA_057457935 718 718 0
+Log: GCA_003812785 13550 13550 0
+Log: GCA_011399315 432 432 0
+Log: GCA_057198265 3976 3976 0
+Log: GCA_008728435 158 158 0
+Log: GCA_058137405 5652 5652 0
+Log: GCA_058182115 23800 23800 0
+Log: GCA_057198095 272 272 0
+Log: GCA_057584595 14150 14150 0
+Log: GCA_057198105 566 566 0
+Unique part -> kid_match: 205761 , kmatrix: 205761
+2026-10-06 14:13:29 - StrainScan::build_DB:: C4- Partial k-mer extract
+Partial Unique part -> kid_match: 226281 , kmatrix: 226281
+2026-10-06 14:13:30 - StrainScan::build_DB:: C4- Global k-mer extract and build matrix
+2026-10-06 14:10:08 - StrainScan::build_DB: C8- Fill the Sparse matrix: Row:  88568  Column:  2
+2026-10-06 14:10:12 - StrainScan::build_DB: C8- Recluster matrix
+2026-10-06 14:10:14 - StrainScan::build_DB: C8- The current cluster is finished!
+2026-10-06 14:10:26 - StrainScan::build_DB: C7- Fill the Sparse matrix: Row:  97502  Column:  3
+2026-10-06 14:10:31 - StrainScan::build_DB: C7- Recluster matrix
+2026-10-06 14:10:33 - StrainScan::build_DB: C7- The current cluster is finished!
+2026-10-06 14:10:56 - StrainScan::build_DB: C5- Fill the Sparse matrix: Row:  269279  Column:  4
+2026-10-06 14:11:14 - StrainScan::build_DB: C5- Recluster matrix
+2026-10-06 14:11:18 - StrainScan::build_DB: C5- The current cluster is finished!
+2026-10-06 14:11:25 - StrainScan::build_DB: C1- Fill the Sparse matrix: Row:  219322  Column:  6
+2026-10-06 14:11:38 - StrainScan::build_DB: C1- Recluster matrix
+2026-10-06 14:11:40 - StrainScan::build_DB: C1- The current cluster is finished!
+2026-10-06 14:15:15 - StrainScan::build_DB: C4- Fill the Sparse matrix: Row:  652143  Column:  25
+2026-10-06 14:15:54 - StrainScan::build_DB: C4- Recluster matrix
+2026-10-06 14:15:57 - StrainScan::build_DB: C4- The current cluster is finished!
+2026-10-06 14:15:59,954 - Building Overlap matrix
+2026-10-06 14:15:59 - StrainScan::build_DB:: Build sparse matices done - Current Memory Usage: 0.2763 GB
+2026-10-06 14:15:59 - StrainScan::build_DB:: - Build omatrix cls k-mer dict...
+2026-10-06 14:17:58 - StrainScan::build_DB:: - Build omatrix cls k-mer dict... Done
+2026-10-06 14:17:58 - StrainScan::build_DB:: C4- Build overlap matrix...
+2026-10-06 14:18:30 - StrainScan::build_DB:: C4- Current Memory Usage: 4.1860 GB
+2026-10-06 14:18:30 - StrainScan::build_DB:: C4- Omatrix finished
+2026-10-06 14:18:30 - StrainScan::build_DB:: C1- Build overlap matrix...
+2026-10-06 14:18:42 - StrainScan::build_DB:: C1- Current Memory Usage: 4.1400 GB
+2026-10-06 14:18:42 - StrainScan::build_DB:: C1- Omatrix finished
+2026-10-06 14:18:42 - StrainScan::build_DB:: C5- Build overlap matrix...
+2026-10-06 14:18:55 - StrainScan::build_DB:: C5- Current Memory Usage: 4.1453 GB
+2026-10-06 14:18:55 - StrainScan::build_DB:: C5- Omatrix finished
+2026-10-06 14:18:55 - StrainScan::build_DB:: C7- Build overlap matrix...
+2026-10-06 14:19:00 - StrainScan::build_DB:: C7- Current Memory Usage: 4.1269 GB
+2026-10-06 14:19:00 - StrainScan::build_DB:: C7- Omatrix finished
+2026-10-06 14:19:00 - StrainScan::build_DB:: C8- Build overlap matrix...
+2026-10-06 14:19:05 - StrainScan::build_DB:: C8- Current Memory Usage: 4.1260 GB
+2026-10-06 14:19:05 - StrainScan::build_DB:: C8- Omatrix finished
+2026-10-06 14:19:05 - StrainScan::build_DB:: - All omatrices are finished now.

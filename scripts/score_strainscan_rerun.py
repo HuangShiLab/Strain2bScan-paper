@@ -58,10 +58,12 @@ def main():
             maps[sp] = cluster_map(db) if (db / "Cluster_Result/hclsMap_95_recls.txt").exists() else {}
         g2c = maps[sp]
         truth_path = Path(row["truth"])
+        if not truth_path.is_absolute():
+            truth_path = PAPER / truth_path
         if row["kind"] == "single":
             truth_rows = read_tsv(truth_path)
-            truth = {g2c[r[1]] for r in truth_rows if r[1] in g2c}
-            pred = report_clusters(WORK / "results/single" / row["sample"] / row["species"] / "final_report.txt")
+            truth = {g2c[r[0]] for r in truth_rows if r[0] in g2c}
+            pred = report_clusters(WORK / "results/single" / row["sample"] / "final_report.txt")
         else:
             truth = set(); pred = set()
             for r in read_tsv(truth_path):
@@ -75,17 +77,24 @@ def main():
                 sp = report.parent.name
                 for cluster in report_clusters(report):
                     pred.add(f"{sp}|{cluster}")
-        tp, fp, fn, precision, recall, f1 = metrics(truth, pred)
+        if row["kind"] == "single":
+            report = WORK / "results/single" / row["sample"] / "final_report.txt"
+        else:
+            report = WORK / "results/multi" / row["sample"]
+        completed = (report.is_file() if row["kind"] == "single" else report.is_dir())
+        tp, fp, fn, precision, recall, f1 = metrics(truth, pred) if completed else (0, 0, 0, float("nan"), float("nan"), float("nan"))
         rows.append({"kind": row["kind"], "sample": row["sample"], "species": row["species"],
-                     "depth": depth_of(row["sample"]), "n_truth": len(truth), "n_pred": len(pred),
+                     "depth": depth_of(row["sample"]), "status": "completed" if completed else "no_call",
+                     "n_truth": len(truth), "n_pred": len(pred),
                      "tp": tp, "fp": fp, "fn": fn, "precision": precision, "recall": recall, "f1": f1})
     out = WORK / "scored_runs.tsv"
     with open(out, "w", newline="") as fh:
-        fields = ["kind","sample","species","depth","n_truth","n_pred","tp","fp","fn","precision","recall","f1"]
+        fields = ["kind","sample","species","depth","status","n_truth","n_pred","tp","fp","fn","precision","recall","f1"]
         writer = csv.DictWriter(fh, fieldnames=fields, delimiter="\t", lineterminator="\n"); writer.writeheader(); writer.writerows(rows)
     print(f"wrote {out} ({len(rows)} scored runs)")
-    complete = [r for r in rows if r["kind"] == "single"]
-    print(f"single completed: {len(complete)}")
+    complete = [r for r in rows if r["kind"] == "single" and r["status"] == "completed"]
+    no_call = [r for r in rows if r["kind"] == "single" and r["status"] == "no_call"]
+    print(f"single completed: {len(complete)}; single no-call: {len(no_call)}")
 
 if __name__ == "__main__":
     main()

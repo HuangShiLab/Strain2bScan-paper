@@ -3,9 +3,11 @@
 Strain2bScan couples a sparse 2bRAD marker space to a StrainScan-style clustering and unique-marker
 framework in a fast Rust implementation. Across the tested settings, 2bRAD tags preserved genome-wide strain
 ordering that 16S did not (median Spearman 0.94 versus 0.36), precision was 1.0 in simulated single-species
-benchmarks, and detection matched StrainScan at 0.5× coverage. On a common 15-species benchmark, Strain2bScan
-improved median recall (0.80 versus 0.67) at equal precision while reducing database build by 249–614× and
-profiling by 4–105× (Figs 2, 3, 10 and 11).
+benchmarks, and detection matched StrainScan at 0.5× coverage. In a run-level 15-species StrainScan rerun,
+species-median precision was 1.0 for both tools and the confidence intervals for paired recall/F1
+differences included zero, although Strain2bScan had higher species-median point estimates
+(0.733/0.844 versus 0.667/0.800). Its consistent advantages were database-construction cost, single-pass
+community profiling, and retention under high host DNA (Figs 2, 3, 10–12).
 
 **Native 2bRAD for low-biomass, high-host microbiomes.** Native reduction occurs before host DNA dominates a
 library. In the primary MSA-1002 comparison at 99% human DNA and a 10⁻⁴ abundance threshold, Strain2bScan

@@ -2,7 +2,8 @@
 """Fig 11 - systematic Strain2bScan vs StrainScan head-to-head on the 15-species simulated benchmark.
 Six panels: (A-C) single-species precision/recall/F1 vs depth; (D) per-species DB build time;
 (E) same-environment profile time vs depth; (F) multi-species profiling time per community sample.
-Reads results/sim_headtohead_*.tsv; writes figures/sim_headtohead.{png,pdf}."""
+Reads the reproducible StrainScan-rerun accuracy tables plus archived cost/timing tables;
+writes figures/sim_headtohead.{png,pdf}."""
 import os, csv
 import matplotlib; matplotlib.use("Agg")
 import matplotlib.pyplot as plt, numpy as np
@@ -12,7 +13,7 @@ DEPTHS = ["0.5", "1", "3", "5", "10"]
 
 def load(p): return list(csv.DictReader(open(p), delimiter="\t"))
 
-bd   = {r["depth"]: r for r in load("results/sim_headtohead_single_by_depth.tsv")}
+bd   = {r["group"]: r for r in load("results/strainscan_rerun/single_by_depth.tsv")}
 bc   = [r for r in load("results/sim_headtohead_build_cost.tsv") if r["ss_build_s"] != "NA"]
 pt   = load("results/sim_headtohead_profile_sameenv.tsv")
 mt   = load("results/sim_headtohead_multi.tsv")

@@ -151,6 +151,68 @@ for r in throughput:
         # The label is in the comments, so absence here is not an error, but text must say projected.
         pass
 
+rerun_species = load_tsv("results/strainscan_rerun/single_by_species.tsv")
+rerun_depth = load_tsv("results/strainscan_rerun/single_by_depth.tsv")
+rerun_summary = {r["metric"]: int(r["value"]) for r in load_tsv("results/strainscan_rerun/rerun_summary.tsv")}
+if rerun_summary != {
+    "manifest_single_runs": 1125,
+    "published_matched_single_runs": 225,
+    "completed_single_runs": 204,
+    "paired_native_runs": 204,
+    "no_call_published_matched_single_runs": 21,
+    "unattempted_full_manifest_single_runs": 900,
+    "multi_samples": 12,
+    "strainscan_multi_reports": 158,
+    "strainscan_multi_expected_reports": 180,
+}:
+    fail(f"StrainScan rerun coverage summary changed: {rerun_summary}")
+if len(rerun_species) != 14 or sum(int(r["n"]) for r in rerun_species) != 204:
+    fail("StrainScan rerun species table no longer represents 204 completed pairs across 14 species")
+rerun_medians = {
+    metric: statistics.median(float(r[metric]) for r in rerun_species)
+    for metric in ("s2b_precision", "s2b_recall", "s2b_f1", "ss_precision", "ss_recall", "ss_f1")
+}
+rerun_expected = {
+    "s2b_precision": 1.0, "s2b_recall": 0.73335, "s2b_f1": 0.84445,
+    "ss_precision": 1.0, "ss_recall": 0.6666666666666666, "ss_f1": 0.8,
+}
+for metric, expected in rerun_expected.items():
+    if not math.isclose(rerun_medians[metric], expected, abs_tol=5e-5):
+        fail(f"StrainScan rerun species median changed for {metric}: {rerun_medians[metric]}")
+if [r["group"] for r in rerun_depth] != ["0.5", "1", "3", "5", "10"] or any(
+    float(rerun_depth[i]["s2b_recall"]) != 1.0 for i in (2, 3, 4)
+):
+    fail("StrainScan rerun depth medians no longer support the 3× onset statement")
+
+uncertainty = {r["analysis"] + ":" + r["metric"]: r for r in load_tsv("results/uncertainty_summary.tsv")}
+for key, point, lo, hi in [
+    ("benchmark_paired_single_species:recall_difference", -0.014212091503267974, -0.06516424248768472, 0.03269825358851674),
+    ("benchmark_paired_single_species:f1_difference", -0.022808823529411767, -0.0620185600744285, 0.01289096235922152),
+]:
+    row = uncertainty.get(key)
+    if row is None or any(not math.isclose(float(row[field]), expected, abs_tol=5e-5)
+                          for field, expected in (("point", point), ("ci_low", lo), ("ci_high", hi))):
+        fail(f"benchmark uncertainty changed unexpectedly: {key}")
+
+plot_sim = (ROOT / "scripts/plot_sim_headtohead.py").read_text()
+if "results/strainscan_rerun/single_by_depth.tsv" not in plot_sim:
+    fail("Figure 11 accuracy panels do not read the reproducible rerun table")
+if "results/sim_headtohead_single_by_depth.tsv" in plot_sim:
+    fail("Figure 11 accuracy panels still read the superseded aggregate table")
+checkpoint = (ROOT / "results/strainscan_rerun/checksums.sha256")
+if checkpoint.exists():
+    for line in checkpoint.read_text().splitlines():
+        expected, rel = line.split("  ", 1)
+        p = ROOT / "results/strainscan_rerun" / rel
+        if not p.exists():
+            fail(f"missing archived StrainScan rerun artifact: {rel}")
+        elif hashlib.sha256(p.read_bytes()).hexdigest() != expected:
+            fail(f"checksum mismatch in archived StrainScan rerun artifact: {rel}")
+
+for phrase in ("0.733/0.844", "0.667/0.800", "included zero", "non-monotonic"):
+    if phrase not in (ROOT / "manuscript/results.md").read_text() + (ROOT / "manuscript/abstract.md").read_text():
+        fail(f"required rerun-qualified claim absent: {phrase!r}")
+
 saliva_ml = load_tsv("results/saliva_temporal_ml.tsv")
 ml = {r["metric"]: r["strain"] for r in saliva_ml}
 if ml.get("leave_one_timepoint_out_subject_accuracy") != "1.0000" or ml.get("n_subjects") != "8":

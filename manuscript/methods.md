@@ -416,11 +416,13 @@ genomes independently, **each tool was scored in its own cluster space**: predic
 against the truth strains mapped into that tool's clusters; for Strain2bScan via the truth `cluster`
 column, for StrainScan via its `Cluster_Result/hclsMap_95_recls.txt` (report `Cluster_ID` = `C`+cluster
 id); and precision/recall/F1 computed over the cluster sets per sample. Strain2bScan profiled all 2 025 +
-60 samples; StrainScan profiled a matched subset (different-cluster mixtures, k = 2/3/5, one replicate, all
-depths; near-clonal *M. tuberculosis* via its same-cluster samples); 204 depth-matched paired
-single-species samples across 14 species, plus 4 multi-species samples per depth. StrainScan has no
-multi-species mode, so each community sample was profiled once per species database and the per-sample
-cost taken as the sum of wall-clock over species (peak RSS as the maximum).
+60 samples; the reproducible StrainScan rerun used a matched subset (different-cluster mixtures, k = 2/3/5,
+one replicate, all depths; near-clonal *M. tuberculosis* via its same-cluster samples). Of these 225
+intended entries, 204 completed and were paired; 21 ended without calls, including all *S. enterica*
+entries. The paired accuracy set therefore comprised 14 species. For communities, 12 samples were rerun and
+158 of 180 possible species-by-sample final reports were generated; absent reports were treated as no
+detection. StrainScan has no multi-species mode, so archived cost was the sum of wall-clock over species
+databases (peak RSS as the maximum).
 
 *Software and timing provenance.* The primary ATCC mock benchmark was frozen at Strain2bScan commit
 `f26f234b817ba7772a3f1df59ce720751e9b45b9` (release-build SHA-256
@@ -431,10 +433,12 @@ Strain2bScan build and profile times for the 15-species benchmark were native ar
 confound in profiling speed, a `linux/amd64` Strain2bScan binary was run in the same container on the same
 subset, giving the same-environment ratio in Fig 11E/Table 2. StrainScan build times were obtained under
 `linux/amd64` QEMU emulation and are therefore upper bounds. DB build for *K. pneumoniae* did not complete
-under StrainScan and that species is omitted from the paired accuracy set. Complete raw StrainScan per-sample
-outputs and the original `scratchpad/eval` drivers were not retained. The available Strain2bScan per-sample
-tables, aggregate tables, and frozen ATCC mock outputs are retained, but the 15-species StrainScan comparison
-is therefore reproducible only at the aggregate-table level and is declared a provenance limitation.
+in the archived timing run but did complete in the reproducible accuracy rerun; these results are therefore
+reported separately rather than pooled. Original `scratchpad/eval` drivers were not retained, but the new
+comparator rerun has a manifest, container-derived database mappings, logs, run outputs, run-level scores,
+and aggregate tables in `work/strainscan_headtohead_rerun/` and `results/strainscan_rerun/`. Uncertainty was
+estimated by resampling species with replacement for 20 000 replicates and reporting 2.5th and 97.5th
+percentiles of paired mean Strain2bScan-minus-StrainScan differences.
 
 **Comparison to StrainScan (curated-DB and per-sample benchmarks).** In addition to the common benchmark
 above, StrainScan v1.0.14 was run on its **own** reference databases (Fig 10) and on the same *C. acnes*
