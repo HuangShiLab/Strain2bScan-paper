@@ -79,7 +79,9 @@ irreducible case (a strain represented only by a low-completeness, contaminated 
 no clustering can overcome. (v) The public-cohort experiment in Table 4 adds real WGS profiling of longitudinal, multi-site and
 low-biomass samples, and Table 5 adds an isolate-derived panel compatibility check. These are application-oriented
 subsets rather than closed-world truth benchmarks: read sets used to build the isolate panel were also
-used for self-recovery, and the real metagenomes lack exhaustive strain truth. Deeper external
+used for self-recovery, and the real metagenomes lack exhaustive strain truth. The comparator scope in
+Table 8 separates the executed StrainScan and inStrain comparisons from StrainGE, a related
+reference-guided shotgun toolkit that was not rerun here. Deeper external
 validation, oral-cancer case/control analysis, FFPE and degraded material, broader multi-tool
 comparison (sylph, StrainGE), and completing the Fast2bRAD-M species layer remain future work.
 

@@ -14,6 +14,7 @@ submission; DOIs/accession numbers should be added.*
    and genetic diversity from metagenomes.** *Genome Research* 2017; 27(4):626–638.
 5. van Dijk LR, Walker BJ, Straub TJ, *et al.* **StrainGE: a toolkit to track and characterize
    low-abundance strains in complex microbial communities.** *Genome Biology* 2022; 23:74.
+   doi:10.1186/s13059-022-02630-0.
 6. Shaw J, Yu YW. **Rapid species-level metagenome profiling and containment estimation with sylph.**
    *Nature Biotechnology* 2024 (advance online).
 7. Ondov BD, Treangen TJ, Melsted P, *et al.* **Mash: fast genome and metagenome distance estimation using

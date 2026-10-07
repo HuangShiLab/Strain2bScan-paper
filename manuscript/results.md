@@ -135,7 +135,10 @@ times were obtained under linux/amd64 emulation and are upper bounds.
 We compared Strain2bScan, StrainScan v1.0.14 and inStrain 1.10.0 on shotgun reads from the same four ATCC
 mocks. Strain2bScan used the all-enzyme 164-genome tree; StrainScan used per-species databases; inStrain
 used a dereplicated 98%-ANI reference, as its documentation requires. Each tool was scored in its own
-0.95-similarity cluster space.
+0.95-similarity cluster space. StrainScan and inStrain were therefore the executed strain-resolved
+comparators. StrainGE was treated as a related reference-guided shotgun comparator rather than a benchmarked
+one because its standard StrainGST/StrainGR workflow was not part of the frozen database and run
+configuration (Table 8).
 
 At the primary 10⁻⁴ threshold, each tool scored well on the MSA-1002 0%-host sample. The tools then
 separated under host contamination. Strain2bScan retained F1 = 1.0 at 90, 95 and 99% human DNA; Bray–Curtis
@@ -187,3 +190,16 @@ isolate-out *E. coli* tests reinforced this boundary: reads from an absent isola
 relatives broadly (0.799–0.911) and were reported as merged `C0|C1` rather than creating a false third
 cluster. Thus, closed panels can misassign conspecific signal, and absence of a true strain cannot be
 inferred from a nearest-relative call (Table 6).
+
+### Comparator scope
+
+The executed strain-resolved comparisons used StrainScan and inStrain because both operate directly on the
+frozen shotgun benchmark reads and could be scored under the frozen cluster-space or read-level workflow.
+StrainScan is the closest methodological comparator because it uses reference-guided strain-cluster
+resolution. inStrain represents widely used read-level shotgun profiling. StrainGE (including StrainGST for
+reference selection and StrainGR for strain-resolved variant calling) addresses a related shotgun task, but
+its documented workflow uses WMS reads and StrainGE-specific reference databases; it was not rerun in this
+study and is therefore not represented in the quantitative comparator results. Native BcgI 2bRAD libraries
+are also outside its documented input scope. Table 8 records this distinction so that the missing StrainGE
+row is interpreted as a scope limitation and future comparison, not as evidence of equivalent or inferior
+performance.

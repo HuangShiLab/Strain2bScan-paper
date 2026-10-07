@@ -232,7 +232,10 @@ times were obtained under linux/amd64 emulation and are upper bounds.
 We compared Strain2bScan, StrainScan v1.0.14 and inStrain 1.10.0 on shotgun reads from the same four ATCC
 mocks. Strain2bScan used the all-enzyme 164-genome tree; StrainScan used per-species databases; inStrain
 used a dereplicated 98%-ANI reference, as its documentation requires. Each tool was scored in its own
-0.95-similarity cluster space.
+0.95-similarity cluster space. StrainScan and inStrain were therefore the executed strain-resolved
+comparators. StrainGE was treated as a related reference-guided shotgun comparator rather than a benchmarked
+one because its standard StrainGST/StrainGR workflow was not part of the frozen database and run
+configuration (Table 8).
 
 At the primary 10⁻⁴ threshold, each tool scored well on the MSA-1002 0%-host sample. The tools then
 separated under host contamination. Strain2bScan retained F1 = 1.0 at 90, 95 and 99% human DNA; Bray–Curtis
@@ -284,6 +287,19 @@ isolate-out *E. coli* tests reinforced this boundary: reads from an absent isola
 relatives broadly (0.799–0.911) and were reported as merged `C0|C1` rather than creating a false third
 cluster. Thus, closed panels can misassign conspecific signal, and absence of a true strain cannot be
 inferred from a nearest-relative call (Table 6).
+
+#### Comparator scope
+
+The executed strain-resolved comparisons used StrainScan and inStrain because both operate directly on the
+frozen shotgun benchmark reads and could be scored under the frozen cluster-space or read-level workflow.
+StrainScan is the closest methodological comparator because it uses reference-guided strain-cluster
+resolution. inStrain represents widely used read-level shotgun profiling. StrainGE (including StrainGST for
+reference selection and StrainGR for strain-resolved variant calling) addresses a related shotgun task, but
+its documented workflow uses WMS reads and StrainGE-specific reference databases; it was not rerun in this
+study and is therefore not represented in the quantitative comparator results. Native BcgI 2bRAD libraries
+are also outside its documented input scope. Table 8 records this distinction so that the missing StrainGE
+row is interpreted as a scope limitation and future comparison, not as evidence of equivalent or inferior
+performance.
 
 ## Discussion
 
@@ -366,7 +382,9 @@ irreducible case (a strain represented only by a low-completeness, contaminated 
 no clustering can overcome. (v) The public-cohort experiment in Table 4 adds real WGS profiling of longitudinal, multi-site and
 low-biomass samples, and Table 5 adds an isolate-derived panel compatibility check. These are application-oriented
 subsets rather than closed-world truth benchmarks: read sets used to build the isolate panel were also
-used for self-recovery, and the real metagenomes lack exhaustive strain truth. Deeper external
+used for self-recovery, and the real metagenomes lack exhaustive strain truth. The comparator scope in
+Table 8 separates the executed StrainScan and inStrain comparisons from StrainGE, a related
+reference-guided shotgun toolkit that was not rerun here. Deeper external
 validation, oral-cancer case/control analysis, FFPE and degraded material, broader multi-tool
 comparison (sylph, StrainGE), and completing the Fast2bRAD-M species layer remain future work.
 
@@ -783,7 +801,11 @@ against **StrainScan** 1.0.14 (per-species databases, `linux/amd64` container) a
 shown as a control in Fig S4). Each tool was scored in its own 0.95-similarity cluster space
 against the mock ground truth (`Ground_truth/*`, sequence abundance), reporting precision, recall, F1,
 AUPR (abundance-threshold sweep, Ye et al. 2019), and Bray–Curtis and L2 similarity to the truth profile
-(2bRAD-M, 2021); scorer `scripts/score_all.py`, figures `scripts/plot_figs_h.py`. (vii) *Real saliva* (Fig 7, Fig 8): native BcgI
+(2bRAD-M, 2021); scorer `scripts/score_all.py`, figures `scripts/plot_figs_h.py`. StrainGE was reviewed as a
+related reference-guided shotgun comparator but was not executed: it was not part of the frozen benchmark
+configuration, and a fair rerun would require its WMS-oriented StrainGST/StrainGR workflow and
+StrainGE-specific reference databases. Table 8 therefore lists StrainGE as a scope comparison rather than as
+a benchmarked comparator. (vii) *Real saliva* (Fig 7, Fig 8): native BcgI
 2bRAD (and paired shotgun WMS) saliva from PRJNA1131785, 8 subjects × 4 within-day timepoints, profiled
 against a 19-species oral-commensal panel (up to 25 genomes/species). Strain- and species-level relative
 abundances → Bray–Curtis → PERMANOVA (adonis, subject/timepoint factors) and leave-one-timepoint-out
@@ -1066,6 +1088,21 @@ This test shows that closed panels can misattribute a truly absent conspecific s
 It therefore supports the paper's conservative treatment of the low-coverage W2 *E. coli* signal as an
 unresolved `C0|C1|C2` unit rather than assigning it to one isolate.
 
+**Table 8. Comparator and assay scope.** This table distinguishes tools executed in the benchmark from
+related tools discussed for context. It is a scope statement, not a performance comparison. Native 2bRAD
+denotes BcgI-derived experimental libraries; shotgun denotes conventional WMS reads, which Strain2bScan
+can also process after in-silico digestion.
+
+| Tool | Executed here | Input scope | Typical resolution | Scope and role |
+|---|:--:|---|---|---|
+| Strain2bScan | Yes | Native BcgI 2bRAD reads and in-silico-digested shotgun reads | Strain clusters | Method under test; one marker framework supports both reduced-representation and shotgun input. |
+| StrainScan v1.0.14 | Yes | Shotgun reads against per-species reference databases | Strain clusters | Direct reference-guided comparator on shotgun reads (Fig 10–12; Tables 1–3). |
+| inStrain v1.10.0 | Yes | Shotgun reads aligned to a dereplicated reference | Strain and SNV | Direct read-level shotgun comparator (Fig 12 and Fig S4). |
+| StrainGE / StrainGST / StrainGR | No | Shotgun WMS reads; native BcgI 2bRAD is not documented input | Strain level, reference guided | Related comparator. It was not executed because it was outside the frozen benchmark and no performance claim is made here. |
+| 2bRAD-M / Fast2bRAD-M | No | Native BcgI 2bRAD reads | Mainly species | Same restriction-assay family; provides the species-level upstream context for Strain2bScan. |
+| sylph | No | Shotgun sketches | Mainly species and ANI | Context for rapid species-level profiling; not a strain-resolved benchmark here. |
+| StrainPhlAn | No | Shotgun marker genes | Strain types | Context for marker-gene strain profiling; not rerun here. |
+
 ## References
 
 *Working bibliography compiled from the tools and methods cited in the text. Author-facing note:
@@ -1082,6 +1119,7 @@ submission; DOIs/accession numbers should be added.*
    and genetic diversity from metagenomes.** *Genome Research* 2017; 27(4):626–638.
 5. van Dijk LR, Walker BJ, Straub TJ, *et al.* **StrainGE: a toolkit to track and characterize
    low-abundance strains in complex microbial communities.** *Genome Biology* 2022; 23:74.
+   doi:10.1186/s13059-022-02630-0.
 6. Shaw J, Yu YW. **Rapid species-level metagenome profiling and containment estimation with sylph.**
    *Nature Biotechnology* 2024 (advance online).
 7. Ondov BD, Treangen TJ, Melsted P, *et al.* **Mash: fast genome and metagenome distance estimation using

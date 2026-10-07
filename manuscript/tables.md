@@ -97,3 +97,18 @@ two *E. coli* assemblies and the three Bifidobacterium species controls.
 This test shows that closed panels can misattribute a truly absent conspecific strain to near relatives.
 It therefore supports the paper's conservative treatment of the low-coverage W2 *E. coli* signal as an
 unresolved `C0|C1|C2` unit rather than assigning it to one isolate.
+
+**Table 8. Comparator and assay scope.** This table distinguishes tools executed in the benchmark from
+related tools discussed for context. It is a scope statement, not a performance comparison. Native 2bRAD
+denotes BcgI-derived experimental libraries; shotgun denotes conventional WMS reads, which Strain2bScan
+can also process after in-silico digestion.
+
+| Tool | Executed here | Input scope | Typical resolution | Scope and role |
+|---|:--:|---|---|---|
+| Strain2bScan | Yes | Native BcgI 2bRAD reads and in-silico-digested shotgun reads | Strain clusters | Method under test; one marker framework supports both reduced-representation and shotgun input. |
+| StrainScan v1.0.14 | Yes | Shotgun reads against per-species reference databases | Strain clusters | Direct reference-guided comparator on shotgun reads (Fig 10–12; Tables 1–3). |
+| inStrain v1.10.0 | Yes | Shotgun reads aligned to a dereplicated reference | Strain and SNV | Direct read-level shotgun comparator (Fig 12 and Fig S4). |
+| StrainGE / StrainGST / StrainGR | No | Shotgun WMS reads; native BcgI 2bRAD is not documented input | Strain level, reference guided | Related comparator. It was not executed because it was outside the frozen benchmark and no performance claim is made here. |
+| 2bRAD-M / Fast2bRAD-M | No | Native BcgI 2bRAD reads | Mainly species | Same restriction-assay family; provides the species-level upstream context for Strain2bScan. |
+| sylph | No | Shotgun sketches | Mainly species and ANI | Context for rapid species-level profiling; not a strain-resolved benchmark here. |
+| StrainPhlAn | No | Shotgun marker genes | Strain types | Context for marker-gene strain profiling; not rerun here. |

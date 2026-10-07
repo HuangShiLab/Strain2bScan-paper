@@ -388,7 +388,11 @@ against **StrainScan** 1.0.14 (per-species databases, `linux/amd64` container) a
 shown as a control in Fig S4). Each tool was scored in its own 0.95-similarity cluster space
 against the mock ground truth (`Ground_truth/*`, sequence abundance), reporting precision, recall, F1,
 AUPR (abundance-threshold sweep, Ye et al. 2019), and Bray–Curtis and L2 similarity to the truth profile
-(2bRAD-M, 2021); scorer `scripts/score_all.py`, figures `scripts/plot_figs_h.py`. (vii) *Real saliva* (Fig 7, Fig 8): native BcgI
+(2bRAD-M, 2021); scorer `scripts/score_all.py`, figures `scripts/plot_figs_h.py`. StrainGE was reviewed as a
+related reference-guided shotgun comparator but was not executed: it was not part of the frozen benchmark
+configuration, and a fair rerun would require its WMS-oriented StrainGST/StrainGR workflow and
+StrainGE-specific reference databases. Table 8 therefore lists StrainGE as a scope comparison rather than as
+a benchmarked comparator. (vii) *Real saliva* (Fig 7, Fig 8): native BcgI
 2bRAD (and paired shotgun WMS) saliva from PRJNA1131785, 8 subjects × 4 within-day timepoints, profiled
 against a 19-species oral-commensal panel (up to 25 genomes/species). Strain- and species-level relative
 abundances → Bray–Curtis → PERMANOVA (adonis, subject/timepoint factors) and leave-one-timepoint-out
