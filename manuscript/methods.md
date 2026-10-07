@@ -428,6 +428,19 @@ entries. The paired accuracy set therefore comprised 14 species. For communities
 detection. StrainScan has no multi-species mode, so archived cost was the sum of wall-clock over species
 databases (peak RSS as the maximum).
 
+*StrainGST rerun.* We additionally ran StrainGST 1.3.9, the reference-search component of StrainGE, on
+the 225 matched single-species simulations, the 12 multi-species communities and the four primary ATCC
+WMS mocks. For each species panel, all genomes were k-merized with StrainGE's default k = 23, near-subset
+references were removed, remaining references were clustered at Jaccard 0.90, and one StrainGST
+species-level pan-genome database was created with the recommended workflow. Each sample was k-merized
+once and searched against every relevant species database (maximum five iterations for single-species
+samples, eight for communities and 32 for mocks). Calls used StrainGST score >= 0.02. Accuracy was scored
+by mapping truth genomes and reported references through StrainGE's 0.90-reference clusters; DNA-mock
+detection additionally used abundance >= 1e-4, as in the primary comparison. Wall time is the sum of one
+sample k-merization and all species searches, and peak RSS is the maximum across those stages. StrainGR
+was not run, so these are StrainGST identification and abundance results rather than full StrainGE
+variant calling.
+
 *Software and timing provenance.* The primary ATCC mock benchmark was frozen at Strain2bScan commit
 `f26f234b817ba7772a3f1df59ce720751e9b45b9` (release-build SHA-256
 `a4cf7a4043a06c55a99d6abf1e9fd312f6243aa5a5ca021bd41915636fb56b18`, Rust 1.97.0); later software commits

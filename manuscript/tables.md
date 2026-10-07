@@ -108,7 +108,22 @@ can also process after in-silico digestion.
 | Strain2bScan | Yes | Native BcgI 2bRAD reads and in-silico-digested shotgun reads | Strain clusters | Method under test; one marker framework supports both reduced-representation and shotgun input. |
 | StrainScan v1.0.14 | Yes | Shotgun reads against per-species reference databases | Strain clusters | Direct reference-guided comparator on shotgun reads (Fig 10–12; Tables 1–3). |
 | inStrain v1.10.0 | Yes | Shotgun reads aligned to a dereplicated reference | Strain and SNV | Direct read-level shotgun comparator (Fig 12 and Fig S4). |
-| StrainGE / StrainGST / StrainGR | No | Shotgun WMS reads; native BcgI 2bRAD is not documented input | Strain level, reference guided | Related comparator. It was not executed because it was outside the frozen benchmark and no performance claim is made here. |
+| StrainGE / StrainGST / StrainGR | StrainGST only | Shotgun WMS reads against StrainGE 0.90-reference databases; native BcgI 2bRAD is not documented input | Strain level, reference guided | Related shotgun comparator rerun in Table 9; StrainGR was not run. |
 | 2bRAD-M / Fast2bRAD-M | No | Native BcgI 2bRAD reads | Mainly species | Same restriction-assay family; provides the species-level upstream context for Strain2bScan. |
 | sylph | No | Shotgun sketches | Mainly species and ANI | Context for rapid species-level profiling; not a strain-resolved benchmark here. |
 | StrainPhlAn | No | Shotgun marker genes | Strain types | Context for marker-gene strain profiling; not rerun here. |
+
+**Table 9. StrainGST (StrainGE 1.3.9) rerun accuracy and efficiency.** Simulations are the matched
+`_rep1_` subset and all 12 multi-species communities. Mocks are the primary WMS replicate used in
+Figure 12; MSA-1002 is the 99%-host sample. Accuracy is in StrainGE's 0.90-reference space; mock calls
+use abundance >= 1e-4. Wall time is one sample k-merization plus all per-species StrainGST searches; RSS
+is the maximum across those stages. StrainGR was not run.
+
+| Dataset | n | Precision | Recall | F1 | Median wall time/sample (s) | Median peak RSS/sample (GB) |
+|---|--:|--:|--:|--:|--:|--:|
+| Simulated single-species | 225 | 1.000 | 1.000 | 1.000 | 18.66 | 1.30 |
+| Simulated multi-species | 12 | 0.901 | 1.000 | 0.941 | 236.98 | 7.90 |
+| MSA-1002, 99% host | 1 | 0.700 | 0.700 | 0.700 | 1007.22 | 14.36 |
+| MSA-1003 | 1 | 0.464 | 0.650 | 0.542 | 2158.75 | 21.52 |
+| MSA-1005 | 1 | 0.333 | 0.833 | 0.476 | 1784.50 | 20.10 |
+| MSA-1007 | 1 | 0.429 | 1.000 | 0.600 | 1555.76 | 17.69 |

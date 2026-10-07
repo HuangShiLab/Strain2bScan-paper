@@ -1,0 +1,5 @@
+benchmark	sample	mock	n_databases	kmerize_wall_s	search_wall_s_sum	total_wall_s	maxrss_bytes	status	output_dir	kmerize_cpu_s	search_cpu_s_sum	total_cpu_s
+ATCC_DNA_mock	MSA1002_99	MSA1002	28	680.25	326.96999999999997	1007.22	14435532800	completed	work/strainge_rerun/runs/mock/MSA1002_99	672.11	283.34	955.45
+ATCC_DNA_mock	MSA1003_0	MSA1003	28	1393.2740691660147	765.48	2158.7540691660147	21524627456	completed	work/strainge_rerun/runs/mock/MSA1003_0		673.19	673.19
+ATCC_DNA_mock	MSA1005_0	MSA1005	28	1234.38	550.12	1784.5	20097318912	completed	work/strainge_rerun/runs/mock/MSA1005_0	1177.6699999999998	498.0	1675.6699999999998
+ATCC_DNA_mock	MSA1007_0	MSA1007	28	1107.33	448.43	1555.76	17694588928	completed	work/strainge_rerun/runs/mock/MSA1007_0	1094.71	400.07	1494.78

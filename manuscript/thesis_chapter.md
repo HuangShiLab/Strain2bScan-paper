@@ -347,16 +347,32 @@ inferred from a nearest-relative call (Table 6).
 
 #### Comparator scope
 
-The executed strain-resolved comparisons used StrainScan and inStrain because both operate directly on the
+The primary strain-resolved comparisons used StrainScan and inStrain because both operate directly on the
 frozen shotgun benchmark reads and could be scored under the frozen cluster-space or read-level workflow.
 StrainScan is the closest methodological comparator because it uses reference-guided strain-cluster
-resolution. inStrain represents widely used read-level shotgun profiling. StrainGE (including StrainGST for
-reference selection and StrainGR for strain-resolved variant calling) addresses a related shotgun task, but
-its documented workflow uses WMS reads and StrainGE-specific reference databases; it was not rerun in this
-study and is therefore not represented in the quantitative comparator results. Native BcgI 2bRAD libraries
-are also outside its documented input scope. Table 8 records this distinction so that the missing StrainGE
-row is interpreted as a scope limitation and future comparison, not as evidence of equivalent or inferior
-performance.
+resolution. inStrain represents widely used read-level shotgun profiling. A supplementary StrainGST rerun
+covers the related reference-guided StrainGE workflow; because StrainGE's documented input is WMS rather
+than native BcgI 2bRAD, and StrainGR variant calling was not run, this rerun is reported separately rather
+than pooled with the primary same-assay comparisons (Table 8).
+
+#### StrainGST rerun on simulations and ATCC WMS mocks (Table 9)
+
+StrainGST completed all 237 simulation runs and all four ATCC WMS mocks. On the 225 matched
+single-species simulations, median precision, recall and F1 were 1.000 in StrainGE's 0.90-reference
+space; median cost was 18.66 s and 1.30 GB per sample. On the 12 multi-species communities, median
+precision was 0.901, recall was 1.000 and F1 was 0.941; median cost was 236.98 s and 7.90 GB. This
+runtime includes one sample k-merization and searches against all 15 species databases. On the same
+matched simulations, Strain2bScan medians were 0.35 s and 0.051 GB for single-species samples and 4.33 s
+and 0.662 GB for communities; StrainGST therefore used approximately 53-54× more wall time and 12-25×
+more peak RSS. Accuracy was not pooled because the two tools use different cluster spaces.
+
+ATCC behaviour was mock dependent. At the 1e-4 abundance threshold, StrainGST F1 was 0.700 on MSA-1002
+at 99% host, 0.542 on MSA-1003, 0.476 on MSA-1005 and 0.600 on MSA-1007. Cost was 1007.22-2158.75 s and
+14.36-21.52 GB peak RSS per sample, including one sample k-merization and 28 species searches. These
+results are not directly pooled with the primary comparator curves because each tool is scored in its own
+reference space and StrainGR was not run; they show that the reference-guided StrainGST workflow is
+feasible on these shotgun mocks but does not remove the input-scope distinction from native 2bRAD
+analysis.
 
 ## 3. Discussion
 
@@ -440,10 +456,10 @@ no clustering can overcome. (v) The public-cohort experiment in Table 4 adds rea
 low-biomass samples, and Table 5 adds an isolate-derived panel compatibility check. These are application-oriented
 subsets rather than closed-world truth benchmarks: read sets used to build the isolate panel were also
 used for self-recovery, and the real metagenomes lack exhaustive strain truth. The comparator scope in
-Table 8 separates the executed StrainScan and inStrain comparisons from StrainGE, a related
-reference-guided shotgun toolkit that was not rerun here. Deeper external
+Table 8 separates the executed StrainScan and inStrain comparisons from the supplementary StrainGST rerun;
+StrainGR variant calling and native-2bRAD input for StrainGE remain untested. Deeper external
 validation, oral-cancer case/control analysis, FFPE and degraded material, broader multi-tool
-comparison (sylph, StrainGE), and completing the Fast2bRAD-M species layer remain future work.
+comparison (sylph), and completing the Fast2bRAD-M species layer remain future work.
 
 (vi) The PRJNA1517970 body-site panel still produced no calls, showing that species choice alone does not
 solve low-marker input; panel completeness and sequencing depth remain limiting. (vii) Leave-one-isolate-out
@@ -985,6 +1001,19 @@ entries. The paired accuracy set therefore comprised 14 species. For communities
 detection. StrainScan has no multi-species mode, so archived cost was the sum of wall-clock over species
 databases (peak RSS as the maximum).
 
+*StrainGST rerun.* We additionally ran StrainGST 1.3.9, the reference-search component of StrainGE, on
+the 225 matched single-species simulations, the 12 multi-species communities and the four primary ATCC
+WMS mocks. For each species panel, all genomes were k-merized with StrainGE's default k = 23, near-subset
+references were removed, remaining references were clustered at Jaccard 0.90, and one StrainGST
+species-level pan-genome database was created with the recommended workflow. Each sample was k-merized
+once and searched against every relevant species database (maximum five iterations for single-species
+samples, eight for communities and 32 for mocks). Calls used StrainGST score >= 0.02. Accuracy was scored
+by mapping truth genomes and reported references through StrainGE's 0.90-reference clusters; DNA-mock
+detection additionally used abundance >= 1e-4, as in the primary comparison. Wall time is the sum of one
+sample k-merization and all species searches, and peak RSS is the maximum across those stages. StrainGR
+was not run, so these are StrainGST identification and abundance results rather than full StrainGE
+variant calling.
+
 *Software and timing provenance.* The primary ATCC mock benchmark was frozen at Strain2bScan commit
 `f26f234b817ba7772a3f1df59ce720751e9b45b9` (release-build SHA-256
 `a4cf7a4043a06c55a99d6abf1e9fd312f6243aa5a5ca021bd41915636fb56b18`, Rust 1.97.0); later software commits
@@ -1410,10 +1439,25 @@ can also process after in-silico digestion.
 | Strain2bScan | Yes | Native BcgI 2bRAD reads and in-silico-digested shotgun reads | Strain clusters | Method under test; one marker framework supports both reduced-representation and shotgun input. |
 | StrainScan v1.0.14 | Yes | Shotgun reads against per-species reference databases | Strain clusters | Direct reference-guided comparator on shotgun reads (Fig 10–12; Tables 1–3). |
 | inStrain v1.10.0 | Yes | Shotgun reads aligned to a dereplicated reference | Strain and SNV | Direct read-level shotgun comparator (Fig 12 and Fig S4). |
-| StrainGE / StrainGST / StrainGR | No | Shotgun WMS reads; native BcgI 2bRAD is not documented input | Strain level, reference guided | Related comparator. It was not executed because it was outside the frozen benchmark and no performance claim is made here. |
+| StrainGE / StrainGST / StrainGR | StrainGST only | Shotgun WMS reads against StrainGE 0.90-reference databases; native BcgI 2bRAD is not documented input | Strain level, reference guided | Related shotgun comparator rerun in Table 9; StrainGR was not run. |
 | 2bRAD-M / Fast2bRAD-M | No | Native BcgI 2bRAD reads | Mainly species | Same restriction-assay family; provides the species-level upstream context for Strain2bScan. |
 | sylph | No | Shotgun sketches | Mainly species and ANI | Context for rapid species-level profiling; not a strain-resolved benchmark here. |
 | StrainPhlAn | No | Shotgun marker genes | Strain types | Context for marker-gene strain profiling; not rerun here. |
+
+**Table 9. StrainGST (StrainGE 1.3.9) rerun accuracy and efficiency.** Simulations are the matched
+`_rep1_` subset and all 12 multi-species communities. Mocks are the primary WMS replicate used in
+Figure 12; MSA-1002 is the 99%-host sample. Accuracy is in StrainGE's 0.90-reference space; mock calls
+use abundance >= 1e-4. Wall time is one sample k-merization plus all per-species StrainGST searches; RSS
+is the maximum across those stages. StrainGR was not run.
+
+| Dataset | n | Precision | Recall | F1 | Median wall time/sample (s) | Median peak RSS/sample (GB) |
+|---|--:|--:|--:|--:|--:|--:|
+| Simulated single-species | 225 | 1.000 | 1.000 | 1.000 | 18.66 | 1.30 |
+| Simulated multi-species | 12 | 0.901 | 1.000 | 0.941 | 236.98 | 7.90 |
+| MSA-1002, 99% host | 1 | 0.700 | 0.700 | 0.700 | 1007.22 | 14.36 |
+| MSA-1003 | 1 | 0.464 | 0.650 | 0.542 | 2158.75 | 21.52 |
+| MSA-1005 | 1 | 0.333 | 0.833 | 0.476 | 1784.50 | 20.10 |
+| MSA-1007 | 1 | 0.429 | 1.000 | 0.600 | 1555.76 | 17.69 |
 
 ## 7. References
 

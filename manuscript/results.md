@@ -193,13 +193,29 @@ inferred from a nearest-relative call (Table 6).
 
 ### Comparator scope
 
-The executed strain-resolved comparisons used StrainScan and inStrain because both operate directly on the
+The primary strain-resolved comparisons used StrainScan and inStrain because both operate directly on the
 frozen shotgun benchmark reads and could be scored under the frozen cluster-space or read-level workflow.
 StrainScan is the closest methodological comparator because it uses reference-guided strain-cluster
-resolution. inStrain represents widely used read-level shotgun profiling. StrainGE (including StrainGST for
-reference selection and StrainGR for strain-resolved variant calling) addresses a related shotgun task, but
-its documented workflow uses WMS reads and StrainGE-specific reference databases; it was not rerun in this
-study and is therefore not represented in the quantitative comparator results. Native BcgI 2bRAD libraries
-are also outside its documented input scope. Table 8 records this distinction so that the missing StrainGE
-row is interpreted as a scope limitation and future comparison, not as evidence of equivalent or inferior
-performance.
+resolution. inStrain represents widely used read-level shotgun profiling. A supplementary StrainGST rerun
+covers the related reference-guided StrainGE workflow; because StrainGE's documented input is WMS rather
+than native BcgI 2bRAD, and StrainGR variant calling was not run, this rerun is reported separately rather
+than pooled with the primary same-assay comparisons (Table 8).
+
+### StrainGST rerun on simulations and ATCC WMS mocks (Table 9)
+
+StrainGST completed all 237 simulation runs and all four ATCC WMS mocks. On the 225 matched
+single-species simulations, median precision, recall and F1 were 1.000 in StrainGE's 0.90-reference
+space; median cost was 18.66 s and 1.30 GB per sample. On the 12 multi-species communities, median
+precision was 0.901, recall was 1.000 and F1 was 0.941; median cost was 236.98 s and 7.90 GB. This
+runtime includes one sample k-merization and searches against all 15 species databases. On the same
+matched simulations, Strain2bScan medians were 0.35 s and 0.051 GB for single-species samples and 4.33 s
+and 0.662 GB for communities; StrainGST therefore used approximately 53-54× more wall time and 12-25×
+more peak RSS. Accuracy was not pooled because the two tools use different cluster spaces.
+
+ATCC behaviour was mock dependent. At the 1e-4 abundance threshold, StrainGST F1 was 0.700 on MSA-1002
+at 99% host, 0.542 on MSA-1003, 0.476 on MSA-1005 and 0.600 on MSA-1007. Cost was 1007.22-2158.75 s and
+14.36-21.52 GB peak RSS per sample, including one sample k-merization and 28 species searches. These
+results are not directly pooled with the primary comparator curves because each tool is scored in its own
+reference space and StrainGR was not run; they show that the reference-guided StrainGST workflow is
+feasible on these shotgun mocks but does not remove the input-scope distinction from native 2bRAD
+analysis.
