@@ -106,8 +106,8 @@ can also process after in-silico digestion.
 | Tool | Executed here | Input scope | Typical resolution | Scope and role |
 |---|:--:|---|---|---|
 | Strain2bScan | Yes | Native BcgI 2bRAD reads and in-silico-digested shotgun reads | Strain clusters | Method under test; one marker framework supports both reduced-representation and shotgun input. |
-| StrainScan v1.0.14 | Yes | Shotgun reads against per-species reference databases | Strain clusters | Direct reference-guided comparator on shotgun reads (Fig 10–12; Tables 1–3). |
-| inStrain v1.10.0 | Yes | Shotgun reads aligned to a dereplicated reference | Strain and SNV | Direct read-level shotgun comparator (Fig 12 and Fig S4). |
+| StrainScan v1.0.14 | Yes | Shotgun reads against per-species reference databases | Strain clusters | Direct reference-guided comparator on shotgun reads (Fig 10–11, Supplementary Fig S5; Tables 1–3). |
+| inStrain v1.10.0 | Yes | Shotgun reads aligned to a dereplicated reference | Strain and SNV | Direct read-level shotgun comparator (Fig 11 and Fig S4). |
 | StrainGE / StrainGST / StrainGR | StrainGST only | Shotgun WMS reads against StrainGE 0.90-reference databases; native BcgI 2bRAD is not documented input | Strain level, reference guided | Related shotgun comparator rerun in Table 9; StrainGR was not run. |
 | 2bRAD-M / Fast2bRAD-M | No | Native BcgI 2bRAD reads | Mainly species | Same restriction-assay family; provides the species-level upstream context for Strain2bScan. |
 | sylph | No | Shotgun sketches | Mainly species and ANI | Context for rapid species-level profiling; not a strain-resolved benchmark here. |
@@ -115,7 +115,7 @@ can also process after in-silico digestion.
 
 **Table 9. StrainGST (StrainGE 1.3.9) rerun accuracy and efficiency.** Simulations are the matched
 `_rep1_` subset and all 12 multi-species communities. Mocks are the primary WMS replicate used in
-Figure 12; MSA-1002 is the 99%-host sample. Accuracy is in StrainGE's 0.90-reference space; mock calls
+Figure 11; MSA-1002 is the 99%-host sample. Accuracy is in StrainGE's 0.90-reference space; mock calls
 use abundance >= 1e-4. Wall time is one sample k-merization plus all per-species StrainGST searches; RSS
 is the maximum across those stages. StrainGR was not run.
 
@@ -127,3 +127,15 @@ is the maximum across those stages. StrainGR was not run.
 | MSA-1003 | 1 | 0.464 | 0.650 | 0.542 | 2158.75 | 21.52 |
 | MSA-1005 | 1 | 0.333 | 0.833 | 0.476 | 1784.50 | 20.10 |
 | MSA-1007 | 1 | 0.429 | 1.000 | 0.600 | 1555.76 | 17.69 |
+
+**Table S3. Exploratory native BcgI 2bRAD-M oral-library profiling.** Four libraries from the
+PRJNA1131785 exploratory oral cohort were profiled against the same 19-species panel used for the saliva
+analysis. No case/control labels were available in public metadata. Values are from
+`results/clinical_exploratory.tsv`.
+
+| Sample | Distinct markers | Species resolved | Strain calls | Runtime (s) | Top species |
+|---|--:|--:|--:|--:|---|
+| S_0313206 | 271,322 | 15 | 115 | 2.3 | *Neisseria subflava*; *Haemophilus parainfluenzae*; *Actinomyces odontolyticus* |
+| S_1413231 | 288,019 | 17 | 129 | 1.8 | *Neisseria subflava*; *Streptococcus mitis*; *Actinomyces odontolyticus* |
+| S_8123213 | 370,379 | 16 | 149 | 2.0 | *Actinomyces odontolyticus*; *Neisseria subflava*; *Haemophilus parainfluenzae* |
+| S_8221232 | 488,180 | 17 | 158 | 1.8 | *Actinomyces odontolyticus*; *Neisseria subflava*; *Rothia mucilaginosa* |

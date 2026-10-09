@@ -43,9 +43,13 @@ TABLES = lambda: body("manuscript/tables.md").strip()
 REFS   = lambda: read("manuscript/references.md").strip()
 
 # ---------- full manuscript ----------
-TITLE_M = ("# Strain2bScan: strain-level metagenomic profiling on 2bRAD-reduced markers "
-"for low-biomass microbiomes and community-scale cohorts\n\n"
-"*Assembled manuscript. Authors, affiliations, funding and data-availability accessions to be completed.*\n\n---")
+TITLE_M = ("# Strain2bScan: strain-level profiling from 2bRAD markers across microbiomes\n\n"
+"[Author 1 Given Name Surname]<sup>1</sup>, [Author 2 Given Name Surname]<sup>2</sup>, "
+"[additional authors to be completed]\n\n"
+"<sup>1</sup> [Department, Institution, City, Country]; "
+"<sup>2</sup> [Department, Institution, City, Country].\n"
+"[Add further numbered affiliations and mark the corresponding author here.]\n\n"
+"*Author-facing placeholder: replace all bracketed author and affiliation fields before submission.*\n\n---")
 full = "\n\n".join([
     TITLE_M,
     "## Abstract\n\n" + abstract(),
@@ -53,6 +57,16 @@ full = "\n\n".join([
     "## Results\n\n" + shift(results(), 1),
     "## Discussion\n\n" + body("manuscript/discussion.md").strip(),
     "## Methods\n\n" + shift(body("manuscript/methods.md").strip(), 1),
+    "## Funding\n\n"
+    "[Funding statement to be completed. List funder names, award numbers and recipient initials, or state "
+    "\u201cThis work received no external funding.\u201d Do not leave this placeholder in a submitted version.]\n\n"
+    "## Data and code availability\n\n"
+    "The Strain2bScan source code is available at https://github.com/HuangShiLab/Strain2bScan. "
+    "Derived tables, benchmark configurations, checksums and assembly scripts are available at "
+    "https://github.com/HuangShiLab/Strain2bScan-paper. Public human metagenome reads used in the "
+    "exploratory analyses are from PRJNA1131785, PRJNA288562, PRJNA1517970, PRJNA1191223 and PRJNA1191225. "
+    "Commercial ATCC mock standards are identified by their catalogue names in the manuscript. No new "
+    "human subject data were generated for this study.\n\n"
     "## Figure legends\n\n" + shift(figure_legends(), 1),
     "## Tables\n\n" + TABLES(),
     REFS(),
@@ -67,8 +81,7 @@ disc_full = disc[:i].rstrip() + "\n\n" + extra + "\n\n" + disc[i:]
 methods_full = (shift(body("manuscript/methods.md").strip(), 1)
     + "\n\n### Extended algorithmic detail, data structures and complexity\n\n"
     + shift(read("manuscript/_thesis_methods_appendix.md").strip(), 1))
-TITLE_T = ("# Strain-level metagenomic profiling on 2bRAD-reduced markers: Strain2bScan for "
-"low-biomass microbiomes and community-scale cohorts\n\n"
+TITLE_T = ("# Strain2bScan: strain-level profiling from 2bRAD markers across microbiomes\n\n"
 "*Thesis chapter. Extended background, technical methods and discussion relative to the manuscript "
 "version (`full_manuscript.md`).*\n\n---")
 thesis = "\n\n".join([

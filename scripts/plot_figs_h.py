@@ -277,7 +277,7 @@ if __name__ == "__main__":
                 f"{FIGDIR}/figS_tree_expansion", legend_sp)
     wms = build_wms()
     legend_sp = {species_of(g) for r in wms for g, v in profiles.get(r["_truthkey"], {}).items() if v > 0}
-    draw_figure(wms, "Figure 12 — Primary WMS mock comparison (detection threshold 1e-4)",
+    draw_figure(wms, "Figure 11 — Primary WMS mock comparison (detection threshold 1e-4)",
                 f"{FIGDIR}/fig12_wms_toolcompare", legend_sp)
     brad = build_brad()
     legend_sp = {species_of(g) for r in brad for g, v in profiles.get(r["_truthkey"], {}).items() if v > 0}

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Produce the draft-backed numbered figure set.
 
-Outputs are Figures 1-12 and S1-S4 in ``figures/numbered`` and match
+Outputs are Figures 1-11 and S1-S5 in ``figures/numbered`` and match
 ``figures/numbered/MANIFEST.tsv``. Single-source figures copy the vector PDF;
 multi-source figures are montaged vertically from their source PNGs. Re-run after
 regenerating any panel figure.
@@ -24,9 +24,8 @@ MAIN = {
     "07": ["saliva_individual_discrimination", "saliva_temporal_ml"],
     "08": ["saliva_concordance"],
     "09": ["performance", "scalability", "community_throughput"],
-    "10": ["species_expansion"],
-    "11": ["sim_headtohead"],
-    "12": ["fig12_wms_toolcompare"],
+    "10": ["sim_headtohead"],
+    "11": ["fig12_wms_toolcompare"],
 }
 SUPP = {
     # (former S1 rank-rank scatter is now Fig 2 panel B — see scripts/plot_fig2_combined.py)
@@ -34,16 +33,18 @@ SUPP = {
     "S2": ["gate_calibration"],
     "S3": ["figS_tree_expansion"],    # DB-expansion cost: 20- vs 28-species combined tree
     "S4": ["figS_instrain_derep"],   # non-dereplicated vs dereplicated inStrain reference
+    "S5": ["species_expansion"],     # exploratory StrainScan-curated-database comparison
 }
 
 # Human-readable output labels. By default the source stems are joined with '+';
 # these overrides avoid redundant names such as Fig12_fig12_wms_toolcompare.
 LABELS = {
     "06": "native_2brad_mocks",
-    "10": "species_expansion_strainscan",
-    "12": "wms_toolcompare",
+    "10": "sim_headtohead",
+    "11": "wms_toolcompare",
     "S3": "tree_expansion",
     "S4": "instrain_derep",
+    "S5": "species_expansion_strainscan",
 }
 
 def montage(tag, sources):

@@ -173,7 +173,7 @@ for ax, level in zip(axes, ("species", "strain")):
         idx = [i for i, sm in enumerate(samples) if subject[sm] == s]
         ax.scatter(coords[idx, 0], coords[idx, 1], s=70, color=colors[s],
                    label=f"subject {s}", edgecolor="k", linewidth=0.5, alpha=0.9)
-    ax.set_title(f"{level.capitalize()}-level  (R²={R2:.2f}, p={p:.3f}, 1-NN acc={acc:.0%})",
+    ax.set_title(f"{level.capitalize()}-level PCoA  (R²={R2:.2f}, p={p:.3f})",
                  fontsize=12)
     ax.set_xlabel(f"PCo1 ({ev[0]*100:.0f}%)", fontsize=11)
     ax.set_ylabel(f"PCo2 ({ev[1]*100:.0f}%)", fontsize=11)

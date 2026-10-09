@@ -196,9 +196,9 @@ for key, point, lo, hi in [
 
 plot_sim = (ROOT / "scripts/plot_sim_headtohead.py").read_text()
 if "results/strainscan_rerun/single_by_depth.tsv" not in plot_sim:
-    fail("Figure 11 accuracy panels do not read the reproducible rerun table")
+    fail("Figure 10 accuracy panels do not read the reproducible rerun table")
 if "results/sim_headtohead_single_by_depth.tsv" in plot_sim:
-    fail("Figure 11 accuracy panels still read the superseded aggregate table")
+    fail("Figure 10 accuracy panels still read the superseded aggregate table")
 checkpoint = (ROOT / "results/strainscan_rerun/checksums.sha256")
 if checkpoint.exists():
     for line in checkpoint.read_text().splitlines():
@@ -233,13 +233,13 @@ brad_start = plot.index("def build_brad():")
 brad_end = plot.index("# ---------------- assemble Fig S")
 brad_block = plot[brad_start:brad_end]
 if "Strain2bScan-port" in wms_block:
-    fail("primary Figure 12 includes non-primary Strain2bScan-port rows")
+    fail("primary Figure 11 includes non-primary Strain2bScan-port rows")
 if '"120"' in brad_block:
     fail("primary Figure 6 includes 20-species tree rows")
 if '"120"' in wms_block:
-    fail("primary Figure 12 includes 20-species tree rows")
+    fail("primary Figure 11 includes 20-species tree rows")
 if "164-tracegap" in wms_block:
-    fail("primary Figure 12 includes trace-gap rows")
+    fail("primary Figure 11 includes trace-gap rows")
 
 # 5. Required and forbidden manuscript phrasing.
 text = read("manuscript/abstract.md", "manuscript/results.md", "manuscript/methods.md",
