@@ -194,6 +194,42 @@ for key, point, lo, hi in [
                           for field, expected in (("point", point), ("ci_low", lo), ("ci_high", hi))):
         fail(f"benchmark uncertainty changed unexpectedly: {key}")
 
+sensitivity_rows = load_tsv("results/strainscan_rerun/sensitivity_failure_as_absence.tsv")
+if len(sensitivity_rows) != 1 or sensitivity_rows[0]["n_entries"] != "225" or sensitivity_rows[0]["no_call_entries"] != "21":
+    fail("failure-aware sensitivity coverage changed")
+for field, expected in (
+    ("recall_difference_point", 0.06459614814814814),
+    ("recall_difference_ci_low", -0.034218818518518525),
+    ("recall_difference_ci_high", 0.19674783333333304),
+    ("f1_difference_point", 0.06248133333333334),
+    ("f1_difference_ci_low", -0.036274330864197525),
+    ("f1_difference_ci_high", 0.20248760370370295),
+):
+    if not math.isclose(float(sensitivity_rows[0][field]), expected, abs_tol=5e-9):
+        fail(f"failure-aware sensitivity changed for {field}")
+
+resolution = {r["species"]: r for r in load_tsv("results/strainscan_rerun/database_cluster_resolution.tsv")}
+if len(resolution) != 15 or resolution["Salmonella_enterica"]["s2b_0.95_clusters"] != "19" or resolution["Salmonella_enterica"]["strainscan_0.95_clusters"] != "12":
+    fail("database-resolution audit no longer supports Table 1 cluster-count columns")
+
+public_runs = load_tsv("results/realworld_cohort_benchmark/public_run_manifest.tsv")
+if len(public_runs) != 22 or len({r["run"] for r in public_runs}) != 22:
+    fail("public-run manifest no longer enumerates 22 unique runs")
+p08 = {r["run"]: r["condition_or_site"] for r in public_runs if r["project"] == "PRJNA1191223"}
+expected_p08 = {
+    "SRR32121885": "preterm infant P08 stool W1",
+    "SRR32121884": "preterm infant P08 stool W2",
+    "SRR32121883": "preterm infant P08 stool W3",
+}
+if p08 != expected_p08:
+    fail(f"P08 accession-to-week mapping changed: {p08}")
+body_panel = load_tsv("results/realworld_cohort_benchmark/PRJNA1517970_body_site_panel.tsv")
+if len(body_panel) != 13 or sum(int(r["genomes"]) for r in body_panel) != 74:
+    fail("PRJNA1517970 body-site panel no longer contains 74 genomes across 13 species")
+instrain_provenance = (ROOT / "results/mock_benchmark_f26f234/instrain_provenance.txt").read_text()
+if "package: inStrain 1.9.1" not in instrain_provenance or "popANI_reference >= 0.99999" not in instrain_provenance:
+    fail("inStrain provenance lacks archived version and call filters")
+
 plot_sim = (ROOT / "scripts/plot_sim_headtohead.py").read_text()
 if "results/strainscan_rerun/single_by_depth.tsv" not in plot_sim:
     fail("Figure 10 accuracy panels do not read the reproducible rerun table")
@@ -256,7 +292,7 @@ for phrase in required:
 forbidden = [
     "error-free 150 bp", "150 bp paired-end", "Strain2bScan and StrainScan F1 = 1.0",
     "all three tools performed well", "confirmed by native", "130–146", "8.5×", "6.5×",
-    "recovered all six", "all strains from\nthe ATCC mocks",
+    "recovered all six", "all strains from\nthe ATCC mocks", "inStrain 1.10.0", "146 genomes",
 ]
 for phrase in forbidden:
     if phrase in text:

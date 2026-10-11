@@ -16,7 +16,7 @@ ax.step(d, s10, where="mid", marker="^", lw=2, ls="--", color="#2ca02c", label="
 ax.set_xscale("log"); ax.set_xticks(d); ax.set_xticklabels([f"{x}×" for x in d])
 ax.set_yticks([0, 1]); ax.set_yticklabels(["missed", "detected"]); ax.set_ylim(-0.15, 1.15)
 ax.set_xlabel("per-strain sequencing depth")
-ax.set_title("Detection vs depth (C. acnes strain): both tools match at 0.5× (strand-fixed)")
+ax.set_title("Detection vs depth (C. acnes strain): both tools detect at 0.5×")
 ax.legend(loc="center left", fontsize=8); ax.grid(alpha=0.3, axis="x")
 ax.axvspan(0.08, 0.4, color="orange", alpha=0.07)
 ax.text(0.16, 0.55, "both miss\n< ~0.5×", fontsize=8, color="#cc7000", ha="center")

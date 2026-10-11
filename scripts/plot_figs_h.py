@@ -273,7 +273,7 @@ def build_supp():
 if __name__ == "__main__":
     supp = build_supp()
     legend_sp = {species_of(g) for r in supp for g, v in profiles.get(r["_truthkey"], {}).items() if v > 0}
-    draw_figure(supp, "Figure S — Database-expansion cost: 20- vs 28-species tree",
+    draw_figure(supp, "Figure S3 — Database-expansion cost: 20- vs 28-species tree",
                 f"{FIGDIR}/figS_tree_expansion", legend_sp)
     wms = build_wms()
     legend_sp = {species_of(g) for r in wms for g, v in profiles.get(r["_truthkey"], {}).items() if v > 0}

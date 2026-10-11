@@ -1,26 +1,33 @@
 # Strain2bScan; Manuscript tables (simulated head-to-head)
 
-**Table 1. Reproducible StrainScan-rerun accuracy on the 15-species simulated benchmark.** Accuracy is the median over completed run-level paired samples (different-cluster mixtures for 14 species; same-cluster mixtures for near-clonal *M. tuberculosis*; k = 2/3/5; depths 0.5–10×); each tool was scored in its own 0.95-similarity cluster space. Build cost is the archived timing benchmark (Strain2bScan native arm64; StrainScan `linux/amd64` under emulation). *S. enterica* produced no completed StrainScan calls in the rerun; *K. pneumoniae*, which did not finish in the archived timing run, was successfully built and profiled in the reproducible rerun.
+**Table 1. Reproducible StrainScan-rerun accuracy on the 15-species simulated benchmark.** Accuracy is the median over completed run-level paired samples (different-cluster mixtures for 14 species; same-cluster mixtures for near-clonal *M. tuberculosis*; k = 2/3/5; depths 0.5–10×); each tool was scored in its own 0.95-similarity cluster space. Cluster-count columns are each tool's own 0.95 partitions of the common species pool. Build cost is the archived timing benchmark (Strain2bScan native arm64; StrainScan `linux/amd64` under emulation). *S. enterica* produced no completed StrainScan calls in the rerun; *K. pneumoniae*, which did not finish in the archived timing run, was successfully built and profiled in the reproducible rerun.
 
-| Species | Paired n | Pool genomes | S2B P | S2B R | S2B F1 | SS P | SS R | SS F1 | S2B build | SS build |
-|---|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|
-| *A. muciniphila* | 14 | 50 | 1.000 | 0.800 | 0.889 | 1.000 | 1.000 | 1.000 | 2.8 s / 0.16 GB | 17 min / 16 GB |
-| *C. difficile* | 15 | 47 | 1.000 | 0.800 | 0.889 | 1.000 | 0.667 | 0.800 | 3.2 s / 0.28 GB | 30 min / 14 GB |
-| *C. acnes* | 15 | 43 | 1.000 | 0.667 | 0.800 | 1.000 | 0.800 | 0.889 | 1.5 s / 0.17 GB | 11 min / 8 GB |
-| *E. coli* | 15 | 50 | 1.000 | 1.000 | 1.000 | 1.000 | 0.800 | 0.889 | 4.3 s / 0.34 GB | 43 min / 28 GB |
-| *F. nucleatum* | 15 | 25 | 1.000 | 1.000 | 1.000 | 1.000 | 0.667 | 0.800 | 0.7 s / 0.10 GB | 5 min / 8 GB |
-| *K. pneumoniae* | 15 | 47 | 1.000 | 0.600 | 0.750 | 1.000 | 0.800 | 0.889 | 5.1 s / 0.40 GB | DNF (timing run) |
-| *L. plantarum* | 15 | 50 | 1.000 | 1.000 | 1.000 | 1.000 | 0.800 | 0.889 | 5.0 s / 0.24 GB | 24 min / 18 GB |
-| *M. tuberculosis* | 15 | 29 | 1.000 | 1.000 | 1.000 | 1.000 | 1.000 | 1.000 | 1.6 s / 0.25 GB | 16 min / 15 GB |
-| *P. dorei* | 10 | 15 | 1.000 | 0.667 | 0.800 | 1.000 | 0.667 | 0.800 | 1.0 s / 0.25 GB | 5 min / 13 GB |
-| *P. gingivalis* | 15 | 43 | 1.000 | 0.667 | 0.800 | 1.000 | 0.667 | 0.800 | 2.3 s / 0.15 GB | 19 min / 11 GB |
-| *P. copri* | 15 | 19 | 1.000 | 1.000 | 1.000 | 1.000 | 0.667 | 0.800 | 1.8 s / 0.19 GB | 8 min / 26 GB |
-| *S. enterica* | 0 | 45 | -- | -- | -- | -- | -- | -- | 4.2 s / 0.37 GB | 34 min / 16 GB |
-| *S. aureus* | 15 | 48 | 1.000 | 0.667 | 0.800 | 1.000 | 0.667 | 0.800 | 1.7 s / 0.17 GB | 17 min / 12 GB |
-| *S. epidermidis* | 15 | 50 | 1.000 | 0.667 | 0.800 | 1.000 | 0.667 | 0.800 | 1.6 s / 0.14 GB | 15 min / 8 GB |
-| *S. pneumoniae* | 15 | 50 | 1.000 | 0.667 | 0.800 | 1.000 | 0.667 | 0.800 | 1.5 s / 0.16 GB | 11 min / 11 GB |
+| Species | Paired n | Pool genomes | S2B clusters | SS clusters | S2B P | S2B R | S2B F1 | SS P | SS R | SS F1 | S2B build | SS build |
+|---|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|
+| *A. muciniphila* | 14 | 50 | 24 | 24 | 1.000 | 0.800 | 0.889 | 1.000 | 1.000 | 1.000 | 2.8 s / 0.16 GB | 17 min / 16 GB |
+| *C. difficile* | 15 | 47 | 27 | 24 | 1.000 | 0.800 | 0.889 | 1.000 | 0.667 | 0.800 | 3.2 s / 0.28 GB | 30 min / 14 GB |
+| *C. acnes* | 15 | 43 | 8 | 8 | 1.000 | 0.667 | 0.800 | 1.000 | 0.800 | 0.889 | 1.5 s / 0.17 GB | 11 min / 8 GB |
+| *E. coli* | 15 | 50 | 30 | 27 | 1.000 | 1.000 | 1.000 | 1.000 | 0.800 | 0.889 | 4.3 s / 0.34 GB | 43 min / 28 GB |
+| *F. nucleatum* | 15 | 25 | 19 | 19 | 1.000 | 1.000 | 1.000 | 1.000 | 0.667 | 0.800 | 0.7 s / 0.10 GB | 5 min / 8 GB |
+| *K. pneumoniae* | 15 | 47 | 28 | 27 | 1.000 | 0.600 | 0.750 | 1.000 | 0.800 | 0.889 | 5.1 s / 0.40 GB | DNF (timing run) |
+| *L. plantarum* | 15 | 50 | 39 | 39 | 1.000 | 1.000 | 1.000 | 1.000 | 0.800 | 0.889 | 5.0 s / 0.24 GB | 24 min / 18 GB |
+| *M. tuberculosis* | 15 | 29 | 1 | 1 | 1.000 | 1.000 | 1.000 | 1.000 | 1.000 | 1.000 | 1.6 s / 0.25 GB | 16 min / 15 GB |
+| *P. dorei* | 10 | 15 | 10 | 10 | 1.000 | 0.667 | 0.800 | 1.000 | 0.667 | 0.800 | 1.0 s / 0.25 GB | 5 min / 13 GB |
+| *P. gingivalis* | 15 | 43 | 27 | 31 | 1.000 | 0.667 | 0.800 | 1.000 | 0.667 | 0.800 | 2.3 s / 0.15 GB | 19 min / 11 GB |
+| *P. copri* | 15 | 19 | 19 | 19 | 1.000 | 1.000 | 1.000 | 1.000 | 0.667 | 0.800 | 1.8 s / 0.19 GB | 8 min / 26 GB |
+| *S. enterica* | 0 | 45 | 19 | 12 | -- | -- | -- | -- | -- | -- | 4.2 s / 0.37 GB | 34 min / 16 GB |
+| *S. aureus* | 15 | 48 | 13 | 12 | 1.000 | 0.667 | 0.800 | 1.000 | 0.667 | 0.800 | 1.7 s / 0.17 GB | 17 min / 12 GB |
+| *S. epidermidis* | 15 | 50 | 9 | 9 | 1.000 | 0.667 | 0.800 | 1.000 | 0.667 | 0.800 | 1.6 s / 0.14 GB | 15 min / 8 GB |
+| *S. pneumoniae* | 15 | 50 | 38 | 38 | 1.000 | 0.667 | 0.800 | 1.000 | 0.667 | 0.800 | 1.5 s / 0.16 GB | 11 min / 11 GB |
 
 **Median across 14 species with completed paired runs:** Strain2bScan P 1.000 / R 0.733 / F1 0.844; StrainScan P 1.000 / R 0.667 / F1 0.800. The species-cluster bootstrap paired mean differences and 95% intervals are in `results/uncertainty_summary.tsv`.
+
+**Table S4. Failure-aware sensitivity for all 225 matched single-species entries.** Absent StrainScan final reports were retained and scored as zero detection. Mean paired differences use the same species-cluster bootstrap as the completed-pair analysis. Source: `results/strainscan_rerun/single_all225_persample.tsv` and `results/strainscan_rerun/sensitivity_failure_as_absence.tsv`.
+
+| Analysis | n | No-calls | S2B median P/R/F1 | SS median P/R/F1 | Mean recall difference (95% CI) | Mean F1 difference (95% CI) |
+|---|--:|--:|:--:|:--:|:--:|:--:|
+| Completed pairs | 204 | 0 | 1.000/0.733/0.844 | 1.000/0.667/0.800 | −0.014 (−0.065 to 0.033) | −0.023 (−0.062 to 0.013) |
+| Failure as absence | 225 | 21 | 1.000/0.800/0.889 | 1.000/0.667/0.800 | +0.065 (−0.034 to 0.197) | +0.062 (−0.036 to 0.202) |
 
 **Table 2. Accuracy and archived per-sample cost vs sequencing depth (single-species rerun; medians).** Accuracy is restricted to the 204 completed run-level StrainScan pairs. Cost comes from the archived same-environment emulation subset (Strain2bScan `linux/amd64` vs StrainScan).
 
@@ -107,7 +114,7 @@ can also process after in-silico digestion.
 |---|:--:|---|---|---|
 | Strain2bScan | Yes | Native BcgI 2bRAD reads and in-silico-digested shotgun reads | Strain clusters | Method under test; one marker framework supports both reduced-representation and shotgun input. |
 | StrainScan v1.0.14 | Yes | Shotgun reads against per-species reference databases | Strain clusters | Direct reference-guided comparator on shotgun reads (Fig 10–11, Supplementary Fig S5; Tables 1–3). |
-| inStrain v1.10.0 | Yes | Shotgun reads aligned to a dereplicated reference | Strain and SNV | Direct read-level shotgun comparator (Fig 11 and Fig S4). |
+| inStrain v1.9.1 | Yes | Shotgun reads aligned to a dereplicated reference | Strain and SNV | Direct read-level shotgun comparator (Fig 11 and Fig S4). |
 | StrainGE / StrainGST / StrainGR | StrainGST only | Shotgun WMS reads against StrainGE 0.90-reference databases; native BcgI 2bRAD is not documented input | Strain level, reference guided | Related shotgun comparator rerun in Table 9; StrainGR was not run. |
 | 2bRAD-M / Fast2bRAD-M | No | Native BcgI 2bRAD reads | Mainly species | Same restriction-assay family; provides the species-level upstream context for Strain2bScan. |
 | sylph | No | Shotgun sketches | Mainly species and ANI | Context for rapid species-level profiling; not a strain-resolved benchmark here. |
@@ -139,3 +146,30 @@ analysis. No case/control labels were available in public metadata. Values are f
 | S_1413231 | 288,019 | 17 | 129 | 1.8 | *Neisseria subflava*; *Streptococcus mitis*; *Actinomyces odontolyticus* |
 | S_8123213 | 370,379 | 16 | 149 | 2.0 | *Actinomyces odontolyticus*; *Neisseria subflava*; *Haemophilus parainfluenzae* |
 | S_8221232 | 488,180 | 17 | 158 | 1.8 | *Actinomyces odontolyticus*; *Neisseria subflava*; *Rothia mucilaginosa* |
+
+**Table S5. Public-run manifest and exploratory profiling outcomes.** SRA spots, bases and instrument metadata were retrieved from NCBI on 2026-10-11. Marker and call counts are from the generic MSA screen; body-site-panel calls are shown for PRJNA1517970. P08 run-to-week mapping follows SRA submitter titles. Source: `results/realworld_cohort_benchmark/public_run_manifest.tsv`.
+
+| Run | Project | Role/site | SRA spots | SRA bases | MSA markers | MSA strain calls | Body-site calls |
+|---|---|---|--:|--:|--:|--:|--:|
+| SRR32121885 | PRJNA1191223 | preterm infant P08 stool W1 | 4,862,900 | 1,215,725,000 | 748,209 | 1 | -- |
+| SRR32121884 | PRJNA1191223 | preterm infant P08 stool W2 | 4,684,342 | 1,171,085,500 | 694,111 | 2 | -- |
+| SRR32121883 | PRJNA1191223 | preterm infant P08 stool W3 | 4,403,456 | 1,100,864,000 | 830,986 | 6 | -- |
+| SRR32076429 | PRJNA1191225 | Bifidobacterium bifidum LHCA82 isolate WGS | 265,039 | 78,810,882 | 129,681 | 0 | -- |
+| SRR32076422 | PRJNA1191225 | Bifidobacterium breve LHCA81 isolate WGS | 292,272 | 87,006,759 | 142,707 | 0 | -- |
+| SRR32076444 | PRJNA1191225 | Bifidobacterium longum LHCA43 isolate WGS | 117,024 | 34,917,748 | 65,183 | 0 | -- |
+| SRR32076385 | PRJNA1191225 | Escherichia coli LHCA45 isolate WGS | 530,692 | 157,695,345 | 219,245 | 0 | -- |
+| SRR32076393 | PRJNA1191225 | Escherichia coli LHCA56 isolate WGS | 694,301 | 206,230,492 | 242,121 | 0 | -- |
+| SRR32076407 | PRJNA1191225 | Escherichia coli LHCA72 isolate WGS | 405,951 | 120,852,478 | 183,313 | 0 | -- |
+| SRR40410776 | PRJNA1517970 | extraction blank | 969 | 181,397 | 464 | 0 | 0 |
+| SRR40410528 | PRJNA1517970 | meconium | 130,092 | 35,779,278 | 116,410 | 0 | 0 |
+| SRR40410657 | PRJNA1517970 | meconium | 63,704 | 12,967,250 | 31,171 | 0 | 0 |
+| SRR40410851 | PRJNA1517970 | meconium | 37,274 | 8,265,014 | 23,718 | 0 | 0 |
+| SRR40410567 | PRJNA1517970 | vagina | 29,852 | 5,373,843 | 9,693 | 0 | 0 |
+| SRR40410734 | PRJNA1517970 | vagina | 123,942 | 24,263,782 | 24,067 | 0 | 0 |
+| SRR40410753 | PRJNA1517970 | vagina | 71,724 | 13,985,625 | 14,802 | 0 | 0 |
+| SRR6748033 | PRJNA288562 | subject T23 distal gut GD273 | 3,803,560 | 1,120,072,205 | 1,595,769 | 2 | -- |
+| SRR6748028 | PRJNA288562 | subject T23 distal gut GD84 | 2,804,411 | 824,219,750 | 1,918,932 | 7 | -- |
+| SRR6748088 | PRJNA288562 | subject T23 saliva GD273 | 771,556 | 226,981,334 | 876,200 | 11 | -- |
+| SRR6748097 | PRJNA288562 | subject T23 saliva GD84 | 377,872 | 111,169,454 | 533,573 | 13 | -- |
+| SRR6747958 | PRJNA288562 | subject T23 vagina GD273 | 636,817 | 186,911,987 | 226,983 | 1 | -- |
+| SRR6748207 | PRJNA288562 | subject T23 vagina GD84 | 243,062 | 71,385,301 | 45,805 | 0 | -- |

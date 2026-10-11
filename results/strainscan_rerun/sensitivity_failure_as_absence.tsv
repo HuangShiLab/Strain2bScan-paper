@@ -1,0 +1,2 @@
+analysis	n_entries	no_call_entries	recall_difference_point	recall_difference_ci_low	recall_difference_ci_high	f1_difference_point	f1_difference_ci_low	f1_difference_ci_high	bootstrap	resampling
+all_225_failure_as_absence	225	21	0.06459614814814814	-0.034218818518518525	0.19674783333333304	0.06248133333333334	-0.036274330864197527	0.20248760370370295	20000	species clusters with replacement

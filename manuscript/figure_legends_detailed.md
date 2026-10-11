@@ -190,18 +190,18 @@ species-level, and is the signature stable? Conclusion: **yes**. subject strain-
 non-significant, and within-subject ≪ between-subject distance: an individual-specific, within-day
 strain signature resolved in ~1 s/sample.
 **3. Results by subfigure.**
-- **(A)** Species-level PCoA coloured by subject (R² 0.755, 1-NN 78.1 %).
-- **(B)** Strain-level PCoA coloured by subject (R² 0.757, 1-NN 96.9%).
+- **(A)** Species-level PCoA coloured by subject (R² 0.755).
+- **(B)** Strain-level PCoA coloured by subject (R² 0.757).
 - **(C)** Per-species strain-level subject R² (bars); *Neisseria subflava* 0.808 highest, 13/13 testable
   species significant.
-- **(D)** Within- vs between-subject strain Bray–Curtis distance (0.327 vs 0.696, p 8.05e-19); temporal stability.
+- **(D)** Within- vs between-subject strain Bray–Curtis distance (0.327 vs 0.696, p 8.05e-19) within one sampling day.
 - **(E)** Leave-one-timepoint-out host-ID accuracy, strain (100 %) vs species (78.1 %) vs chance (12.5 %).
 
 ---
 
 ---
 
-## Figure 8; Native 2bRAD contains callable shotgun strain calls and recovers the low-abundance ones shotgun misses
+## Figure 8; Directional shotgun-native saliva concordance and candidate low-abundance calls
 **1. Data source.**
 - *Data type:* **real paired shotgun metagenome (WMS) + real native BcgI 2bRAD-M** (same saliva samples).
 - *Production/collection:* paired shotgun WMS of the Fig 7 saliva samples (SRA PRJNA1131785, DNBSEQ). WMS
@@ -215,37 +215,30 @@ strain signature resolved in ~1 s/sample.
 *and* the low-abundance strains shotgun cannot? Conclusion: All 65 shotgun strain-cluster calls (three usable paired samples, prefix-subsampled shotgun) are
 present in native BcgI 2bRAD-M; this is directional concordance, not independent validation. Native BcgI 2bRAD-M
 yields **128–163 additional candidate strain-cluster calls/sample**, which are **significantly
-lower-abundance**. quantifying 2bRAD's sensitivity advantage on real clinical material.
+lower-abundance**. They are candidate observations and do not quantify an independent sensitivity advantage.
 **3. Results by subfigure.**
 - **(A)** Per sample, strains detected: shared with shotgun (blue) plus 2bRAD-only candidate calls (orange)
   (orange, 128–163); this is a call-set concordance result and does not establish independent strain truth.
-- **(B)** Community relative abundance (log) of shared vs 2bRAD-only strains; 2bRAD-only significantly
-  lower (median 0.0029 vs 0.0097; Mann–Whitney p 1.2e-23).
+- **(B)** Per-sample median community relative abundance of shared versus candidate-only native calls (log scale); candidate-only calls were lower abundance (Mann-Whitney p 1.2e-23 in the archived paired call-level test).
 
 ---
 
 ---
 
-## Figure 9; Fast, light, and scalable to whole communities
+## Figure 9; Performance, scaling and projected community throughput
 **1. Data source.**
-- *Data type:* mixed; real *C. acnes* benchmark (A, B) + simulation (C, 55-species community).
-- *Production/collection:* (A) per-sample time/memory on the real *C. acnes* mock vs StrainScan; (B) thread
-  scaling of build and profile; (C) a simulated 55-species community (218 NCBI genomes, 30 samples mixing
-  12 species at log-normal depth) profiled across increasing sample counts.
-- *Raw data (local):* *C. acnes* mock reads from MockMetagenomes4Benchmark; simulated community regenerated
-  from scripts + `data/accessions/multispecies_55x4.tsv`; not stored as reads.
-**2. Key issue & conclusion.** How does the sparse-marker, digest-once design scale on conventional
-metagenomes? Conclusion: **~8× faster / ~11× lighter per sample**, clean thread parallelism, and; because
-per-sample cost is flat in #species; measured Strain2bScan cost is **121–146× lower than projected per-species querying** on a 55-species community.
+- *Data type:* mixed measured benchmarks and one projected StrainScan cost curve.
+- *Production/collection:* real *C. acnes* per-sample and thread-scaling runs; simulated 55-species communities for species/sample gradients; archived MinHash scaling; and measured Strain2bScan community cost versus projected StrainScan cost (55 measured single-species runs multiplied by samples).
+- *Raw data:* `results/headtohead_performance.tsv`, `results/parallel_and_build_scaling.tsv`, `results/multispecies_*.tsv`, `results/community_throughput.tsv`.
+**2. Key issue & conclusion.** Does one digest-once pass retain low cost as samples and species grow? Conclusion: per-sample cost was lower and approximately flat in species count, while projected per-species querying rose steeply. The projected advantage was 121-146×; StrainScan was not actually run across all 55 databases for every sample.
 **3. Results by subfigure.**
-- **(A)** Per-sample wall-time and peak memory, Strain2bScan (0.86 s / 78 MB) vs StrainScan (7.06 s / 828 MB).
-- **(B)** Speedup of build and profile vs thread count (4.6× / 5.8× at 16 threads; tracked in `results/parallel_and_build_scaling.tsv`).
-- **(C)** Community throughput: per-sample time flat in species count; fold-speedup vs a per-species tool
-  (~132× at 100 samples, ~146× at ≥200).
-
----
-
----
+- **(A)** Per-sample wall time and peak memory versus StrainScan.
+- **(B)** Database-build and profile speedups at 16 threads.
+- **(C)** Strain2bScan time across 10-55 species databases.
+- **(D)** Strain2bScan time across sample counts.
+- **(E)** MinHash database-build scaling above 96 genomes.
+- **(F)** Multi-species precision and recall versus the Layer-1 species gate.
+- **(G)** Measured Strain2bScan community time versus projected StrainScan cost; the 500-sample point is a linear extrapolation.
 
 ## Figure 10; Systematic head-to-head on the 15-species simulated benchmark
 **1. Data source.**
@@ -287,7 +280,7 @@ including high host contamination
 **1. Data source.**
 - *Data type:* **whole-metagenome shotgun (WMS)** of the same four ATCC mocks as Fig 6.
 - *Production/collection:* in-silico all-enzyme digestion of WMS reads against the 164-genome combined tree
-  for Strain2bScan; StrainScan v1.0.14 with its per-species databases; inStrain 1.10.0 with a 98 %-ANI
+  for Strain2bScan; StrainScan v1.0.14 with its per-species databases; inStrain 1.9.1 with a 98 %-ANI
   dereplicated reference (the non-dereplicated control is shown in Fig S4). Each tool scored in its own
   0.95-similarity cluster space against the mock ground truth. Host-contamination ladder 0/90/95/99 %
   human DNA for MSA-1002.

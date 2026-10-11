@@ -37,6 +37,9 @@ def figure_legends():
     fl = re.sub(r'(\*\*Figure[^\n]*?\*\*)\s*\.\s*', r'\1 ', fl)
     fl = re.sub(r'\n[ \t]*\.\s*\n', '\n\n', fl)
     fl = re.sub(r'[ \t]+\n', '\n', fl); fl = re.sub(r'\n{3,}', '\n\n', fl)
+    # Keep one legend paragraph per numbered item after source-path cleanup.
+    fl = re.sub(r'\s+(?=\*\*(?:Figure|Table) )', '\n\n', fl)
+    fl = re.sub(r'\n{3,}', '\n\n', fl)
     return fl.strip()
 
 TABLES = lambda: body("manuscript/tables.md").strip()
@@ -63,7 +66,7 @@ full = "\n\n".join([
     "## Data and code availability\n\n"
     "The Strain2bScan source code is available at https://github.com/HuangShiLab/Strain2bScan. "
     "Derived tables, benchmark configurations, checksums and assembly scripts are available at "
-    "https://github.com/HuangShiLab/Strain2bScan-paper. Public human metagenome reads used in the "
+    "https://github.com/HuangShiLab/Strain2bScan-paper (paper-2026-10-11 tag). Public human metagenome reads used in the "
     "exploratory analyses are from PRJNA1131785, PRJNA288562, PRJNA1517970, PRJNA1191223 and PRJNA1191225. "
     "Commercial ATCC mock standards are identified by their catalogue names in the manuscript. No new "
     "human subject data were generated for this study.\n\n"

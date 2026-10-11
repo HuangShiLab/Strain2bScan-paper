@@ -27,7 +27,7 @@ dissimilarity of 0.24, 0.33 and 0.02, respectively (Fig 3A). A single *C. acnes*
 0.5× per-strain coverage, matching the StrainScan detection onset (Fig 3B). Precision therefore remained
 high even when many genomes collapsed to few 0.95-similarity clusters.
 
-Reference completeness was the dominant accuracy constraint. Degrading truth-strain references from 100% to
+In the co-varying reference-degradation gradient, completeness was the dominant accuracy constraint. Degrading truth-strain references from 100% to
 70% completeness while holding sample reads fixed reduced median Jaccard-mode precision from 1.0 to 0.71 and
 recall from 0.96 to 0.74 across 14 resolvable species, because incomplete genomes fragmented from complete
 relatives (Fig 4). The optional `--containment` mode, which links genomes by maximum marker-set containment,
@@ -124,6 +124,8 @@ species-median recall and F1 were 0.733 and 0.844 for Strain2bScan versus 0.667 
 recall at 3× and remained there, whereas StrainScan's depth profile was non-monotonic (Table 2).
 Multi-species F1 was lower for Strain2bScan at medium and high depth but higher at low depth (Table 3).
 
+A prespecified failure-aware sensitivity retained all 225 intended entries and scored each of the 21 absent StrainScan reports as zero detection. This analysis shifted the mean Strain2bScan-minus-StrainScan differences to +0.065 recall (95% species-cluster bootstrap CI −0.034 to 0.197) and +0.062 F1 (−0.036 to 0.202); both intervals included zero. Fifteen *S. enterica* and five *P. dorei* entries accounted for the no-call runs (Table S4). The two tools did not impose identical 0.95 partitions on the common pool: database cluster counts ranged from 1 to 39 for Strain2bScan and 1 to 39 for StrainScan, with species-specific differences documented in Table 1 and `results/strainscan_rerun/database_cluster_resolution.tsv`.
+
 The cost differences were largest during database construction: Strain2bScan used 0.7–5.1 s and 0.1–0.4 GB
 per species, versus 5–43 min and 8–28 GB for StrainScan, a 249–614× runtime and 43–138× memory advantage
 (Table 1). In the same emulated container, per-sample profiling was 4–33× faster and 5–39× lighter
@@ -135,7 +137,7 @@ times were obtained under linux/amd64 emulation and are upper bounds.
 
 ### Strain-level profiling on shotgun, and the advantage under host contamination (Fig 11)
 
-We compared Strain2bScan, StrainScan v1.0.14 [1] and inStrain 1.10.0 [8] on shotgun reads from the same
+We compared Strain2bScan, StrainScan v1.0.14 [1] and inStrain 1.9.1 [8] on shotgun reads from the same
 four ATCC mocks. Strain2bScan used the all-enzyme 164-genome tree; StrainScan used per-species databases;
 inStrain used a dereplicated 98%-ANI reference, as its documentation requires. Each tool was scored in its own
 0.95-similarity cluster space. StrainScan and inStrain were therefore the executed strain-resolved

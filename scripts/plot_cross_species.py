@@ -13,8 +13,7 @@ ax.bar(x + w, [1 - b for b in BC], w, label="abundance accuracy (1 − Bray–Cu
 ax.set_xticks(x); ax.set_xticklabels(sp); ax.set_ylabel("accuracy"); ax.set_ylim(0, 1.14)
 for i in x:
     ax.annotate(f"{ncl[i]}/{ng[i]} clusters", (i, 1.05), ha="center", fontsize=8, color="#555")
-ax.set_title("Cross-species strain profiling (strand-fixed): precision 1.0 across species\n"
-             "(the earlier resolvability gradient / over-detection was a digestion artifact)")
+ax.set_title("Cross-species strain profiling: precision 1.0 across species")
 ax.legend(loc="lower center", fontsize=8, ncol=3)
 fig.tight_layout(); os.makedirs("figures", exist_ok=True)
 fig.savefig("figures/cross_species.png", dpi=150); fig.savefig("figures/cross_species.pdf")

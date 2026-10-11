@@ -384,9 +384,9 @@ mock species = its ATCC genome + up to 5 high-quality conspecific decoys, CheckM
 contamination ≤ 5 %, within-species ANI 95–99.9 % to the ATCC reference by skani [22]), clustered at 0.95
 similarity with `--containment`; native 2bRAD used the BcgI tree and shotgun used the all-enzyme tree.
 Strain2bScan was run with `--min-abundance 0 --min-coverage 0.2`. On the shotgun samples it was compared
-against **StrainScan** 1.0.14 [1] (per-species databases, `linux/amd64` container) and **inStrain** 1.10.0
-[8] (Bowtie2 [23], rather than BWA-MEM [24], → `inStrain profile` against a 98 %-ANI dereplicated reference; the non-dereplicated reference is
-shown as a control in Fig S4). Each tool was scored in its own 0.95-similarity cluster space
+against **StrainScan** 1.0.14 [1] (per-species databases, `linux/amd64` container) and **inStrain** 1.9.1
+[8]. Reads were aligned with Bowtie2 [23] using default paired-end settings, sorted and indexed with samtools, and profiled with `inStrain profile` against single-linkage skani dereplicated references (98% ANI threshold, ATCC representative retained). The MSA-1002/1003 pool was reduced from 120 genomes to 32 references; the MSA-1005/1007 pool was reduced from 164 to 47. Genome-level calls required breadth ≥ 0.5 and reference popANI ≥ 0.99999; their coverage values were then normalized for abundance scoring and the manuscript-level 10⁻⁴ detection threshold was applied. The non-dereplicated reference is
+shown as a control in Fig S4. These exact filters were fixed before metric scoring; raw genome-table threshold sensitivity was not rerun. Each tool was scored in its own 0.95-similarity cluster space
 against the mock ground truth (`Ground_truth/*`, sequence abundance), reporting precision, recall, F1,
 AUPR (abundance-threshold sweep, Ye et al. [25]), and Bray–Curtis and L2 similarity to the truth profile;
 scorer `scripts/score_all.py`, figures `scripts/plot_figs_h.py`. The primary frozen comparators were
@@ -422,8 +422,10 @@ column, for StrainScan via its `Cluster_Result/hclsMap_95_recls.txt` (report `Cl
 id); and precision/recall/F1 computed over the cluster sets per sample. Strain2bScan profiled all 2 025 +
 60 samples; the reproducible StrainScan rerun used a matched subset (different-cluster mixtures, k = 2/3/5,
 one replicate, all depths; near-clonal *M. tuberculosis* via its same-cluster samples). Of these 225
-intended entries, 204 completed and were paired; 21 ended without calls, including all *S. enterica*
-entries. The paired accuracy set therefore comprised 14 species. For communities, 12 samples were rerun and
+intended entries, 204 produced a final report and were paired; 21 ended without a final report, including all *S. enterica*
+entries. `no_call` therefore denotes an absent final report rather than a biologically interpretable absence call. The completed-pair accuracy set comprised 14 species. In a prespecified failure-aware sensitivity, each no-call was retained in its intended pair and assigned precision, recall and F1 of zero; Strain2bScan metrics were unchanged. Database resolution was audited from each tool's own 0.95 clustering of the common genome pool.
+
+For communities, 12 samples were rerun and
 158 of 180 possible species-by-sample final reports were generated; absent reports were treated as no
 detection. StrainScan has no multi-species mode, so archived cost was the sum of wall-clock over species
 databases (peak RSS as the maximum).
@@ -481,9 +483,9 @@ in the repository; the complete 15-species run-driver provenance limitation is s
 To supplement the controlled analyses, we profiled representative paired-end WGS subsets from four
 public BioProjects: PRJNA288562 (pregnancy saliva/vagina/distal-gut time series), PRJNA1517970 (preterm
 vaginal and meconium metagenomes), PRJNA1191223 (preterm-infant stool time series) and PRJNA1191225
-(preterm-infant isolate WGS). These were exploratory application subsets selected to test multi-site
+(preterm-infant isolate WGS). The 22 run accessions, SRA spot/base counts, mean read lengths, instruments, sample roles and generic-panel outcomes are enumerated in `results/realworld_cohort_benchmark/public_run_manifest.tsv`. These were exploratory application subsets selected to test multi-site
 stability, low-biomass specificity and isolate-derived strain recovery; they were not complete
-epidemiological cohorts. For the generic-panel screen we used the existing 20-species MSA database in
+epidemiological cohorts. Reads were supplied directly to Strain2bScan as paired FASTQ without an external host-removal or trimming step; the tool's own streaming I/O and marker-count gates were used as described above. For the generic-panel screen we used the existing 20-species MSA database in
 `all`-enzyme mode with `--min-species-markers 20 --min-species-detect 2 --min-support 2
 --min-coverage 0.01 --min-abundance 0`. PRJNA288562 analyses used subject T23 at gestational days 84 and
 273 for all three body sites. PRJNA1517970 analyses used three vaginal, three meconium and one negative
@@ -505,7 +507,7 @@ representing vaginal, neonatal-gut and meconium communities: *Bifidobacterium ad
 *Cutibacterium acnes*, *Enterococcus faecalis*, *Escherichia coli*, *Gardnerella vaginalis*,
 *Lactobacillus gasseri*, *Lactobacillus jensenii*, *Prevotella bivia*, *Staphylococcus aureus*,
 *Staphylococcus epidermidis*, *Streptococcus agalactiae*, *Streptococcus mitis* and *Streptococcus
-mutans*. We used up to six RefSeq or ATCC genomes per species (146 genomes; two *S. mitis* genomes were
+mutans*. We used up to six RefSeq or ATCC genomes per species (74 genomes across the 13 species; two *S. mitis* genomes were
 available). Databases were built with `--enzyme recommended` and profiled with the same thresholds as the
 generic-panel screen. To test behaviour when a true strain is absent from the panel, we also built three
 leave-one-isolate-out *E. coli* databases, each containing only the other two *E. coli* assemblies plus

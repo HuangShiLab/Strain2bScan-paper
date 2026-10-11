@@ -1,0 +1,11 @@
+# inStrain comparator provenance
+package: inStrain 1.9.1 (bioconda build pyhdfd78af_0)
+alignment: bowtie2 -p 12 -x REF -1 R1 -2 R2
+postprocessing: samtools sort -@4; samtools index
+profiling: inStrain profile BAM REF.fasta -o SAMPLE.IS -s REF.stb -p 12 --skip_plot_generation
+dereplication: skani triangle --full-matrix -m 200; single-linkage clustering at ANI >= 98%; ATCC genome retained as representative
+reference_MSA1002_MSA1003: 120 input genomes -> 32 references (20 ATCC)
+reference_MSA1005_MSA1007: 164 input genomes -> 47 references (28 ATCC)
+genome_call_filter: breadth >= 0.5 and popANI_reference >= 0.99999
+abundance: sum coverage among passed genome calls and normalize; detection threshold >= 1e-4 applied downstream
+scorer: scripts/score_all.py (read_instrain)
