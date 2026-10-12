@@ -47,12 +47,11 @@ REFS   = lambda: read("manuscript/references.md").strip()
 
 # ---------- full manuscript ----------
 TITLE_M = ("# Strain2bScan: strain-level profiling from 2bRAD markers across microbiomes\n\n"
-"[Author 1 Given Name Surname]<sup>1</sup>, [Author 2 Given Name Surname]<sup>2</sup>, "
-"[additional authors to be completed]\n\n"
-"<sup>1</sup> [Department, Institution, City, Country]; "
-"<sup>2</sup> [Department, Institution, City, Country].\n"
-"[Add further numbered affiliations and mark the corresponding author here.]\n\n"
-"*Author-facing placeholder: replace all bracketed author and affiliation fields before submission.*\n\n---")
+"Yufeng Zhang<sup>1,2</sup>, Shi Huang<sup>1,2,*</sup>\n\n"
+"<sup>1</sup> Faculty of Dentistry, The University of Hong Kong, Hong Kong SAR, China;\n"
+"<sup>2</sup> The University of Hong Kong Shenzhen Institute of Research and Innovation, China.\n"
+"*Correspondence: Shi Huang, [email to be completed].\n\n"
+"---")
 full = "\n\n".join([
     TITLE_M,
     "## Abstract\n\n" + abstract(),
@@ -60,13 +59,14 @@ full = "\n\n".join([
     "## Results\n\n" + shift(results(), 1),
     "## Discussion\n\n" + body("manuscript/discussion.md").strip(),
     "## Methods\n\n" + shift(body("manuscript/methods.md").strip(), 1),
+    "## Author contributions\n\n"
+    "[xxxx]\n\n"
     "## Funding\n\n"
-    "[Funding statement to be completed. List funder names, award numbers and recipient initials, or state "
-    "\u201cThis work received no external funding.\u201d Do not leave this placeholder in a submitted version.]\n\n"
+    "This work was supported by award 32572519.\n\n"
     "## Data and code availability\n\n"
     "The Strain2bScan source code is available at https://github.com/HuangShiLab/Strain2bScan. "
     "Derived tables, benchmark configurations, checksums and assembly scripts are available at "
-    "https://github.com/HuangShiLab/Strain2bScan-paper (paper-2026-10-11 tag). Public human metagenome reads used in the "
+    "https://github.com/HuangShiLab/Strain2bScan-paper (paper-2026-10-12 tag). Public human metagenome reads used in the "
     "exploratory analyses are from PRJNA1131785, PRJNA288562, PRJNA1517970, PRJNA1191223 and PRJNA1191225. "
     "Commercial ATCC mock standards are identified by their catalogue names in the manuscript. No new "
     "human subject data were generated for this study.\n\n"

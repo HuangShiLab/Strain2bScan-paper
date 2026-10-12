@@ -1,11 +1,10 @@
 # Strain2bScan: strain-level profiling from 2bRAD markers across microbiomes
 
-[Author 1 Given Name Surname]<sup>1</sup>, [Author 2 Given Name Surname]<sup>2</sup>, [additional authors to be completed]
+Yufeng Zhang<sup>1,2</sup>, Shi Huang<sup>1,2,*</sup>
 
-<sup>1</sup> [Department, Institution, City, Country]; <sup>2</sup> [Department, Institution, City, Country].
-[Add further numbered affiliations and mark the corresponding author here.]
-
-*Author-facing placeholder: replace all bracketed author and affiliation fields before submission.*
+<sup>1</sup> Faculty of Dentistry, The University of Hong Kong, Hong Kong SAR, China;
+<sup>2</sup> The University of Hong Kong Shenzhen Institute of Research and Innovation, China.
+*Correspondence: Shi Huang, [email to be completed].
 
 ---
 
@@ -951,13 +950,17 @@ generic-panel screen. To test behaviour when a true strain is absent from the pa
 leave-one-isolate-out *E. coli* databases, each containing only the other two *E. coli* assemblies plus
 the three Bifidobacterium controls, and profiled the held-out isolate reads.
 
+## Author contributions
+
+[xxxx]
+
 ## Funding
 
-[Funding statement to be completed. List funder names, award numbers and recipient initials, or state “This work received no external funding.” Do not leave this placeholder in a submitted version.]
+This work was supported by award 32572519.
 
 ## Data and code availability
 
-The Strain2bScan source code is available at https://github.com/HuangShiLab/Strain2bScan. Derived tables, benchmark configurations, checksums and assembly scripts are available at https://github.com/HuangShiLab/Strain2bScan-paper (paper-2026-10-11 tag). Public human metagenome reads used in the exploratory analyses are from PRJNA1131785, PRJNA288562, PRJNA1517970, PRJNA1191223 and PRJNA1191225. Commercial ATCC mock standards are identified by their catalogue names in the manuscript. No new human subject data were generated for this study.
+The Strain2bScan source code is available at https://github.com/HuangShiLab/Strain2bScan. Derived tables, benchmark configurations, checksums and assembly scripts are available at https://github.com/HuangShiLab/Strain2bScan-paper (paper-2026-10-12 tag). Public human metagenome reads used in the exploratory analyses are from PRJNA1131785, PRJNA288562, PRJNA1517970, PRJNA1191223 and PRJNA1191225. Commercial ATCC mock standards are identified by their catalogue names in the manuscript. No new human subject data were generated for this study.
 
 ## Figure legends
 
