@@ -42,3 +42,4 @@ figure_raw_data/**/truth/
 /figure_raw_data/Fig06_mock_hostcontam/reads
 /figure_raw_data/Fig07_saliva_2bRAD/reads
 /figure_raw_data/TableS3_clinical_oral/reads
+~$*.docx
