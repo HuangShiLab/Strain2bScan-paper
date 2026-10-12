@@ -50,7 +50,7 @@ TITLE_M = ("# Strain2bScan: strain-level profiling from 2bRAD markers across mic
 "Yufeng Zhang<sup>1,2</sup>, Shi Huang<sup>1,2,*</sup>\n\n"
 "<sup>1</sup> Faculty of Dentistry, The University of Hong Kong, Hong Kong SAR, China;\n"
 "<sup>2</sup> The University of Hong Kong Shenzhen Institute of Research and Innovation, China.\n"
-"*Correspondence: Shi Huang, [email to be completed].\n\n"
+"*Correspondence: Shi Huang, shihuang@hku.hk.\n\n"
 "---")
 full = "\n\n".join([
     TITLE_M,

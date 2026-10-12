@@ -4,7 +4,7 @@ Yufeng Zhang<sup>1,2</sup>, Shi Huang<sup>1,2,*</sup>
 
 <sup>1</sup> Faculty of Dentistry, The University of Hong Kong, Hong Kong SAR, China;
 <sup>2</sup> The University of Hong Kong Shenzhen Institute of Research and Innovation, China.
-*Correspondence: Shi Huang, [email to be completed].
+*Correspondence: Shi Huang, shihuang@hku.hk.
 
 ---
 
