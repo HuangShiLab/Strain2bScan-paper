@@ -9,7 +9,7 @@ resolvable species of the 15-species simulation pool: 1 (`BcgI`), 2 (`+CspCI`), 
 8 (`+AloI,BsaXI,CjeI,PpiI`), 14 (full curated set). For each species, 2/3/5-strain simulated
 mixtures at log-normal depth ≥1× are profiled at each enzyme level. Metrics are medians over
 species/replicates. (`scripts/run_enzyme_sweep_multi.py`, `results/enzyme_sweep_multi.tsv`,
-`figures/enzyme_sweep.{png,pdf}`, `scripts/plot_enzyme_sweep_multi.py`.)
+`figures/source_panels/enzyme_sweep.{png,pdf}`, `scripts/plot_enzyme_sweep_multi.py`.)
 
 | #enzymes | median strain-specific markers | median recall | median precision | median Bray–Curtis |
 |---|---|---|---|---|

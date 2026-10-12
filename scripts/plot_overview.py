@@ -154,6 +154,6 @@ box(ax, 50, 2.2, 96, 3.6,
     fc=GREEN_F, ec=GREEN_E, tc="#1d5637", fs=7.2, weight="bold")
 
 os.makedirs("figures", exist_ok=True)
-fig.savefig("figures/overview.png", dpi=200, bbox_inches="tight")
-fig.savefig("figures/overview.pdf", bbox_inches="tight")
-print("wrote figures/overview.png + .pdf")
+fig.savefig("figures/source_panels/overview.png", dpi=200, bbox_inches="tight")
+fig.savefig("figures/source_panels/overview.pdf", bbox_inches="tight")
+print("wrote figures/source_panels/overview.png + .pdf")

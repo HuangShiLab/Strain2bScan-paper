@@ -1,115 +1,38 @@
-# Strain2bScan — manuscript & reproducibility
+# Strain2bScan — manuscript and reproducibility snapshot
 
-Scripts, accession lists, ground truth, result tables, and analysis notes for the
-**Strain2bScan** manuscript. The software lives at
+This repository contains the manuscript, final figures, current result tables, and reproducibility
+scripts for **Strain2bScan**. The software source is in
 [HuangShiLab/Strain2bScan](https://github.com/HuangShiLab/Strain2bScan).
 
-> **Note — enzyme table corrected to match Fast2bRAD-M (all benchmarks re-run).** A correctness
-> bug was found and fixed mid-project: 15 of 16 enzyme **tag lengths** were wrong (only BcgI was
-> right), so the forward/reverse recognition patterns were no longer reverse-complement pairs and
-> digestion was not strand-invariant — causing spurious over-detection of similar strains and
-> corrupted clustering. The fix ports Fast2bRAD-M's authoritative enzyme table (tag lengths from
-> `2bRADExtraction.pl`) and uses a single forward-strand scan + canonical hashing, which is
-> provably strand-invariant with the correct lengths. Result: **tags now match Fast2bRAD-M exactly
-> (interoperable), accuracy is precision 1.0 across the cross-species / species-expansion /
-> panel-size benchmarks, low-depth detection matches StrainScan (0.5×), and the marker set is
-> correct (1×) — giving ~8× faster / ~11× lighter per-sample profiling and ~120–146× community-
-> scale throughput.** **Every benchmark below was re-run with the corrected binary.**
+The current snapshot is tagged `paper-2026-10-12`.
 
-Large data (genomes, reads, databases) is **not** committed — everything is regenerated from
-the committed accession lists + seeded scripts, so the repository stays small and fully
-reproducible.
+## Start here
 
-## Layout
+- `PAPER_OUTPUTS.md`: short map to the active manuscript, figures, evidence tables, and QA scripts.
+- `manuscript/full_manuscript.md`: assembled paper.
+- `manuscript/thesis_chapter.md`: extended thesis version.
+- `figures/numbered/`: final Figures 1–11 and Supplementary Figures S1–S5, with checksums.
+- `results/`: current evidence tables and frozen benchmark provenance.
+- `archive/README.md`: policy for superseded outputs and local bulk intermediates.
 
-```
-scripts/    benchmark + simulation scripts (portable: set $WORKDIR and $STRAIN2BSCAN_BIN)
-data/
-  accessions/   NCBI accession lists  (cae_reference_545.txt, cae_truth_strains.txt,
-                                       multispecies_40x4.tsv)
-  truth/        per-sample ground-truth abundance tables (C. acnes mocks)
-results/    measured result tables (TSV) — the source data for each figure
-docs/       analysis write-ups (methods rationale + per-experiment results)
-env/        conda env for the StrainScan comparison
-figures/    figure-generation scripts + rendered figures (add as the manuscript develops)
-Makefile    convenience targets for the multi-species benchmark
-```
+## QA and regeneration
 
-## Prerequisites
-- **Strain2bScan** built: `cargo build --release` in the software repo; then either put
-  `target/release/strain2bscan` on `PATH` or `export STRAIN2BSCAN_BIN=/abs/path/strain2bscan`.
-- Python 3 (stdlib only for simulation/eval); network access to NCBI Datasets.
-- For the StrainScan head-to-head: `conda env create -f env/strainscan-linux.yml` (Linux).
-
-## Data sources
-- **Reference genomes** — fetched from NCBI by the accession lists in `data/accessions/`
-  (`scripts/dl_multispecies.py`; the *C. acnes* 545-genome panel is in `cae_reference_545.txt`).
-- **C. acnes mock reads** — from
-  [HuangShiLab/MockMetagenomes4Benchmark](https://github.com/HuangShiLab/MockMetagenomes4Benchmark)
-  (`Cutibacterium_acnes_0.01/`).
-- **Multi-species samples** — regenerated deterministically (fixed seeds) by
-  `scripts/sim_samples.py`; no reads are stored.
-
-## Reproduce each result
-
-| result / figure | table | how |
-|---|---|---|
-| Strain2bScan vs StrainScan, per-sample time & memory | `results/headtohead_performance.tsv` | `scripts/run_acnes.sh` (Strain2bScan) + StrainScan on the 5 *C. acnes* mocks |
-| Parallel speedup + DB-build scaling | `results/parallel_and_build_scaling.tsv` | `STRAIN2BSCAN_THREADS=1\|16 strain2bscan cluster …`; `scripts/gen_scale.py` for synthetic panels |
-| Detection vs depth (0.1–5×) | `results/depth_sensitivity.tsv` | `scripts/sim_depth.py` then profile with each tool |
-| Multi-species scaling, earlier 40-species panel (species & sample gradients) | `results/multispecies_scaling.tsv` | superseded by the 55-species run below; kept for reference |
-| Multi-species scaling, **55-species** panel + community throughput vs StrainScan | `results/multispecies_species_gradient55.tsv`, `..._sample_gradient55.tsv`, `..._accuracy_gate55.tsv`, `community_throughput.tsv` + `figures/community_throughput.*` | `make genomes samples build scaling gate-sweep` (55-species pinned accessions), then `make figures`; see `docs/multispecies.md` |
-| Multi-species accuracy vs species gate | `results/multispecies_accuracy_gate.tsv`, `..._accuracy_gate55.tsv` | `make gate-sweep` |
-| Reference-genome quality vs accuracy (supp.) | `results/refqual_degradation.tsv` + `figures/refqual_figure.*` | `scripts/run_refqual.py` (Strain2bScan) + `run_refqual_strainscan.py` (Linux); `plot_refqual.py` |
-| Enzyme count vs performance (the 2bRAD knob) | `results/enzyme_sweep.tsv` + `figures/enzyme_sweep.*` | `make enzyme-sweep` |
-| Cross-species generalization (3 species, our own panels) | `results/cross_species.tsv` + `figures/cross_species.*` | `make cross-species` |
-| Species expansion (3 more, StrainScan's own pre-built DBs) | `results/species_expansion.tsv` + `figures/species_expansion.*` | `make species-expansion`; see `docs/species_expansion.md` |
-| P. copri panel-size test (does a bigger DB fix it? — no) | `results/panelsize_prevotella.tsv` + `figures/panelsize_prevotella.*` | `make panelsize`; see `docs/species_expansion.md` |
-
-### Quick multi-species run
 ```bash
-export STRAIN2BSCAN_BIN=/path/to/strain2bscan
-make genomes      # download 40 species × 4 strains (NCBI)
-make samples      # simulate 20 mock metagenomes (seeded) + truth
-make build scaling
-make gate-sweep   # accuracy vs Layer-1 species gate
+python3 scripts/assemble_manuscript.py
+python3 scripts/check_manuscript_claims.py
+make figures
 ```
 
-## Headline results (see `results/` and `docs/` for detail; corrected enzyme table, Fast2bRAD-M-consistent)
-- **Interoperable tags:** enzyme tag lengths + recognition patterns now match Fast2bRAD-M /
-  `2bRADExtraction.pl` exactly (all 16), so Strain2bScan's strain layer composes with the
-  Fast2bRAD-M species layer and reads real BcgI 2bRAD data correctly (verified: BcgI 2bRAD-M mock
-  detected exactly, 0 false positives).
-- **Speed/memory:** **~8× faster, ~11× less memory** per sample than StrainScan (*C. acnes*:
-  0.86 s / 78 MB vs 7.06 s / 828 MB). Single forward-strand scan + canonical hash (correct tag
-  lengths make it strand-invariant), so the marker set is a correct 1×.
-- **Scalability:** per-sample cost independent of species count (digest once, match many),
-  flat from 10 to **55 real species** (~3.3 s); linear in samples (~2.6–3.1 s/sample, 10→200
-  measured, extrapolated to 500); build 218 genomes → 55 DBs in 35 s.
-- **Complex-community efficiency (55 species):** **~132× faster at 100 samples** (4.7 min vs a
-  projected 10.4 h) and **~146× at 500 samples** (21 min vs ~52 h) than running StrainScan once
-  per species per sample — the only mode available to a tool with no multi-species support.
-  See `docs/multispecies.md`.
-- **Accuracy (55-species panel):** with the Layer-1 species gate, species precision **0.96→1.0**
-  (gate 10→200), species recall 0.98, strain recall 0.97.
-- **Cross-species (C. acnes, S. aureus, S. epidermidis):** **precision 1.0 for all three**,
-  recall 0.75–1.0, Bray–Curtis 0.02–0.33. Clustering matches StrainScan's own granularity.
-- **Depth:** Strain2bScan **detects down to 0.5×, matching StrainScan** (both miss at 0.1×).
-- **Enzyme count (the 2bRAD knob):** precision 1.0 from ≥1 enzyme; recall climbs to 0.75 and
-  plateaus by **~4–8 enzymes (the sweet spot)** — 14 is no better. BcgI alone already resolves.
-- **Reference quality (supp.):** precision stays **1.0 down to 70% completeness / 8%
-  contamination**; recall and abundance error degrade progressively and hit a hard cliff (total
-  failure) at 50% completeness / 10% contamination / 400 contigs.
-- **Species expansion (StrainScan's own pre-built DBs — *A. muciniphila*, *P. copri*,
-  *M. tuberculosis*):** Strain2bScan **precision 1.0** on all three (~17–23× faster, ~15–24×
-  lighter where StrainScan completes), matching StrainScan's precision while recall-first. The
-  one low recall, *M. tuberculosis* (0.25), reflects **genuine near-clonality** (40 genomes → 5
-  clusters), not a bug. **StrainScan itself did not complete** on *M. tuberculosis* (>3.3 h,
-  >25.5 GB RAM, 1 sample) — a real scalability ceiling of its full-k-mer regression Layer-2 on
-  near-clonal species. See `docs/species_expansion.md`.
+`make figures` regenerates current source panels and the numbered publication set, then refreshes
+`figures/numbered/MANIFEST.tsv`. Frozen benchmark tables and checksums should not be overwritten by
+ad hoc runs.
 
-## Notes
-- Committed scripts are the exact ones used (paths parameterized via `$WORKDIR` /
-  `$STRAIN2BSCAN_BIN`). The HaeIV/Hin4I enzymes are excluded from the multi-enzyme set
-  (degenerate recognition in the Fast2bRAD-M table → over-matching).
-- Reads are simulated error-free; an error model is a planned addition (see `docs/`).
+## Data and code availability
+
+- Strain2bScan source: <https://github.com/HuangShiLab/Strain2bScan>.
+- This paper snapshot: <https://github.com/HuangShiLab/Strain2bScan-paper>, tag `paper-2026-10-12`.
+- Public reads: PRJNA1131785, PRJNA288562, PRJNA1517970, PRJNA1191223 and PRJNA1191225.
+- The 22 selected public-library accessions and SRA metadata are in
+  `results/realworld_cohort_benchmark/public_run_manifest.tsv`.
+
+Correspondence: Shi Huang, `shihuang@hku.hk`.

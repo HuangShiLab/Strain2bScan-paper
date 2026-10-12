@@ -16,5 +16,5 @@ for i in x:
 ax.set_title("Cross-species strain profiling: precision 1.0 across species")
 ax.legend(loc="lower center", fontsize=8, ncol=3)
 fig.tight_layout(); os.makedirs("figures", exist_ok=True)
-fig.savefig("figures/cross_species.png", dpi=150); fig.savefig("figures/cross_species.pdf")
-print("wrote figures/cross_species.png + .pdf")
+fig.savefig("figures/source_panels/cross_species.png", dpi=150); fig.savefig("figures/source_panels/cross_species.pdf")
+print("wrote figures/source_panels/cross_species.png + .pdf")

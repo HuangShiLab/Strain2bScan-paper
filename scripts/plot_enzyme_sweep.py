@@ -27,5 +27,5 @@ a2b=a2.twinx(); a2b.plot(ne,bt,"d:",color="#7f7f7f",label="build time (s)"); a2b
 a2.set_title("Accuracy & cost vs #enzymes (C. acnes)")
 a1.legend(loc="center right",fontsize=7); a2.legend(loc="center left",fontsize=7)
 fig.tight_layout(); os.makedirs("figures",exist_ok=True)
-fig.savefig("figures/enzyme_sweep.png",dpi=150); fig.savefig("figures/enzyme_sweep.pdf")
-print("wrote figures/enzyme_sweep.png + .pdf")
+fig.savefig("figures/source_panels/enzyme_sweep.png",dpi=150); fig.savefig("figures/source_panels/enzyme_sweep.pdf")
+print("wrote figures/source_panels/enzyme_sweep.png + .pdf")

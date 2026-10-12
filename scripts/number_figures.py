@@ -11,8 +11,8 @@ from pathlib import Path
 from PIL import Image
 
 PAPER = Path(__file__).resolve().parent.parent
-FIG = PAPER / "figures"
-OUT = FIG / "numbered"; os.makedirs(OUT, exist_ok=True)
+FIG = PAPER / "figures/source_panels"
+OUT = PAPER / "figures/numbered"; os.makedirs(OUT, exist_ok=True)
 
 MAIN = {
     "01": ["overview"],
@@ -20,12 +20,12 @@ MAIN = {
     "03": ["cross_species", "depth_sensitivity"],
     "04": ["containment_mechanism", "refqual_figure"],
     "05": ["enzyme_sweep"],
-    "06": ["fig6_2brad"],
+    "06": ["fig06_native_2brad_mocks"],
     "07": ["saliva_fig07"],
     "08": ["saliva_fig08"],
     "09": ["performance", "scalability", "community_throughput"],
     "10": ["sim_headtohead"],
-    "11": ["fig12_wms_toolcompare"],
+    "11": ["fig11_wms_toolcompare"],
 }
 SUPP = {
     # (former S1 rank-rank scatter is now Fig 2 panel B — see scripts/plot_fig2_combined.py)
@@ -37,7 +37,7 @@ SUPP = {
 }
 
 # Human-readable output labels. By default the source stems are joined with '+';
-# these overrides avoid redundant names such as Fig12_fig12_wms_toolcompare.
+# these overrides avoid redundant names such as Fig12_fig11_wms_toolcompare.
 LABELS = {
     "06": "native_2brad_mocks",
     "10": "sim_headtohead",

@@ -90,7 +90,7 @@ reported here is the current manuscript version.
 ```bash
 export STRAIN2BSCAN_BIN=/path/to/strain2bscan      # or have `strain2bscan` on PATH
 make refqual        # downloads the 15-species pool + runs the gradient
-# -> results/refqual_15species.tsv, figures/refqual_figure.{png,pdf}
+# -> results/refqual_15species.tsv, figures/source_panels/refqual_figure.{png,pdf}
 ```
 
 **Containment arm:**

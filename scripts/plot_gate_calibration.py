@@ -49,5 +49,5 @@ else:
     b.axis("off")
 
 fig.tight_layout(); os.makedirs("figures", exist_ok=True)
-fig.savefig("figures/gate_calibration.png", dpi=150); fig.savefig("figures/gate_calibration.pdf")
-print("wrote figures/gate_calibration.png + .pdf")
+fig.savefig("figures/source_panels/gate_calibration.png", dpi=150); fig.savefig("figures/source_panels/gate_calibration.pdf")
+print("wrote figures/source_panels/gate_calibration.png + .pdf")

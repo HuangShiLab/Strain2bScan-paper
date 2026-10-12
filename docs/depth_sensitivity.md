@@ -14,7 +14,7 @@
 Single C. acnes strain **GCF_009737125** (present in both tools' DBs), simulated shotgun reads
 (150 bp, error-free) at 0.1× / 0.5× / 1× / 5× coverage. Strain2bScan profiled against the
 64-genome panel (detection floors 10 and 3); StrainScan against its 275-strain DB with its
-low-depth modes. `results/depth_sensitivity.tsv`, `figures/depth_sensitivity.*`.
+low-depth modes. `results/depth_sensitivity.tsv`, `figures/source_panels/depth_sensitivity.*`.
 
 | depth | Strain2bScan (floor 10) | Strain2bScan (floor 3) | StrainScan |
 |---|---|---|---|

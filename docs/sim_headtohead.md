@@ -40,7 +40,7 @@ single-species and multi-species communities?
 - **Multi-species:** 1–9 s (one pass) vs 100–398 s (Σ 14 runs) = **50–105× faster**.
 
 ## Files
-- Figure: `figures/sim_headtohead.{png,pdf}` (script `scripts/plot_sim_headtohead.py`).
+- Figure: `figures/source_panels/sim_headtohead.{png,pdf}` (script `scripts/plot_sim_headtohead.py`).
 - Aggregates: `results/sim_headtohead_{single_by_depth,by_species,multi,build_cost,profile_sameenv}.tsv`.
 - Tables: `manuscript/tables.md` (Table 1–3). Per-sample raw + README: `figure_raw_data/sim_headtohead/`.
 - Drivers (this session): `scratchpad/eval/run_s2b_{single,multi}.py`,

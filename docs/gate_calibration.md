@@ -15,7 +15,7 @@ species each, at two depth regimes: **normal** (paper distribution, median ~2×,
 **low** (median 0.62×, 70 % of species sub-1×). A species counts as a *positive call* only if it
 is strain-**resolved** (tier `Resolved`) — exactly what the gate controls. Metrics aggregated over
 all samples; `detect=10` throughout. Data: `results/gate_calibration_*.tsv`; figure
-`figures/gate_calibration.{png,pdf}`; runners `scripts/calibrate_gate.py` (frac sweep, env:
+`figures/source_panels/gate_calibration.{png,pdf}`; runners `scripts/calibrate_gate.py` (frac sweep, env:
 `FLOOR`/`DETECT`/`FRACS`/`SAMPLES_DIR`/`TRUTH_DIR`) and `scripts/sim_lowdepth.py` (low-depth
 samples); plot `scripts/plot_gate_calibration.py`.
 

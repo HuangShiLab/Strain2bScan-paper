@@ -52,7 +52,7 @@ the sample is digested once and each additional species is a cheap hash-set matc
 StrainScan has no multi-species mode — resolving *S* species means running it once per species
 database, per sample, re-counting the sample's k-mers each time (measured cost: 6.8 s/run on
 *C. acnes*, `results/headtohead_performance.tsv`). For the 55-species panel
-(`results/community_throughput.tsv`, `figures/community_throughput.*`):
+(`results/community_throughput.tsv`, `figures/source_panels/community_throughput.*`):
 
 | # samples | Strain2bScan (measured) | StrainScan (projected, 55 runs/sample) | speedup |
 |---|---|---|---|

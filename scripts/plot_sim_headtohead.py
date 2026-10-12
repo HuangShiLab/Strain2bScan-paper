@@ -3,7 +3,7 @@
 Six panels: (A-C) single-species precision/recall/F1 vs depth; (D) per-species DB build time;
 (E) same-environment profile time vs depth; (F) multi-species profiling time per community sample.
 Reads the reproducible StrainScan-rerun accuracy tables plus archived cost/timing tables;
-writes figures/sim_headtohead.{png,pdf}."""
+writes figures/source_panels/sim_headtohead.{png,pdf}."""
 import os, csv
 import matplotlib; matplotlib.use("Agg")
 import matplotlib.pyplot as plt, numpy as np
@@ -75,6 +75,6 @@ for i, r in enumerate(mt):
 panel_tag(axf, "F")
 
 os.makedirs("figures", exist_ok=True)
-fig.savefig("figures/sim_headtohead.png", dpi=150, bbox_inches="tight")
-fig.savefig("figures/sim_headtohead.pdf", bbox_inches="tight")
-print("wrote figures/sim_headtohead.png + .pdf")
+fig.savefig("figures/source_panels/sim_headtohead.png", dpi=150, bbox_inches="tight")
+fig.savefig("figures/source_panels/sim_headtohead.pdf", bbox_inches="tight")
+print("wrote figures/source_panels/sim_headtohead.png + .pdf")

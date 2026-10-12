@@ -19,7 +19,7 @@ between-strain distance spaces, all with the Mash transform D(J) = −ln(2J/(1+J
 Per species, the pairwise distance vector for 2bRAD and for 16S is correlated (Spearman) against the
 whole-genome vector; **95% CIs by 500 genome subsamples (80% without replacement)**. `PYTHONHASHSEED=0`.
 
-## Result — `results/mash_2brad_vs_16s_recomputed.tsv`, `figures/mash_2brad_vs_16s.*`
+## Result — `results/mash_2brad_vs_16s_recomputed.tsv`, `figures/source_panels/mash_2brad_vs_16s.*`
 
 **2bRAD median Spearman 0.94 vs 16S median 0.36** across the 15 species. Every 2bRAD CI is high
 (≥0.53) and never overlaps its species' 16S CI; several **16S CIs overlap zero** (no strain signal

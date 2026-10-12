@@ -13,7 +13,7 @@ both native BcgI 2bRAD (Part I, Fig 12) and in-silico-digested shotgun (Part II,
 - Profile with `--min-abundance 0` (keep every strain; the exposed floor set to 0 for strain-ID) and
   `--min-coverage 0.2` (precision via marker breadth).
 
-## Results (`results/mock_strainid.tsv`)
+## Results (`archive/legacy_results/mock_strainid.tsv`)
 - **Fig 12 native 2bRAD:** 19/20 strains at 90–99 % host (100 ng), 11/20 at 99.9 %; titration 0/16/19/19
   at 0.001/0.01/0.1/1 ng; ~0 false positives. The one miss, *L. gasseri*, has < 10 unique BcgI tags in the
   combined tree (single-enzyme limit, Fig 5) — still species-detected. `--containment` (Fig 4) is required:
@@ -22,7 +22,7 @@ both native BcgI 2bRAD (Part I, Fig 12) and in-silico-digested shotgun (Part II,
   all-enzyme marker set avoids sparse-tree fragmentation.
 - **Abundance** (both): per-species marker `depth` (∝ genome copy number; new output column) normalised
   across species recovers the mock design — uniform for even MSA-1002, ~3-orders-of-magnitude staggered for
-  MSA-1003 (`results/mock_species_abundance.tsv`).
+  MSA-1003 (`archive/legacy_results/mock_species_abundance.tsv`).
 
 ## Reproduce
 Raw data, DBs and drivers under `../Strain2bScan-raw-data/MSA_demo/` (see its `db_strategy.md`):

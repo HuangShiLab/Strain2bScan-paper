@@ -31,3 +31,14 @@ __pycache__/
 *.bak
 figure_raw_data/**/truth/
 .venv/
+
+# Local archival area: retained for provenance, not part of the paper repository.
+/archive/large_intermediates/
+/archive/work_legacy/
+# Compatibility symlinks to archived reproducibility inputs.
+/figure_raw_data/sim_single_species
+/figure_raw_data/sim_multi_species
+/figure_raw_data/sim_genome_pool
+/figure_raw_data/Fig06_mock_hostcontam/reads
+/figure_raw_data/Fig07_saliva_2bRAD/reads
+/figure_raw_data/TableS3_clinical_oral/reads

@@ -68,6 +68,6 @@ ax.scatter(45, 6.5, s=42, marker="s", color=GREEN, edgecolors="k", linewidths=0.
 fig.suptitle("Reference incompleteness fragments Jaccard clusters (wrong markers); max-containment keeps them intact",
              fontsize=12, y=0.99)
 fig.tight_layout(rect=[0, 0, 1, 0.96])
-fig.savefig(f"{PAPER}/figures/containment_mechanism.png", dpi=150, bbox_inches="tight")
-fig.savefig(f"{PAPER}/figures/containment_mechanism.pdf", bbox_inches="tight")
-print("wrote figures/containment_mechanism.png/pdf")
+fig.savefig(f"{PAPER}/figures/source_panels/containment_mechanism.png", dpi=150, bbox_inches="tight")
+fig.savefig(f"{PAPER}/figures/source_panels/containment_mechanism.pdf", bbox_inches="tight")
+print("wrote figures/source_panels/containment_mechanism.png/pdf")

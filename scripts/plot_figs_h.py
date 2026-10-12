@@ -18,7 +18,7 @@ from matplotlib import colormaps
 PAPER = Path(__file__).resolve().parent.parent
 SP = PAPER / "data"
 RAW = PAPER / "work" / "mock_retest" / "Strain2bScan-raw-data"
-FIGDIR = PAPER / "figures"
+FIGDIR = PAPER / "figures/source_panels"
 os.makedirs(FIGDIR, exist_ok=True)
 
 INK = "#222222"; MUTED = "#6b6b6b"; BARGREY = "#c9c9c9"; FPBLACK = "#1a1a1a"; GROUPLINE = "#888888"
@@ -278,8 +278,8 @@ if __name__ == "__main__":
     wms = build_wms()
     legend_sp = {species_of(g) for r in wms for g, v in profiles.get(r["_truthkey"], {}).items() if v > 0}
     draw_figure(wms, "Figure 11 — Primary WMS mock comparison (detection threshold 1e-4)",
-                f"{FIGDIR}/fig12_wms_toolcompare", legend_sp)
+                f"{FIGDIR}/fig11_wms_toolcompare", legend_sp)
     brad = build_brad()
     legend_sp = {species_of(g) for r in brad for g, v in profiles.get(r["_truthkey"], {}).items() if v > 0}
     draw_figure(brad, "Figure 6 — Native BcgI 2bRAD mocks (detection threshold 1e-4)",
-                f"{FIGDIR}/fig6_2brad", legend_sp)
+                f"{FIGDIR}/fig06_native_2brad_mocks", legend_sp)

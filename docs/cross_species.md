@@ -3,7 +3,7 @@
 **Goal.** Test whether strain profiling generalizes across species. Real NCBI/ENA panels
 (*C. acnes* 64 genomes, *S. aureus* 60, *S. epidermidis* 60), identical 14-enzyme pipeline,
 5 simulated strain-mixture mocks per species (2–5 strains, log-normal depth ≥1×).
-`results/cross_species.tsv`, `figures/cross_species.*`, `scripts/run_cross_species.py`.
+`results/cross_species.tsv`, `figures/source_panels/cross_species.*`, `scripts/run_cross_species.py`.
 
 > **This experiment was re-run after the strand-invariance digestion fix** (see
 > `docs/species_expansion.md` and the software repo). The earlier version of this doc reported a

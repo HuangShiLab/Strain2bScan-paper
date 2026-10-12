@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Fig 5 (multi-species): enzyme count vs strain-ID accuracy across 14 sim-pool species.
-Reads results/enzyme_sweep_multi.tsv; writes figures/enzyme_sweep.{png,pdf}."""
+Reads results/enzyme_sweep_multi.tsv; writes figures/source_panels/enzyme_sweep.{png,pdf}."""
 import csv, statistics as st, os
 from collections import defaultdict
 import matplotlib; matplotlib.use("Agg"); import matplotlib.pyplot as plt, numpy as np
@@ -30,5 +30,5 @@ ax[1].set_title("B  Marker yield vs enzyme set"); ax[1].grid(alpha=.3)
 fig.suptitle("2bRAD enzyme set is a resolution/cost knob — precision 1.0, recall rises with enzymes (14 species)",fontsize=11)
 fig.tight_layout(rect=[0,0,1,0.95])
 os.makedirs("figures",exist_ok=True)
-fig.savefig("figures/enzyme_sweep.png",dpi=150,bbox_inches="tight"); fig.savefig("figures/enzyme_sweep.pdf",bbox_inches="tight")
-print("wrote figures/enzyme_sweep.{png,pdf}")
+fig.savefig("figures/source_panels/enzyme_sweep.png",dpi=150,bbox_inches="tight"); fig.savefig("figures/source_panels/enzyme_sweep.pdf",bbox_inches="tight")
+print("wrote figures/source_panels/enzyme_sweep.{png,pdf}")

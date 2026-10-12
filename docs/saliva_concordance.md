@@ -13,7 +13,7 @@ native 2bRAD. Strain calls compared per sample; 2bRAD community relative abundan
 support / sample total. `scripts/concordance_superset.py`. (A 4th sample, S13-11, recovered 0
 bacterial species from WMS — host-dominated — and was dropped.)
 
-## Result — `results/saliva_concordance.tsv`, `figures/saliva_concordance.*`
+## Result — `results/saliva_concordance.tsv`, `archive/legacy_figures/saliva_concordance.*`
 
 | sample | 2bRAD strains | WMS strains | WMS confirmed by 2bRAD | 2bRAD-only |
 |---|---|---|---|---|

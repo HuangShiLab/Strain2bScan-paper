@@ -64,6 +64,6 @@ for i, r in enumerate(rows):
 
 fig.suptitle("Species expansion: Strain2bScan vs StrainScan's own pre-built DBs (3 new species)", y=1.03)
 fig.tight_layout(); os.makedirs("figures", exist_ok=True)
-fig.savefig("figures/species_expansion.png", dpi=150, bbox_inches="tight")
-fig.savefig("figures/species_expansion.pdf", bbox_inches="tight")
-print("wrote figures/species_expansion.png + .pdf")
+fig.savefig("figures/source_panels/species_expansion.png", dpi=150, bbox_inches="tight")
+fig.savefig("figures/source_panels/species_expansion.pdf", bbox_inches="tight")
+print("wrote figures/source_panels/species_expansion.png + .pdf")

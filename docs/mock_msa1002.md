@@ -14,7 +14,7 @@ Lactobacillus gasseri, Bacillus cereus, Clostridium beijerinckii, Cereibacter sp
 42 decoy species** (62 total), so both recall and false positives are testable.
 `scripts/dl_mock_extra.py` fetches the ENA genomes; DBs are `cluster --enzyme BcgI --similarity 0.95`.
 
-## Result — `results/mock_msa1002_titration.tsv`, `figures/mock_msa1002_titration.*`
+## Result — `results/mock_msa1002_titration.tsv`, `figures/source_panels/mock_msa1002_titration.*`
 Strain2bScan `multi-profile --enzyme BcgI` (gate 50/5) on the real reads:
 
 - **Precision 1.0 at every DNA input** — zero false species strain-resolved.

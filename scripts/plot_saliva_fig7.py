@@ -186,7 +186,7 @@ def main():
 
     fig.suptitle("Native 2bRAD saliva profiles are individual-specific within one day (8 subjects × 4 timepoints)",
                  fontsize=14, fontweight="bold")
-    out = PAPER / "figures/saliva_fig07"
+    out = PAPER / "figures/source_panels/saliva_fig07"
     fig.savefig(out.with_suffix(".png"), dpi=180, bbox_inches="tight")
     fig.savefig(out.with_suffix(".pdf"), bbox_inches="tight")
     print(f"wrote {out}.png/.pdf; LOTO species={acc_species:.4f}, strain={acc_s2b:.4f}")

@@ -39,5 +39,5 @@ ax[1,1].set_ylabel("accuracy"); ax[1,1].set_ylim(0, 1.05); ax[1,1].legend(loc="l
 ax[1,1].set_title("Multi-species accuracy vs species gate\n(precision 0.96→1.0, recall 0.98)")
 for a in ax.flat: a.grid(alpha=0.3)
 fig.tight_layout(); os.makedirs("figures", exist_ok=True)
-fig.savefig("figures/scalability.png", dpi=150); fig.savefig("figures/scalability.pdf")
-print("wrote figures/scalability.png + .pdf")
+fig.savefig("figures/source_panels/scalability.png", dpi=150); fig.savefig("figures/source_panels/scalability.pdf")
+print("wrote figures/source_panels/scalability.png + .pdf")

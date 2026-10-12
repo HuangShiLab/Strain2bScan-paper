@@ -14,8 +14,8 @@ Inputs (populated by rsync from HPC):
 Outputs:
   data/fig6_fig12_metrics.tsv
   data/fig6_fig12_profiles.json
-  figures/fig6_2brad.{png,pdf}
-  figures/fig12_wms_toolcompare.{png,pdf}
+  figures/source_panels/fig06_native_2brad_mocks.{png,pdf}
+  figures/source_panels/fig11_wms_toolcompare.{png,pdf}
   figures/numbered/Fig06_native_2brad_mocks.{png,pdf}
   figures/numbered/Fig12_wms_toolcompare.{png,pdf}
 """

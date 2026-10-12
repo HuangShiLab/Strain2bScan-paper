@@ -18,7 +18,7 @@ issue where an independently-chosen panel only partly overlapped StrainScan's 20
 resolve versions and download from NCBI, build our own Strain2bScan cluster DB on that subset,
 simulate 5 log-normal strain-mixture samples (2–5 truth strains, depth ≥1×), and profile both
 tools on the same reads. `scripts/run_species_expansion.py`, `results/species_expansion.tsv`,
-`figures/species_expansion.*`.
+`figures/source_panels/species_expansion.*`.
 
 ## Results
 
@@ -68,7 +68,7 @@ BcgI was correct), which made the forward/reverse recognition patterns stop bein
 pairs. The fix ports Fast2bRAD-M's correct tag lengths and keeps a single forward-strand scan +
 canonical hash (now strand-invariant, and interoperable with Fast2bRAD-M). The panel-size experiment, re-run with the fixed
 binary (`scripts/run_panelsize.py`, `results/panelsize_prevotella.tsv`,
-`figures/panelsize_prevotella.*`; genomes from EBI/ENA as NCBI was IP-blocked):
+`archive/legacy_figures/panelsize_prevotella.*`; genomes from EBI/ENA as NCBI was IP-blocked):
 
 | panel size | clusters (was, forward-only) | precision (was) | recall (was) |
 |---|---|---|---|

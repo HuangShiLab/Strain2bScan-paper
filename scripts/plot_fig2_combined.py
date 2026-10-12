@@ -90,6 +90,6 @@ fig.legend(handles=[Line2D([0],[0], marker="o", color="w", markerfacecolor="#1f7
 fig.suptitle("2bRAD captures strain-level signal that 16S cannot (15 species): summary (A) and per-species rank–rank scatter (B)",
              fontsize=13, y=0.995)
 fig.subplots_adjust(left=0.075, right=0.985, top=0.9, bottom=0.09)
-fig.savefig(f"{PAPER}/figures/mash_2brad_vs_16s.png", dpi=150)
-fig.savefig(f"{PAPER}/figures/mash_2brad_vs_16s.pdf")
+fig.savefig(f"{PAPER}/figures/source_panels/mash_2brad_vs_16s.png", dpi=150)
+fig.savefig(f"{PAPER}/figures/source_panels/mash_2brad_vs_16s.pdf")
 print(f"2bRAD median {med2:.3f} vs 16S {med16:.3f}; wrote combined Fig 2 (A bars + B 3x5 scatter)")

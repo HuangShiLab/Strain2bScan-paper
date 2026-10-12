@@ -61,7 +61,7 @@ def main():
              "Shotgun was an R1 prefix subsample; candidate-only calls are not independent strain validation.",
              ha="center", fontsize=9)
     fig.tight_layout(rect=[0, 0.03, 1, 0.94])
-    out = PAPER / "figures/saliva_fig08"
+    out = PAPER / "figures/source_panels/saliva_fig08"
     fig.savefig(out.with_suffix(".png"), dpi=180, bbox_inches="tight")
     fig.savefig(out.with_suffix(".pdf"), bbox_inches="tight")
     print(f"wrote {out}.png/.pdf; totals={totals[1]}")

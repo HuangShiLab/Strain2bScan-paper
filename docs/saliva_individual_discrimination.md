@@ -30,7 +30,7 @@ relative-abundance matrices (`sample_fraction`, per-sample normalized) → Bray�
 (adonis, 4999 perms) + leave-one-out 1-NN subject classification. `scripts/profile_saliva.py`,
 `scripts/analyze_saliva.py`.
 
-## Result — `results/saliva_permanova.tsv`, `results/saliva_perspecies_subject.tsv`, `figures/saliva_individual_discrimination.*`
+## Result — `results/saliva_permanova.tsv`, `results/saliva_perspecies_subject.tsv`, `archive/legacy_figures/saliva_individual_discrimination.*`
 
 | factor | level | R² | p | LOO 1-NN acc |
 |---|---|---|---|---|

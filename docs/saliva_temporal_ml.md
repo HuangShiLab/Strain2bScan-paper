@@ -5,7 +5,7 @@ two follow-ups the plan called for: is an individual's strain profile **stable a
 can we **classify the host** from strain features? Same 8 subjects × 4 timepoints (9AM/11AM/1PM/5PM)
 native BcgI 2bRAD, oral panel, strain-level abundances. `scripts/temporal_ml_saliva.py`.
 
-## Temporal stability — `results/saliva_temporal_ml.tsv`, `figures/saliva_temporal_ml.*`
+## Temporal stability — `results/saliva_temporal_ml.tsv`, `archive/legacy_figures/saliva_temporal_ml.*`
 Strain-level Bray–Curtis distance **within subject** (across the 4 times of day) vs **between
 subjects**:
 

@@ -33,7 +33,7 @@ refqual-data: $(WORKDIR)        ## download C. acnes 64-panel + 5 mock reads + E
 
 refqual: refqual-data           ## Strain2bScan arm: degrade DB across a quality gradient + figure
 	cd $(WORKDIR) && python3 $(SCRIPTS)/run_refqual.py && python3 $(SCRIPTS)/plot_refqual.py
-	@echo "outputs: $(WORKDIR)/refqual/refqual_degradation.tsv, $(WORKDIR)/figures/refqual_figure.*"
+	@echo "outputs: $(WORKDIR)/refqual/refqual_degradation.tsv, $(WORKDIR)/figures/source_panels/refqual_figure.*"
 
 refqual-strainscan:             ## StrainScan arm (LINUX; needs $$STRAINSCAN, $$STRAINSCAN_PY)
 	cd $(WORKDIR) && python3 $(SCRIPTS)/run_refqual_strainscan.py && python3 $(SCRIPTS)/plot_refqual.py
@@ -63,16 +63,24 @@ cross-species-data: $(WORKDIR)  ## download the pinned S. aureus + S. epidermidi
 cross-species: refqual-data cross-species-data  ## strain-mixture accuracy across 3 species + figure
 	cd $(WORKDIR) && python3 $(SCRIPTS)/run_cross_species.py && python3 $(SCRIPTS)/plot_cross_species.py
 
-figures:                        ## regenerate all figures from results/*.tsv (no workdir needed)
+figures:                        ## regenerate current source panels and numbered figures
 	python3 scripts/plot_performance.py
 	python3 scripts/plot_scalability.py
 	python3 scripts/plot_depth.py
-	python3 scripts/plot_enzyme_sweep.py
+	python3 scripts/plot_enzyme_sweep_multi.py
 	python3 scripts/plot_cross_species.py
-	python3 scripts/plot_refqual.py
+	python3 scripts/plot_refqual15.py
 	python3 scripts/plot_community_throughput.py
 	python3 scripts/plot_species_expansion.py
-	python3 scripts/plot_panelsize.py
+	python3 scripts/plot_fig2_combined.py
+	python3 scripts/plot_mock_titration.py
+	python3 scripts/plot_gate_calibration.py
+	python3 scripts/plot_figs_h.py
+	python3 scripts/plot_saliva_fig7.py
+	python3 scripts/plot_saliva_fig8.py
+	python3 scripts/plot_sim_headtohead.py
+	python3 scripts/number_figures.py
+	python3 scripts/make_figure_manifest.py
 
 clean:                          ## remove the work directory
 	rm -rf $(WORKDIR)
