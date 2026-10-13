@@ -8,17 +8,17 @@ host-dominated, low-biomass samples. We present Strain2bScan, a Rust profiler th
 reference genomes and scores unique 25–33 bp type-IIB restriction markers. It profiles native BcgI
 2bRAD-M libraries and in-silico-digested shotgun reads in one marker framework. Across 15 species,
 2bRAD-marker distances tracked whole-genome strain distances more closely than 16S distances (median
-Spearman ρ = 0.94 versus 0.36). Native BcgI profiling retained F1 = 1.0 at an abundance threshold of 10⁻⁴
+Spearman ρ = 0.94 versus 0.36). Native BcgI profiling retained F1 = 1.0 at the 10⁻⁴ abundance threshold
 in the 99%-human-DNA mock. In shotgun comparisons, Strain2bScan was the only tested tool that
 preserved detection and abundance at 99% host. In a
 run-level StrainScan rerun, accuracy was comparable: species-median precision was 1.0 for both tools,
-median recall/F1 were 0.733/0.844 versus 0.667/0.800, and paired-difference intervals included zero in completed-pair and failure-aware analyses.
+paired recall and F1 differences were +0.063 and +0.005; failure-aware values were +0.127 and +0.076, with intervals including zero.
 Archived cross-environment runs reduced database-construction cost by 249–614× in wall time and 43–138×
 in memory. A
 supplementary StrainGST rerun used a different 0.90-reference space; StrainGR was not run. In eight
 saliva subjects, a leave-one-timepoint-out classifier reached 100% with strain features versus 78.1%
-with species features; the paired difference interval included zero. This was a small
-within-subject classification result, not independent strain-accuracy validation. Accuracy depends on
+with species features; the paired difference interval included zero. This small
+within-subject result is not independent strain-accuracy validation. Accuracy depends on
 reference completeness and niche-matched panel design.
 
 **Availability.** Rust source: https://github.com/HuangShiLab/Strain2bScan. Public reads: PRJNA1131785,

@@ -4,7 +4,7 @@ This repository contains the manuscript, final figures, current result tables, a
 scripts for **Strain2bScan**. The software source is in
 [HuangShiLab/Strain2bScan](https://github.com/HuangShiLab/Strain2bScan).
 
-The current snapshot is tagged `paper-2026-10-12`.
+The current snapshot is tagged `paper-2026-10-13-submission`.
 
 ## Start here
 
@@ -30,7 +30,7 @@ ad hoc runs.
 ## Data and code availability
 
 - Strain2bScan source: <https://github.com/HuangShiLab/Strain2bScan>.
-- This paper snapshot: <https://github.com/HuangShiLab/Strain2bScan-paper>, tag `paper-2026-10-12`.
+- This paper snapshot: <https://github.com/HuangShiLab/Strain2bScan-paper>, tag `paper-2026-10-13-submission`.
 - Public reads: PRJNA1131785, PRJNA288562, PRJNA1517970, PRJNA1191223 and PRJNA1191225.
 - The 22 selected public-library accessions and SRA metadata are in
   `results/realworld_cohort_benchmark/public_run_manifest.tsv`.

@@ -66,7 +66,7 @@ full = "\n\n".join([
     "## Data and code availability\n\n"
     "The Strain2bScan source code is available at https://github.com/HuangShiLab/Strain2bScan. "
     "Derived tables, benchmark configurations, checksums and assembly scripts are available at "
-    "https://github.com/HuangShiLab/Strain2bScan-paper (paper-2026-10-12 tag). Public human metagenome reads used in the "
+    "https://github.com/HuangShiLab/Strain2bScan-paper (paper-2026-10-13-submission tag). Public human metagenome reads used in the "
     "exploratory analyses are from PRJNA1131785, PRJNA288562, PRJNA1517970, PRJNA1191223 and PRJNA1191225. "
     "Commercial ATCC mock standards are identified by their catalogue names in the manuscript. No new "
     "human subject data were generated for this study.\n\n"

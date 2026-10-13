@@ -411,8 +411,12 @@ with ART [18] (`art_illumina -p -l 250 -m 600 -s 150`, error-modelled 250-bp pai
 species, genome accession and 0.95-cluster assignment.
 
 Both tools [1] built their databases from the **same genome pool** and profiled the **same reads**.
-Strain2bScan databases were built with `cluster --enzyme all --similarity 0.95` and profiled with
-`profile` / `multi-profile --enzyme all` (reads decompressed, R1+R2 concatenated). StrainScan (v1.0.14,
+The Strain2bScan systematic rerun used source commit `6ae760c2f3bd2f39efc0e6aa06c53a84366cb16e` (tag `benchmark-v0.1.1-6ae760c`)
+(release binary SHA-256 `a14a831a3b67c29de583d48eecf30001d8d7d5dc0f51775dea2ce95a4586329f`) with its
+current default depth-adaptive gates. Databases were rebuilt with
+`cluster --enzyme all --similarity 0.95`; samples were profiled with `profile` or `multi-profile --enzyme all`
+(reads decompressed, R1+R2 concatenated). The rerun and set-level scoring are implemented by
+`scripts/regression_strain2bscan_current.py` and `scripts/aggregate_strain2bscan_regression.py`. StrainScan (v1.0.14,
 bioconda) is Linux-x86-only; it ships Dashing [27] and jellyfish [28] executables, a Python-3.7
 `.so`, and an R reclustering step; so it was run inside a Docker `linux/amd64` container (QEMU emulation
 on Apple Silicon; `strainscan_build`, then `strainscan -i R1 -j R2 -d DB`). Because the two tools cluster

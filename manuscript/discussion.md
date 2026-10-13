@@ -5,8 +5,8 @@ framework in a fast Rust implementation. Across the tested settings, 2bRAD tags 
 ordering that 16S did not (median Spearman 0.94 versus 0.36), precision was 1.0 in simulated single-species
 benchmarks, and detection matched StrainScan at 0.5× coverage. In a run-level 15-species StrainScan rerun,
 species-median precision was 1.0 for both tools and the confidence intervals for paired recall/F1
-differences included zero, although Strain2bScan had higher species-median point estimates
-(0.733/0.844 versus 0.667/0.800). Its consistent advantages were database-construction cost, single-pass
+differences included zero (+0.063 recall and +0.005 F1), although current Strain2bScan traded lower
+precision for higher recall on *K. pneumoniae*. Its consistent advantages were database-construction cost, single-pass
 community profiling, and retention under high host DNA (Figs 2, 3, S5, 10, 11).
 
 **Native 2bRAD for low-biomass, high-host microbiomes.** Native reduction occurs before host DNA dominates a
@@ -59,12 +59,15 @@ distinguish strains (*M. tuberculosis*); this limit is intrinsic and shared by a
 and where it bites hardest StrainScan failed to complete (>3.3 h, >25 GB) while Strain2bScan finished in
 ~1 s at precision 1.0 (Fig 10). Layering a within-cluster overlap/regression step on top of
 occurrence-based uniqueness is the clearest algorithmic target for raising near-clonal recall.
+
 (ii) **Reference panels must be niche-appropriate and genome-rich** for real communities: a generic
 pathogen panel with few genomes per species gave no saliva signal because real strains map uniformly
 across arbitrary clusters, whereas a genome-rich oral panel recovered the full individual-discrimination
 signal; panel design is a real determinant of strain-level performance on open-world data.
+
 (iii) **Host-limited shotgun** cannot reach the low-abundance strain tail on high-host samples; this is a
 property of the input, not the tool, and is precisely the gap the native-2bRAD mode fills.
+
 (iv) **Reference incompleteness is improved but not fully solved.** The `--containment` clustering mode
 recovers accuracy when an incomplete genome has a complete relative in the panel (Fig 4), but it cannot
 recover markers that are simply *absent* (a strain whose only reference is a partial assembly) nor undo
@@ -78,7 +81,10 @@ analogous to the Layer-1 breadth term) so incomplete strains are not gated out; 
 member); **upstream completeness/contamination estimation and decontamination** (CheckM2 [11] / GUNC [12]) feeding
 the quality filter; and **pangenome-based imputation** of missing markers from complete conspecifics. The
 irreducible case (a strain represented only by a low-completeness, contaminated genome) is a data limit
-no clustering can overcome. (v) The public-cohort experiment in Table 4 adds real WGS profiling of longitudinal, multi-site and
+no clustering can overcome.
+
+
+(v) The public-cohort experiment in Table 4 adds real WGS profiling of longitudinal, multi-site and
 low-biomass samples, and Table 5 adds an isolate-derived panel compatibility check. These are application-oriented
 subsets rather than closed-world truth benchmarks: read sets used to build the isolate panel were also
 used for self-recovery, and the real metagenomes lack exhaustive strain truth. The comparator scope in
@@ -88,13 +94,18 @@ benchmark is required before claiming StrainGE-equivalent genomic resolution. De
 validation, oral-cancer case/control analysis, FFPE and degraded material, broader multi-tool
 comparison (sylph), and completing the Fast2bRAD-M species layer remain future work.
 
+
 (vi) The PRJNA1517970 body-site panel still produced no calls. This finding shows that species choice alone does not
 solve low-marker input: the negative result reflects sparse strain-marker evidence and incomplete body-site
-coverage, with panel completeness and sequencing depth remaining limiting. (vii) Leave-one-isolate-out
+coverage, with panel completeness and sequencing depth remaining limiting.
+
+
+(vii) Leave-one-isolate-out
 *E. coli* tests showed that reads from an absent isolate were assigned to a merged cluster formed by the
 two closest available relatives. This behaviour avoids inventing a false isolate-specific call but also
 means that absence of the true strain cannot be inferred from a nearest-relative assignment. Future work
 therefore requires broader pangenome panels and explicit absent-strain models.
+
 
 (viii) **Strain-level profiling did not improve case/control prediction over species-level on two
 native BcgI 2bRAD-M oral datasets** (ECC caries vs healthy, and Lim_ORPI clean vs unclean denture;

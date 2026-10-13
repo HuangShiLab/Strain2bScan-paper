@@ -263,9 +263,9 @@ def main():
         print(f"ERROR: HPC mirror not found at {RAW}")
         print("Run rsync from HPC first:")
         print("  rsync -av shihuang@hpc2021.hku.hk:/lustre1/g/aos_shihuang/LU/Strain2bScan-raw-data/"
-              "\{MSA_combined164_all_flat.members.tsv,MSA1002_combined_all_flat.members.tsv,"
+              "\\{MSA_combined164_all_flat.members.tsv,MSA1002_combined_all_flat.members.tsv,"
               "MSA_combined164_bcgi_cont.members.tsv,MSA1002_combined_bcgi_cont.members.tsv,"
-              "Ground_truth,wms_analysis\} work/mock_retest/Strain2bScan-raw-data/")
+              "Ground_truth,wms_analysis\\} work/mock_retest/Strain2bScan-raw-data/")
         sys.exit(1)
 
     old_profiles = json.load(open(DATA / "fig6_fig12_profiles.json"))

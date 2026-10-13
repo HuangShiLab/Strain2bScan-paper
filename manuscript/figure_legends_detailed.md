@@ -257,9 +257,9 @@ lower-abundance**. They are candidate observations and do not quantify an indepe
   `manuscript/tables.md`.
 **2. Key issue & conclusion.** On a common, controlled benchmark, does Strain2bScan match StrainScan's
 accuracy at far lower cost across many species and depths? Conclusion: accuracy was broadly comparable.
-Species-median P/R/F1 was 1.0/0.733/0.844 for Strain2bScan and 1.0/0.667/0.800 for StrainScan; bootstrap
-CIs for paired mean differences included zero. Strain2bScan reached full median recall at 3× and remained
-there, whereas StrainScan was non-monotonic. Archived timing runs showed database builds **249–614×
+Species-median P/R/F1 was 1.0/1.0/1.0 for Strain2bScan and 1.0/0.667/0.800 for StrainScan; bootstrap CIs
+for paired mean recall and F1 differences included zero. Strain2bScan reached full median recall from 1×
+onward, whereas StrainScan was non-monotonic. Archived timing runs showed database builds **249–614×
 faster / 43–138× lighter**, same-environment profiling **4–33× faster**, and one-pass community profiling
 **46–105× faster**. StrainScan failed to build *K. pneumoniae* in the archived timing run but succeeded in
 the reproducible accuracy rerun, indicating resource sensitivity.
@@ -346,7 +346,7 @@ precision 1.0 at both depths with leakage held in the middle tier; the breadth t
 
 ---
 
-## Figure S5; Matches or exceeds StrainScan on its own databases
+## Figure S5; Strain2bScan versus StrainScan on three StrainScan-curated reference sets
 **1. Data source.**
 - *Data type:* simulation on real reference panels (StrainScan's own reference sets; closed-world).
 - *Production/collection:* *A. muciniphila*, *P. copri* and near-clonal *M. tuberculosis* (40-genome

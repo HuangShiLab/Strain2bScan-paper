@@ -230,9 +230,40 @@ instrain_provenance = (ROOT / "results/mock_benchmark_f26f234/instrain_provenanc
 if "package: inStrain 1.9.1" not in instrain_provenance or "popANI_reference >= 0.99999" not in instrain_provenance:
     fail("inStrain provenance lacks archived version and call filters")
 
+current_rows = load_tsv("results/strainscan_rerun/current_single_persample.tsv")
+current_species = load_tsv("results/strainscan_rerun/current_single_by_species.tsv")
+if len(current_rows) != 225 or len(current_species) != 14:
+    fail(f"current regression coverage changed: {len(current_rows)} rows, {len(current_species)} species")
+current_metrics = {
+    metric: statistics.median(float(row[metric]) for row in current_species)
+    for metric in ("s2b_precision", "s2b_recall", "s2b_f1", "ss_precision", "ss_recall", "ss_f1")
+}
+current_expected = {
+    "s2b_precision": 1.0, "s2b_recall": 1.0, "s2b_f1": 1.0,
+    "ss_precision": 1.0, "ss_recall": 0.6666666666666666, "ss_f1": 0.8,
+}
+for metric, expected in current_expected.items():
+    if not math.isclose(current_metrics[metric], expected, abs_tol=5e-5):
+        fail(f"current regression species median changed for {metric}: {current_metrics[metric]}")
+current_uncertainty = {row["analysis"]: row for row in load_tsv("results/strainscan_rerun/current_uncertainty_summary.tsv")}
+for key, point, lo, hi in [
+    ("current_completed_single_species:recall_difference", 0.06290849673202614, -0.036842325663404736, 0.13282051282051283),
+    ("current_completed_single_species:f1_difference", 0.005030345471521942, -0.09071670840053193, 0.06913690499345183),
+    ("current_failure_as_absence:recall_difference", 0.12711111111111112, -0.020317460317460314, 0.17555555555555555),
+    ("current_failure_as_absence:f1_difference", 0.07589065255731922, -0.07459646636432349, 0.11985326908541188),
+]:
+    row = current_uncertainty.get(key)
+    if row is None or any(not math.isclose(float(row[field]), expected, abs_tol=5e-9)
+                          for field, expected in (("point", point), ("ci_low", lo), ("ci_high", hi))):
+        fail(f"current regression uncertainty changed: {key}")
+current_multi = load_tsv("results/strainscan_rerun/current_multi_by_depth.tsv")
+if [row["group"] for row in current_multi] != ["low", "med", "high"] or any(
+        int(row["n"]) != 4 for row in current_multi):
+    fail("current multi-species regression coverage changed")
+
 plot_sim = (ROOT / "scripts/plot_sim_headtohead.py").read_text()
-if "results/strainscan_rerun/single_by_depth.tsv" not in plot_sim:
-    fail("Figure 10 accuracy panels do not read the reproducible rerun table")
+if "results/strainscan_rerun/current_single_by_depth.tsv" not in plot_sim:
+    fail("Figure 10 accuracy panels do not read the current regression table")
 if "results/sim_headtohead_single_by_depth.tsv" in plot_sim:
     fail("Figure 10 accuracy panels still read the superseded aggregate table")
 checkpoint = (ROOT / "results/strainscan_rerun/checksums.sha256")
@@ -245,7 +276,7 @@ if checkpoint.exists():
         elif hashlib.sha256(p.read_bytes()).hexdigest() != expected:
             fail(f"checksum mismatch in archived StrainScan rerun artifact: {rel}")
 
-for phrase in ("0.733/0.844", "0.667/0.800", "included zero", "non-monotonic"):
+for phrase in ("+0.063", "+0.005", "+0.127", "+0.076", "included zero", "non-monotonic"):
     if phrase not in (ROOT / "manuscript/results.md").read_text() + (ROOT / "manuscript/abstract.md").read_text():
         fail(f"required rerun-qualified claim absent: {phrase!r}")
 

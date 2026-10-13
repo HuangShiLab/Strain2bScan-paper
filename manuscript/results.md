@@ -114,17 +114,18 @@ independent validations of strain identity.
 ### Systematic head-to-head on a 15-species simulated benchmark (Fig 10, Tables 1–3)
 
 On a common 15-species simulation pool, both tools built databases from the same genomes and profiled the
-same simulated reads. Each tool was scored in its own 0.95-similarity cluster space. The reproducible
-comparator rerun comprised 225 matched single-species entries; 204 completed and were paired to the
-corresponding Strain2bScan runs, whereas 21 ended without calls, including all *Salmonella enterica*
-entries. Across the 204 completed runs from 14 species, species-median precision was 1.0 for both tools;
-species-median recall and F1 were 0.733 and 0.844 for Strain2bScan versus 0.667 and 0.800 for StrainScan
-(Fig 10, Table 1). In a species-cluster bootstrap, the paired mean differences in recall (−0.014; 95% CI
-−0.065 to 0.033) and F1 (−0.023; 95% CI −0.062 to 0.013) included zero. Strain2bScan reached full median
-recall at 3× and remained there, whereas StrainScan's depth profile was non-monotonic (Table 2).
-Multi-species F1 was lower for Strain2bScan at medium and high depth but higher at low depth (Table 3).
+same simulated reads. Each tool was scored in its own 0.95-similarity cluster space. The current
+Strain2bScan rerun comprised 225 matched single-species entries; StrainScan produced reports for 204,
+which were paired to the corresponding Strain2bScan runs, whereas 21 ended without calls, including all
+*Salmonella enterica* entries. Across the 204 completed runs from 14 species, species-median precision was
+1.0 for both tools; species-median recall and F1 were 1.000 for Strain2bScan versus 0.667 and 0.800 for
+StrainScan (Fig 10, Table 1). Species medians concealed a trade-off: Strain2bScan had lower precision and
+recall on *K. pneumoniae* (0.333/0.333 versus 1.000/0.800). In a species-cluster bootstrap, the paired mean
+differences in recall (+0.063; 95% CI −0.037 to 0.133) and F1 (+0.005; 95% CI −0.091 to 0.069) included
+zero. Strain2bScan reached full median recall from 1× onward, whereas StrainScan's depth profile was
+non-monotonic (Table 2). Multi-species F1 was lower for Strain2bScan at all three depths (Table 3).
 
-A prespecified failure-aware sensitivity retained all 225 intended entries and scored each of the 21 absent StrainScan reports as zero detection. This analysis shifted the mean Strain2bScan-minus-StrainScan differences to +0.065 recall (95% species-cluster bootstrap CI −0.034 to 0.197) and +0.062 F1 (−0.036 to 0.202); both intervals included zero. Fifteen *S. enterica* and five *P. dorei* entries accounted for the no-call runs (Table S4). The two tools did not impose identical 0.95 partitions on the common pool: database cluster counts ranged from 1 to 39 for Strain2bScan and 1 to 39 for StrainScan, with species-specific differences documented in Table 1 and `results/strainscan_rerun/database_cluster_resolution.tsv`.
+A prespecified failure-aware sensitivity retained all 225 intended entries and scored each of the 21 absent StrainScan reports as zero detection. This analysis shifted the mean Strain2bScan-minus-StrainScan differences to +0.127 recall (95% species-cluster bootstrap CI −0.020 to 0.176) and +0.076 F1 (−0.075 to 0.120); both intervals included zero. Fifteen *S. enterica* and five *P. dorei* entries accounted for the no-call runs (Table S4). The two tools did not impose identical 0.95 partitions on the common pool: database cluster counts ranged from 1 to 39 for Strain2bScan and 1 to 39 for StrainScan, with species-specific differences documented in Table 1 and `results/strainscan_rerun/database_cluster_resolution.tsv`.
 
 The cost differences were largest during database construction: Strain2bScan used 0.7–5.1 s and 0.1–0.4 GB
 per species, versus 5–43 min and 8–28 GB for StrainScan, a 249–614× runtime and 43–138× memory advantage

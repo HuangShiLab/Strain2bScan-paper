@@ -13,7 +13,7 @@ DEPTHS = ["0.5", "1", "3", "5", "10"]
 
 def load(p): return list(csv.DictReader(open(p), delimiter="\t"))
 
-bd   = {r["group"]: r for r in load("results/strainscan_rerun/single_by_depth.tsv")}
+bd   = {r["group"]: r for r in load("results/strainscan_rerun/current_single_by_depth.tsv")}
 bc   = [r for r in load("results/sim_headtohead_build_cost.tsv") if r["ss_build_s"] != "NA"]
 pt   = load("results/sim_headtohead_profile_sameenv.tsv")
 mt   = load("results/sim_headtohead_multi.tsv")

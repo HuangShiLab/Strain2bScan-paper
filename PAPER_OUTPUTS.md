@@ -1,6 +1,6 @@
 # Current paper output map
 
-This is the short index for the 2026-10-12 manuscript snapshot (`paper-2026-10-12`).
+This is the short index for the 2026-10-12 manuscript snapshot (`paper-2026-10-13-submission`).
 
 ## Manuscript
 
@@ -22,7 +22,7 @@ This is the short index for the 2026-10-12 manuscript snapshot (`paper-2026-10-1
 
 - Mock benchmark: `results/mock_benchmark_f26f234/` and `data/fig6_fig12_metrics.tsv`.
 - StrainScan rerun: `results/strainscan_rerun/`.
-- Failure-aware sensitivity: `results/strainscan_rerun/sensitivity_failure_as_absence.tsv`.
+- Current software regression: `results/strainscan_rerun/current_single_persample.tsv`, `current_uncertainty_summary.tsv` and `current_software_regression_provenance.json`.
 - Cluster-resolution audit: `results/strainscan_rerun/database_cluster_resolution.tsv`.
 - StrainGE rerun: `results/strainge_rerun/`.
 - Saliva analyses: `results/saliva_*.tsv`.

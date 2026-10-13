@@ -16,7 +16,7 @@ def pick_rep(in_matrix,cls_file,out_dir):
 	c=0
 	for e in ele:
 		pre=re.split('/',e)[-1]
-		pre=re.split('\.',pre)[0]
+		pre=re.split(r'\.',pre)[0]
 		all_strains[pre]=''
 		dpi[pre]=c
 		dpn[pre]=e
@@ -27,7 +27,7 @@ def pick_rep(in_matrix,cls_file,out_dir):
 		if not line:break
 		ele=line.split('\t')
 		pre=pre=re.split('/',ele[0])[-1]
-		pre=re.split('\.',pre)[0]
+		pre=re.split(r'\.',pre)[0]
 		dpd[pre]=np.array(ele[1:])
 	#print(sorted(dpd['GCF_001069395']))
 	#exit()
