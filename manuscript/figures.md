@@ -27,7 +27,7 @@ distance (y): 2bRAD hugs the diagonal in every species, 16S forms flat rank-band
 
 **Figure 3. Accurate strain profiling and depth sensitivity.** **(A)** Precision, recall and abundance accuracy across simulated *C. acnes*, *S. aureus* and *S. epidermidis* mixtures. **(B)** Detection of a single *C. acnes* strain across a coverage ladder; Strain2bScan and StrainScan both detect at 0.5×.
 
-**Figure 4. Reference degradation reduces strain-identification accuracy (all 15 species).**
+**Figure 4. Reference degradation reduces strain-identification accuracy (15 species assessed; medians use 14 resolvable species).**
 `figures/source_panels/refqual_figure.{png,pdf}`. Sample reads held fixed while the truth strains' reference genomes are
 degraded (completeness 100→50 %, with co-varying contamination + fragmentation), DB rebuilt and re-profiled.
 Problem → mechanism → solution. **(A)** (containment-mechanism schematic): an incomplete

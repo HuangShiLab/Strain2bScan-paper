@@ -44,6 +44,7 @@ def figure_legends():
 
 TABLES = lambda: body("manuscript/tables.md").strip()
 REFS   = lambda: read("manuscript/references.md").strip()
+AUTHOR_CONTRIBUTIONS = read("manuscript/author_contributions.md").strip()
 
 # ---------- full manuscript ----------
 TITLE_M = ("# Strain2bScan: strain-level profiling from 2bRAD markers across microbiomes\n\n"
@@ -59,8 +60,7 @@ full = "\n\n".join([
     "## Results\n\n" + shift(results(), 1),
     "## Discussion\n\n" + body("manuscript/discussion.md").strip(),
     "## Methods\n\n" + shift(body("manuscript/methods.md").strip(), 1),
-    "## Author contributions\n\n"
-    "[xxxx]\n\n"
+    "## Author contributions\n\n" + AUTHOR_CONTRIBUTIONS + "\n\n"
     "## Funding\n\n"
     "This work was supported by award 32572519.\n\n"
     "## Data and code availability\n\n"

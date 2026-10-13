@@ -111,49 +111,41 @@ def main() -> int:
         "analysis": "current_completed_single_species:f1_difference",
         "point": point_f1, "ci_low": ci[0, 1], "ci_high": ci[1, 1],
     }]
-    # Failure-aware sensitivity retains the 21 StrainScan no-call runs as zero calls.
+    # Failure-as-absence sensitivity: recall is defined because absent predictions have zero recall;
+    # precision and F1 are not defined for execution/no-report failures and are not reported here.
     completed_samples = set(strainscan)
     failure_rows = []
     for row in current:
         comparator = strainscan.get(row["sample"])
-        ss_p = float(comparator["precision"]) if comparator else 0.0
         ss_r = float(comparator["recall"]) if comparator else 0.0
-        ss_f = float(comparator["f1"]) if comparator else 0.0
         failure_rows.append({
             "sample": row["sample"], "species": row["species"], "status": "completed" if comparator else "no_call",
-            "s2b_precision": row["precision"], "s2b_recall": row["recall"], "s2b_f1": row["f1"],
-            "ss_precision": ss_p, "ss_recall": ss_r, "ss_f1": ss_f,
-            "precision_difference": float(row["precision"]) - ss_p,
+            "s2b_recall": row["recall"], "ss_recall": ss_r,
             "recall_difference": float(row["recall"]) - ss_r,
-            "f1_difference": float(row["f1"]) - ss_f,
         })
     failure_recall = float(np.mean([row["recall_difference"] for row in failure_rows]))
-    failure_f1 = float(np.mean([row["f1_difference"] for row in failure_rows]))
+    failure_species = sorted({row["species"] for row in failure_rows})
+    failure_by_species = defaultdict(list)
+    for row in failure_rows:
+        failure_by_species[row["species"]].append(row)
+    failure_stats = []
+    for _ in range(20000):
+        chosen = RNG.choice(failure_species, len(failure_species), replace=True)
+        selected = [row for name in chosen for row in failure_by_species[name]]
+        failure_stats.append(np.mean([row["recall_difference"] for row in selected]))
+    failure_ci = np.quantile(failure_stats, [0.025, 0.975])
     uncertainty.extend([
         {"analysis": "current_failure_as_absence:recall_difference", "point": failure_recall,
-         "ci_low": math.nan, "ci_high": math.nan},
-        {"analysis": "current_failure_as_absence:f1_difference", "point": failure_f1,
+         "ci_low": failure_ci[0], "ci_high": failure_ci[1]},
+        {"analysis": "current_failure_as_absence:no_call_rate", "point": 21/225,
          "ci_low": math.nan, "ci_high": math.nan},
     ])
     write_tsv(OUT / "current_uncertainty_summary.tsv",
               ["analysis", "point", "ci_low", "ci_high"], uncertainty)
-    # Failure-aware bootstrap, computed separately over all 225 entries.
-    failure_by_species = defaultdict(list)
-    for row in failure_rows:
-        failure_by_species[row["species"]].append(row)
-    stats = []
-    for _ in range(20000):
-        chosen = RNG.choice(species, len(species), replace=True)
-        selected = [row for name in chosen for row in failure_by_species[name]]
-        stats.append((np.mean([row["recall_difference"] for row in selected]),
-                      np.mean([row["f1_difference"] for row in selected])))
-    arr = np.asarray(stats)
-    uncertainty[-2]["ci_low"], uncertainty[-2]["ci_high"] = np.quantile(arr[:, 0], [0.025, 0.975])
-    uncertainty[-1]["ci_low"], uncertainty[-1]["ci_high"] = np.quantile(arr[:, 1], [0.025, 0.975])
-    write_tsv(OUT / "current_uncertainty_summary.tsv",
-              ["analysis", "point", "ci_low", "ci_high"], uncertainty)
+    write_tsv(OUT / "current_failure_as_absence.tsv",
+              ["sample", "species", "status", "s2b_recall", "ss_recall", "recall_difference"], failure_rows)
     print(f"paired={len(paired)} recall={point_recall:.6f} f1={point_f1:.6f} "
-          f"failure_recall={failure_recall:.6f} failure_f1={failure_f1:.6f}")
+          f"failure_recall={failure_recall:.6f}")
     return 0
 
 

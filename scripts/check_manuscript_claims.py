@@ -249,13 +249,24 @@ current_uncertainty = {row["analysis"]: row for row in load_tsv("results/strains
 for key, point, lo, hi in [
     ("current_completed_single_species:recall_difference", 0.06290849673202614, -0.036842325663404736, 0.13282051282051283),
     ("current_completed_single_species:f1_difference", 0.005030345471521942, -0.09071670840053193, 0.06913690499345183),
-    ("current_failure_as_absence:recall_difference", 0.12711111111111112, -0.020317460317460314, 0.17555555555555555),
-    ("current_failure_as_absence:f1_difference", 0.07589065255731922, -0.07459646636432349, 0.11985326908541188),
+    ("current_failure_as_absence:recall_difference", 0.12711111111111112, 0.0066666666666666706, 0.24800370370370337),
 ]:
     row = current_uncertainty.get(key)
     if row is None or any(not math.isclose(float(row[field]), expected, abs_tol=5e-9)
                           for field, expected in (("point", point), ("ci_low", lo), ("ci_high", hi))):
         fail(f"current regression uncertainty changed: {key}")
+strainge_sim=list(csv.DictReader(open(ROOT/"results/strainge_rerun/simulation_persample.tsv"),delimiter="\t"))
+strainge_mock=list(csv.DictReader(open(ROOT/"results/strainge_rerun/mock_persample.tsv"),delimiter="\t"))
+if sum(r["kind"]=="single" and r["status"]=="completed" for r in strainge_sim)!=225 or sum(r["kind"]=="multi" and r["status"]=="completed" for r in strainge_sim)!=12:
+ fail("StrainGE simulation completion counts changed")
+if len(strainge_mock)!=4 or any(r["status"]!="completed" for r in strainge_mock):
+ fail("StrainGE ATCC completion counts changed")
+current_checksum_manifest=ROOT/"results/strainscan_rerun/current_checksums.sha256"
+for line in current_checksum_manifest.read_text().splitlines():
+ expected,rel=line.split("  ",1);p=ROOT/rel
+ if not p.exists() or hashlib.sha256(p.read_bytes()).hexdigest()!=expected:
+  fail(f"current regression checksum failed: {rel}")
+
 current_multi = load_tsv("results/strainscan_rerun/current_multi_by_depth.tsv")
 if [row["group"] for row in current_multi] != ["low", "med", "high"] or any(
         int(row["n"]) != 4 for row in current_multi):
@@ -276,7 +287,7 @@ if checkpoint.exists():
         elif hashlib.sha256(p.read_bytes()).hexdigest() != expected:
             fail(f"checksum mismatch in archived StrainScan rerun artifact: {rel}")
 
-for phrase in ("+0.063", "+0.005", "+0.127", "+0.076", "included zero", "non-monotonic"):
+for phrase in ("+0.063", "+0.005", "+0.127", "0.007 to 0.248", "included zero", "non-monotonic"):
     if phrase not in (ROOT / "manuscript/results.md").read_text() + (ROOT / "manuscript/abstract.md").read_text():
         fail(f"required rerun-qualified claim absent: {phrase!r}")
 

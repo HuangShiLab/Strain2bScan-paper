@@ -25,6 +25,7 @@ oral sites, tumour and FFPE tissue, skin; yield little microbial DNA against a l
 bacterial fraction, and with it the rarer strains, is lost; strain resolution collapses exactly where it
 would be most valuable.
 
+Reduced-representation sequencing addresses both. Type-IIB restriction ("2bRAD") digestion releases a
 sparse, reproducible set of fixed-length tags (roughly 1–2 % of the genome) [5]. Applied as a wet-lab
 protocol (2bRAD-M / Fast2bRAD-M) [6,7], it enriches these informative markers *before* host DNA can swamp
 the library, giving accurate profiles from picogram inputs, heavily host-contaminated samples and degraded

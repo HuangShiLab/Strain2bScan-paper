@@ -1,4 +1,4 @@
-# Strain2bScan: strain-level profiling from 2bRAD-reduced markers for low-biomass microbiomes and community-scale metagenomes
+# Strain2bScan: strain-level profiling from 2bRAD markers across microbiomes
 
 ## Abstract
 
@@ -9,10 +9,10 @@ reference genomes and scores unique 25–33 bp type-IIB restriction markers. It 
 2bRAD-M libraries and in-silico-digested shotgun reads in one marker framework. Across 15 species,
 2bRAD-marker distances tracked whole-genome strain distances more closely than 16S distances (median
 Spearman ρ = 0.94 versus 0.36). Native BcgI profiling retained F1 = 1.0 at the 10⁻⁴ abundance threshold
-in the 99%-human-DNA mock. In shotgun comparisons, Strain2bScan was the only tested tool that
-preserved detection and abundance at 99% host. In a
+in the 99%-human-DNA mock. In the primary four-mock shotgun comparison, Strain2bScan was the only tested tool preserving
+detection and abundance at 99% host. In a
 run-level StrainScan rerun, accuracy was comparable: species-median precision was 1.0 for both tools,
-paired recall and F1 differences were +0.063 and +0.005; failure-aware values were +0.127 and +0.076, with intervals including zero.
+paired recall/F1 differences were +0.063 and +0.005; failure-as-absence recall was +0.127, with an interval excluding zero.
 Archived cross-environment runs reduced database-construction cost by 249–614× in wall time and 43–138×
 in memory. A
 supplementary StrainGST rerun used a different 0.90-reference space; StrainGR was not run. In eight

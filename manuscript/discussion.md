@@ -27,7 +27,7 @@ so the marginal cost of another species is a hash lookup. In a 55-species analys
 runtime was 121–146× lower than the corresponding projected per-species StrainScan cost (Fig 9C). The primary
 high-host mock supported detection and abundance retention (Fig 11), and saliva calls were contained in the
 native-2bRAD call set (Fig 8), but the clean-mock precision trade-off means these results support a shared
-framework rather than uniform superiority.
+framework rather than uniform performance advantage.
 
 **Cluster resolution is the honest unit of strain analysis.** Short reads cannot separate strains that
 share almost all of their sequence, so both StrainScan [1] and Strain2bScan resolve to *clusters* of
@@ -89,7 +89,7 @@ low-biomass samples, and Table 5 adds an isolate-derived panel compatibility che
 subsets rather than closed-world truth benchmarks: read sets used to build the isolate panel were also
 used for self-recovery, and the real metagenomes lack exhaustive strain truth. The comparator scope in
 Table 8 separates the executed StrainScan [1] and inStrain [8] comparisons from the supplementary StrainGST [2]
-rerun; StrainGR variant calling and native-2bRAD input for StrainGE remain untested, and a full StrainGR
+rerun; StrainGR variant calling and native-2bRAD input for StrainGE remain untested; StrainGST covered the primary simulation and mock benchmarks but not the supplementary StrainScan-curated-database subset, and a full StrainGR
 benchmark is required before claiming StrainGE-equivalent genomic resolution. Deeper external
 validation, oral-cancer case/control analysis, FFPE and degraded material, broader multi-tool
 comparison (sylph), and completing the Fast2bRAD-M species layer remain future work.

@@ -1,0 +1,26 @@
+{
+  "source_commit": "6ae760c2f3bd2f39efc0e6aa06c53a84366cb16e",
+  "binary": "/Users/macstudio/Downloads/Strain2bScan/target/release/strain2bscan",
+  "binary_sha256": "a14a831a3b67c29de583d48eecf30001d8d7d5dc0f51775dea2ce95a4586329f",
+  "runs": 12,
+  "database_hashes": {
+    "Fusobacterium_nucleatum": "7bca92e508e21fb2cc8b02e75b429be03cdf1620aeeed2701212438724238d62",
+    "Porphyromonas_gingivalis": "4fb73b18bccdbed238a44fbfb0444378a33483fd57a985c7838027de91af05ce",
+    "Clostridioides_difficile": "2691b7469df4c592f4f8bd476b9203c8891849687548d5cf3c5bc3af3d554454",
+    "Lactiplantibacillus_plantarum": "6ecdc82e12fefbf4008c6594644f01783718cf5903a05b0df0de4a364ae41a55",
+    "Salmonella_enterica": "5e7fcbdff4af416ee92630975720e2cc5d96d478e4ae8868de6d147bf260ac29",
+    "Prevotella_copri": "9c94d5ed539d09cd26dcf8c45bc11ba4e4c9000764f84625b9ad5add972de004",
+    "Klebsiella_pneumoniae": "35b9a541d732fb37e1e205105f5e4517101749aec07767f9d4fccacf54be3261",
+    "Akkermansia_muciniphila": "2ddd43a959c472b3a0bf00779828bd5b9abbbf063d2d26bef9cad7428684f963",
+    "Staphylococcus_epidermidis": "8852bf2d5ef2063098c415333cca6dace1032e05f19ecacdac5e9b27b00270a4",
+    "Streptococcus_pneumoniae": "d9f2108cdc9262d89c10b96bc23a5182c5bd1088962a699943f7d0f34d183db5",
+    "Escherichia_coli": "d143f62f486260ca38cdaffb079e68190011631896c056c6100b452dceaac48f",
+    "Mycobacterium_tuberculosis": "077aecd3601aa011c54af7da87da6ae202e4bf11bfb22a73d5651c27690fc39a",
+    "Cutibacterium_acnes": "b415a6e8b636eb3aa60867e19eb7cd5770843f9408a756db525cde4b63073ebb",
+    "Staphylococcus_aureus": "ae086069708c0fe8751a080d291682e2b607d10380a2a78c64a87b668a2e5e74",
+    "Phocaeicola_dorei": "b628a3a27bb57d10d3c18fb9be8268b88baba0601118915d94b9d5cb70a7db11"
+  },
+  "single_source": "results/strainscan_rerun/current_single_persample.tsv",
+  "multi_source": "results/strainscan_rerun/current_multi_persample.tsv",
+  "aggregate": "results/strainscan_rerun/current_multi_by_depth.tsv"
+}

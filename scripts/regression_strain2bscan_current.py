@@ -92,7 +92,8 @@ def profile_sample(binary: Path, db: Path, row: dict[str, str], outdir: Path,
              + (["--fixed-gate"] if fixed_gate else []),
         env=env,
     )
-    writer = subprocess.Popen(["gzip", "-dc", row["r1"], row["r2"]], stdout=fifo.open("wb"),
+    with fifo.open("wb") as fifo_handle:
+        writer = subprocess.Popen(["gzip", "-dc", row["r1"], row["r2"]], stdout=fifo_handle,
                               stderr=subprocess.DEVNULL)
     try:
         returncode = proc.wait()

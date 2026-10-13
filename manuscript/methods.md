@@ -388,19 +388,21 @@ against **StrainScan** 1.0.14 [1] (per-species databases, `linux/amd64` containe
 [8]. Reads were aligned with Bowtie2 [23] using default paired-end settings, sorted and indexed with samtools, and profiled with `inStrain profile` against single-linkage skani dereplicated references (98% ANI threshold, ATCC representative retained). The MSA-1002/1003 pool was reduced from 120 genomes to 32 references; the MSA-1005/1007 pool was reduced from 164 to 47. Genome-level calls required breadth ≥ 0.5 and reference popANI ≥ 0.99999; their coverage values were then normalized for abundance scoring and the manuscript-level 10⁻⁴ detection threshold was applied. The non-dereplicated reference is
 shown as a control in Fig S4. These exact filters were fixed before metric scoring; raw genome-table threshold sensitivity was not rerun. Each tool was scored in its own 0.95-similarity cluster space
 against the mock ground truth (`Ground_truth/*`, sequence abundance), reporting precision, recall, F1,
-AUPR (abundance-threshold sweep, Ye et al. [25]), and Bray–Curtis and L2 similarity to the truth profile;
+AUPR (abundance-threshold sweep, Ye et al. [24]), and Bray–Curtis and L2 similarity to the truth profile;
 scorer `scripts/score_all.py`, figures `scripts/plot_figs_h.py`. The primary frozen comparators were
 therefore StrainScan and inStrain. A separate StrainGST rerun [2] was added after the frozen run because it
 requires StrainGE-specific 0.90-reference databases and a WMS-oriented workflow; it is described under
 *StrainGST rerun*. StrainGR was not run. (vii) *Real saliva* (Fig 7, Fig 8): native BcgI
 2bRAD (and paired shotgun WMS) saliva from PRJNA1131785, 8 subjects × 4 within-day timepoints, profiled
 against a 19-species oral-commensal panel (up to 25 genomes/species). Strain- and species-level relative
-abundances → Bray–Curtis → PERMANOVA [26] (adonis, subject/timepoint factors) and leave-one-timepoint-out
-1-NN host classification; shotgun R1 (in-silico BcgI) compared to native 2bRAD calls per sample. Full
+abundances → Bray–Curtis → PERMANOVA [25] (adonis, subject/timepoint factors) and leave-one-timepoint-out
+Classification uncertainty used a subject-aware cluster bootstrap with 20,000 resamples: all four timepoints
+were retained together and the strain-minus-species accuracy difference was summarized with a 95% percentile
+interval. 1-NN host classification; shotgun R1 (in-silico BcgI) compared to native 2bRAD calls per sample. Full
 per-dataset procedures and accessions are in `docs/` (`motivation_16s.md`,
 `saliva_individual_discrimination.md`, `saliva_temporal_ml.md`, `saliva_concordance.md`).
 
-**Systematic head-to-head on a 15-species simulated benchmark (Fig 10, Table 1–3).** A common
+**Matched current-source regression on a 15-species simulated benchmark (Fig 10, Table 1–3).** A common
 benchmark was built from a fixed pool of 15 pathogenic/commensal species (15–50 complete/near-complete
 NCBI genomes each; `figure_raw_data/sim_pool_manifest.tsv`). *Single-species* samples were generated for
 every species as 2/3/5 co-present strains drawn either from the same or from different 0.95 clusters, at
@@ -411,13 +413,13 @@ with ART [18] (`art_illumina -p -l 250 -m 600 -s 150`, error-modelled 250-bp pai
 species, genome accession and 0.95-cluster assignment.
 
 Both tools [1] built their databases from the **same genome pool** and profiled the **same reads**.
-The Strain2bScan systematic rerun used source commit `6ae760c2f3bd2f39efc0e6aa06c53a84366cb16e` (tag `benchmark-v0.1.1-6ae760c`)
+The Strain2bScan matched current-source rerun used source commit `6ae760c2f3bd2f39efc0e6aa06c53a84366cb16e` (tag `benchmark-v0.1.1-6ae760c`)
 (release binary SHA-256 `a14a831a3b67c29de583d48eecf30001d8d7d5dc0f51775dea2ce95a4586329f`) with its
 current default depth-adaptive gates. Databases were rebuilt with
 `cluster --enzyme all --similarity 0.95`; samples were profiled with `profile` or `multi-profile --enzyme all`
 (reads decompressed, R1+R2 concatenated). The rerun and set-level scoring are implemented by
 `scripts/regression_strain2bscan_current.py` and `scripts/aggregate_strain2bscan_regression.py`. StrainScan (v1.0.14,
-bioconda) is Linux-x86-only; it ships Dashing [27] and jellyfish [28] executables, a Python-3.7
+bioconda) is Linux-x86-only; it ships Dashing [26] and jellyfish [27] executables, a Python-3.7
 `.so`, and an R reclustering step; so it was run inside a Docker `linux/amd64` container (QEMU emulation
 on Apple Silicon; `strainscan_build`, then `strainscan -i R1 -j R2 -d DB`). Because the two tools cluster
 genomes independently, **each tool was scored in its own cluster space**: predicted clusters were compared
@@ -495,7 +497,7 @@ epidemiological cohorts. Reads were supplied directly to Strain2bScan as paired 
 273 for all three body sites. PRJNA1517970 analyses used three vaginal, three meconium and one negative
 extraction-control library.
 
-For cohort-specific compatibility testing, six PRJNA1191225 isolate read sets were assembled with SPAdes 4.3.0 [29]
+For cohort-specific compatibility testing, six PRJNA1191225 isolate read sets were assembled with SPAdes 4.3.0 [28]
 (`--isolate`, 8 threads). Three *E. coli* assemblies were clustered at 0.95 similarity into three
 resolvable units; one assembly each from *B. longum*, *B. breve* and *B. bifidum* was built as a
 single-genome species database. Panels used `--enzyme recommended`. All six isolate read sets were then

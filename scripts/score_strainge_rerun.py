@@ -147,10 +147,13 @@ def score_sim() -> None:
             "tp": tp, "fp": fp, "fn": fn, "precision": precision, "recall": recall, "f1": f1,
             "bray_curtis_similarity": bray_similarity, "l2_similarity": l2_similarity,
         })
+    failed=[r["sample"] for r in rows if r["status"] != "completed"]
+    if failed:
+        raise RuntimeError(f"StrainGST missing/failed outputs: {failed}")
     write_tsv(OUT / "simulation_persample.tsv", list(rows[0]), rows)
-    summarize(rows, ["species"], OUT / "simulation_by_species.tsv")
-    summarize([r for r in rows if r["kind"] == "single"], ["depth"], OUT / "simulation_single_by_depth.tsv")
-    summarize([r for r in rows if r["kind"] == "multi"], ["depth"], OUT / "simulation_multi_by_depth.tsv")
+    summarize([r for r in rows if r["status"] == "completed"], ["species"], OUT / "simulation_by_species.tsv")
+    summarize([r for r in rows if r["kind"] == "single" and r["status"] == "completed"], ["depth"], OUT / "simulation_single_by_depth.tsv")
+    summarize([r for r in rows if r["kind"] == "multi" and r["status"] == "completed"], ["depth"], OUT / "simulation_multi_by_depth.tsv")
 
 
 def atcc_reference_name(genome_files: list[str], atcc: str) -> str:
@@ -209,6 +212,9 @@ def score_mock() -> None:
             "precision": precision, "recall": recall, "f1": f1,
             "bray_curtis_similarity": bray_similarity, "l2_similarity": l2_similarity,
         })
+    failed=[r["sample"] for r in rows if r["status"] != "completed"]
+    if failed:
+        raise RuntimeError(f"StrainGST missing/failed ATCC outputs: {failed}")
     write_tsv(OUT / "mock_persample.tsv", list(rows[0]), rows)
 
 

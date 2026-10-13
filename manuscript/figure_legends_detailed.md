@@ -290,13 +290,13 @@ including high host contamination
 accuracy while preserving detection *and* quantification under host contamination? Conclusion:
 At the primary 1e-4 threshold, **Strain2bScan is the only tested tool that preserves both** (F1 = 1.0, Bray–Curtis dissimilarity 0.302, similarity
 ≥ 0.72). StrainScan keeps detection but its depth estimator diverges (Bray–Curtis similarity 0.03 at
-99 % host); inStrain loses detection (recall 0.20). Clean samples are concordant across all three tools.
+99 % host); inStrain loses detection (recall 0.20). Clean-mock behaviour was mixed: Strain2bScan retained recall and AUPR but lost thresholded precision to trace-abundance calls on MSA-1005/1007.
 **3. Results by subfigure.**
 - **One row per sample**, same layout as Fig 6: left = stacked per-genome abundance (truth + each tool),
   right = precision, recall, F1, AUPR, Bray–Curtis, L2.
 - Core row block: MSA-1002 host-DNA ladder (0/90/95/99 %) showing the three-way separation.
 - MSA-1003 rows: staggered mock on 20-species (`120`) and 28-species (`164`) trees.
-- MSA-1005/1007 rows: 6-strain mocks at 0 % host, confirming clean-sample concordance.
+- MSA-1005/1007 rows: 6-strain mocks at 0 % host; these show retained recall/AUPR but lower thresholded precision for Strain2bScan, so they do not establish clean-sample superiority.
 
 ---
 
