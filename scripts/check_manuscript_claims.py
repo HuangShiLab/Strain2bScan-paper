@@ -287,8 +287,9 @@ if checkpoint.exists():
         elif hashlib.sha256(p.read_bytes()).hexdigest() != expected:
             fail(f"checksum mismatch in archived StrainScan rerun artifact: {rel}")
 
+rerun_text = " ".join(((ROOT / "manuscript/results.md").read_text() + (ROOT / "manuscript/abstract.md").read_text()).split())
 for phrase in ("+0.063", "+0.005", "+0.127", "0.007 to 0.248", "included zero", "non-monotonic"):
-    if phrase not in (ROOT / "manuscript/results.md").read_text() + (ROOT / "manuscript/abstract.md").read_text():
+    if phrase not in rerun_text:
         fail(f"required rerun-qualified claim absent: {phrase!r}")
 
 saliva_ml = load_tsv("results/saliva_temporal_ml.tsv")

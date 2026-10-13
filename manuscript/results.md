@@ -35,7 +35,7 @@ restored precision to 0.92–0.98 and recall to 0.92–0.95 at 90–95% complete
 *M. tuberculosis* cluster intact to 90% completeness, whereas Jaccard recall collapsed to approximately
 0.05. Because containment can coarsen complete panels, it remains opt-in for uneven-completeness references.
 
-### Part I; Native 2bRAD-M for low-biomass, high-host microbiomes
+**Part I. Native 2bRAD-M for low-biomass, high-host microbiomes.**
 
 ### A tunable enzyme set enables native BcgI 2bRAD operation (Fig 5)
 
@@ -86,7 +86,7 @@ the additional calls require independent validation. Strain2bScan also profiled 
 libraries, producing 15–17 species and 115–158 strain-cluster calls per sample in approximately 2 s
 (Table S3).
 
-### Part II; Conventional metagenomes at community scale
+**Part II. Conventional metagenomes at community scale.**
 
 ### Fast, light, and scalable to whole communities (Fig 9)
 
@@ -97,7 +97,7 @@ flat in species count: on a 55-species panel, Strain2bScan profiled samples in 2
 has no multi-species mode, its projected cost was the measured single-species runtime multiplied by species
 and sample count; the projected advantage was 121–146× (Fig 9C).
 
-### Matches or exceeds StrainScan on its own databases (Supplementary Fig S5)
+### Expands tractable reference sets relative to StrainScan (Supplementary Fig S5)
 
 On StrainScan-curated reference sets [1], both tools reached precision 1.0 for *A. muciniphila* and
 *P. copri* (Supplementary Fig S5). Strain2bScan matched or exceeded recall (0.93 versus 0.24 and 0.94
@@ -106,10 +106,7 @@ faster and 15–24× lighter, and completed near-clonal *M. tuberculosis* in 0.8
 complete. Its low *M. tuberculosis* recall reflects the resolution limit of a panel that collapses to five
 0.95-similarity clusters.
 
-The shotgun mode was then stress-tested in ATCC mocks and compared with saliva. It preserved detection and
-abundance under host contamination in the primary MSA-1002 comparison (Fig 11), and its saliva calls were
-contained in the native-2bRAD call set (Fig 8). These are concordance and stress-test results, not
-independent validations of strain identity.
+These results established computational portability across curated reference sets. The shotgun mode was then stress-tested in ATCC mocks and compared with paired saliva libraries (Figs 8 and 11).
 
 ### Matched current-source regression on a 15-species simulated benchmark (Fig 10, Tables 1–3)
 
@@ -119,8 +116,7 @@ Strain2bScan rerun comprised 225 matched single-species entries; StrainScan prod
 which were paired to the corresponding Strain2bScan runs, whereas 21 ended without calls, including all
 *Salmonella enterica* entries. Across the 204 completed runs from 14 species, species-median precision was
 1.0 for both tools; species-median recall and F1 were 1.000 for Strain2bScan versus 0.667 and 0.800 for
-StrainScan (Fig 10, Table 1). Species medians concealed a trade-off: Strain2bScan had lower precision and
-recall on *K. pneumoniae* (0.333/0.333 versus 1.000/0.800). In a species-cluster bootstrap, the paired mean
+StrainScan (Fig 10, Table 1). Species-specific resolution differed: Strain2bScan had lower precision and recall on *K. pneumoniae* (0.333/0.333 versus 1.000/0.800). In a species-cluster bootstrap, the paired mean
 differences in recall (+0.063; 95% CI −0.037 to 0.133) and F1 (+0.005; 95% CI −0.091 to 0.069) included
 zero. Strain2bScan reached full median recall from 1× onward, whereas StrainScan's depth profile was
 non-monotonic (Table 2). Multi-species F1 was lower for Strain2bScan at all three depths (Table 3). StrainGE/StrainGST was also run for every primary StrainScan-covered simulation benchmark and all four ATCC WMS mocks; its 0.90-space metrics are shown alongside the 0.95-space comparisons without pooling (Tables 1–3, 9). The supplementary StrainScan-curated-database subset in Supplementary Fig S5 was not rerun with StrainGE.
@@ -151,11 +147,10 @@ separated under host contamination. Strain2bScan retained F1 = 1.0 at 90, 95 and
 similarity was 0.777, 0.772 and 0.698, and L2 similarity was at least 0.839. At 99% host, StrainScan had F1
 = 0.095 because thresholded recall collapsed to 0.05 and its abundance diverged (Bray–Curtis similarity
 0.026); inStrain had F1 = 0.333 because recall fell to 0.20. In this primary comparison, Strain2bScan was
-the only tested tool that retained both strain detection and abundance at 99% host. Clean-mock behaviour was
-more mixed. On MSA-1003, Strain2bScan had F1 at 1e-4 = 0.909, 1.0, 1.0 and Bray–Curtis similarity
+the only tested tool that retained both strain detection and abundance at 99% host. Clean-mock thresholded precision varied by input composition. On MSA-1003, Strain2bScan had F1 at 1e-4 = 0.909, 1.0, 1.0 and Bray–Curtis similarity
 0.773–0.780. On MSA-1005/1007 it retained full recall and AUPR = 1.0, but F1 was 0.60–0.75 because many
 abundance-negligible clusters crossed the threshold; StrainScan had higher thresholded precision on those
-two mocks. The host-contamination result therefore should not be read as uniform clean-sample performance advantage.
+two mocks. Host retention and clean-mock precision therefore represent distinct performance axes.
 
 ### Exploratory public WGS cohorts: longitudinal observations, low-biomass specificity, and isolate-derived panels (Tables 4–6)
 
@@ -174,10 +169,7 @@ early (Table 4).
 PRJNA1517970 tested vaginal and meconium libraries plus one extraction blank. Neither the generic panel nor
 a newly built 13-species body-site panel produced a strain call. The blank yielded 340 distinct markers,
 whereas selected vaginal and meconium libraries yielded 7,394–86,980; a one-marker diagnostic gate found only
-three *C. acnes* markers in the largest meconium library. This negative result therefore localises the
-failure to sparse strain-marker input and incomplete niche coverage rather than runtime failure: even the
-largest library provided only three markers for a candidate species, far below any strain-resolution gate,
-and the blank supports specificity at low marker input. These low-biomass cohorts require body-site-complete
+three *C. acnes* markers in the largest meconium library. The result localised the constraint to sparse strain-marker evidence and incomplete niche coverage rather than runtime: even the largest library provided only three markers for a candidate species, far below any strain-resolution gate, and the blank supported specificity at low marker input. These low-biomass cohorts require body-site-complete
 pangenome panels and deeper marker coverage before absence calls can be interpreted biologically.
 
 For direct gut tracking, we assembled six public isolates from PRJNA1191225 (three *E. coli*, one

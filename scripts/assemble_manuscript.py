@@ -47,7 +47,7 @@ REFS   = lambda: read("manuscript/references.md").strip()
 AUTHOR_CONTRIBUTIONS = read("manuscript/author_contributions.md").strip()
 
 # ---------- full manuscript ----------
-TITLE_M = ("# Strain2bScan: strain-level profiling from 2bRAD markers across microbiomes\n\n"
+TITLE_M = ("# Strain2bScan: strain-level 2bRAD-marker profiling of microbiomes\n\n"
 "Yufeng Zhang<sup>1,2</sup>, Shi Huang<sup>1,2,*</sup>\n\n"
 "<sup>1</sup> Faculty of Dentistry, The University of Hong Kong, Hong Kong SAR, China;\n"
 "<sup>2</sup> The University of Hong Kong Shenzhen Institute of Research and Innovation, China.\n"
@@ -84,7 +84,7 @@ disc_full = disc[:i].rstrip() + "\n\n" + extra + "\n\n" + disc[i:]
 methods_full = (shift(body("manuscript/methods.md").strip(), 1)
     + "\n\n### Extended algorithmic detail, data structures and complexity\n\n"
     + shift(read("manuscript/_thesis_methods_appendix.md").strip(), 1))
-TITLE_T = ("# Strain2bScan: strain-level profiling from 2bRAD markers across microbiomes\n\n"
+TITLE_T = ("# Strain2bScan: strain-level 2bRAD-marker profiling of microbiomes\n\n"
 "*Thesis chapter. Extended background, technical methods and discussion relative to the manuscript "
 "version (`full_manuscript.md`).*\n\n---")
 thesis = "\n\n".join([

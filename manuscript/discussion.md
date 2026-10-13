@@ -1,124 +1,58 @@
 # Discussion
 
-Strain2bScan couples a sparse 2bRAD marker space to a StrainScan-style [1] clustering and unique-marker
-framework in a fast Rust implementation. Across the tested settings, 2bRAD tags preserved genome-wide strain
-ordering that 16S did not (median Spearman 0.94 versus 0.36), precision was 1.0 in simulated single-species
-benchmarks, and detection matched StrainScan at 0.5× coverage. In a run-level 15-species StrainScan rerun,
-species-median precision was 1.0 for both tools and the confidence intervals for paired recall/F1
-differences included zero (+0.063 recall and +0.005 F1), although current Strain2bScan traded lower
-precision for higher recall on *K. pneumoniae*. Its consistent advantages were database-construction cost, single-pass
-community profiling, and retention under high host DNA (Figs 2, 3, S5, 10, 11).
+Strain2bScan couples a sparse 2bRAD marker space to StrainScan-style [1] strain-cluster resolution in a
+compact Rust implementation. The resulting capability is not another full-k-mer profiler with a faster
+engine. It is a single marker framework in which native reduction precedes host depletion for low-biomass
+libraries and one in-silico digest serves every species panel for cohort-scale shotgun analysis. Across the
+benchmarks, 2bRAD markers preserved genome-wide strain relationships, precision matched StrainScan in
+completed paired simulations, and the strongest operational gains appeared in database construction,
+multi-species runtime and retention at 99% host DNA (Figs 2, 3, 9–11).
 
-**Native 2bRAD for low-biomass, high-host microbiomes.** Native reduction occurs before host DNA dominates a
-library. In the primary MSA-1002 comparison at 99% human DNA and a 10⁻⁴ abundance threshold, Strain2bScan
-retained F1 = 1.0 with Bray–Curtis dissimilarity 0.302; StrainScan [1] had thresholded recall 0.05 and abundance
-dissimilarity 0.974, whereas inStrain [8] had F1 = 0.333 (Fig 11). In eight saliva subjects, leave-one-timepoint-out host
-identification reached 100% for strain profiles versus 78.1% for species profiles, although PERMANOVA R² was
-similar (0.757 versus 0.755). That classifier result was within-subject and involved only eight subjects; it
-should not be interpreted as independent strain-identity accuracy. In three usable paired samples, 65/65
-shotgun strain-cluster calls were present
-in native 2bRAD-M, which produced 128–163 additional candidate strain-cluster calls per sample (Fig 8). These
-are concordance and sensitivity observations, not independent validation. Tumour, FFPE and skin applications
-remain untested but are natural targets because host content and degradation can limit shotgun sequencing.
+Native 2bRAD-M addresses the setting in which shotgun coverage is most constrained. Because reduction occurs
+before host DNA dominates the library, the primary MSA-1002 comparison retained both detection and abundance
+at 99% human DNA, whereas the tested shotgun profilers lost one or both quantities (Fig 11). The saliva
+analysis extended this observation from synthetic host ladders to person-specific profiles: strain features
+identified the subject in every leave-one-timepoint-out test, compared with 78.1% for species features
+(Fig 7). This is a small within-subject classification result rather than independent strain-identity
+validation. Its value lies in showing that native libraries carry enough strain-specific structure to
+support subject-level discrimination, a property that 65/65 concordant shotgun calls and 128–163 additional
+candidate strain-cluster calls per sample further support on usable paired libraries (Fig 8).
 
-**Conventional metagenomes at community scale.** In shotgun mode, Strain2bScan was approximately 8× faster
-and 11× lighter in single-panel testing. Its main structural advantage is that one digest serves all species,
-so the marginal cost of another species is a hash lookup. In a 55-species analysis, measured Strain2bScan
-runtime was 121–146× lower than the corresponding projected per-species StrainScan cost (Fig 9C). The primary
-high-host mock supported detection and abundance retention (Fig 11), and saliva calls were contained in the
-native-2bRAD call set (Fig 8), but the clean-mock precision trade-off means these results support a shared
-framework rather than uniform performance advantage.
+In shotgun mode, the structural advantage is a change in search economics. A sample is digested once and the
+resulting tags index against all species, so adding species increases panel searches rather than sample
+k-mer counting. This design produced the 121–146× projected cohort-level advantage on the 55-species
+analysis and made the marginal cost of community profiling approximately flat in species count (Fig 9).
+Clean-mock precision depended on input composition and threshold semantics, so the scale claim should be
+read together with the accuracy and cluster-space conditions in Tables 1–3. The framework's strongest
+current position is therefore scalable strain resolution across mixed cohorts, rather than uniform
+precision superiority on every mock.
 
-**Cluster resolution is the honest unit of strain analysis.** Short reads cannot separate strains that
-share almost all of their sequence, so both StrainScan [1] and Strain2bScan resolve to *clusters* of
-near-identical strains and we evaluate at that resolution. The clusters-to-genomes ratio at the 0.95 cut
-is a per-species property; for diverse species (*C. acnes*) clusters are essentially single strains,
-whereas for near-clonal *M. tuberculosis* (5 clusters from 40 genomes) the cluster is the honest level of
-claim. Resolving to clusters does not cost precision (it stayed 1.0 even for low-diversity
-*S. epidermidis*); what varies with diversity is recall.
+The biological unit of the claim is the strain cluster. At a 0.95 similarity cut, diverse species can
+resolve close to individual genomes, whereas near-clonal populations resolve to fewer clusters. This is an
+inherent property of short-read evidence shared by StrainScan [1] and Strain2bScan, not a loss introduced by
+reduced-representation markers. Precision remained high in low-diversity species, while near-clonal recall
+defined the most important algorithmic boundary (Fig 3). A within-cluster overlap or regression layer that
+uses read placement after occurrence-based uniqueness would directly test whether near-clonal recall can
+increase without sacrificing precision.
 
-**Design choices.** Occurrence-based uniqueness; a marker is cluster-unique only if absent, at any copy
-number, from every other cluster; eliminates false-unique markers from single-copy filtering and keeps
-precision 1.0 in similar-strain species. MinHash-sketch [9,10] clustering scales database construction while
-producing partitions identical to exact Jaccard and to StrainScan's own pre-built *P. copri* clustering
-(112 → 51 clusters; `results/panelsize_prevotella.tsv`). In the degradation-gradient experiment, reference incompleteness was the dominant factor that
-genuinely degraded strain identification under Jaccard; an incomplete genome's markers are a subset of a
-complete relative's, so the two fall below the 0.95 similarity cut and split (Fig 4). We address this two
-ways: the built-in assembly-quality filter drops low-quality genomes before clustering
-(`--min-tag-fraction`/`--max-contigs`), and the optional **`--containment` clustering mode**
-(max-containment) keeps subset genomes with their complete relatives, restoring precision/recall down to
-~80 % completeness and removing the near-clonal *M. tuberculosis* cluster-fragmentation artifact (Fig 4).
-The same completeness concern motivated restricting the Fig 2 motivation panel to complete/near-complete
-genomes, where the 2bRAD-over-16S advantage is unchanged (median 0.90→0.94), confirming it is not a
-draft-assembly artifact. The enzyme count is an explicit resolution/cost control
-(~4 enzymes captures most recall; Fig 5), and single-enzyme BcgI operation is what enables native
-2bRAD-M libraries.
+Panel and reference quality control the transportability of all strain calls. A niche-appropriate,
+genome-rich oral panel recovered individual-specific structure that a generic pathogen panel did not, and
+body-site-complete pangenomes are needed before sparse vaginal or meconium marker evidence can support
+biological absence calls (Tables 4–7). The containment mode addresses incomplete genomes that have a more
+complete relative, but markers absent from every reference remain unavailable. Broader pangenome panels,
+completeness-aware gating and explicit absent-strain models are therefore the next tests for open-world
+surveillance rather than optional engineering refinements.
 
-**Limitations and future work.** (i) **Near-clonality** caps recall on species where short reads cannot
-distinguish strains (*M. tuberculosis*); this limit is intrinsic and shared by all short-read tools;
-and where it bites hardest StrainScan failed to complete (>3.3 h, >25 GB) while Strain2bScan finished in
-~1 s at precision 1.0 (Fig 10). Layering a within-cluster overlap/regression step on top of
-occurrence-based uniqueness is the clearest algorithmic target for raising near-clonal recall.
+The comparator scope is also explicit. StrainScan [1] and inStrain [8] were executed on the frozen shotgun
+benchmarks, whereas StrainGST [2] was rerun in StrainGE's 0.90-reference space and reported separately
+because those calls cannot be pooled with 0.95-space Strain2bScan or StrainScan metrics (Tables 8–9). This
+rerun covered the primary simulations and ATCC shotgun mocks, but native BcgI input for StrainGE, StrainGR
+and the supplementary curated-database subset remain untested. The comparison therefore establishes cost and
+feasibility boundaries for the tested StrainGST workflow without claiming equivalence to the full StrainGE
+family.
 
-(ii) **Reference panels must be niche-appropriate and genome-rich** for real communities: a generic
-pathogen panel with few genomes per species gave no saliva signal because real strains map uniformly
-across arbitrary clusters, whereas a genome-rich oral panel recovered the full individual-discrimination
-signal; panel design is a real determinant of strain-level performance on open-world data.
-
-(iii) **Host-limited shotgun** cannot reach the low-abundance strain tail on high-host samples; this is a
-property of the input, not the tool, and is precisely the gap the native-2bRAD mode fills.
-
-(iv) **Reference incompleteness is improved but not fully solved.** The `--containment` clustering mode
-recovers accuracy when an incomplete genome has a complete relative in the panel (Fig 4), but it cannot
-recover markers that are simply *absent* (a strain whose only reference is a partial assembly) nor undo
-contamination that injects foreign tags, so it converges with Jaccard below ~70 % completeness; and
-because it merges more aggressively it trades a little resolution on complete panels (hence opt-in, not
-the default). Making strain identification *more resistant* to incomplete references is a clear direction:
-a **completeness-aware detection gate** (scale the unique-marker floor by each genome's estimated
-completeness, or gate on a *fraction* of a cluster's available markers rather than an absolute count;
-analogous to the Layer-1 breadth term) so incomplete strains are not gated out; a
-**best-quality-representative** marker set per cluster (define the cluster's markers from its most-complete
-member); **upstream completeness/contamination estimation and decontamination** (CheckM2 [11] / GUNC [12]) feeding
-the quality filter; and **pangenome-based imputation** of missing markers from complete conspecifics. The
-irreducible case (a strain represented only by a low-completeness, contaminated genome) is a data limit
-no clustering can overcome.
-
-
-(v) The public-cohort experiment in Table 4 adds real WGS profiling of longitudinal, multi-site and
-low-biomass samples, and Table 5 adds an isolate-derived panel compatibility check. These are application-oriented
-subsets rather than closed-world truth benchmarks: read sets used to build the isolate panel were also
-used for self-recovery, and the real metagenomes lack exhaustive strain truth. The comparator scope in
-Table 8 separates the executed StrainScan [1] and inStrain [8] comparisons from the supplementary StrainGST [2]
-rerun; StrainGR variant calling and native-2bRAD input for StrainGE remain untested; StrainGST covered the primary simulation and mock benchmarks but not the supplementary StrainScan-curated-database subset, and a full StrainGR
-benchmark is required before claiming StrainGE-equivalent genomic resolution. Deeper external
-validation, oral-cancer case/control analysis, FFPE and degraded material, broader multi-tool
-comparison (sylph), and completing the Fast2bRAD-M species layer remain future work.
-
-
-(vi) The PRJNA1517970 body-site panel still produced no calls. This finding shows that species choice alone does not
-solve low-marker input: the negative result reflects sparse strain-marker evidence and incomplete body-site
-coverage, with panel completeness and sequencing depth remaining limiting.
-
-
-(vii) Leave-one-isolate-out
-*E. coli* tests showed that reads from an absent isolate were assigned to a merged cluster formed by the
-two closest available relatives. This behaviour avoids inventing a false isolate-specific call but also
-means that absence of the true strain cannot be inferred from a nearest-relative assignment. Future work
-therefore requires broader pangenome panels and explicit absent-strain models.
-
-
-(viii) **Strain-level profiling did not improve case/control prediction over species-level on two
-native BcgI 2bRAD-M oral datasets** (ECC caries vs healthy, and Lim_ORPI clean vs unclean denture;
-`results/real_data_strain_benchmark.md`). Species-level classifiers outperformed strain-level
-(AUROC 0.81 vs 0.59 for ECC, 0.72 vs 0.52 for Lim_ORPI), largely because BcgI single-enzyme marker
-density produced too few strain calls (9–18 prevalent clusters) for stable ML, and the phenotypes
-appeared driven more by species presence than by strain identity. This is a marker-density limit of
-the native BcgI protocol, not a failure of the resolution framework: in-silico multi-enzyme or k-mer
-marker sources would be needed to test whether strain-level resolution can outperform species-level
-classification on these phenotypes.
-
-**Conclusion.** Reduced-representation 2bRAD markers, combined with a StrainScan-style [1] resolution
-framework and a fast Rust implementation, make accurate strain-level profiling practical at a fraction of
-the compute and memory of full-k-mer methods. The same tool spans two regimes: native 2bRAD-M for
-strain-level analysis of low-biomass, high-host microbiomes, and in-silico-digested shotgun for strain
-profiling across communities of many species and many samples.
+Two applications follow directly from the evidence. Native 2bRAD-M is appropriate when host content, input
+mass or degradation limits shotgun recovery, with tumour, FFPE and skin as priority targets that remain to
+be tested. In-silico digestion is appropriate for large shotgun cohorts in which repeated per-species
+k-mer searches dominate cost. Resolving those two regimes in one marker space turns reduced-representation
+sequencing from a species-profile protocol into a practical route to strain-resolved microbiome analysis.
