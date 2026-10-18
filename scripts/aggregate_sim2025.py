@@ -2,8 +2,8 @@
 """Aggregate the complete 2,025-sample single-species simulation benchmark."""
 import csv, collections, statistics
 from pathlib import Path
-SRC = Path("figure_raw_data/sim_headtohead/strain2bscan_single_native_persample.tsv")
-OUT = Path("results/sim2025_summary")
+SRC = Path("results/sim2025_current/current_single_persample.tsv")
+OUT = Path("results/sim2025_current_summary")
 OUT.mkdir(parents=True, exist_ok=True)
 rows = list(csv.DictReader(SRC.open(), delimiter="\t"))
 fields = ["group","n","mean_precision","mean_recall","mean_f1","median_precision","median_recall","median_f1","fraction_perfect_f1"]

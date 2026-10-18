@@ -5,7 +5,7 @@ import matplotlib; matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
 
-rows=list(csv.DictReader(open("figure_raw_data/sim_headtohead/strain2bscan_single_native_persample.tsv"),delimiter="\t"))
+rows=list(csv.DictReader(open("results/sim2025_current/current_single_persample.tsv"),delimiter="\t"))
 def aggregate(key, order=None):
     g=collections.defaultdict(list)
     for r in rows:g[r[key]].append(r)

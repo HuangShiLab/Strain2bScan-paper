@@ -8,7 +8,7 @@ import os, csv
 import matplotlib; matplotlib.use("Agg")
 import matplotlib.pyplot as plt, numpy as np
 
-S2B, SS, SG = "#1f77b4", "#8c8c8c", "#2ca02c"        # house colours (blue = Strain2bScan, grey = StrainScan, green = StrainGST)
+S2B, SS, SG, ISN = "#1f77b4", "#8c8c8c", "#2ca02c", "#cc79a7"        # blue=Strain2bScan, grey=StrainScan, green=StrainGST, magenta=inStrain
 DEPTHS = ["0.5", "1", "3", "5", "10"]
 
 def load(p): return list(csv.DictReader(open(p), delimiter="\t"))
@@ -18,6 +18,7 @@ bc   = [r for r in load("results/sim_headtohead_build_cost.tsv") if r["ss_build_
 pt   = load("results/sim_headtohead_profile_sameenv.tsv")
 mt   = load("results/sim_headtohead_multi.tsv")
 ge  = load("results/strainge_rerun/simulation_single_by_depth.tsv")
+isn = load("results/instrain_sim225/by_depth.tsv")
 ge_rt = load("results/strainge_rerun/simulation_run_efficiency.tsv")
 
 def ge_by_depth(depth):
@@ -40,6 +41,8 @@ for j, (metric, title) in enumerate(zip(["precision", "recall", "f1"], ["Precisi
     ax.plot(dd, col(metric, "ss"), "s--", color=SS, lw=2, ms=7, label="StrainScan")
     gevals=[float(next(r for r in ge if r["depth"]==d)[metric]) for d in DEPTHS if any(x["depth"]==d for x in ge)]
     ax.plot(dd, gevals, "^-.", color=SG, lw=2, ms=7, label="StrainGST (0.90 space)")
+    isvals=[float(next(r for r in isn if r["group"]==d)["median_"+metric]) for d in DEPTHS]
+    ax.plot(dd, isvals, "v:", color=ISN, lw=2, ms=7, label="inStrain (genome pool)")
     ax.set_xscale("log"); ax.set_xticks(dd); ax.set_xticklabels([str(x) for x in dd])
     ax.set_xlabel("per-strain sequencing depth (×)"); ax.set_ylabel(f"median {title.lower()}")
     ax.set_title(f"Single-species {title.lower()}"); ax.set_ylim(-0.03, 1.06); ax.grid(alpha=0.3)

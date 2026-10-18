@@ -1,0 +1,8 @@
+{
+  "tool": "inStrain",
+  "version": "1.11.0",
+  "alignment": "bowtie2-align-s 2.5.5 against full species genome pools",
+  "scoring": "genomeCoverage detections at coverage >= 0.1 and breadth >= 0.05, mapped to 0.95 truth clusters",
+  "n_runs": 225,
+  "note": "One Akkermansia muciniphila d10 run was remapped with bowtie2-align-s after an initial large-index zero-mapping result."
+}

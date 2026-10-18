@@ -1,0 +1,7 @@
+sample	run	mates	gzip_files	status
+S11_1	SRR29727008	2	2	complete
+S11_2	SRR29726982	2	2	complete
+S11_6	SRR29726981	2	2	complete
+S11_11	SRR29727007	2	2	complete
+all_other_28_samples	multiple	2	56	already_present
+all_32_samples	all	64	64	complete

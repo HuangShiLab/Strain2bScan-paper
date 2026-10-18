@@ -33,10 +33,10 @@ Shotgun R1 prefix libraries from usable paired samples were digested in silico a
 # Part II — conventional shotgun metagenome performance
 
 **Figure 7. Accuracy across the complete 2,025-sample single-species simulation pool.** `figures/source_panels/sim2025_summary.{png,pdf}`
-Strain2bScan was evaluated on all 2,025 ART error-modelled shotgun simulations from 15 species, followed by in-silico 2bRAD digestion. Median precision, recall and F1 were 1.000; mean F1 increased from 0.744 at 0.5× to 0.963 at 10×. Panels show per-species means, depth dependence and different-cluster versus same-cluster design.
+Strain2bScan was evaluated on all 2,025 ART error-modelled shotgun simulations from 15 species, followed by in-silico 2bRAD digestion. Median precision, recall and F1 were 1.000; mean precision, recall and F1 were 0.890, 0.846 and 0.862. Mean F1 increased from 0.786 at 0.5× to 0.888 at 10×. Panels show per-species means, depth dependence and different-cluster versus same-cluster design.
 
 **Figure 8. Matched 225-sample simulation comparison.** `figures/source_panels/sim_headtohead.{png,pdf}`
-Strain2bScan, StrainScan and StrainGST were compared on 225 matched single-species simulations and 12 multi-species communities. Accuracy panels use each tool's own cluster space: 0.95 for Strain2bScan/StrainScan and 0.90 for StrainGST, so accuracy is not pooled. Panels also show database-build cost, same-environment profiling cost and multi-species profiling time.
+Strain2bScan, StrainScan, StrainGST and inStrain were compared on 225 matched single-species simulations and 12 multi-species communities. Accuracy panels use each tool's own reference/cluster space: 0.95 for Strain2bScan/StrainScan, 0.90 for StrainGST, and full species genome pools for inStrain, so accuracy is not pooled. Panels also show database-build cost, same-environment profiling cost and multi-species profiling time.
 
 **Figure 9. Computational scaling and community throughput.** `figures/source_panels/performance.{png,pdf} + scalability.{png,pdf} + community_throughput.{png,pdf}`
 For *C. acnes* shotgun input, Strain2bScan was 8× faster and 11× lighter than StrainScan. Database build and profiling parallelised to 4.6× and 5.8× speed at 16 threads. Community profiling was approximately flat in species count; on a 55-species panel the projected cohort advantage over per-species StrainScan was 121–146×.

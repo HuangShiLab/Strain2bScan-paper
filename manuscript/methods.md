@@ -415,12 +415,12 @@ design), 5 replicates per cell; 2 025 samples. *Multi-species* samples mixed ~18
 with ART [18] (`art_illumina -p -l 250 -m 600 -s 150`, error-modelled 250-bp paired-end reads) from the truth genomes; truth tables record each strain's
 species, genome accession and 0.95-cluster assignment.
 
-Figure 7 summarizes the archived native Strain2bScan output for all 2,025 single-species samples
-(`figure_raw_data/sim_headtohead/strain2bscan_single_native_persample.tsv`; aggregate tables in
-`results/sim2025_summary/`). This complete-pool analysis characterizes the depth and cluster-strategy
-accuracy envelope. Because a subsequent current-source audit found version-dependent changes in 101 of
-225 archived metric triplets, the multi-tool comparison in Fig 8 and Tables 1–3 uses the current-source
-matched rerun rather than pooling archived and current metrics.
+Figure 7 summarizes a current-source Strain2bScan rerun of all 2,025 single-species samples
+(`results/sim2025_current/current_single_persample.tsv`; aggregate tables in
+`results/sim2025_current_summary/`). This complete-pool analysis characterizes the depth and
+cluster-strategy accuracy envelope and supersedes the archived n=2025 table, which differed for 512 of
+2,025 metric triplets. The multi-tool comparison in Fig 8 and Tables 1–3 uses the same current-source
+matched subset.
 
 Both tools [1] built their databases from the **same genome pool** and profiled the **same reads**.
 The Strain2bScan matched current-source rerun used source commit `6ae760c2f3bd2f39efc0e6aa06c53a84366cb16e` (tag `benchmark-v0.1.1-6ae760c`)

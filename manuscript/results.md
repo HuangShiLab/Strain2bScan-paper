@@ -82,9 +82,10 @@ strains at per-strain depths of 0.5, 1, 3, 5 or 10×, with 5 replicates per feas
  samples (150 samples each), three lacked one five-strain same-cluster combination (125 samples each),
  near-clonal *M. tuberculosis* was represented by same-cluster samples (75), and *P. copri*, whose panel
  collapsed to singleton clusters, was represented by different-cluster samples (75). Across all 2,025 samples,
- median precision, recall and F1 were 1.000, with mean precision 0.954, mean recall 0.852 and mean F1 0.887.
- Mean F1 rose from 0.744 at 0.5× to 0.963 at 10×, while precision remained high across depths (Fig 7;
- `results/sim2025_summary/`). These archived full-pool runs define the accuracy envelope of the marker framework. The multi-tool comparison below uses the current-source matched subset to avoid mixing archived and current software versions.
+ median precision, recall and F1 were 1.000, with mean precision 0.890, mean recall 0.846 and mean F1 0.862.
+ Mean F1 rose from 0.786 at 0.5× to 0.888 at 10×, while median precision remained 1.000 across depths
+ (Fig 7; `results/sim2025_current_summary/`). This current-source full-pool rerun supersedes the archived
+ 2,025-sample table, which differed for 512 of 2,025 metric triplets.
 
 
 #### Matched 225-sample multi-tool simulation benchmark (Fig 8, Tables 1–3)
@@ -99,6 +100,11 @@ StrainScan (Fig 8, Table 1). Species-specific resolution differed: Strain2bScan 
 differences in recall (+0.063; 95% CI −0.037 to 0.133) and F1 (+0.005; 95% CI −0.091 to 0.069) included
 zero. Strain2bScan reached full median recall from 1× onward, whereas StrainScan's depth profile was
 non-monotonic (Table 2). Multi-species F1 was lower for Strain2bScan at all three depths (Table 3). StrainGST was also run for every primary StrainScan-covered simulation benchmark and all four ATCC WMS mocks; Fig 8 and Tables 1–3 show its 0.90-space metrics alongside the 0.95-space comparisons without pooling. The supplementary StrainScan-curated-database subset in Supplementary Fig S5 was not rerun with StrainGE.
+inStrain was likewise extended to all 225 matched single-species samples. Because its output is genome-resolved rather than
+0.95-cluster-resolved, detected genomes were mapped to the truth 0.95 clusters after genomeCoverage filtering
+(coverage ≥ 0.1, breadth ≥ 0.05). It retained high recall but precision declined with depth, with median
+precision/recall/F1 of 0.750/0.500/0.667 at 0.5× and 0.185/1.000/0.313 at 10× (Fig 8;
+`results/instrain_sim225/`).
 
 A prespecified failure-as-absence sensitivity retained all 225 intended entries and scored recall for each of the 21 absent StrainScan reports as zero. This analysis shifted the mean recall difference to +0.127 (95% species-cluster bootstrap CI 0.007 to 0.248); the no-call rate was 9.33%. Current-source outputs differed from the archived 2025 Strain2bScan table for 101 of 225 metric triplets, motivating use of the current rerun rather than the historical accuracy columns. Precision and F1 were not assigned to no-report failures. Fifteen *S. enterica* and five *P. dorei* entries accounted for the no-call runs (Table S4). The two tools did not impose identical 0.95 partitions on the common pool: database cluster counts ranged from 1 to 39 for Strain2bScan and 1 to 39 for StrainScan, with species-specific differences documented in Table 1 and `results/strainscan_rerun/database_cluster_resolution.tsv`.
 

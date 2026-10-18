@@ -1,0 +1,11 @@
+{
+  "configuration": "current default depth-adaptive gates",
+  "source_commit": "6ae760c2f3bd2f39efc0e6aa06c53a84366cb16e",
+  "binary": "/Users/macstudio/Downloads/Strain2bScan/target/release/strain2bscan",
+  "binary_sha256": "a14a831a3b67c29de583d48eecf30001d8d7d5dc0f51775dea2ce95a4586329f",
+  "runs": 2025,
+  "archived_metric_differences": 512,
+  "max_abs_precision_difference": 1.0,
+  "max_abs_recall_difference": 1.0,
+  "max_abs_f1_difference": 1.0
+}

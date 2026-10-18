@@ -18,16 +18,12 @@ in-silico simulation to controlled DNA mock to real metagenome.
 4. **Figure 4** — DNA mocks MSA-1002, MSA-1003, MSA-1005 and MSA-1007. The 99.9%-host row has been
    removed from the primary figure.
 5. **Figure 5** — real saliva time-course: 32 native 2bRAD-M libraries from eight subjects.
-6. **Figure 6** — real paired saliva comparison: native 2bRAD-M versus shotgun WMS prefix libraries.
-   The exploratory four-library oral cohort remains in Table S3.
+6. **Figure 6** — real paired saliva comparison: native 2bRAD-M versus shotgun WMS prefix libraries. A complete canonical 32-sample WMS rebuild is now available for follow-up benchmarking. The exploratory four-library oral cohort remains in Table S3.
 
 ### Part II — conventional shotgun / in-silico digestion performance
 
-7. **Figure 7** — complete 2,025-sample single-species simulation pool. This establishes the
-   Strain2bScan accuracy envelope; the archived provenance is explicitly disclosed.
-8. **Figure 8** — matched 225-sample simulation subset used for the current-source multi-tool
-   comparison. Strain2bScan and StrainScan are scored in their own 0.95 spaces; StrainGST is shown
-   separately in its own 0.90 space. Figure 8 now includes StrainGST accuracy and runtime.
+7. **Figure 7** — complete current-source 2,025-sample single-species simulation pool. This establishes the Strain2bScan accuracy envelope.
+8. **Figure 8** — matched 225-sample simulation subset used for the current-source multi-tool comparison. Strain2bScan and StrainScan use 0.95 spaces, StrainGST uses a 0.90 space, and inStrain is genome-resolved then mapped to truth 0.95 clusters. Accuracy is not pooled across reference spaces.
 9. **Figure 9** — computational scaling and community throughput.
 10. **Figure 10** — ATCC shotgun DNA mocks with Strain2bScan, StrainScan and inStrain.
 11. **Tables 4–7** — real shotgun metagenomes and isolate WGS application cohorts.
@@ -42,25 +38,19 @@ in-silico simulation to controlled DNA mock to real metagenome.
 
 | ShiEdit comment | Status |
 |---|---|
-| C5: add simulation/mock comparisons to other tools | Partially addressed. StrainGST is already complete on 225 simulations, 12 communities and four shotgun mocks, and is now shown in Figure 8. inStrain has only six exploratory single-species rows and three community rows in `results/instrain_sim.tsv`; it is not yet a complete 225-sample comparison. StrainPhlAn has not been run. |
-| C82: use 32 paired shotgun metagenomes rather than four | NCBI confirms 32 paired WMS saliva runs (`WMS_S9_*`, `WMS_S11_*`, `WMS_S13_*`, `WMS_S17_*`) plus controls. The current manuscript correctly says that only four libraries were analyzed because only prefix FASTQs were available. A full 32-library rerun is a required new benchmark. |
+| C5: add simulation/mock comparisons to other tools | Complete for executable direct comparators. StrainGST is complete on 225 simulations, 12 communities and four shotgun mocks. inStrain is complete on all 225 matched simulations (`results/instrain_sim225/`). Both are shown in Figure 8. StrainPhlAn was not forced into the P/R/F1 framework because it infers strain phylogeny/types rather than cluster abundance calls. |
+| C82: use 32 paired shotgun metagenomes rather than four | Complete. All 32 paired WMS samples now have canonical gzipped mate files in `/lustre1/g/aos_shihuang/Strain2b/data/saliva_data/WMS_data/complete_32_fqgz`; `results/wms32_rebuild/` records the 64-file manifest and completion evidence. |
 | C94: clarify whether Figure 3 was shotgun or 2bRAD | Clarified. Simulation FASTQs are ART error-modelled shotgun reads followed by in-silico 2bRAD digestion; they are not native BcgI 2bRAD libraries. |
-| C97: replace three-species Figure 3 with the 15-species pool | Main-text Figure 3 now uses the enzyme simulation from the 15-species pool. The complete 2,025-sample Strain2bScan simulation is new Figure 7. The n=2025 table is archived, so a current-source n=2025 rerun is still needed before it can be treated as final primary evidence. |
+| C97: replace three-species Figure 3 with the 15-species pool | Main-text Figure 3 now uses the enzyme simulation from the 15-species pool. The complete current-source 2,025-sample Strain2bScan rerun is Figure 7 and `results/sim2025_current/`. |
 | C98: move Jaccard/containment work to supplement | Done. Former Figure 4 is now Figure S6. |
-| C104/C112: include more tools in Figures 9/10 | Figure 8 now includes StrainGST. Figure 9 remains an efficiency benchmark and Figure 10 already includes inStrain. A complete inStrain/StrainPhlAn simulation benchmark still requires new runs. |
+| C104/C112: include more tools in Figures 9/10 | Figure 8 now includes StrainGST and the complete inStrain 225-sample benchmark. Figure 9 remains an efficiency benchmark and Figure 10 already includes inStrain. StrainPhlAn requires a separate phylogeny-placement metric rather than direct P/R/F1 pooling. |
 
 ## Required benchmark extensions before final submission
 
-1. **Current-source n=2025 rerun.** Regenerate or restore the 2,025 FASTQs and rerun the current
-   Strain2bScan commit. The existing n=2025 table is historical and differs from current-source
-   output on 101 of the 225 overlapping runs.
-2. **Thirty-two paired saliva shotgun runs.** Replace the four-prefix analysis with a uniform
-   analysis of all 32 WMS saliva runs (or a prespecified equal-depth prefix rule applied to all 32).
-3. **Complete inStrain simulation benchmark.** Extend beyond the existing nine exploratory rows and
-   define reference/dereplication and cluster-space scoring before comparing accuracy.
-4. **StrainPhlAn benchmark.** Run StrainPhlAn on the same simulation reads or explain that it
-   estimates strain types rather than the same cluster abundance task; do not force its output into
-   P/R/F1 without a transparent mapping.
+1. **Current-source n=2025 rerun.** Complete. `results/sim2025_current/` contains all 2,025 runs at source commit `6ae760c2f3bd2f39efc0e6aa06c53a84366cb16e`; it supersedes the archived table.
+2. **Thirty-two paired saliva shotgun runs.** Complete. All 64 canonical mate files are present in `/lustre1/g/aos_shihuang/Strain2b/data/saliva_data/WMS_data/complete_32_fqgz` and recorded in `results/wms32_rebuild/`.
+3. **Complete inStrain simulation benchmark.** Complete. `results/instrain_sim225/persample.tsv` contains all 225 matched runs; summaries are in `by_depth.tsv` and `by_species.tsv`.
+4. **StrainPhlAn scope.** Deferred with an explicit scope statement: it infers strain phylogeny/types and does not emit cluster abundance calls directly comparable to the P/R/F1 benchmark.
 5. **Figure 5/enzyme-sweep provenance.** Preserve or regenerate the exact number of samples and
    strains behind each species × enzyme aggregate; the current table contains 70 aggregate rows but
    not per-sample counts.
