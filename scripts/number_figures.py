@@ -17,16 +17,16 @@ OUT = PAPER / "figures/numbered"; os.makedirs(OUT, exist_ok=True)
 MAIN = {
     "01": ["overview"],
     "02": ["mash_2brad_vs_16s"],
-    "03": ["cross_species", "depth_sensitivity"],
-    "04": ["containment_mechanism", "refqual_figure"],
-    "05": ["enzyme_sweep"],
-    "06": ["fig06_native_2brad_mocks"],
-    "07": ["saliva_fig07"],
-    "08": ["saliva_fig08"],
+    "03": ["enzyme_sweep"],
+    "04": ["fig06_native_2brad_mocks"],
+    "05": ["saliva_fig07"],
+    "06": ["saliva_fig08"],
+    "07": ["sim2025_summary"],
+    "08": ["sim_headtohead"],
     "09": ["performance", "scalability", "community_throughput"],
-    "10": ["sim_headtohead"],
-    "11": ["fig11_wms_toolcompare"],
+    "10": ["fig11_wms_toolcompare"],
 }
+
 SUPP = {
     # (former S1 rank-rank scatter is now Fig 2 panel B — see scripts/plot_fig2_combined.py)
     "S1": ["mock_msa1002_titration"],
@@ -34,14 +34,15 @@ SUPP = {
     "S3": ["figS_tree_expansion"],    # DB-expansion cost: 20- vs 28-species combined tree
     "S4": ["figS_instrain_derep"],   # non-dereplicated vs dereplicated inStrain reference
     "S5": ["species_expansion"],     # exploratory StrainScan-curated-database comparison
+    "S6": ["containment_mechanism", "refqual_figure"], # reference-completeness / containment optimization
 }
 
 # Human-readable output labels. By default the source stems are joined with '+';
 # these overrides avoid redundant names such as Fig12_fig11_wms_toolcompare.
 LABELS = {
-    "06": "native_2brad_mocks",
-    "10": "sim_headtohead",
-    "11": "wms_toolcompare",
+    "04": "native_2brad_mocks",
+    "10": "wms_toolcompare",
+    "S6": "reference_quality_containment",
     "S3": "tree_expansion",
     "S4": "instrain_derep",
     "S5": "species_expansion_strainscan",

@@ -13,7 +13,7 @@ import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 SRC = ROOT / "manuscript/full_manuscript.md"
-OUT = ROOT / "manuscript/Strain2bScan_manuscript_figures_tables_2026-10-13.docx"
+OUT = ROOT / "manuscript/Strain2bScan_manuscript_figures_tables_2026-10-18-restructured.docx"
 TITLE = "Strain2bScan: strain-level 2bRAD-marker profiling of microbiomes"
 
 
@@ -55,9 +55,9 @@ def prepare_intermediate() -> Path:
         ])
 
     parts = [body, "# Main figures", ""]
-    parts.extend(image_block(str(i)) for i in range(1, 12))
+    parts.extend(image_block(str(i)) for i in range(1, 11))
     parts.extend(["# Supplementary figures", ""])
-    parts.extend(image_block(f"S{i}") for i in range(1, 6))
+    parts.extend(image_block(f"S{i}") for i in range(1, 7))
     table_lines = []
     for line in tables.splitlines():
         if line.startswith("**Table "):
@@ -166,7 +166,7 @@ def style_docx(path: Path) -> None:
     metadata.author = "Yufeng Zhang; Shi Huang"
     metadata.subject = "Manuscript snapshot with embedded main and supplementary figures"
     metadata.keywords = "Strain2bScan; 2bRAD; metagenomics; strain profiling"
-    metadata.comments = "Nature-style optimized manuscript snapshot 2026-10-13"
+    metadata.comments = "Two-input restructuring response 2026-10-18"
     doc.save(path)
 
 

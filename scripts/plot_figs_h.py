@@ -229,7 +229,7 @@ def build_wms():
 BRAD_STRUCT = [
     ("MSA1002", [("0_0.001ng_1", "0.001 ng"), ("0_0.01ng_1", "0.01 ng"), ("0_0.1ng_1", "0.1 ng"),
                  ("0_1ng_1", "1 ng"), ("90_100ng_1", "90% host"), ("95_100ng_1", "95% host"),
-                 ("99_100ng_1", "99% host"), ("99.9_100ng_1", "99.9% host")]),
+                 ("99_100ng_1", "99% host")]),
     ("MSA1003", [("0_100ng_1", "rep1"), ("0_100ng_2", "rep2"), ("0_100ng_3", "rep3")]),
     ("MSA1005", [("0_100ng_1", "rep1"), ("0_100ng_2", "rep2"), ("0_100ng_3", "rep3")]),
     ("MSA1007", [("0_100ng_1", "rep1"), ("0_100ng_2", "rep2"), ("0_100ng_3", "rep3")]),
@@ -277,9 +277,9 @@ if __name__ == "__main__":
                 f"{FIGDIR}/figS_tree_expansion", legend_sp)
     wms = build_wms()
     legend_sp = {species_of(g) for r in wms for g, v in profiles.get(r["_truthkey"], {}).items() if v > 0}
-    draw_figure(wms, "Figure 11 — Primary WMS mock comparison (detection threshold 1e-4)",
+    draw_figure(wms, "Figure 10 — Shotgun mock multi-tool comparison (detection threshold 1e-4)",
                 f"{FIGDIR}/fig11_wms_toolcompare", legend_sp)
     brad = build_brad()
     legend_sp = {species_of(g) for r in brad for g, v in profiles.get(r["_truthkey"], {}).items() if v > 0}
-    draw_figure(brad, "Figure 6 — Native BcgI 2bRAD mocks (detection threshold 1e-4)",
+    draw_figure(brad, "Figure 4 — Native BcgI 2bRAD DNA mocks (detection threshold 1e-4)",
                 f"{FIGDIR}/fig06_native_2brad_mocks", legend_sp)

@@ -6,17 +6,17 @@ engine. It is a single marker framework in which native reduction precedes host 
 libraries and one in-silico digest serves every species panel for cohort-scale shotgun analysis. Across the
 benchmarks, 2bRAD markers preserved genome-wide strain relationships, precision matched StrainScan in
 completed paired simulations, and the strongest operational gains appeared in database construction,
-multi-species runtime and retention at 99% host DNA (Figs 2, 3, 9–11).
+multi-species runtime and retention at 99% host DNA (Figs 2, 7–10).
 
 Native 2bRAD-M addresses the setting in which shotgun coverage is most constrained. Because reduction occurs
 before host DNA dominates the library, the primary MSA-1002 comparison retained both detection and abundance
-at 99% human DNA, whereas the tested shotgun profilers lost one or both quantities (Fig 11). The saliva
+at 99% human DNA, whereas the tested shotgun profilers lost one or both quantities (Fig 10). The saliva
 analysis extended this observation from synthetic host ladders to person-specific profiles: strain features
 identified the subject in every leave-one-timepoint-out test, compared with 78.1% for species features
-(Fig 7). This is a small within-subject classification result rather than independent strain-identity
+(Fig 5). This is a small within-subject classification result rather than independent strain-identity
 validation. Its value lies in showing that native libraries carry enough strain-specific structure to
 support subject-level discrimination, a property that 65/65 concordant shotgun calls and 128–163 additional
-candidate strain-cluster calls per sample further support on usable paired libraries (Fig 8).
+candidate strain-cluster calls per sample further support on usable paired libraries (Fig 6).
 
 In shotgun mode, the structural advantage is a change in search economics. A sample is digested once and the
 resulting tags index against all species, so adding species increases panel searches rather than sample
@@ -31,7 +31,7 @@ The biological unit of the claim is the strain cluster. At a 0.95 similarity cut
 resolve close to individual genomes, whereas near-clonal populations resolve to fewer clusters. This is an
 inherent property of short-read evidence shared by StrainScan [1] and Strain2bScan, not a loss introduced by
 reduced-representation markers. Precision remained high in low-diversity species, while near-clonal recall
-defined the most important algorithmic boundary (Fig 3). A within-cluster overlap or regression layer that
+defined the most important algorithmic boundary (Fig 7). A within-cluster overlap or regression layer that
 uses read placement after occurrence-based uniqueness would directly test whether near-clonal recall can
 increase without sacrificing precision.
 

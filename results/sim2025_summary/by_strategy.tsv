@@ -1,0 +1,3 @@
+group	n	mean_precision	mean_recall	mean_f1	median_precision	median_recall	median_f1	fraction_perfect_f1
+diff	1050	0.9847619047619047	0.7891141904761905	0.8563298095238095	1.0	1.0	1.0	0.5095238095238095
+same	975	0.92	0.92	0.92	1.0	1.0	1.0	0.92

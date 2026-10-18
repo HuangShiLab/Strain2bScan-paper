@@ -27,7 +27,7 @@ for s in bysp:
 ax[1].set_xscale("log",base=2); ax[1].set_yscale("log"); ax[1].set_xticks(ks); ax[1].set_xticklabels(ks)
 ax[1].set_xlabel("number of 2bRAD enzymes"); ax[1].set_ylabel("strain-specific markers (median, log)")
 ax[1].set_title("B  Marker yield vs enzyme set"); ax[1].grid(alpha=.3)
-fig.suptitle("2bRAD enzyme set is a resolution/cost knob — precision 1.0, recall rises with enzymes (14 species)",fontsize=11)
+fig.suptitle("Figure 3. 2bRAD enzyme set is a marker-density and recall control — precision 1.0, recall rises with enzymes (14 species)",fontsize=11)
 fig.tight_layout(rect=[0,0,1,0.95])
 os.makedirs("figures",exist_ok=True)
 fig.savefig("figures/source_panels/enzyme_sweep.png",dpi=150,bbox_inches="tight"); fig.savefig("figures/source_panels/enzyme_sweep.pdf",bbox_inches="tight")
