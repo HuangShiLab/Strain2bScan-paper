@@ -16,3 +16,7 @@ Four previously absent/partial libraries were rebuilt from SRA:
 | S11_11 | SRR29727007 |
 
 `SRR29726985` was also fetched/converted during disambiguation; it corresponds to `S11_14`, whose gz files were already present in the source directory. Conversion logs report exact read/write mate-count equality for every rebuilt run. The canonical directory uses hard links to avoid duplicating 1.3 TB.
+
+## Validation and cleanup
+
+All 64 canonical gzipped mate files passed `gzip -t` (`gzip_validation.tsv`: 64 OK, 0 FAIL). Uncompressed FASTQ, temporary conversion directories, and superseded run logs were removed after conversion. The deleted-path inventory is in `cleanup_intermediates_2026-10-19.tsv`. Raw SRA archives, canonical gzipped FASTQ files, download/conversion scripts, and manifests remain on HPC.
