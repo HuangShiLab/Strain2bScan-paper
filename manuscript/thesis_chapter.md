@@ -151,7 +151,7 @@ Across 15 species with complete or near-complete genomes, 2bRAD-tag distances tr
 
 ##### In-silico marker-density simulation (Fig 3)
 
-Across 14 resolvable simulation-pool species, increasing the enzyme set from 1 to 14 maintained precision at 1.0 and increased median recall from 0.50 to 1.00. Marker yield increased from 976 to 12,647, but cluster count was unchanged, showing that additional enzymes increased marker density and recall rather than cluster resolution. BcgI alone enabled direct native 2bRAD-M profiling; approximately four enzymes recovered most recall.
+We reran the enzyme ladder on the 225 matched simulations, giving 1,125 sample-level predictions across 15 species. Increasing enzymes from 1 to 14 increased median strain-specific markers from 816 to 12,298 while median cluster count remained 19, showing that the ladder increased marker density rather than cluster resolution. Across species, median precision/recall/F1 improved from 0.667/0.333/0.500 with BcgI alone to 1.000/1.000/1.000 with 14 enzymes; four enzymes already reached median precision 1.000 and F1 0.667 (Fig 3; `results/enzyme_sweep_225/`). BcgI therefore enables native 2bRAD-M operation, although single-enzyme panels are panel-dependent and less precise.
 
 ##### DNA mocks (Fig 4)
 
@@ -714,6 +714,13 @@ benchmark used `art_illumina -p -l 250 -m 600 -s 150`, producing 250 bp paired-e
 Illumina quality-error model. Earlier diagnostic datasets may have used different read configurations;
 the systematic comparison and its figures are defined by this ART configuration.
 
+*Enzyme-ladder rerun.* To add per-sample provenance to the enzyme-set analysis (Fig 3), we rebuilt each
+of the 15 simulation-pool species databases at five cumulative enzyme counts (1, 2, 4, 8 and 14) and
+profiled the 225 matched single-species simulations against the matching species database, for 1,125
+sample-level predictions. Runs used current-source Strain2bScan with default depth-adaptive gates and were
+scored against each database's own 0.95-cluster partition. Per-sample predictions and database marker
+counts are in `results/enzyme_sweep_225/`.
+
 **Real-data and motivation datasets.** (v) *2bRAD-vs-16S motivation* (Fig 2): 15
 pathogenic/commensal species, ~50 genomes each from NCBI accession lists (ENA FASTA), **restricted to
 complete/near-complete assemblies** (CheckM [15] completeness ≥ 97 %, contamination ≤ 5 %, assembly level
@@ -1052,7 +1059,7 @@ calls on the benchmark samples.
 
 **Figure 2. 2bRAD tags track genome-wide strain distance; 16S does not.** **(A)** Per-species Spearman correlation between whole-genome strain distance and 2bRAD-tag or 16S distance across 15 complete/near-complete genome panels; 2bRAD median 0.94 versus 16S median 0.36. **(B)** Rank-rank matrices show that 2bRAD preserves genome-wide strain ordering whereas 16S collapses many unrelated pairs. # Part I — native BcgI 2bRAD-M performance
 
-**Figure 3. The 2bRAD enzyme set is a marker-density and recall control.** In simulated samples from 14 resolvable species of the 15-species pool, increasing the enzyme set from 1 to 14 leaves precision at 1.0 while increasing median recall from 0.50 to 1.00 and strain-specific marker yield from 976 to 12,647. Approximately four enzymes recover most recall; BcgI alone supports native 2bRAD-M libraries. The sweep is an in-silico design experiment, not a native wet-lab library benchmark.
+**Figure 3. The 2bRAD enzyme set is a marker-density and recall control.** On 225 matched simulations per enzyme level (1,125 sample-level predictions across 15 species), increasing enzymes from 1 to 14 raised median strain-specific markers from 816 to 12,298 while median cluster count stayed 19. Median precision/recall/F1 improved from 0.667/0.333/0.500 to 1.000/1.000/1.000; four enzymes reached median precision 1.000 and F1 0.667. This is an in-silico design experiment, not a native wet-lab library benchmark.
 
 **Figure 4. Native BcgI 2bRAD-M across four ATCC DNA mocks.** MSA-1002, MSA-1003, MSA-1005 and MSA-1007 were profiled against a 28-species, 164-genome containment tree. At 90, 95 and 99% human DNA, F1 was 0.976–1.0 and Bray–Curtis similarity 0.745–0.756. A 0.1-ng input retained F1 0.952; 0.01 ng approached the marker-depth noise floor and 0.001 ng was below the detection floor.
 

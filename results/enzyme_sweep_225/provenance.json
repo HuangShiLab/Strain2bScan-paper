@@ -1,0 +1,17 @@
+{
+  "binary": "/Users/macstudio/Downloads/Strain2bScan/target/release/strain2bscan",
+  "binary_sha256": "a14a831a3b67c29de583d48eecf30001d8d7d5dc0f51775dea2ce95a4586329f",
+  "enzyme_ladder": {
+    "1": "BcgI",
+    "2": "BcgI,CspCI",
+    "4": "BcgI,CspCI,BaeI,AlfI",
+    "8": "BcgI,CspCI,BaeI,AlfI,AloI,BsaXI,CjeI,PpiI",
+    "14": "CspCI,AloI,BsaXI,BaeI,BcgI,CjeI,PpiI,PsrI,BplI,FalI,Bsp24I,CjePI,AlfI,BslFI"
+  },
+  "n_samples_per_ladder": 225,
+  "n_results": 1125,
+  "worker_threads": 4,
+  "profile_threads": 2,
+  "elapsed_s": 297.6783490180969,
+  "scoring": "Strain2bScan own 0.95-cluster space; truth clusters from sim_pool_manifest.tsv"
+}

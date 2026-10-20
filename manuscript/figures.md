@@ -19,7 +19,7 @@ manifest with `python scripts/make_figure_manifest.py`.
 # Part I — native BcgI 2bRAD-M performance
 
 **Figure 3. The 2bRAD enzyme set is a marker-density and recall control.** `figures/source_panels/enzyme_sweep.{png,pdf}`
-In simulated samples from 14 resolvable species of the 15-species pool, increasing the enzyme set from 1 to 14 leaves precision at 1.0 while increasing median recall from 0.50 to 1.00 and strain-specific marker yield from 976 to 12,647. Approximately four enzymes recover most recall; BcgI alone supports native 2bRAD-M libraries. The sweep is an in-silico design experiment, not a native wet-lab library benchmark.
+On 225 matched simulations per enzyme level (1,125 sample-level predictions across 15 species), increasing enzymes from 1 to 14 raised median strain-specific markers from 816 to 12,298 while median cluster count stayed 19. Median precision/recall/F1 improved from 0.667/0.333/0.500 to 1.000/1.000/1.000; four enzymes reached median precision 1.000 and F1 0.667. This is an in-silico design experiment, not a native wet-lab library benchmark.
 
 **Figure 4. Native BcgI 2bRAD-M across four ATCC DNA mocks.** `figures/source_panels/fig06_native_2brad_mocks.{png,pdf}`
 MSA-1002, MSA-1003, MSA-1005 and MSA-1007 were profiled against a 28-species, 164-genome containment tree. At 90, 95 and 99% human DNA, F1 was 0.976–1.0 and Bray–Curtis similarity 0.745–0.756. A 0.1-ng input retained F1 0.952; 0.01 ng approached the marker-depth noise floor and 0.001 ng was below the detection floor.

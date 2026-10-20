@@ -83,10 +83,10 @@ overlapping zero. 16S resolves species, 2bRAD tags resolve strains.
 - *Raw data (local):* `results/enzyme_sweep_multi.tsv`; regenerated from `scripts/run_enzyme_sweep_multi.py`
   + pinned accessions; not stored as reads.
 **2. Key issue & conclusion.** How many enzymes are needed across a broad species panel, and can
-single-enzyme BcgI operation support native 2bRAD-M libraries? Conclusion: **precision stays 1.0 at every
+single-enzyme BcgI operation support native 2bRAD-M libraries? Conclusion: precision and recall increase across the ladder, reaching
 step in every species**. Median recall rises monotonically with enzyme count; BcgI alone 0.50 → ~4 enzymes
 0.72 → 14 enzymes 1.00; cluster count is invariant (more enzymes add marker density/recall, not
-resolution). Single-enzyme BcgI operation is therefore sufficient for native BcgI 2bRAD-M libraries, while
+resolution). Single-enzyme BcgI operation supports native BcgI 2bRAD-M libraries, although lower precision at 1–2 enzymes means that
 ~4 enzymes is the practical recall/cost sweet spot for in-silico shotgun profiling.
 **3. Results by subfigure.**
 - **(A)** Median precision (1.0 throughout) and recall vs enzyme number, with faint per-species recall

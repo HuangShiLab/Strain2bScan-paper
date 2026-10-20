@@ -12,7 +12,7 @@ Across 15 species with complete or near-complete genomes, 2bRAD-tag distances tr
 
 #### In-silico marker-density simulation (Fig 3)
 
-Across 14 resolvable simulation-pool species, increasing the enzyme set from 1 to 14 maintained precision at 1.0 and increased median recall from 0.50 to 1.00. Marker yield increased from 976 to 12,647, but cluster count was unchanged, showing that additional enzymes increased marker density and recall rather than cluster resolution. BcgI alone enabled direct native 2bRAD-M profiling; approximately four enzymes recovered most recall.
+We reran the enzyme ladder on the 225 matched simulations, giving 1,125 sample-level predictions across 15 species. Increasing enzymes from 1 to 14 increased median strain-specific markers from 816 to 12,298 while median cluster count remained 19, showing that the ladder increased marker density rather than cluster resolution. Across species, median precision/recall/F1 improved from 0.667/0.333/0.500 with BcgI alone to 1.000/1.000/1.000 with 14 enzymes; four enzymes already reached median precision 1.000 and F1 0.667 (Fig 3; `results/enzyme_sweep_225/`). BcgI therefore enables native 2bRAD-M operation, although single-enzyme panels are panel-dependent and less precise.
 
 #### DNA mocks (Fig 4)
 

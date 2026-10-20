@@ -367,6 +367,13 @@ benchmark used `art_illumina -p -l 250 -m 600 -s 150`, producing 250 bp paired-e
 Illumina quality-error model. Earlier diagnostic datasets may have used different read configurations;
 the systematic comparison and its figures are defined by this ART configuration.
 
+*Enzyme-ladder rerun.* To add per-sample provenance to the enzyme-set analysis (Fig 3), we rebuilt each
+of the 15 simulation-pool species databases at five cumulative enzyme counts (1, 2, 4, 8 and 14) and
+profiled the 225 matched single-species simulations against the matching species database, for 1,125
+sample-level predictions. Runs used current-source Strain2bScan with default depth-adaptive gates and were
+scored against each database's own 0.95-cluster partition. Per-sample predictions and database marker
+counts are in `results/enzyme_sweep_225/`.
+
 **Real-data and motivation datasets.** (v) *2bRAD-vs-16S motivation* (Fig 2): 15
 pathogenic/commensal species, ~50 genomes each from NCBI accession lists (ENA FASTA), **restricted to
 complete/near-complete assemblies** (CheckM [15] completeness ≥ 97 %, contamination ≤ 5 %, assembly level

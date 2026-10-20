@@ -12,9 +12,9 @@ in-silico simulation to controlled DNA mock to real metagenome.
 
 ### Part I — native BcgI 2bRAD-M performance
 
-3. **Figure 3** — in-silico enzyme/marker-density simulation across 14 resolvable species from the
-   15-species pool. This is a design experiment; BcgI is the single-enzyme condition used for native
-   2bRAD-M libraries.
+3. **Figure 3** — current-source in-silico enzyme/marker-density simulation across 15 species and
+   all 225 matched samples per enzyme count. This is a design experiment; BcgI is the single-enzyme
+   condition relevant to native 2bRAD-M libraries.
 4. **Figure 4** — DNA mocks MSA-1002, MSA-1003, MSA-1005 and MSA-1007. The 99.9%-host row has been
    removed from the primary figure.
 5. **Figure 5** — real saliva time-course: 32 native 2bRAD-M libraries from eight subjects.
@@ -51,6 +51,4 @@ in-silico simulation to controlled DNA mock to real metagenome.
 2. **Thirty-two paired saliva shotgun runs.** Complete. All 64 canonical mate files are present in `/lustre1/g/aos_shihuang/Strain2b/data/saliva_data/WMS_data/complete_32_fqgz` and recorded in `results/wms32_rebuild/`.
 3. **Complete inStrain simulation benchmark.** Complete. `results/instrain_sim225/persample.tsv` contains all 225 matched runs; summaries are in `by_depth.tsv` and `by_species.tsv`.
 4. **StrainPhlAn scope.** Deferred with an explicit scope statement: it infers strain phylogeny/types and does not emit cluster abundance calls directly comparable to the P/R/F1 benchmark.
-5. **Figure 5/enzyme-sweep provenance.** Preserve or regenerate the exact number of samples and
-   strains behind each species × enzyme aggregate; the current table contains 70 aggregate rows but
-   not per-sample counts.
+5. **Figure 3/enzyme-sweep provenance.** Complete. `results/enzyme_sweep_225/persample.tsv` contains 1,125 rows (225 samples × five enzyme counts), with per-species summaries and database marker counts in the same directory.
