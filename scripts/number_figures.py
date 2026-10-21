@@ -41,6 +41,8 @@ SUPP = {
 # these overrides avoid redundant names such as Fig12_fig11_wms_toolcompare.
 LABELS = {
     "04": "native_2brad_mocks",
+    "05": "real_saliva_timecourse",
+    "06": "paired_saliva_prefix",
     "10": "wms_toolcompare",
     "S6": "reference_quality_containment",
     "S3": "tree_expansion",

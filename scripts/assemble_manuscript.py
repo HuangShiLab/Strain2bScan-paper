@@ -39,6 +39,7 @@ def figure_legends():
     fl = re.sub(r'[ \t]+\n', '\n', fl); fl = re.sub(r'\n{3,}', '\n\n', fl)
     # Keep one legend paragraph per numbered item after source-path cleanup.
     fl = re.sub(r'\s+(?=\*\*(?:Figure|Table) )', '\n\n', fl)
+    fl = re.sub(r'\s+(?=## )', '\n\n', fl)
     fl = re.sub(r'\n{3,}', '\n\n', fl)
     return fl.strip()
 
@@ -62,7 +63,7 @@ full = "\n\n".join([
     "## Methods\n\n" + shift(body("manuscript/methods.md").strip(), 1),
     "## Author contributions\n\n" + AUTHOR_CONTRIBUTIONS + "\n\n"
     "## Funding\n\n"
-    "This work was supported by award 32572519.\n\n"
+    "This work was supported by award 32572519. The funder had no role in study design, data analysis, decision to publish, or manuscript preparation.\n\n"
     "## Acknowledgements\n\n"
     "We thank the developers of the public benchmarking tools and the investigators who deposited the\n"
     "public metagenomic datasets used here.\n\n"

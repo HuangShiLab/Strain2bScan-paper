@@ -212,7 +212,9 @@ with the given enzyme set.
 
 For community samples, the reads are digested **once** into a shared set of tag counts, matched
 against every per-species cluster database in parallel; the per-species marginal cost is a
-hash-set lookup rather than a re-count, so the total cost is independent of the number of species.
+hash-set lookup rather than a re-count. The marginal work of an additional species is one compact database
+lookup/search, while total cost remains weakly dependent on panel content; throughput was approximately flat
+over the tested 20–55-species range.
 
 **Which species to strain-profile; the Layer-1 gate.** Strain markers are unique only *within* a
 species, so a species absent from a sample can be spuriously hit by a present relative's shared
@@ -393,24 +395,39 @@ similarity with `--containment`; native 2bRAD used the BcgI tree and shotgun use
 Strain2bScan was run with `--min-abundance 0 --min-coverage 0.2`. On the shotgun samples it was compared
 against **StrainScan** 1.0.14 [1] (per-species databases, `linux/amd64` container) and **inStrain** 1.9.1
 [8]. Reads were aligned with Bowtie2 [23] using default paired-end settings, sorted and indexed with samtools, and profiled with `inStrain profile` against single-linkage skani dereplicated references (98% ANI threshold, ATCC representative retained). The MSA-1002/1003 pool was reduced from 120 genomes to 32 references; the MSA-1005/1007 pool was reduced from 164 to 47. Genome-level calls required breadth ≥ 0.5 and reference popANI ≥ 0.99999; their coverage values were then normalized for abundance scoring and the manuscript-level 10⁻⁴ detection threshold was applied. The non-dereplicated reference is
-shown as a control in Fig S4. These exact filters were fixed before metric scoring; raw genome-table threshold sensitivity was not rerun. Each tool was scored in its own 0.95-similarity cluster space
-against the mock ground truth (`Ground_truth/*`, sequence abundance), reporting precision, recall, F1,
-AUPR (abundance-threshold sweep, Ye et al. [24]), and Bray–Curtis and L2 similarity to the truth profile;
-scorer `scripts/score_all.py`, figures `scripts/plot_figs_h.py`. The primary frozen comparators were
-therefore StrainScan and inStrain. A separate StrainGST rerun [2] was added after the frozen run because it
-requires StrainGE-specific 0.90-reference databases and a WMS-oriented workflow; it is described under
-*StrainGST rerun*. StrainGR was not run. (vii) *Real saliva* (Fig 5, Fig 6): native BcgI 2bRAD and paired shotgun WMS saliva from PRJNA1131785
+shown as a control in Fig S4. These exact filters were fixed before metric scoring; raw genome-table threshold sensitivity was not rerun. Each tool was scored against the same mock ground truth (`Ground_truth/*`, sequence abundance) in its own
+call unit: 0.95-similarity clusters for Strain2bScan/StrainScan and 98%-ANI-dereplicated genome references
+for inStrain. Metrics were precision, recall, F1, AUPR (abundance-threshold sweep, Ye et al. [24]), and
+Bray–Curtis and L2 similarity to the truth profile;
+Threshold-aware P/R/F1, AUPR and abundance-error values were computed by `scripts/update_mock_figs.py` into
+`data/fig6_fig12_metrics.tsv` (frozen copy `results/mock_benchmark_f26f234/fig6_fig12_metrics.tsv`);
+`scripts/score_all.py` supplied threshold-free mock scoring and `scripts/plot_figs_h.py` generated figures.
+The primary frozen comparators were therefore StrainScan and inStrain. A separate StrainGST rerun [2] was
+added after the frozen run because it requires StrainGE-specific 0.90-reference databases and a WMS-oriented
+workflow; it is described under *StrainGST rerun*. StrainGR was not run. (vii) *Real saliva* (Fig 5, Fig 6): native BcgI 2bRAD and paired shotgun WMS saliva from PRJNA1131785
 (8 subjects × 4 within-day timepoints) were profiled against a 19-species oral-commensal panel (up to 25
 genomes/species). The BioProject contains 32 paired WMS saliva runs
 (`figure_raw_data/Fig08_saliva_shotgun/full_sra_wms_manifest.tsv`); the frozen shotgun-native comparison used
-the four libraries for which R1 prefixes had been downloaded. Strain- and species-level relative abundances
-were converted to Bray–Curtis dissimilarities and tested by PERMANOVA [25] (`adonis`, subject/timepoint
-factors). Leave-one-timepoint-out 1-NN host classification was compared between feature types; uncertainty
-used a subject-aware cluster bootstrap with 20,000 resamples, retaining all four timepoints together and
-summarizing the strain-minus-species accuracy difference with a 95% percentile interval. Shotgun R1 reads
-were digested in silico with BcgI and compared with native 2bRAD calls per sample. Full per-dataset
+the four libraries for which R1 prefixes had been downloaded, capped WMS input at 4 × 10⁸ reads and applied
+stricter species gates (50 panel-specific markers and five detected markers). Three libraries yielded usable
+strain calls. Strain- and species-level relative abundances were converted to Bray–Curtis dissimilarities and
+tested by a custom Python PERMANOVA implementation with 4,999 label permutations and seed 42 [25] for
+subject/timepoint factors. Leave-one-timepoint-out 1-NN host classification was compared between feature
+types; uncertainty used a subject-aware cluster bootstrap with 20,000 resamples, retaining all four
+timepoints together and summarizing the strain-minus-species accuracy difference with a 95% percentile
+interval. Shotgun R1 reads were digested in silico with BcgI and compared with native 2bRAD calls per sample. Full per-dataset
 procedures and accessions are in `docs/` (`motivation_16s.md`,
 `saliva_individual_discrimination.md`, `saliva_temporal_ml.md`, `saliva_concordance.md`).
+
+*Full-depth 32-sample WMS rebuild.* The canonical PRJNA1131785 WMS dataset was rebuilt to 32 samples
+and 64 mate files, validated with `gzip -t`, and retained with its SRA manifest. All 32 paired-end
+libraries were then profiled at full depth with the same 19-species oral BcgI panel at Strain2bScan
+commit `6ae760c2f3bd2f39efc0e6aa06c53a84366cb16e`, using batch-mode species gates of 20 panel-specific
+markers and two detected markers and call gates of at least two supporting markers and 0.01 coverage.
+All 32 native 2bRAD libraries were then reprofiled with these same species, support and coverage gates
+(`native20_matched/native_strain_calls.tsv`). This analysis quantified modality and depth coverage across all
+32 gate-matched pairs; it was not used as an accuracy benchmark because the two assays differ in sequencing
+depth, read layout and biological representation. Outputs are in `results/wms32_rebuild/`.
 
 **Complete 15-species simulation pool and matched subset (Fig 7, Fig 8, Tables 1–3).** A common
 benchmark was built from a fixed pool of 15 pathogenic/commensal species (15–50 complete/near-complete
@@ -465,6 +482,16 @@ detection additionally used abundance >= 1e-4, as in the primary comparison. Wal
 sample k-merization and all species searches, and peak RSS is the maximum across those stages. StrainGR
 was not run, so these are StrainGST identification and abundance results rather than full StrainGE
 variant calling.
+
+*inStrain simulation rerun.* To extend inStrain to the matched simulation benchmark, we used inStrain
+1.11.0 with Bowtie2 alignment against the complete species genome pool from the common simulation
+(not a dereplicated mock-specific reference). For each of the 225 matched single-species samples,
+sorted BAM files were processed with `inStrain quick_profile`, and a genome was considered detected when
+reported coverage was ≥ 0.1 and breadth was ≥ 0.05. Detected genomes were then mapped to the truth
+0.95-cluster partition before computing precision, recall and F1. These genome-resolved calls were not
+pooled with Strain2bScan, StrainScan or StrainGST cluster calls, but they permit a read-level comparator
+to be evaluated on the same simulation reads and truth genomes. Per-sample outputs are in
+`results/instrain_sim225/`.
 
 *Software and timing provenance.* The primary ATCC mock benchmark was frozen at Strain2bScan commit
 `f26f234b817ba7772a3f1df59ce720751e9b45b9` (release-build SHA-256

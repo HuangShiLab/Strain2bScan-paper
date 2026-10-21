@@ -51,14 +51,14 @@ def main():
     ax.set_xticks(positions)
     ax.set_xticklabels([r["sample"] for r in rows])
     ax.set_ylabel("community relative abundance (median)")
-    ax.set_title(f"B  Candidate-only calls are lower abundance\np = {p:.1e}")
+    ax.set_title("B  Candidate-only calls have lower medians\n(exploratory)")
     ax.legend(fontsize=8.5)
     ax.grid(alpha=0.25, axis="y", which="both")
 
-    fig.suptitle("Directional paired saliva comparison in three usable subjects", fontsize=12,
+    fig.suptitle("Exploratory paired saliva comparison in three usable subjects", fontsize=12,
                  fontweight="bold")
     fig.text(0.5, 0.005,
-             "Shotgun was an R1 prefix subsample; candidate-only calls are not independent strain validation.",
+             "Shotgun was an R1-prefix subsample; this non-depth-matched comparison is not a modality advantage test.",
              ha="center", fontsize=9)
     fig.tight_layout(rect=[0, 0.03, 1, 0.94])
     out = PAPER / "figures/source_panels/saliva_fig08"

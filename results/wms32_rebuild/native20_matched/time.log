@@ -1,0 +1,82 @@
+[batch 1/32] sample S11-11: /Users/macstudio/Downloads/Strain2bScan-paper/figure_raw_data/Fig07_saliva_2bRAD/reads/S11-11__SRR29712950_1.fastq.gz
+[batch 1/32] sample S11-11: 419092 distinct markers, 52 strain call(s)
+[batch 2/32] sample S11-12: /Users/macstudio/Downloads/Strain2bScan-paper/figure_raw_data/Fig07_saliva_2bRAD/reads/S11-12__SRR29712939_1.fastq.gz
+[batch 2/32] sample S11-12: 521872 distinct markers, 71 strain call(s)
+[batch 3/32] sample S11-14: /Users/macstudio/Downloads/Strain2bScan-paper/figure_raw_data/Fig07_saliva_2bRAD/reads/S11-14__SRR29712928_1.fastq.gz
+[batch 3/32] sample S11-14: 678854 distinct markers, 25 strain call(s)
+[batch 4/32] sample S11-1: /Users/macstudio/Downloads/Strain2bScan-paper/figure_raw_data/Fig07_saliva_2bRAD/reads/S11-1__SRR29712951_1.fastq.gz
+[batch 4/32] sample S11-1: 783259 distinct markers, 36 strain call(s)
+[batch 5/32] sample S11-2: /Users/macstudio/Downloads/Strain2bScan-paper/figure_raw_data/Fig07_saliva_2bRAD/reads/S11-2__SRR29712925_1.fastq.gz
+[batch 5/32] sample S11-2: 428695 distinct markers, 56 strain call(s)
+[batch 6/32] sample S11-6: /Users/macstudio/Downloads/Strain2bScan-paper/figure_raw_data/Fig07_saliva_2bRAD/reads/S11-6__SRR29712924_1.fastq.gz
+[batch 6/32] sample S11-6: 782485 distinct markers, 35 strain call(s)
+[batch 7/32] sample S11-7: /Users/macstudio/Downloads/Strain2bScan-paper/figure_raw_data/Fig07_saliva_2bRAD/reads/S11-7__SRR29712923_1.fastq.gz
+[batch 7/32] sample S11-7: 564069 distinct markers, 18 strain call(s)
+[batch 8/32] sample S11-9: /Users/macstudio/Downloads/Strain2bScan-paper/figure_raw_data/Fig07_saliva_2bRAD/reads/S11-9__SRR29712922_1.fastq.gz
+[batch 8/32] sample S11-9: 972240 distinct markers, 23 strain call(s)
+[batch 9/32] sample S13-11: /Users/macstudio/Downloads/Strain2bScan-paper/figure_raw_data/Fig07_saliva_2bRAD/reads/S13-11__SRR29712920_1.fastq.gz
+[batch 9/32] sample S13-11: 493384 distinct markers, 52 strain call(s)
+[batch 10/32] sample S13-12: /Users/macstudio/Downloads/Strain2bScan-paper/figure_raw_data/Fig07_saliva_2bRAD/reads/S13-12__SRR29712949_1.fastq.gz
+[batch 10/32] sample S13-12: 450661 distinct markers, 61 strain call(s)
+[batch 11/32] sample S13-14: /Users/macstudio/Downloads/Strain2bScan-paper/figure_raw_data/Fig07_saliva_2bRAD/reads/S13-14__SRR29712948_1.fastq.gz
+[batch 11/32] sample S13-14: 959950 distinct markers, 22 strain call(s)
+[batch 12/32] sample S13-1: /Users/macstudio/Downloads/Strain2bScan-paper/figure_raw_data/Fig07_saliva_2bRAD/reads/S13-1__SRR29712921_1.fastq.gz
+[batch 12/32] sample S13-1: 623966 distinct markers, 53 strain call(s)
+[batch 13/32] sample S13-2: /Users/macstudio/Downloads/Strain2bScan-paper/figure_raw_data/Fig07_saliva_2bRAD/reads/S13-2__SRR29712947_1.fastq.gz
+[batch 13/32] sample S13-2: 334251 distinct markers, 56 strain call(s)
+[batch 14/32] sample S13-6: /Users/macstudio/Downloads/Strain2bScan-paper/figure_raw_data/Fig07_saliva_2bRAD/reads/S13-6__SRR29712946_1.fastq.gz
+[batch 14/32] sample S13-6: 779172 distinct markers, 30 strain call(s)
+[batch 15/32] sample S13-7: /Users/macstudio/Downloads/Strain2bScan-paper/figure_raw_data/Fig07_saliva_2bRAD/reads/S13-7__SRR29712945_1.fastq.gz
+[batch 15/32] sample S13-7: 479268 distinct markers, 33 strain call(s)
+[batch 16/32] sample S13-9: /Users/macstudio/Downloads/Strain2bScan-paper/figure_raw_data/Fig07_saliva_2bRAD/reads/S13-9__SRR29712944_1.fastq.gz
+[batch 16/32] sample S13-9: 948316 distinct markers, 20 strain call(s)
+[batch 17/32] sample S17-11: /Users/macstudio/Downloads/Strain2bScan-paper/figure_raw_data/Fig07_saliva_2bRAD/reads/S17-11__SRR29712942_1.fastq.gz
+[batch 17/32] sample S17-11: 454462 distinct markers, 67 strain call(s)
+[batch 18/32] sample S17-12: /Users/macstudio/Downloads/Strain2bScan-paper/figure_raw_data/Fig07_saliva_2bRAD/reads/S17-12__SRR29712941_1.fastq.gz
+[batch 18/32] sample S17-12: 478887 distinct markers, 37 strain call(s)
+[batch 19/32] sample S17-14: /Users/macstudio/Downloads/Strain2bScan-paper/figure_raw_data/Fig07_saliva_2bRAD/reads/S17-14__SRR29712940_1.fastq.gz
+[batch 19/32] sample S17-14: 912649 distinct markers, 25 strain call(s)
+[batch 20/32] sample S17-1: /Users/macstudio/Downloads/Strain2bScan-paper/figure_raw_data/Fig07_saliva_2bRAD/reads/S17-1__SRR29712943_1.fastq.gz
+[batch 20/32] sample S17-1: 899864 distinct markers, 35 strain call(s)
+[batch 21/32] sample S17-2: /Users/macstudio/Downloads/Strain2bScan-paper/figure_raw_data/Fig07_saliva_2bRAD/reads/S17-2__SRR29712938_1.fastq.gz
+[batch 21/32] sample S17-2: 425530 distinct markers, 67 strain call(s)
+[batch 22/32] sample S17-6: /Users/macstudio/Downloads/Strain2bScan-paper/figure_raw_data/Fig07_saliva_2bRAD/reads/S17-6__SRR29712937_1.fastq.gz
+[batch 22/32] sample S17-6: 866319 distinct markers, 25 strain call(s)
+[batch 23/32] sample S17-7: /Users/macstudio/Downloads/Strain2bScan-paper/figure_raw_data/Fig07_saliva_2bRAD/reads/S17-7__SRR29712936_1.fastq.gz
+[batch 23/32] sample S17-7: 591792 distinct markers, 27 strain call(s)
+[batch 24/32] sample S17-9: /Users/macstudio/Downloads/Strain2bScan-paper/figure_raw_data/Fig07_saliva_2bRAD/reads/S17-9__SRR29712935_1.fastq.gz
+[batch 24/32] sample S17-9: 1063961 distinct markers, 25 strain call(s)
+[batch 25/32] sample S9-11: /Users/macstudio/Downloads/Strain2bScan-paper/figure_raw_data/Fig07_saliva_2bRAD/reads/S9-11__SRR29712933_1.fastq.gz
+[batch 25/32] sample S9-11: 398474 distinct markers, 71 strain call(s)
+[batch 26/32] sample S9-12: /Users/macstudio/Downloads/Strain2bScan-paper/figure_raw_data/Fig07_saliva_2bRAD/reads/S9-12__SRR29712932_1.fastq.gz
+[batch 26/32] sample S9-12: 461428 distinct markers, 103 strain call(s)
+[batch 27/32] sample S9-14: /Users/macstudio/Downloads/Strain2bScan-paper/figure_raw_data/Fig07_saliva_2bRAD/reads/S9-14__SRR29712931_1.fastq.gz
+[batch 27/32] sample S9-14: 862195 distinct markers, 23 strain call(s)
+[batch 28/32] sample S9-1: /Users/macstudio/Downloads/Strain2bScan-paper/figure_raw_data/Fig07_saliva_2bRAD/reads/S9-1__SRR29712934_1.fastq.gz
+[batch 28/32] sample S9-1: 603065 distinct markers, 59 strain call(s)
+[batch 29/32] sample S9-2: /Users/macstudio/Downloads/Strain2bScan-paper/figure_raw_data/Fig07_saliva_2bRAD/reads/S9-2__SRR29712930_1.fastq.gz
+[batch 29/32] sample S9-2: 446143 distinct markers, 65 strain call(s)
+[batch 30/32] sample S9-6: /Users/macstudio/Downloads/Strain2bScan-paper/figure_raw_data/Fig07_saliva_2bRAD/reads/S9-6__SRR29712929_1.fastq.gz
+[batch 30/32] sample S9-6: 826088 distinct markers, 27 strain call(s)
+[batch 31/32] sample S9-7: /Users/macstudio/Downloads/Strain2bScan-paper/figure_raw_data/Fig07_saliva_2bRAD/reads/S9-7__SRR29712927_1.fastq.gz
+[batch 31/32] sample S9-7: 602141 distinct markers, 52 strain call(s)
+[batch 32/32] sample S9-9: /Users/macstudio/Downloads/Strain2bScan-paper/figure_raw_data/Fig07_saliva_2bRAD/reads/S9-9__SRR29712926_1.fastq.gz
+[batch 32/32] sample S9-9: 1069254 distinct markers, 17 strain call(s)
+       57.82 real       161.89 user        12.49 sys
+           113442816  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+              311157  page reclaims
+                 100  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+              664691  voluntary context switches
+              283459  involuntary context switches
+       1329131118400  instructions retired
+        508520749910  cycles elapsed
+           112034224  peak memory footprint

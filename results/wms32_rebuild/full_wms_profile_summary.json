@@ -1,0 +1,11 @@
+{
+  "n_samples": 32,
+  "wms_calls": 2487,
+  "median_wms_calls_per_sample": 79.0,
+  "native_calls": 1368,
+  "median_native_calls_per_sample": 35.5,
+  "wms_calls_shared_with_native": 495,
+  "wms_calls_shared_fraction": 0.19903498190591074,
+  "native_calls_shared_with_wms": 495,
+  "native_calls_shared_fraction": 0.3618421052631579
+}

@@ -7,13 +7,13 @@
    low-abundance strains in complex microbial communities.** *Genome Biology* 2022; 23:74.
    doi:10.1186/s13059-022-02630-0.
 3. Truong DT, Tett A, Pasolli E, Huttenhower C, Segata N. **Microbial strain-level population structure
-   and genetic diversity from metagenomes.** *Genome Research* 2017; 27(4):626–638.
+   and genetic diversity from metagenomes.** *Genome Research* 2017; 27(4):626–638. doi:10.1101/gr.215087.116
 4. Shaw J, Yu YW. **Rapid species-level metagenome profiling and containment estimation with sylph.**
    *Nature Biotechnology* 2025; 43(8):1348–1359 (published online 2024). doi:10.1038/s41587-024-02412-y.
 5. Wang S, Meyer E, McKay JK, Matz MV. **2b-RAD: a simple and flexible method for genome-wide
-   genotyping.** *Nature Methods* 2012; 9(8):808–810.
+   genotyping.** *Nature Methods* 2012; 9(8):808–810. doi:10.1038/nmeth.2028
 6. Sun Z, Huang S, Zhu P, *et al.* **Species-resolved sequencing of low-biomass or degraded microbiomes
-   using 2bRAD-M.** *Genome Biology* 2022; 23:36.
+   using 2bRAD-M.** *Genome Biology* 2022; 23:36. doi:10.1186/s13059-022-02624-y
 7. Huang S. **Fast2bRAD-M: high-performance Rust reimplementation of the 2bRAD-M microbiome profiling
     pipeline.** Software, https://github.com/HuangShiLab/Fast2bRAD-M.
 8. Olm MR, Crits-Christoph A, Bouma-Gregson K, Firek BA, Morowitz MJ, Banfield JF. **inStrain profiles

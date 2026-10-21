@@ -27,7 +27,7 @@ LADDER={
 }
 FIELDS=["species","sample","strategy","k","rep","depth","enzyme_count","enzyme_set",
         "n_truth_clusters","n_pred_clusters","TP","FP","FN","precision","recall","f1",
-        "prediction","truth","database"]
+        "prediction","prediction_sha256","truth","database"]
 
 def read_tsv(path):
  with path.open() as f:return list(csv.DictReader(f,delimiter="\t"))
@@ -136,7 +136,7 @@ def main():
      "k":parts[1].removeprefix("k"),"rep":parts[2].removeprefix("rep"),"depth":parts[3].removeprefix("d"),
      "enzyme_count":count,"enzyme_set":enzymes,"n_truth_clusters":len(truth),"n_pred_clusters":len(pred),
      "TP":tp,"FP":fp,"FN":fn,"precision":p,"recall":r,"f1":f,
-     "prediction":str(out),"truth":row["truth"],"database":str(db)})
+     "prediction":str(out),"prediction_sha256":sha256(out),"truth":row["truth"],"database":str(db)})
    print(f"[{done}/{len(futures)}] {sample} enzymes={count} P={p:.3f} R={r:.3f} F1={f:.3f}",flush=True)
  fields=FIELDS
  with (OUT/"persample.tsv").open("w",newline="") as f:

@@ -194,19 +194,9 @@ for key, point, lo, hi in [
                           for field, expected in (("point", point), ("ci_low", lo), ("ci_high", hi))):
         fail(f"benchmark uncertainty changed unexpectedly: {key}")
 
-sensitivity_rows = load_tsv("results/strainscan_rerun/sensitivity_failure_as_absence.tsv")
-if len(sensitivity_rows) != 1 or sensitivity_rows[0]["n_entries"] != "225" or sensitivity_rows[0]["no_call_entries"] != "21":
-    fail("failure-aware sensitivity coverage changed")
-for field, expected in (
-    ("recall_difference_point", 0.06459614814814814),
-    ("recall_difference_ci_low", -0.034218818518518525),
-    ("recall_difference_ci_high", 0.19674783333333304),
-    ("f1_difference_point", 0.06248133333333334),
-    ("f1_difference_ci_low", -0.036274330864197525),
-    ("f1_difference_ci_high", 0.20248760370370295),
-):
-    if not math.isclose(float(sensitivity_rows[0][field]), expected, abs_tol=5e-9):
-        fail(f"failure-aware sensitivity changed for {field}")
+current_failure = load_tsv("results/strainscan_rerun/current_failure_as_absence.tsv")
+if len(current_failure) != 225 or sum(r["status"] == "no_call" for r in current_failure) != 21:
+    fail("current failure-aware sensitivity coverage changed")
 
 resolution = {r["species"]: r for r in load_tsv("results/strainscan_rerun/database_cluster_resolution.tsv")}
 if len(resolution) != 15 or resolution["Salmonella_enterica"]["s2b_0.95_clusters"] != "19" or resolution["Salmonella_enterica"]["strainscan_0.95_clusters"] != "12":
@@ -299,6 +289,97 @@ if ml.get("leave_one_timepoint_out_subject_accuracy") != "1.0000" or ml.get("n_s
 concordance = load_tsv("results/saliva_concordance.tsv")
 if len(concordance) != 3 or sum(int(r["wms_confirmed_by_2brad"]) for r in concordance) != 65:
     fail("saliva concordance table no longer supports the three-sample 65/65 statement")
+saliva_uncertainty = {r["metric"]: r for r in load_tsv("results/uncertainty_summary.tsv")
+                      if r["analysis"] == "saliva_leave_one_timepoint_out"}
+for metric, point, lo, hi in (
+    ("strain_accuracy", 1.0, 1.0, 1.0),
+    ("species_accuracy", 0.78125, 0.5625, 1.0),
+    ("strain_minus_species_accuracy", 0.21875, 0.0, 0.4375),
+):
+    row = saliva_uncertainty.get(metric)
+    if row is None or any(not math.isclose(float(row[field]), expected, abs_tol=5e-9)
+                          for field, expected in (("point", point), ("ci_low", lo), ("ci_high", hi))):
+        fail(f"saliva classifier uncertainty changed for {metric}")
+wms_full = json.loads((ROOT / "results/wms32_rebuild/full_wms_profile_summary.json").read_text())
+wms_expected = {
+    "n_samples": 32,
+    "wms_calls": 2487,
+    "median_wms_calls_per_sample": 79.0,
+    "native_calls": 1368,
+    "median_native_calls_per_sample": 35.5,
+    "wms_calls_shared_with_native": 495,
+    "native_calls_shared_with_wms": 495,
+}
+if any(wms_full.get(k) != v for k, v in wms_expected.items()):
+    fail("full-depth WMS rebuild summary no longer supports the manuscript statement")
+if not math.isclose(wms_full["wms_calls_shared_fraction"], 495 / 2487, abs_tol=5e-9):
+    fail("full-depth WMS shared fraction changed")
+if not math.isclose(wms_full["native_calls_shared_fraction"], 495 / 1368, abs_tol=5e-9):
+    fail("full-depth WMS native recovery fraction changed")
+wms_checksums = ROOT / "results/wms32_rebuild/checksums.sha256"
+for line in wms_checksums.read_text().splitlines():
+    expected, rel = line.split("  ", 1)
+    p = ROOT / "results/wms32_rebuild" / rel
+if not p.exists() or hashlib.sha256(p.read_bytes()).hexdigest() != expected:
+        fail(f"full-depth WMS rebuild artifact changed: {rel}")
+enzyme_rows = load_tsv("results/enzyme_sweep_225/persample.tsv")
+if len(enzyme_rows) != 1125:
+    fail("enzyme-sweep row count changed")
+for row in enzyme_rows:
+    expected_path = (ROOT / "work/enzyme_sweep_225/predictions" /
+                     f"enzymes_{row['enzyme_count']}/{row['sample']}.pred")
+    if Path(row["prediction"]) != expected_path.relative_to(ROOT):
+        fail(f"enzyme-sweep prediction path mismatch: {row['sample']}")
+    p = ROOT / row["prediction"]
+    if not p.exists() or hashlib.sha256(p.read_bytes()).hexdigest() != row["prediction_sha256"]:
+        fail(f"enzyme-sweep prediction hash mismatch: {row['sample']}")
+enzyme_checksums = ROOT / "results/enzyme_sweep_225/checksums.sha256"
+for line in enzyme_checksums.read_text().splitlines():
+    expected, rel = line.split("  ", 1)
+    p = ROOT / "results/enzyme_sweep_225" / rel
+    if not p.exists() or hashlib.sha256(p.read_bytes()).hexdigest() != expected:
+        fail(f"enzyme-sweep archived artifact changed: {rel}")
+mock_metrics_checksum = (ROOT / "results/mock_benchmark_f26f234/mock_metrics_checksums.sha256").read_text().split()[0]
+mock_metrics = ROOT / "results/mock_benchmark_f26f234/fig6_fig12_metrics.tsv"
+if not mock_metrics.exists() or hashlib.sha256(mock_metrics.read_bytes()).hexdigest() != mock_metrics_checksum:
+    fail("frozen mock metric table checksum mismatch")
+mock_rows = load_tsv("results/mock_benchmark_f26f234/fig6_fig12_metrics.tsv")
+mock_index = {(r["kind"], r["mock"], r["sample"], r["tool"], r["variant"]): r for r in mock_rows}
+mock_expected = {
+    ("2bRAD", "MSA1002", "BcgI_MSA1002_0_0.1ng_1", "Strain2bScan", "164"): ("0.9091", "1.0", "0.9524", "1.0"),
+    ("2bRAD", "MSA1002", "BcgI_MSA1002_90_100ng_1", "Strain2bScan", "164"): ("0.9524", "1.0", "0.9756", "1.0"),
+    ("2bRAD", "MSA1002", "BcgI_MSA1002_95_100ng_1", "Strain2bScan", "164"): ("1.0", "1.0", "1.0", "1.0"),
+    ("2bRAD", "MSA1002", "BcgI_MSA1002_99_100ng_1", "Strain2bScan", "164"): ("1.0", "1.0", "1.0", "1.0"),
+    ("WMS", "MSA1002", "WMS_MSA1002_99_100ng_1", "StrainScan", "-"): ("1.0", "0.05", "0.0952", "1.0"),
+    ("WMS", "MSA1002", "WMS_MSA1002_99_100ng_1", "inStrain", "derep98"): ("1.0", "0.2", "0.3333", "0.2"),
+}
+for key, expected in mock_expected.items():
+    row = mock_index.get(key)
+    if row is None:
+        fail(f"mock metric row missing: {key}")
+        continue
+    for field, value in zip(("precision_at_1e_4", "recall_at_1e_4", "f1_at_1e_4", "aupr"), expected):
+        if value is not None and row[field] != value:
+            fail(f"mock metric changed for {key}: {field}")
+sameenv = {r["depth"]: r for r in load_tsv("results/sim_headtohead_profile_sameenv.tsv")}
+sameenv_expected = {
+    "0.5": ("40", "1.000/0.600/0.708", "1.000/0.667/0.800", "37", "0.160 s / 21.1 MB", "5.300 s / 830.9 MB"),
+    "10": ("41", "1.000/1.000/1.000", "1.000/1.000/1.000", "38", "1.655 s / 160.7 MB", "6.915 s / 831.8 MB"),
+}
+table2 = (ROOT / "manuscript/tables.md").read_text()
+for depth, expected in sameenv_expected.items():
+    row = sameenv[depth]
+    if int(row["n"]) != int(expected[3]) or not math.isclose(float(row["s2b_emu_wall_s"]), float(expected[4].split(" s")[0]), abs_tol=5e-9):
+        fail(f"Table 2 same-container source changed at depth {depth}")
+    if expected[1] not in table2 or expected[2] not in table2 or expected[4] not in table2 or expected[5] not in table2:
+        fail(f"Table 2 values no longer match source at depth {depth}")
+gst_multi = {r["depth"]: r for r in load_tsv("results/strainge_rerun/simulation_multi_by_depth.tsv")}
+current_multi = {r["group"]: r for r in load_tsv("results/strainscan_rerun/current_multi_by_depth.tsv")}
+old_multi = {r["group"]: r for r in load_tsv("results/strainscan_rerun/multi_by_depth.tsv")}
+if current_multi["low"]["s2b_f1"] != "0.6990883740883741" or old_multi["low"]["ss_f1"] != "0.7979419191919191" or gst_multi["low"]["f1"] != "0.9436293436293437":
+    fail("Table 3 low-depth accuracy source changed")
+if "0.748/0.667/0.699" not in (ROOT / "manuscript/tables.md").read_text():
+    fail("Table 3 current Strain2bScan low-depth accuracy absent")
 isolate = load_tsv("results/realworld_cohort_benchmark/isolate_validation_scorecard.tsv")
 if len(isolate) != 6 or sum(r["correct"] == "True" for r in isolate) != 6:
     fail("isolate scorecard no longer supports the 6/6 self-call statement")
@@ -325,7 +406,7 @@ text = read("manuscript/abstract.md", "manuscript/results.md", "manuscript/metho
             "manuscript/discussion.md", "manuscript/figures.md",
             "manuscript/figure_legends_detailed.md")
 required = [
-    "250 bp", "ART", "error-modelled", "F1 at 1e-4 = 0.909", "AUPR = 1.0",
+    "250 bp", "ART", "error-modelled", "F1 = 0.952", "AUPR = 1.0",
     "candidate strain-cluster calls", "panel/read compatibility", "prefix subsample",
     "121–146", "projected", "4.6×", "5.8×", "8 subjects",
 ]

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fig 4 (problem -> solution): reference-genome completeness vs strain-identification accuracy across
+"""Figure S6B (problem -> solution): reference-genome completeness vs strain-identification accuracy across
 15 species, and how the --containment clustering mode addresses it. Default Jaccard clustering
 (dashed) loses precision/recall as references degrade because incomplete genomes split from their
 complete relatives; max-containment clustering (solid) keeps them together, restoring accuracy down to
@@ -42,7 +42,7 @@ axi.plot(xt, [Rc[OUT][c] for c in comps], "-o", color="#d62728", lw=2, ms=3)
 axi.set_ylim(0, 1.08); axi.set_xticks([50, 70, 90, 100]); axi.tick_params(labelsize=6.5)
 axi.set_title("M. tuberculosis recall\n(near-clonal; artifact fixed)", fontsize=6.8)
 axi.grid(alpha=0.25)
-fig.suptitle("Fig 4. Reference completeness limits strain ID under Jaccard clustering; the --containment "
+fig.suptitle("Figure S6B. Reference completeness limits strain ID under Jaccard clustering; the --containment "
              "mode restores it (15 species)", fontsize=12.5)
 fig.tight_layout(rect=[0, 0, 1, 0.94])
 fig.savefig(f"{PAPER}/figures/source_panels/refqual_figure.png", dpi=150)

@@ -10,18 +10,19 @@ multi-species runtime and retention at 99% host DNA (Figs 2, 7–10).
 
 Native 2bRAD-M addresses the setting in which shotgun coverage is most constrained. Because reduction occurs
 before host DNA dominates the library, the primary MSA-1002 comparison retained both detection and abundance
-at 99% human DNA, whereas the tested shotgun profilers lost one or both quantities (Fig 10). The saliva
-analysis extended this observation from synthetic host ladders to person-specific profiles: strain features
-identified the subject in every leave-one-timepoint-out test, compared with 78.1% for species features
-(Fig 5). This is a small within-subject classification result rather than independent strain-identity
-validation. Its value lies in showing that native libraries carry enough strain-specific structure to
-support subject-level discrimination, a property that 65/65 concordant shotgun calls and 128–163 additional
-candidate strain-cluster calls per sample further support on usable paired libraries (Fig 6).
+at 99% human DNA, whereas the primary shotgun comparators lost one or both quantities in their own call
+spaces (Fig 10). The saliva analysis extended this observation from a synthetic host ladder to person-specific
+profiles: strain features identified the subject in every leave-one-timepoint-out test, compared with 78.1%
+for species features, although the subject-aware improvement interval included zero (Fig 5). The matched
+32-pair rebuild showed both modality-specific sensitivity and modality-specific omissions, reinforcing that
+these real-data comparisons describe assay scope rather than validate either modality (Fig 6).
 
 In shotgun mode, the structural advantage is a change in search economics. A sample is digested once and the
 resulting tags index against all species, so adding species increases panel searches rather than sample
 k-mer counting. This design produced the 121–146× projected cohort-level advantage on the 55-species
 analysis and made the marginal cost of community profiling approximately flat in species count (Fig 9).
+The head-to-head timing comparison measures the combined effect of the sparse marker space, Rust
+implementation and compact data structures; it was not designed to apportion these contributions causally.
 Clean-mock precision depended on input composition and threshold semantics, so the scale claim should be
 read together with the accuracy and cluster-space conditions in Tables 1–3. The framework's strongest
 current position is therefore scalable strain resolution across mixed cohorts, rather than uniform
@@ -45,7 +46,9 @@ surveillance rather than optional engineering refinements.
 
 The comparator scope is also explicit. StrainScan [1] and inStrain [8] were executed on the frozen shotgun
 benchmarks, whereas StrainGST [2] was rerun in StrainGE's 0.90-reference space and reported separately
-because those calls cannot be pooled with 0.95-space Strain2bScan or StrainScan metrics (Tables 8–9). This
+because those calls cannot be pooled with 0.95-space Strain2bScan or StrainScan metrics (Tables 8–9). The
+other comparators likewise used their own call units, so cross-tool accuracy panels are descriptive rather
+than pooled estimates. This
 rerun covered the primary simulations and ATCC shotgun mocks, but native BcgI input for StrainGE, StrainGR
 and the supplementary curated-database subset remain untested. The comparison therefore establishes cost and
 feasibility boundaries for the tested StrainGST workflow without claiming equivalence to the full StrainGE

@@ -1,8 +1,8 @@
 # Strain2bScan; Manuscript tables (simulated head-to-head)
 
-**Table 1. Current Strain2bScan regression versus the reproducible StrainScan rerun on the 15-species simulated benchmark.** Accuracy is the median over completed run-level paired samples (different-cluster mixtures for 14 species; same-cluster mixtures for near-clonal *M. tuberculosis*; k = 2/3/5; depths 0.5–10×); each tool was scored in its own 0.95-similarity cluster space. Cluster-count columns are each tool's own 0.95 partitions of the common species pool. StrainGE F1 uses all 15 species-specific tests in its own 0.90-reference space and is not pooled with the 0.95-space columns. Current Strain2bScan values are from source commit `6ae760c2f3bd2f39efc0e6aa06c53a84366cb16e`; current source: `results/strainscan_rerun/current_single_persample.tsv`. Build cost is the archived timing benchmark (Strain2bScan native arm64; StrainScan `linux/amd64` under emulation). *S. enterica* produced no completed StrainScan calls in the rerun; *K. pneumoniae*, which did not finish in the archived timing run, was successfully built and profiled in the reproducible rerun.
+**Table 1. Current Strain2bScan regression versus the reproducible StrainScan rerun on the 15-species simulated benchmark.** Accuracy is the median over completed run-level paired samples (different-cluster mixtures for 14 species; same-cluster mixtures for near-clonal *M. tuberculosis*; k = 2/3/5; depths 0.5–10×); each tool was scored in its own 0.95-similarity cluster space. Cluster-count columns are each tool's own 0.95 partitions of the common species pool. StrainGST F1 uses all 15 species-specific tests in its own 0.90-reference space and is not pooled with the 0.95-space columns. Current Strain2bScan values are from source commit `6ae760c2f3bd2f39efc0e6aa06c53a84366cb16e`; current source: `results/strainscan_rerun/current_single_persample.tsv`. Build cost is the archived timing benchmark (Strain2bScan native arm64; StrainScan `linux/amd64` under emulation). *S. enterica* produced no completed StrainScan calls in the rerun; *K. pneumoniae*, which did not finish in the archived timing run, was successfully built and profiled in the reproducible rerun.
 
-| Species | Paired n | Pool genomes | S2B clusters | SS clusters | S2B P | S2B R | S2B F1 | SS P | SS R | SS F1 | Separate StrainGE F1 (0.90-space)† | S2B build | SS build |
+| Species | Paired n | Pool genomes | S2B clusters | SS clusters | S2B P | S2B R | S2B F1 | SS P | SS R | SS F1 | Separate StrainGST F1 (0.90-space)† | S2B build | SS build |
 |---|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|
 | *A. muciniphila* | 14 | 50 | 24 | 24 | 0.900 | 0.900 | 0.900 | 1.000 | 1.000 | 1.000 | 1.000 | 2.8 s / 0.16 GB | 17 min / 16 GB |
 | *C. difficile* | 15 | 47 | 27 | 24 | 1.000 | 1.000 | 1.000 | 1.000 | 0.667 | 0.800 | 1.000 | 3.2 s / 0.28 GB | 30 min / 14 GB |
@@ -22,25 +22,25 @@
 
 **Median across 14 species with completed paired runs:** Strain2bScan P 1.000 / R 1.000 / F1 1.000; StrainScan P 1.000 / R 0.667 / F1 0.800. Species medians conceal a precision/recall trade-off for *K. pneumoniae*. Mean paired differences and 95% intervals are in `results/strainscan_rerun/current_uncertainty_summary.tsv`.
 
-**Table 2. Accuracy and archived per-sample cost vs sequencing depth (single-species rerun; medians).** Current Strain2bScan accuracy is from `results/strainscan_rerun/current_single_persample.tsv` on the 204 completed StrainScan pairs. †StrainGE/StrainGST metrics use the separate 0.90-reference space and are not pooled across tools. Cost comes from a smaller archived same-environment emulation subset whose per-depth n values differ from the accuracy n values (Strain2bScan `linux/amd64` vs StrainScan).
+**Table 2. Accuracy and same-container per-sample cost by sequencing depth (single-species medians).** Accuracy uses current Strain2bScan and StrainScan on the 204 completed paired runs from `results/strainscan_rerun/current_single_by_depth.tsv`; StrainGST accuracy uses its separate 0.90-reference space from `results/strainge_rerun/simulation_single_by_depth.tsv` and is not pooled. Cost is the median of the archived same-container subset in `results/sim_headtohead_profile_sameenv.tsv`; both tools ran as linux/amd64 containers. Cost n is reported separately from accuracy n.
 
-| Depth (×) | n | S2B P/R/F1 | SS P/R/F1 | S2B time/mem | Separate StrainGE P/R/F1 (0.90-space)† | SS time/mem |
-|--:|--:|:--:|:--:|--:|:--:|:--:|
-| 0.5 | 40 | 1.000/0.600/0.708 | 1.000/0.667/0.800 | 1.000/1.000/1.000 | 0.16 s / 21 MB | 5.30 s / 831 MB |
-| 1 | 41 | 1.000/1.000/1.000 | 1.000/1.000/1.000 | 1.000/1.000/1.000 | 0.24 s / 30 MB | 3.48 s / 831 MB |
-| 3 | 41 | 1.000/1.000/1.000 | 1.000/0.600/0.750 | 1.000/1.000/1.000 | 0.56 s / 60 MB | 4.17 s / 831 MB |
-| 5 | 41 | 1.000/1.000/1.000 | 1.000/0.667/0.800 | 1.000/1.000/1.000 | 0.89 s / 91 MB | 4.79 s / 831 MB |
-| 10 | 41 | 1.000/1.000/1.000 | 1.000/1.000/1.000 | 1.000/1.000/1.000 | 1.66 s / 161 MB | 6.92 s / 832 MB |
+| Depth (×) | Accuracy n | S2B P/R/F1 | StrainScan P/R/F1 | StrainGST P/R/F1† | Cost n | S2B time / RSS | StrainScan time / RSS |
+|--:|--:|:--:|:--:|:--:|--:|:--:|:--:|
+| 0.5 | 40 | 1.000/0.600/0.708 | 1.000/0.667/0.800 | 1.000/1.000/1.000 | 37 | 0.160 s / 21.1 MB | 5.300 s / 830.9 MB |
+| 1 | 41 | 1.000/1.000/1.000 | 1.000/1.000/1.000 | 1.000/1.000/1.000 | 38 | 0.240 s / 29.9 MB | 3.475 s / 830.8 MB |
+| 3 | 41 | 1.000/1.000/1.000 | 1.000/0.600/0.750 | 1.000/1.000/1.000 | 38 | 0.560 s / 60.0 MB | 4.165 s / 830.9 MB |
+| 5 | 41 | 1.000/1.000/1.000 | 1.000/0.667/0.800 | 1.000/1.000/1.000 | 38 | 0.890 s / 90.8 MB | 4.790 s / 830.9 MB |
+| 10 | 41 | 1.000/1.000/1.000 | 1.000/1.000/1.000 | 1.000/1.000/1.000 | 38 | 1.655 s / 160.7 MB | 6.915 s / 831.8 MB |
 
 Strain2bScan reached median recall 1.0 from 1× onward; StrainScan was non-monotonic and did not exceed 0.800 median F1 at 0.5× or intermediate depths. The depth table aggregates heterogeneous strain mixtures and is not a causal depth-onset estimate.
 
-**Table 3. Multi-species community accuracy (reproducible rerun; medians) and archived profiling cost.** Current Strain2bScan values are from `results/strainscan_rerun/current_multi_persample.tsv`. †StrainGE/StrainGST metrics use the separate 0.90-reference space and are not pooled across tools. Four samples per depth. Strain2bScan profiles each community in one digest-once pass; StrainScan has no multi-species mode, so archived cost is the sum over per-species runs.
+**Table 3. Multi-species community accuracy and archived profiling cost.** Accuracy is the mean of four samples per depth. Strain2bScan and StrainScan use 0.95-cluster spaces from `results/strainscan_rerun/current_multi_by_depth.tsv` and `results/strainscan_rerun/multi_by_depth.tsv`; StrainGST uses its separate 0.90-reference space from `results/strainge_rerun/simulation_multi_by_depth.tsv`. Costs are medians from the archived timing tables (`results/sim_headtohead_multi.tsv` and `results/strainge_rerun/simulation_run_efficiency.tsv`) and are not pooled with accuracy. Strain2bScan profiles each community in one digest-once pass; StrainScan and StrainGST costs are medians of per-sample totals across species searches.
 
-| Community depth | S2B P/R/F1 | SS P/R/F1 | S2B time/mem | Separate StrainGE P/R/F1 (0.90-space)† | SS time/mem |
-|---|:--:|:--:|:--:|:--:|:--:|
-| low | 0.748/0.667/0.699 | 0.938/0.702/0.798 | 0.918/1.000/0.944 | 1.0 s / 311 MB | 100 s / 1112 MB |
-| med | 0.838/0.838/0.837 | 0.954/0.903/0.927 | 0.901/1.000/0.934 | 4.3 s / 670 MB | 228 s / 1696 MB |
-| high | 0.806/0.806/0.806 | 0.972/0.958/0.965 | 0.908/1.000/0.951 | 8.7 s / 1119 MB | 398 s / 2028 MB |
+| Community depth | S2B P/R/F1 | StrainScan P/R/F1 | StrainGST P/R/F1† | S2B time / RSS | StrainScan time / RSS | StrainGST time / RSS |
+|---|:--:|:--:|:--:|:--:|:--:|:--:|
+| low | 0.748/0.667/0.699 | 0.938/0.702/0.798 | 0.918/1.000/0.944 | 0.96 s / 311 MB | 100.4 s / 1112 MB | 163.8 s / 2.923 GB |
+| med | 0.838/0.838/0.837 | 0.954/0.903/0.927 | 0.901/1.000/0.934 | 4.33 s / 670 MB | 228.2 s / 1696 MB | 237.0 s / 7.896 GB |
+| high | 0.806/0.806/0.806 | 0.972/0.958/0.965 | 0.908/1.000/0.951 | 8.70 s / 1119 MB | 397.9 s / 2028 MB | 350.0 s / 10.705 GB |
 
 Of 180 species-by-community opportunities (15 databases × 12 samples), 158 StrainScan final reports were generated; absent reports were treated as no detection. The per-sample coverage audit is in `results/strainscan_rerun/multi_persample.tsv`.
 
@@ -128,7 +128,7 @@ is the maximum across those stages. StrainGR was not run.
 | MSA-1005 | 1 | 0.333 | 0.833 | 0.476 | 1784.50 | 20.10 |
 | MSA-1007 | 1 | 0.429 | 1.000 | 0.600 | 1555.76 | 17.69 |
 
-**Table S3. Exploratory native BcgI 2bRAD-M oral-library profiling.** Four libraries from the
+**Table S1. Exploratory native BcgI 2bRAD-M oral-library profiling.** Four libraries from the
 PRJNA1131785 exploratory oral cohort were profiled against the same 19-species panel used for the saliva
 analysis. No case/control labels were available in public metadata. Values are from
 `results/clinical_exploratory.tsv`.
@@ -140,7 +140,7 @@ analysis. No case/control labels were available in public metadata. Values are f
 | S_8123213 | 370,379 | 16 | 149 | 2.0 | *Actinomyces odontolyticus*; *Neisseria subflava*; *Haemophilus parainfluenzae* |
 | S_8221232 | 488,180 | 17 | 158 | 1.8 | *Actinomyces odontolyticus*; *Neisseria subflava*; *Rothia mucilaginosa* |
 
-**Table S4. Failure-aware sensitivity for all 225 matched single-species entries.** Absent StrainScan final reports were retained and scored as zero detection. Failure-as-absence assigns zero recall to absent reports and uses a species-cluster bootstrap; precision and F1 are not assigned to no-report failures. Source: `results/strainscan_rerun/current_single_persample.tsv` and `results/strainscan_rerun/current_uncertainty_summary.tsv`.
+**Table S2. Failure-aware sensitivity for all 225 matched single-species entries.** Absent StrainScan final reports were retained and scored as zero detection. Failure-as-absence assigns zero recall to absent reports and uses a species-cluster bootstrap; precision and F1 are not assigned to no-report failures. Source: `results/strainscan_rerun/current_single_persample.tsv` and `results/strainscan_rerun/current_uncertainty_summary.tsv`.
 
 | Analysis | n | No-calls | Mean recall difference (95% CI) | No-call rate |
 |---|--:|--:|:--:|--:|
@@ -148,7 +148,7 @@ analysis. No case/control labels were available in public metadata. Values are f
 | Failure as absence | 225 | 21 | +0.127 (0.007 to 0.248) | 9.33% |
 
 
-**Table S5. Public-run manifest and exploratory profiling outcomes.** SRA spots, bases and instrument metadata were retrieved from NCBI on 2026-10-11. Marker and call counts are from the generic MSA screen; body-site-panel calls are shown for PRJNA1517970. P08 run-to-week mapping follows SRA submitter titles. Source: `results/realworld_cohort_benchmark/public_run_manifest.tsv`.
+**Table S3. Public-run manifest and exploratory profiling outcomes.** SRA spots, bases and instrument metadata were retrieved from NCBI on 2026-10-11. Marker and call counts are from the generic MSA screen; body-site-panel calls are shown for PRJNA1517970. P08 run-to-week mapping follows SRA submitter titles. Source: `results/realworld_cohort_benchmark/public_run_manifest.tsv`.
 
 
 | Run | Project | Role/site | SRA spots | SRA bases | MSA markers | MSA strain calls | Body-site calls |
@@ -175,3 +175,40 @@ analysis. No case/control labels were available in public metadata. Values are f
 | SRR6748097 | PRJNA288562 | subject T23 saliva GD84 | 377,872 | 111,169,454 | 533,573 | 13 | -- |
 | SRR6747958 | PRJNA288562 | subject T23 vagina GD273 | 636,817 | 186,911,987 | 226,983 | 1 | -- |
 | SRR6748207 | PRJNA288562 | subject T23 vagina GD84 | 243,062 | 71,385,301 | 45,805 | 0 | -- |
+
+**Table S4. Gate-matched full-depth saliva comparison across all 32 PRJNA1131785 pairs.** WMS and native BcgI 2bRAD libraries were profiled with the same 19-species oral panel, species gate (20 panel-specific markers and two detected markers), support threshold (two markers) and coverage threshold (0.01). Cluster calls were matched by species and cluster label. Differences in sequencing depth, read layout and representation prevent interpretation as accuracy validation. Source: `results/wms32_rebuild/per_sample_summary.tsv`.
+
+| Sample | WMS calls | Native calls | Shared | WMS-only | Native-only | WMS species |
+|---|--:|--:|--:|--:|--:|--:|
+| S11-1 | 89 | 36 | 24 | 65 | 12 | 16 |
+| S11-11 | 77 | 52 | 22 | 55 | 30 | 19 |
+| S11-12 | 83 | 71 | 26 | 57 | 45 | 15 |
+| S11-14 | 136 | 25 | 10 | 126 | 15 | 18 |
+| S11-2 | 73 | 56 | 12 | 61 | 44 | 16 |
+| S11-6 | 72 | 35 | 14 | 58 | 21 | 16 |
+| S11-7 | 104 | 18 | 7 | 97 | 11 | 18 |
+| S11-9 | 39 | 23 | 13 | 26 | 10 | 11 |
+| S13-1 | 82 | 53 | 17 | 65 | 36 | 17 |
+| S13-11 | 85 | 52 | 10 | 75 | 42 | 14 |
+| S13-12 | 49 | 61 | 17 | 32 | 44 | 13 |
+| S13-14 | 105 | 22 | 5 | 100 | 17 | 17 |
+| S13-2 | 84 | 56 | 16 | 68 | 40 | 14 |
+| S13-6 | 82 | 30 | 14 | 68 | 16 | 17 |
+| S13-7 | 114 | 33 | 17 | 97 | 16 | 18 |
+| S13-9 | 78 | 20 | 9 | 69 | 11 | 17 |
+| S17-1 | 83 | 35 | 19 | 64 | 16 | 17 |
+| S17-11 | 71 | 67 | 15 | 56 | 52 | 13 |
+| S17-12 | 63 | 37 | 21 | 42 | 16 | 16 |
+| S17-14 | 121 | 25 | 7 | 114 | 18 | 18 |
+| S17-2 | 56 | 67 | 18 | 38 | 49 | 15 |
+| S17-6 | 63 | 25 | 12 | 51 | 13 | 17 |
+| S17-7 | 80 | 27 | 18 | 62 | 9 | 15 |
+| S17-9 | 47 | 25 | 16 | 31 | 9 | 15 |
+| S9-1 | 81 | 59 | 22 | 59 | 37 | 18 |
+| S9-11 | 70 | 71 | 20 | 50 | 51 | 15 |
+| S9-12 | 45 | 103 | 27 | 18 | 76 | 10 |
+| S9-14 | 109 | 23 | 6 | 103 | 17 | 17 |
+| S9-2 | 55 | 65 | 16 | 39 | 49 | 15 |
+| S9-6 | 38 | 27 | 20 | 18 | 7 | 12 |
+| S9-7 | 116 | 52 | 15 | 101 | 37 | 17 |
+| S9-9 | 37 | 17 | 10 | 27 | 7 | 11 |

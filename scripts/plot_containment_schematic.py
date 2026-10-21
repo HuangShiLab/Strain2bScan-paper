@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fig 4A schematic: why reference incompleteness breaks Jaccard clustering and how --containment
+"""Figure S6A schematic: why reference incompleteness breaks Jaccard clustering and how --containment
 fixes it. An incomplete genome's tags are a subset of a complete relative's; Jaccard drops below the
 0.95 cut and splits them (shared tags demoted to non-discriminating, detection corrupted), whereas
 max-containment stays ~1 and merges them (cluster marker set = union of members, discriminating tags

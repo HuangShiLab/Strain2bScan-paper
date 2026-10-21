@@ -1,0 +1,19 @@
+{
+  "source_commit": "6ae760c2f3bd2f39efc0e6aa06c53a84366cb16e",
+  "panel_species": 19,
+  "enzyme": "BcgI",
+  "thresholds": {
+    "min_species_markers": 20,
+    "min_species_detect": 2,
+    "min_support": 2,
+    "min_coverage": 0.01,
+    "min_abundance": 0
+  },
+  "wms_manifest": "results/wms32_rebuild/MANIFEST.tsv",
+  "native_source": "results/wms32_rebuild/native20_matched/native_strain_calls.tsv",
+  "comparison_key": [
+    "species",
+    "cluster"
+  ],
+  "interpretation": "modality and sequencing-depth comparison, not ground-truth validation"
+}
