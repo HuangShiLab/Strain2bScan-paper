@@ -106,8 +106,8 @@ can also process after in-silico digestion.
 | Tool | Executed here | Input scope | Typical resolution | Scope and role |
 |---|:--:|---|---|---|
 | Strain2bScan | Yes | Native BcgI 2bRAD reads and in-silico-digested shotgun reads | Strain clusters | Method under test; one marker framework supports both reduced-representation and shotgun input. |
-| StrainScan v1.0.14 | Yes | Shotgun reads against per-species reference databases | Strain clusters | Direct reference-guided comparator on shotgun reads (Fig 10–11, Supplementary Fig S5; Tables 1–3). |
-| inStrain v1.9.1 | Yes | Shotgun reads aligned to a dereplicated reference | Strain and SNV | Direct read-level shotgun comparator (Fig 11 and Fig S4). |
+| StrainScan v1.0.14 | Yes | Shotgun reads against per-species reference databases | Strain clusters | Direct reference-guided comparator on shotgun reads (Fig 8, Fig 10, Supplementary Fig S5; Tables 1–3). |
+| inStrain v1.9.1 (mocks) and v1.11.0 (simulations) | Yes | Shotgun reads aligned to dereplicated mock references or full species simulation pools | Strain, SNV and genome coverage | Direct read-level shotgun comparator (Fig 8, Fig 10, Fig S4; simulation outputs in `results/instrain_sim225/`). |
 | StrainGE / StrainGST / StrainGR | StrainGST only | Shotgun WMS reads against StrainGE 0.90-reference databases; native BcgI 2bRAD is not documented input | Strain level, reference guided | StrainGST completed 225 single-species simulations, 12 multi-species communities and four ATCC WMS mocks (Tables 1–3 and 9); StrainGR was not run. |
 | 2bRAD-M / Fast2bRAD-M | No | Native BcgI 2bRAD reads | Mainly species | Same restriction-assay family; provides the species-level upstream context for Strain2bScan. |
 | sylph | No | Shotgun sketches | Mainly species and ANI | Context for rapid species-level profiling; not a strain-resolved benchmark here. |
@@ -115,7 +115,7 @@ can also process after in-silico digestion.
 
 **Table 9. StrainGST (StrainGE 1.3.9) rerun accuracy and efficiency.** Simulations are the matched
 `_rep1_` subset and all 12 multi-species communities. Mocks are the primary WMS replicate used in
-Figure 11; MSA-1002 is the 99%-host sample. Accuracy is in StrainGE's 0.90-reference space; mock calls
+Figure 10; MSA-1002 is the 99%-host sample. Accuracy is in StrainGE's 0.90-reference space; mock calls
 use abundance >= 1e-4. Wall time is one sample k-merization plus all per-species StrainGST searches; RSS
 is the maximum across those stages. StrainGR was not run.
 

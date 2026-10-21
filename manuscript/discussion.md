@@ -25,7 +25,7 @@ analysis and made the marginal cost of community profiling approximately flat in
 Clean-mock precision depended on input composition and threshold semantics, so the scale claim should be
 read together with the accuracy and cluster-space conditions in Tables 1–3. The framework's strongest
 current position is therefore scalable strain resolution across mixed cohorts, rather than uniform
-precision superiority on every mock.
+higher precision on every mock.
 
 The biological unit of the claim is the strain cluster. At a 0.95 similarity cut, diverse species can
 resolve close to individual genomes, whereas near-clonal populations resolve to fewer clusters. This is an
