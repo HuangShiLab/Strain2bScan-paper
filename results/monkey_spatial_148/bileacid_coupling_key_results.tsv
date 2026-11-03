@@ -1,0 +1,7 @@
+strain_cluster	bile_acid_class	rho	p	BH_q
+Cryptobacteroides_sp000433355|C1	conjugated_or_highmass	-0.942688	1.77332e-11	1.024829e-08
+Cryptobacteroides_sp000433355|C5	cholate_like_Q1_407	-0.934783	6.648389e-11	1.358032e-08
+Treponema_D_succinifaciens|C25	conjugated_or_highmass	-0.922925	3.643067e-10	5.188475e-08
+Succinivibrio_sp000431835|C25	cholate_like_Q1_407	-0.909091	1.937424e-09	1.358032e-07
+UBA4372_sp900543815|C3	conjugated_or_highmass	-0.895257	8.053374e-09	2.713367e-07
+UBA636_sp900546285|C11	dihydroxy_Q1_391	0.648221	0.000823	0.002547

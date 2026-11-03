@@ -178,6 +178,133 @@ analysis. No case/control labels were available in public metadata. Values are f
 
 **Table S4. Gate-matched full-depth saliva comparison across all 32 PRJNA1131785 pairs.** WMS and native BcgI 2bRAD libraries were profiled with the same 19-species oral panel, species gate (20 panel-specific markers and two detected markers), support threshold (two markers) and coverage threshold (0.01). Cluster calls were matched by species and cluster label. Differences in sequencing depth, read layout and representation prevent interpretation as accuracy validation. Source: `results/wms32_rebuild/per_sample_summary.tsv`.
 
+**Table S5. Rhesus macaque 148-sample cohort and monkey MAG panel.** The cohort contains 128 GI spatial
+samples (66 luminal and 62 mucosal) plus 20 body controls. The monkey-specific panel used 315 selected
+study MAGs across 18 species and 303 0.95 strain-cluster units. Counts use the same BcgI gates listed in
+Methods. Source: `results/monkey_spatial_148/cohort_panel_summary.tsv`.
+
+| Metric | Value |
+|---|--:|
+| Full cohort samples | 148 |
+| GI spatial samples | 128 |
+| GI luminal samples | 66 |
+| GI mucosal samples | 62 |
+| Body-control samples | 20 |
+| Excluded vendor extra samples | 4 |
+| Panel species | 18 |
+| Selected study MAGs | 315 |
+| Strain-cluster units | 303 |
+| Panel markers before cross-species filtering | 30,008 |
+| Usable markers after cross-species filtering | 29,162 |
+| GI samples with ≥1 2bRAD strain call | 113/128 (88.3%) |
+| Luminal samples with ≥1 call | 56/66 (84.8%) |
+| Mucosal samples with ≥1 call | 57/62 (91.9%) |
+| Body controls with ≥1 call | 2/20 (10.0%) |
+| Total body-control calls | 3 |
+
+**Table S6. Species prevalence in the rhesus macaque GI cohort.** Prevalence is the fraction of samples in
+the indicated group with at least one strain call for the species. Source:
+`results/monkey_spatial_148/species_GI_control_prevalence.tsv`.
+
+| Species | GI | Luminal | Mucosal | Body control |
+|---|--:|--:|--:|--:|
+| *Helicobacter_B_sp003364135* | 0.766 | 0.727 | 0.806 | 0.100 |
+| *UBA4372_sp900543815* | 0.664 | 0.727 | 0.597 | 0.000 |
+| *Cryptobacteroides_sp000433355* | 0.656 | 0.773 | 0.532 | 0.050 |
+| *Succinivibrio_sp000431835* | 0.578 | 0.652 | 0.500 | 0.000 |
+| *WG_1_sp900539665* | 0.555 | 0.667 | 0.435 | 0.000 |
+| *Oribacterium_sp900768305* | 0.500 | 0.530 | 0.468 | 0.000 |
+| *CAG_873_sp001701165* | 0.492 | 0.591 | 0.387 | 0.000 |
+| *Lachnospira_eligens_A* | 0.477 | 0.530 | 0.419 | 0.000 |
+| *Treponema_D_succinifaciens* | 0.445 | 0.545 | 0.339 | 0.000 |
+| *Treponema_D_berlinense* | 0.445 | 0.545 | 0.339 | 0.000 |
+| *Ligilactobacillus_animalis* | 0.422 | 0.545 | 0.290 | 0.000 |
+| *Cryptobacteroides_sp900546445* | 0.422 | 0.485 | 0.355 | 0.000 |
+| *Ornithospirochaeta_sp934247875* | 0.414 | 0.500 | 0.323 | 0.000 |
+| *Onthomorpha_sp900545215* | 0.414 | 0.470 | 0.355 | 0.000 |
+| *UBA636_sp900546285* | 0.383 | 0.455 | 0.306 | 0.000 |
+| *UBA1724_sp900548225* | 0.367 | 0.424 | 0.306 | 0.000 |
+| *CAG_349_sp003539515* | 0.344 | 0.424 | 0.258 | 0.000 |
+| *Ruminococcus_E_sp934476515* | 0.312 | 0.379 | 0.242 | 0.000 |
+
+**Table S7. Representative LI-enriched strain clusters.** LI enrichment required peak LI prevalence ≥ 0.3
+and region specificity ≥ 0.8. Ten high-confidence examples are shown. Source:
+`results/monkey_spatial_148/LI_enriched_cluster_examples.tsv`.
+
+| Species | Cluster | GI prevalence | Luminal prevalence | Mucosal prevalence | Peak LI prevalence | Region specificity |
+|---|---|--:|--:|--:|--:|--:|
+| *Treponema_D_succinifaciens* | C25 | 0.328 | 0.409 | 0.242 | 0.750 | 1.000 |
+| *WG_1_sp900539665* | C22 | 0.328 | 0.439 | 0.210 | 0.714 | 0.936 |
+| *Treponema_D_succinifaciens* | C2 | 0.289 | 0.424 | 0.145 | 0.643 | 0.963 |
+| *Succinivibrio_sp000431835* | C6 | 0.266 | 0.364 | 0.161 | 0.589 | 0.960 |
+| *Cryptobacteroides_sp900546445* | C1 | 0.258 | 0.364 | 0.145 | 0.571 | 0.959 |
+| *Treponema_D_succinifaciens* | C15 | 0.242 | 0.394 | 0.081 | 0.554 | 1.000 |
+| *Treponema_D_succinifaciens* | C5 | 0.242 | 0.333 | 0.145 | 0.554 | 1.000 |
+| *UBA636_sp900546285* | C12 | 0.234 | 0.303 | 0.161 | 0.536 | 1.000 |
+| *Oribacterium_sp900768305* | C4 | 0.250 | 0.379 | 0.113 | 0.536 | 0.917 |
+| *Cryptobacteroides_sp000433355* | C6 | 0.258 | 0.439 | 0.065 | 0.536 | 0.880 |
+
+**Table S8. Matched mucosal/luminal strain clusters after Bonferroni correction.** Samples were matched
+within monkey, GI region and position; absent cluster calls were treated as zero within-species abundance.
+Only clusters with Bonferroni q < 0.05 are shown. Source:
+`results/monkey_spatial_148/mucosal_luminal_bonferroni.tsv`.
+
+| Species | Cluster | Matched pairs | Mucosal positive | Luminal positive | p | Bonferroni q |
+|---|---|--:|--:|--:|--:|--:|
+| *Treponema_D_succinifaciens* | C25 | 50 | 15 | 27 | 6.0 × 10⁻⁶ | 9.6 × 10⁻⁴ |
+| *UBA4372_sp900543815* | C13 | 50 | 4 | 24 | 1.8 × 10⁻⁵ | 2.8 × 10⁻³ |
+| *Treponema_D_succinifaciens* | C6 | 50 | 7 | 23 | 2.7 × 10⁻⁵ | 4.1 × 10⁻³ |
+| *Treponema_D_succinifaciens* | C22 | 50 | 8 | 22 | 3.1 × 10⁻⁵ | 4.7 × 10⁻³ |
+| *UBA4372_sp900543815* | C5 | 50 | 7 | 32 | 4.2 × 10⁻⁵ | 6.5 × 10⁻³ |
+| *Cryptobacteroides_sp900546445* | C13 | 50 | 4 | 24 | 4.4 × 10⁻⁵ | 6.7 × 10⁻³ |
+| *Cryptobacteroides_sp900546445* | C3 | 50 | 4 | 27 | 8.7 × 10⁻⁵ | 1.3 × 10⁻² |
+| *WG_1_sp900539665* | C20 | 50 | 16 | 30 | 1.2 × 10⁻⁴ | 1.8 × 10⁻² |
+| *Cryptobacteroides_sp900546445* | C14 | 50 | 4 | 22 | 1.2 × 10⁻⁴ | 1.8 × 10⁻² |
+| *Cryptobacteroides_sp000433355* | C3 | 50 | 5 | 28 | 2.1 × 10⁻⁴ | 3.1 × 10⁻² |
+| *Treponema_D_succinifaciens* | C10 | 50 | 9 | 20 | 2.1 × 10⁻⁴ | 3.3 × 10⁻² |
+| *Treponema_D_succinifaciens* | C12 | 50 | 4 | 21 | 2.1 × 10⁻⁴ | 3.3 × 10⁻² |
+| *Treponema_D_berlinense* | C10 | 50 | 4 | 17 | 2.9 × 10⁻⁴ | 4.5 × 10⁻² |
+
+**Table S9. Paired luminal 2bRAD/shotgun concordance on the monkey cohort.** Both modalities used the
+same BcgI marker space and cluster gates. Concordance is restricted to 51 luminal samples with calls in
+both modalities; differences in depth, representation and host content prevent accuracy interpretation.
+Source: `results/monkey_spatial_148/paired_modality_concordance_summary.tsv`.
+
+| Metric | Mean | Median |
+|---|--:|--:|
+| 2bRAD strain calls | 72.2 | 84 |
+| Shotgun strain calls | 106.0 | 123 |
+| Shared strain calls | 64.0 | 81 |
+| Strain-call Jaccard | 0.420 | 0.605 |
+| Species Jaccard | 0.735 | 0.889 |
+
+Dominant-cluster agreement was 234/580 comparisons (40.3%).
+
+**Table S10. Representative LI strain-cluster associations with bile acids and functions.** LI strain
+composition was residualized against monkey identity and LI position, then associated with bile-acid class
+composition or HUMAnN pathway composition using Spearman correlation and Benjamini–Hochberg FDR. These are
+sample-level ecological associations, not gene-to-cluster assignments. Source:
+`results/monkey_spatial_148/bileacid_coupling_key_results.tsv` and
+`results/monkey_spatial_148/function_coupling_key_results.tsv`.
+
+| Strain cluster | Feature | rho | p | BH q |
+|---|---|--:|--:|--:|
+| *Cryptobacteroides_sp000433355* C1 | Conjugated/high-mass bile acids | −0.943 | 1.8 × 10⁻¹¹ | 1.0 × 10⁻⁸ |
+| *Cryptobacteroides_sp000433355* C5 | Cholate-like bile acids | −0.935 | 6.6 × 10⁻¹¹ | 1.4 × 10⁻⁸ |
+| *Treponema_D_succinifaciens* C25 | Conjugated/high-mass bile acids | −0.923 | 3.6 × 10⁻¹⁰ | 5.2 × 10⁻⁸ |
+| *Succinivibrio_sp000431835* C25 | Cholate-like bile acids | −0.909 | 1.9 × 10⁻⁹ | 1.4 × 10⁻⁷ |
+| *UBA4372_sp900543815* C3 | Conjugated/high-mass bile acids | −0.895 | 8.1 × 10⁻⁹ | 2.7 × 10⁻⁷ |
+| *UBA636_sp900546285* C11 | Dihydroxy bile acids | 0.648 | 8.2 × 10⁻⁴ | 2.5 × 10⁻³ |
+| *UBA4372_sp900543815* C4 | Pyruvate fermentation to butanoate | 0.926 | 1.2 × 10⁻¹¹ | 4.0 × 10⁻¹⁰ |
+| *UBA4372_sp900543815* C4 | Acetyl-CoA fermentation to butanoate II | 0.905 | 2.2 × 10⁻¹⁰ | 4.9 × 10⁻⁹ |
+| *Oribacterium_sp900768305* C2 | Pyruvate fermentation to butanoate | 0.955 | 3.7 × 10⁻¹⁴ | 2.9 × 10⁻¹² |
+| *Cryptobacteroides_sp000433355* C5 | Pyruvate fermentation to propanoate I | 0.981 | 1.5 × 10⁻¹⁸ | 5.6 × 10⁻¹⁶ |
+| *UBA4372_sp900543815* C3 | Succinate fermentation to butanoate | −0.951 | 1.0 × 10⁻¹³ | 7.1 × 10⁻¹² |
+| *Treponema_D_succinifaciens* C2 | N-acetylneuraminate degradation | 0.964 | 2.2 × 10⁻¹⁵ | 2.6 × 10⁻¹³ |
+| *Treponema_D_succinifaciens* C2 | N-acetylglucosamine/mannosamine/neuraminate degradation | 0.965 | 1.8 × 10⁻¹⁵ | 2.1 × 10⁻¹³ |
+| *Succinivibrio_sp000431835* C4 | N-acetylglucosamine/mannosamine/neuraminate degradation | 0.789 | 2.0 × 10⁻⁶ | 1.2 × 10⁻⁵ |
+
+
 | Sample | WMS calls | Native calls | Shared | WMS-only | Native-only | WMS species |
 |---|--:|--:|--:|--:|--:|--:|
 | S11-1 | 89 | 36 | 24 | 65 | 12 | 16 |

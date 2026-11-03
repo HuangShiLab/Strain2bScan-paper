@@ -1,0 +1,149 @@
+sample_id	data_type	sample_group	sample_category	source	monkey_id	gi_region	position_cm	compartment	body_site_code	path
+O1_E_1cm_L_MG_1	2bRAD	GI_spatial	GI	luminal_content	O1	E	1.0	luminal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/content/DZQD2025110503-b1/Clean_data/O1_E_1cm_L_MG_1/O1_E_1cm_L_MG_1.fq.gz
+O1_E_5cm_L_MG_1	2bRAD	GI_spatial	GI	luminal_content	O1	E	5.0	luminal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/content/DZQD2025110503-b1/Clean_data/O1_E_5cm_L_MG_1/O1_E_5cm_L_MG_1.fq.gz
+O1_K_1_L_MG_1	2bRAD	GI_spatial	GI	luminal_content	O1	K	1.0	luminal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/content/DZQD2025110503-b1/Clean_data/O1_K_1_L_MG_1/O1_K_1_L_MG_1.fq.gz
+O1_LI_1cm_L_MG_1	2bRAD	GI_spatial	GI	luminal_content	O1	LI	1.0	luminal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/content/DZQD2025110503-b1/Clean_data/O1_LI_1cm_L_MG_1/O1_LI_1cm_L_MG_1.fq.gz
+O1_LI_1cm_M_MG_1	2bRAD	GI_spatial	GI	mucosa	O1	LI	1.0	mucosal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/mucosa/Cleandata/O1_LI_1cm_M_MG_1/O1_LI_1cm_M_MG_1.fq.gz
+O1_LI_10cm_L_MG_1	2bRAD	GI_spatial	GI	luminal_content	O1	LI	10.0	luminal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/content/DZQD2025110503-b1/Clean_data/O1_LI_10cm_L_MG_1/O1_LI_10cm_L_MG_1.fq.gz
+O1_LI_10cm_M_MG_1	2bRAD	GI_spatial	GI	mucosa	O1	LI	10.0	mucosal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/mucosa/Cleandata/O1_LI_10cm_M_MG_1/O1_LI_10cm_M_MG_1.fq.gz
+O1_LI_19cm_L_MG_1	2bRAD	GI_spatial	GI	luminal_content	O1	LI	19.0	luminal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/content/DZQD2025110503-b1/Clean_data/O1_LI_19cm_L_MG_1/O1_LI_19cm_L_MG_1.fq.gz
+O1_LI_19cm_M_MG_1	2bRAD	GI_spatial	GI	mucosa	O1	LI	19.0	mucosal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/mucosa/Cleandata/O1_LI_19cm_M_MG_1/O1_LI_19cm_M_MG_1.fq.gz
+O1_LI_28cm_L_MG_1	2bRAD	GI_spatial	GI	luminal_content	O1	LI	28.0	luminal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/content/DZQD2025110503-b1/Clean_data/O1_LI_28cm_L_MG_1/O1_LI_28cm_L_MG_1.fq.gz
+O1_LI_28cm_M_MG_1	2bRAD	GI_spatial	GI	mucosa	O1	LI	28.0	mucosal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/mucosa/Cleandata/O1_LI_28cm_M_MG_1/O1_LI_28cm_M_MG_1.fq.gz
+O1_LI_37cm_L_MG_1	2bRAD	GI_spatial	GI	luminal_content	O1	LI	37.0	luminal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/content/DZQD2025110503-b1/Clean_data/O1_LI_37cm_L_MG_1/O1_LI_37cm_L_MG_1.fq.gz
+O1_LI_37cm_M_MG_1	2bRAD	GI_spatial	GI	mucosa	O1	LI	37.0	mucosal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/mucosa/Cleandata/O1_LI_37cm_M_MG_1/O1_LI_37cm_M_MG_1.fq.gz
+O1_LI_46cm_L_MG_1	2bRAD	GI_spatial	GI	luminal_content	O1	LI	46.0	luminal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/content/DZQD2025110503-b1/Clean_data/O1_LI_46cm_L_MG_1/O1_LI_46cm_L_MG_1.fq.gz
+O1_LI_46cm_M_MG_1	2bRAD	GI_spatial	GI	mucosa	O1	LI	46.0	mucosal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/mucosa/Cleandata/O1_LI_46cm_M_MG_1/O1_LI_46cm_M_MG_1.fq.gz
+O1_LI_55cm_L_MG_1	2bRAD	GI_spatial	GI	luminal_content	O1	LI	55.0	luminal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/content/DZQD2025110503-b1/Clean_data/O1_LI_55cm_L_MG_1/O1_LI_55cm_L_MG_1.fq.gz
+O1_LI_55cm_M_MG_1	2bRAD	GI_spatial	GI	mucosa	O1	LI	55.0	mucosal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/mucosa/Cleandata/O1_LI_55cm_M_MG_1/O1_LI_55cm_M_MG_1.fq.gz
+O1_S_1_L_MG_1	2bRAD	GI_spatial	GI	luminal_content	O1	S	1.0	luminal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/content/DZQD2025110503-b1/Clean_data/O1_S_1_L_MG_1/O1_S_1_L_MG_1.fq.gz
+O1_S_1_M_MG_1	2bRAD	GI_spatial	GI	mucosa	O1	S	1.0	mucosal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/mucosa/Cleandata/O1_S_1_M_MG_1/O1_S_1_M_MG_1.fq.gz
+O1_S_3_L_MG_1	2bRAD	GI_spatial	GI	luminal_content	O1	S	3.0	luminal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/content/DZQD2025110503-b1/Clean_data/O1_S_3_L_MG_1/O1_S_3_L_MG_1.fq.gz
+O1_S_6_M_MG_1	2bRAD	GI_spatial	GI	mucosa	O1	S	6.0	mucosal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/mucosa/Cleandata/O1_S_6_M_MG_1/O1_S_6_M_MG_1.fq.gz
+O1_SI_1cm_L_MG_1	2bRAD	GI_spatial	GI	luminal_content	O1	SI	1.0	luminal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/content/DZQD2025110503-b1/Clean_data/O1_SI_1cm_L_MG_1/O1_SI_1cm_L_MG_1.fq.gz
+O1_SI_1cm_M_MG_1	2bRAD	GI_spatial	GI	mucosa	O1	SI	1.0	mucosal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/mucosa/Cleandata/O1_SI_1cm_M_MG_1/O1_SI_1cm_M_MG_1.fq.gz
+O1_SI_41cm_L_MG_1	2bRAD	GI_spatial	GI	luminal_content	O1	SI	41.0	luminal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/content/DZQD2025110503-b1/Clean_data/O1_SI_41cm_L_MG_1/O1_SI_41cm_L_MG_1.fq.gz
+O1_SI_41cm_M_MG_1	2bRAD	GI_spatial	GI	mucosa	O1	SI	41.0	mucosal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/mucosa/Cleandata/O1_SI_41cm_M_MG_1/O1_SI_41cm_M_MG_1.fq.gz
+O1_SI_81cm_L_MG_1	2bRAD	GI_spatial	GI	luminal_content	O1	SI	81.0	luminal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/content/DZQD2025110503-b1/Clean_data/O1_SI_81cm_L_MG_1/O1_SI_81cm_L_MG_1.fq.gz
+O1_SI_81cm_M_MG_1	2bRAD	GI_spatial	GI	mucosa	O1	SI	81.0	mucosal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/mucosa/Cleandata/O1_SI_81cm_M_MG_1/O1_SI_81cm_M_MG_1.fq.gz
+O1_SI_121cm_M_MG_1	2bRAD	GI_spatial	GI	mucosa	O1	SI	121.0	mucosal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/mucosa/Cleandata/O1_SI_121cm_M_MG_1/O1_SI_121cm_M_MG_1.fq.gz
+O1_SI_161cm_L_MG_1	2bRAD	GI_spatial	GI	luminal_content	O1	SI	161.0	luminal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/content/DZQD2025110503-b1/Clean_data/O1_SI_161cm_L_MG_1/O1_SI_161cm_L_MG_1.fq.gz
+O1_SI_161cm_M_MG_1	2bRAD	GI_spatial	GI	mucosa	O1	SI	161.0	mucosal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/mucosa/Cleandata/O1_SI_161cm_M_MG_1/O1_SI_161cm_M_MG_1.fq.gz
+O1_SI_201cm_L_MG_1	2bRAD	GI_spatial	GI	luminal_content	O1	SI	201.0	luminal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/content/DZQD2025110503-b1/Clean_data/O1_SI_201cm_L_MG_1/O1_SI_201cm_L_MG_1.fq.gz
+O1_SI_201cm_M_MG_1	2bRAD	GI_spatial	GI	mucosa	O1	SI	201.0	mucosal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/mucosa/Cleandata/O1_SI_201cm_M_MG_1/O1_SI_201cm_M_MG_1.fq.gz
+O2_E_1cm_L_MG_1	2bRAD	GI_spatial	GI	luminal_content	O2	E	1.0	luminal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/content/DZQD2025110503-b1/Clean_data/O2_E_1cm_L_MG_1/O2_E_1cm_L_MG_1.fq.gz
+O2_E_5cm_L_MG_1	2bRAD	GI_spatial	GI	luminal_content	O2	E	5.0	luminal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/content/DZQD2025110503-b1/Clean_data/O2_E_5cm_L_MG_1/O2_E_5cm_L_MG_1.fq.gz
+O2_K_1_L_MG_1	2bRAD	GI_spatial	GI	luminal_content	O2	K	1.0	luminal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/content/DZQD2025110503-b1/Clean_data/O2_K_1_L_MG_1/O2_K_1_L_MG_1.fq.gz
+O2_LI_1cm_L_MG_1	2bRAD	GI_spatial	GI	luminal_content	O2	LI	1.0	luminal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/content/DZQD2025110503-b1/Clean_data/O2_LI_1cm_L_MG_1/O2_LI_1cm_L_MG_1.fq.gz
+O2_LI_1cm_M_MG_1	2bRAD	GI_spatial	GI	mucosa	O2	LI	1.0	mucosal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/mucosa/Cleandata/O2_LI_1cm_M_MG_1/O2_LI_1cm_M_MG_1.fq.gz
+O2_LI_10cm_L_MG_1	2bRAD	GI_spatial	GI	luminal_content	O2	LI	10.0	luminal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/content/DZQD2025110503-b1/Clean_data/O2_LI_10cm_L_MG_1/O2_LI_10cm_L_MG_1.fq.gz
+O2_LI_10cm_M_MG_1	2bRAD	GI_spatial	GI	mucosa	O2	LI	10.0	mucosal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/mucosa/Cleandata/O2_LI_10cm_M_MG_1/O2_LI_10cm_M_MG_1.fq.gz
+O2_LI_19cm_L_MG_1	2bRAD	GI_spatial	GI	luminal_content	O2	LI	19.0	luminal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/content/DZQD2025110503-b1/Clean_data/O2_LI_19cm_L_MG_1/O2_LI_19cm_L_MG_1.fq.gz
+O2_LI_19cm_M_MG_1	2bRAD	GI_spatial	GI	mucosa	O2	LI	19.0	mucosal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/mucosa/Cleandata/O2_LI_19cm_M_MG_1/O2_LI_19cm_M_MG_1.fq.gz
+O2_LI_28cm_L_MG_1	2bRAD	GI_spatial	GI	luminal_content	O2	LI	28.0	luminal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/content/DZQD2025110503-b1/Clean_data/O2_LI_28cm_L_MG_1/O2_LI_28cm_L_MG_1.fq.gz
+O2_LI_28cm_M_MG_1	2bRAD	GI_spatial	GI	mucosa	O2	LI	28.0	mucosal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/mucosa/Cleandata/O2_LI_28cm_M_MG_1/O2_LI_28cm_M_MG_1.fq.gz
+O2_LI_37cm_L_MG_1	2bRAD	GI_spatial	GI	luminal_content	O2	LI	37.0	luminal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/content/DZQD2025110503-b1/Clean_data/O2_LI_37cm_L_MG_1/O2_LI_37cm_L_MG_1.fq.gz
+O2_LI_37cm_M_MG_1	2bRAD	GI_spatial	GI	mucosa	O2	LI	37.0	mucosal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/mucosa/Cleandata/O2_LI_37cm_M_MG_1/O2_LI_37cm_M_MG_1.fq.gz
+O2_LI_46cm_L_MG_1	2bRAD	GI_spatial	GI	luminal_content	O2	LI	46.0	luminal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/content/DZQD2025110503-b1/Clean_data/O2_LI_46cm_L_MG_1/O2_LI_46cm_L_MG_1.fq.gz
+O2_LI_46cm_M_MG_1	2bRAD	GI_spatial	GI	mucosa	O2	LI	46.0	mucosal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/mucosa/Cleandata/O2_LI_46cm_M_MG_1/O2_LI_46cm_M_MG_1.fq.gz
+O2_LI_55cm_L_MG_1	2bRAD	GI_spatial	GI	luminal_content	O2	LI	55.0	luminal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/content/DZQD2025110503-b1/Clean_data/O2_LI_55cm_L_MG_1/O2_LI_55cm_L_MG_1.fq.gz
+O2_LI_55cm_M_MG_1	2bRAD	GI_spatial	GI	mucosa	O2	LI	55.0	mucosal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/mucosa/Cleandata/O2_LI_55cm_M_MG_1/O2_LI_55cm_M_MG_1.fq.gz
+O2_S_1_L_MG_1	2bRAD	GI_spatial	GI	luminal_content	O2	S	1.0	luminal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/content/DZQD2025110503-b1/Clean_data/O2_S_1_L_MG_1/O2_S_1_L_MG_1.fq.gz
+O2_S_1_M_MG_1	2bRAD	GI_spatial	GI	mucosa	O2	S	1.0	mucosal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/mucosa/Cleandata/O2_S_1_M_MG_1/O2_S_1_M_MG_1.fq.gz
+O2_S_3_L_MG_1	2bRAD	GI_spatial	GI	luminal_content	O2	S	3.0	luminal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/content/DZQD2025110503-b1/Clean_data/O2_S_3_L_MG_1/O2_S_3_L_MG_1.fq.gz
+O2_S_6_M_MG_1	2bRAD	GI_spatial	GI	mucosa	O2	S	6.0	mucosal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/mucosa/Cleandata/O2_S_6_M_MG_1/O2_S_6_M_MG_1.fq.gz
+O2_SI_1cm_M_MG_1	2bRAD	GI_spatial	GI	mucosa	O2	SI	1.0	mucosal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/mucosa/Cleandata/O2_SI_1cm_M_MG_1/O2_SI_1cm_M_MG_1.fq.gz
+O2_SI_25cm_M_MG_1	2bRAD	GI_spatial	GI	mucosa	O2	SI	25.0	mucosal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/mucosa/Cleandata/O2_SI_25cm_M_MG_1/O2_SI_25cm_M_MG_1.fq.gz
+O2_SI_49cm_L_MG_1	2bRAD	GI_spatial	GI	luminal_content	O2	SI	49.0	luminal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/content/DZQD2025110503-b1/Clean_data/O2_SI_49cm_L_MG_1/O2_SI_49cm_L_MG_1.fq.gz
+O2_SI_49cm_M_MG_1	2bRAD	GI_spatial	GI	mucosa	O2	SI	49.0	mucosal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/mucosa/Cleandata/O2_SI_49cm_M_MG_1/O2_SI_49cm_M_MG_1.fq.gz
+O2_SI_73cm_M_MG_1	2bRAD	GI_spatial	GI	mucosa	O2	SI	73.0	mucosal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/mucosa/Cleandata/O2_SI_73cm_M_MG_1/O2_SI_73cm_M_MG_1.fq.gz
+O2_SI_97cm_M_MG_1	2bRAD	GI_spatial	GI	mucosa	O2	SI	97.0	mucosal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/mucosa/Cleandata/O2_SI_97cm_M_MG_1/O2_SI_97cm_M_MG_1.fq.gz
+O2_SI_121cm_L_MG_1	2bRAD	GI_spatial	GI	luminal_content	O2	SI	121.0	luminal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/content/DZQD2025110503-b1/Clean_data/O2_SI_121cm_L_MG_1/O2_SI_121cm_L_MG_1.fq.gz
+O2_SI_121cm_M_MG_1	2bRAD	GI_spatial	GI	mucosa	O2	SI	121.0	mucosal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/mucosa/Cleandata/O2_SI_121cm_M_MG_1/O2_SI_121cm_M_MG_1.fq.gz
+O2_SI_145cm_L_MG_1	2bRAD	GI_spatial	GI	luminal_content	O2	SI	145.0	luminal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/content/DZQD2025110503-b1/Clean_data/O2_SI_145cm_L_MG_1/O2_SI_145cm_L_MG_1.fq.gz
+O2_SI_145cm_M_MG_1	2bRAD	GI_spatial	GI	mucosa	O2	SI	145.0	mucosal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/mucosa/Cleandata/O2_SI_145cm_M_MG_1/O2_SI_145cm_M_MG_1.fq.gz
+Y1_E_1cm_L_MG_1	2bRAD	GI_spatial	GI	luminal_content	Y1	E	1.0	luminal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/content/DZQD2025110503-b1/Clean_data/Y1_E_1cm_L_MG_1/Y1_E_1cm_L_MG_1.fq.gz
+Y1_E_5cm_L_MG_1	2bRAD	GI_spatial	GI	luminal_content	Y1	E	5.0	luminal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/content/DZQD2025110503-b1/Clean_data/Y1_E_5cm_L_MG_1/Y1_E_5cm_L_MG_1.fq.gz
+Y1_K_1_L_MG_1	2bRAD	GI_spatial	GI	luminal_content	Y1	K	1.0	luminal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/content/DZQD2025110503-b1/Clean_data/Y1_K_1_L_MG_1/Y1_K_1_L_MG_1.fq.gz
+Y1_LI_1cm_L_MG_1	2bRAD	GI_spatial	GI	luminal_content	Y1	LI	1.0	luminal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/content/DZQD2025110503-b1/Clean_data/Y1_LI_1cm_L_MG_1/Y1_LI_1cm_L_MG_1.fq.gz
+Y1_LI_1cm_M_MG_1	2bRAD	GI_spatial	GI	mucosa	Y1	LI	1.0	mucosal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/mucosa/Cleandata/Y1_LI_1cm_M_MG_1/Y1_LI_1cm_M_MG_1.fq.gz
+Y1_LI_10cm_L_MG_1	2bRAD	GI_spatial	GI	luminal_content	Y1	LI	10.0	luminal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/content/DZQD2025110503-b1/Clean_data/Y1_LI_10cm_L_MG_1/Y1_LI_10cm_L_MG_1.fq.gz
+Y1_LI_10cm_M_MG_1	2bRAD	GI_spatial	GI	mucosa	Y1	LI	10.0	mucosal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/mucosa/Cleandata/Y1_LI_10cm_M_MG_1/Y1_LI_10cm_M_MG_1.fq.gz
+Y1_LI_19cm_L_MG_1	2bRAD	GI_spatial	GI	luminal_content	Y1	LI	19.0	luminal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/content/DZQD2025110503-b1/Clean_data/Y1_LI_19cm_L_MG_1/Y1_LI_19cm_L_MG_1.fq.gz
+Y1_LI_19cm_M_MG_1	2bRAD	GI_spatial	GI	mucosa	Y1	LI	19.0	mucosal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/mucosa/Cleandata/Y1_LI_19cm_M_MG_1/Y1_LI_19cm_M_MG_1.fq.gz
+Y1_LI_28cm_L_MG_1	2bRAD	GI_spatial	GI	luminal_content	Y1	LI	28.0	luminal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/content/DZQD2025110503-b1/Clean_data/Y1_LI_28cm_L_MG_1/Y1_LI_28cm_L_MG_1.fq.gz
+Y1_LI_28cm_M_MG_1	2bRAD	GI_spatial	GI	mucosa	Y1	LI	28.0	mucosal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/mucosa/Cleandata/Y1_LI_28cm_M_MG_1/Y1_LI_28cm_M_MG_1.fq.gz
+Y1_LI_37cm_L_MG_1	2bRAD	GI_spatial	GI	luminal_content	Y1	LI	37.0	luminal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/content/DZQD2025110503-b1/Clean_data/Y1_LI_37cm_L_MG_1/Y1_LI_37cm_L_MG_1.fq.gz
+Y1_LI_37cm_M_MG_1	2bRAD	GI_spatial	GI	mucosa	Y1	LI	37.0	mucosal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/mucosa/Cleandata/Y1_LI_37cm_M_MG_1/Y1_LI_37cm_M_MG_1.fq.gz
+Y1_LI_46cm_L_MG_1	2bRAD	GI_spatial	GI	luminal_content	Y1	LI	46.0	luminal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/content/DZQD2025110503-b1/Clean_data/Y1_LI_46cm_L_MG_1/Y1_LI_46cm_L_MG_1.fq.gz
+Y1_LI_46cm_M_MG_1	2bRAD	GI_spatial	GI	mucosa	Y1	LI	46.0	mucosal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/mucosa/Cleandata/Y1_LI_46cm_M_MG_1/Y1_LI_46cm_M_MG_1.fq.gz
+Y1_LI_55cm_L_MG_1	2bRAD	GI_spatial	GI	luminal_content	Y1	LI	55.0	luminal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/content/DZQD2025110503-b1/Clean_data/Y1_LI_55cm_L_MG_1/Y1_LI_55cm_L_MG_1.fq.gz
+Y1_LI_55cm_M_MG_1	2bRAD	GI_spatial	GI	mucosa	Y1	LI	55.0	mucosal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/mucosa/Cleandata/Y1_LI_55cm_M_MG_1/Y1_LI_55cm_M_MG_1.fq.gz
+Y1_S_1_L_MG_1	2bRAD	GI_spatial	GI	luminal_content	Y1	S	1.0	luminal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/content/DZQD2025110503-b1/Clean_data/Y1_S_1_L_MG_1/Y1_S_1_L_MG_1.fq.gz
+Y1_S_1_M_MG_1	2bRAD	GI_spatial	GI	mucosa	Y1	S	1.0	mucosal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/mucosa/Cleandata/Y1_S_1_M_MG_1/Y1_S_1_M_MG_1.fq.gz
+Y1_S_3_L_MG_1	2bRAD	GI_spatial	GI	luminal_content	Y1	S	3.0	luminal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/content/DZQD2025110503-b1/Clean_data/Y1_S_3_L_MG_1/Y1_S_3_L_MG_1.fq.gz
+Y1_S_6_M_MG_1	2bRAD	GI_spatial	GI	mucosa	Y1	S	6.0	mucosal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/mucosa/Cleandata/Y1_S_6_M_MG_1/Y1_S_6_M_MG_1.fq.gz
+Y1_SI_1cm_M_MG_1	2bRAD	GI_spatial	GI	mucosa	Y1	SI	1.0	mucosal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/mucosa/Cleandata/Y1_SI_1cm_M_MG_1/Y1_SI_1cm_M_MG_1.fq.gz
+Y1_SI_29cm_L_MG_1	2bRAD	GI_spatial	GI	luminal_content	Y1	SI	29.0	luminal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/content/DZQD2025110503-b1/Clean_data/Y1_SI_29cm_L_MG_1/Y1_SI_29cm_L_MG_1.fq.gz
+Y1_SI_29cm_M_MG_1	2bRAD	GI_spatial	GI	mucosa	Y1	SI	29.0	mucosal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/mucosa/Cleandata/Y1_SI_29cm_M_MG_1/Y1_SI_29cm_M_MG_1.fq.gz
+Y1_SI_57cm_M_MG_1	2bRAD	GI_spatial	GI	mucosa	Y1	SI	57.0	mucosal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/mucosa/Cleandata/Y1_SI_57cm_M_MG_1/Y1_SI_57cm_M_MG_1.fq.gz
+Y1_SI_85cm_L_MG_1	2bRAD	GI_spatial	GI	luminal_content	Y1	SI	85.0	luminal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/content/DZQD2025110503-b1/Clean_data/Y1_SI_85cm_L_MG_1/Y1_SI_85cm_L_MG_1.fq.gz
+Y1_SI_85cm_M_MG_1	2bRAD	GI_spatial	GI	mucosa	Y1	SI	85.0	mucosal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/mucosa/Cleandata/Y1_SI_85cm_M_MG_1/Y1_SI_85cm_M_MG_1.fq.gz
+Y1_SI_113cm_L_MG_1	2bRAD	GI_spatial	GI	luminal_content	Y1	SI	113.0	luminal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/content/DZQD2025110503-b1/Clean_data/Y1_SI_113cm_L_MG_1/Y1_SI_113cm_L_MG_1.fq.gz
+Y1_SI_113cm_M_MG_1	2bRAD	GI_spatial	GI	mucosa	Y1	SI	113.0	mucosal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/mucosa/Cleandata/Y1_SI_113cm_M_MG_1/Y1_SI_113cm_M_MG_1.fq.gz
+Y1_SI_137cm_L_MG_1	2bRAD	GI_spatial	GI	luminal_content	Y1	SI	137.0	luminal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/content/DZQD2025110503-b1/Clean_data/Y1_SI_137cm_L_MG_1/Y1_SI_137cm_L_MG_1.fq.gz
+Y1_SI_137cm_M_MG_1	2bRAD	GI_spatial	GI	mucosa	Y1	SI	137.0	mucosal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/mucosa/Cleandata/Y1_SI_137cm_M_MG_1/Y1_SI_137cm_M_MG_1.fq.gz
+Y2_E_1cm_L_MG_1	2bRAD	GI_spatial	GI	luminal_content	Y2	E	1.0	luminal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/content/DZQD2025110503-b1/Clean_data/Y2_E_1cm_L_MG_1/Y2_E_1cm_L_MG_1.fq.gz
+Y2_E_5cm_L_MG_1	2bRAD	GI_spatial	GI	luminal_content	Y2	E	5.0	luminal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/content/DZQD2025110503-b1/Clean_data/Y2_E_5cm_L_MG_1/Y2_E_5cm_L_MG_1.fq.gz
+Y2_K_1_L_MG_1	2bRAD	GI_spatial	GI	luminal_content	Y2	K	1.0	luminal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/content/DZQD2025110503-b1/Clean_data/Y2_K_1_L_MG_1/Y2_K_1_L_MG_1.fq.gz
+Y2_LI_1cm_L_MG_1	2bRAD	GI_spatial	GI	luminal_content	Y2	LI	1.0	luminal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/content/DZQD2025110503-b1/Clean_data/Y2_LI_1cm_L_MG_1/Y2_LI_1cm_L_MG_1.fq.gz
+Y2_LI_1cm_M_MG_1	2bRAD	GI_spatial	GI	mucosa	Y2	LI	1.0	mucosal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/mucosa/Cleandata/Y2_LI_1cm_M_MG_1/Y2_LI_1cm_M_MG_1.fq.gz
+Y2_LI_10cm_L_MG_1	2bRAD	GI_spatial	GI	luminal_content	Y2	LI	10.0	luminal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/content/DZQD2025110503-b1/Clean_data/Y2_LI_10cm_L_MG_1/Y2_LI_10cm_L_MG_1.fq.gz
+Y2_LI_10cm_M_MG_1	2bRAD	GI_spatial	GI	mucosa	Y2	LI	10.0	mucosal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/mucosa/Cleandata/Y2_LI_10cm_M_MG_1/Y2_LI_10cm_M_MG_1.fq.gz
+Y2_LI_19cm_L_MG_1	2bRAD	GI_spatial	GI	luminal_content	Y2	LI	19.0	luminal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/content/DZQD2025110503-b1/Clean_data/Y2_LI_19cm_L_MG_1/Y2_LI_19cm_L_MG_1.fq.gz
+Y2_LI_19cm_M_MG_1	2bRAD	GI_spatial	GI	mucosa	Y2	LI	19.0	mucosal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/mucosa/Cleandata/Y2_LI_19cm_M_MG_1/Y2_LI_19cm_M_MG_1.fq.gz
+Y2_LI_28cm_L_MG_1	2bRAD	GI_spatial	GI	luminal_content	Y2	LI	28.0	luminal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/content/DZQD2025110503-b1/Clean_data/Y2_LI_28cm_L_MG_1/Y2_LI_28cm_L_MG_1.fq.gz
+Y2_LI_28cm_M_MG_1	2bRAD	GI_spatial	GI	mucosa	Y2	LI	28.0	mucosal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/mucosa/Cleandata/Y2_LI_28cm_M_MG_1/Y2_LI_28cm_M_MG_1.fq.gz
+Y2_LI_37cm_L_MG_1	2bRAD	GI_spatial	GI	luminal_content	Y2	LI	37.0	luminal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/content/DZQD2025110503-b1/Clean_data/Y2_LI_37cm_L_MG_1/Y2_LI_37cm_L_MG_1.fq.gz
+Y2_LI_37cm_M_MG_1	2bRAD	GI_spatial	GI	mucosa	Y2	LI	37.0	mucosal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/mucosa/Cleandata/Y2_LI_37cm_M_MG_1/Y2_LI_37cm_M_MG_1.fq.gz
+Y2_LI_46cm_L_MG_1	2bRAD	GI_spatial	GI	luminal_content	Y2	LI	46.0	luminal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/content/DZQD2025110503-b1/Clean_data/Y2_LI_46cm_L_MG_1/Y2_LI_46cm_L_MG_1.fq.gz
+Y2_LI_46cm_M_MG_1	2bRAD	GI_spatial	GI	mucosa	Y2	LI	46.0	mucosal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/mucosa/Cleandata/Y2_LI_46cm_M_MG_1/Y2_LI_46cm_M_MG_1.fq.gz
+Y2_LI_55cm_L_MG_1	2bRAD	GI_spatial	GI	luminal_content	Y2	LI	55.0	luminal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/content/DZQD2025110503-b1/Clean_data/Y2_LI_55cm_L_MG_1/Y2_LI_55cm_L_MG_1.fq.gz
+Y2_LI_55cm_M_MG_1	2bRAD	GI_spatial	GI	mucosa	Y2	LI	55.0	mucosal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/mucosa/Cleandata/Y2_LI_55cm_M_MG_1/Y2_LI_55cm_M_MG_1.fq.gz
+Y2_S_1_L_MG_1	2bRAD	GI_spatial	GI	luminal_content	Y2	S	1.0	luminal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/content/DZQD2025110503-b1/Clean_data/Y2_S_1_L_MG_1/Y2_S_1_L_MG_1.fq.gz
+Y2_S_1_M_MG_1	2bRAD	GI_spatial	GI	mucosa	Y2	S	1.0	mucosal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/mucosa/Cleandata/Y2_S_1_M_MG_1/Y2_S_1_M_MG_1.fq.gz
+Y2_S_3_L_MG_1	2bRAD	GI_spatial	GI	luminal_content	Y2	S	3.0	luminal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/content/DZQD2025110503-b1/Clean_data/Y2_S_3_L_MG_1/Y2_S_3_L_MG_1.fq.gz
+Y2_S_6_M_MG_1	2bRAD	GI_spatial	GI	mucosa	Y2	S	6.0	mucosal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/mucosa/Cleandata/Y2_S_6_M_MG_1/Y2_S_6_M_MG_1.fq.gz
+Y2_SI_1cm_L_MG_1	2bRAD	GI_spatial	GI	luminal_content	Y2	SI	1.0	luminal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/content/DZQD2025110503-b1/Clean_data/Y2_SI_1cm_L_MG_1/Y2_SI_1cm_L_MG_1.fq.gz
+Y2_SI_1cm_M_MG_1	2bRAD	GI_spatial	GI	mucosa	Y2	SI	1.0	mucosal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/mucosa/Cleandata/Y2_SI_1cm_M_MG_1/Y2_SI_1cm_M_MG_1.fq.gz
+Y2_SI_29cm_L_MG_1	2bRAD	GI_spatial	GI	luminal_content	Y2	SI	29.0	luminal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/content/DZQD2025110503-b1/Clean_data/Y2_SI_29cm_L_MG_1/Y2_SI_29cm_L_MG_1.fq.gz
+Y2_SI_29cm_M_MG_1	2bRAD	GI_spatial	GI	mucosa	Y2	SI	29.0	mucosal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/mucosa/Cleandata/Y2_SI_29cm_M_MG_1/Y2_SI_29cm_M_MG_1.fq.gz
+Y2_SI_57cm_L_MG_1	2bRAD	GI_spatial	GI	luminal_content	Y2	SI	57.0	luminal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/content/DZQD2025110503-b1/Clean_data/Y2_SI_57cm_L_MG_1/Y2_SI_57cm_L_MG_1.fq.gz
+Y2_SI_57cm_M_MG_1	2bRAD	GI_spatial	GI	mucosa	Y2	SI	57.0	mucosal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/mucosa/Cleandata/Y2_SI_57cm_M_MG_1/Y2_SI_57cm_M_MG_1.fq.gz
+Y2_SI_85cm_M_MG_1	2bRAD	GI_spatial	GI	mucosa	Y2	SI	85.0	mucosal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/mucosa/Cleandata/Y2_SI_85cm_M_MG_1/Y2_SI_85cm_M_MG_1.fq.gz
+Y2_SI_113cm_L_MG_1	2bRAD	GI_spatial	GI	luminal_content	Y2	SI	113.0	luminal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/content/DZQD2025110503-b1/Clean_data/Y2_SI_113cm_L_MG_1/Y2_SI_113cm_L_MG_1.fq.gz
+Y2_SI_113cm_M_MG_1	2bRAD	GI_spatial	GI	mucosa	Y2	SI	113.0	mucosal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/mucosa/Cleandata/Y2_SI_113cm_M_MG_1/Y2_SI_113cm_M_MG_1.fq.gz
+Y2_SI_141cm_L_MG_1	2bRAD	GI_spatial	GI	luminal_content	Y2	SI	141.0	luminal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/content/DZQD2025110503-b1/Clean_data/Y2_SI_141cm_L_MG_1/Y2_SI_141cm_L_MG_1.fq.gz
+Y2_SI_141cm_M_MG_1	2bRAD	GI_spatial	GI	mucosa	Y2	SI	141.0	mucosal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/mucosa/Cleandata/Y2_SI_141cm_M_MG_1/Y2_SI_141cm_M_MG_1.fq.gz
+Y2_SI_169cm_L_MG_1	2bRAD	GI_spatial	GI	luminal_content	Y2	SI	169.0	luminal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/content/DZQD2025110503-b1/Clean_data/Y2_SI_169cm_L_MG_1/Y2_SI_169cm_L_MG_1.fq.gz
+Y2_SI_169cm_M_MG_1	2bRAD	GI_spatial	GI	mucosa	Y2	SI	169.0	mucosal		/lustre1/g/aos_shihuang/data/monkey/2bRAD/mucosa/Cleandata/Y2_SI_169cm_M_MG_1/Y2_SI_169cm_M_MG_1.fq.gz
+O1_B_LA_L_MG_1	2bRAD	body_control	body_control	mucosa					LA	/lustre1/g/aos_shihuang/data/monkey/2bRAD/mucosa/Cleandata/O1_B_LA_L_MG_1/O1_B_LA_L_MG_1.fq.gz
+O1_B_LL_L_MG_1	2bRAD	body_control	body_control	mucosa					LL	/lustre1/g/aos_shihuang/data/monkey/2bRAD/mucosa/Cleandata/O1_B_LL_L_MG_1/O1_B_LL_L_MG_1.fq.gz
+O1_B_N_L_MG_1	2bRAD	body_control	body_control	mucosa					N	/lustre1/g/aos_shihuang/data/monkey/2bRAD/mucosa/Cleandata/O1_B_N_L_MG_1/O1_B_N_L_MG_1.fq.gz
+O1_B_RA_L_MG_1	2bRAD	body_control	body_control	mucosa					RA	/lustre1/g/aos_shihuang/data/monkey/2bRAD/mucosa/Cleandata/O1_B_RA_L_MG_1/O1_B_RA_L_MG_1.fq.gz
+O1_B_RL_L_MG_1	2bRAD	body_control	body_control	mucosa					RL	/lustre1/g/aos_shihuang/data/monkey/2bRAD/mucosa/Cleandata/O1_B_RL_L_MG_1/O1_B_RL_L_MG_1.fq.gz
+O2_B_LA_L_MG_1	2bRAD	body_control	body_control	mucosa					LA	/lustre1/g/aos_shihuang/data/monkey/2bRAD/mucosa/Cleandata/O2_B_LA_L_MG_1/O2_B_LA_L_MG_1.fq.gz
+O2_B_LL_L_MG_1	2bRAD	body_control	body_control	mucosa					LL	/lustre1/g/aos_shihuang/data/monkey/2bRAD/mucosa/Cleandata/O2_B_LL_L_MG_1/O2_B_LL_L_MG_1.fq.gz
+O2_B_N_L_MG_1	2bRAD	body_control	body_control	mucosa					N	/lustre1/g/aos_shihuang/data/monkey/2bRAD/mucosa/Cleandata/O2_B_N_L_MG_1/O2_B_N_L_MG_1.fq.gz
+O2_B_RA_L_MG_1	2bRAD	body_control	body_control	mucosa					RA	/lustre1/g/aos_shihuang/data/monkey/2bRAD/mucosa/Cleandata/O2_B_RA_L_MG_1/O2_B_RA_L_MG_1.fq.gz
+O2_B_RL_L_MG_1	2bRAD	body_control	body_control	mucosa					RL	/lustre1/g/aos_shihuang/data/monkey/2bRAD/mucosa/Cleandata/O2_B_RL_L_MG_1/O2_B_RL_L_MG_1.fq.gz
+Y1_B_LA_L_MG_1	2bRAD	body_control	body_control	mucosa					LA	/lustre1/g/aos_shihuang/data/monkey/2bRAD/mucosa/Cleandata/Y1_B_LA_L_MG_1/Y1_B_LA_L_MG_1.fq.gz
+Y1_B_LL_L_MG_1	2bRAD	body_control	body_control	mucosa					LL	/lustre1/g/aos_shihuang/data/monkey/2bRAD/mucosa/Cleandata/Y1_B_LL_L_MG_1/Y1_B_LL_L_MG_1.fq.gz
+Y1_B_N_L_MG_1	2bRAD	body_control	body_control	mucosa					N	/lustre1/g/aos_shihuang/data/monkey/2bRAD/mucosa/Cleandata/Y1_B_N_L_MG_1/Y1_B_N_L_MG_1.fq.gz
+Y1_B_RA_L_MG_1	2bRAD	body_control	body_control	mucosa					RA	/lustre1/g/aos_shihuang/data/monkey/2bRAD/mucosa/Cleandata/Y1_B_RA_L_MG_1/Y1_B_RA_L_MG_1.fq.gz
+Y1_B_RL_L_MG_1	2bRAD	body_control	body_control	mucosa					RL	/lustre1/g/aos_shihuang/data/monkey/2bRAD/mucosa/Cleandata/Y1_B_RL_L_MG_1/Y1_B_RL_L_MG_1.fq.gz
+Y2_B_LA_L_MG_1	2bRAD	body_control	body_control	mucosa					LA	/lustre1/g/aos_shihuang/data/monkey/2bRAD/mucosa/Cleandata/Y2_B_LA_L_MG_1/Y2_B_LA_L_MG_1.fq.gz
+Y2_B_LL_L_MG_1	2bRAD	body_control	body_control	mucosa					LL	/lustre1/g/aos_shihuang/data/monkey/2bRAD/mucosa/Cleandata/Y2_B_LL_L_MG_1/Y2_B_LL_L_MG_1.fq.gz
+Y2_B_N_L_MG_1	2bRAD	body_control	body_control	mucosa					N	/lustre1/g/aos_shihuang/data/monkey/2bRAD/mucosa/Cleandata/Y2_B_N_L_MG_1/Y2_B_N_L_MG_1.fq.gz
+Y2_B_RA_L_MG_1	2bRAD	body_control	body_control	mucosa					RA	/lustre1/g/aos_shihuang/data/monkey/2bRAD/mucosa/Cleandata/Y2_B_RA_L_MG_1/Y2_B_RA_L_MG_1.fq.gz
+Y2_B_RL_L_MG_1	2bRAD	body_control	body_control	mucosa					RL	/lustre1/g/aos_shihuang/data/monkey/2bRAD/mucosa/Cleandata/Y2_B_RL_L_MG_1/Y2_B_RL_L_MG_1.fq.gz

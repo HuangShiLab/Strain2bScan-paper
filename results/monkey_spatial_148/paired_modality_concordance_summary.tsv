@@ -1,0 +1,15 @@
+metric	value
+paired_samples_with_calls_in_both_modalities	51
+mean_2bRAD_calls	72.176471
+median_2bRAD_calls	84
+mean_shotgun_calls	105.980392
+median_shotgun_calls	123
+mean_shared_calls	63.980392
+median_shared_calls	81
+mean_strain_call_jaccard	0.420059
+median_strain_call_jaccard	0.605405
+mean_species_jaccard	0.735237
+median_species_jaccard	0.888889
+dominant_cluster_comparisons	580
+dominant_cluster_matches	234
+dominant_cluster_match_rate	0.403448

@@ -126,6 +126,16 @@ In the MSA-1002 shotgun host ladder, Strain2bScan retained F1 = 1.0 at 90, 95 an
 
 Public WGS cohorts showed three application boundaries (Supplementary Table S3). A pregnancy multi-site subset produced 34 strain-cluster calls across five of six libraries, with saliva cluster-rich two-time-point descriptive profiles. Preterm vaginal/meconium libraries produced no strain calls because strain-marker evidence was sparse and panels were incomplete. Preterm-infant stool profiling detected weekly turnover with a generic panel and persistent *Bifidobacterium bifidum* LHCA82 with a cohort-specific panel. Six isolate WGS read sets recovered their expected panel units (6/6), but this was a panel/read compatibility result rather than independent classification.
 
+##### Real rhesus macaque GI cohort: strain-resolved spatial ecology in 148 samples (Supplementary Tables S5–S10)
+
+We next asked whether the same framework could resolve strain structure in a complete real spatial cohort rather than an exploratory subset. We profiled 148 rhesus macaque libraries: 128 GI spatial samples (66 luminal and 62 mucosal) plus 20 body controls. A cohort-specific panel built from 315 study MAGs represented 18 gut species and 303 0.95 strain-cluster units; after cross-species marker restriction, 29,162 of 30,008 BcgI markers remained available for quantification. With the prespecified species and cluster gates, 113 of 128 GI samples (88.3%) yielded strain calls: 56/66 luminal and 57/62 mucosal samples. Only two body controls produced calls, with three total strain calls, indicating that the main GI signals were not explained by body-site contamination (Supplementary Table S5).
+
+Strain calls partitioned along the GI axis. Eighty-nine clusters met the prespecified LI-enrichment screen; ten high-confidence examples included *Treponema_D_succinifaciens* C25, *WG_1_sp900539665* C22, *Treponema_D_succinifaciens* C2, *Succinivibrio_sp000431835* C6 and *Cryptobacteroides_sp900546445* C1 (Supplementary Table S7). In 50 matched mucosal/luminal positions, zero-filled within-species compositions identified 20 nominally significant clusters and 13 that remained significant after Bonferroni correction; all 13 were luminal-enriched (Supplementary Table S8). The strongest examples included *T._succinifaciens* C25, *UBA4372_sp900543815* C13/C5, *Cryptobacteroides_sp900546445* C13/C3 and *WG_1* C20. Thus, closely related strains of the same species were not uniformly distributed across mucosal and luminal niches.
+
+The 66 luminal GI libraries also had shotgun and HUMAnN profiles, enabling a modality and function overlay. Among the 51 samples with calls in both modalities, species profiles were more concordant than exact cluster profiles (median Jaccard 0.889 versus 0.605), and shotgun yielded more calls per sample (median 123 versus 84). Only 234 of 580 dominant-cluster comparisons matched exactly (40.3%). These results support native 2bRAD-M as a reduced-depth strain-aware measurement while indicating that shotgun provides denser cluster resolution (Supplementary Table S9).
+
+In matched LI samples, strain composition was coupled to bile-acid composition and selected metabolic pathways after residualizing monkey identity and GI position (Supplementary Table S10). Among 219 clusters and four precursor-mass bile-acid classes, 410 of 876 associations passed BH FDR < 0.05; 409 were negative, showing that the LI strain reservoir mainly tracked a lower conjugated/high-mass bile-acid state. For example, *Cryptobacteroides_sp000433355* C1 was negatively associated with the conjugated/high-mass class (ρ = −0.943, q = 1.0 × 10⁻⁸), whereas *UBA636_sp900546285* C11 was positively associated with the dihydroxy class (ρ = 0.648, q = 2.5 × 10⁻³). Functional coupling was also cluster-specific: *UBA4372_sp900543815* C4 tracked pyruvate- and acetyl-CoA-to-butyrate pathways, *Cryptobacteroides_sp000433355* C5 tracked pyruvate-to-propionate, and *Treponema_D_succinifaciens* C2 and *Succinivibrio_sp000431835* C4 tracked N-acetylneuraminate and N-acetylglucosamine-related degradation pathways. These associations describe ecological coupling in real samples; they do not assign individual pathway genes to a strain cluster or establish causality.
+
 #### Comparator scope
 
 The primary executed strain-resolved comparators were StrainScan and inStrain; StrainGST was run separately because it uses StrainGE 0.90-reference databases. StrainPhlAn was not included in this P/R/F1 benchmark because it infers strain phylogeny and types rather than cluster abundance calls. Accuracies are therefore descriptive within prespecified, tool-specific resolution spaces and are not pooled.
@@ -724,6 +734,37 @@ Wall-clock time and peak resident set size were measured with `/usr/bin/time` on
 machine. Primary ATCC predictions, commands, database hashes, and checksums are archived in
 `results/mock_benchmark_f26f234/` and `results/benchmark_configuration.json`. Available figure recipes are
 in the repository; the complete 15-species run-driver provenance limitation is stated above.
+#### Rhesus macaque GI spatial cohort
+
+The final real-cohort application used an author-generated rhesus macaque GI spatial cohort of 148 libraries:
+128 GI samples (66 luminal and 62 mucosal) and 20 body controls. Four additional vendor throat/trachea
+files were excluded. Clean native BcgI libraries contained 32-bp tags. We selected 18 prevalent gut species
+and 315 study MAGs from the cohort assembly catalogue, clustered genomes within species at 0.95 Jaccard
+similarity, and built per-species BcgI databases representing 303 strain-cluster units. Cross-species marker
+filtering retained 29,162 of 30,008 markers. All 148 libraries were profiled with `--enzyme BcgI
+--min-species-markers 20 --min-species-detect 2 --min-support 2 --min-coverage 0.01
+--min-consistency 0.5`. Sample-level, species-level and cluster-level summaries were calculated for GI,
+luminal, mucosal and body-control groups. LI-enriched clusters required peak LI prevalence >= 0.3 and
+region specificity >= 0.8.
+
+For mucosal/luminal tests, luminal and mucosal samples were matched within monkey, GI region and GI
+position. Missing strain-cluster values were represented as zero, and within-species global-abundance
+compositions were compared with two-sided Wilcoxon signed-rank tests followed by Bonferroni correction.
+The 66 luminal libraries were also profiled from processed shotgun reads in the same BcgI marker space.
+Species and strain-call concordance used Jaccard distances; dominant clusters were compared only where both
+modalities detected the species.
+
+For metabolic coupling, targeted bile-acid SRM chromatograms were extracted from mzML files, peak areas
+were normalized to internal standards, and negative-mode precursor classes were grouped by precursor mass
+into LCA-like, dihydroxy, cholate-like and conjugated/high-mass categories. HUMAnN `pathabundance-cpm`
+tables were aggregated and screened for butyrate/SCFA, propionate, lactate, mixed-acid, sialic-acid,
+N-acetyl-sugar, fucose/rhamnose and glucarate pathways. In LI samples, strain composition and BA or
+functional composition were residualized against monkey identity and LI position before Spearman
+correlation; Benjamini–Hochberg FDR was estimated separately for BA and functional tests. Because BA names
+were not available from the vendor quantification table, BA features were interpreted at precursor-class
+rather than individual-compound resolution. Associations are ecological and do not assign pathway genes to
+individual strain clusters.
+
 #### Public real-metagenome cohorts and isolate-derived panels
 
 To supplement the controlled analyses, we profiled representative paired-end WGS subsets from four
@@ -778,12 +819,11 @@ The authors declare no competing interests.
 
 ## Ethics
 
-This study used only publicly deposited sequencing data and ATCC commercial mock communities. No new
-human participants were recruited, and no new human subject data were generated by this study.
+Benchmarking used publicly deposited sequencing data and ATCC commercial mock communities. The rhesus macaque spatial cohort was generated by the authors from non-human samples. No new human participants were recruited, and no new human subject data were generated by this study.
 
 ## Data and code availability
 
-The Strain2bScan source code is available at https://github.com/HuangShiLab/Strain2bScan. The simulation benchmark used commit 6ae760c2f3bd2f39efc0e6aa06c53a84366cb16e (tag benchmark-v0.1.1-6ae760c); the ATCC mock benchmark used commit f26f234b817ba7772a3f1df59ce720751e9b45b9 (tag benchmark-v0.1.0-f26f234). Derived tables, benchmark configurations, checksums and assembly scripts are available at https://github.com/HuangShiLab/Strain2bScan-paper (tag results-simplified-2026-10-19 and subsequent history). Public human metagenome reads used in the exploratory analyses are from PRJNA1131785, PRJNA288562, PRJNA1517970, PRJNA1191223 and PRJNA1191225. Commercial ATCC mock standards are identified by their catalogue names in the manuscript. No new human subject data were generated for this study.
+The Strain2bScan source code is available at https://github.com/HuangShiLab/Strain2bScan. The simulation benchmark used commit 6ae760c2f3bd2f39efc0e6aa06c53a84366cb16e (tag benchmark-v0.1.1-6ae760c); the ATCC mock benchmark used commit f26f234b817ba7772a3f1df59ce720751e9b45b9 (tag benchmark-v0.1.0-f26f234). Derived tables, benchmark configurations, checksums and assembly scripts are available at https://github.com/HuangShiLab/Strain2bScan-paper (tag results-simplified-2026-10-19 and subsequent history). Public human metagenome reads used in the exploratory analyses are from PRJNA1131785, PRJNA288562, PRJNA1517970, PRJNA1191223 and PRJNA1191225. Commercial ATCC mock standards are identified by their catalogue names in the manuscript. The rhesus macaque spatial cohort was generated by the authors; curated metadata and strain/BA/function summary tables are provided in `results/monkey_spatial_148/`, and raw sequencing, metabolomics and full processed outputs are available from the corresponding author on reasonable request. No new human subject data were generated for this study.
 
 ## Figure legends
 
@@ -1002,6 +1042,133 @@ analysis. No case/control labels were available in public metadata. Values are f
 | SRR6748207 | PRJNA288562 | subject T23 vagina GD84 | 243,062 | 71,385,301 | 45,805 | 0 | -- |
 
 **Table S4. Gate-matched full-depth saliva comparison across all 32 PRJNA1131785 pairs.** WMS and native BcgI 2bRAD libraries were profiled with the same 19-species oral panel, species gate (20 panel-specific markers and two detected markers), support threshold (two markers) and coverage threshold (0.01). Cluster calls were matched by species and cluster label. Differences in sequencing depth, read layout and representation prevent interpretation as accuracy validation. Source: `results/wms32_rebuild/per_sample_summary.tsv`.
+
+**Table S5. Rhesus macaque 148-sample cohort and monkey MAG panel.** The cohort contains 128 GI spatial
+samples (66 luminal and 62 mucosal) plus 20 body controls. The monkey-specific panel used 315 selected
+study MAGs across 18 species and 303 0.95 strain-cluster units. Counts use the same BcgI gates listed in
+Methods. Source: `results/monkey_spatial_148/cohort_panel_summary.tsv`.
+
+| Metric | Value |
+|---|--:|
+| Full cohort samples | 148 |
+| GI spatial samples | 128 |
+| GI luminal samples | 66 |
+| GI mucosal samples | 62 |
+| Body-control samples | 20 |
+| Excluded vendor extra samples | 4 |
+| Panel species | 18 |
+| Selected study MAGs | 315 |
+| Strain-cluster units | 303 |
+| Panel markers before cross-species filtering | 30,008 |
+| Usable markers after cross-species filtering | 29,162 |
+| GI samples with ≥1 2bRAD strain call | 113/128 (88.3%) |
+| Luminal samples with ≥1 call | 56/66 (84.8%) |
+| Mucosal samples with ≥1 call | 57/62 (91.9%) |
+| Body controls with ≥1 call | 2/20 (10.0%) |
+| Total body-control calls | 3 |
+
+**Table S6. Species prevalence in the rhesus macaque GI cohort.** Prevalence is the fraction of samples in
+the indicated group with at least one strain call for the species. Source:
+`results/monkey_spatial_148/species_GI_control_prevalence.tsv`.
+
+| Species | GI | Luminal | Mucosal | Body control |
+|---|--:|--:|--:|--:|
+| *Helicobacter_B_sp003364135* | 0.766 | 0.727 | 0.806 | 0.100 |
+| *UBA4372_sp900543815* | 0.664 | 0.727 | 0.597 | 0.000 |
+| *Cryptobacteroides_sp000433355* | 0.656 | 0.773 | 0.532 | 0.050 |
+| *Succinivibrio_sp000431835* | 0.578 | 0.652 | 0.500 | 0.000 |
+| *WG_1_sp900539665* | 0.555 | 0.667 | 0.435 | 0.000 |
+| *Oribacterium_sp900768305* | 0.500 | 0.530 | 0.468 | 0.000 |
+| *CAG_873_sp001701165* | 0.492 | 0.591 | 0.387 | 0.000 |
+| *Lachnospira_eligens_A* | 0.477 | 0.530 | 0.419 | 0.000 |
+| *Treponema_D_succinifaciens* | 0.445 | 0.545 | 0.339 | 0.000 |
+| *Treponema_D_berlinense* | 0.445 | 0.545 | 0.339 | 0.000 |
+| *Ligilactobacillus_animalis* | 0.422 | 0.545 | 0.290 | 0.000 |
+| *Cryptobacteroides_sp900546445* | 0.422 | 0.485 | 0.355 | 0.000 |
+| *Ornithospirochaeta_sp934247875* | 0.414 | 0.500 | 0.323 | 0.000 |
+| *Onthomorpha_sp900545215* | 0.414 | 0.470 | 0.355 | 0.000 |
+| *UBA636_sp900546285* | 0.383 | 0.455 | 0.306 | 0.000 |
+| *UBA1724_sp900548225* | 0.367 | 0.424 | 0.306 | 0.000 |
+| *CAG_349_sp003539515* | 0.344 | 0.424 | 0.258 | 0.000 |
+| *Ruminococcus_E_sp934476515* | 0.312 | 0.379 | 0.242 | 0.000 |
+
+**Table S7. Representative LI-enriched strain clusters.** LI enrichment required peak LI prevalence ≥ 0.3
+and region specificity ≥ 0.8. Ten high-confidence examples are shown. Source:
+`results/monkey_spatial_148/LI_enriched_cluster_examples.tsv`.
+
+| Species | Cluster | GI prevalence | Luminal prevalence | Mucosal prevalence | Peak LI prevalence | Region specificity |
+|---|---|--:|--:|--:|--:|--:|
+| *Treponema_D_succinifaciens* | C25 | 0.328 | 0.409 | 0.242 | 0.750 | 1.000 |
+| *WG_1_sp900539665* | C22 | 0.328 | 0.439 | 0.210 | 0.714 | 0.936 |
+| *Treponema_D_succinifaciens* | C2 | 0.289 | 0.424 | 0.145 | 0.643 | 0.963 |
+| *Succinivibrio_sp000431835* | C6 | 0.266 | 0.364 | 0.161 | 0.589 | 0.960 |
+| *Cryptobacteroides_sp900546445* | C1 | 0.258 | 0.364 | 0.145 | 0.571 | 0.959 |
+| *Treponema_D_succinifaciens* | C15 | 0.242 | 0.394 | 0.081 | 0.554 | 1.000 |
+| *Treponema_D_succinifaciens* | C5 | 0.242 | 0.333 | 0.145 | 0.554 | 1.000 |
+| *UBA636_sp900546285* | C12 | 0.234 | 0.303 | 0.161 | 0.536 | 1.000 |
+| *Oribacterium_sp900768305* | C4 | 0.250 | 0.379 | 0.113 | 0.536 | 0.917 |
+| *Cryptobacteroides_sp000433355* | C6 | 0.258 | 0.439 | 0.065 | 0.536 | 0.880 |
+
+**Table S8. Matched mucosal/luminal strain clusters after Bonferroni correction.** Samples were matched
+within monkey, GI region and position; absent cluster calls were treated as zero within-species abundance.
+Only clusters with Bonferroni q < 0.05 are shown. Source:
+`results/monkey_spatial_148/mucosal_luminal_bonferroni.tsv`.
+
+| Species | Cluster | Matched pairs | Mucosal positive | Luminal positive | p | Bonferroni q |
+|---|---|--:|--:|--:|--:|--:|
+| *Treponema_D_succinifaciens* | C25 | 50 | 15 | 27 | 6.0 × 10⁻⁶ | 9.6 × 10⁻⁴ |
+| *UBA4372_sp900543815* | C13 | 50 | 4 | 24 | 1.8 × 10⁻⁵ | 2.8 × 10⁻³ |
+| *Treponema_D_succinifaciens* | C6 | 50 | 7 | 23 | 2.7 × 10⁻⁵ | 4.1 × 10⁻³ |
+| *Treponema_D_succinifaciens* | C22 | 50 | 8 | 22 | 3.1 × 10⁻⁵ | 4.7 × 10⁻³ |
+| *UBA4372_sp900543815* | C5 | 50 | 7 | 32 | 4.2 × 10⁻⁵ | 6.5 × 10⁻³ |
+| *Cryptobacteroides_sp900546445* | C13 | 50 | 4 | 24 | 4.4 × 10⁻⁵ | 6.7 × 10⁻³ |
+| *Cryptobacteroides_sp900546445* | C3 | 50 | 4 | 27 | 8.7 × 10⁻⁵ | 1.3 × 10⁻² |
+| *WG_1_sp900539665* | C20 | 50 | 16 | 30 | 1.2 × 10⁻⁴ | 1.8 × 10⁻² |
+| *Cryptobacteroides_sp900546445* | C14 | 50 | 4 | 22 | 1.2 × 10⁻⁴ | 1.8 × 10⁻² |
+| *Cryptobacteroides_sp000433355* | C3 | 50 | 5 | 28 | 2.1 × 10⁻⁴ | 3.1 × 10⁻² |
+| *Treponema_D_succinifaciens* | C10 | 50 | 9 | 20 | 2.1 × 10⁻⁴ | 3.3 × 10⁻² |
+| *Treponema_D_succinifaciens* | C12 | 50 | 4 | 21 | 2.1 × 10⁻⁴ | 3.3 × 10⁻² |
+| *Treponema_D_berlinense* | C10 | 50 | 4 | 17 | 2.9 × 10⁻⁴ | 4.5 × 10⁻² |
+
+**Table S9. Paired luminal 2bRAD/shotgun concordance on the monkey cohort.** Both modalities used the
+same BcgI marker space and cluster gates. Concordance is restricted to 51 luminal samples with calls in
+both modalities; differences in depth, representation and host content prevent accuracy interpretation.
+Source: `results/monkey_spatial_148/paired_modality_concordance_summary.tsv`.
+
+| Metric | Mean | Median |
+|---|--:|--:|
+| 2bRAD strain calls | 72.2 | 84 |
+| Shotgun strain calls | 106.0 | 123 |
+| Shared strain calls | 64.0 | 81 |
+| Strain-call Jaccard | 0.420 | 0.605 |
+| Species Jaccard | 0.735 | 0.889 |
+
+Dominant-cluster agreement was 234/580 comparisons (40.3%).
+
+**Table S10. Representative LI strain-cluster associations with bile acids and functions.** LI strain
+composition was residualized against monkey identity and LI position, then associated with bile-acid class
+composition or HUMAnN pathway composition using Spearman correlation and Benjamini–Hochberg FDR. These are
+sample-level ecological associations, not gene-to-cluster assignments. Source:
+`results/monkey_spatial_148/bileacid_coupling_key_results.tsv` and
+`results/monkey_spatial_148/function_coupling_key_results.tsv`.
+
+| Strain cluster | Feature | rho | p | BH q |
+|---|---|--:|--:|--:|
+| *Cryptobacteroides_sp000433355* C1 | Conjugated/high-mass bile acids | −0.943 | 1.8 × 10⁻¹¹ | 1.0 × 10⁻⁸ |
+| *Cryptobacteroides_sp000433355* C5 | Cholate-like bile acids | −0.935 | 6.6 × 10⁻¹¹ | 1.4 × 10⁻⁸ |
+| *Treponema_D_succinifaciens* C25 | Conjugated/high-mass bile acids | −0.923 | 3.6 × 10⁻¹⁰ | 5.2 × 10⁻⁸ |
+| *Succinivibrio_sp000431835* C25 | Cholate-like bile acids | −0.909 | 1.9 × 10⁻⁹ | 1.4 × 10⁻⁷ |
+| *UBA4372_sp900543815* C3 | Conjugated/high-mass bile acids | −0.895 | 8.1 × 10⁻⁹ | 2.7 × 10⁻⁷ |
+| *UBA636_sp900546285* C11 | Dihydroxy bile acids | 0.648 | 8.2 × 10⁻⁴ | 2.5 × 10⁻³ |
+| *UBA4372_sp900543815* C4 | Pyruvate fermentation to butanoate | 0.926 | 1.2 × 10⁻¹¹ | 4.0 × 10⁻¹⁰ |
+| *UBA4372_sp900543815* C4 | Acetyl-CoA fermentation to butanoate II | 0.905 | 2.2 × 10⁻¹⁰ | 4.9 × 10⁻⁹ |
+| *Oribacterium_sp900768305* C2 | Pyruvate fermentation to butanoate | 0.955 | 3.7 × 10⁻¹⁴ | 2.9 × 10⁻¹² |
+| *Cryptobacteroides_sp000433355* C5 | Pyruvate fermentation to propanoate I | 0.981 | 1.5 × 10⁻¹⁸ | 5.6 × 10⁻¹⁶ |
+| *UBA4372_sp900543815* C3 | Succinate fermentation to butanoate | −0.951 | 1.0 × 10⁻¹³ | 7.1 × 10⁻¹² |
+| *Treponema_D_succinifaciens* C2 | N-acetylneuraminate degradation | 0.964 | 2.2 × 10⁻¹⁵ | 2.6 × 10⁻¹³ |
+| *Treponema_D_succinifaciens* C2 | N-acetylglucosamine/mannosamine/neuraminate degradation | 0.965 | 1.8 × 10⁻¹⁵ | 2.1 × 10⁻¹³ |
+| *Succinivibrio_sp000431835* C4 | N-acetylglucosamine/mannosamine/neuraminate degradation | 0.789 | 2.0 × 10⁻⁶ | 1.2 × 10⁻⁵ |
+
 
 | Sample | WMS calls | Native calls | Shared | WMS-only | Native-only | WMS species |
 |---|--:|--:|--:|--:|--:|--:|

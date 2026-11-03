@@ -13,7 +13,7 @@ import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 SRC = ROOT / "manuscript/full_manuscript.md"
-OUT = ROOT / "manuscript/Strain2bScan_manuscript_2026-10-21-submission.docx"
+OUT = ROOT / "manuscript/Strain2bScan_manuscript_2026-11-03-full148.docx"
 TITLE = "Strain2bScan: strain-level 2bRAD-marker profiling of microbiomes"
 
 
@@ -166,7 +166,7 @@ def style_docx(path: Path) -> None:
     metadata.author = "Yufeng Zhang; Shi Huang"
     metadata.subject = "Manuscript snapshot with embedded main and supplementary figures"
     metadata.keywords = "Strain2bScan; 2bRAD; metagenomics; strain profiling"
-    metadata.comments = "Submission snapshot after isolated Nature-style review, 2026-10-21"
+    metadata.comments = "Manuscript snapshot with real 148-sample rhesus GI cohort application, 2026-11-03"
     doc.save(path)
 
 

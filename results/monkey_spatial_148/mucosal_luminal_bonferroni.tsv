@@ -1,0 +1,14 @@
+species	cluster	matched_pairs	mucosal_positive	luminal_positive	p_two_sided	p_bonferroni
+Treponema_D_succinifaciens	C25	50	15	27	6e-06	0.000961
+UBA4372_sp900543815	C13	50	4	24	1.8e-05	0.002787
+Treponema_D_succinifaciens	C6	50	7	23	2.7e-05	0.004133
+Treponema_D_succinifaciens	C22	50	8	22	3.1e-05	0.004725
+UBA4372_sp900543815	C5	50	7	32	4.2e-05	0.006457
+Cryptobacteroides_sp900546445	C13	50	4	24	4.4e-05	0.006723
+Cryptobacteroides_sp900546445	C3	50	4	27	8.7e-05	0.013326
+WG_1_sp900539665	C20	50	16	30	0.000115	0.017594
+Cryptobacteroides_sp900546445	C14	50	4	22	0.000119	0.018281
+Cryptobacteroides_sp000433355	C3	50	5	28	0.000206	0.031493
+Treponema_D_succinifaciens	C10	50	9	20	0.000214	0.032768
+Treponema_D_succinifaciens	C12	50	4	21	0.000214	0.032768
+Treponema_D_berlinense	C10	50	4	17	0.000293	0.044837

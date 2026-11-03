@@ -528,6 +528,37 @@ Wall-clock time and peak resident set size were measured with `/usr/bin/time` on
 machine. Primary ATCC predictions, commands, database hashes, and checksums are archived in
 `results/mock_benchmark_f26f234/` and `results/benchmark_configuration.json`. Available figure recipes are
 in the repository; the complete 15-species run-driver provenance limitation is stated above.
+### Rhesus macaque GI spatial cohort
+
+The final real-cohort application used an author-generated rhesus macaque GI spatial cohort of 148 libraries:
+128 GI samples (66 luminal and 62 mucosal) and 20 body controls. Four additional vendor throat/trachea
+files were excluded. Clean native BcgI libraries contained 32-bp tags. We selected 18 prevalent gut species
+and 315 study MAGs from the cohort assembly catalogue, clustered genomes within species at 0.95 Jaccard
+similarity, and built per-species BcgI databases representing 303 strain-cluster units. Cross-species marker
+filtering retained 29,162 of 30,008 markers. All 148 libraries were profiled with `--enzyme BcgI
+--min-species-markers 20 --min-species-detect 2 --min-support 2 --min-coverage 0.01
+--min-consistency 0.5`. Sample-level, species-level and cluster-level summaries were calculated for GI,
+luminal, mucosal and body-control groups. LI-enriched clusters required peak LI prevalence >= 0.3 and
+region specificity >= 0.8.
+
+For mucosal/luminal tests, luminal and mucosal samples were matched within monkey, GI region and GI
+position. Missing strain-cluster values were represented as zero, and within-species global-abundance
+compositions were compared with two-sided Wilcoxon signed-rank tests followed by Bonferroni correction.
+The 66 luminal libraries were also profiled from processed shotgun reads in the same BcgI marker space.
+Species and strain-call concordance used Jaccard distances; dominant clusters were compared only where both
+modalities detected the species.
+
+For metabolic coupling, targeted bile-acid SRM chromatograms were extracted from mzML files, peak areas
+were normalized to internal standards, and negative-mode precursor classes were grouped by precursor mass
+into LCA-like, dihydroxy, cholate-like and conjugated/high-mass categories. HUMAnN `pathabundance-cpm`
+tables were aggregated and screened for butyrate/SCFA, propionate, lactate, mixed-acid, sialic-acid,
+N-acetyl-sugar, fucose/rhamnose and glucarate pathways. In LI samples, strain composition and BA or
+functional composition were residualized against monkey identity and LI position before Spearman
+correlation; Benjamini–Hochberg FDR was estimated separately for BA and functional tests. Because BA names
+were not available from the vendor quantification table, BA features were interpreted at precursor-class
+rather than individual-compound resolution. Associations are ecological and do not assign pathway genes to
+individual strain clusters.
+
 ### Public real-metagenome cohorts and isolate-derived panels
 
 To supplement the controlled analyses, we profiled representative paired-end WGS subsets from four

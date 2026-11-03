@@ -1,0 +1,9 @@
+strain_cluster	pathway	rho	p	BH_q
+UBA4372_sp900543815|C4	CENTFERM-PWY: pyruvate fermentation to butanoate	0.926154	1.186108e-11	3.952835e-10
+UBA4372_sp900543815|C4	PWY-5676: acetyl-CoA fermentation to butanoate II	0.904957	2.191342e-10	4.904128e-09
+Oribacterium_sp900768305|C2	CENTFERM-PWY: pyruvate fermentation to butanoate	0.954872	3.73732e-14	2.938108e-12
+Cryptobacteroides_sp000433355|C5	P108-PWY: pyruvate fermentation to propanoate I	0.980855	1.452206e-18	5.565581e-16
+UBA4372_sp900543815|C3	PWY-5677: succinate fermentation to butanoate	-0.950769	1.039414e-13	7.081875e-12
+Treponema_D_succinifaciens|C2	P441-PWY: superpathway of N-acetylneuraminate degradation	0.964444	2.246752e-15	2.551312e-13
+Treponema_D_succinifaciens|C2	GLCMANNANAUT-PWY: superpathway of N-acetylglucosamine, N-acetylmannosamine and N-acetylneuraminate degradation	0.965128	1.786027e-15	2.106138e-13
+Succinivibrio_sp000431835|C4	GLCMANNANAUT-PWY: superpathway of N-acetylglucosamine, N-acetylmannosamine and N-acetylneuraminate degradation	0.788718	2e-06	1.2e-05
