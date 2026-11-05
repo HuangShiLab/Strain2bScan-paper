@@ -50,6 +50,13 @@ strain-call counts; colour gives strain-call Jaccard. **(F)** Representative Spe
 strain-cluster composition and bile-acid classes or HUMAnN pathways; q values are Benjamini–Hochberg estimates.
 These associations are cohort-level ecological relationships rather than direct gene-to-cluster assignments.
 
+**Figure 12. Pairwise sharing of 0.95 marker-cluster types across saliva timepoints and macaque GI sites.** `figures/numbered/Fig12_strain_sharing.{png,pdf}`
+**(A,B)** Dominant-cluster and any-shared-cluster rates for the 32 saliva libraries. Denominators were species
+with calls in both samples; boxes summarize pairwise rates, and bootstrap contrasts are given in the text.
+**(C)** Mean dominant-cluster sharing for prespecified rhesus GI comparisons. **(D)** Old/young corresponding-site
+sharing by GI region and compartment, showing both dominant-cluster and any-shared-cluster rates. Exact label
+sharing describes 0.95 marker-cluster resolution, not SNV/popANI-validated strain identity or transmission.
+
 ## Supplementary figures
 
 **Figure S1. ATCC MSA-1002 DNA-input titration uses native BcgI 2bRAD-M reads.** `figures/source_panels/mock_msa1002_titration.{png,pdf}` Native-input species precision and recall are shown for 0.001, 0.01, 0.1 and 1 ng DNA; precision was 1.0 and recall was complete at 0.1 ng and above.

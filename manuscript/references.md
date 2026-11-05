@@ -65,3 +65,9 @@
 28. Bankevich A, Nurk S, Antipov D, *et al.* **SPAdes: a new genome assembly algorithm and its
     applications to single-cell sequencing.** *Journal of Computational Biology* 2012; 19(5):455–477.
     doi:10.1089/cmb.2012.0021.
+29. Beghini F, Pullman J, Alexander M, *et al.* **Gut microbiome strain-sharing within isolated village
+    social networks.** *Nature* 2025; 637(8044):167–175.
+    doi:10.1038/s41586-024-08222-1.
+30. Heidrich V, Fackelmann G, Ricci L, *et al.* **Strain transmission links human microbiomes along the
+    oral-gut axis and across cohabiting individuals.** *Cell Press Blue* 2026; 1(3):100034.
+    doi:10.1016/j.cpblue.2026.100034.

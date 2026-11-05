@@ -67,6 +67,24 @@ The 66 luminal GI libraries also had shotgun and HUMAnN profiles, enabling a mod
 
 In matched LI samples, strain composition was coupled to bile-acid composition and selected metabolic pathways after residualizing monkey identity and GI position (Supplementary Table S10). Among 219 clusters and four precursor-mass bile-acid classes, 410 of 876 associations passed BH FDR < 0.05; 409 were negative, showing that the LI strain reservoir mainly tracked a lower conjugated/high-mass bile-acid state. For example, *Cryptobacteroides_sp000433355* C1 was negatively associated with the conjugated/high-mass class (ρ = −0.943, q = 1.0 × 10⁻⁸), whereas *UBA636_sp900546285* C11 was positively associated with the dihydroxy class (ρ = 0.648, q = 2.5 × 10⁻³). Functional coupling was also cluster-specific: *UBA4372_sp900543815* C4 tracked pyruvate- and acetyl-CoA-to-butyrate pathways, *Cryptobacteroides_sp000433355* C5 tracked pyruvate-to-propionate, and *Treponema_D_succinifaciens* C2 and *Succinivibrio_sp000431835* C4 tracked N-acetylneuraminate and N-acetylglucosamine-related degradation pathways. These associations describe ecological coupling in real samples; they do not assign individual pathway genes to a strain cluster or establish causality.
 
+#### Strain sharing across timepoints and GI sites (Fig 12, Supplementary Tables S11–S13)
+
+We next summarized the same 0.95 cluster calls as pairwise sharing rates. The denominator was the number
+of species with strain calls in both samples. The primary metric counted a species when its most abundant
+cluster was identical; a secondary coexistence-aware metric counted at least one shared cluster label.
+In the 32 saliva libraries, dominant-cluster sharing was 0.538 within subjects across timepoints versus
+0.217 between subjects (mean difference +0.320; pair-level bootstrap 95% CI 0.264–0.375), and any-cluster
+sharing was 0.801 versus 0.568 (difference +0.233; 95% CI 0.191–0.271). Thus, within-day saliva samples
+retained host-specific strain signatures.
+
+In the 128 GI libraries, within-monkey between-position sharing exceeded between-monkey same-age
+same-region/compartment sharing (dominant-cluster mean 0.379 versus 0.159; difference +0.220; 95% CI
+0.176–0.262). Between old and young monkeys at corresponding sites, large-intestinal luminal sharing was
+high for any-cluster labels (0.870) but much lower for dominant clusters (0.222), whereas LI mucosal
+dominant sharing was 0.071. These patterns support spatial retention of gut strain reservoirs but do not
+by themselves establish transmission, because exact label sharing is at 0.95 marker-cluster resolution
+rather than SNV/popANI identity.
+
 ### Comparator scope
 
 The primary executed strain-resolved comparators were StrainScan and inStrain; StrainGST was run separately because it uses StrainGE 0.90-reference databases. StrainPhlAn was not included in this P/R/F1 benchmark because it infers strain phylogeny and types rather than cluster abundance calls. Accuracies are therefore descriptive within prespecified, tool-specific resolution spaces and are not pooled.

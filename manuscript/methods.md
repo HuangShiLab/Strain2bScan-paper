@@ -559,6 +559,27 @@ were not available from the vendor quantification table, BA features were interp
 rather than individual-compound resolution. Associations are ecological and do not assign pathway genes to
 individual strain clusters.
 
+### Strain-sharing rates
+
+Pairwise strain sharing was computed only among samples with at least one species-level call and used the
+same gate-filtered 0.95 cluster calls as the preceding analyses. For each sample pair, species detected in
+both samples formed the denominator, following the strain-sharing-rate framework used in epidemiological
+microbiome studies [29,30]. A species contributed to the primary dominant-cluster rate when its
+highest-within-species-abundance cluster label was identical in both samples. A species contributed to the
+secondary any-cluster rate when at least one cluster label was shared; this secondary metric is more
+sensitive to multi-strain coexistence but less conservative. Exact merged labels (for example,
+`C0|C1|C2`) were considered shared only when the identical label occurred in both samples.
+
+Saliva comparisons comprised 496 pairs from 32 native BcgI libraries (eight subjects and four within-day
+timepoints) and contrasted same-subject between-timepoint pairs with between-subject pairs. Rhesus GI
+comparisons comprised 8,128 pairs from 128 spatial libraries. Groups distinguished within-monkey
+adjacent-position, within-monkey mucosal/luminal, between-monkey same-age same-site and old/young
+corresponding-site comparisons. O1/O2 were 20-year-old animals and Y1/Y2 were 8-year-old animals. Differences
+between prespecified groups used 10,000 pair-level bootstrap resamples with seed 20261105. Because samples
+are nested within subjects or monkeys, these intervals describe pairwise-rate variability rather than
+independent-host inference. Sharing of a 0.95 marker-cluster label is not, without SNV or popANI
+validation, evidence of strain identity at nucleotide resolution.
+
 ### Public real-metagenome cohorts and isolate-derived panels
 
 To supplement the controlled analyses, we profiled representative paired-end WGS subsets from four

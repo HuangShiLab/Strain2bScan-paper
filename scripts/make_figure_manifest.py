@@ -16,6 +16,7 @@ SOURCES = {
  "Fig09_performance+scalability+community_throughput": "figures/source_panels/performance.{png,pdf} + scalability.{png,pdf} + community_throughput.{png,pdf} (combined)",
  "Fig10_wms_toolcompare": "figures/source_panels/fig11_wms_toolcompare.{png,pdf} (retitled for manuscript numbering)",
  "Fig11_monkey_spatial_cohort": "results/monkey_spatial_148/hpc_outputs/ + analysis scripts (generated figure)",
+ "Fig12_strain_sharing": "results/strain_sharing_20261105/ (generated figure)",
  "FigS1_mock_msa1002_titration": "figures/source_panels/mock_msa1002_titration.{png,pdf}",
  "FigS2_gate_calibration": "figures/source_panels/gate_calibration.{png,pdf}",
  "FigS3_tree_expansion": "figures/source_panels/figS_tree_expansion.{png,pdf}",

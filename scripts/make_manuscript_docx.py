@@ -55,7 +55,7 @@ def prepare_intermediate() -> Path:
         ])
 
     parts = [body, "# Main figures", ""]
-    parts.extend(image_block(str(i)) for i in range(1, 12))
+    parts.extend(image_block(str(i)) for i in range(1, 13))
     parts.extend(["# Supplementary figures", ""])
     parts.extend(image_block(f"S{i}") for i in range(1, 7))
     table_lines = []
@@ -166,7 +166,7 @@ def style_docx(path: Path) -> None:
     metadata.author = "Yufeng Zhang; Shi Huang"
     metadata.subject = "Manuscript snapshot with embedded main and supplementary figures"
     metadata.keywords = "Strain2bScan; 2bRAD; metagenomics; strain profiling"
-    metadata.comments = "Manuscript snapshot with real 148-sample rhesus GI cohort application, 2026-11-03"
+    metadata.comments = "Manuscript snapshot with strain-sharing and real 148-sample rhesus GI cohort application, 2026-11-05"
     doc.save(path)
 
 

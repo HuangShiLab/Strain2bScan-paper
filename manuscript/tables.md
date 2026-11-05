@@ -178,6 +178,41 @@ analysis. No case/control labels were available in public metadata. Values are f
 
 **Table S4. Gate-matched full-depth saliva comparison across all 32 PRJNA1131785 pairs.** WMS and native BcgI 2bRAD libraries were profiled with the same 19-species oral panel, species gate (20 panel-specific markers and two detected markers), support threshold (two markers) and coverage threshold (0.01). Cluster calls were matched by species and cluster label. Differences in sequencing depth, read layout and representation prevent interpretation as accuracy validation. Source: `results/wms32_rebuild/per_sample_summary.tsv`.
 
+| Sample | WMS calls | Native calls | Shared | WMS-only | Native-only | WMS species |
+|---|--:|--:|--:|--:|--:|--:|
+| S11-1 | 89 | 36 | 24 | 65 | 12 | 16 |
+| S11-11 | 77 | 52 | 22 | 55 | 30 | 19 |
+| S11-12 | 83 | 71 | 26 | 57 | 45 | 15 |
+| S11-14 | 136 | 25 | 10 | 126 | 15 | 18 |
+| S11-2 | 73 | 56 | 12 | 61 | 44 | 16 |
+| S11-6 | 72 | 35 | 14 | 58 | 21 | 16 |
+| S11-7 | 104 | 18 | 7 | 97 | 11 | 18 |
+| S11-9 | 39 | 23 | 13 | 26 | 10 | 11 |
+| S13-1 | 82 | 53 | 17 | 65 | 36 | 17 |
+| S13-11 | 85 | 52 | 10 | 75 | 42 | 14 |
+| S13-12 | 49 | 61 | 17 | 32 | 44 | 13 |
+| S13-14 | 105 | 22 | 5 | 100 | 17 | 17 |
+| S13-2 | 84 | 56 | 16 | 68 | 40 | 14 |
+| S13-6 | 82 | 30 | 14 | 68 | 16 | 17 |
+| S13-7 | 114 | 33 | 17 | 97 | 16 | 18 |
+| S13-9 | 78 | 20 | 9 | 69 | 11 | 17 |
+| S17-1 | 83 | 35 | 19 | 64 | 16 | 17 |
+| S17-11 | 71 | 67 | 15 | 56 | 52 | 13 |
+| S17-12 | 63 | 37 | 21 | 42 | 16 | 16 |
+| S17-14 | 121 | 25 | 7 | 114 | 18 | 18 |
+| S17-2 | 56 | 67 | 18 | 38 | 49 | 15 |
+| S17-6 | 63 | 25 | 12 | 51 | 13 | 17 |
+| S17-7 | 80 | 27 | 18 | 62 | 9 | 15 |
+| S17-9 | 47 | 25 | 16 | 31 | 9 | 15 |
+| S9-1 | 81 | 59 | 22 | 59 | 37 | 18 |
+| S9-11 | 70 | 71 | 20 | 50 | 51 | 15 |
+| S9-12 | 45 | 103 | 27 | 18 | 76 | 10 |
+| S9-14 | 109 | 23 | 6 | 103 | 17 | 17 |
+| S9-2 | 55 | 65 | 16 | 39 | 49 | 15 |
+| S9-6 | 38 | 27 | 20 | 18 | 7 | 12 |
+| S9-7 | 116 | 52 | 15 | 101 | 37 | 17 |
+| S9-9 | 37 | 17 | 10 | 27 | 7 | 11 |
+
 **Table S5. Rhesus macaque 148-sample cohort and monkey MAG panel.** The cohort contains 128 GI spatial
 samples (66 luminal and 62 mucosal) plus 20 body controls. The monkey-specific panel used 315 selected
 study MAGs across 18 species and 303 0.95 strain-cluster units. Counts use the same BcgI gates listed in
@@ -304,38 +339,42 @@ sample-level ecological associations, not gene-to-cluster assignments. Source:
 | *Treponema_D_succinifaciens* C2 | N-acetylglucosamine/mannosamine/neuraminate degradation | 0.965 | 1.8 × 10⁻¹⁵ | 2.1 × 10⁻¹³ |
 | *Succinivibrio_sp000431835* C4 | N-acetylglucosamine/mannosamine/neuraminate degradation | 0.789 | 2.0 × 10⁻⁶ | 1.2 × 10⁻⁵ |
 
+**Table S11. Strain-sharing groups in the 32-sample saliva time-course.** Rates are pairwise and were
+calculated only over species with calls in both samples. Dominant-cluster sharing is the primary
+StrainPhlAn-compatible metric; any-cluster sharing is the coexistence-aware secondary metric. Source:
+`results/strain_sharing_20261105/saliva_strain_sharing_group_summary.tsv`.
 
-| Sample | WMS calls | Native calls | Shared | WMS-only | Native-only | WMS species |
-|---|--:|--:|--:|--:|--:|--:|
-| S11-1 | 89 | 36 | 24 | 65 | 12 | 16 |
-| S11-11 | 77 | 52 | 22 | 55 | 30 | 19 |
-| S11-12 | 83 | 71 | 26 | 57 | 45 | 15 |
-| S11-14 | 136 | 25 | 10 | 126 | 15 | 18 |
-| S11-2 | 73 | 56 | 12 | 61 | 44 | 16 |
-| S11-6 | 72 | 35 | 14 | 58 | 21 | 16 |
-| S11-7 | 104 | 18 | 7 | 97 | 11 | 18 |
-| S11-9 | 39 | 23 | 13 | 26 | 10 | 11 |
-| S13-1 | 82 | 53 | 17 | 65 | 36 | 17 |
-| S13-11 | 85 | 52 | 10 | 75 | 42 | 14 |
-| S13-12 | 49 | 61 | 17 | 32 | 44 | 13 |
-| S13-14 | 105 | 22 | 5 | 100 | 17 | 17 |
-| S13-2 | 84 | 56 | 16 | 68 | 40 | 14 |
-| S13-6 | 82 | 30 | 14 | 68 | 16 | 17 |
-| S13-7 | 114 | 33 | 17 | 97 | 16 | 18 |
-| S13-9 | 78 | 20 | 9 | 69 | 11 | 17 |
-| S17-1 | 83 | 35 | 19 | 64 | 16 | 17 |
-| S17-11 | 71 | 67 | 15 | 56 | 52 | 13 |
-| S17-12 | 63 | 37 | 21 | 42 | 16 | 16 |
-| S17-14 | 121 | 25 | 7 | 114 | 18 | 18 |
-| S17-2 | 56 | 67 | 18 | 38 | 49 | 15 |
-| S17-6 | 63 | 25 | 12 | 51 | 13 | 17 |
-| S17-7 | 80 | 27 | 18 | 62 | 9 | 15 |
-| S17-9 | 47 | 25 | 16 | 31 | 9 | 15 |
-| S9-1 | 81 | 59 | 22 | 59 | 37 | 18 |
-| S9-11 | 70 | 71 | 20 | 50 | 51 | 15 |
-| S9-12 | 45 | 103 | 27 | 18 | 76 | 10 |
-| S9-14 | 109 | 23 | 6 | 103 | 17 | 17 |
-| S9-2 | 55 | 65 | 16 | 39 | 49 | 15 |
-| S9-6 | 38 | 27 | 20 | 18 | 7 | 12 |
-| S9-7 | 116 | 52 | 15 | 101 | 37 | 17 |
-| S9-9 | 37 | 17 | 10 | 27 | 7 | 11 |
+| Comparison | Pairs | Mean any-cluster rate | Mean dominant-cluster rate | Pooled any-cluster rate |
+|---|--:|--:|--:|--:|
+| Same subject, between timepoints | 48 | 0.801 | 0.538 | 0.800 |
+| Different subject, same timepoint | 112 | 0.574 | 0.216 | 0.578 |
+| Different subject, different timepoints | 336 | 0.566 | 0.218 | 0.567 |
+
+**Table S12. Strain-sharing groups in the 128-sample rhesus macaque GI spatial cohort.** Rates are pairwise
+and restricted to GI samples. Pooled rates divide shared species-pairs by all analyzable species-pairs.
+Source: `results/strain_sharing_20261105/monkey_strain_sharing_group_summary.tsv`.
+
+| Comparison | Analyzable pairs | Mean any-cluster rate | Mean dominant-cluster rate | Pooled any-cluster rate |
+|---|--:|--:|--:|--:|
+| Within monkey, between positions, same region/compartment | 260 | 0.649 | 0.379 | 0.819 |
+| Within monkey, mucosal/luminal, same region | 297 | 0.680 | 0.251 | 0.838 |
+| Between monkeys, same age, same region/compartment | 289 | 0.535 | 0.159 | 0.728 |
+| Between ages, corresponding region/compartment | 589 | 0.495 | 0.157 | 0.679 |
+| Between monkeys, between regions, same compartment | 1,321 | 0.336 | 0.100 | 0.457 |
+| Between compartments | 2,222 | 0.382 | 0.102 | 0.546 |
+
+**Table S13. Old/young rhesus strain sharing at corresponding GI sites.** Corresponding-site pairs matched
+GI region and compartment across O/Y monkey IDs. Region codes are retained from cohort metadata; rates use
+only pairs with at least one species detected in both samples. Source:
+`results/strain_sharing_20261105/monkey_between_age_corresponding_site_summary.tsv`.
+
+| Region | Compartment | Pairs | Analyzable pairs | Mean any-cluster rate | Mean dominant-cluster rate |
+|---|---|--:|--:|--:|--:|
+| E | Luminal | 6 | 4 | 0.275 | 0.194 |
+| K | Luminal | 2 | 2 | 0.500 | 0.125 |
+| LI | Luminal | 196 | 196 | 0.870 | 0.222 |
+| LI | Mucosal | 196 | 196 | 0.368 | 0.071 |
+| SI | Luminal | 72 | 72 | 0.408 | 0.253 |
+| SI | Mucosal | 143 | 119 | 0.149 | 0.131 |
+| S | Luminal | 2 | 0 | -- | -- |
+| S | Mucosal | 6 | 0 | -- | -- |

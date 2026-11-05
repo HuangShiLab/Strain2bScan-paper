@@ -19,7 +19,8 @@ Strain2bScan matched StrainScan species-median precision and had higher failure-
 full-depth WMS and native profiles shared 495 strain-cluster calls, with additional calls unique to each
 modality. In a 148-sample rhesus macaque GI spatial cohort, a cohort-specific MAG panel resolved
 strain clusters in 88.3% of GI samples, identified large-intestinal luminal-enriched strain reservoirs, and
-showed sample-level coupling to bile-acid classes and SCFA/glycan-associated pathways. Same-container profiling used 4–33× less wall time and 5–39× less memory than StrainScan; an
+showed sample-level coupling to bile-acid classes and SCFA/glycan-associated pathways. Pairwise dominant-cluster sharing was higher within subjects across saliva timepoints and within monkeys across GI sites
+than between hosts. Same-container profiling used 4–33× less wall time and 5–39× less memory than StrainScan; an
 archived cross-platform database benchmark showed larger differences. Accuracy depended on reference
 completeness and niche-matched panel design. Strain2bScan therefore extends reduced-representation
 sequencing from species profiles to scalable strain-cluster resolution.
@@ -210,6 +211,24 @@ The 66 luminal GI libraries also had shotgun and HUMAnN profiles, enabling a mod
 
 In matched LI samples, strain composition was coupled to bile-acid composition and selected metabolic pathways after residualizing monkey identity and GI position (Supplementary Table S10). Among 219 clusters and four precursor-mass bile-acid classes, 410 of 876 associations passed BH FDR < 0.05; 409 were negative, showing that the LI strain reservoir mainly tracked a lower conjugated/high-mass bile-acid state. For example, *Cryptobacteroides_sp000433355* C1 was negatively associated with the conjugated/high-mass class (ρ = −0.943, q = 1.0 × 10⁻⁸), whereas *UBA636_sp900546285* C11 was positively associated with the dihydroxy class (ρ = 0.648, q = 2.5 × 10⁻³). Functional coupling was also cluster-specific: *UBA4372_sp900543815* C4 tracked pyruvate- and acetyl-CoA-to-butyrate pathways, *Cryptobacteroides_sp000433355* C5 tracked pyruvate-to-propionate, and *Treponema_D_succinifaciens* C2 and *Succinivibrio_sp000431835* C4 tracked N-acetylneuraminate and N-acetylglucosamine-related degradation pathways. These associations describe ecological coupling in real samples; they do not assign individual pathway genes to a strain cluster or establish causality.
 
+##### Strain sharing across timepoints and GI sites (Fig 12, Supplementary Tables S11–S13)
+
+We next summarized the same 0.95 cluster calls as pairwise sharing rates. The denominator was the number
+of species with strain calls in both samples. The primary metric counted a species when its most abundant
+cluster was identical; a secondary coexistence-aware metric counted at least one shared cluster label.
+In the 32 saliva libraries, dominant-cluster sharing was 0.538 within subjects across timepoints versus
+0.217 between subjects (mean difference +0.320; pair-level bootstrap 95% CI 0.264–0.375), and any-cluster
+sharing was 0.801 versus 0.568 (difference +0.233; 95% CI 0.191–0.271). Thus, within-day saliva samples
+retained host-specific strain signatures.
+
+In the 128 GI libraries, within-monkey between-position sharing exceeded between-monkey same-age
+same-region/compartment sharing (dominant-cluster mean 0.379 versus 0.159; difference +0.220; 95% CI
+0.176–0.262). Between old and young monkeys at corresponding sites, large-intestinal luminal sharing was
+high for any-cluster labels (0.870) but much lower for dominant clusters (0.222), whereas LI mucosal
+dominant sharing was 0.071. These patterns support spatial retention of gut strain reservoirs but do not
+by themselves establish transmission, because exact label sharing is at 0.95 marker-cluster resolution
+rather than SNV/popANI identity.
+
 #### Comparator scope
 
 The primary executed strain-resolved comparators were StrainScan and inStrain; StrainGST was run separately because it uses StrainGE 0.90-reference databases. StrainPhlAn was not included in this P/R/F1 benchmark because it infers strain phylogeny and types rather than cluster abundance calls. Accuracies are therefore descriptive within prespecified, tool-specific resolution spaces and are not pooled.
@@ -243,6 +262,10 @@ S5–S10). In shotgun/HUMAnN/bile-acid subsets, strain composition was associate
 butyrate and propionate programs and N-acetyl-sugar degradation. These are cohort-level ecological
 associations rather than assignments of individual pathway genes to strains, but they show that
 reduced-representation strain calls can support spatial and metabolic hypotheses in real animal cohorts.
+Dominant-cluster sharing followed the same ecological logic: it was higher within monkeys between GI
+positions than between monkeys, and old/young sharing was higher for LI luminal than LI mucosal calls
+(Fig 12). This cluster-sharing summary is a population-resolution ecological measure rather than
+SNV/popANI-level transmission proof.
 
 In shotgun mode, the structural advantage is a change in search economics. A sample is digested once and the
 resulting tags index against all species, so adding species increases panel searches rather than sample
@@ -939,6 +962,27 @@ were not available from the vendor quantification table, BA features were interp
 rather than individual-compound resolution. Associations are ecological and do not assign pathway genes to
 individual strain clusters.
 
+#### Strain-sharing rates
+
+Pairwise strain sharing was computed only among samples with at least one species-level call and used the
+same gate-filtered 0.95 cluster calls as the preceding analyses. For each sample pair, species detected in
+both samples formed the denominator, following the strain-sharing-rate framework used in epidemiological
+microbiome studies [29,30]. A species contributed to the primary dominant-cluster rate when its
+highest-within-species-abundance cluster label was identical in both samples. A species contributed to the
+secondary any-cluster rate when at least one cluster label was shared; this secondary metric is more
+sensitive to multi-strain coexistence but less conservative. Exact merged labels (for example,
+`C0|C1|C2`) were considered shared only when the identical label occurred in both samples.
+
+Saliva comparisons comprised 496 pairs from 32 native BcgI libraries (eight subjects and four within-day
+timepoints) and contrasted same-subject between-timepoint pairs with between-subject pairs. Rhesus GI
+comparisons comprised 8,128 pairs from 128 spatial libraries. Groups distinguished within-monkey
+adjacent-position, within-monkey mucosal/luminal, between-monkey same-age same-site and old/young
+corresponding-site comparisons. O1/O2 were 20-year-old animals and Y1/Y2 were 8-year-old animals. Differences
+between prespecified groups used 10,000 pair-level bootstrap resamples with seed 20261105. Because samples
+are nested within subjects or monkeys, these intervals describe pairwise-rate variability rather than
+independent-host inference. Sharing of a 0.95 marker-cluster label is not, without SNV or popANI
+validation, evidence of strain identity at nucleotide resolution.
+
 #### Public real-metagenome cohorts and isolate-derived panels
 
 To supplement the controlled analyses, we profiled representative paired-end WGS subsets from four
@@ -1175,6 +1219,12 @@ strain-call counts; colour gives strain-call Jaccard. **(F)** Representative Spe
 strain-cluster composition and bile-acid classes or HUMAnN pathways; q values are Benjamini–Hochberg estimates.
 These associations are cohort-level ecological relationships rather than direct gene-to-cluster assignments.
 
+**Figure 12. Pairwise sharing of 0.95 marker-cluster types across saliva timepoints and macaque GI sites.** **(A,B)** Dominant-cluster and any-shared-cluster rates for the 32 saliva libraries. Denominators were species
+with calls in both samples; boxes summarize pairwise rates, and bootstrap contrasts are given in the text.
+**(C)** Mean dominant-cluster sharing for prespecified rhesus GI comparisons. **(D)** Old/young corresponding-site
+sharing by GI region and compartment, showing both dominant-cluster and any-shared-cluster rates. Exact label
+sharing describes 0.95 marker-cluster resolution, not SNV/popANI-validated strain identity or transmission.
+
 ### Supplementary figures
 
 **Figure S1. ATCC MSA-1002 DNA-input titration uses native BcgI 2bRAD-M reads.** Native-input species precision and recall are shown for 0.001, 0.01, 0.1 and 1 ng DNA; precision was 1.0 and recall was complete at 0.1 ng and above.
@@ -1369,6 +1419,41 @@ analysis. No case/control labels were available in public metadata. Values are f
 
 **Table S4. Gate-matched full-depth saliva comparison across all 32 PRJNA1131785 pairs.** WMS and native BcgI 2bRAD libraries were profiled with the same 19-species oral panel, species gate (20 panel-specific markers and two detected markers), support threshold (two markers) and coverage threshold (0.01). Cluster calls were matched by species and cluster label. Differences in sequencing depth, read layout and representation prevent interpretation as accuracy validation. Source: `results/wms32_rebuild/per_sample_summary.tsv`.
 
+| Sample | WMS calls | Native calls | Shared | WMS-only | Native-only | WMS species |
+|---|--:|--:|--:|--:|--:|--:|
+| S11-1 | 89 | 36 | 24 | 65 | 12 | 16 |
+| S11-11 | 77 | 52 | 22 | 55 | 30 | 19 |
+| S11-12 | 83 | 71 | 26 | 57 | 45 | 15 |
+| S11-14 | 136 | 25 | 10 | 126 | 15 | 18 |
+| S11-2 | 73 | 56 | 12 | 61 | 44 | 16 |
+| S11-6 | 72 | 35 | 14 | 58 | 21 | 16 |
+| S11-7 | 104 | 18 | 7 | 97 | 11 | 18 |
+| S11-9 | 39 | 23 | 13 | 26 | 10 | 11 |
+| S13-1 | 82 | 53 | 17 | 65 | 36 | 17 |
+| S13-11 | 85 | 52 | 10 | 75 | 42 | 14 |
+| S13-12 | 49 | 61 | 17 | 32 | 44 | 13 |
+| S13-14 | 105 | 22 | 5 | 100 | 17 | 17 |
+| S13-2 | 84 | 56 | 16 | 68 | 40 | 14 |
+| S13-6 | 82 | 30 | 14 | 68 | 16 | 17 |
+| S13-7 | 114 | 33 | 17 | 97 | 16 | 18 |
+| S13-9 | 78 | 20 | 9 | 69 | 11 | 17 |
+| S17-1 | 83 | 35 | 19 | 64 | 16 | 17 |
+| S17-11 | 71 | 67 | 15 | 56 | 52 | 13 |
+| S17-12 | 63 | 37 | 21 | 42 | 16 | 16 |
+| S17-14 | 121 | 25 | 7 | 114 | 18 | 18 |
+| S17-2 | 56 | 67 | 18 | 38 | 49 | 15 |
+| S17-6 | 63 | 25 | 12 | 51 | 13 | 17 |
+| S17-7 | 80 | 27 | 18 | 62 | 9 | 15 |
+| S17-9 | 47 | 25 | 16 | 31 | 9 | 15 |
+| S9-1 | 81 | 59 | 22 | 59 | 37 | 18 |
+| S9-11 | 70 | 71 | 20 | 50 | 51 | 15 |
+| S9-12 | 45 | 103 | 27 | 18 | 76 | 10 |
+| S9-14 | 109 | 23 | 6 | 103 | 17 | 17 |
+| S9-2 | 55 | 65 | 16 | 39 | 49 | 15 |
+| S9-6 | 38 | 27 | 20 | 18 | 7 | 12 |
+| S9-7 | 116 | 52 | 15 | 101 | 37 | 17 |
+| S9-9 | 37 | 17 | 10 | 27 | 7 | 11 |
+
 **Table S5. Rhesus macaque 148-sample cohort and monkey MAG panel.** The cohort contains 128 GI spatial
 samples (66 luminal and 62 mucosal) plus 20 body controls. The monkey-specific panel used 315 selected
 study MAGs across 18 species and 303 0.95 strain-cluster units. Counts use the same BcgI gates listed in
@@ -1495,41 +1580,45 @@ sample-level ecological associations, not gene-to-cluster assignments. Source:
 | *Treponema_D_succinifaciens* C2 | N-acetylglucosamine/mannosamine/neuraminate degradation | 0.965 | 1.8 × 10⁻¹⁵ | 2.1 × 10⁻¹³ |
 | *Succinivibrio_sp000431835* C4 | N-acetylglucosamine/mannosamine/neuraminate degradation | 0.789 | 2.0 × 10⁻⁶ | 1.2 × 10⁻⁵ |
 
+**Table S11. Strain-sharing groups in the 32-sample saliva time-course.** Rates are pairwise and were
+calculated only over species with calls in both samples. Dominant-cluster sharing is the primary
+StrainPhlAn-compatible metric; any-cluster sharing is the coexistence-aware secondary metric. Source:
+`results/strain_sharing_20261105/saliva_strain_sharing_group_summary.tsv`.
 
-| Sample | WMS calls | Native calls | Shared | WMS-only | Native-only | WMS species |
-|---|--:|--:|--:|--:|--:|--:|
-| S11-1 | 89 | 36 | 24 | 65 | 12 | 16 |
-| S11-11 | 77 | 52 | 22 | 55 | 30 | 19 |
-| S11-12 | 83 | 71 | 26 | 57 | 45 | 15 |
-| S11-14 | 136 | 25 | 10 | 126 | 15 | 18 |
-| S11-2 | 73 | 56 | 12 | 61 | 44 | 16 |
-| S11-6 | 72 | 35 | 14 | 58 | 21 | 16 |
-| S11-7 | 104 | 18 | 7 | 97 | 11 | 18 |
-| S11-9 | 39 | 23 | 13 | 26 | 10 | 11 |
-| S13-1 | 82 | 53 | 17 | 65 | 36 | 17 |
-| S13-11 | 85 | 52 | 10 | 75 | 42 | 14 |
-| S13-12 | 49 | 61 | 17 | 32 | 44 | 13 |
-| S13-14 | 105 | 22 | 5 | 100 | 17 | 17 |
-| S13-2 | 84 | 56 | 16 | 68 | 40 | 14 |
-| S13-6 | 82 | 30 | 14 | 68 | 16 | 17 |
-| S13-7 | 114 | 33 | 17 | 97 | 16 | 18 |
-| S13-9 | 78 | 20 | 9 | 69 | 11 | 17 |
-| S17-1 | 83 | 35 | 19 | 64 | 16 | 17 |
-| S17-11 | 71 | 67 | 15 | 56 | 52 | 13 |
-| S17-12 | 63 | 37 | 21 | 42 | 16 | 16 |
-| S17-14 | 121 | 25 | 7 | 114 | 18 | 18 |
-| S17-2 | 56 | 67 | 18 | 38 | 49 | 15 |
-| S17-6 | 63 | 25 | 12 | 51 | 13 | 17 |
-| S17-7 | 80 | 27 | 18 | 62 | 9 | 15 |
-| S17-9 | 47 | 25 | 16 | 31 | 9 | 15 |
-| S9-1 | 81 | 59 | 22 | 59 | 37 | 18 |
-| S9-11 | 70 | 71 | 20 | 50 | 51 | 15 |
-| S9-12 | 45 | 103 | 27 | 18 | 76 | 10 |
-| S9-14 | 109 | 23 | 6 | 103 | 17 | 17 |
-| S9-2 | 55 | 65 | 16 | 39 | 49 | 15 |
-| S9-6 | 38 | 27 | 20 | 18 | 7 | 12 |
-| S9-7 | 116 | 52 | 15 | 101 | 37 | 17 |
-| S9-9 | 37 | 17 | 10 | 27 | 7 | 11 |
+| Comparison | Pairs | Mean any-cluster rate | Mean dominant-cluster rate | Pooled any-cluster rate |
+|---|--:|--:|--:|--:|
+| Same subject, between timepoints | 48 | 0.801 | 0.538 | 0.800 |
+| Different subject, same timepoint | 112 | 0.574 | 0.216 | 0.578 |
+| Different subject, different timepoints | 336 | 0.566 | 0.218 | 0.567 |
+
+**Table S12. Strain-sharing groups in the 128-sample rhesus macaque GI spatial cohort.** Rates are pairwise
+and restricted to GI samples. Pooled rates divide shared species-pairs by all analyzable species-pairs.
+Source: `results/strain_sharing_20261105/monkey_strain_sharing_group_summary.tsv`.
+
+| Comparison | Analyzable pairs | Mean any-cluster rate | Mean dominant-cluster rate | Pooled any-cluster rate |
+|---|--:|--:|--:|--:|
+| Within monkey, between positions, same region/compartment | 260 | 0.649 | 0.379 | 0.819 |
+| Within monkey, mucosal/luminal, same region | 297 | 0.680 | 0.251 | 0.838 |
+| Between monkeys, same age, same region/compartment | 289 | 0.535 | 0.159 | 0.728 |
+| Between ages, corresponding region/compartment | 589 | 0.495 | 0.157 | 0.679 |
+| Between monkeys, between regions, same compartment | 1,321 | 0.336 | 0.100 | 0.457 |
+| Between compartments | 2,222 | 0.382 | 0.102 | 0.546 |
+
+**Table S13. Old/young rhesus strain sharing at corresponding GI sites.** Corresponding-site pairs matched
+GI region and compartment across O/Y monkey IDs. Region codes are retained from cohort metadata; rates use
+only pairs with at least one species detected in both samples. Source:
+`results/strain_sharing_20261105/monkey_between_age_corresponding_site_summary.tsv`.
+
+| Region | Compartment | Pairs | Analyzable pairs | Mean any-cluster rate | Mean dominant-cluster rate |
+|---|---|--:|--:|--:|--:|
+| E | Luminal | 6 | 4 | 0.275 | 0.194 |
+| K | Luminal | 2 | 2 | 0.500 | 0.125 |
+| LI | Luminal | 196 | 196 | 0.870 | 0.222 |
+| LI | Mucosal | 196 | 196 | 0.368 | 0.071 |
+| SI | Luminal | 72 | 72 | 0.408 | 0.253 |
+| SI | Mucosal | 143 | 119 | 0.149 | 0.131 |
+| S | Luminal | 2 | 0 | -- | -- |
+| S | Mucosal | 6 | 0 | -- | -- |
 
 ## 7. References
 
@@ -1598,3 +1687,9 @@ sample-level ecological associations, not gene-to-cluster assignments. Source:
 28. Bankevich A, Nurk S, Antipov D, *et al.* **SPAdes: a new genome assembly algorithm and its
     applications to single-cell sequencing.** *Journal of Computational Biology* 2012; 19(5):455–477.
     doi:10.1089/cmb.2012.0021.
+29. Beghini F, Pullman J, Alexander M, *et al.* **Gut microbiome strain-sharing within isolated village
+    social networks.** *Nature* 2025; 637(8044):167–175.
+    doi:10.1038/s41586-024-08222-1.
+30. Heidrich V, Fackelmann G, Ricci L, *et al.* **Strain transmission links human microbiomes along the
+    oral-gut axis and across cohabiting individuals.** *Cell Press Blue* 2026; 1(3):100034.
+    doi:10.1016/j.cpblue.2026.100034.

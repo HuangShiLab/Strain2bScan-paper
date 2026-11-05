@@ -25,6 +25,10 @@ S5–S10). In shotgun/HUMAnN/bile-acid subsets, strain composition was associate
 butyrate and propionate programs and N-acetyl-sugar degradation. These are cohort-level ecological
 associations rather than assignments of individual pathway genes to strains, but they show that
 reduced-representation strain calls can support spatial and metabolic hypotheses in real animal cohorts.
+Dominant-cluster sharing followed the same ecological logic: it was higher within monkeys between GI
+positions than between monkeys, and old/young sharing was higher for LI luminal than LI mucosal calls
+(Fig 12). This cluster-sharing summary is a population-resolution ecological measure rather than
+SNV/popANI-level transmission proof.
 
 In shotgun mode, the structural advantage is a change in search economics. A sample is digested once and the
 resulting tags index against all species, so adding species increases panel searches rather than sample
