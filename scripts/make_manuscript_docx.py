@@ -38,7 +38,7 @@ def prepare_intermediate() -> Path:
     references = text[references_start:].rstrip()
 
     captions = {m.group(2): " ".join(m.group(1).split()) for m in re.finditer(
-        r"(^\*\*Figure (S?\d+)\..*?)(?=^\*\*Figure |\Z)", legends, flags=re.M | re.S)}
+        r"(^\*\*Figure (S?\d+)\..*?)(?=^### |^\*\*Figure |\Z)", legends, flags=re.M | re.S)}
 
     def image_block(label: str) -> str:
         pattern = f"Fig{int(label):02d}_*.png" if label.isdigit() else f"Fig{label}_*.png"
