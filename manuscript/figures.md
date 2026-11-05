@@ -40,6 +40,16 @@ The left pair shows per-sample profiling cost and parallel speedup; the middle f
 **Figure 10. Shotgun DNA mocks separate tools under host contamination.** `figures/source_panels/fig11_wms_toolcompare.{png,pdf}`
 Four ATCC shotgun mocks were profiled with Strain2bScan, StrainScan and inStrain in their own call units. In MSA-1002 at 99% host, Strain2bScan retained F1 1.0 and Bray–Curtis dissimilarity 0.302, whereas StrainScan and inStrain had F1 0.095 and 0.333. These are descriptive tool-specific contrasts, not pooled estimates. Clean-mock thresholded precision varied with input composition.
 
+**Figure 11. Real rhesus macaque GI cohort reveals LI-luminal strain reservoirs.** `figures/numbered/Fig11_monkey_spatial_cohort.{png,pdf}`
+**(A)** Distribution of 128 GI libraries across four rhesus macaques and five GI regions. **(B)** Species
+prevalence in GI, luminal, mucosal and body-control libraries for the ten most frequently recovered species.
+**(C)** Ten representative LI-enriched clusters; the open red circle marks peak LI prevalence. **(D)** Thirteen
+matched mucosal/luminal strain clusters that remained significant after Bonferroni correction; bars show
+−log10(q), with numbers of luminal- and mucosa-positive pairs. **(E)** Paired luminal shotgun and native 2bRAD
+strain-call counts; colour gives strain-call Jaccard. **(F)** Representative Spearman associations between LI
+strain-cluster composition and bile-acid classes or HUMAnN pathways; q values are Benjamini–Hochberg estimates.
+These associations are cohort-level ecological relationships rather than direct gene-to-cluster assignments.
+
 ## Supplementary figures
 
 **Figure S1. ATCC MSA-1002 DNA-input titration uses native BcgI 2bRAD-M reads.** `figures/source_panels/mock_msa1002_titration.{png,pdf}` Native-input species precision and recall are shown for 0.001, 0.01, 0.1 and 1 ng DNA; precision was 1.0 and recall was complete at 0.1 ng and above.

@@ -17,6 +17,15 @@ for species features, although the subject-aware improvement interval included z
 32-pair rebuild showed both modality-specific sensitivity and modality-specific omissions, reinforcing that
 these real-data comparisons describe assay scope rather than validate either modality (Fig 6).
 
+A rhesus macaque GI spatial cohort extended this logic from person-specific stability to spatial ecology.
+A cohort-specific panel built from 315 study MAGs recovered strain calls in 113/128 GI samples and 56/66
+luminal samples, whereas only two body controls produced calls. Eighty-nine clusters were LI-enriched and
+thirteen remained luminal-enriched after matched-position Bonferroni correction (Supplementary Tables
+S5–S10). In shotgun/HUMAnN/bile-acid subsets, strain composition was associated with bile-acid classes,
+butyrate and propionate programs and N-acetyl-sugar degradation. These are cohort-level ecological
+associations rather than assignments of individual pathway genes to strains, but they show that
+reduced-representation strain calls can support spatial and metabolic hypotheses in real animal cohorts.
+
 In shotgun mode, the structural advantage is a change in search economics. A sample is digested once and the
 resulting tags index against all species, so adding species increases panel searches rather than sample
 k-mer counting. This design produced the 121–146× projected cohort-level advantage on the 55-species
@@ -57,5 +66,7 @@ family.
 Two applications follow directly from the evidence. Native 2bRAD-M is appropriate when host content, input
 mass or degradation limits shotgun recovery, with tumour, FFPE and skin as priority targets that remain to
 be tested. In-silico digestion is appropriate for large shotgun cohorts in which repeated per-species
-k-mer searches dominate cost. Resolving those two regimes in one marker space turns reduced-representation
-sequencing from a species-profile protocol into a practical route to strain-resolved microbiome analysis.
+k-mer searches dominate cost. The rhesus GI analysis illustrates the second use: one panel spans multiple
+species and links strain-cluster structure to regional, mucosal/luminal and metabolic contrasts. Resolving
+those regimes in one marker space turns reduced-representation sequencing from a species-profile protocol
+into a practical route to strain-resolved microbiome analysis.

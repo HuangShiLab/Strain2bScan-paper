@@ -33,4 +33,4 @@ libraries enable strain-level analysis of low-biomass, high-host microbiomes. In
 conventional shotgun metagenomes enables digest-once, cohort-scale analysis, in which the marginal cost of
 another species is a search against a compact panel rather than a second pass over sample k-mers. We
 evaluate marker information content, strain detection and abundance accuracy, comparator performance,
-computational scaling and application to real oral, vaginal, meconium and infant-gut metagenomes.
+computational scaling and application to real oral, vaginal, meconium, infant-gut and rhesus GI spatial metagenomes.

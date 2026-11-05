@@ -152,7 +152,7 @@ marginal cost *ε* of a hash-set intersection: total ≈ *N × (digest + S·ε)*
 the ratio grows with *S*; an *S*-fold structural advantage confirmed empirically at ~132× on 100 samples
 of a 55-species community (Fig 9C) and reproduced in the head-to-head, where StrainScan, lacking a
 multi-species mode, must run each community sample once per species and so pays 100–398 s per sample versus
-1–9 s for a single Strain2bScan pass (Fig 11F).
+1–9 s for a single Strain2bScan pass (Fig 9F).
 
 ### Implementation and determinism
 

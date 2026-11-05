@@ -1,0 +1,158 @@
+#!/usr/bin/env python3
+"""Build Figure 11: real rhesus macaque GI spatial strain-cohort analysis."""
+from pathlib import Path
+import numpy as np
+import pandas as pd
+import matplotlib as mpl
+import matplotlib.pyplot as plt
+from matplotlib.colors import Normalize
+from matplotlib.cm import ScalarMappable
+
+ROOT=Path(__file__).resolve().parents[1]
+IN=ROOT/"results/monkey_spatial_148/hpc_outputs/analysis"
+OUT=ROOT/"figures/numbered"
+OUT.mkdir(parents=True,exist_ok=True)
+
+mpl.rcParams.update({
+    "font.family":"Arial","font.size":7.2,"axes.titlesize":8.4,"axes.labelsize":7.6,
+    "xtick.labelsize":6.6,"ytick.labelsize":6.6,"legend.fontsize":6.4,
+    "axes.linewidth":0.7,"pdf.fonttype":42,"ps.fonttype":42,
+    "figure.dpi":300,"savefig.dpi":300,"savefig.bbox":"tight",
+})
+meta=pd.read_csv(IN/"full_148_20261027/full_148_sample_metadata.tsv",sep="\t")
+species=pd.read_csv(IN/"full_148_20261027/full148_species_GI_control_summary.tsv",sep="\t")
+clusters=pd.read_csv(IN/"full_148_20261027/full148_2brad_cluster_GI_control_region_summary.tsv",sep="\t")
+paired=pd.read_csv(IN/"full_148_20261027/full148_mucosal_luminal_paired_tests.tsv",sep="\t")
+paired=paired[paired.p_bonferroni<0.05].copy()
+concordance=pd.read_csv(IN/"strain_profiling_20261023/paired_luminal_modality_concordance.tsv",sep="\t")
+coupling=pd.read_csv(IN/"functional_coupling_20261027/key_coupling_results.tsv",sep="\t")
+
+def clean_species(x):
+    return x.replace("_sp0"," sp0").replace("_sp9"," sp9").replace("_A","_A").replace("_B","_B")
+
+def cluster_label(row, maxlen=34):
+    if "species" in row:
+        species=str(row["species"]); cluster=str(row.get("cluster",""))
+    else:
+        combined=str(row.get("strain_cluster","")); species,cluster=combined.rsplit("|",1)
+    species=species.replace("_sp"," sp").replace("_A"," A").replace("_B"," B")
+    label=f"{species} {cluster}"
+    return label if len(label)<=maxlen else label[:maxlen-1]+"…"
+
+fig=plt.figure(figsize=(18.0,13.0))
+gs=fig.add_gridspec(3,2,height_ratios=[0.72,0.92,0.94],hspace=0.58,wspace=0.58)
+
+# A. Sampling design
+ax=fig.add_subplot(gs[0,0])
+counts=meta[meta.sample_group=="GI_spatial"].groupby(["monkey_id","gi_region","compartment"]).size().unstack(fill_value=0)
+order=[(m,r) for m in ["O1","O2","Y1","Y2"] for r in ["E","S","SI","LI","K"]]
+counts=counts.reindex(pd.MultiIndex.from_tuples(order,names=["monkey_id","gi_region"]),fill_value=0)
+x=np.arange(len(counts)); width=0.78
+ax.bar(x,counts.get("luminal",0),width,label="Luminal",color="#4C78A8",edgecolor="white",linewidth=0.4)
+ax.bar(x,counts.get("mucosal",0),width,bottom=counts.get("luminal",0),label="Mucosal",color="#F58518",edgecolor="white",linewidth=0.4)
+ax.axvline(9.5,color="0.75",lw=0.6,ls=":")
+ax.set_xticks(x); ax.set_xticklabels([f"{m}\n{r}" for m,r in counts.index])
+ax.set_ylabel("GI libraries"); ax.set_ylim(0,max(counts.sum(axis=1))*1.15)
+ax.set_title("A  128 GI spatial samples plus 20 body controls",loc="left",fontweight="bold")
+ax.legend(frameon=False,ncol=2,loc="upper left",bbox_to_anchor=(0.01,0.98))
+ax.text(0.97,0.82,"20 body controls\n3 total strain calls",transform=ax.transAxes,ha="right",va="top",
+        fontsize=7.0,color="0.25",bbox=dict(boxstyle="round,pad=0.25",facecolor="white",edgecolor="0.75",lw=0.5))
+
+# B. Species prevalence
+ax=fig.add_subplot(gs[0,1])
+top=species.sort_values("prevalence_GI",ascending=False).head(10).iloc[::-1]
+y=np.arange(len(top)); h=0.18
+groups=[("prevalence_GI","GI","#2F4B7C"),("prevalence_luminal","Luminal","#4C78A8"),
+        ("prevalence_mucosal","Mucosal","#F58518"),("prevalence_body_control","Body control","#B0B0B0")]
+for j,(col,label,color) in enumerate(groups):
+    offset=(j-1.5)*h
+    ax.barh(y+offset,top[col],height=h,label=label,color=color,edgecolor="none")
+ax.set_yticks(y); ax.set_yticklabels([clean_species(x) for x in top.species],fontsize=6.0)
+ax.set_xlabel("Species prevalence"); ax.set_xlim(0,1.0); ax.xaxis.set_major_formatter(lambda v,_:f"{v:.0%}")
+ax.set_title("B  Species recovery and body-control specificity",loc="left",fontweight="bold")
+ax.legend(frameon=False,ncol=2,loc="lower right")
+
+# C. LI-enriched cluster dumbbell
+ax=fig.add_subplot(gs[1,0])
+li=clusters[(clusters.peak_region=="LI")&(clusters.region_specificity>=0.8)&(clusters.max_region_prevalence>=0.3)].copy()
+li=li.sort_values(["max_region_prevalence","region_specificity"],ascending=False).head(10).iloc[::-1]
+y=np.arange(len(li))
+for i,(_,r) in enumerate(li.iterrows()):
+    ax.plot([r.prevalence_mucosal,r.prevalence_luminal],[i,i],color="#D0D0D0",lw=1.0,zorder=1)
+ax.scatter(li.prevalence_mucosal,y,s=18,color="#F58518",label="Mucosal",zorder=2)
+ax.scatter(li.prevalence_luminal,y,s=20,color="#4C78A8",label="Luminal",zorder=3)
+ax.scatter(li.prevalence_LI,y,s=24,facecolor="none",edgecolor="#B2182B",lw=0.8,label="Peak LI",zorder=4)
+ax.set_yticks(y); ax.set_yticklabels([cluster_label(r) for _,r in li.iterrows()],fontsize=5.9)
+ax.set_xlabel("Cluster prevalence"); ax.set_xlim(0,0.85); ax.xaxis.set_major_formatter(lambda v,_:f"{v:.0%}")
+ax.set_title("C  LI-enriched strain clusters (n = 89 total)",loc="left",fontweight="bold")
+ax.legend(frameon=False,ncol=3,loc="lower right",handletextpad=0.2,columnspacing=0.7)
+
+# D. Bonferroni-significant luminal enrichment
+ax=fig.add_subplot(gs[1,1])
+plot=paired.sort_values("p_bonferroni",ascending=False).copy()
+plot["minus_log_q"]=-np.log10(plot.p_bonferroni)
+y=np.arange(len(plot))
+bars=ax.barh(y,plot.minus_log_q,color="#2166AC",edgecolor="none",height=0.62)
+ax.set_yticks(y); ax.set_yticklabels([cluster_label(r) for _,r in plot.iterrows()],fontsize=5.9)
+ax.set_xlabel(r"$-\log_{10}$(Bonferroni $q$)")
+ax.set_xlim(0,max(plot.minus_log_q)*1.20)
+for i,(_,r) in enumerate(plot.iterrows()):
+    ax.text(r.minus_log_q+0.08,i,f"{int(r.n_luminal_positive)} L / {int(r.n_mucosal_positive)} M",
+            va="center",fontsize=5.6,color="0.25")
+ax.set_title("D  Matched mucosal/luminal tests (13 Bonferroni q < 0.05)",loc="left",fontweight="bold")
+
+# E. Modality concordance
+ax=fig.add_subplot(gs[2,0])
+sc=ax.scatter(concordance.n_shotgun_calls,concordance.n_2brad_calls,
+              c=concordance.jaccard_calls,cmap="viridis_r",s=17,edgecolor="0.55",linewidth=0.25,
+              norm=Normalize(0,1))
+lim=max(concordance.n_shotgun_calls.max(),concordance.n_2brad_calls.max())*1.08
+ax.plot([0,lim],[0,lim],color="0.45",lw=0.6,ls="--")
+ax.set_xlim(0,lim); ax.set_ylim(0,lim)
+ax.set_xlabel("Shotgun strain-cluster calls"); ax.set_ylabel("2bRAD strain-cluster calls")
+cb=fig.colorbar(sc,ax=ax,pad=0.015,aspect=18); cb.set_label("Strain-call Jaccard",fontsize=6.2)
+cb.ax.tick_params(labelsize=5.8); cb.outline.set_linewidth(0.4)
+ax.text(0.04,0.94,"Median call Jaccard = 0.605\nMedian species Jaccard = 0.889",transform=ax.transAxes,
+        ha="left",va="top",fontsize=6.1,bbox=dict(boxstyle="round,pad=0.22",facecolor="white",edgecolor="0.75",lw=0.5))
+ax.set_title("E  Paired luminal 2bRAD / shotgun calls",loc="left",fontweight="bold")
+
+# F. BA and pathway coupling
+ax=fig.add_subplot(gs[2,1])
+plot=coupling.copy()
+feature_map={
+ "conjugated_or_highmass":"Conjugated/high-mass BA",
+ "cholate_like_Q1_407":"Cholate-like BA",
+ "dihydroxy_Q1_391":"Dihydroxy BA",
+ "LCA_like_Q1_375":"LCA-like BA",
+ "CENTFERM-PWY: pyruvate fermentation to butanoate":"Pyruvate → butanoate",
+ "PWY-5676: acetyl-CoA fermentation to butanoate II":"Acetyl-CoA → butanoate II",
+ "Oribacterium_sp900768305|C2_PYRUVTETHSYN-PWY: pyruvate fermentation to butanoate":"Pyruvate → butanoate",
+ "P108-PWY: pyruvate fermentation to propanoate I":"Pyruvate → propanoate I",
+ "PWY-5677: succinate fermentation to butanoate":"Succinate → butanoate",
+ "P441-PWY: superpathway of N-acetylneuraminate degradation":"N-acetylneuraminate degradation",
+ "GLCMANNANAUT-PWY: superpathway of N-acetylglucosamine, N-acetylmannosamine and N-acetylneuraminate degradation":"N-acetyl-sugar degradation",
+}
+plot["short_feature"]=plot.feature.map(lambda x:feature_map.get(x,x))
+plot["label"]=plot.apply(lambda r:f"{cluster_label(r)} — {r.short_feature}",axis=1)
+plot["abs_rho"]=plot.rho.abs()
+plot=plot.sort_values("rho")
+y=np.arange(len(plot))
+colors=["#B2182B" if v<0 else "#2166AC" for v in plot.rho]
+ax.barh(y,plot.rho,color=colors,edgecolor="none",height=0.62)
+ax.axvline(0,color="0.35",lw=0.6)
+ax.set_yticks(y); ax.set_yticklabels(plot.label,fontsize=5.4)
+ax.set_xlabel("Spearman ρ with strain-cluster composition")
+ax.set_xlim(-1.05,1.05)
+for i,(_,r) in enumerate(plot.iterrows()):
+    x=r.rho+(0.03 if r.rho>=0 else -0.03); ha="left" if r.rho>=0 else "right"
+    ax.text(x,i,f"q={r.q:.1g}",va="center",ha=ha,fontsize=5.2,color="0.3")
+
+ax.set_title("F  LI strain-cluster coupling to BA and functions",loc="left",fontweight="bold")
+
+fig.suptitle("Real rhesus macaque GI cohort: 148 samples, 18-species/303-cluster monkey MAG panel",x=0.015,y=0.985,ha="left",fontsize=12,fontweight="bold")
+for label,ax in zip("ABCDEF",fig.axes):
+    ax.text(-0.08,1.08,label,transform=ax.transAxes,fontsize=13,fontweight="bold",va="bottom",ha="right")
+
+for ext in ["png","pdf"]:
+    fig.savefig(OUT / f"Fig11_monkey_spatial_cohort.{ext}",bbox_inches="tight",facecolor="white")
+print(OUT/"Fig11_monkey_spatial_cohort.png")

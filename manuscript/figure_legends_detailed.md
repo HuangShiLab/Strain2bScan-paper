@@ -353,7 +353,7 @@ precision 1.0 at both depths with leakage held in the middle tier; the breadth t
 - *Comparison:* inStrain on the non-dereplicated 164-genome reference versus a 98%-ANI
   dereplicated reference.
 - *Result:* the non-dereplicated reference inflates false positives; dereplication restores
-  detection and precision. This is why Fig 11 uses the dereplicated inStrain reference.
+  detection and precision. This is why Fig S4 uses the dereplicated inStrain reference.
 - *File:* `figures/numbered/FigS4_instrain_derep.{png,pdf}`.
 
 ---
@@ -414,3 +414,25 @@ to 0.98/0.92 and recall to 0.95/0.92 at 95/90 % completeness, converging with Ja
 ---
 
 ---
+
+---
+
+## Figure 11; Real rhesus macaque GI spatial strain cohort
+**1. Data source.**
+- *Data type:* native BcgI 2bRAD-M GI/body-control libraries, paired luminal shotgun libraries, HUMAnN
+  pathway profiles and targeted bile-acid SRM chromatograms.
+- *Samples:* 148 libraries = 128 GI samples (66 luminal, 62 mucosal) + 20 body controls; paired shotgun and
+  function/bile-acid overlays are available for luminal subsets.
+- *Panel:* 315 selected study MAGs across 18 species, clustered to 303 0.95 strain-cluster units.
+**2. Key issue & conclusion.** Does Strain2bScan recover reproducible strain-cluster structure in a real
+non-human spatial cohort, and is that structure distinguishable from body controls? The cohort yielded
+GI strain calls in 113/128 samples, with only 3 calls in body controls. Eighty-nine clusters were
+LI-enriched and 13 matched mucosal/luminal clusters remained significant after Bonferroni correction.
+**3. Results by subfigure.**
+- **(A)** Library distribution by monkey, GI region and compartment.
+- **(B)** Species prevalence across GI, luminal, mucosal and body-control libraries.
+- **(C)** Representative LI-enriched clusters, showing mucosal/luminal prevalence and peak LI prevalence.
+- **(D)** Bonferroni-significant matched mucosal/luminal strain clusters.
+- **(E)** Paired luminal shotgun versus native 2bRAD strain-call counts and Jaccard concordance.
+- **(F)** LI strain-cluster associations with bile-acid classes and HUMAnN pathways.
+- *File:* `figures/numbered/Fig11_monkey_spatial_cohort.{png,pdf}`.

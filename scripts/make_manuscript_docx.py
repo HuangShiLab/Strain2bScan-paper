@@ -13,7 +13,7 @@ import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 SRC = ROOT / "manuscript/full_manuscript.md"
-OUT = ROOT / "manuscript/Strain2bScan_manuscript_2026-11-03-full148.docx"
+OUT = ROOT / "manuscript/Strain2bScan_manuscript_2026-11-05-full148.docx"
 TITLE = "Strain2bScan: strain-level 2bRAD-marker profiling of microbiomes"
 
 
@@ -55,7 +55,7 @@ def prepare_intermediate() -> Path:
         ])
 
     parts = [body, "# Main figures", ""]
-    parts.extend(image_block(str(i)) for i in range(1, 11))
+    parts.extend(image_block(str(i)) for i in range(1, 12))
     parts.extend(["# Supplementary figures", ""])
     parts.extend(image_block(f"S{i}") for i in range(1, 7))
     table_lines = []

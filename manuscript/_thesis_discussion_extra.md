@@ -17,7 +17,7 @@ could not build; while being dramatically cheaper. A fuller comparison against S
 StrainPhlAn on identical inputs is the natural next benchmark; the framework and evaluation harness built
 here are designed to accommodate it.
 
-**Interpreting the head-to-head, and its caveats.** Three points bound the interpretation of Fig 11 and
+**Interpreting the head-to-head, and its caveats.** Three points bound the interpretation of Fig 8 and
 Table 1–3. First, StrainScan is Linux-x86-only and was run under emulation on the Apple-silicon test
 machine; its *wall-clock* is therefore an upper bound, which is why the profiling comparison is reported in
 a same-environment ratio (an emulated `linux/amd64` build of Strain2bScan) rather than native-vs-emulated,
