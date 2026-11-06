@@ -96,6 +96,7 @@ def main():
     permanova = read_tsv(PAPER / "results/saliva_permanova.tsv")
     perm = {(r["factor"], r["level"]): r for r in permanova if r["factor"] == "subject"}
     temporal = {r["metric"]: r for r in read_tsv(PAPER / "results/saliva_temporal_ml.tsv")}
+    sharing = read_tsv(PAPER / "results/strain_sharing_20261105/saliva_pairwise_strain_sharing.tsv")
     acc_s2b = loto_accuracy(Ms, subject, timepoint)
     acc_species = loto_accuracy(Mp, subject, timepoint)
     expected_s2b = float(temporal["leave_one_timepoint_out_subject_accuracy"]["strain"])
@@ -123,14 +124,16 @@ def main():
         raise SystemExit("Bray-Curtis group means do not match archived saliva table")
     p_within = float(temporal["within_vs_between_mannwhitney_p"]["strain"])
 
-    fig = plt.figure(figsize=(15.5, 9.0), constrained_layout=True)
-    gs = fig.add_gridspec(2, 6)
+    fig = plt.figure(figsize=(17.5, 10.4), constrained_layout=True)
+    gs = fig.add_gridspec(2, 12)
     axes = {
-        "A": fig.add_subplot(gs[0, 0:2]),
-        "B": fig.add_subplot(gs[0, 2:4]),
-        "C": fig.add_subplot(gs[0, 4:6]),
+        "A": fig.add_subplot(gs[0, 0:3]),
+        "B": fig.add_subplot(gs[0, 3:6]),
+        "C": fig.add_subplot(gs[0, 6:12]),
         "D": fig.add_subplot(gs[1, 0:3]),
         "E": fig.add_subplot(gs[1, 3:6]),
+        "F": fig.add_subplot(gs[1, 6:9]),
+        "G": fig.add_subplot(gs[1, 9:12]),
     }
 
     for label, coords, explained, level in (("A", coords_s, ev_s, "species"), ("B", coords_b, ev_b, "strain")):
@@ -139,12 +142,14 @@ def main():
         for s in subjects:
             idx = np.where(subject == s)[0]
             ax.scatter(coords[idx, 0], coords[idx, 1], s=48, color=colors[s],
-                       label=f"{s}" if label == "A" else None, edgecolor="k", linewidth=0.35, alpha=0.9)
+                       label=f"Subject {s}" if label == "A" else None, edgecolor="k", linewidth=0.35, alpha=0.9)
         ax.set_title(f"{label}  {level.capitalize()}-level PCoA\nsubject R²={float(row['R2']):.3f}, p={float(row['p_value']):.1e}")
         ax.set_xlabel(f"PCo1 ({explained[0]:.0%})")
         ax.set_ylabel(f"PCo2 ({explained[1]:.0%})")
-        ax.grid(alpha=0.22)
-    axes["A"].legend(title="Subject", fontsize=8, loc="best", ncol=2)
+        ax.grid(False)
+    legend = axes["A"].legend(fontsize=7.6, loc="upper right", ncol=2, frameon=True,
+                              framealpha=0.95, edgecolor="0.75", handletextpad=2.4,
+                              borderpad=0.55, labelspacing=0.42, columnspacing=4.0)
 
     ax = axes["C"]
     ypos = np.arange(len(per_species))
@@ -153,12 +158,11 @@ def main():
     ax.barh(ypos, r2, color=["#1f77b4" if x else "#bbbbbb" for x in sig], edgecolor="k", linewidth=0.3)
     ax.set_yticks(ypos)
     ax.set_yticklabels([r["species"].replace("_", " ") for r in per_species], fontsize=8)
-    ax.axvline(float(perm[("subject", "strain")]["R2"]), color="k", linestyle="--", linewidth=1,
-               label="whole-community strain R²")
+    whole_r2 = float(perm[("subject", "strain")]["R2"])
+    ax.axvline(whole_r2, color="k", linestyle="--", linewidth=1)
     ax.set_xlabel("strain-level subject PERMANOVA R²")
-    ax.set_title("C  Per-species individual signal")
+    ax.set_title(f"C  Per-species individual signal (dashed whole-community R² = {whole_r2:.3f})")
     ax.grid(alpha=0.22, axis="x")
-    ax.legend(loc="lower right", fontsize=8)
 
     ax = axes["D"]
     ax.boxplot([within, between], tick_labels=["Within subject", "Between subjects"], widths=0.55,
@@ -176,13 +180,44 @@ def main():
                   color=["#9467bd", "#1f77b4"], edgecolor="k")
     ax.axhline(1 / len(subjects), color="k", linestyle=":", linewidth=1.2, label="Chance = 12.5%")
     for bar, value in zip(bars, [acc_species, acc_s2b]):
-        ax.text(bar.get_x() + bar.get_width() / 2, value + 0.025, f"{value:.1%}",
-                ha="center", fontweight="bold")
+        ax.text(bar.get_x() + bar.get_width() / 2, value + 0.045, f"{value:.1%}",
+                ha="center", fontweight="bold", bbox=dict(boxstyle="round,pad=0.16",
+                facecolor="white", edgecolor="none"), zorder=5)
     ax.set_ylim(0, 1.10)
     ax.set_ylabel("Leave-one-timepoint-out accuracy")
     ax.set_title("E  Within-subject host classification\n8 subjects; one timepoint held out")
     ax.grid(alpha=0.22, axis="y")
     ax.legend(loc="upper left", fontsize=8)
+
+    sharing_order = ["same_subject_between_timepoints", "same_timepoint_between_subjects",
+                     "different_subject_between_timepoints"]
+    sharing_labels = ["Same subj", "Diff subj same TP", "Diff subj diff TPs"]
+    sharing_metrics = (("F", "strain_sharing_rate_dominant_cluster",
+                        "Dominant-cluster sharing rate",
+                        "#C6DBEF", "#2171B5", "#08519C"),
+                       ("G", "strain_sharing_rate_any_cluster",
+                        "Any-shared-cluster rate",
+                        "#FDD0A2", "#D7301F", "#7F0000"))
+    for label, metric, ylabel, facecolor, edgecolor, pointcolor in sharing_metrics:
+        ax = axes[label]
+        values = [[float(r[metric]) for r in sharing if r["comparison_group"] == group]
+                  for group in sharing_order]
+        box = ax.boxplot(values, tick_labels=sharing_labels, patch_artist=True, widths=0.55,
+                         showfliers=False, medianprops={"color": "k", "linewidth": 1.0})
+        for item in box["boxes"]:
+            item.set_facecolor(facecolor)
+            item.set_edgecolor(edgecolor)
+            item.set_linewidth(0.7)
+        for i, vals in enumerate(values, 1):
+            xs = np.random.default_rng(11 + i).normal(i, 0.055, len(vals))
+            ax.scatter(xs, vals, s=8, color=pointcolor, alpha=0.42, linewidths=0)
+        ax.set_ylim(-0.02, 1.02)
+        ax.set_ylabel(ylabel)
+        ax.grid(alpha=0.22, axis="y")
+        ax.set_xticklabels(sharing_labels, rotation=28, ha="right", fontsize=6.8)
+        metric_title = ("Dominant-cluster sharing" if label == "F"
+                        else "Any-shared-cluster sharing")
+        ax.set_title(f"{label}  Saliva {metric_title}")
 
     fig.suptitle("Native 2bRAD saliva profiles are individual-specific within one day (8 subjects × 4 timepoints)",
                  fontsize=14, fontweight="bold")

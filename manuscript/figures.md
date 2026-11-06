@@ -23,7 +23,7 @@ manifest with `python scripts/make_figure_manifest.py`.
 MSA-1002, MSA-1003, MSA-1005 and MSA-1007 were profiled against a 28-species, 164-genome containment tree. At 90, 95 and 99% human DNA, F1 was 0.976–1.0 and Bray–Curtis similarity 0.745–0.756. A 0.1-ng input retained F1 0.952; 0.01 ng approached the marker-depth noise floor and 0.001 ng was below the detection floor.
 
 **Figure 5. Real saliva contains individual-specific, within-day strain signatures.** `figures/source_panels/saliva_fig07.{png,pdf}`
-**(A,B)** Subject-constrained PCoA of species-level and strain-level profiles. **(C)** Per-species strain signal. **(D)** Within- versus between-subject Bray–Curtis distance. **(E)** Leave-one-timepoint-out subject classification. Thirty-two native BcgI 2bRAD-M saliva libraries from eight subjects sampled four times in one day were profiled against a 19-species oral panel. Classification reached 100% with strain features versus 78.1% with species features; within-subject Bray–Curtis distance was 0.327 versus 0.696 between subjects. This is a small within-subject result, not independent strain-identity validation.
+**(A,B)** Subject-constrained PCoA of species-level and strain-level profiles. **(C)** Per-species strain signal; the dashed line marks whole-community strain signal. **(D)** Within- versus between-subject Bray–Curtis distance. **(E)** Leave-one-timepoint-out subject classification. **(F,G)** Dominant-cluster and any-shared-cluster rates for pairwise saliva comparisons; denominators were species with calls in both samples. Thirty-two native BcgI 2bRAD-M saliva libraries from eight subjects sampled four times in one day were profiled against a 19-species oral panel. Classification reached 100% with strain features versus 78.1% with species features; within-subject Bray–Curtis distance was 0.327 versus 0.696 between subjects. This is a small within-subject result, not independent strain-identity validation.
 
 **Figure 6. Exploratory paired saliva comparison.** `figures/source_panels/saliva_fig08.{png,pdf}`
 **(A)** Shared and unique paired-sample call sets. **(B)** Relative abundance of shared versus native-only calls. Shotgun R1 prefix libraries from three usable paired samples were digested in silico and compared with matched native BcgI libraries under the prefix-analysis gates. All 65 shotgun strain-cluster calls were present in native calls; native 2bRAD-M yielded 128–163 additional candidate calls per sample. This non-depth-matched exploratory result is directional only and does not establish a systematic modality advantage.
@@ -47,15 +47,12 @@ prevalence in GI, luminal, mucosal and body-control libraries for the ten most f
 matched mucosal/luminal strain clusters that remained significant after Bonferroni correction; bars show
 −log10(q), with numbers of luminal- and mucosa-positive pairs. **(E)** Paired luminal shotgun and native 2bRAD
 strain-call counts; colour gives strain-call Jaccard. **(F)** Representative Spearman associations between LI
-strain-cluster composition and bile-acid classes or HUMAnN pathways; q values are Benjamini–Hochberg estimates.
+strain-cluster composition and bile-acid classes or HUMAnN pathways; Benjamini–Hochberg q values are provided
+in Supplementary Table S10.
 These associations are cohort-level ecological relationships rather than direct gene-to-cluster assignments.
-
-**Figure 12. Pairwise sharing of 0.95 marker-cluster types across saliva timepoints and macaque GI sites.** `figures/numbered/Fig12_strain_sharing.{png,pdf}`
-**(A,B)** Dominant-cluster and any-shared-cluster rates for the 32 saliva libraries. Denominators were species
-with calls in both samples; boxes summarize pairwise rates, and bootstrap contrasts are given in the text.
-**(C)** Mean dominant-cluster sharing for prespecified rhesus GI comparisons. **(D)** Old/young corresponding-site
-sharing by GI region and compartment, showing both dominant-cluster and any-shared-cluster rates. Exact label
-sharing describes 0.95 marker-cluster resolution, not SNV/popANI-validated strain identity or transmission.
+**(G)** Mean dominant-cluster sharing for prespecified rhesus GI comparisons. **(H)** Old/young corresponding-site
+sharing by GI region and compartment, showing dominant-cluster and any-shared-cluster rates. Exact label sharing
+describes 0.95 marker-cluster resolution, not SNV/popANI-validated strain identity or transmission.
 
 ## Supplementary figures
 

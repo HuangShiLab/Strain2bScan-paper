@@ -158,6 +158,9 @@ strain signature resolved in ~1 s/sample.
   species significant.
 - **(D)** Within- vs between-subject strain Bray–Curtis distance (0.327 vs 0.696, p 8.05e-19) within one sampling day.
 - **(E)** Leave-one-timepoint-out host-ID accuracy, strain (100 %) vs species (78.1 %) vs chance (12.5 %).
+- **(F,G)** Pairwise dominant-cluster and any-shared-cluster rates. Within-subject between-timepoint
+  dominant-cluster sharing was 0.538 versus 0.217 between subjects; any-cluster sharing was 0.801 versus
+  0.568. Source tables: `results/strain_sharing_20261105/saliva_*_strain_sharing*.tsv`.
 
 ---
 
@@ -435,4 +438,9 @@ LI-enriched and 13 matched mucosal/luminal clusters remained significant after B
 - **(D)** Bonferroni-significant matched mucosal/luminal strain clusters.
 - **(E)** Paired luminal shotgun versus native 2bRAD strain-call counts and Jaccard concordance.
 - **(F)** LI strain-cluster associations with bile-acid classes and HUMAnN pathways.
+- **(G)** Mean dominant-cluster sharing across prespecified spatial and age contrasts; within-monkey
+  between-position sharing was 0.379 versus 0.159 between monkeys at same age/site.
+- **(H)** Old/young corresponding-site sharing by GI region and compartment; LI luminal any-cluster sharing
+  was 0.870, whereas LI mucosal dominant-cluster sharing was 0.071. Source tables are in
+  `results/strain_sharing_20261105/`.
 - *File:* `figures/numbered/Fig11_monkey_spatial_cohort.{png,pdf}`.

@@ -66,5 +66,4 @@ fig.suptitle("Strain2bScan strain-sharing rates across timepoints, monkeys and G
 fig.tight_layout(rect=[0,.01,.99,.96])
 for ext in ["png","pdf"]:
     fig.savefig(IN/f"strain_sharing_summary.{ext}",bbox_inches="tight",facecolor="white")
-    fig.savefig(ROOT/"figures/numbered"/f"Fig12_strain_sharing.{ext}",bbox_inches="tight",facecolor="white")
 print(IN/"strain_sharing_summary.png")

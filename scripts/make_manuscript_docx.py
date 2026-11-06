@@ -55,7 +55,7 @@ def prepare_intermediate() -> Path:
         ])
 
     parts = [body, "# Main figures", ""]
-    parts.extend(image_block(str(i)) for i in range(1, 13))
+    parts.extend(image_block(str(i)) for i in range(1, 12))
     parts.extend(["# Supplementary figures", ""])
     parts.extend(image_block(f"S{i}") for i in range(1, 7))
     table_lines = []

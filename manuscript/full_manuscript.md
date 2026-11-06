@@ -90,9 +90,11 @@ We reran the enzyme ladder on 225 matched shotgun-derived simulations, giving 1,
 
 Four ATCC whole-cell mocks were profiled against a unified 28-species, 164-genome tree. In the primary MSA-1002 comparison, native BcgI 2bRAD-M retained F1 = 0.952 at 0.1 ng DNA and F1 = 1.0 with AUPR = 1.0 at 90–99% human DNA. At 90, 95 and 99% host DNA, MSA-1002 F1 was 0.976–1.0 and Bray–Curtis similarity was 0.745–0.756. F1 was 1.0 at 1 ng, whereas 0.001 ng was below the practical detection floor. These MSA-1002 mocks support robust strain detection under high host content and low input, with a remaining noise floor near approximately 1× marker depth; clean MSA-1003/1005/1007 profiles tested composition rather than the host ladder.
 
-##### Real saliva time-course (Fig 5)
+##### Real saliva time-course (Fig 5, Supplementary Table S11)
 
 Thirty-two native BcgI 2bRAD-M saliva libraries from eight subjects and four within-day timepoints were profiled against a 19-species oral panel. Strain features identified the subject in every leave-one-timepoint-out test (100%; species features 78.1%, 95% CI 0.563–1.000). The subject-aware strain-minus-species accuracy difference was 0.219 (95% CI 0.000–0.438), and within-subject Bray–Curtis distance was lower than between-subject distance (0.327 versus 0.696; exploratory PERMANOVA p = 8.05 × 10⁻¹⁹). These data show a stable, person-specific strain signature, although the small within-subject classifier does not establish a significant improvement over species features or independent strain identity.
+
+The same libraries supported pairwise sharing analysis. For each pair, the denominator was the number of species with calls in both samples; the primary metric required the same dominant cluster. Dominant-cluster sharing was 0.538 within subjects across timepoints versus 0.217 between subjects (mean difference +0.320; pair-level bootstrap 95% CI 0.264–0.375), and any-cluster sharing was 0.801 versus 0.568 (difference +0.233; 95% CI 0.191–0.271; Supplementary Table S11).
 
 ##### Paired saliva: 2bRAD-M versus shotgun (Fig 6)
 
@@ -129,33 +131,17 @@ In the MSA-1002 shotgun host ladder, Strain2bScan retained F1 = 1.0 at 90, 95 an
 
 Public WGS cohorts showed three application boundaries (Supplementary Table S3). A pregnancy multi-site subset produced 34 strain-cluster calls across five of six libraries, with saliva cluster-rich two-time-point descriptive profiles. Preterm vaginal/meconium libraries produced no strain calls because strain-marker evidence was sparse and panels were incomplete. Preterm-infant stool profiling detected weekly turnover with a generic panel and persistent *Bifidobacterium bifidum* LHCA82 with a cohort-specific panel. Six isolate WGS read sets recovered their expected panel units (6/6), but this was a panel/read compatibility result rather than independent classification.
 
-##### Real rhesus macaque GI cohort: strain-resolved spatial ecology in 148 samples (Fig 11, Supplementary Tables S5–S10)
+##### Real rhesus macaque GI cohort: strain-resolved spatial ecology in 148 samples (Fig 11, Supplementary Tables S5–S13)
 
 We next asked whether the same framework could resolve strain structure in a complete real spatial cohort rather than an exploratory subset. We profiled 148 rhesus macaque libraries: 128 GI spatial samples (66 luminal and 62 mucosal) plus 20 body controls. A cohort-specific panel built from 315 study MAGs represented 18 gut species and 303 0.95 strain-cluster units; after cross-species marker restriction, 29,162 of 30,008 BcgI markers remained available for quantification. With the prespecified species and cluster gates, 113 of 128 GI samples (88.3%) yielded strain calls: 56/66 luminal and 57/62 mucosal samples. Only two body controls produced calls, with three total strain calls, indicating that the main GI signals were not explained by body-site contamination (Supplementary Table S5).
 
 Strain calls partitioned along the GI axis. Eighty-nine clusters met the prespecified LI-enrichment screen; ten high-confidence examples included *Treponema_D_succinifaciens* C25, *WG_1_sp900539665* C22, *Treponema_D_succinifaciens* C2, *Succinivibrio_sp000431835* C6 and *Cryptobacteroides_sp900546445* C1 (Supplementary Table S7). In 50 matched mucosal/luminal positions, zero-filled within-species compositions identified 20 nominally significant clusters and 13 that remained significant after Bonferroni correction; all 13 were luminal-enriched (Supplementary Table S8). The strongest examples included *T._succinifaciens* C25, *UBA4372_sp900543815* C13/C5, *Cryptobacteroides_sp900546445* C13/C3 and *WG_1* C20. Thus, closely related strains of the same species were not uniformly distributed across mucosal and luminal niches.
 
+Pairwise sharing summarized this spatial structure (Fig 11G,H). Within-monkey between-position sharing exceeded between-monkey same-age same-region/compartment sharing (dominant-cluster mean 0.379 versus 0.159; difference +0.220; 95% CI 0.176–0.262; Supplementary Table S12). Between old and young monkeys at corresponding sites, LI luminal sharing was high for any-cluster labels (0.870) but much lower for dominant clusters (0.222), whereas LI mucosal dominant sharing was 0.071 (Supplementary Table S13). These patterns support spatial retention of gut strain reservoirs but do not by themselves establish transmission, because exact label sharing is at 0.95 marker-cluster resolution rather than SNV/popANI identity.
+
 The 66 luminal GI libraries also had shotgun and HUMAnN profiles, enabling a modality and function overlay. Among the 51 samples with calls in both modalities, species profiles were more concordant than exact cluster profiles (median Jaccard 0.889 versus 0.605), and shotgun yielded more calls per sample (median 123 versus 84). Only 234 of 580 dominant-cluster comparisons matched exactly (40.3%). These results support native 2bRAD-M as a reduced-depth strain-aware measurement while indicating that shotgun provides denser cluster resolution (Supplementary Table S9).
 
 In matched LI samples, strain composition was coupled to bile-acid composition and selected metabolic pathways after residualizing monkey identity and GI position (Supplementary Table S10). Among 219 clusters and four precursor-mass bile-acid classes, 410 of 876 associations passed BH FDR < 0.05; 409 were negative, showing that the LI strain reservoir mainly tracked a lower conjugated/high-mass bile-acid state. For example, *Cryptobacteroides_sp000433355* C1 was negatively associated with the conjugated/high-mass class (ρ = −0.943, q = 1.0 × 10⁻⁸), whereas *UBA636_sp900546285* C11 was positively associated with the dihydroxy class (ρ = 0.648, q = 2.5 × 10⁻³). Functional coupling was also cluster-specific: *UBA4372_sp900543815* C4 tracked pyruvate- and acetyl-CoA-to-butyrate pathways, *Cryptobacteroides_sp000433355* C5 tracked pyruvate-to-propionate, and *Treponema_D_succinifaciens* C2 and *Succinivibrio_sp000431835* C4 tracked N-acetylneuraminate and N-acetylglucosamine-related degradation pathways. These associations describe ecological coupling in real samples; they do not assign individual pathway genes to a strain cluster or establish causality.
-
-##### Strain sharing across timepoints and GI sites (Fig 12, Supplementary Tables S11–S13)
-
-We next summarized the same 0.95 cluster calls as pairwise sharing rates. The denominator was the number
-of species with strain calls in both samples. The primary metric counted a species when its most abundant
-cluster was identical; a secondary coexistence-aware metric counted at least one shared cluster label.
-In the 32 saliva libraries, dominant-cluster sharing was 0.538 within subjects across timepoints versus
-0.217 between subjects (mean difference +0.320; pair-level bootstrap 95% CI 0.264–0.375), and any-cluster
-sharing was 0.801 versus 0.568 (difference +0.233; 95% CI 0.191–0.271). Thus, within-day saliva samples
-retained host-specific strain signatures.
-
-In the 128 GI libraries, within-monkey between-position sharing exceeded between-monkey same-age
-same-region/compartment sharing (dominant-cluster mean 0.379 versus 0.159; difference +0.220; 95% CI
-0.176–0.262). Between old and young monkeys at corresponding sites, large-intestinal luminal sharing was
-high for any-cluster labels (0.870) but much lower for dominant clusters (0.222), whereas LI mucosal
-dominant sharing was 0.071. These patterns support spatial retention of gut strain reservoirs but do not
-by themselves establish transmission, because exact label sharing is at 0.95 marker-cluster resolution
-rather than SNV/popANI identity.
 
 #### Comparator scope
 
@@ -192,7 +178,7 @@ associations rather than assignments of individual pathway genes to strains, but
 reduced-representation strain calls can support spatial and metabolic hypotheses in real animal cohorts.
 Dominant-cluster sharing followed the same ecological logic: it was higher within monkeys between GI
 positions than between monkeys, and old/young sharing was higher for LI luminal than LI mucosal calls
-(Fig 12). This cluster-sharing summary is a population-resolution ecological measure rather than
+(Fig 11). This cluster-sharing summary is a population-resolution ecological measure rather than
 SNV/popANI-level transmission proof.
 
 In shotgun mode, the structural advantage is a change in search economics. A sample is digested once and the
@@ -894,7 +880,7 @@ The Strain2bScan source code is available at https://github.com/HuangShiLab/Stra
 
 **Figure 4. Native BcgI 2bRAD-M across four ATCC DNA mocks.** MSA-1002, MSA-1003, MSA-1005 and MSA-1007 were profiled against a 28-species, 164-genome containment tree. At 90, 95 and 99% human DNA, F1 was 0.976–1.0 and Bray–Curtis similarity 0.745–0.756. A 0.1-ng input retained F1 0.952; 0.01 ng approached the marker-depth noise floor and 0.001 ng was below the detection floor.
 
-**Figure 5. Real saliva contains individual-specific, within-day strain signatures.** **(A,B)** Subject-constrained PCoA of species-level and strain-level profiles. **(C)** Per-species strain signal. **(D)** Within- versus between-subject Bray–Curtis distance. **(E)** Leave-one-timepoint-out subject classification. Thirty-two native BcgI 2bRAD-M saliva libraries from eight subjects sampled four times in one day were profiled against a 19-species oral panel. Classification reached 100% with strain features versus 78.1% with species features; within-subject Bray–Curtis distance was 0.327 versus 0.696 between subjects. This is a small within-subject result, not independent strain-identity validation.
+**Figure 5. Real saliva contains individual-specific, within-day strain signatures.** **(A,B)** Subject-constrained PCoA of species-level and strain-level profiles. **(C)** Per-species strain signal; the dashed line marks whole-community strain signal. **(D)** Within- versus between-subject Bray–Curtis distance. **(E)** Leave-one-timepoint-out subject classification. **(F,G)** Dominant-cluster and any-shared-cluster rates for pairwise saliva comparisons; denominators were species with calls in both samples. Thirty-two native BcgI 2bRAD-M saliva libraries from eight subjects sampled four times in one day were profiled against a 19-species oral panel. Classification reached 100% with strain features versus 78.1% with species features; within-subject Bray–Curtis distance was 0.327 versus 0.696 between subjects. This is a small within-subject result, not independent strain-identity validation.
 
 **Figure 6. Exploratory paired saliva comparison.** **(A)** Shared and unique paired-sample call sets. **(B)** Relative abundance of shared versus native-only calls. Shotgun R1 prefix libraries from three usable paired samples were digested in silico and compared with matched native BcgI libraries under the prefix-analysis gates. All 65 shotgun strain-cluster calls were present in native calls; native 2bRAD-M yielded 128–163 additional candidate calls per sample. This non-depth-matched exploratory result is directional only and does not establish a systematic modality advantage.
 
@@ -912,14 +898,12 @@ prevalence in GI, luminal, mucosal and body-control libraries for the ten most f
 matched mucosal/luminal strain clusters that remained significant after Bonferroni correction; bars show
 −log10(q), with numbers of luminal- and mucosa-positive pairs. **(E)** Paired luminal shotgun and native 2bRAD
 strain-call counts; colour gives strain-call Jaccard. **(F)** Representative Spearman associations between LI
-strain-cluster composition and bile-acid classes or HUMAnN pathways; q values are Benjamini–Hochberg estimates.
+strain-cluster composition and bile-acid classes or HUMAnN pathways; Benjamini–Hochberg q values are provided
+in Supplementary Table S10.
 These associations are cohort-level ecological relationships rather than direct gene-to-cluster assignments.
-
-**Figure 12. Pairwise sharing of 0.95 marker-cluster types across saliva timepoints and macaque GI sites.** **(A,B)** Dominant-cluster and any-shared-cluster rates for the 32 saliva libraries. Denominators were species
-with calls in both samples; boxes summarize pairwise rates, and bootstrap contrasts are given in the text.
-**(C)** Mean dominant-cluster sharing for prespecified rhesus GI comparisons. **(D)** Old/young corresponding-site
-sharing by GI region and compartment, showing both dominant-cluster and any-shared-cluster rates. Exact label
-sharing describes 0.95 marker-cluster resolution, not SNV/popANI-validated strain identity or transmission.
+**(G)** Mean dominant-cluster sharing for prespecified rhesus GI comparisons. **(H)** Old/young corresponding-site
+sharing by GI region and compartment, showing dominant-cluster and any-shared-cluster rates. Exact label sharing
+describes 0.95 marker-cluster resolution, not SNV/popANI-validated strain identity or transmission.
 
 ### Supplementary figures
 

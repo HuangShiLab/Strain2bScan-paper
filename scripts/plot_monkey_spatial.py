@@ -10,6 +10,7 @@ from matplotlib.cm import ScalarMappable
 
 ROOT=Path(__file__).resolve().parents[1]
 IN=ROOT/"results/monkey_spatial_148/hpc_outputs/analysis"
+SHARING=ROOT/"results/strain_sharing_20261105"
 OUT=ROOT/"figures/numbered"
 OUT.mkdir(parents=True,exist_ok=True)
 
@@ -26,6 +27,8 @@ paired=pd.read_csv(IN/"full_148_20261027/full148_mucosal_luminal_paired_tests.ts
 paired=paired[paired.p_bonferroni<0.05].copy()
 concordance=pd.read_csv(IN/"strain_profiling_20261023/paired_luminal_modality_concordance.tsv",sep="\t")
 coupling=pd.read_csv(IN/"functional_coupling_20261027/key_coupling_results.tsv",sep="\t")
+sharing=pd.read_csv(SHARING/"monkey_strain_sharing_group_summary.tsv",sep="\t")
+age_sharing=pd.read_csv(SHARING/"monkey_between_age_corresponding_site_summary.tsv",sep="\t")
 
 def clean_species(x):
     return x.replace("_sp0"," sp0").replace("_sp9"," sp9").replace("_A","_A").replace("_B","_B")
@@ -39,8 +42,8 @@ def cluster_label(row, maxlen=34):
     label=f"{species} {cluster}"
     return label if len(label)<=maxlen else label[:maxlen-1]+"…"
 
-fig=plt.figure(figsize=(18.0,13.0))
-gs=fig.add_gridspec(3,2,height_ratios=[0.72,0.92,0.94],hspace=0.58,wspace=0.58)
+fig=plt.figure(figsize=(18.0,17.2))
+gs=fig.add_gridspec(4,2,height_ratios=[0.65,0.86,0.90,0.90],hspace=0.58,wspace=0.58)
 
 # A. Sampling design
 ax=fig.add_subplot(gs[0,0])
@@ -54,8 +57,8 @@ ax.axvline(9.5,color="0.75",lw=0.6,ls=":")
 ax.set_xticks(x); ax.set_xticklabels([f"{m}\n{r}" for m,r in counts.index])
 ax.set_ylabel("GI libraries"); ax.set_ylim(0,max(counts.sum(axis=1))*1.15)
 ax.set_title("A  128 GI spatial samples plus 20 body controls",loc="left",fontweight="bold")
-ax.legend(frameon=False,ncol=2,loc="upper left",bbox_to_anchor=(0.01,0.98))
-ax.text(0.97,0.82,"20 body controls\n3 total strain calls",transform=ax.transAxes,ha="right",va="top",
+ax.legend(frameon=True,framealpha=.95,edgecolor="0.75",ncol=2,loc="upper right",bbox_to_anchor=(0.99,0.98))
+ax.text(0.02,0.95,"20 body controls\n3 total strain calls",transform=ax.transAxes,ha="left",va="top",
         fontsize=7.0,color="0.25",bbox=dict(boxstyle="round,pad=0.25",facecolor="white",edgecolor="0.75",lw=0.5))
 
 # B. Species prevalence
@@ -143,16 +146,54 @@ ax.axvline(0,color="0.35",lw=0.6)
 ax.set_yticks(y); ax.set_yticklabels(plot.label,fontsize=5.4)
 ax.set_xlabel("Spearman ρ with strain-cluster composition")
 ax.set_xlim(-1.05,1.05)
-for i,(_,r) in enumerate(plot.iterrows()):
-    x=r.rho+(0.03 if r.rho>=0 else -0.03); ha="left" if r.rho>=0 else "right"
-    ax.text(x,i,f"q={r.q:.1g}",va="center",ha=ha,fontsize=5.2,color="0.3")
-
 ax.set_title("F  LI strain-cluster coupling to BA and functions",loc="left",fontweight="bold")
 
-fig.suptitle("Real rhesus macaque GI cohort: 148 samples, 18-species/303-cluster monkey MAG panel",x=0.015,y=0.985,ha="left",fontsize=12,fontweight="bold")
-for label,ax in zip("ABCDEF",fig.axes):
-    ax.text(-0.08,1.08,label,transform=ax.transAxes,fontsize=13,fontweight="bold",va="bottom",ha="right")
+# G. Dominant-cluster sharing across spatial and age comparisons
+ax=fig.add_subplot(gs[3,0])
+sel=[
+ "within_monkey_between_position_same_region",
+ "within_monkey_mucosal_luminal_same_region",
+ "between_monkey_same_age_same_region_compartment",
+ "between_age_corresponding_region_compartment",
+ "between_monkey_between_region_same_compartment",
+]
+plot=sharing.set_index("comparison_group").loc[sel]
+x=np.arange(len(plot))
+bars=ax.bar(x,plot.strain_sharing_rate_dominant_cluster_mean,color="#4393C3",width=.58,
+            edgecolor="white",linewidth=.4)
+for xx,v in zip(x,plot.strain_sharing_rate_dominant_cluster_mean):
+    ax.text(xx,v-.025,f"{v:.3f}",ha="center",va="top",fontsize=6.3,color="white")
+ax.set_xticks(x)
+ax.set_xticklabels(["Within monkey\nbetween positions","Within monkey\nmucosal/luminal",
+                    "Between monkeys\nsame age/site","Old/young\ncorresponding site",
+                    "Between monkeys\nbetween regions"],fontsize=6.3)
+ax.set_ylabel("Mean dominant-cluster sharing rate")
+ax.set_ylim(0,.46)
+ax.grid(axis="y",color="0.85",lw=0.4)
+ax.set_title("G  Monkey GI dominant-cluster sharing contrasts",loc="left",fontweight="bold")
 
+# H. Old/young corresponding-site sharing
+ax=fig.add_subplot(gs[3,1])
+vis=age_sharing[age_sharing.n_pairs_analyzable>0].copy()
+matrix=vis[["strain_sharing_rate_dominant_cluster_mean",
+            "strain_sharing_rate_any_cluster_mean"]].to_numpy()
+im=ax.imshow(matrix,cmap="RdYlBu_r",vmin=0,vmax=1,aspect="auto")
+ax.set_xticks([0,1]); ax.set_xticklabels(["Dominant cluster","Any shared cluster"])
+ax.set_yticks(np.arange(len(vis)))
+ax.set_yticklabels([f"{r.region} {r.compartment}\n(n={int(r.n_pairs)})" for _,r in vis.iterrows()],
+                   fontsize=6.3)
+for i in range(matrix.shape[0]):
+    for j in range(matrix.shape[1]):
+        value=matrix[i,j]
+        ax.text(j,i,f"{value:.2f}",ha="center",va="center",fontsize=6.4,
+                color="black" if .25<value<.75 else "white")
+colorbar=fig.colorbar(im,ax=ax,pad=.02,aspect=18)
+colorbar.set_label("Old/young sharing rate",fontsize=6.5)
+colorbar.ax.tick_params(labelsize=6)
+colorbar.outline.set_linewidth(.4)
+ax.set_title("H  Old/young corresponding GI sites",loc="left",fontweight="bold")
+
+fig.suptitle("Real rhesus macaque GI cohort: 148 samples, 18-species/303-cluster monkey MAG panel",x=0.015,y=0.985,ha="left",fontsize=12,fontweight="bold")
 for ext in ["png","pdf"]:
     fig.savefig(OUT / f"Fig11_monkey_spatial_cohort.{ext}",bbox_inches="tight",facecolor="white")
 print(OUT/"Fig11_monkey_spatial_cohort.png")
