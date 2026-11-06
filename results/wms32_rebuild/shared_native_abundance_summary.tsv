@@ -1,0 +1,4 @@
+group	n_calls	median_sample_fraction
+shared	495	1.6e-05
+native_only	873	5e-06
+paired_per_sample_median_wilcoxon_p	32	6.685266271233559e-05

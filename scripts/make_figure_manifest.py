@@ -10,7 +10,7 @@ SOURCES = {
  "Fig03_enzyme_sweep": "figures/source_panels/enzyme_sweep.{png,pdf}",
  "Fig04_native_2brad_mocks": "figures/source_panels/fig06_native_2brad_mocks.{png,pdf}",
  "Fig05_real_saliva_timecourse": "figures/source_panels/saliva_fig07.{png,pdf} (five-panel A-E)",
- "Fig06_paired_saliva_prefix": "figures/source_panels/saliva_fig08.{png,pdf} (exploratory paired comparison)",
+ "Fig06_paired_saliva_full_depth": "figures/source_panels/saliva_fig08.{png,pdf} (full-depth paired comparison)",
  "Fig07_sim2025_summary": "figures/source_panels/sim2025_summary.{png,pdf} (complete 2,025-sample simulation aggregate)",
  "Fig08_sim_headtohead": "figures/source_panels/sim_headtohead.{png,pdf} (Strain2bScan/StrainScan/StrainGST/inStrain 225-sample simulation)",
  "Fig09_performance+scalability+community_throughput": "figures/source_panels/performance.{png,pdf} + scalability.{png,pdf} + community_throughput.{png,pdf} (combined)",

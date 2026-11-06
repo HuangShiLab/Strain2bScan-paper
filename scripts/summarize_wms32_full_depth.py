@@ -7,6 +7,7 @@ import json
 import statistics
 from collections import defaultdict
 from pathlib import Path
+from scipy.stats import wilcoxon
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -20,16 +21,19 @@ def sample_label(raw: str) -> str:
     return raw.removeprefix("WMS_").replace("_", "-")
 
 
-def read_calls(path: Path, sample_column: str) -> dict[str, set[tuple[str, str]]]:
-    calls: dict[str, set[tuple[str, str]]] = defaultdict(set)
+def read_calls(path: Path, sample_column: str) -> dict[str, dict[tuple[str, str], float]]:
+    calls: dict[str, dict[tuple[str, str], float]] = defaultdict(dict)
     with path.open(newline="") as handle:
         for row in csv.DictReader(handle, delimiter="\t"):
-            calls[sample_label(row[sample_column])].add((row["species"], row["cluster"]))
+            key = (row["species"], row["cluster"])
+            calls[sample_label(row[sample_column])][key] = float(row["sample_fraction"])
     return calls
 
 
-wms = read_calls(WMS, "#sample")
-native = read_calls(NATIVE, "#sample")
+wms_data = read_calls(WMS, "#sample")
+native_data = read_calls(NATIVE, "#sample")
+wms = {sample: set(data) for sample, data in wms_data.items()}
+native = {sample: set(data) for sample, data in native_data.items()}
 if set(wms) != set(native) or len(wms) != 32:
     raise SystemExit(f"sample mismatch: WMS={len(wms)}, native={len(native)}")
 
@@ -46,6 +50,51 @@ for sample in sorted(wms):
 with (OUTDIR / "per_sample_summary.tsv").open("w", newline="") as handle:
     writer = csv.writer(handle, delimiter="\t", lineterminator="\n")
     writer.writerows(rows)
+
+native_rows = []
+per_sample_medians = []
+for sample in sorted(native_data):
+    shared_values = []
+    native_only_values = []
+    for key, sample_fraction in native_data[sample].items():
+        group = "shared" if key in wms_data[sample] else "native_only"
+        native_rows.append({"sample": sample, "group": group,
+                            "sample_fraction": sample_fraction})
+        (shared_values if group == "shared" else native_only_values).append(sample_fraction)
+    per_sample_medians.append({
+        "sample": sample,
+        "shared_median_sample_fraction": statistics.median(shared_values),
+        "native_only_median_sample_fraction": statistics.median(native_only_values),
+    })
+
+with (OUTDIR / "native_call_shared_status.tsv").open("w", newline="") as handle:
+    writer = csv.DictWriter(handle, fieldnames=["sample", "group", "sample_fraction"],
+                            delimiter="\t", lineterminator="\n")
+    writer.writeheader(); writer.writerows(native_rows)
+
+with (OUTDIR / "per_sample_shared_native_median.tsv").open("w", newline="") as handle:
+    writer = csv.DictWriter(handle, fieldnames=list(per_sample_medians[0]),
+                            delimiter="\t", lineterminator="\n")
+    writer.writeheader(); writer.writerows(per_sample_medians)
+
+def _median_group(group: str) -> float:
+    values = [row["sample_fraction"] for row in native_rows if row["group"] == group]
+    return statistics.median(values)
+
+p_value = wilcoxon([row["shared_median_sample_fraction"] for row in per_sample_medians],
+                   [row["native_only_median_sample_fraction"] for row in per_sample_medians]).pvalue
+abundance_summary = [
+    {"group": "shared", "n_calls": sum(row["group"] == "shared" for row in native_rows),
+     "median_sample_fraction": _median_group("shared")},
+    {"group": "native_only", "n_calls": sum(row["group"] == "native_only" for row in native_rows),
+     "median_sample_fraction": _median_group("native_only")},
+    {"group": "paired_per_sample_median_wilcoxon_p", "n_calls": len(per_sample_medians),
+     "median_sample_fraction": p_value},
+]
+with (OUTDIR / "shared_native_abundance_summary.tsv").open("w", newline="") as handle:
+    writer = csv.DictWriter(handle, fieldnames=["group", "n_calls", "median_sample_fraction"],
+                            delimiter="\t", lineterminator="\n")
+    writer.writeheader(); writer.writerows(abundance_summary)
 
 wms_calls = sum(int(row[1]) for row in rows[1:])
 native_calls = sum(int(row[2]) for row in rows[1:])

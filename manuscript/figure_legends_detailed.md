@@ -110,7 +110,7 @@ resolution). Single-enzyme BcgI operation supports native BcgI 2bRAD-M libraries
   magnitude), MSA-1005 and MSA-1007 (6 strains each). Native BcgI 2bRAD reads were profiled against a
   unified 28-species / 164-genome combined tree (each mock species = ATCC genome + up to 5 conspecific
   decoys, within-species ANI > 95 %), with `--enzyme BcgI --containment --similarity 0.95`,
-  `--min-abundance 0 --min-coverage 0.2`. MSA-1002 was additionally run across a host-DNA ladder
+  binary Strain2bScan defaults (`--min-support 8`, `--min-coverage 0.1`, `--min-abundance 0`, `--min-consistency 0.5`). MSA-1002 was additionally run across a host-DNA ladder
   (90/95/99 %) and a low-biomass DNA-input ladder (1 → 0.001 ng); SRA PRJNA1131785.
 - *Raw data (local):* **available**. `figure_raw_data/Fig06_mock_hostcontam/reads/` with `manifest.tsv`;
   table `data/fig6_fig12_metrics.tsv`; scorer `scripts/score_all.py`.
@@ -146,6 +146,7 @@ single-threshold precision but is recovered by abundance-threshold AUPR.
   `manifest.tsv` decoding `S<time>-<subject>` (prefix = time of day, suffix = subject 1–14). Tables
   `results/saliva_permanova.tsv`, `saliva_perspecies_subject.tsv`, `saliva_temporal_ml.tsv`,
   `saliva_strain_long.tsv`.
+  Cross-species community matrices use `sample_fraction` (18 observed species, 125 strain-cluster features); panel C shows the 13 species present in at least 12 samples.
 **2. Key issue & conclusion.** Does strain-level 2bRAD profiling distinguish individuals better than
 species-level, and is the signature stable? Conclusion: **yes**. subject strain-level PERMANOVA
 **R² 0.757 versus species 0.755** (p 2e-4), host-ID **100 % (strain) vs 78.1 % (species)** in this small within-subject classifier, time-of-day
@@ -154,8 +155,8 @@ strain signature resolved in ~1 s/sample.
 **3. Results by subfigure.**
 - **(A)** Species-level PCoA coloured by subject (R² 0.755).
 - **(B)** Strain-level PCoA coloured by subject (R² 0.757).
-- **(C)** Per-species strain-level subject R² (bars); *Neisseria subflava* 0.808 highest, 13/13 testable
-  species significant.
+- **(C)** Per-species strain-level subject R² (bars) for 13 species present in at least 12 samples;
+  *Neisseria subflava* 0.808 highest, 13/13 testable species significant.
 - **(D)** Within- vs between-subject strain Bray–Curtis distance (0.327 vs 0.696, p 8.05e-19) within one sampling day.
 - **(E)** Leave-one-timepoint-out host-ID accuracy, strain (100 %) vs species (78.1 %) vs chance (12.5 %).
 - **(F,G)** Pairwise dominant-cluster and any-shared-cluster rates. Within-subject between-timepoint
@@ -170,25 +171,26 @@ strain signature resolved in ~1 s/sample.
 
 
 
-## Figure 6; Directional shotgun-native saliva concordance and candidate low-abundance calls
+## Figure 6; Full-depth shotgun-native saliva comparison
 **1. Data source.**
 - *Data type:* **real paired shotgun metagenome (WMS) + real native BcgI 2bRAD-M** (same saliva samples).
-- *Production/collection:* paired shotgun WMS of the Fig 5 saliva samples (SRA PRJNA1131785, DNBSEQ). WMS
-  R1 (~14 GB/sample) was truncated on download and used as a valid prefix subsample (in-silico BcgI
-  digestion), compared per sample to the matched native-2bRAD strain calls; 3 subjects (7/1/14) with
-  usable bacterial recovery.
-- *Raw data (local):* **available (partial)**. `figure_raw_data/Fig08_saliva_shotgun/reads/` (WMS R1
-  prefixes) with `manifest.tsv`; cached WMS profiles in `results/wms_preds/`; table
-  `results/saliva_concordance.tsv`. (Full-depth WMS re-downloadable from PRJNA1131785.)
+- *Production/collection:* complete full-depth paired shotgun WMS and native BcgI 2bRAD libraries for all
+  32 saliva samples (8 subjects × 4 timepoints; SRA PRJNA1131785). Both modalities used the same
+  19-species oral panel and matched gates.
+- *Source tables:* `results/wms32_rebuild/per_sample_summary.tsv`,
+  `results/wms32_rebuild/per_sample_shared_native_median.tsv` and
+  `results/wms32_rebuild/shared_native_abundance_summary.tsv`.
 **2. Key issue & conclusion.** On high-host saliva, does native BcgI 2bRAD-M recover the strains shotgun finds
-*and* the low-abundance strains shotgun cannot? Conclusion: All 65 shotgun strain-cluster calls (three usable paired samples, prefix-subsampled shotgun) are
-present in native BcgI 2bRAD-M; this is directional concordance, not independent validation. Native BcgI 2bRAD-M
-yields **128–163 additional candidate strain-cluster calls/sample**, which are **significantly
-lower-abundance**. They are candidate observations and do not quantify an independent sensitivity advantage.
+*and* the low-abundance strains shotgun cannot? Full-depth WMS produced 2,487 calls (median 79/sample)
+versus 1,368 native calls (median 35.5/sample); 495 calls were shared. Thus, 19.9% of WMS calls and 36.2%
+of native calls had a same-species, same-cluster counterpart. Native-only calls were lower abundance
+(median sample fraction 5 × 10⁻⁶ versus 1.6 × 10⁻⁵; paired per-sample median Wilcoxon p = 6.7 × 10⁻⁵).
+Because depth, representation and host content differ, this is a modality-scope comparison rather than
+independent accuracy validation.
 **3. Results by subfigure.**
-- **(A)** Per sample, strains detected: shared with shotgun (blue) plus 2bRAD-only candidate calls (orange)
-  (orange, 128–163); this is a call-set concordance result and does not establish independent strain truth.
-- **(B)** Per-sample median community relative abundance of shared versus candidate-only native calls (log scale); candidate-only calls were lower abundance (Mann-Whitney p 1.2e-23 in the archived paired call-level test).
+- **(A)** Per sample, shared, WMS-only and native-2bRAD-only strain-cluster calls.
+- **(B)** Per-sample median community sample fraction of shared versus native-only native calls (log scale);
+  grey lines pair the same sample.
 
 ---
 

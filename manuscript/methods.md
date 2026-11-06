@@ -392,7 +392,8 @@ each). A single unified combined tree was built from **28 species × up to 6 gen
 mock species = its ATCC genome + up to 5 high-quality conspecific decoys, CheckM [15] completeness ≥ 90 %,
 contamination ≤ 5 %, within-species ANI 95–99.9 % to the ATCC reference by skani [22]), clustered at 0.95
 similarity with `--containment`; native 2bRAD used the BcgI tree and shotgun used the all-enzyme tree.
-Strain2bScan was run with `--min-abundance 0 --min-coverage 0.2`. On the shotgun samples it was compared
+Strain2bScan used binary defaults for these frozen runs (`--min-support 8`, `--min-coverage 0.1`,
+`--min-abundance 0`, `--min-consistency 0.5`; `run_one.sh` passed no gate overrides). On the shotgun samples it was compared
 against **StrainScan** 1.0.14 [1] (per-species databases, `linux/amd64` container) and **inStrain** 1.9.1
 [8]. Reads were aligned with Bowtie2 [23] using default paired-end settings, sorted and indexed with samtools, and profiled with `inStrain profile` against single-linkage skani dereplicated references (98% ANI threshold, ATCC representative retained). The MSA-1002/1003 pool was reduced from 120 genomes to 32 references; the MSA-1005/1007 pool was reduced from 164 to 47. Genome-level calls required breadth ≥ 0.5 and reference popANI ≥ 0.99999; their coverage values were then normalized for abundance scoring and the manuscript-level 10⁻⁴ detection threshold was applied. The non-dereplicated reference is
 shown as a control in Fig S4. These exact filters were fixed before metric scoring; raw genome-table threshold sensitivity was not rerun. Each tool was scored against the same mock ground truth (`Ground_truth/*`, sequence abundance) in its own
@@ -402,15 +403,19 @@ Bray–Curtis and L2 similarity to the truth profile;
 Threshold-aware P/R/F1, AUPR and abundance-error values were computed by `scripts/update_mock_figs.py` into
 `data/fig6_fig12_metrics.tsv` (frozen copy `results/mock_benchmark_f26f234/fig6_fig12_metrics.tsv`);
 `scripts/score_all.py` supplied threshold-free mock scoring and `scripts/plot_figs_h.py` generated figures.
+The separate Figure S1 titration used the original public mock analysis: a 62-species BcgI panel,
+`multi-profile`, and broader species gates (50 panel-specific markers and five detected markers). Its
+0.01-ng species-level result is therefore not numerically comparable to the primary Figure 4
+164-genome, 0.95-cluster benchmark.
 The primary frozen comparators were therefore StrainScan and inStrain. A separate StrainGST rerun [2] was
 added after the frozen run because it requires StrainGE-specific 0.90-reference databases and a WMS-oriented
 workflow; it is described under *StrainGST rerun*. StrainGR was not run. (vii) *Real saliva* (Fig 5, Fig 6): native BcgI 2bRAD and paired shotgun WMS saliva from PRJNA1131785
 (8 subjects × 4 within-day timepoints) were profiled against a 19-species oral-commensal panel (up to 25
 genomes/species). The BioProject contains 32 paired WMS saliva runs
-(`figure_raw_data/Fig08_saliva_shotgun/full_sra_wms_manifest.tsv`); the frozen shotgun-native comparison used
-the four libraries for which R1 prefixes had been downloaded, capped WMS input at 4 × 10⁸ reads and applied
-stricter species gates (50 panel-specific markers and five detected markers). Three libraries yielded usable
-strain calls. Strain- and species-level relative abundances were converted to Bray–Curtis dissimilarities and
+(`figure_raw_data/Fig08_saliva_shotgun/full_sra_wms_manifest.tsv`). An earlier exploratory R1-prefix
+comparison used four downloaded libraries, capped WMS input and stricter species gates; three yielded calls.
+It is retained only as archived provenance and is not used in the current Figure 6. Strain- and
+species-level relative abundances were converted to Bray–Curtis dissimilarities and
 tested by a custom Python PERMANOVA implementation with 4,999 label permutations and seed 42 [25] for
 subject/timepoint factors. Leave-one-timepoint-out 1-NN host classification was compared between feature
 types; uncertainty used a subject-aware cluster bootstrap with 20,000 resamples, retaining all four
@@ -418,6 +423,15 @@ timepoints together and summarizing the strain-minus-species accuracy difference
 interval. Shotgun R1 reads were digested in silico with BcgI and compared with native 2bRAD calls per sample. Full per-dataset
 procedures and accessions are in `docs/` (`motivation_16s.md`,
 `saliva_individual_discrimination.md`, `saliva_temporal_ml.md`, `saliva_concordance.md`).
+
+*Real saliva community statistics.* Cross-species community matrices used `sample_fraction`, the fraction
+of all sample tag observations assigned to a strain-cluster call, because this is comparable across
+species. The resulting matrices contained 32 samples, 18 observed species and 125 species-cluster
+features. Per-species analyses were restricted to one species and therefore used `within_abund`; Figure 5C
+shows the 13 species present in at least 12 of 32 samples. An earlier exploratory analysis had
+inadvertently used `support` (raw marker count) for cross-species matrices; those matrices and their
+higher feature count were superseded. This was a downstream abundance-column correction, not a change to
+the Strain2bScan profiling algorithm.
 
 *Full-depth 32-sample WMS rebuild.* The canonical PRJNA1131785 WMS dataset was rebuilt to 32 samples
 and 64 mate files, validated with `gzip -t`, and retained with its SRA manifest. All 32 paired-end

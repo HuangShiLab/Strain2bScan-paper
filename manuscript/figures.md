@@ -21,12 +21,17 @@ manifest with `python scripts/make_figure_manifest.py`.
 
 **Figure 4. Native BcgI 2bRAD-M across four ATCC DNA mocks.** `figures/source_panels/fig06_native_2brad_mocks.{png,pdf}`
 MSA-1002, MSA-1003, MSA-1005 and MSA-1007 were profiled against a 28-species, 164-genome containment tree. At 90, 95 and 99% human DNA, F1 was 0.976–1.0 and Bray–Curtis similarity 0.745–0.756. A 0.1-ng input retained F1 0.952; 0.01 ng approached the marker-depth noise floor and 0.001 ng was below the detection floor.
+The 0.01-ng result is specific to this cluster-resolved 164-genome primary benchmark and is not directly comparable with the separate 62-species, species-level titration in Figure S1.
 
 **Figure 5. Real saliva contains individual-specific, within-day strain signatures.** `figures/source_panels/saliva_fig07.{png,pdf}`
 **(A,B)** Subject-constrained PCoA of species-level and strain-level profiles. **(C)** Per-species strain signal; the dashed line marks whole-community strain signal. **(D)** Within- versus between-subject Bray–Curtis distance. **(E)** Leave-one-timepoint-out subject classification. **(F,G)** Dominant-cluster and any-shared-cluster rates for pairwise saliva comparisons; denominators were species with calls in both samples. Thirty-two native BcgI 2bRAD-M saliva libraries from eight subjects sampled four times in one day were profiled against a 19-species oral panel. Classification reached 100% with strain features versus 78.1% with species features; within-subject Bray–Curtis distance was 0.327 versus 0.696 between subjects. This is a small within-subject result, not independent strain-identity validation.
+Cross-species matrices used sample fraction and contained 18 observed species and 125 strain-cluster features; panel C shows the 13 species present in at least 12 samples.
 
-**Figure 6. Exploratory paired saliva comparison.** `figures/source_panels/saliva_fig08.{png,pdf}`
-**(A)** Shared and unique paired-sample call sets. **(B)** Relative abundance of shared versus native-only calls. Shotgun R1 prefix libraries from three usable paired samples were digested in silico and compared with matched native BcgI libraries under the prefix-analysis gates. All 65 shotgun strain-cluster calls were present in native calls; native 2bRAD-M yielded 128–163 additional candidate calls per sample. This non-depth-matched exploratory result is directional only and does not establish a systematic modality advantage.
+**Figure 6. Full-depth paired saliva comparison.** `figures/source_panels/saliva_fig08.{png,pdf}`
+**(A)** Shared, WMS-only and native-2bRAD-only strain-cluster calls for all 32 gate-matched WMS/native pairs.
+**(B)** Per-sample median sample fraction for shared versus native-only calls. WMS yielded more calls per sample,
+and native-only calls were lower abundance. Differences in depth, representation and host content prevent an
+accuracy interpretation.
 
 **Figure 7. Accuracy across the complete 2,025-sample single-species simulation pool.** `figures/source_panels/sim2025_summary.{png,pdf}`
 **(A)** Per-species mean accuracy. **(B)** Accuracy across per-strain depth. **(C)** Accuracy by different-cluster versus same-cluster design. Strain2bScan was evaluated on all 2,025 ART error-modelled shotgun simulations from 15 species, followed by in-silico 2bRAD digestion. Median precision, recall and F1 were 1.000; mean precision, recall and F1 were 0.890, 0.846 and 0.862. Mean F1 increased from 0.786 at 0.5× to 0.888 at 10×. Panels show per-species means, depth dependence and different-cluster versus same-cluster design.
@@ -56,7 +61,7 @@ describes 0.95 marker-cluster resolution, not SNV/popANI-validated strain identi
 
 ## Supplementary figures
 
-**Figure S1. ATCC MSA-1002 DNA-input titration uses native BcgI 2bRAD-M reads.** `figures/source_panels/mock_msa1002_titration.{png,pdf}` Native-input species precision and recall are shown for 0.001, 0.01, 0.1 and 1 ng DNA; precision was 1.0 and recall was complete at 0.1 ng and above.
+**Figure S1. ATCC MSA-1002 DNA-input titration uses native BcgI 2bRAD-M reads.** `figures/source_panels/mock_msa1002_titration.{png,pdf}` Native-input species precision and recall are shown for 0.001, 0.01, 0.1 and 1 ng DNA in the original 62-species species-level analysis; precision was 1.0, 0.01-ng recall was 0.95, and recall was complete at 0.1 ng and above. This titration is not directly comparable with the Figure 4 164-genome, 0.95-cluster primary benchmark.
 
 **Figure S2. Layer-1 gate calibration uses the 55-species panel.** `figures/source_panels/gate_calibration.{png,pdf}` Species precision and recall are plotted against the minimum species-marker floor at normal and low depth.
 

@@ -289,6 +289,13 @@ if ml.get("leave_one_timepoint_out_subject_accuracy") != "1.0000" or ml.get("n_s
 concordance = load_tsv("results/saliva_concordance.tsv")
 if len(concordance) != 3 or sum(int(r["wms_confirmed_by_2brad"]) for r in concordance) != 65:
     fail("saliva concordance table no longer supports the three-sample 65/65 statement")
+abundance = {r["group"]: r for r in load_tsv("results/wms32_rebuild/shared_native_abundance_summary.tsv")}
+if abundance.get("shared", {}).get("n_calls") != "495" or abundance.get("native_only", {}).get("n_calls") != "873":
+    fail("full-depth saliva shared/native-only call counts changed")
+if not math.isclose(float(abundance["shared"]["median_sample_fraction"]), 1.6e-5, abs_tol=5e-7) or \
+   not math.isclose(float(abundance["native_only"]["median_sample_fraction"]), 5e-6, abs_tol=5e-7) or \
+   not math.isclose(float(abundance["paired_per_sample_median_wilcoxon_p"]["median_sample_fraction"]), 6.685266271233559e-05, abs_tol=1e-8):
+    fail("full-depth saliva abundance summary changed unexpectedly")
 saliva_uncertainty = {r["metric"]: r for r in load_tsv("results/uncertainty_summary.tsv")
                       if r["analysis"] == "saliva_leave_one_timepoint_out"}
 for metric, point, lo, hi in (
@@ -407,7 +414,8 @@ text = read("manuscript/abstract.md", "manuscript/results.md", "manuscript/metho
             "manuscript/figure_legends_detailed.md")
 required = [
     "250 bp", "ART", "error-modelled", "F1 = 0.952", "AUPR = 1.0",
-    "candidate strain-cluster calls", "panel/read compatibility", "prefix subsample",
+    "Native-only calls were lower abundance", "full-depth paired", "sample fraction",
+    "panel/read compatibility",
     "121–146", "projected", "4.6×", "5.8×", "8 subjects",
 ]
 for phrase in required:

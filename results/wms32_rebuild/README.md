@@ -30,3 +30,6 @@ table is `wms32_strain_calls_all.tsv`; the gate-matched native call table is
 `native20_matched/native_strain_calls.tsv`. `per_sample_summary.tsv` and
 `full_wms_profile_summary.json` compare the two call sets. This is a modality and sequencing-depth
 comparison, not a ground-truth accuracy validation.
+Shared/native-only abundance summaries used to build Figure 6 are in
+`native_call_shared_status.tsv`, `per_sample_shared_native_median.tsv` and
+`shared_native_abundance_summary.tsv`.

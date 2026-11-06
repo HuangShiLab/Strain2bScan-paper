@@ -31,7 +31,7 @@
       "clustering": "containment",
       "similarity": 0.95
     },
-    "profile_options": "--min-abundance 0 --min-coverage 0.2",
+    "profile_options": "binary defaults (--min-support 8, --min-coverage 0.1, --min-abundance 0, --min-consistency 0.5); run_one.sh passed no overrides",
     "trace_gap": false,
     "layer1_override": false,
     "layer2_override": false

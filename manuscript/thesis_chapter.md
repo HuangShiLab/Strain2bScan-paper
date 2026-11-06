@@ -161,18 +161,17 @@ We reran the enzyme ladder on 225 matched shotgun-derived simulations, giving 1,
 ##### DNA mocks (Fig 4)
 
 Four ATCC whole-cell mocks were profiled against a unified 28-species, 164-genome tree. In the primary MSA-1002 comparison, native BcgI 2bRAD-M retained F1 = 0.952 at 0.1 ng DNA and F1 = 1.0 with AUPR = 1.0 at 90–99% human DNA. At 90, 95 and 99% host DNA, MSA-1002 F1 was 0.976–1.0 and Bray–Curtis similarity was 0.745–0.756. F1 was 1.0 at 1 ng, whereas 0.001 ng was below the practical detection floor. These MSA-1002 mocks support robust strain detection under high host content and low input, with a remaining noise floor near approximately 1× marker depth; clean MSA-1003/1005/1007 profiles tested composition rather than the host ladder.
+The lower 0.01-ng value applies to this primary cluster-resolved 164-genome benchmark. A separate Figure S1 titration used the original 62-species panel and broader species-level gates and reached precision 1.0 with 19/20 species at 0.01 ng; those settings are not directly comparable.
 
 ##### Real saliva time-course (Fig 5, Supplementary Table S11)
 
-Thirty-two native BcgI 2bRAD-M saliva libraries from eight subjects and four within-day timepoints were profiled against a 19-species oral panel. Strain features identified the subject in every leave-one-timepoint-out test (100%; species features 78.1%, 95% CI 0.563–1.000). The subject-aware strain-minus-species accuracy difference was 0.219 (95% CI 0.000–0.438), and within-subject Bray–Curtis distance was lower than between-subject distance (0.327 versus 0.696; exploratory PERMANOVA p = 8.05 × 10⁻¹⁹). These data show a stable, person-specific strain signature, although the small within-subject classifier does not establish a significant improvement over species features or independent strain identity.
+Thirty-two native BcgI 2bRAD-M saliva libraries from eight subjects and four within-day timepoints were profiled against a 19-species oral panel; calls represented 18 observed species and 125 species-cluster features. Subject PERMANOVA R² was similarly high for species-level (0.755) and strain-level (0.757) sample-fraction matrices, but strain features identified the subject in every leave-one-timepoint-out test (100%; species features 78.1%, 95% CI 0.563–1.000). The subject-aware strain-minus-species accuracy difference was 0.219 (95% CI 0.000–0.438), and within-subject Bray–Curtis distance was lower than between-subject distance (0.327 versus 0.696; exploratory PERMANOVA p = 8.05 × 10⁻¹⁹). Figure 5C shows the 13 species present in at least 12 samples. These data show a stable, person-specific strain signature, although the small within-subject classifier does not establish a significant improvement over species features or independent strain identity.
 
 The same libraries supported pairwise sharing analysis. For each pair, the denominator was the number of species with calls in both samples; the primary metric required the same dominant cluster. Dominant-cluster sharing was 0.538 within subjects across timepoints versus 0.217 between subjects (mean difference +0.320; pair-level bootstrap 95% CI 0.264–0.375), and any-cluster sharing was 0.801 versus 0.568 (difference +0.233; 95% CI 0.191–0.271; Supplementary Table S11).
 
-##### Paired saliva: 2bRAD-M versus shotgun (Fig 6)
+##### Paired saliva: 2bRAD-M versus shotgun (Fig 6, Supplementary Table S4)
 
-In an exploratory R1-prefix comparison (three of four downloaded libraries usable; WMS capped at 4 × 10⁸ reads and profiled with stricter species gates), all 65 shotgun strain-cluster calls were also present in native BcgI 2bRAD-M (65/65). Native libraries yielded 128–163 additional candidate strain-cluster calls per sample. This small, non-depth-matched observation is directional only and does not establish a systematic native advantage.
-
-A uniform gate-matched rebuild (Supplementary Table S4) then profiled all 32 paired WMS libraries and all 32 native 2bRAD libraries with the same oral panel, species gate, support and coverage thresholds. Full-depth WMS produced 2,487 strain-cluster calls (median 79 per sample) versus 1,368 native calls (median 35.5); 495 calls were shared. Thus, 19.9% of WMS calls were present in native profiles and 36.2% of native calls were recovered in WMS. Because sequencing depth, representation and host content differ between modalities, these data show substantial modality-specific sensitivity rather than accuracy validation.
+A uniform gate-matched rebuild profiled all 32 paired WMS libraries and all 32 native 2bRAD libraries with the same oral panel, species gate, support and coverage thresholds. Full-depth WMS produced 2,487 strain-cluster calls (median 79 per sample) versus 1,368 native calls (median 35.5); 495 calls were shared. Thus, 19.9% of WMS calls were present in native profiles and 36.2% of native calls were recovered in WMS. Native-only calls were lower abundance than shared calls (median sample fraction 5 × 10⁻⁶ versus 1.6 × 10⁻⁵; paired per-sample medians, Wilcoxon p = 6.7 × 10⁻⁵). Because sequencing depth, representation and host content differ between modalities, these data show substantial modality-specific sensitivity rather than accuracy validation.
 
 
 **Part II. Conventional shotgun performance.**
@@ -781,7 +780,8 @@ each). A single unified combined tree was built from **28 species × up to 6 gen
 mock species = its ATCC genome + up to 5 high-quality conspecific decoys, CheckM [15] completeness ≥ 90 %,
 contamination ≤ 5 %, within-species ANI 95–99.9 % to the ATCC reference by skani [22]), clustered at 0.95
 similarity with `--containment`; native 2bRAD used the BcgI tree and shotgun used the all-enzyme tree.
-Strain2bScan was run with `--min-abundance 0 --min-coverage 0.2`. On the shotgun samples it was compared
+Strain2bScan used binary defaults for these frozen runs (`--min-support 8`, `--min-coverage 0.1`,
+`--min-abundance 0`, `--min-consistency 0.5`; `run_one.sh` passed no gate overrides). On the shotgun samples it was compared
 against **StrainScan** 1.0.14 [1] (per-species databases, `linux/amd64` container) and **inStrain** 1.9.1
 [8]. Reads were aligned with Bowtie2 [23] using default paired-end settings, sorted and indexed with samtools, and profiled with `inStrain profile` against single-linkage skani dereplicated references (98% ANI threshold, ATCC representative retained). The MSA-1002/1003 pool was reduced from 120 genomes to 32 references; the MSA-1005/1007 pool was reduced from 164 to 47. Genome-level calls required breadth ≥ 0.5 and reference popANI ≥ 0.99999; their coverage values were then normalized for abundance scoring and the manuscript-level 10⁻⁴ detection threshold was applied. The non-dereplicated reference is
 shown as a control in Fig S4. These exact filters were fixed before metric scoring; raw genome-table threshold sensitivity was not rerun. Each tool was scored against the same mock ground truth (`Ground_truth/*`, sequence abundance) in its own
@@ -791,15 +791,19 @@ Bray–Curtis and L2 similarity to the truth profile;
 Threshold-aware P/R/F1, AUPR and abundance-error values were computed by `scripts/update_mock_figs.py` into
 `data/fig6_fig12_metrics.tsv` (frozen copy `results/mock_benchmark_f26f234/fig6_fig12_metrics.tsv`);
 `scripts/score_all.py` supplied threshold-free mock scoring and `scripts/plot_figs_h.py` generated figures.
+The separate Figure S1 titration used the original public mock analysis: a 62-species BcgI panel,
+`multi-profile`, and broader species gates (50 panel-specific markers and five detected markers). Its
+0.01-ng species-level result is therefore not numerically comparable to the primary Figure 4
+164-genome, 0.95-cluster benchmark.
 The primary frozen comparators were therefore StrainScan and inStrain. A separate StrainGST rerun [2] was
 added after the frozen run because it requires StrainGE-specific 0.90-reference databases and a WMS-oriented
 workflow; it is described under *StrainGST rerun*. StrainGR was not run. (vii) *Real saliva* (Fig 5, Fig 6): native BcgI 2bRAD and paired shotgun WMS saliva from PRJNA1131785
 (8 subjects × 4 within-day timepoints) were profiled against a 19-species oral-commensal panel (up to 25
 genomes/species). The BioProject contains 32 paired WMS saliva runs
-(`figure_raw_data/Fig08_saliva_shotgun/full_sra_wms_manifest.tsv`); the frozen shotgun-native comparison used
-the four libraries for which R1 prefixes had been downloaded, capped WMS input at 4 × 10⁸ reads and applied
-stricter species gates (50 panel-specific markers and five detected markers). Three libraries yielded usable
-strain calls. Strain- and species-level relative abundances were converted to Bray–Curtis dissimilarities and
+(`figure_raw_data/Fig08_saliva_shotgun/full_sra_wms_manifest.tsv`). An earlier exploratory R1-prefix
+comparison used four downloaded libraries, capped WMS input and stricter species gates; three yielded calls.
+It is retained only as archived provenance and is not used in the current Figure 6. Strain- and
+species-level relative abundances were converted to Bray–Curtis dissimilarities and
 tested by a custom Python PERMANOVA implementation with 4,999 label permutations and seed 42 [25] for
 subject/timepoint factors. Leave-one-timepoint-out 1-NN host classification was compared between feature
 types; uncertainty used a subject-aware cluster bootstrap with 20,000 resamples, retaining all four
@@ -807,6 +811,15 @@ timepoints together and summarizing the strain-minus-species accuracy difference
 interval. Shotgun R1 reads were digested in silico with BcgI and compared with native 2bRAD calls per sample. Full per-dataset
 procedures and accessions are in `docs/` (`motivation_16s.md`,
 `saliva_individual_discrimination.md`, `saliva_temporal_ml.md`, `saliva_concordance.md`).
+
+*Real saliva community statistics.* Cross-species community matrices used `sample_fraction`, the fraction
+of all sample tag observations assigned to a strain-cluster call, because this is comparable across
+species. The resulting matrices contained 32 samples, 18 observed species and 125 species-cluster
+features. Per-species analyses were restricted to one species and therefore used `within_abund`; Figure 5C
+shows the 13 species present in at least 12 of 32 samples. An earlier exploratory analysis had
+inadvertently used `support` (raw marker count) for cross-species matrices; those matrices and their
+higher feature count were superseded. This was a downstream abundance-column correction, not a change to
+the Strain2bScan profiling algorithm.
 
 *Full-depth 32-sample WMS rebuild.* The canonical PRJNA1131785 WMS dataset was rebuilt to 32 samples
 and 64 mate files, validated with `gzip -t`, and retained with its SRA manifest. All 32 paired-end
@@ -1183,10 +1196,15 @@ calls on the benchmark samples.
 **Figure 3. The 2bRAD enzyme set is a marker-density and recall control.** **(A)** Species-median precision, recall and F1 across the cumulative enzyme ladder. **(B)** Median strain-specific marker yield and cluster count. On 225 matched simulations per enzyme level (1,125 sample-level predictions across 15 species), increasing enzymes from 1 to 14 raised median strain-specific markers from 816 to 12,298 while median cluster count stayed 19. Median precision/recall/F1 improved from 0.667/0.333/0.500 to 1.000/1.000/1.000; four enzymes reached median precision 1.000 and F1 0.667. This is an in-silico design experiment, not a native wet-lab library benchmark.
 
 **Figure 4. Native BcgI 2bRAD-M across four ATCC DNA mocks.** MSA-1002, MSA-1003, MSA-1005 and MSA-1007 were profiled against a 28-species, 164-genome containment tree. At 90, 95 and 99% human DNA, F1 was 0.976–1.0 and Bray–Curtis similarity 0.745–0.756. A 0.1-ng input retained F1 0.952; 0.01 ng approached the marker-depth noise floor and 0.001 ng was below the detection floor.
+The 0.01-ng result is specific to this cluster-resolved 164-genome primary benchmark and is not directly comparable with the separate 62-species, species-level titration in Figure S1.
 
 **Figure 5. Real saliva contains individual-specific, within-day strain signatures.** **(A,B)** Subject-constrained PCoA of species-level and strain-level profiles. **(C)** Per-species strain signal; the dashed line marks whole-community strain signal. **(D)** Within- versus between-subject Bray–Curtis distance. **(E)** Leave-one-timepoint-out subject classification. **(F,G)** Dominant-cluster and any-shared-cluster rates for pairwise saliva comparisons; denominators were species with calls in both samples. Thirty-two native BcgI 2bRAD-M saliva libraries from eight subjects sampled four times in one day were profiled against a 19-species oral panel. Classification reached 100% with strain features versus 78.1% with species features; within-subject Bray–Curtis distance was 0.327 versus 0.696 between subjects. This is a small within-subject result, not independent strain-identity validation.
+Cross-species matrices used sample fraction and contained 18 observed species and 125 strain-cluster features; panel C shows the 13 species present in at least 12 samples.
 
-**Figure 6. Exploratory paired saliva comparison.** **(A)** Shared and unique paired-sample call sets. **(B)** Relative abundance of shared versus native-only calls. Shotgun R1 prefix libraries from three usable paired samples were digested in silico and compared with matched native BcgI libraries under the prefix-analysis gates. All 65 shotgun strain-cluster calls were present in native calls; native 2bRAD-M yielded 128–163 additional candidate calls per sample. This non-depth-matched exploratory result is directional only and does not establish a systematic modality advantage.
+**Figure 6. Full-depth paired saliva comparison.** **(A)** Shared, WMS-only and native-2bRAD-only strain-cluster calls for all 32 gate-matched WMS/native pairs.
+**(B)** Per-sample median sample fraction for shared versus native-only calls. WMS yielded more calls per sample,
+and native-only calls were lower abundance. Differences in depth, representation and host content prevent an
+accuracy interpretation.
 
 **Figure 7. Accuracy across the complete 2,025-sample single-species simulation pool.** **(A)** Per-species mean accuracy. **(B)** Accuracy across per-strain depth. **(C)** Accuracy by different-cluster versus same-cluster design. Strain2bScan was evaluated on all 2,025 ART error-modelled shotgun simulations from 15 species, followed by in-silico 2bRAD digestion. Median precision, recall and F1 were 1.000; mean precision, recall and F1 were 0.890, 0.846 and 0.862. Mean F1 increased from 0.786 at 0.5× to 0.888 at 10×. Panels show per-species means, depth dependence and different-cluster versus same-cluster design.
 
@@ -1211,7 +1229,7 @@ describes 0.95 marker-cluster resolution, not SNV/popANI-validated strain identi
 
 ### Supplementary figures
 
-**Figure S1. ATCC MSA-1002 DNA-input titration uses native BcgI 2bRAD-M reads.** Native-input species precision and recall are shown for 0.001, 0.01, 0.1 and 1 ng DNA; precision was 1.0 and recall was complete at 0.1 ng and above.
+**Figure S1. ATCC MSA-1002 DNA-input titration uses native BcgI 2bRAD-M reads.** Native-input species precision and recall are shown for 0.001, 0.01, 0.1 and 1 ng DNA in the original 62-species species-level analysis; precision was 1.0, 0.01-ng recall was 0.95, and recall was complete at 0.1 ng and above. This titration is not directly comparable with the Figure 4 164-genome, 0.95-cluster primary benchmark.
 
 **Figure S2. Layer-1 gate calibration uses the 55-species panel.** Species precision and recall are plotted against the minimum species-marker floor at normal and low depth.
 
