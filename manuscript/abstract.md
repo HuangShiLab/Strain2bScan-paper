@@ -16,8 +16,9 @@ full-depth WMS and native profiles shared 495 strain-cluster calls, with additio
 modality. In a 148-sample rhesus macaque GI spatial cohort, a cohort-specific MAG panel resolved
 strain clusters in 88.3% of GI samples, identified large-intestinal luminal-enriched strain reservoirs, and
 showed sample-level coupling to bile-acid classes and SCFA/glycan-associated pathways. Pairwise dominant-cluster sharing was higher within subjects across saliva timepoints and within monkeys across GI sites
-than between hosts. Same-container profiling used 4–33× less wall time and 5–39× less memory than StrainScan; an
-archived cross-platform database benchmark showed larger differences. Accuracy depended on reference
+than between hosts. Across the matched 225-sample simulation set, Strain2bScan used median 0.56 s and 0.059 GB per sample
+versus 4.79 s and 0.811 GB for StrainScan; StrainGST and inStrain used larger peak memory in their respective
+workflows. Accuracy depended on reference
 completeness and niche-matched panel design. Strain2bScan therefore extends reduced-representation
 sequencing from species profiles to scalable strain-cluster resolution.
 

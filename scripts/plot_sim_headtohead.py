@@ -15,11 +15,13 @@ def load(p): return list(csv.DictReader(open(p), delimiter="\t"))
 
 bd   = {r["group"]: r for r in load("results/strainscan_rerun/current_single_by_depth.tsv")}
 bc   = [r for r in load("results/sim_headtohead_build_cost.tsv") if r["ss_build_s"] != "NA"]
+ge_build={r["species"]:float(r["build_wall_s"]) for r in load("results/strainge_rerun/simulation_database_build.tsv")}
 pt   = load("results/sim_headtohead_profile_sameenv.tsv")
 mt   = load("results/sim_headtohead_multi.tsv")
 ge  = load("results/strainge_rerun/simulation_single_by_depth.tsv")
 isn = load("results/instrain_sim225/by_depth.tsv")
 ge_rt = load("results/strainge_rerun/simulation_run_efficiency.tsv")
+ge_bd = load("results/strainge_rerun/simulation_database_build.tsv")
 
 def ge_by_depth(depth):
     rs=[float(r["total_wall_s"]) for r in ge_rt if r["kind"]=="multi" and r["depth"]==depth]
@@ -55,6 +57,7 @@ bc.sort(key=lambda r: float(r["ss_build_s"]))
 y = np.arange(len(bc))
 axd.barh(y - 0.2, [float(r["s2b_build_s"]) for r in bc], 0.4, color=S2B, label="Strain2bScan")
 axd.barh(y + 0.2, [float(r["ss_build_s"]) for r in bc], 0.4, color=SS, label="StrainScan")
+axd.barh(y + 0.6, [ge_build[r["species"]] for r in bc], 0.4, color=SG, label="StrainGST")
 axd.set_yticks(y)
 axd.set_yticklabels([r["species"].split("_")[0][0] + ". " + r["species"].split("_")[1] for r in bc], fontsize=7.5, style="italic")
 axd.set_xscale("log"); axd.set_xlabel("DB build time (s, log scale)")
@@ -67,9 +70,11 @@ axe = fig.add_subplot(gs[1, 1])
 pdd = [float(r["depth"]) for r in pt]
 axe.plot(pdd, [float(r["s2b_emu_wall_s"]) for r in pt], "o-", color=S2B, lw=2, ms=7, label="Strain2bScan")
 axe.plot(pdd, [float(r["ss_wall_s"]) for r in pt], "s--", color=SS, lw=2, ms=7, label="StrainScan")
+ge_single={float(r["depth"]):r for r in ge_rt if r["kind"]=="single"}
+axe.plot(pdd, [float(ge_single[float(d)]["total_wall_s"]) for d in pdd], "^-.", color=SG, lw=2, ms=7, label="StrainGST")
 axe.set_xscale("log"); axe.set_yscale("log"); axe.set_xticks(pdd); axe.set_xticklabels([str(x) for x in pdd])
 axe.set_xlabel("per-strain sequencing depth (×)"); axe.set_ylabel("profile time / sample (s, log)")
-axe.set_title("Profiling cost (same emulated env)"); axe.legend(fontsize=8, loc="upper left"); axe.grid(alpha=0.3)
+axe.set_title("Profiling cost by depth"); axe.legend(fontsize=8, loc="upper left"); axe.grid(alpha=0.3)
 panel_tag(axe, "E")
 
 # ---- F: multi-species time / community sample (log bars) ----

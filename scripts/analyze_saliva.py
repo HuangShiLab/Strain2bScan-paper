@@ -134,7 +134,7 @@ perspec = []
 for sp in sorted(set(r["species"] for r in rows)):
     M = species_matrix(sp)
     pres = int((M.sum(1) > 0).sum())
-    if pres < 12:
+    if pres < 10:
         continue
     R2, F, p = permanova(braycurtis(M), labels)
     perspec.append((R2, p, pres, M.shape[1], sp))

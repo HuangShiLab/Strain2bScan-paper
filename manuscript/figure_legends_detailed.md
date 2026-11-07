@@ -61,10 +61,8 @@ overlapping zero. 16S resolves species, 2bRAD tags resolve strains.
   genome subsamples); genome count per species at right. Every 2bRAD CI is high and non-overlapping with
   its 16S CI; 16S CIs for *M. tuberculosis* (−0.04), *L. plantarum* (0.02) and *P. dorei* (−0.13) span
   zero (no strain signal).
-- **(B)** 3×5 matrix of per-species **rank–rank** scatters: rank of each strain pair's whole-genome
-  distance (x) vs its 2bRAD (blue) / 16S (red) distance (y), sorted worst→best 16S. 2bRAD hugs the
-  diagonal in every species; 16S forms flat horizontal rank-bands (few discrete distances shared by many
-  unrelated pairs), most extreme in *P. dorei* and *M. tuberculosis* (collapse to a single band).
+- Rank–rank evidence is shown in **Figure S7**: 2bRAD hugs the diagonal in every species, whereas 16S
+  forms flat horizontal rank-bands; the effect is strongest for *P. dorei* and *M. tuberculosis*.
 
 ---
 
@@ -74,7 +72,7 @@ overlapping zero. 16S resolves species, 2bRAD tags resolve strains.
 
 
 
-## Figure 3; The 2bRAD enzyme set is a resolution/cost knob (14-species multi-species ladder)
+## Figure 6; The 2bRAD enzyme set is a resolution/cost knob (14-species multi-species ladder)
 **1. Data source.**
 - *Data type:* simulation on the 15-species reference pool (closed-world, error-modelled ART 250 bp paired-end reads).
 - *Production/collection:* 14 resolvable species of the simulation pool were re-profiled while varying the
@@ -103,7 +101,7 @@ resolution). Single-enzyme BcgI operation supports native BcgI 2bRAD-M libraries
 
 
 
-## Figure 4; Native 2bRAD strain-level identification and abundance across four ATCC DNA mocks
+## Figure 3; Native 2bRAD strain-level identification and abundance across four ATCC DNA mocks
 **1. Data source.**
 - *Data type:* **real native BcgI 2bRAD-M metagenome** of four ATCC whole-cell mocks.
 - *Production/collection:* MSA-1002 (20 strains, even), MSA-1003 (20 strains, staggered ~3 orders of
@@ -135,7 +133,7 @@ single-threshold precision but is recovered by abundance-threshold AUPR.
 
 
 
-## Figure 5; Real saliva: individual-specific, within-day strain signatures
+## Figure 4; Real saliva: individual-specific, within-day strain signatures
 **1. Data source.**
 - *Data type:* **real native BcgI 2bRAD-M metagenome** (human saliva).
 - *Production/collection:* saliva from **8 subjects sampled at 4 times of day** (9AM/11AM/1PM/5PM = 32
@@ -171,7 +169,7 @@ strain signature resolved in ~1 s/sample.
 
 
 
-## Figure 6; Full-depth shotgun-native saliva comparison
+## Figure 10; Full-depth shotgun-native saliva comparison
 **1. Data source.**
 - *Data type:* **real paired shotgun metagenome (WMS) + real native BcgI 2bRAD-M** (same saliva samples).
 - *Production/collection:* complete full-depth paired shotgun WMS and native BcgI 2bRAD libraries for all
@@ -204,7 +202,7 @@ independent accuracy validation.
 
 
 
-## Figure 7; Accuracy across the complete 2,025-sample single-species simulation pool
+## Figure 5; Accuracy across the complete 2,025-sample single-species simulation pool
 
 **1. Data source.**
 - *Data type:* in-silico shotgun simulation followed by Strain2bScan 2bRAD digestion.
@@ -222,7 +220,7 @@ independent accuracy validation.
 
 
 
-## Figure 8; Matched 225-sample multi-tool simulation benchmark
+## Figure 7; Matched 225-sample multi-tool simulation benchmark
 **1. Data source.**
 - *Data type:* simulation on a fixed 15-species genome pool (15–50 complete/near-complete NCBI genomes
   each; closed-world, error-modelled ART reads, 250 bp PE).
@@ -261,7 +259,7 @@ sample for Strain2bScan, StrainScan and StrainGST.
 
 
 
-## Figure 9; Performance, scaling and projected community throughput
+## Figure 8; Performance, scaling and projected community throughput
 **1. Data source.**
 - *Data type:* mixed measured benchmarks and one projected StrainScan cost curve.
 - *Production/collection:* real *C. acnes* per-sample and thread-scaling runs; simulated 55-species communities for species/sample gradients; archived MinHash scaling; and measured Strain2bScan community cost versus projected StrainScan cost (55 measured single-species runs multiplied by samples).
@@ -280,7 +278,7 @@ sample for Strain2bScan, StrainScan and StrainGST.
 
 
 
-## Figure 10; Strain-level profiling on shotgun mocks: Strain2bScan vs StrainScan and inStrain,
+## Figure 9; Strain-level profiling on shotgun mocks: Strain2bScan vs StrainScan and inStrain,
 including high host contamination
 **1. Data source.**
 - *Data type:* **whole-metagenome shotgun (WMS)** of the same four ATCC mocks as Fig 6.

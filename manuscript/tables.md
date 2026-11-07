@@ -1,6 +1,6 @@
 # Strain2bScan; Manuscript tables (simulated head-to-head)
 
-**Table 1. Current Strain2bScan regression versus the reproducible StrainScan rerun on the 15-species simulated benchmark.** Accuracy is the median over completed run-level paired samples (different-cluster mixtures for 14 species; same-cluster mixtures for near-clonal *M. tuberculosis*; k = 2/3/5; depths 0.5–10×); each tool was scored in its own 0.95-similarity cluster space. Cluster-count columns are each tool's own 0.95 partitions of the common species pool. StrainGST F1 uses all 15 species-specific tests in its own 0.90-reference space and is not pooled with the 0.95-space columns. Current Strain2bScan values are from source commit `6ae760c2f3bd2f39efc0e6aa06c53a84366cb16e`; current source: `results/strainscan_rerun/current_single_persample.tsv`. Build cost is the archived timing benchmark (Strain2bScan native arm64; StrainScan `linux/amd64` under emulation). *S. enterica* produced no completed StrainScan calls in the rerun; *K. pneumoniae*, which did not finish in the archived timing run, was successfully built and profiled in the reproducible rerun.
+**Table 1. Strain2bScan versus StrainScan on the 15-species simulated benchmark.** Accuracy is the median over completed run-level paired samples (different-cluster mixtures for 14 species; same-cluster mixtures for near-clonal *M. tuberculosis*; k = 2/3/5; depths 0.5–10×); each tool was scored in its own 0.95-similarity cluster space. Cluster-count columns are each tool's own 0.95 partitions of the common species pool. StrainGST F1 uses all 15 species-specific tests in its own 0.90-reference space and is not pooled with the 0.95-space columns. Strain2bScan values are from source commit `6ae760c2f3bd2f39efc0e6aa06c53a84366cb16e`; source table: `results/strainscan_rerun/current_single_persample.tsv`. Build cost is the cross-platform timing benchmark (Strain2bScan native arm64; StrainScan `linux/amd64` under emulation). *S. enterica* produced no completed StrainScan calls; *K. pneumoniae* was successfully built and profiled in the final cross-platform analysis.
 
 | Species | Paired n | Pool genomes | S2B clusters | SS clusters | S2B P | S2B R | S2B F1 | SS P | SS R | SS F1 | Separate StrainGST F1 (0.90-space)† | S2B build | SS build |
 |---|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|
@@ -22,7 +22,7 @@
 
 **Median across 14 species with completed paired runs:** Strain2bScan P 1.000 / R 1.000 / F1 1.000; StrainScan P 1.000 / R 0.667 / F1 0.800. Species medians conceal a precision/recall trade-off for *K. pneumoniae*. Mean paired differences and 95% intervals are in `results/strainscan_rerun/current_uncertainty_summary.tsv`.
 
-**Table 2. Accuracy and same-container per-sample cost by sequencing depth (single-species medians).** Accuracy uses current Strain2bScan and StrainScan on the 204 completed paired runs from `results/strainscan_rerun/current_single_by_depth.tsv`; StrainGST accuracy uses its separate 0.90-reference space from `results/strainge_rerun/simulation_single_by_depth.tsv` and is not pooled. Cost is the median of the archived same-container subset in `results/sim_headtohead_profile_sameenv.tsv`; both tools ran as linux/amd64 containers. Cost n is reported separately from accuracy n.
+**Table 2. Accuracy and same-container per-sample cost by sequencing depth (single-species medians).** Accuracy uses final Strain2bScan and StrainScan on the 204 completed paired runs from `results/strainscan_rerun/current_single_by_depth.tsv`; StrainGST accuracy uses its separate 0.90-reference space from `results/strainge_rerun/simulation_single_by_depth.tsv` and is not pooled. Cost is the median of the same-container subset in `results/sim_headtohead_profile_sameenv.tsv`; both tools ran as linux/amd64 containers. Cost n is reported separately from accuracy n.
 
 | Depth (×) | Accuracy n | S2B P/R/F1 | StrainScan P/R/F1 | StrainGST P/R/F1† | Cost n | S2B time / RSS | StrainScan time / RSS |
 |--:|--:|:--:|:--:|:--:|--:|:--:|:--:|
@@ -34,7 +34,7 @@
 
 Strain2bScan reached median recall 1.0 from 1× onward; StrainScan was non-monotonic and did not exceed 0.800 median F1 at 0.5× or intermediate depths. The depth table aggregates heterogeneous strain mixtures and is not a causal depth-onset estimate.
 
-**Table 3. Multi-species community accuracy and archived profiling cost.** Accuracy is the mean of four samples per depth. Strain2bScan and StrainScan use 0.95-cluster spaces from `results/strainscan_rerun/current_multi_by_depth.tsv` and `results/strainscan_rerun/multi_by_depth.tsv`; StrainGST uses its separate 0.90-reference space from `results/strainge_rerun/simulation_multi_by_depth.tsv`. Costs are medians from the archived timing tables (`results/sim_headtohead_multi.tsv` and `results/strainge_rerun/simulation_run_efficiency.tsv`) and are not pooled with accuracy. Strain2bScan profiles each community in one digest-once pass; StrainScan and StrainGST costs are medians of per-sample totals across species searches.
+**Table 3. Multi-species community accuracy and profiling cost.** Accuracy is the mean of four samples per depth. Strain2bScan and StrainScan use 0.95-cluster spaces from `results/strainscan_rerun/current_multi_by_depth.tsv` and `results/strainscan_rerun/multi_by_depth.tsv`; StrainGST uses its separate 0.90-reference space from `results/strainge_rerun/simulation_multi_by_depth.tsv`. Costs are medians from the timing tables (`results/sim_headtohead_multi.tsv` and `results/strainge_rerun/simulation_run_efficiency.tsv`) and are not pooled with accuracy. Strain2bScan profiles each community in one digest-once pass; StrainScan and StrainGST costs are medians of per-sample totals across species searches.
 
 | Community depth | S2B P/R/F1 | StrainScan P/R/F1 | StrainGST P/R/F1† | S2B time / RSS | StrainScan time / RSS | StrainGST time / RSS |
 |---|:--:|:--:|:--:|:--:|:--:|:--:|
@@ -106,16 +106,16 @@ can also process after in-silico digestion.
 | Tool | Executed here | Input scope | Typical resolution | Scope and role |
 |---|:--:|---|---|---|
 | Strain2bScan | Yes | Native BcgI 2bRAD reads and in-silico-digested shotgun reads | Strain clusters | Method under test; one marker framework supports both reduced-representation and shotgun input. |
-| StrainScan v1.0.14 | Yes | Shotgun reads against per-species reference databases | Strain clusters | Direct reference-guided comparator on shotgun reads (Fig 8, Fig 10, Supplementary Fig S5; Tables 1–3). |
-| inStrain v1.9.1 (mocks) and v1.11.0 (simulations) | Yes | Shotgun reads aligned to dereplicated mock references or full species simulation pools | Strain, SNV and genome coverage | Direct read-level shotgun comparator (Fig 8, Fig 10, Fig S4; simulation outputs in `results/instrain_sim225/`). |
+| StrainScan v1.0.14 | Yes | Shotgun reads against per-species reference databases | Strain clusters | Direct reference-guided comparator on shotgun reads (Fig 7, Fig 9, Supplementary Fig S5; Tables 1–3). |
+| inStrain v1.9.1 (mocks) and v1.11.0 (simulations) | Yes | Shotgun reads aligned to dereplicated mock references or full species simulation pools | Strain, SNV and genome coverage | Direct read-level shotgun comparator (Fig 7, Fig 9, Fig S4; simulation outputs in `results/instrain_sim225/`). |
 | StrainGE / StrainGST / StrainGR | StrainGST only | Shotgun WMS reads against StrainGE 0.90-reference databases; native BcgI 2bRAD is not documented input | Strain level, reference guided | StrainGST completed 225 single-species simulations, 12 multi-species communities and four ATCC WMS mocks (Tables 1–3 and 9); StrainGR was not run. |
 | 2bRAD-M / Fast2bRAD-M | No | Native BcgI 2bRAD reads | Mainly species | Same restriction-assay family; provides the species-level upstream context for Strain2bScan. |
 | sylph | No | Shotgun sketches | Mainly species and ANI | Context for rapid species-level profiling; not a strain-resolved benchmark here. |
-| StrainPhlAn | No | Shotgun marker genes | Strain types | Context for marker-gene strain profiling; not rerun here. |
+| StrainPhlAn | No | Shotgun marker genes | Strain types | Context for marker-gene strain profiling; not evaluated here. |
 
-**Table 9. StrainGST (StrainGE 1.3.9) rerun accuracy and efficiency.** Simulations are the matched
+**Table 9. StrainGST (StrainGE 1.3.9) accuracy and efficiency.** Simulations are the matched
 `_rep1_` subset and all 12 multi-species communities. Mocks are the primary WMS replicate used in
-Figure 10; MSA-1002 is the 99%-host sample. Accuracy is in StrainGE's 0.90-reference space; mock calls
+Figure 9; MSA-1002 is the 99%-host sample. Accuracy is in StrainGE's 0.90-reference space; mock calls
 use abundance >= 1e-4. Wall time is one sample k-merization plus all per-species StrainGST searches; RSS
 is the maximum across those stages. StrainGR was not run.
 
@@ -378,3 +378,88 @@ only pairs with at least one species detected in both samples. Source:
 | SI | Mucosal | 143 | 119 | 0.149 | 0.131 |
 | S | Luminal | 2 | 0 | -- | -- |
 | S | Mucosal | 6 | 0 | -- | -- |
+
+**Table S14. ATCC strain identifiers represented in the four DNA mock communities.** Each row maps the species-level colour key used in mock figures to the ATCC strain/reference genome and its 0.95-cluster representative. For MSA-1003, only staggered taxonomic abundance was provided; sequence abundance is therefore not shown. Source: `results/mock_benchmark_f26f234/mock_strain_identifiers.tsv`.
+
+| Mock | Species | ATCC strain/reference | Truth abundance | 0.95 cluster |
+|---|---|---|--:|---|
+| MSA1002 | *Acinetobacter baumannii* | ATCC Acinetobacter baumannii ATCC 17978 | 0.06079 | C0 |
+| MSA1002 | *Bacillus pacificus* | ATCC Bacillus pacificus ATCC 10987 | 0.08117 | C12 |
+| MSA1002 | *Bifidobacterium adolescentis* | ATCC Bifidobacterium adolescentis ATCC 15703 | 0.03116 | C18 |
+| MSA1002 | *Cereibacter sphaeroides* | ATCC Cereibacter sphaeroides ATCC 17029 | 0.06694 | C24 |
+| MSA1002 | *Clostridium beijerinckii* | ATCC Clostridium beijerinckii ATCC 35702 | 0.0896 | C28 |
+| MSA1002 | *Cutibacterium acnes* | ATCC Cutibacterium acnes ATCC 11828 | 0.03725 | C35 |
+| MSA1002 | *Deinococcus radiodurans* | ATCC Deinococcus radiodurans ATCC BAA 816 | 0.04892 | C40 |
+| MSA1002 | *Enterococcus faecalis* | ATCC Enterococcus faecalis ATCC 47077 | 0.04084 | C41 |
+| MSA1002 | *Escherichia coli* | ATCC Escherichia coli ATCC 700926 | 0.06924 | C47 |
+| MSA1002 | *Helicobacter pylori* | ATCC Helicobacter pylori ATCC 700392 | 0.02487 | C56 |
+| MSA1002 | *Lactobacillus gasseri* | ATCC Lactobacillus gasseri ATCC 33323 | 0.02765 | C58 |
+| MSA1002 | *Neisseria meningitidis* | ATCC Neisseria meningitidis ATCC BAA 335 | 0.03347 | C78 |
+| MSA1002 | *Phocaeicola vulgatus* | ATCC Phocaeicola vulgatus ATCC 8482 | 0.077 | C84 |
+| MSA1002 | *Porphyromonas gingivalis* | ATCC Porphyromonas gingivalis ATCC 33277 | 0.03579 | C90 |
+| MSA1002 | *Pseudomonas paraeruginosa* | ATCC Pseudomonas paraeruginosa ATCC 9027 | 0.09507 | C100 |
+| MSA1002 | *Schaalia odontolytica* | ATCC Schaalia odontolytica ATCC 17982 | 0.0357 | C105 |
+| MSA1002 | *Staphylococcus aureus* | ATCC Staphylococcus aureus ATCC BAA 1556 | 0.0436 | C110 |
+| MSA1002 | *Staphylococcus epidermidis* | ATCC Staphylococcus epidermidis ATCC 12228 | 0.03842 | C115 |
+| MSA1002 | *Streptococcus agalactiae* | ATCC Streptococcus agalactiae ATCC BAA 611 | 0.03221 | C121 |
+| MSA1002 | *Streptococcus mutans* | ATCC Streptococcus mutans ATCC 700610 | 0.0303 | C129 |
+| MSA1003 | *Acinetobacter baumannii* | ATCC Acinetobacter baumannii ATCC 17978 | -- | C0 |
+| MSA1003 | *Bacillus pacificus* | ATCC Bacillus pacificus ATCC 10987 | -- | C12 |
+| MSA1003 | *Bifidobacterium adolescentis* | ATCC Bifidobacterium adolescentis ATCC 15703 | -- | C18 |
+| MSA1003 | *Cereibacter sphaeroides* | ATCC Cereibacter sphaeroides ATCC 17029 | -- | C24 |
+| MSA1003 | *Clostridium beijerinckii* | ATCC Clostridium beijerinckii ATCC 35702 | -- | C28 |
+| MSA1003 | *Cutibacterium acnes* | ATCC Cutibacterium acnes ATCC 11828 | -- | C35 |
+| MSA1003 | *Deinococcus radiodurans* | ATCC Deinococcus radiodurans ATCC BAA 816 | -- | C40 |
+| MSA1003 | *Enterococcus faecalis* | ATCC Enterococcus faecalis ATCC 47077 | -- | C41 |
+| MSA1003 | *Escherichia coli* | ATCC Escherichia coli ATCC 700926 | -- | C47 |
+| MSA1003 | *Helicobacter pylori* | ATCC Helicobacter pylori ATCC 700392 | -- | C56 |
+| MSA1003 | *Lactobacillus gasseri* | ATCC Lactobacillus gasseri ATCC 33323 | -- | C58 |
+| MSA1003 | *Neisseria meningitidis* | ATCC Neisseria meningitidis ATCC BAA 335 | -- | C78 |
+| MSA1003 | *Phocaeicola vulgatus* | ATCC Phocaeicola vulgatus ATCC 8482 | -- | C84 |
+| MSA1003 | *Porphyromonas gingivalis* | ATCC Porphyromonas gingivalis ATCC 33277 | -- | C90 |
+| MSA1003 | *Pseudomonas paraeruginosa* | ATCC Pseudomonas paraeruginosa ATCC 9027 | -- | C100 |
+| MSA1003 | *Schaalia odontolytica* | ATCC Schaalia odontolytica ATCC 17982 | -- | C105 |
+| MSA1003 | *Staphylococcus aureus* | ATCC Staphylococcus aureus ATCC BAA 1556 | -- | C110 |
+| MSA1003 | *Staphylococcus epidermidis* | ATCC Staphylococcus epidermidis ATCC 12228 | -- | C115 |
+| MSA1003 | *Streptococcus agalactiae* | ATCC Streptococcus agalactiae ATCC BAA 611 | -- | C121 |
+| MSA1003 | *Streptococcus mutans* | ATCC Streptococcus mutans ATCC 700610 | -- | C129 |
+| MSA1005 | *Acinetobacter johnsonii* | ATCC Acinetobacter johnsonii ATCC 17909 | 0.227 | C6 |
+| MSA1005 | *Corynebacterium striatum* | ATCC Corynebacterium striatum ATCC 6940 | 0.1841 | C29 |
+| MSA1005 | *Cutibacterium acnes* | ATCC Cutibacterium acnes ATCC 11828 | 0.1564 | C35 |
+| MSA1005 | *Micrococcus luteus* | ATCC Micrococcus luteus ATCC 4698 | 0.1541 | C72 |
+| MSA1005 | *Staphylococcus epidermidis* | ATCC Staphylococcus epidermidis ATCC 12228 | 0.1613 | C115 |
+| MSA1005 | *Streptococcus mitis* | ATCC Streptococcus mitis ATCC 49456 | 0.117 | C127 |
+| MSA1007 | *Gardnerella vaginalis* | ATCC Gardnerella vaginalis ATCC 14019 | 0.1576 | C50 |
+| MSA1007 | *Lactobacillus gasseri* | ATCC Lactobacillus gasseri ATCC 33323 | 0.1753 | C58 |
+| MSA1007 | *Lactobacillus jensenii* | ATCC Lactobacillus jensenii ATCC 25258 | 0.1577 | C64 |
+| MSA1007 | *Metamycoplasma hominis* | ATCC Metamycoplasma hominis ATCC 23114 | 0.0633 | C68 |
+| MSA1007 | *Prevotella bivia* | ATCC Prevotella bivia ATCC 29303 | 0.242 | C96 |
+| MSA1007 | *Streptococcus agalactiae* | ATCC Streptococcus agalactiae ATCC BAA 611 | 0.2042 | C121 |
+
+The source table also contains representative-genome accessions and taxonomic abundance.
+
+
+**Table S15. Composition of the 2,025-sample single-species simulation pool.** Each species contained 2, 3
+or 5 co-present truth strains from the same or different 0.95 clusters at five per-strain depths and five
+replicates. Cells show sample counts. *M. tuberculosis* contributed only same-cluster 5-strain samples and
+*P. copri* contributed only different-cluster 5-strain samples. Source:
+`results/sim2025_current_summary/sample_composition.tsv`.
+
+| Species | Design | Truth strains | 0.5× | 1× | 3× | 5× | 10× | Total |
+|---|---|--:|--:|--:|--:|--:|--:|--:|
+| *Akkermansia muciniphila* | same/different | 2/3/5 | 5 each | 5 each | 5 each | 5 each | 5 each | 150 |
+| *Clostridioides difficile* | same/different | 2/3/5 | 5 each | 5 each | 5 each | 5 each | 5 each | 150 |
+| *Cutibacterium acnes* | same/different | 2/3/5 | 5 each | 5 each | 5 each | 5 each | 5 each | 150 |
+| *Escherichia coli* | same/different | 2/3/5 | 5 each | 5 each | 5 each | 5 each | 5 each | 150 |
+| *Fusobacterium nucleatum* | same/different | 2/3/5 | 5 each | 5 each | 5 each | 5 each | 5 each | 150 |
+| *Klebsiella pneumoniae* | same/different | 2/3/5 | 5 each | 5 each | 5 each | 5 each | 5 each | 150 |
+| *Lactiplantibacillus plantarum* | same/different | 2/3/5 | 5 each | 5 each | 5 each | 5 each | 5 each | 150 |
+| *Mycobacterium tuberculosis* | same only | 2/3/5 | 5 each | 5 each | 5 each | 5 each | 5 each | 150 |
+| *Phocaeicola dorei* | same/different | 2/3/5 | 5 each | 5 each | 5 each | 5 each | 5 each | 150 |
+| *Porphyromonas gingivalis* | same/different | 2/3/5 | 5 each | 5 each | 5 each | 5 each | 5 each | 150 |
+| *Prevotella copri* | different only | 2/3 | 5 each | 5 each | 5 each | 5 each | 5 each | 100 |
+| *Salmonella enterica* | same/different | 2/3/5 | 5 each | 5 each | 5 each | 5 each | 5 each | 150 |
+| *Staphylococcus aureus* | same/different | 2/3/5 | 5 each | 5 each | 5 each | 5 each | 5 each | 150 |
+| *Staphylococcus epidermidis* | same/different | 2/3/5 | 5 each | 5 each | 5 each | 5 each | 5 each | 150 |
+| *Streptococcus pneumoniae* | same/different | 2/3/5 | 5 each | 5 each | 5 each | 5 each | 5 each | 150 |
+| **Total** |  |  | **405** | **405** | **405** | **405** | **405** | **2,025** |

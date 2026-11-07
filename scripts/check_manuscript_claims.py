@@ -427,7 +427,7 @@ required = [
     "250 bp", "ART", "error-modelled", "F1 = 0.952", "AUPR = 1.0",
     "Native-only calls were lower abundance", "full-depth paired", "sample fraction",
     "panel/read compatibility",
-    "121–146", "projected", "4.6×", "5.8×", "8 subjects",
+    "121–146", "projected", "8 subjects",
 ]
 for phrase in required:
     if phrase not in text:

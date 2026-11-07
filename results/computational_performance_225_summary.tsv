@@ -1,0 +1,21 @@
+tool	scope	depth	median_wall_s	median_peak_rss_gb
+Strain2bScan	single-species per-depth matched runs	0.5	0.16	0.0206055
+Strain2bScan	single-species per-depth matched runs	1.0	0.24	0.0291992
+Strain2bScan	single-species per-depth matched runs	10.0	1.655	0.156934
+Strain2bScan	single-species per-depth matched runs	3.0	0.56	0.0585938
+Strain2bScan	single-species per-depth matched runs	5.0	0.89	0.0886719
+StrainScan	single-species per-depth matched runs	0.5	5.3	0.811426
+StrainScan	single-species per-depth matched runs	1.0	3.475	0.811328
+StrainScan	single-species per-depth matched runs	10.0	6.915	0.812305
+StrainScan	single-species per-depth matched runs	3.0	4.165	0.811426
+StrainScan	single-species per-depth matched runs	5.0	4.79	0.811426
+StrainGST	single-species k-merize + searches	0.5	14.5	978.906
+StrainGST	single-species k-merize + searches	1	15.95	946.344
+StrainGST	single-species k-merize + searches	10	28.66	2173.91
+StrainGST	single-species k-merize + searches	3	19.21	1195.14
+StrainGST	single-species k-merize + searches	5	22.63	1474.5
+inStrain	single-species quick-profile from sorted BAM	0.5	1.59	18.3735
+inStrain	single-species quick-profile from sorted BAM	1.0	1.61	18.3774
+inStrain	single-species quick-profile from sorted BAM	10.0	2.21	18.3794
+inStrain	single-species quick-profile from sorted BAM	3.0	1.76	18.3796
+inStrain	single-species quick-profile from sorted BAM	5.0	1.88	18.3773

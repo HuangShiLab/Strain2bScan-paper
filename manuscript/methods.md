@@ -4,7 +4,7 @@
 
 Strain2bScan reimplements the two-layer StrainScan strategy [1]; cluster near-identical strains,
 then score samples on markers unique to a strain or cluster; but replaces the full k-mer set
-with **2bRAD tags**, and implemented in Rust for speed and parallelism. The primary benchmark used the dependency-free release `benchmark-v0.1.0-f26f234`; later development versions are not part of that frozen configuration. The
+with **2bRAD tags**, and implemented in Rust for speed and parallelism. The
 pipeline is: (i) digest reference genomes and sample reads into 2bRAD-tag markers; (ii) build,
 per species, a within-species cluster database annotated with unique markers; (iii) profile a
 sample by detecting present clusters from their unique markers and estimating their abundance;
@@ -316,7 +316,7 @@ each cluster's marker set is *shared*, which denser sampling need not change.
 
 ## Implementation
 
-The benchmark release `benchmark-v0.1.0-f26f234` is written in Rust with no third-party dependencies, making that frozen binary self-contained. Current development versions may use additional dependencies and are not part of the frozen benchmark. Data-parallelism (genome digestion, sketch
+Strain2bScan is written in Rust with no required third-party runtime dependencies. Data-parallelism (genome digestion, sketch
 construction, the pairwise similarity scan, read digestion) uses scoped `std` threads
 (`STRAIN2BSCAN_THREADS`; default = all cores).
 
@@ -337,211 +337,104 @@ only in-memory bucket assignment differs and databases remain readable across ve
 so the zero-dependency property is preserved. Peak memory is one batch rather than the whole file,
 which is what makes multi-GB samples tractable.
 
-**Measured.** On 4 M reads (289 MB) against a two-species panel with all 16 enzymes, wall time is
-0.51 s and peak resident memory 11 MB (1.71 s / 282 MB before these optimisations); gzipped input
-costs no additional wall-clock. Tree construction scales as ~O(*n*<sup>1.6</sup>) after replacing a
-per-merge recomputation of max-linkage with an incrementally updated cluster-level similarity
-matrix, and a per-node set-subtraction with a single carrier-set index; on 543 genomes the
-pairwise similarity scan that dominates a large build is parallel, taking the build from 71.4 s to
-58.4 s. Every optimisation was verified to leave output unchanged; for the tree, node for node
-against the serial build at *n* = 543.
-
-Two intuitive optimisations were **rejected on measurement** and are recorded here because both
-are commonly assumed to help: replacing the hash-set Jaccard with a sorted-vector two-pointer
-intersection is 0.82×; slower, because a hash lookup on `u64` is cheap while the two-pointer must
-traverse both arrays; although it would halve the memory; and fusing the multi-enzyme scan into a
-single pass is 1.43× on a 2.5 Mb contig but 0.93× on 150 bp reads, so it would have to be
-dispatched on sequence length rather than applied globally.
-
 ## Benchmarking
 
-**Datasets.** (i) A real *C. acnes* benchmark: a 64-genome reference panel (14 ground-truth
-strains + 50 background, NCBI accessions pinned) and five paired-end mock samples from
-MockMetagenomes4Benchmark [16,17] (~100k read pairs each, ~12× total). (ii) A simulated multi-species
-benchmark: 55 real species × ~4 strains (218 NCBI genomes) and 30 samples, each mixing strains
-from twelve species at log-normal depth ≥1× (plus a low-depth variant, median 0.62×, used for
-gate calibration). (iii) Cross-species mocks for *Staphylococcus
-aureus* and *S. epidermidis* (60-genome panels each; 2–5 strains/sample, log-normal ≥1×,
-matching the *C. acnes* design). (iv) A reference-degradation gradient in which the truth
-strains' database genomes are degraded to completeness 100→50 % (with co-varying contamination
-0→10 % and fragmentation), samples held fixed. Simulated reads were generated with ART [18] rather than treated as error-free. The systematic 15-species
-benchmark used `art_illumina -p -l 250 -m 600 -s 150`, producing 250 bp paired-end reads with the ART
-Illumina quality-error model. Earlier diagnostic datasets may have used different read configurations;
-the systematic comparison and its figures are defined by this ART configuration.
+### Overview
 
-*Enzyme-ladder rerun.* To add per-sample provenance to the enzyme-set analysis (Fig 3), we rebuilt each
-of the 15 simulation-pool species databases at five cumulative enzyme counts (1, 2, 4, 8 and 14) and
-profiled the 225 matched single-species simulations against the matching species database, for 1,125
-sample-level predictions. Runs used current-source Strain2bScan with default depth-adaptive gates and were
-scored against each database's own 0.95-cluster partition. Per-sample predictions and database marker
-counts are in `results/enzyme_sweep_225/`.
+All simulated reads were generated with ART [18] using `art_illumina -p -l 250 -m 600 -s 150`; this
+250 bp paired-end configuration includes the ART Illumina quality-error model and was used for every
+primary simulation. Reference panels were restricted to complete or near-complete genomes unless stated
+otherwise. Detection metrics use cluster-set precision, recall and F1 in each tool's own reference or
+call space; abundance error uses Bray–Curtis dissimilarity or L2 distance against sequence-abundance
+truth. Timing used the resource manager or `/usr/bin/time` and reports wall-clock time and maximum
+resident set size.
 
-**Real-data and motivation datasets.** (v) *2bRAD-vs-16S motivation* (Fig 2): 15
-pathogenic/commensal species, ~50 genomes each from NCBI accession lists (ENA FASTA), **restricted to
-complete/near-complete assemblies** (CheckM [15] completeness ≥ 97 %, contamination ≤ 5 %, assembly level
-Complete Genome/Chromosome, consistent with high-quality MISAG/MIMAG criteria [19]; `data/genome_qc_16s_panel.tsv`). Between-strain distance was computed in
-three spaces; whole-genome (bottom-3000 canonical 21-mer MinHash), 2bRAD (Strain2bScan `build` BcgI
-tags) and 16S (longest gene per genome via barrnap [20] 0.9 + HMMER [21], 21-mer Jaccard); all with the
-Mash [9] transform D(J) = −ln(2J/(1+J)); per species the 2bRAD and 16S pairwise vectors were correlated
-(Spearman)
-against the whole-genome vector, with 95 % CIs from 500 genome subsamples. (vi) *ATCC DNA mocks,
-strain-level (Fig 4, Fig 10, Fig S3, Fig S4)*: four whole-cell mocks; MSA-1002 (20 strains,
-even; native BcgI 2bRAD and shotgun WMS across a 0/90/95/99 % human-DNA ladder and a 1→0.001 ng
-low-biomass ladder, SRA PRJNA1131785), MSA-1003 (20 strains, staggered), MSA-1005 and MSA-1007 (6 strains
-each). A single unified combined tree was built from **28 species × up to 6 genomes = 164 genomes** (each
-mock species = its ATCC genome + up to 5 high-quality conspecific decoys, CheckM [15] completeness ≥ 90 %,
-contamination ≤ 5 %, within-species ANI 95–99.9 % to the ATCC reference by skani [22]), clustered at 0.95
-similarity with `--containment`; native 2bRAD used the BcgI tree and shotgun used the all-enzyme tree.
-Strain2bScan used binary defaults for these frozen runs (`--min-support 8`, `--min-coverage 0.1`,
-`--min-abundance 0`, `--min-consistency 0.5`; `run_one.sh` passed no gate overrides). On the shotgun samples it was compared
-against **StrainScan** 1.0.14 [1] (per-species databases, `linux/amd64` container) and **inStrain** 1.9.1
-[8]. Reads were aligned with Bowtie2 [23] using default paired-end settings, sorted and indexed with samtools, and profiled with `inStrain profile` against single-linkage skani dereplicated references (98% ANI threshold, ATCC representative retained). The MSA-1002/1003 pool was reduced from 120 genomes to 32 references; the MSA-1005/1007 pool was reduced from 164 to 47. Genome-level calls required breadth ≥ 0.5 and reference popANI ≥ 0.99999; their coverage values were then normalized for abundance scoring and the manuscript-level 10⁻⁴ detection threshold was applied. The non-dereplicated reference is
-shown as a control in Fig S4. These exact filters were fixed before metric scoring; raw genome-table threshold sensitivity was not rerun. Each tool was scored against the same mock ground truth (`Ground_truth/*`, sequence abundance) in its own
-call unit: 0.95-similarity clusters for Strain2bScan/StrainScan and 98%-ANI-dereplicated genome references
-for inStrain. Metrics were precision, recall, F1, AUPR (abundance-threshold sweep, Ye et al. [24]), and
-Bray–Curtis and L2 similarity to the truth profile;
-Threshold-aware P/R/F1, AUPR and abundance-error values were computed by `scripts/update_mock_figs.py` into
-`data/fig6_fig12_metrics.tsv` (frozen copy `results/mock_benchmark_f26f234/fig6_fig12_metrics.tsv`);
-`scripts/score_all.py` supplied threshold-free mock scoring and `scripts/plot_figs_h.py` generated figures.
-The separate Figure S1 titration used the original public mock analysis: a 62-species BcgI panel,
-`multi-profile`, and broader species gates (50 panel-specific markers and five detected markers). Its
-0.01-ng species-level result is therefore not numerically comparable to the primary Figure 4
-164-genome, 0.95-cluster benchmark.
-The primary frozen comparators were therefore StrainScan and inStrain. A separate StrainGST rerun [2] was
-added after the frozen run because it requires StrainGE-specific 0.90-reference databases and a WMS-oriented
-workflow; it is described under *StrainGST rerun*. StrainGR was not run. (vii) *Real saliva* (Fig 5, Fig 6): native BcgI 2bRAD and paired shotgun WMS saliva from PRJNA1131785
-(8 subjects × 4 within-day timepoints) were profiled against a 19-species oral-commensal panel (up to 25
-genomes/species). The BioProject contains 32 paired WMS saliva runs
-(`figure_raw_data/Fig08_saliva_shotgun/full_sra_wms_manifest.tsv`). An earlier exploratory R1-prefix
-comparison used four downloaded libraries, capped WMS input and stricter species gates; three yielded calls.
-It is retained only as archived provenance and is not used in the current Figure 6. Strain- and
-species-level relative abundances were converted to Bray–Curtis dissimilarities and
-tested by a custom Python PERMANOVA implementation with 4,999 label permutations and seed 42 [25] for
-subject/timepoint factors. Leave-one-timepoint-out 1-NN host classification was compared between feature
-types; uncertainty used a subject-aware cluster bootstrap with 20,000 resamples, retaining all four
-timepoints together and summarizing the strain-minus-species accuracy difference with a 95% percentile
-interval. Shotgun R1 reads were digested in silico with BcgI and compared with native 2bRAD calls per sample. Full per-dataset
-procedures and accessions are in `docs/` (`motivation_16s.md`,
-`saliva_individual_discrimination.md`, `saliva_temporal_ml.md`, `saliva_concordance.md`).
+### 2bRAD versus 16S reference panels
 
-*Real saliva community statistics.* Cross-species community matrices used `sample_fraction`, the fraction
-of all sample tag observations assigned to a strain-cluster call, because this is comparable across
-species. The resulting matrices contained 32 samples, 18 observed species and 125 species-cluster
-features. Per-species analyses were restricted to one species and therefore used `within_abund`; Figure 5C
-shows the 13 species present in at least 12 of 32 samples. An earlier exploratory analysis had
-inadvertently used `support` (raw marker count) for cross-species matrices; those matrices and their
-higher feature count were superseded. This was a downstream abundance-column correction, not a change to
-the Strain2bScan profiling algorithm.
+For the 15-species motivation analysis, ~50 genomes per species were obtained from NCBI through ENA and
+restricted to CheckM [15] completeness ≥ 97%, contamination ≤ 5% and assembly level Complete
+Genome/Chromosome. Whole-genome distance used bottom-3000 canonical 21-mer MinHash; 2bRAD distance used
+BcgI tags built by Strain2bScan; 16S distance used the longest barrnap [20] gene, HMMER [21] alignment
+and 21-mer Jaccard. Mash [9] distances were converted with
+D(J) = −ln(2J/(1+J)), and per-species Spearman correlations against whole-genome distance used 95% CIs
+from 500 genome subsamples.
 
-*Full-depth 32-sample WMS rebuild.* The canonical PRJNA1131785 WMS dataset was rebuilt to 32 samples
-and 64 mate files, validated with `gzip -t`, and retained with its SRA manifest. All 32 paired-end
-libraries were then profiled at full depth with the same 19-species oral BcgI panel at Strain2bScan
-commit `6ae760c2f3bd2f39efc0e6aa06c53a84366cb16e`, using batch-mode species gates of 20 panel-specific
-markers and two detected markers and call gates of at least two supporting markers and 0.01 coverage.
-All 32 native 2bRAD libraries were then reprofiled with these same species, support and coverage gates
-(`native20_matched/native_strain_calls.tsv`). This analysis quantified modality and depth coverage across all
-32 gate-matched pairs; it was not used as an accuracy benchmark because the two assays differ in sequencing
-depth, read layout and biological representation. Outputs are in `results/wms32_rebuild/`.
+### Native and shotgun ATCC DNA mock communities
 
-**Complete 15-species simulation pool and matched subset (Fig 7, Fig 8, Tables 1–3).** A common
-benchmark was built from a fixed pool of 15 pathogenic/commensal species (15–50 complete/near-complete
-NCBI genomes each; `figure_raw_data/sim_pool_manifest.tsv`). *Single-species* samples were generated for
-every species as 2/3/5 co-present strains drawn either from the same or from different 0.95 clusters, at
-per-strain coverages 0.5/1/3/5/10× with uneven abundance ratios (following StrainScan's simulation
-design), 5 replicates per cell; 2 025 samples. *Multi-species* samples mixed ~18 co-present species
-(one to a few strains each) across three community depth gradients; 60 samples. Reads were simulated
-with ART [18] (`art_illumina -p -l 250 -m 600 -s 150`, error-modelled 250-bp paired-end reads) from the truth genomes; truth tables record each strain's
-species, genome accession and 0.95-cluster assignment.
+The four ATCC whole-cell mocks were MSA-1002 (20 even strains), MSA-1003 (20 staggered strains),
+MSA-1005 and MSA-1007 (six strains each). A combined reference tree contained 28 species and up to six
+genomes per species (164 genomes), including the ATCC strain and up to five high-quality conspecific
+decoys per species; genomes were clustered at 0.95 similarity with `--containment`. Native BcgI used the
+BcgI tree; shotgun used the all-enzyme tree. Strain2bScan used default gates (`--min-support 8`,
+`--min-coverage 0.1`, `--min-abundance 0`, `--min-consistency 0.5`). Shotgun StrainScan 1.0.14 [1] used
+per-species databases in a `linux/amd64` container. inStrain 1.9.1 [8] used Bowtie2 [23] alignments,
+sorted BAM files and skani [22]-dereplicated references at 98% ANI. Genome-level calls required breadth
+≥ 0.5 and reference popANI ≥ 0.99999; abundance was normalized and detection thresholded at 10⁻⁴.
+Supplementary Fig S4 shows the non-dereplicated control. Mock species-to-ATCC-strain mappings are in
+Supplementary Table S14.
 
-Figure 7 summarizes a current-source Strain2bScan rerun of all 2,025 single-species samples
-(`results/sim2025_current/current_single_persample.tsv`; aggregate tables in
-`results/sim2025_current_summary/`). This complete-pool analysis characterizes the depth and
-cluster-strategy accuracy envelope and supersedes the archived n=2025 table, which differed for 512 of
-2,025 metric triplets. The multi-tool comparison in Fig 8 and Tables 1–3 uses the same current-source
-matched subset.
+### Real saliva time-course
 
-Both tools [1] built their databases from the **same genome pool** and profiled the **same reads**.
-The Strain2bScan matched current-source rerun used source commit `6ae760c2f3bd2f39efc0e6aa06c53a84366cb16e` (tag `benchmark-v0.1.1-6ae760c`)
-(release binary SHA-256 `a14a831a3b67c29de583d48eecf30001d8d7d5dc0f51775dea2ce95a4586329f`) with its
-current default depth-adaptive gates. Databases were rebuilt with
-`cluster --enzyme all --similarity 0.95`; samples were profiled with `profile` or `multi-profile --enzyme all`
-(reads decompressed, R1+R2 concatenated). The rerun and set-level scoring are implemented by
-`scripts/regression_strain2bscan_current.py` and `scripts/aggregate_strain2bscan_regression.py`. StrainScan (v1.0.14,
-bioconda) is Linux-x86-only; it ships Dashing [26] and jellyfish [27] executables, a Python-3.7
-`.so`, and an R reclustering step; so it was run inside a Docker `linux/amd64` container (QEMU emulation
-on Apple Silicon; `strainscan_build`, then `strainscan -i R1 -j R2 -d DB`). Because the two tools cluster
-genomes independently, **each tool was scored in its own cluster space**: predicted clusters were compared
-against the truth strains mapped into that tool's clusters; for Strain2bScan via the truth `cluster`
-column, for StrainScan via its `Cluster_Result/hclsMap_95_recls.txt` (report `Cluster_ID` = `C`+cluster
-id); and precision/recall/F1 computed over the cluster sets per sample. Strain2bScan profiled all 2 025 +
-60 samples; the reproducible StrainScan rerun used a matched subset (different-cluster mixtures, k = 2/3/5,
-one replicate, all depths; near-clonal *M. tuberculosis* via its same-cluster samples). Of these 225
-intended entries, 204 produced a final report and were paired; 21 ended without a final report, including all *S. enterica*
-entries. `no_call` therefore denotes an absent final report rather than a biologically interpretable absence call. The completed-pair accuracy set comprised 14 species. In a prespecified failure-aware sensitivity, each no-call was retained in its intended pair and assigned precision, recall and F1 of zero; Strain2bScan metrics were unchanged. Database resolution was audited from each tool's own 0.95 clustering of the common genome pool.
+Native BcgI 2bRAD and paired shotgun WMS saliva from PRJNA1131785 comprised eight subjects and four
+within-day timepoints. Libraries were profiled against a 19-species oral-commensal panel (up to 25
+genomes/species) with species gates of 20 panel-specific markers and two detected species markers and call
+gates of two supporting markers and 0.01 coverage. Strain- and species-level cross-species matrices used
+`sample_fraction`; within-species analyses used within-species relative abundance. Bray–Curtis
+dissimilarities were tested by PERMANOVA with 4,999 label permutations (seed 42) [25]. Host assignment used
+leave-one-timepoint-out 1-nearest-neighbour classification, and subject-aware cluster bootstrap with
+20,000 resamples provided uncertainty. Full-depth paired comparisons used all 32 WMS/native pairs.
 
-For communities, 12 samples were rerun and
-158 of 180 possible species-by-sample final reports were generated; absent reports were treated as no
-detection. StrainScan has no multi-species mode, so archived cost was the sum of wall-clock over species
-databases (peak RSS as the maximum).
+### Simulation pool and comparator workflows
 
-*StrainGST rerun.* We additionally ran StrainGST 1.3.9, the reference-search component of StrainGE [2], on
-the 225 matched single-species simulations, the 12 multi-species communities and the four primary ATCC
-WMS mocks. For each species panel, all genomes were k-merized with StrainGE's default k = 23, near-subset
-references were removed, remaining references were clustered at Jaccard 0.90, and one StrainGST
-species-level pan-genome database was created with the recommended workflow. Each sample was k-merized
-once and searched against every relevant species database (maximum five iterations for single-species
-samples, eight for communities and 32 for mocks). Calls used StrainGST score >= 0.02. Accuracy was scored
-by mapping truth genomes and reported references through StrainGE's 0.90-reference clusters; DNA-mock
-detection additionally used abundance >= 1e-4, as in the primary comparison. Wall time is the sum of one
-sample k-merization and all species searches, and peak RSS is the maximum across those stages. StrainGR
-was not run, so these are StrainGST identification and abundance results rather than full StrainGE
-variant calling.
+A fixed 15-species pool containing 15–50 complete or near-complete NCBI genomes per species was used for
+single-species and multi-species simulations. Single-species samples contained 2, 3 or 5 co-present strains
+from the same or different 0.95 clusters at per-strain depths of 0.5, 1, 3, 5 and 10×, with five replicates
+per cell (2,025 samples). Multi-species samples mixed approximately 18 species across three community depth
+gradients (60 samples). Truth tables recorded genome accession and 0.95-cluster assignment. Supplementary
+Table S15 enumerates the single-species design.
 
-*inStrain simulation rerun.* To extend inStrain to the matched simulation benchmark, we used inStrain
-1.11.0 with Bowtie2 alignment against the complete species genome pool from the common simulation
-(not a dereplicated mock-specific reference). For each of the 225 matched single-species samples,
-sorted BAM files were processed with `inStrain quick_profile`, and a genome was considered detected when
-reported coverage was ≥ 0.1 and breadth was ≥ 0.05. Detected genomes were then mapped to the truth
-0.95-cluster partition before computing precision, recall and F1. These genome-resolved calls were not
-pooled with Strain2bScan, StrainScan or StrainGST cluster calls, but they permit a read-level comparator
-to be evaluated on the same simulation reads and truth genomes. Per-sample outputs are in
-`results/instrain_sim225/`.
+Strain2bScan databases were built with `--enzyme all --similarity 0.95` (16 enzymes) and samples were
+profiled with `profile` or `multi-profile --enzyme all` using default depth-adaptive gates. StrainScan
+v1.0.14 [1] clustered the same genome pool independently and was run in a `linux/amd64` Docker container.
+Because clustering differs, each tool was scored against truth genomes mapped to its own clusters. The
+matched subset contained 225 intended single-species entries; 204 produced StrainScan final reports and 21
+were scored as absent final reports in the failure-aware sensitivity. Multi-species analyses used 12
+samples, and absent StrainScan species reports were treated as no detection.
 
-*Software and timing provenance.* The primary ATCC mock benchmark was frozen at Strain2bScan commit
-`f26f234b817ba7772a3f1df59ce720751e9b45b9` (release-build SHA-256
-`a4cf7a4043a06c55a99d6abf1e9fd312f6243aa5a5ca021bd41915636fb56b18`, Rust 1.97.0); later software commits
-were not used for those mock outputs. The primary configuration, database hashes, metric definitions, and
-per-run outputs are in `results/benchmark_configuration.json` and `results/mock_benchmark_f26f234/`.
-Strain2bScan build and profile times for the 15-species benchmark were native arm64. To reduce the emulation
-confound in profiling speed, a `linux/amd64` Strain2bScan binary was run in the same container on the same
-subset, giving the same-environment ratio in Fig 8E/Table 2. StrainScan build times were obtained under
-`linux/amd64` QEMU emulation and are therefore upper bounds. DB build for *K. pneumoniae* did not complete
-in the archived timing run but did complete in the reproducible accuracy rerun; these results are therefore
-reported separately rather than pooled. Original `scratchpad/eval` drivers were not retained, but the new
-comparator rerun has a manifest, container-derived database mappings, logs, run outputs, run-level scores,
-and aggregate tables in `work/strainscan_headtohead_rerun/` and `results/strainscan_rerun/`. Uncertainty was
-estimated by resampling species with replacement for 20 000 replicates and reporting 2.5th and 97.5th
-percentiles of paired mean Strain2bScan-minus-StrainScan differences.
+StrainGST 1.3.9 [2], the reference-search component of StrainGE, used default k = 23, StrainGE's
+near-subset removal and 0.90 Jaccard reference clustering. One species-level pan-genome database was built
+for each panel. Each sample was k-merized once and searched against every relevant species database; calls
+used StrainGST score ≥ 0.02. Accuracy was mapped through StrainGE's 0.90-reference clusters. Wall time
+summed sample k-merization and all species searches; peak RSS was the maximum across those stages.
 
-**Comparison to StrainScan (curated-DB and per-sample benchmarks).** In addition to the common benchmark
-above, StrainScan v1.0.14 [1] was run on its **own** reference databases (Supplementary Fig S5) and on the same *C. acnes*
-per-sample profiling comparison (Fig 9A), using its low-depth modes for the depth series.
+inStrain 1.11.0 [8] aligned reads to full species genome pools with Bowtie2 and scored genomeCoverage
+detections at coverage ≥ 0.1 and breadth ≥ 0.05 after mapping references to truth 0.95 clusters. Profiling
+runtime used the same matched simulation set.
 
-**Primary ATCC mock configuration.** The primary Strain2bScan variant was the default flat path on the
-164-genome containment tree, with no trace-gap filter and no Layer-1/Layer-2 override. Native BcgI libraries
-used the BcgI database and shotgun libraries used the all-enzyme database. Optional trace-gap and port-layer
-runs were retained as sensitivity artifacts but are not primary evidence and are not shown in Figures 4 or
-10. The primary detection threshold was abundance ≥ 10⁻⁴.
+### FracMinHash marker mode
 
-**Metrics.** For the primary ATCC mock comparison, detection precision, recall and F1 use an abundance
-threshold of 10⁻⁴; AUPR is the threshold-free abundance-ranking summary. Abundance error is Bray–Curtis
-dissimilarity or L2 distance against sequence-abundance truth, and corresponding similarities are reported
-as one minus dissimilarity where noted. All mock metrics are evaluated at 0.95-similarity cluster
-resolution. Simulation detection metrics are computed over each tool's predicted and truth cluster sets.
-Wall-clock time and peak resident set size were measured with `/usr/bin/time` on a 16-core Apple-silicon
-machine. Primary ATCC predictions, commands, database hashes, and checksums are archived in
-`results/mock_benchmark_f26f234/` and `results/benchmark_configuration.json`. Available figure recipes are
-in the repository; the complete 15-species run-driver provenance limitation is stated above.
+The optional k-mer marker mode was benchmarked with k = 31 and FracMinHash scale 100. Species databases
+were clustered from the same genome pool at 0.95 similarity, and all 225 matched single-species samples were
+profiled with `--marker-source kmer`. Calls were scored against truth strains mapped to the k-mer-mode
+0.95 clusters.
+
+### Computational profiling
+
+The 225-sample matched simulation set was used for runtime and memory summaries. Strain2bScan/StrainScan
+same-container comparisons report median wall time and peak RSS by depth for the 190 completed matched pairs.
+StrainGST reports 225 samples as the sum of sample k-merization and species searches. inStrain reports 225
+quick-profile runs from sorted BAM files; Bowtie2 alignment was not included in this stage. Database-build cost
+was summarized across the 15 species panels. Multi-species throughput used 55 real species panels and the
+projection described in Results.
+
+### Metrics and mock scoring
+
+For primary mock comparisons, precision, recall and F1 use abundance ≥ 10⁻⁴; AUPR summarizes the
+threshold-free abundance ranking. Abundance error is Bray–Curtis dissimilarity or L2 distance, and
+corresponding similarities are reported as one minus dissimilarity. All mock metrics are evaluated at
+0.95-cluster resolution for Strain2bScan/StrainScan and 98%-ANI dereplicated genome references for inStrain.
+StrainGST uses its own 0.90-reference space. Metrics were therefore not pooled across tools.
+
 ### Rhesus macaque GI spatial cohort
 
 The final real-cohort application used an author-generated rhesus macaque GI spatial cohort of 148 libraries:
@@ -614,7 +507,7 @@ single-genome species database. Panels used `--enzyme recommended`. All six isol
 profiled with the cohort panel using `--min-species-markers 50 --min-species-detect 3 --min-support 2
 --min-coverage 0.01 --min-abundance 0`. Because these reads also generated the assemblies, the 6/6
 self-recovery is a panel/read compatibility check, not an independent classification benchmark. P08
-W1–W3 metagenomes were reprofiled with the same cohort panel using `--min-species-markers 20
+W1–W3 metagenomes were profiled with the same cohort panel using `--min-species-markers 20
 --min-species-detect 2` and otherwise the gates above. Timings were measured on a local Apple Silicon
 workstation; full command lines and per-sample outputs are provided in
 `results/realworld_cohort_benchmark/`.

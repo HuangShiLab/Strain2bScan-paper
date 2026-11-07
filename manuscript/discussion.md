@@ -6,16 +6,16 @@ engine. It is a single marker framework in which native reduction precedes host 
 libraries and one in-silico digest serves every species panel for cohort-scale shotgun analysis. Across the
 benchmarks, 2bRAD markers preserved genome-wide strain relationships, precision matched StrainScan in
 completed paired simulations, and the strongest operational gains appeared in database construction,
-multi-species runtime and retention at 99% host DNA (Figs 2, 7–10).
+multi-species runtime and retention at 99% host DNA (Figs 2, 5–9).
 
 Native 2bRAD-M addresses the setting in which shotgun coverage is most constrained. Because reduction occurs
 before host DNA dominates the library, the primary MSA-1002 comparison retained both detection and abundance
 at 99% human DNA, whereas the primary shotgun comparators lost one or both quantities in their own call
-spaces (Fig 10). The saliva analysis extended this observation from a synthetic host ladder to person-specific
+spaces (Fig 9). The saliva analysis extended this observation from a synthetic host ladder to person-specific
 profiles: strain features identified the subject in every leave-one-timepoint-out test, compared with 78.1%
-for species features, although the subject-aware improvement interval included zero (Fig 5). The matched
-32-pair rebuild showed both modality-specific sensitivity and modality-specific omissions, reinforcing that
-these real-data comparisons describe assay scope rather than validate either modality (Fig 6).
+for species features, although the subject-aware improvement interval included zero (Fig 4). The full-depth
+32-pair comparison showed both modality-specific sensitivity and modality-specific omissions, reinforcing that
+these real-data comparisons describe assay scope rather than validate either modality (Fig 10).
 
 A rhesus macaque GI spatial cohort extended this logic from person-specific stability to spatial ecology.
 A cohort-specific panel built from 315 study MAGs recovered strain calls in 113/128 GI samples and 56/66
@@ -33,7 +33,7 @@ SNV/popANI-level transmission proof.
 In shotgun mode, the structural advantage is a change in search economics. A sample is digested once and the
 resulting tags index against all species, so adding species increases panel searches rather than sample
 k-mer counting. This design produced the 121–146× projected cohort-level advantage on the 55-species
-analysis and made the marginal cost of community profiling approximately flat in species count (Fig 9).
+analysis and made the marginal cost of community profiling approximately flat in species count (Fig 8).
 The head-to-head timing comparison measures the combined effect of the sparse marker space, Rust
 implementation and compact data structures; it was not designed to apportion these contributions causally.
 Clean-mock precision depended on input composition and threshold semantics, so the scale claim should be
@@ -57,12 +57,12 @@ complete relative, but markers absent from every reference remain unavailable. B
 completeness-aware gating and explicit absent-strain models are therefore the next tests for open-world
 surveillance rather than optional engineering refinements.
 
-The comparator scope is also explicit. StrainScan [1] and inStrain [8] were executed on the frozen shotgun
-benchmarks, whereas StrainGST [2] was rerun in StrainGE's 0.90-reference space and reported separately
+The comparator scope is also explicit. StrainScan [1] and inStrain [8] were executed on the shotgun
+benchmarks, whereas StrainGST [2] was analyzed in StrainGE's 0.90-reference space and reported separately
 because those calls cannot be pooled with 0.95-space Strain2bScan or StrainScan metrics (Tables 8–9). The
 other comparators likewise used their own call units, so cross-tool accuracy panels are descriptive rather
 than pooled estimates. This
-rerun covered the primary simulations and ATCC shotgun mocks, but native BcgI input for StrainGE, StrainGR
+StrainGST analysis covered the primary simulations and ATCC shotgun mocks, but native BcgI input for StrainGE, StrainGR
 and the supplementary curated-database subset remain untested. The comparison therefore establishes cost and
 feasibility boundaries for the tested StrainGST workflow without claiming equivalence to the full StrainGE
 family.

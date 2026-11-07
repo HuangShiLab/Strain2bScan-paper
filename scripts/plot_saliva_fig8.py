@@ -42,8 +42,8 @@ def main():
          int(class_lookup[("native_2bRAD", "native_only")]["n_calls"])),
     ]
 
-    fig, axes = plt.subplots(1, 2, figsize=(13.6, 5.7), gridspec_kw={"width_ratios": [2.15, 1]})
-    ax = axes[0]
+    fig, axes = plt.subplots(2, 2, figsize=(14.0, 10.0), gridspec_kw={"width_ratios": [2.1, 1]})
+    ax = axes[0,0]
     x = np.arange(len(pairs))
     ax.bar(x, shared, width=0.72, color="#2166AC", label="Shared")
     ax.bar(x, wms_only, bottom=shared, width=0.72, color="#BDD7E7", label="WMS only")
@@ -59,7 +59,7 @@ def main():
     ax.grid(axis="y", color="0.90", linewidth=0.6)
     ax.set_axisbelow(True)
 
-    ax = axes[1]
+    ax = axes[0,1]
     y = np.arange(len(abundance_specs))
     shared_pct = np.array([row[2] * 100 for row in abundance_specs])
     unique_pct = np.array([row[3] * 100 for row in abundance_specs])
@@ -85,10 +85,54 @@ def main():
     ax.set_title("B  Unique calls are abundance-poor",
                  loc="left", fontweight="bold")
     ax.legend(frameon=False, fontsize=7.6, loc="upper center", bbox_to_anchor=(0.5, -0.22), ncol=2)
+
+    # C. Native versus WMS subject structure
+    ax = axes[1, 0]
+    native_perm_all = list(csv.DictReader((PAPER / "results/saliva_permanova.tsv").open(), delimiter="\t"))
+    native_perm = {(r["factor"], r["level"]): float(r["R2"]) for r in native_perm_all if r["factor"] == "subject"}
+    native_loo = {(r["factor"], r["level"]): float(r["LOO_1NN_acc"]) for r in native_perm_all if r["factor"] == "subject"}
+    native_ml = {r["metric"]: float(r["strain"]) for r in
+                 csv.DictReader((PAPER / "results/saliva_temporal_ml.tsv").open(), delimiter="\t")}
+    wms_rows = list(csv.DictReader((PAPER / "results/wms32_rebuild/wms32_temporal_ml.tsv").open(), delimiter="\t"))
+    wms_perm = {(r["factor"], r["level"]): float(r["R2"]) for r in wms_rows if r["factor"] == "subject"}
+    wms_ml = {(r["factor"], r["level"]): float(r["LOO_1NN_acc"]) for r in wms_rows if r["factor"] == "subject"}
+    labels_c = ["Species R²", "Strain R²", "Species LOTO", "Strain LOTO"]
+    native_vals = [native_perm[("subject", "species")], native_perm[("subject", "strain")],
+                   native_ml["leave_one_timepoint_out_subject_accuracy"],
+                   native_loo[("subject","species")]]
+    wms_vals = [wms_perm[("subject", "species")], wms_perm[("subject", "strain")],
+                wms_ml[("subject", "species")], wms_ml[("subject", "strain")]]
+    x = np.arange(len(labels_c)); width = 0.34
+    ax.bar(x-width/2, native_vals, width, label="Native 2bRAD", color="#2166AC")
+    ax.bar(x+width/2, wms_vals, width, label="Full-depth WMS", color="#F4A582")
+    for xx, vals in ((x-width/2, native_vals), (x+width/2, wms_vals)):
+        for xv, v in zip(xx, vals):
+            ax.text(xv, v+.015, f"{v:.2f}", ha="center", fontsize=7.2)
+    ax.set_xticks(x); ax.set_xticklabels(labels_c, fontsize=8.0)
+    ax.set_ylim(0, 1.13); ax.set_ylabel("subject association / accuracy")
+    ax.set_title("C  Subject structure in native and WMS profiles", loc="left", fontweight="bold")
+    ax.legend(frameon=False, fontsize=8, ncol=2)
+    ax.grid(axis="y", color="0.90", lw=.6); ax.set_axisbelow(True)
+
+    # D. Top WMS per-species strain signal
+    ax = axes[1, 1]
+    perspecies = read_tsv("results/wms32_rebuild/wms32_perspecies_subject.tsv")
+    perspecies = sorted(perspecies, key=lambda r: float(r["strain_R2_subject"]), reverse=True)[:10][::-1]
+    yy = np.arange(len(perspecies))
+    ax.barh(yy, [float(r["strain_R2_subject"]) for r in perspecies], color="#4C78A8")
+    ax.set_yticks(yy)
+    ax.set_yticklabels([r["species"].replace("_", " ") for r in perspecies], fontsize=7.0, style="italic")
+    for yyv, r in zip(yy, perspecies):
+        ax.text(float(r["strain_R2_subject"])+.012, yyv, f'{float(r["strain_R2_subject"]):.2f}',
+                va="center", fontsize=7.0)
+    ax.set_xlim(0, 1.05); ax.set_xlabel("within-species strain PERMANOVA R²")
+    ax.set_title("D  Top full-depth WMS species", loc="left", fontweight="bold")
+    ax.grid(axis="x", color="0.90", lw=.6); ax.set_axisbelow(True)
+
     fig.suptitle("Full-depth paired saliva 2bRAD-M versus shotgun WMS: 8 subjects × 4 timepoints",
-                 x=0.012, ha="left", fontsize=12, fontweight="bold")
-    fig.tight_layout(rect=[0, 0.035, 1, 0.95])
-    fig.text(0.012, 0.012,
+                 x=0.012, ha="left", fontsize=16, fontweight="bold")
+    fig.tight_layout(rect=[0, 0.035, 1, 0.96])
+    fig.text(0.012, 0.006,
              "Same 19-species oral panel and gates; differences in depth, representation and host content prevent an accuracy interpretation.",
              ha="left", fontsize=8.5, color="0.25")
     out = PAPER / "figures/source_panels/saliva_fig08"

@@ -17,14 +17,14 @@ OUT = PAPER / "figures/numbered"; os.makedirs(OUT, exist_ok=True)
 MAIN = {
     "01": ["overview"],
     "02": ["mash_2brad_vs_16s"],
-    "03": ["enzyme_sweep"],
-    "04": ["fig06_native_2brad_mocks"],
-    "05": ["saliva_fig07"],
-    "06": ["saliva_fig08"],
-    "07": ["sim2025_summary"],
-    "08": ["sim_headtohead"],
-    "09": ["performance", "scalability", "community_throughput"],
-    "10": ["fig11_wms_toolcompare"],
+    "03": ["fig06_native_2brad_mocks"],
+    "04": ["saliva_fig07"],
+    "05": ["sim2025_summary"],
+    "06": ["enzyme_sweep"],
+    "07": ["sim_headtohead"],
+    "08": ["computational_performance"],
+    "09": ["fig11_wms_toolcompare"],
+    "10": ["saliva_fig08"],
 }
 
 SUPP = {
@@ -35,19 +35,25 @@ SUPP = {
     "S4": ["figS_instrain_derep"],   # non-dereplicated vs dereplicated inStrain reference
     "S5": ["species_expansion"],     # exploratory StrainScan-curated-database comparison
     "S6": ["containment_mechanism", "refqual_figure"], # reference-completeness / containment optimization
+    "S7": ["rankrank_2brad_16s"],
 }
 
 # Human-readable output labels. By default the source stems are joined with '+';
 # these overrides avoid redundant names such as Fig12_fig11_wms_toolcompare.
 LABELS = {
-    "04": "native_2brad_mocks",
-    "05": "real_saliva_timecourse",
-    "06": "paired_saliva_full_depth",
-    "10": "wms_toolcompare",
+    "03": "native_2brad_mocks",
+    "04": "real_saliva_timecourse",
+    "05": "sim2025_summary",
+    "06": "enzyme_ladder",
+    "07": "sim_headtohead",
+    "08": "computational_performance",
+    "09": "wms_toolcompare",
+    "10": "paired_saliva_wms_reanalysis",
     "S6": "reference_quality_containment",
     "S3": "tree_expansion",
     "S4": "instrain_derep",
     "S5": "species_expansion_strainscan",
+    "S7": "rankrank_2brad_16s",
 }
 
 def montage(tag, sources):
