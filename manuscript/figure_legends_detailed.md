@@ -442,7 +442,8 @@ LI-enriched and 13 matched mucosal/luminal clusters remained significant after B
 - **(B)** Species prevalence across GI, luminal, mucosal and body-control libraries.
 - **(C)** Representative LI-enriched clusters, showing mucosal/luminal prevalence and peak LI prevalence.
 - **(D)** Bonferroni-significant matched mucosal/luminal strain clusters.
-- **(E)** Paired luminal shotgun versus native 2bRAD strain-call counts and Jaccard concordance.
+- **(E)** Paired luminal shotgun versus native 2bRAD strain-call counts; median strain-call Jaccard was
+  0.605 and median species Jaccard was 0.889.
 - **(F)** LI strain-cluster associations with bile-acid classes and HUMAnN pathways.
 - **(G)** Mean dominant-cluster sharing across prespecified spatial and age contrasts; within-monkey
   between-position sharing was 0.379 versus 0.159 between monkeys at same age/site.

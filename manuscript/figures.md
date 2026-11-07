@@ -52,7 +52,7 @@ prevalence in GI, luminal, mucosal and body-control libraries for the ten most f
 **(C)** Ten representative LI-enriched clusters; the open red circle marks peak LI prevalence. **(D)** Thirteen
 matched mucosal/luminal strain clusters that remained significant after Bonferroni correction; bars show
 −log10(q), with numbers of luminal- and mucosa-positive pairs. **(E)** Paired luminal shotgun and native 2bRAD
-strain-call counts; colour gives strain-call Jaccard. **(F)** Representative Spearman associations between LI
+strain-call counts; colour gives strain-call Jaccard (median strain-call Jaccard 0.605; species Jaccard 0.889). **(F)** Representative Spearman associations between LI
 strain-cluster composition and bile-acid classes or HUMAnN pathways; Benjamini–Hochberg q values are provided
 in Supplementary Table S10.
 These associations are cohort-level ecological relationships rather than direct gene-to-cluster assignments.

@@ -47,7 +47,8 @@ def prepare_intermediate() -> Path:
             raise FileNotFoundError(f"missing numbered figure for {label}: {pattern}")
         path = matches[0]
         width_px, height_px = image_size(path)
-        width_in = min(6.3, 7.8 * width_px / height_px)
+        max_width = 7.05 if label == "11" else 6.3
+        width_in = min(max_width, 7.8 * width_px / height_px)
         return "\n\n".join([
             f"``` {{=openxml}}\n{page_break_openxml()}\n```",
             f"![]({path.relative_to(ROOT)}){{width={width_in:.2f}in}}",
