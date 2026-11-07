@@ -178,19 +178,23 @@ strain signature resolved in ~1 s/sample.
   32 saliva samples (8 subjects × 4 timepoints; SRA PRJNA1131785). Both modalities used the same
   19-species oral panel and matched gates.
 - *Source tables:* `results/wms32_rebuild/per_sample_summary.tsv`,
-  `results/wms32_rebuild/per_sample_shared_native_median.tsv` and
-  `results/wms32_rebuild/shared_native_abundance_summary.tsv`.
+  `results/wms32_rebuild/per_sample_shared_native_median.tsv`,
+  `results/wms32_rebuild/shared_native_abundance_summary.tsv` and
+  `results/wms32_rebuild/call_class_abundance_summary.tsv`.
 **2. Key issue & conclusion.** On high-host saliva, does native BcgI 2bRAD-M recover the strains shotgun finds
 *and* the low-abundance strains shotgun cannot? Full-depth WMS produced 2,487 calls (median 79/sample)
 versus 1,368 native calls (median 35.5/sample); 495 calls were shared. Thus, 19.9% of WMS calls and 36.2%
 of native calls had a same-species, same-cluster counterpart. Native-only calls were lower abundance
 (median sample fraction 5 × 10⁻⁶ versus 1.6 × 10⁻⁵; paired per-sample median Wilcoxon p = 6.7 × 10⁻⁵).
+Abundance was not proportional to call count: WMS-only calls were 80.1% of WMS calls but 14.8% of
+WMS-detected sample fraction, whereas native-only calls were 63.8% of native calls but 26.6% of
+native-detected sample fraction.
 Because depth, representation and host content differ, this is a modality-scope comparison rather than
 independent accuracy validation.
 **3. Results by subfigure.**
 - **(A)** Per sample, shared, WMS-only and native-2bRAD-only strain-cluster calls.
-- **(B)** Per-sample median community sample fraction of shared versus native-only native calls (log scale);
-  grey lines pair the same sample.
+- **(B)** Within-modality partition of detected sample fraction: shared versus modality-only calls. This
+  shows that many unique calls individually carry low abundance.
 
 ---
 

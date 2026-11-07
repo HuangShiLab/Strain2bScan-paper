@@ -171,7 +171,7 @@ The same libraries supported pairwise sharing analysis. For each pair, the denom
 
 ##### Paired saliva: 2bRAD-M versus shotgun (Fig 6, Supplementary Table S4)
 
-A uniform gate-matched rebuild profiled all 32 paired WMS libraries and all 32 native 2bRAD libraries with the same oral panel, species gate, support and coverage thresholds. Full-depth WMS produced 2,487 strain-cluster calls (median 79 per sample) versus 1,368 native calls (median 35.5); 495 calls were shared. Thus, 19.9% of WMS calls were present in native profiles and 36.2% of native calls were recovered in WMS. Native-only calls were lower abundance than shared calls (median sample fraction 5 × 10⁻⁶ versus 1.6 × 10⁻⁵; paired per-sample medians, Wilcoxon p = 6.7 × 10⁻⁵). Because sequencing depth, representation and host content differ between modalities, these data show substantial modality-specific sensitivity rather than accuracy validation.
+A uniform gate-matched rebuild profiled all 32 paired WMS libraries and all 32 native 2bRAD libraries with the same oral panel, species gate, support and coverage thresholds. Full-depth WMS produced 2,487 strain-cluster calls (median 79 per sample) versus 1,368 native calls (median 35.5); 495 calls were shared. Thus, 19.9% of WMS calls were present in native profiles and 36.2% of native calls were recovered in WMS. Native-only calls were lower abundance than shared calls (median sample fraction 5 × 10⁻⁶ versus 1.6 × 10⁻⁵; paired per-sample medians, Wilcoxon p = 6.7 × 10⁻⁵). Call counts were not proportional to abundance: WMS-only calls represented 1,992/2,487 (80.1%) of WMS calls but only 14.8% of WMS-detected sample fraction, whereas shared calls contributed 85.2%; native-only calls represented 873/1,368 (63.8%) of native calls but 26.6% of native-detected sample fraction (Fig 6B). Because sequencing depth, representation and host content differ between modalities, these data show substantial modality-specific sensitivity rather than accuracy validation.
 
 
 **Part II. Conventional shotgun performance.**
@@ -1202,9 +1202,10 @@ The 0.01-ng result is specific to this cluster-resolved 164-genome primary bench
 Cross-species matrices used sample fraction and contained 18 observed species and 125 strain-cluster features; panel C shows the 13 species present in at least 12 samples.
 
 **Figure 6. Full-depth paired saliva comparison.** **(A)** Shared, WMS-only and native-2bRAD-only strain-cluster calls for all 32 gate-matched WMS/native pairs.
-**(B)** Per-sample median sample fraction for shared versus native-only calls. WMS yielded more calls per sample,
-and native-only calls were lower abundance. Differences in depth, representation and host content prevent an
-accuracy interpretation.
+**(B)** Within-modality partition of detected sample fraction. WMS-only calls represented 80.1% of WMS calls
+but only 14.8% of WMS-detected sample fraction; native-only calls represented 63.8% of native calls but 26.6%
+of native-detected sample fraction. Differences in depth, representation and host content prevent an accuracy
+interpretation.
 
 **Figure 7. Accuracy across the complete 2,025-sample single-species simulation pool.** **(A)** Per-species mean accuracy. **(B)** Accuracy across per-strain depth. **(C)** Accuracy by different-cluster versus same-cluster design. Strain2bScan was evaluated on all 2,025 ART error-modelled shotgun simulations from 15 species, followed by in-silico 2bRAD digestion. Median precision, recall and F1 were 1.000; mean precision, recall and F1 were 0.890, 0.846 and 0.862. Mean F1 increased from 0.786 at 0.5× to 0.888 at 10×. Panels show per-species means, depth dependence and different-cluster versus same-cluster design.
 

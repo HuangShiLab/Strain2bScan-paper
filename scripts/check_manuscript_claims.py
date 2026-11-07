@@ -296,6 +296,17 @@ if not math.isclose(float(abundance["shared"]["median_sample_fraction"]), 1.6e-5
    not math.isclose(float(abundance["native_only"]["median_sample_fraction"]), 5e-6, abs_tol=5e-7) or \
    not math.isclose(float(abundance["paired_per_sample_median_wilcoxon_p"]["median_sample_fraction"]), 6.685266271233559e-05, abs_tol=1e-8):
     fail("full-depth saliva abundance summary changed unexpectedly")
+class_abundance={(r["modality"],r["group"]):r for r in load_tsv("results/wms32_rebuild/call_class_abundance_summary.tsv")}
+expected_class={
+ ("WMS","shared"):("495","0.8520444600915353"),
+ ("WMS","WMS_only"):("1992","0.1479555399084647"),
+ ("native_2bRAD","shared"):("495","0.7338182158754242"),
+ ("native_2bRAD","native_only"):("873","0.26618178412457577"),
+}
+for key,(n_calls,detected_fraction) in expected_class.items():
+ row=class_abundance.get(key)
+ if row is None or row["n_calls"]!=n_calls or not math.isclose(float(row["fraction_of_modality_detected_abundance"]),float(detected_fraction),abs_tol=5e-12):
+  fail(f"full-depth saliva call-class abundance changed: {key}")
 saliva_uncertainty = {r["metric"]: r for r in load_tsv("results/uncertainty_summary.tsv")
                       if r["analysis"] == "saliva_leave_one_timepoint_out"}
 for metric, point, lo, hi in (

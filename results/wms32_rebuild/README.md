@@ -33,3 +33,5 @@ comparison, not a ground-truth accuracy validation.
 Shared/native-only abundance summaries used to build Figure 6 are in
 `native_call_shared_status.tsv`, `per_sample_shared_native_median.tsv` and
 `shared_native_abundance_summary.tsv`.
+The pooled within-modality abundance partition used by Figure 6B is in
+`call_class_abundance_summary.tsv`.

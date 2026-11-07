@@ -96,6 +96,39 @@ with (OUTDIR / "shared_native_abundance_summary.tsv").open("w", newline="") as h
                             delimiter="\t", lineterminator="\n")
     writer.writeheader(); writer.writerows(abundance_summary)
 
+call_class_records = []
+for modality, call_data in (("WMS", wms_data), ("native_2bRAD", native_data)):
+    class_values: dict[str, list[float]] = defaultdict(list)
+    for sample, calls in call_data.items():
+        for key, sample_fraction in calls.items():
+            other = native_data if modality == "WMS" else wms_data
+            if key in other[sample]:
+                group = "shared"
+            elif modality == "WMS":
+                group = "WMS_only"
+            else:
+                group = "native_only"
+            class_values[group].append(sample_fraction)
+    total_detected = sum(sum(values) for values in class_values.values())
+    for group in ("shared", "WMS_only" if modality == "WMS" else "native_only"):
+        values = class_values[group]
+        call_class_records.append({
+            "modality": modality,
+            "group": group,
+            "n_calls": len(values),
+            "sum_sample_fraction": sum(values),
+            "mean_sample_fraction": statistics.mean(values),
+            "median_sample_fraction": statistics.median(values),
+            "fraction_of_modality_detected_abundance": sum(values) / total_detected,
+        })
+
+with (OUTDIR / "call_class_abundance_summary.tsv").open("w", newline="") as handle:
+    writer = csv.DictWriter(handle, fieldnames=[
+        "modality", "group", "n_calls", "sum_sample_fraction", "mean_sample_fraction",
+        "median_sample_fraction", "fraction_of_modality_detected_abundance",
+    ], delimiter="\t", lineterminator="\n")
+    writer.writeheader(); writer.writerows(call_class_records)
+
 wms_calls = sum(int(row[1]) for row in rows[1:])
 native_calls = sum(int(row[2]) for row in rows[1:])
 shared_calls = sum(int(row[3]) for row in rows[1:])
