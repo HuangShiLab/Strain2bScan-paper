@@ -21,7 +21,6 @@ SOURCES = {
  "FigS3_tree_expansion": "figures/source_panels/figS_tree_expansion.{png,pdf}",
  "FigS4_instrain_derep": "figures/source_panels/figS_instrain_derep.{png,pdf}",
  "FigS5_species_expansion_strainscan": "figures/source_panels/species_expansion.{png,pdf}",
- "FigS7_rankrank_2brad_16s": "figures/source_panels/rankrank_2brad_16s.{png,pdf}",
  "FigS6_reference_quality_containment": "figures/source_panels/containment_mechanism.{png,pdf} + refqual_figure.{png,pdf} (combined)",
 }
 def sha(p): return hashlib.sha256(p.read_bytes()).hexdigest()

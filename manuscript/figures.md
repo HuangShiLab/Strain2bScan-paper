@@ -4,7 +4,7 @@
 **(A)** Reference construction: type-IIB (2bRAD) digestion into single-copy 25–33 bp tags, within-species clustering at 0.95 Jaccard, marker classification and a cluster × marker database. **(B)** Profiling: one sample digest, species-level marker gating, cross-species marker restriction, cluster detection and abundance estimation for conventional shotgun or native BcgI input. **(C)** Depth–breadth consistency separates a genuine low-depth strain from a partial-marker shadow.
 
 **Figure 2. 2bRAD tags track genome-wide strain distance; 16S does not.** `figures/source_panels/mash_2brad_vs_16s.{png,pdf}`
-**(A)** Per-species Spearman correlation between whole-genome strain distance and 2bRAD-tag or 16S distance across 15 complete/near-complete genome panels; 2bRAD median 0.94 versus 16S median 0.36. **(B)** Rank-rank scatter panels for the lowest-, median- and highest-16S-concordance species (*Phocaeicola dorei*, *Escherichia coli* and *Fusobacterium nucleatum*); 2bRAD follows the diagonal whereas 16S forms off-diagonal bands. All 15 per-species panels are in Supplementary Fig S7.
+**(A)** Per-species Spearman correlation between whole-genome strain distance and 2bRAD-tag or 16S distance across 15 complete/near-complete genome panels; 2bRAD median 0.94 versus 16S median 0.36. **(B)** Rank-rank scatter panels for all 15 complete/near-complete genome panels, ordered from lowest to highest 16S concordance; 2bRAD follows the diagonal whereas 16S forms off-diagonal bands.
 
 **Figure 3. Native BcgI 2bRAD-M across four ATCC DNA mocks.** `figures/source_panels/fig06_native_2brad_mocks.{png,pdf}`
 MSA-1002, MSA-1003, MSA-1005 and MSA-1007 were profiled against a 28-species, 164-genome containment tree. At 90, 95 and 99% human DNA, F1 was 0.976–1.0 and Bray–Curtis similarity 0.745–0.756. A 0.1-ng input retained F1 0.952; 0.01 ng approached the marker-depth noise floor and 0.001 ng was below the detection floor. Species-level colour keys correspond to the ATCC strain identifiers listed in Supplementary Table S12.
@@ -47,5 +47,3 @@ Four ATCC shotgun mocks were profiled with Strain2bScan, StrainScan and inStrain
 
 **Figure S6. Reference-completeness optimization with Jaccard and containment clustering.** `figures/source_panels/containment_mechanism.{png,pdf} + refqual_figure.{png,pdf}`
 **(A)** Mechanism by which an incomplete genome becomes a Jaccard outlier and maximum containment merges it with its complete relative. **(B)** Median precision and recall across 14 resolvable species after reference degradation under Jaccard versus opt-in containment clustering, with near-clonal *M. tuberculosis* inset.
-
-**Figure S7. Per-species rank–rank comparison of 2bRAD and 16S distances.** `figures/source_panels/rankrank_2brad_16s.{png,pdf}` For each of the 15 complete/near-complete genome panels, whole-genome distances are compared with 2bRAD and 16S distances. 2bRAD follows the diagonal; 16S forms discrete bands for many species.

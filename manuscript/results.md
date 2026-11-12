@@ -8,7 +8,7 @@ Strain2bScan converts single-copy type-IIB 2bRAD tags into a strain-cluster-reso
 
 #### 2bRAD tags retain strain-level signal that 16S does not (Fig 2)
 
-Across 15 species with complete or near-complete genomes, between-strain 2bRAD-tag distance tracked whole-genome distance (median Spearman ρ = 0.94), whereas 16S distance did not (median ρ = 0.36; Fig 2A). Representative rank–rank scatter panels showed the same separation (Fig 2B), and all 15 per-species panels are shown in Supplementary Fig S7: 2bRAD preserved within-species strain ordering, whereas 16S collapsed divergent strains into discrete 16S-distance bands. Thus, the reduced 2bRAD marker space retained information that is lost by 16S.
+Across 15 species with complete or near-complete genomes, between-strain 2bRAD-tag distance tracked whole-genome distance (median Spearman ρ = 0.94), whereas 16S distance did not (median ρ = 0.36; Fig 2A). All 15 per-species rank–rank comparisons showed the same separation (Fig 2B): 2bRAD preserved within-species strain ordering, whereas 16S collapsed divergent strains into discrete 16S-distance bands. Thus, the reduced 2bRAD marker space retained information that is lost by 16S.
 
 #### DNA mock communities (Fig 3, Supplementary Fig S1)
 

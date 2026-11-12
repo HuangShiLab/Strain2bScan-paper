@@ -81,7 +81,7 @@ Strain2bScan converts single-copy type-IIB 2bRAD tags into a strain-cluster-reso
 
 ##### 2bRAD tags retain strain-level signal that 16S does not (Fig 2)
 
-Across 15 species with complete or near-complete genomes, between-strain 2bRAD-tag distance tracked whole-genome distance (median Spearman ρ = 0.94), whereas 16S distance did not (median ρ = 0.36; Fig 2A). Representative rank–rank scatter panels showed the same separation (Fig 2B), and all 15 per-species panels are shown in Supplementary Fig S7: 2bRAD preserved within-species strain ordering, whereas 16S collapsed divergent strains into discrete 16S-distance bands. Thus, the reduced 2bRAD marker space retained information that is lost by 16S.
+Across 15 species with complete or near-complete genomes, between-strain 2bRAD-tag distance tracked whole-genome distance (median Spearman ρ = 0.94), whereas 16S distance did not (median ρ = 0.36; Fig 2A). All 15 per-species rank–rank comparisons showed the same separation (Fig 2B): 2bRAD preserved within-species strain ordering, whereas 16S collapsed divergent strains into discrete 16S-distance bands. Thus, the reduced 2bRAD marker space retained information that is lost by 16S.
 
 ##### DNA mock communities (Fig 3, Supplementary Fig S1)
 
@@ -794,7 +794,7 @@ The Strain2bScan source code is available at https://github.com/HuangShiLab/Stra
 
 **Figure 1. Strain2bScan overview and quality control.** **(A)** Reference construction: type-IIB (2bRAD) digestion into single-copy 25–33 bp tags, within-species clustering at 0.95 Jaccard, marker classification and a cluster × marker database. **(B)** Profiling: one sample digest, species-level marker gating, cross-species marker restriction, cluster detection and abundance estimation for conventional shotgun or native BcgI input. **(C)** Depth–breadth consistency separates a genuine low-depth strain from a partial-marker shadow.
 
-**Figure 2. 2bRAD tags track genome-wide strain distance; 16S does not.** **(A)** Per-species Spearman correlation between whole-genome strain distance and 2bRAD-tag or 16S distance across 15 complete/near-complete genome panels; 2bRAD median 0.94 versus 16S median 0.36. **(B)** Rank-rank scatter panels for the lowest-, median- and highest-16S-concordance species (*Phocaeicola dorei*, *Escherichia coli* and *Fusobacterium nucleatum*); 2bRAD follows the diagonal whereas 16S forms off-diagonal bands. All 15 per-species panels are in Supplementary Fig S7.
+**Figure 2. 2bRAD tags track genome-wide strain distance; 16S does not.** **(A)** Per-species Spearman correlation between whole-genome strain distance and 2bRAD-tag or 16S distance across 15 complete/near-complete genome panels; 2bRAD median 0.94 versus 16S median 0.36. **(B)** Rank-rank scatter panels for all 15 complete/near-complete genome panels, ordered from lowest to highest 16S concordance; 2bRAD follows the diagonal whereas 16S forms off-diagonal bands.
 
 **Figure 3. Native BcgI 2bRAD-M across four ATCC DNA mocks.** MSA-1002, MSA-1003, MSA-1005 and MSA-1007 were profiled against a 28-species, 164-genome containment tree. At 90, 95 and 99% human DNA, F1 was 0.976–1.0 and Bray–Curtis similarity 0.745–0.756. A 0.1-ng input retained F1 0.952; 0.01 ng approached the marker-depth noise floor and 0.001 ng was below the detection floor. Species-level colour keys correspond to the ATCC strain identifiers listed in Supplementary Table S12.
 
@@ -827,8 +827,6 @@ The Strain2bScan source code is available at https://github.com/HuangShiLab/Stra
 **Figure S5. Strain2bScan versus StrainScan on three StrainScan-curated reference sets.** Both tools reached precision 1.0 for *A. muciniphila* and *P. copri*; Strain2bScan matched or exceeded recall and was faster and lighter. Strain2bScan completed near-clonal *M. tuberculosis* in 0.89 s, whereas StrainScan did not complete.
 
 **Figure S6. Reference-completeness optimization with Jaccard and containment clustering.** **(A)** Mechanism by which an incomplete genome becomes a Jaccard outlier and maximum containment merges it with its complete relative. **(B)** Median precision and recall across 14 resolvable species after reference degradation under Jaccard versus opt-in containment clustering, with near-clonal *M. tuberculosis* inset.
-
-**Figure S7. Per-species rank–rank comparison of 2bRAD and 16S distances.** For each of the 15 complete/near-complete genome panels, whole-genome distances are compared with 2bRAD and 16S distances. 2bRAD follows the diagonal; 16S forms discrete bands for many species.
 
 ## Tables
 

@@ -47,7 +47,7 @@ def prepare_intermediate() -> Path:
             raise FileNotFoundError(f"missing numbered figure for {label}: {pattern}")
         path = matches[0]
         width_px, height_px = image_size(path)
-        max_width = 7.05 if label == "11" else 6.3
+        max_width = 7.05 if label in {"2", "11"} else 6.3
         width_in = min(max_width, 7.8 * width_px / height_px)
         return "\n\n".join([
             f"``` {{=openxml}}\n{page_break_openxml()}\n```",
@@ -58,7 +58,7 @@ def prepare_intermediate() -> Path:
     parts = [body, "# Main figures", ""]
     parts.extend(image_block(str(i)) for i in range(1, 12))
     parts.extend(["# Supplementary figures", ""])
-    parts.extend(image_block(f"S{i}") for i in range(1, 8))
+    parts.extend(image_block(f"S{i}") for i in range(1, 7))
     table_lines = []
     for line in tables.splitlines():
         if line.startswith("**Table "):

@@ -35,7 +35,6 @@ SUPP = {
     "S4": ["figS_instrain_derep"],   # non-dereplicated vs dereplicated inStrain reference
     "S5": ["species_expansion"],     # exploratory StrainScan-curated-database comparison
     "S6": ["containment_mechanism", "refqual_figure"], # reference-completeness / containment optimization
-    "S7": ["rankrank_2brad_16s"],
 }
 
 # Human-readable output labels. By default the source stems are joined with '+';
@@ -53,7 +52,6 @@ LABELS = {
     "S3": "tree_expansion",
     "S4": "instrain_derep",
     "S5": "species_expansion_strainscan",
-    "S7": "rankrank_2brad_16s",
 }
 
 def montage(tag, sources):

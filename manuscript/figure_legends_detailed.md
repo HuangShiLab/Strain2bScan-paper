@@ -61,7 +61,7 @@ overlapping zero. 16S resolves species, 2bRAD tags resolve strains.
   genome subsamples); genome count per species at right. Every 2bRAD CI is high and non-overlapping with
   its 16S CI; 16S CIs for *M. tuberculosis* (−0.04), *L. plantarum* (0.02) and *P. dorei* (−0.13) span
   zero (no strain signal).
-- Rank–rank evidence is summarized in **Figure 2B** for the lowest-, median- and highest-16S-concordance species, with all 15 species in **Figure S7**: 2bRAD hugs the diagonal in every species, whereas 16S
+- Rank–rank evidence for all 15 species is shown in **Figure 2B**: 2bRAD hugs the diagonal in every species, whereas 16S
   forms flat horizontal rank-bands; the effect is strongest for *P. dorei* and *M. tuberculosis*.
 
 ---
