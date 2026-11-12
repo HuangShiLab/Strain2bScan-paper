@@ -83,7 +83,6 @@ The generic MSA panel detected the W2 *E. coli* signal as two low-abundance gene
 (fraction 6.1 × 10⁻⁵ and 5.7 × 10⁻⁵) but did not contain the persistent *B. bifidum* LHCA82 unit. This
 contrast illustrates why body-site- or cohort-specific panels are needed for biological interpretation.
 
-
 **Table 7. Leave-one-isolate-out behaviour for the three *Escherichia coli* panel isolates.** For each test, the
 held-out isolate was absent from the database. Reads were profiled against a panel containing the other
 two *E. coli* assemblies and the three Bifidobacterium species controls.
@@ -140,16 +139,14 @@ analysis. No case/control labels were available in public metadata. Values are f
 | S_8123213 | 370,379 | 16 | 149 | 2.0 | *Actinomyces odontolyticus*; *Neisseria subflava*; *Haemophilus parainfluenzae* |
 | S_8221232 | 488,180 | 17 | 158 | 1.8 | *Actinomyces odontolyticus*; *Neisseria subflava*; *Rothia mucilaginosa* |
 
-**Table S2. Failure-aware sensitivity for all 225 matched single-species entries.** Absent StrainScan final reports were retained and scored as zero detection. Failure-as-absence assigns zero recall to absent reports and uses a species-cluster bootstrap; precision and F1 are not assigned to no-report failures. Source: `results/strainscan_rerun/current_single_persample.tsv` and `results/strainscan_rerun/current_uncertainty_summary.tsv`.
+**Table S2. Failure-aware sensitivity for all 225 matched single-species entries.** Absent StrainScan final reports were retained and scored as zero detection. Failure-as-absence assigns zero recall to absent reports and uses a species-cluster bootstrap; precision and F1 are not assigned to no-report failures.
 
 | Analysis | n | No-calls | Mean recall difference (95% CI) | No-call rate |
 |---|--:|--:|:--:|--:|
 | Completed pairs | 204 | 0 | +0.063 (−0.037 to 0.133) | 0% |
 | Failure as absence | 225 | 21 | +0.127 (0.007 to 0.248) | 9.33% |
 
-
-**Table S3. Public-run manifest and exploratory profiling outcomes.** SRA spots, bases and instrument metadata were retrieved from NCBI on 2026-10-11. Marker and call counts are from the generic MSA screen; body-site-panel calls are shown for PRJNA1517970. P08 run-to-week mapping follows SRA submitter titles. Source: `results/realworld_cohort_benchmark/public_run_manifest.tsv`.
-
+**Table S3. Public-run manifest and exploratory profiling outcomes.** SRA spots, bases and instrument metadata were retrieved from NCBI on 2026-10-11. Marker and call counts are from the generic MSA screen; body-site-panel calls are shown for PRJNA1517970. P08 run-to-week mapping follows SRA submitter titles.
 
 | Run | Project | Role/site | SRA spots | SRA bases | MSA markers | MSA strain calls | Body-site calls |
 |---|---|---|--:|--:|--:|--:|--:|
@@ -176,7 +173,7 @@ analysis. No case/control labels were available in public metadata. Values are f
 | SRR6747958 | PRJNA288562 | subject T23 vagina GD273 | 636,817 | 186,911,987 | 226,983 | 1 | -- |
 | SRR6748207 | PRJNA288562 | subject T23 vagina GD84 | 243,062 | 71,385,301 | 45,805 | 0 | -- |
 
-**Table S4. Gate-matched full-depth saliva comparison across all 32 PRJNA1131785 pairs.** WMS and native BcgI 2bRAD libraries were profiled with the same 19-species oral panel, species gate (20 panel-specific markers and two detected markers), support threshold (two markers) and coverage threshold (0.01). Cluster calls were matched by species and cluster label. Differences in sequencing depth, read layout and representation prevent interpretation as accuracy validation. Source: `results/wms32_rebuild/per_sample_summary.tsv`.
+**Table S4. Gate-matched full-depth saliva comparison across all 32 PRJNA1131785 pairs.** WMS and native BcgI 2bRAD libraries were profiled with the same 19-species oral panel, species gate (20 panel-specific markers and two detected markers), support threshold (two markers) and coverage threshold (0.01). Cluster calls were matched by species and cluster label. Differences in sequencing depth, read layout and representation prevent interpretation as accuracy validation.
 
 | Sample | WMS calls | Native calls | Shared | WMS-only | Native-only | WMS species |
 |---|--:|--:|--:|--:|--:|--:|
@@ -213,20 +210,31 @@ analysis. No case/control labels were available in public metadata. Values are f
 | S9-7 | 116 | 52 | 15 | 101 | 37 | 17 |
 | S9-9 | 37 | 17 | 10 | 27 | 7 | 11 |
 
-**Table S5. Rhesus macaque 148-sample cohort and monkey MAG panel.** The cohort contains 128 GI spatial
-samples (66 luminal and 62 mucosal) plus 20 body controls. The monkey-specific panel used 315 selected
-study MAGs across 18 species and 303 0.95 strain-cluster units. Counts use the same BcgI gates listed in
-Methods. Source: `results/monkey_spatial_148/cohort_panel_summary.tsv`.
+**Table S5. Strain-sharing groups in the 32-sample saliva time-course.** Rates are pairwise and were
+calculated only over species with calls in both samples. Dominant-cluster sharing is the primary
+StrainPhlAn-compatible metric; any-cluster sharing is the coexistence-aware secondary metric.
+
+| Comparison | Pairs | Mean any-cluster rate | Mean dominant-cluster rate | Pooled any-cluster rate |
+|---|--:|--:|--:|--:|
+| Same subject, between timepoints | 48 | 0.801 | 0.538 | 0.800 |
+| Different subject, same timepoint | 112 | 0.574 | 0.216 | 0.578 |
+| Different subject, different timepoints | 336 | 0.566 | 0.218 | 0.567 |
+
+**Table S6. Rhesus macaque GI analysis set and monkey MAG panel.** The primary cohort contains 128 GI
+samples (66 luminal and 62 mucosal); 20 body-control libraries were retained only as contamination
+controls. The monkey-specific panel used 315 selected study MAGs across 18 species and 303 0.95
+strain-cluster units. Counts use the same BcgI gates listed in Methods.
 
 | Metric | Value |
 |---|--:|
-| Full cohort samples | 148 |
+| Libraries processed | 148 |
 | GI spatial samples | 128 |
 | GI luminal samples | 66 |
 | GI mucosal samples | 62 |
 | Body-control samples | 20 |
 | Excluded vendor extra samples | 4 |
 | Panel species | 18 |
+| Minimum MAG/sample support per species | 11 MAGs / 11 samples |
 | Selected study MAGs | 315 |
 | Strain-cluster units | 303 |
 | Panel markers before cross-species filtering | 30,008 |
@@ -237,52 +245,9 @@ Methods. Source: `results/monkey_spatial_148/cohort_panel_summary.tsv`.
 | Body controls with ≥1 call | 2/20 (10.0%) |
 | Total body-control calls | 3 |
 
-**Table S6. Species prevalence in the rhesus macaque GI cohort.** Prevalence is the fraction of samples in
-the indicated group with at least one strain call for the species. Source:
-`results/monkey_spatial_148/species_GI_control_prevalence.tsv`.
-
-| Species | GI | Luminal | Mucosal | Body control |
-|---|--:|--:|--:|--:|
-| *Helicobacter_B_sp003364135* | 0.766 | 0.727 | 0.806 | 0.100 |
-| *UBA4372_sp900543815* | 0.664 | 0.727 | 0.597 | 0.000 |
-| *Cryptobacteroides_sp000433355* | 0.656 | 0.773 | 0.532 | 0.050 |
-| *Succinivibrio_sp000431835* | 0.578 | 0.652 | 0.500 | 0.000 |
-| *WG_1_sp900539665* | 0.555 | 0.667 | 0.435 | 0.000 |
-| *Oribacterium_sp900768305* | 0.500 | 0.530 | 0.468 | 0.000 |
-| *CAG_873_sp001701165* | 0.492 | 0.591 | 0.387 | 0.000 |
-| *Lachnospira_eligens_A* | 0.477 | 0.530 | 0.419 | 0.000 |
-| *Treponema_D_succinifaciens* | 0.445 | 0.545 | 0.339 | 0.000 |
-| *Treponema_D_berlinense* | 0.445 | 0.545 | 0.339 | 0.000 |
-| *Ligilactobacillus_animalis* | 0.422 | 0.545 | 0.290 | 0.000 |
-| *Cryptobacteroides_sp900546445* | 0.422 | 0.485 | 0.355 | 0.000 |
-| *Ornithospirochaeta_sp934247875* | 0.414 | 0.500 | 0.323 | 0.000 |
-| *Onthomorpha_sp900545215* | 0.414 | 0.470 | 0.355 | 0.000 |
-| *UBA636_sp900546285* | 0.383 | 0.455 | 0.306 | 0.000 |
-| *UBA1724_sp900548225* | 0.367 | 0.424 | 0.306 | 0.000 |
-| *CAG_349_sp003539515* | 0.344 | 0.424 | 0.258 | 0.000 |
-| *Ruminococcus_E_sp934476515* | 0.312 | 0.379 | 0.242 | 0.000 |
-
-**Table S7. Representative LI-enriched strain clusters.** LI enrichment required peak LI prevalence ≥ 0.3
-and region specificity ≥ 0.8. Ten high-confidence examples are shown. Source:
-`results/monkey_spatial_148/LI_enriched_cluster_examples.tsv`.
-
-| Species | Cluster | GI prevalence | Luminal prevalence | Mucosal prevalence | Peak LI prevalence | Region specificity |
-|---|---|--:|--:|--:|--:|--:|
-| *Treponema_D_succinifaciens* | C25 | 0.328 | 0.409 | 0.242 | 0.750 | 1.000 |
-| *WG_1_sp900539665* | C22 | 0.328 | 0.439 | 0.210 | 0.714 | 0.936 |
-| *Treponema_D_succinifaciens* | C2 | 0.289 | 0.424 | 0.145 | 0.643 | 0.963 |
-| *Succinivibrio_sp000431835* | C6 | 0.266 | 0.364 | 0.161 | 0.589 | 0.960 |
-| *Cryptobacteroides_sp900546445* | C1 | 0.258 | 0.364 | 0.145 | 0.571 | 0.959 |
-| *Treponema_D_succinifaciens* | C15 | 0.242 | 0.394 | 0.081 | 0.554 | 1.000 |
-| *Treponema_D_succinifaciens* | C5 | 0.242 | 0.333 | 0.145 | 0.554 | 1.000 |
-| *UBA636_sp900546285* | C12 | 0.234 | 0.303 | 0.161 | 0.536 | 1.000 |
-| *Oribacterium_sp900768305* | C4 | 0.250 | 0.379 | 0.113 | 0.536 | 0.917 |
-| *Cryptobacteroides_sp000433355* | C6 | 0.258 | 0.439 | 0.065 | 0.536 | 0.880 |
-
-**Table S8. Matched mucosal/luminal strain clusters after Bonferroni correction.** Samples were matched
+**Table S7. Matched mucosal/luminal strain clusters after Bonferroni correction.** Samples were matched
 within monkey, GI region and position; absent cluster calls were treated as zero within-species abundance.
-Only clusters with Bonferroni q < 0.05 are shown. Source:
-`results/monkey_spatial_148/mucosal_luminal_bonferroni.tsv`.
+Only clusters with Bonferroni q < 0.05 are shown.
 
 | Species | Cluster | Matched pairs | Mucosal positive | Luminal positive | p | Bonferroni q |
 |---|---|--:|--:|--:|--:|--:|
@@ -300,27 +265,7 @@ Only clusters with Bonferroni q < 0.05 are shown. Source:
 | *Treponema_D_succinifaciens* | C12 | 50 | 4 | 21 | 2.1 × 10⁻⁴ | 3.3 × 10⁻² |
 | *Treponema_D_berlinense* | C10 | 50 | 4 | 17 | 2.9 × 10⁻⁴ | 4.5 × 10⁻² |
 
-**Table S9. Paired luminal 2bRAD/shotgun concordance on the monkey cohort.** Both modalities used the
-same BcgI marker space and cluster gates. Concordance is restricted to 51 luminal samples with calls in
-both modalities; differences in depth, representation and host content prevent accuracy interpretation.
-Source: `results/monkey_spatial_148/paired_modality_concordance_summary.tsv`.
-
-| Metric | Mean | Median |
-|---|--:|--:|
-| 2bRAD strain calls | 72.2 | 84 |
-| Shotgun strain calls | 106.0 | 123 |
-| Shared strain calls | 64.0 | 81 |
-| Strain-call Jaccard | 0.420 | 0.605 |
-| Species Jaccard | 0.735 | 0.889 |
-
-Dominant-cluster agreement was 234/580 comparisons (40.3%).
-
-**Table S10. Representative LI strain-cluster associations with bile acids and functions.** LI strain
-composition was residualized against monkey identity and LI position, then associated with bile-acid class
-composition or HUMAnN pathway composition using Spearman correlation and Benjamini–Hochberg FDR. These are
-sample-level ecological associations, not gene-to-cluster assignments. Source:
-`results/monkey_spatial_148/bileacid_coupling_key_results.tsv` and
-`results/monkey_spatial_148/function_coupling_key_results.tsv`.
+**Table S8. Representative LI strain-cluster associations with bile acids.** LI strain composition was residualized against monkey identity and LI position and associated with bile-acid class composition using Spearman correlation and Benjamini–Hochberg FDR. These are sample-level ecological associations, not gene-to-cluster assignments.
 
 | Strain cluster | Feature | rho | p | BH q |
 |---|---|--:|--:|--:|
@@ -330,6 +275,11 @@ sample-level ecological associations, not gene-to-cluster assignments. Source:
 | *Succinivibrio_sp000431835* C25 | Cholate-like bile acids | −0.909 | 1.9 × 10⁻⁹ | 1.4 × 10⁻⁷ |
 | *UBA4372_sp900543815* C3 | Conjugated/high-mass bile acids | −0.895 | 8.1 × 10⁻⁹ | 2.7 × 10⁻⁷ |
 | *UBA636_sp900546285* C11 | Dihydroxy bile acids | 0.648 | 8.2 × 10⁻⁴ | 2.5 × 10⁻³ |
+
+**Table S9. Representative LI strain-cluster associations with microbial pathways.** LI strain composition was residualized against monkey identity and LI position and associated with HUMAnN pathway composition using Spearman correlation and Benjamini–Hochberg FDR. These are sample-level ecological associations, not gene-to-cluster assignments.
+
+| Strain cluster | Feature | rho | p | BH q |
+|---|---|--:|--:|--:|
 | *UBA4372_sp900543815* C4 | Pyruvate fermentation to butanoate | 0.926 | 1.2 × 10⁻¹¹ | 4.0 × 10⁻¹⁰ |
 | *UBA4372_sp900543815* C4 | Acetyl-CoA fermentation to butanoate II | 0.905 | 2.2 × 10⁻¹⁰ | 4.9 × 10⁻⁹ |
 | *Oribacterium_sp900768305* C2 | Pyruvate fermentation to butanoate | 0.955 | 3.7 × 10⁻¹⁴ | 2.9 × 10⁻¹² |
@@ -339,20 +289,8 @@ sample-level ecological associations, not gene-to-cluster assignments. Source:
 | *Treponema_D_succinifaciens* C2 | N-acetylglucosamine/mannosamine/neuraminate degradation | 0.965 | 1.8 × 10⁻¹⁵ | 2.1 × 10⁻¹³ |
 | *Succinivibrio_sp000431835* C4 | N-acetylglucosamine/mannosamine/neuraminate degradation | 0.789 | 2.0 × 10⁻⁶ | 1.2 × 10⁻⁵ |
 
-**Table S11. Strain-sharing groups in the 32-sample saliva time-course.** Rates are pairwise and were
-calculated only over species with calls in both samples. Dominant-cluster sharing is the primary
-StrainPhlAn-compatible metric; any-cluster sharing is the coexistence-aware secondary metric. Source:
-`results/strain_sharing_20261105/saliva_strain_sharing_group_summary.tsv`.
-
-| Comparison | Pairs | Mean any-cluster rate | Mean dominant-cluster rate | Pooled any-cluster rate |
-|---|--:|--:|--:|--:|
-| Same subject, between timepoints | 48 | 0.801 | 0.538 | 0.800 |
-| Different subject, same timepoint | 112 | 0.574 | 0.216 | 0.578 |
-| Different subject, different timepoints | 336 | 0.566 | 0.218 | 0.567 |
-
-**Table S12. Strain-sharing groups in the 128-sample rhesus macaque GI spatial cohort.** Rates are pairwise
+**Table S10. Strain-sharing groups in the 128-sample rhesus macaque GI spatial cohort.** Rates are pairwise
 and restricted to GI samples. Pooled rates divide shared species-pairs by all analyzable species-pairs.
-Source: `results/strain_sharing_20261105/monkey_strain_sharing_group_summary.tsv`.
 
 | Comparison | Analyzable pairs | Mean any-cluster rate | Mean dominant-cluster rate | Pooled any-cluster rate |
 |---|--:|--:|--:|--:|
@@ -363,10 +301,9 @@ Source: `results/strain_sharing_20261105/monkey_strain_sharing_group_summary.tsv
 | Between monkeys, between regions, same compartment | 1,321 | 0.336 | 0.100 | 0.457 |
 | Between compartments | 2,222 | 0.382 | 0.102 | 0.546 |
 
-**Table S13. Old/young rhesus strain sharing at corresponding GI sites.** Corresponding-site pairs matched
+**Table S11. Old/young rhesus strain sharing at corresponding GI sites.** Corresponding-site pairs matched
 GI region and compartment across O/Y monkey IDs. Region codes are retained from cohort metadata; rates use
-only pairs with at least one species detected in both samples. Source:
-`results/strain_sharing_20261105/monkey_between_age_corresponding_site_summary.tsv`.
+only pairs with at least one species detected in both samples.
 
 | Region | Compartment | Pairs | Analyzable pairs | Mean any-cluster rate | Mean dominant-cluster rate |
 |---|---|--:|--:|--:|--:|
@@ -379,7 +316,7 @@ only pairs with at least one species detected in both samples. Source:
 | S | Luminal | 2 | 0 | -- | -- |
 | S | Mucosal | 6 | 0 | -- | -- |
 
-**Table S14. ATCC strain identifiers represented in the four DNA mock communities.** Each row maps the species-level colour key used in mock figures to the ATCC strain/reference genome and its 0.95-cluster representative. For MSA-1003, only staggered taxonomic abundance was provided; sequence abundance is therefore not shown. Source: `results/mock_benchmark_f26f234/mock_strain_identifiers.tsv`.
+**Table S12. ATCC strain identifiers represented in the four DNA mock communities.** Each row maps the species-level colour key used in mock figures to the ATCC strain/reference genome and its 0.95-cluster representative. For MSA-1003, only staggered taxonomic abundance was provided; sequence abundance is therefore not shown.
 
 | Mock | Species | ATCC strain/reference | Truth abundance | 0.95 cluster |
 |---|---|---|--:|---|
@@ -438,12 +375,10 @@ only pairs with at least one species detected in both samples. Source:
 
 The source table also contains representative-genome accessions and taxonomic abundance.
 
-
-**Table S15. Composition of the 2,025-sample single-species simulation pool.** Each species contained 2, 3
+**Table S13. Composition of the 2,025-sample single-species simulation pool.** Each species contained 2, 3
 or 5 co-present truth strains from the same or different 0.95 clusters at five per-strain depths and five
 replicates. Cells show sample counts. *M. tuberculosis* contributed only same-cluster 5-strain samples and
-*P. copri* contributed only different-cluster 5-strain samples. Source:
-`results/sim2025_current_summary/sample_composition.tsv`.
+*P. copri* contributed only different-cluster 5-strain samples.
 
 | Species | Design | Truth strains | 0.5× | 1× | 3× | 5× | 10× | Total |
 |---|---|--:|--:|--:|--:|--:|--:|--:|

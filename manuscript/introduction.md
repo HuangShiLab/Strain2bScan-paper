@@ -4,7 +4,7 @@ Microbial strains within a species can differ in virulence, antibiotic resistanc
 host interaction. Resolving which strains are present, and at what abundance, is therefore central to
 microbiome and clinical metagenomics. The 16S rRNA gene, the workhorse of community surveys, resolves
 species but not strains because its between-strain distances are essentially uncorrelated with genome-wide
-divergence (below, and Fig 2). Shotgun metagenomes retain this signal, and reference k-mer methods such as
+divergence (Fig 2). Shotgun metagenomes retain this signal, and reference k-mer methods such as
 StrainScan [1] and StrainGE [2], marker-gene methods such as StrainPhlAn [3], and sketch-based abundance
 estimators such as sylph [4] now make strain-level profiling routine for individual samples and species.
 

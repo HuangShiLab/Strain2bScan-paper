@@ -371,7 +371,7 @@ per-species databases in a `linux/amd64` container. inStrain 1.9.1 [8] used Bowt
 sorted BAM files and skani [22]-dereplicated references at 98% ANI. Genome-level calls required breadth
 ≥ 0.5 and reference popANI ≥ 0.99999; abundance was normalized and detection thresholded at 10⁻⁴.
 Supplementary Fig S4 shows the non-dereplicated control. Mock species-to-ATCC-strain mappings are in
-Supplementary Table S14.
+Supplementary Table S12.
 
 ### Real saliva time-course
 
@@ -391,7 +391,7 @@ single-species and multi-species simulations. Single-species samples contained 2
 from the same or different 0.95 clusters at per-strain depths of 0.5, 1, 3, 5 and 10×, with five replicates
 per cell (2,025 samples). Multi-species samples mixed approximately 18 species across three community depth
 gradients (60 samples). Truth tables recorded genome accession and 0.95-cluster assignment. Supplementary
-Table S15 enumerates the single-species design.
+Table S13 enumerates the single-species design.
 
 Strain2bScan databases were built with `--enzyme all --similarity 0.95` (16 enzymes) and samples were
 profiled with `profile` or `multi-profile --enzyme all` using default depth-adaptive gates. StrainScan
@@ -437,16 +437,25 @@ StrainGST uses its own 0.90-reference space. Metrics were therefore not pooled a
 
 ### Rhesus macaque GI spatial cohort
 
-The final real-cohort application used an author-generated rhesus macaque GI spatial cohort of 148 libraries:
-128 GI samples (66 luminal and 62 mucosal) and 20 body controls. Four additional vendor throat/trachea
-files were excluded. Clean native BcgI libraries contained 32-bp tags. We selected 18 prevalent gut species
-and 315 study MAGs from the cohort assembly catalogue, clustered genomes within species at 0.95 Jaccard
-similarity, and built per-species BcgI databases representing 303 strain-cluster units. Cross-species marker
-filtering retained 29,162 of 30,008 markers. All 148 libraries were profiled with `--enzyme BcgI
---min-species-markers 20 --min-species-detect 2 --min-support 2 --min-coverage 0.01
---min-consistency 0.5`. Sample-level, species-level and cluster-level summaries were calculated for GI,
-luminal, mucosal and body-control groups. LI-enriched clusters required peak LI prevalence >= 0.3 and
-region specificity >= 0.8.
+The final real-cohort application reanalyzed the published rhesus macaque GI spatial cohort [31]. Briefly,
+Hou et al. sampled four *Macaca mulatta* (two 20-year-old and two 8-year-old animals) across five GI
+regions and paired luminal/mucosal compartments under institutional animal ethics approval. Luminal-content
+shotgun libraries used MagPure Soil DNA extraction, Vazyme ND617-02 library preparation and MGISEQ-T7
+sequencing. Mucosal and blood tissue 2bRAD-M libraries used CretMag DNA extraction and sequencing by
+Qingdao OE Biotech; air, instrument and skin controls were processed in parallel. The primary Strain2bScan
+analysis set contained 128 native BcgI libraries (66 luminal and 62 mucosal); 20 body-control libraries were
+retained for contamination-control summaries but not included in GI call-rate calculations. Public sequence
+data are under NGDC BioProject PRJCA052625.
+
+Clean native BcgI libraries contained 32-bp tags. Because macaque gut species are under-represented in
+public references, we built a niche-matched panel from the 1,677-MAG study catalogue. Species were
+retained when the original study supplied at least 11 non-redundant MAGs recovered from at least 11
+samples; the 18 species meeting this GI prevalence/abundance criterion contributed 315 MAGs. Genomes were
+clustered within species at 0.95 Jaccard similarity and per-species BcgI databases represented 303
+strain-cluster units. Cross-species marker filtering retained 29,162 of 30,008 markers. Libraries were
+profiled with `--enzyme BcgI --min-species-markers 20 --min-species-detect 2 --min-support 2 --min-coverage 0.01 --min-consistency 0.5`.
+GI, luminal, mucosal and control summaries used the same gates. LI-enrichment screening required peak LI
+prevalence >= 0.3 and region specificity >= 0.8.
 
 For mucosal/luminal tests, luminal and mucosal samples were matched within monkey, GI region and GI
 position. Missing strain-cluster values were represented as zero, and within-species global-abundance
@@ -455,16 +464,22 @@ The 66 luminal libraries were also profiled from processed shotgun reads in the 
 Species and strain-call concordance used Jaccard distances; dominant clusters were compared only where both
 modalities detected the species.
 
-For metabolic coupling, targeted bile-acid SRM chromatograms were extracted from mzML files, peak areas
-were normalized to internal standards, and negative-mode precursor classes were grouped by precursor mass
-into LCA-like, dihydroxy, cholate-like and conjugated/high-mass categories. HUMAnN `pathabundance-cpm`
-tables were aggregated and screened for butyrate/SCFA, propionate, lactate, mixed-acid, sialic-acid,
-N-acetyl-sugar, fucose/rhamnose and glucarate pathways. In LI samples, strain composition and BA or
-functional composition were residualized against monkey identity and LI position before Spearman
-correlation; Benjamini–Hochberg FDR was estimated separately for BA and functional tests. Because BA names
-were not available from the vendor quantification table, BA features were interpreted at precursor-class
-rather than individual-compound resolution. Associations are ecological and do not assign pathway genes to
-individual strain clusters.
+Targeted bile-acid SRM data were acquired by UHPLC–MS/MS in negative MRM mode with internal-standard
+calibration in the original study. We reprocessed 44 vendor WIFF-derived mzML files from the HKU HPC archive
+at `/lustre1/g/aos_shihuang/data/monkey/bile acid/Target`; SHA-256 checksums are in
+`results/monkey_spatial_148/bileacid_mzml_manifest.txt`. mzML metadata identified an ABI/SCIEX WIFF source,
+Analyst acquisition software and ProteoWizard `pwiz_Reader_ABI` v3.0.24360 conversion. Because the converted
+transition labels were generic and did not retain the vendor compound mapping, features were interpreted at
+precursor-class resolution: LCA-like (Q1 375), dihydroxy (Q1 391), cholate-like (Q1 407) and
+conjugated/high-mass. A vendor transition-name mapping, if supplied, can restore individual compound names
+within these classes. HUMAnN pathway abundance tables were screened for butyrate/SCFA, propionate, lactate,
+mixed-acid, sialic-acid, N-acetyl-sugar, fucose/rhamnose and glucarate pathways. In LI luminal samples
+(23 with BA and 26 with functional profiles), strain composition and BA or functional composition were
+residualized against monkey identity and LI position before Spearman correlation. Benjamini–Hochberg FDR was
+estimated separately for 219 × 4 BA tests and 219 × 14 pathway tests. Displayed associations were selected
+from BH-significant rows by absolute ρ to illustrate distinct precursor classes and pathway programs; the
+complete BA and pathway results are reported separately. These associations are ecological and do not assign
+pathway genes to individual strain clusters.
 
 ### Strain-sharing rates
 

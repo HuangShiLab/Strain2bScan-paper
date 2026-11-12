@@ -71,3 +71,7 @@
 30. Heidrich V, Fackelmann G, Ricci L, *et al.* **Strain transmission links human microbiomes along the
     oral-gut axis and across cohabiting individuals.** *Cell Press Blue* 2026; 1(3):100034.
     doi:10.1016/j.cpblue.2026.100034.
+31. Hou S, Jiang Y, Zhang D, Xu Z, Li Y, Liu X, Zhang H, Zhang J, Zhai Q, Zhang C, Wang X, Huang S.
+    **A high-resolution spatial model of the primate gut microbiome defines niche-specific functions and
+    host-adapted microbial metabolism.** *Gut Microbes* 2026; 18(1):2748153.
+    doi:10.1080/19490976.2026.2748153.

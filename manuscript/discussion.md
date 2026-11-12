@@ -21,7 +21,7 @@ A rhesus macaque GI spatial cohort extended this logic from person-specific stab
 A cohort-specific panel built from 315 study MAGs recovered strain calls in 113/128 GI samples and 56/66
 luminal samples, whereas only two body controls produced calls. Eighty-nine clusters were LI-enriched and
 thirteen remained luminal-enriched after matched-position Bonferroni correction (Supplementary Tables
-S5–S10). In shotgun/HUMAnN/bile-acid subsets, strain composition was associated with bile-acid classes,
+S6–S11). In shotgun/HUMAnN/bile-acid subsets, strain composition was associated with bile-acid classes,
 butyrate and propionate programs and N-acetyl-sugar degradation. These are cohort-level ecological
 associations rather than assignments of individual pathway genes to strains, but they show that
 reduced-representation strain calls can support spatial and metabolic hypotheses in real animal cohorts.
