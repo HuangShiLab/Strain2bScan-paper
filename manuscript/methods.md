@@ -97,14 +97,14 @@ whose edges join genome pairs with Jaccard ≥ τ, computed with union-find. For
 genomes we use exact all-pairs Jaccard on the tag sets; above that we estimate Jaccard from
 bottom-*k* MinHash [9] sketches (*k* = 2000) of each genome's markers, which reduces the pairwise
 cost from O(n²·m) to O(n²·k) with *k* ≪ *m* and yields partitions identical to exact on real
-data (Results), without the multiple whole-genome alignments used by tools such as SibeliaZ [13]. Clusters are the finest reliable resolution unit: strains within one cluster
+data (Results), without the multiple whole-genome alignments used by tools such as SibeliaZ [11]. Clusters are the finest reliable resolution unit: strains within one cluster
 are too similar to separate from short reads.
 
 **Containment clustering for uneven-completeness panels (`--containment`).** Jaccard penalises
 incompleteness: an incomplete genome's markers are approximately a *subset* of a complete relative's,
 so |A∩B|/|A∪B| falls below τ and the two spuriously split. The optional `--containment` mode instead
 links on **max-containment**, |A∩B| / min(|A|,|B|), which stays ≈ 1 when one marker set is contained in
-the other; the containment estimator used by Mash-screen [14] and sourmash [10] for uneven-completeness genomes.
+the other; the containment estimator used by Mash-screen [12] and sourmash [10] for uneven-completeness genomes.
 It is exact for small panels; for large panels the intersection is estimated from the MinHash-sketch
 Jaccard and the exact set sizes (|A∩B| = J·(|A|+|B|)/(1+J)), then divided by min(|A|,|B|). Because
 max-containment ≥ Jaccard it merges at least as much, so it is opt-in (for reference sets of mixed
@@ -115,7 +115,7 @@ complementary first line of defence.
 incidence; present in all clusters (*species-core*; detects the species, not strains), in one
 cluster with ≥2 genomes (*cluster-specific*), in a single genome (*strain-specific*), or in
 several but not all clusters (*shared-partial*). Cluster- and strain-specific tags are the
-Layer-2 markers. Crucially these are derived from **all** tags of the species' genomes, not
+Layer-2 markers. These markers are derived from **all** tags of the species' genomes, not
 from a pre-built species-unique database: species-unique markers (a genome compared against
 genomes of *other* species) are computed for species detection and are orthogonal to
 within-species strain structure. Each cluster's database is the union of its member genomes'
@@ -125,7 +125,7 @@ still being reachable from that cluster's reads.
 
 **Assembly-quality filtering.** Variable reference completeness biases Jaccard clustering
 toward spurious splits: an incomplete genome's marker set is approximately a subset of its
-complete twin's, so their Jaccard falls below 1 and they fail to cluster. Because CheckM [15] is
+complete twin's, so their Jaccard falls below 1 and they fail to cluster. Because CheckM [13] is
 not run in-line, two dependency-free proxies computed from data already at hand are used;
 contig count (`--max-contigs`), and single-copy tag count relative to the conspecific median
 (`--min-tag-fraction`, a completeness proxy). Genomes far below the median are always flagged;
@@ -341,7 +341,7 @@ which is what makes multi-GB samples tractable.
 
 ### Overview
 
-All simulated reads were generated with ART [18] using `art_illumina -p -l 250 -m 600 -s 150`; this
+All simulated reads were generated with ART [14] using `art_illumina -p -l 250 -m 600 -s 150`; this
 250 bp paired-end configuration includes the ART Illumina quality-error model and was used for every
 primary simulation. Reference panels were restricted to complete or near-complete genomes unless stated
 otherwise. Detection metrics use cluster-set precision, recall and F1 in each tool's own reference or
@@ -352,9 +352,9 @@ resident set size.
 ### 2bRAD versus 16S reference panels
 
 For the 15-species motivation analysis, ~50 genomes per species were obtained from NCBI through ENA and
-restricted to CheckM [15] completeness ≥ 97%, contamination ≤ 5% and assembly level Complete
+restricted to CheckM [13] completeness ≥ 97%, contamination ≤ 5% and assembly level Complete
 Genome/Chromosome. Whole-genome distance used bottom-3000 canonical 21-mer MinHash; 2bRAD distance used
-BcgI tags built by Strain2bScan; 16S distance used the longest barrnap [20] gene, HMMER [21] alignment
+BcgI tags built by Strain2bScan; 16S distance used the longest barrnap [15] gene, HMMER [16] alignment
 and 21-mer Jaccard. Mash [9] distances were converted with
 D(J) = −ln(2J/(1+J)), and per-species Spearman correlations against whole-genome distance used 95% CIs
 from 500 genome subsamples.
@@ -367,20 +367,20 @@ genomes per species (164 genomes), including the ATCC strain and up to five high
 decoys per species; genomes were clustered at 0.95 similarity with `--containment`. Native BcgI used the
 BcgI tree; shotgun used the all-enzyme tree. Strain2bScan used default gates (`--min-support 8`,
 `--min-coverage 0.1`, `--min-abundance 0`, `--min-consistency 0.5`). Shotgun StrainScan 1.0.14 [1] used
-per-species databases in a `linux/amd64` container. inStrain 1.9.1 [8] used Bowtie2 [23] alignments,
-sorted BAM files and skani [22]-dereplicated references at 98% ANI. Genome-level calls required breadth
+per-species databases in a `linux/amd64` container. inStrain 1.9.1 [8] used Bowtie2 [18] alignments,
+sorted BAM files and skani [17]-dereplicated references at 98% ANI. Genome-level calls required breadth
 ≥ 0.5 and reference popANI ≥ 0.99999; abundance was normalized and detection thresholded at 10⁻⁴.
 Supplementary Fig S4 shows the non-dereplicated control. Mock species-to-ATCC-strain mappings are in
 Supplementary Table S12.
 
 ### Real saliva time-course
 
-Native BcgI 2bRAD and paired shotgun WMS saliva from PRJNA1131785 comprised eight subjects and four
+Native BcgI 2bRAD and paired whole-metagenome shotgun (WMS) saliva from PRJNA1131785 comprised eight subjects and four
 within-day timepoints. Libraries were profiled against a 19-species oral-commensal panel (up to 25
 genomes/species) with species gates of 20 panel-specific markers and two detected species markers and call
 gates of two supporting markers and 0.01 coverage. Strain- and species-level cross-species matrices used
 `sample_fraction`; within-species analyses used within-species relative abundance. Bray–Curtis
-dissimilarities were tested by PERMANOVA with 4,999 label permutations (seed 42) [25]. Host assignment used
+dissimilarities were tested by PERMANOVA with 4,999 label permutations (seed 42) [19]. Host assignment used
 leave-one-timepoint-out 1-nearest-neighbour classification, and subject-aware cluster bootstrap with
 20,000 resamples provided uncertainty. Full-depth paired comparisons used all 32 WMS/native pairs.
 
@@ -437,7 +437,7 @@ StrainGST uses its own 0.90-reference space. Metrics were therefore not pooled a
 
 ### Rhesus macaque GI spatial cohort
 
-The final real-cohort application reanalyzed the published rhesus macaque GI spatial cohort [31]. Briefly,
+The final real-cohort application reanalyzed the published rhesus macaque GI spatial cohort [23]. Briefly,
 Hou et al. sampled four *Macaca mulatta* (two 20-year-old and two 8-year-old animals) across five GI
 regions and paired luminal/mucosal compartments under institutional animal ethics approval. Luminal-content
 shotgun libraries used MagPure Soil DNA extraction, Vazyme ND617-02 library preparation and MGISEQ-T7
@@ -465,9 +465,10 @@ Species and strain-call concordance used Jaccard distances; dominant clusters we
 modalities detected the species.
 
 Targeted bile-acid SRM data were acquired by UHPLC–MS/MS in negative MRM mode with internal-standard
-calibration in the original study. We reprocessed 44 vendor WIFF-derived mzML files from the HKU HPC archive
-at `/lustre1/g/aos_shihuang/data/monkey/bile acid/Target`; SHA-256 checksums are in
-`results/monkey_spatial_148/bileacid_mzml_manifest.txt`. mzML metadata identified an ABI/SCIEX WIFF source,
+calibration in the original study. We reprocessed 44 vendor WIFF-derived mzML files from the original
+study's institutional archive; SHA-256 checksums and the public-deposition manifest are in
+`results/monkey_spatial_148/bileacid_mzml_manifest.txt` and
+`results/monkey_spatial_148/zenodo_package_manifest.tsv`. mzML metadata identified an ABI/SCIEX WIFF source,
 Analyst acquisition software and ProteoWizard `pwiz_Reader_ABI` v3.0.24360 conversion. Because the converted
 transition labels were generic and did not retain the vendor compound mapping, features were interpreted at
 precursor-class resolution: LCA-like (Q1 375), dihydroxy (Q1 391), cholate-like (Q1 407) and
@@ -486,7 +487,7 @@ pathway genes to individual strain clusters.
 Pairwise strain sharing was computed only among samples with at least one species-level call and used the
 same gate-filtered 0.95 cluster calls as the preceding analyses. For each sample pair, species detected in
 both samples formed the denominator, following the strain-sharing-rate framework used in epidemiological
-microbiome studies [29,30]. A species contributed to the primary dominant-cluster rate when its
+microbiome studies [21,22]. A species contributed to the primary dominant-cluster rate when its
 highest-within-species-abundance cluster label was identical in both samples. A species contributed to the
 secondary any-cluster rate when at least one cluster label was shared; this secondary metric is more
 sensitive to multi-strain coexistence but less conservative. Exact merged labels (for example,
@@ -515,7 +516,7 @@ epidemiological cohorts. Reads were supplied directly to Strain2bScan as paired 
 273 for all three body sites. PRJNA1517970 analyses used three vaginal, three meconium and one negative
 extraction-control library.
 
-For cohort-specific compatibility testing, six PRJNA1191225 isolate read sets were assembled with SPAdes 4.3.0 [28]
+For cohort-specific compatibility testing, six PRJNA1191225 isolate read sets were assembled with SPAdes 4.3.0 [20]
 (`--isolate`, 8 threads). Three *E. coli* assemblies were clustered at 0.95 similarity into three
 resolvable units; one assembly each from *B. longum*, *B. breve* and *B. bifidum* was built as a
 single-genome species database. Panels used `--enzyme recommended`. All six isolate read sets were then

@@ -5,21 +5,19 @@
 Strain-level variation underlies clinically important microbial phenotypes, but 16S rRNA surveys resolve
 species rather than strains, whereas full-k-mer strain profilers can incur repeated per-species search
 costs and lose signal in host-rich samples. We present Strain2bScan, a Rust profiler that converts
-type-IIB 2bRAD restriction markers into a strain-cluster-resolved, digest-once search framework for
-native BcgI 2bRAD-M libraries and conventional shotgun reads. Across 15 species, 2bRAD markers preserved
-genome-wide strain relationships that 16S markers did not (median Spearman ρ = 0.94 versus 0.36). Native
-profiling retained F1 = 1.0 at a 10⁻⁴ abundance threshold in the MSA-1002 99% human-DNA mock. In 225
-matched simulations, Strain2bScan matched StrainScan species-median precision and had higher
-failure-as-absence recall (+0.127; 95% CI 0.007–0.248), although multi-species F1 was lower. In 32
-gate-matched saliva pairs, full-depth WMS and native profiles shared 495 strain-cluster calls. In a
-published 128-sample rhesus macaque GI spatial cohort, a cohort-specific MAG panel resolved strain
-clusters in 88.3% of GI samples, identified luminal-enriched strain clusters, and showed sample-level
-coupling to bile-acid classes and SCFA/glycan-associated pathways. Pairwise dominant-cluster sharing was
-higher within subjects across saliva timepoints and within monkeys across GI sites than between hosts.
-Across the matched simulation set, Strain2bScan used median 0.56 s and 0.059 GB per sample versus 4.79 s
-and 0.811 GB for StrainScan. Accuracy depended on reference completeness and niche-matched panel design.
-Strain2bScan therefore extends reduced-representation sequencing from species profiles to scalable
-strain-cluster resolution.
+type-IIB 2bRAD restriction markers into a strain-cluster-resolved, digest-once framework for native BcgI
+2bRAD-M libraries and conventional shotgun reads. Across 15 species, 2bRAD markers preserved genome-wide
+strain relationships that 16S did not (median Spearman ρ = 0.94 versus 0.36). Native profiling retained
+F1 = 1.0 at a 10⁻⁴ abundance threshold in the MSA-1002 99% human-DNA mock. In 225 matched simulations,
+Strain2bScan matched StrainScan species-median precision and had higher failure-as-absence recall
+(+0.127; 95% CI 0.007–0.248), although multi-species F1 was lower. In 32 gate-matched saliva pairs,
+full-depth shotgun and native profiles shared 495 strain-cluster calls. In a published 128-sample rhesus
+macaque GI cohort, a cohort-specific MAG panel resolved strain clusters in 88.3% of samples, identified
+luminal-enriched clusters, and showed sample-level coupling to bile-acid classes and
+SCFA/glycan-associated pathways. Pairwise dominant-cluster sharing was higher within hosts than between
+hosts. Strain2bScan used median 0.56 s and 0.059 GB per sample versus 4.79 s and 0.811 GB for StrainScan.
+Accuracy depended on reference completeness and niche-matched panel design. Strain2bScan therefore
+extends reduced-representation sequencing from species profiles to scalable strain-cluster resolution.
 
 **Availability.** Rust source: https://github.com/HuangShiLab/Strain2bScan. Public reads: PRJNA1131785,
 PRJNA288562, PRJNA1517970, PRJNA1191223 and PRJNA1191225. Derived outputs:

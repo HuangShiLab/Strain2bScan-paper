@@ -13,21 +13,19 @@ Yufeng Zhang<sup>1,2</sup>, Shi Huang<sup>1,2,*</sup>
 Strain-level variation underlies clinically important microbial phenotypes, but 16S rRNA surveys resolve
 species rather than strains, whereas full-k-mer strain profilers can incur repeated per-species search
 costs and lose signal in host-rich samples. We present Strain2bScan, a Rust profiler that converts
-type-IIB 2bRAD restriction markers into a strain-cluster-resolved, digest-once search framework for
-native BcgI 2bRAD-M libraries and conventional shotgun reads. Across 15 species, 2bRAD markers preserved
-genome-wide strain relationships that 16S markers did not (median Spearman ρ = 0.94 versus 0.36). Native
-profiling retained F1 = 1.0 at a 10⁻⁴ abundance threshold in the MSA-1002 99% human-DNA mock. In 225
-matched simulations, Strain2bScan matched StrainScan species-median precision and had higher
-failure-as-absence recall (+0.127; 95% CI 0.007–0.248), although multi-species F1 was lower. In 32
-gate-matched saliva pairs, full-depth WMS and native profiles shared 495 strain-cluster calls. In a
-published 128-sample rhesus macaque GI spatial cohort, a cohort-specific MAG panel resolved strain
-clusters in 88.3% of GI samples, identified luminal-enriched strain clusters, and showed sample-level
-coupling to bile-acid classes and SCFA/glycan-associated pathways. Pairwise dominant-cluster sharing was
-higher within subjects across saliva timepoints and within monkeys across GI sites than between hosts.
-Across the matched simulation set, Strain2bScan used median 0.56 s and 0.059 GB per sample versus 4.79 s
-and 0.811 GB for StrainScan. Accuracy depended on reference completeness and niche-matched panel design.
-Strain2bScan therefore extends reduced-representation sequencing from species profiles to scalable
-strain-cluster resolution.
+type-IIB 2bRAD restriction markers into a strain-cluster-resolved, digest-once framework for native BcgI
+2bRAD-M libraries and conventional shotgun reads. Across 15 species, 2bRAD markers preserved genome-wide
+strain relationships that 16S did not (median Spearman ρ = 0.94 versus 0.36). Native profiling retained
+F1 = 1.0 at a 10⁻⁴ abundance threshold in the MSA-1002 99% human-DNA mock. In 225 matched simulations,
+Strain2bScan matched StrainScan species-median precision and had higher failure-as-absence recall
+(+0.127; 95% CI 0.007–0.248), although multi-species F1 was lower. In 32 gate-matched saliva pairs,
+full-depth shotgun and native profiles shared 495 strain-cluster calls. In a published 128-sample rhesus
+macaque GI cohort, a cohort-specific MAG panel resolved strain clusters in 88.3% of samples, identified
+luminal-enriched clusters, and showed sample-level coupling to bile-acid classes and
+SCFA/glycan-associated pathways. Pairwise dominant-cluster sharing was higher within hosts than between
+hosts. Strain2bScan used median 0.56 s and 0.059 GB per sample versus 4.79 s and 0.811 GB for StrainScan.
+Accuracy depended on reference completeness and niche-matched panel design. Strain2bScan therefore
+extends reduced-representation sequencing from species profiles to scalable strain-cluster resolution.
 
 **Availability.** Rust source: https://github.com/HuangShiLab/Strain2bScan. Public reads: PRJNA1131785,
 PRJNA288562, PRJNA1517970, PRJNA1191223 and PRJNA1191225. Derived outputs:
@@ -123,7 +121,7 @@ Four ATCC shotgun mocks were profiled with Strain2bScan, StrainScan and inStrain
 
 ##### Real shotgun saliva shows dense calls but not denser strain-level host discrimination (Fig 10)
 
-The complete 32-pair PRJNA1131785 WMS/native comparison used the same oral panel and gates. Full-depth WMS produced 2,487 strain-cluster calls (median 79 per sample) versus 1,368 native calls (median 35.5); 495 calls were shared (Fig 10A). Thus, 19.9% of WMS calls were present in native profiles and 36.2% of native calls were recovered in WMS. Unique calls were abundance-poor: WMS-only calls represented 80.1% of WMS calls but only 14.8% of WMS-detected sample fraction, whereas native-only calls represented 63.8% of native calls but 26.6% of native-detected sample fraction (Fig 10B).
+The complete 32-pair PRJNA1131785 whole-metagenome shotgun (WMS)/native comparison used the same oral panel and gates. Full-depth WMS produced 2,487 strain-cluster calls (median 79 per sample) versus 1,368 native calls (median 35.5); 495 calls were shared (Fig 10A). Thus, 19.9% of WMS calls were present in native profiles and 36.2% of native calls were recovered in WMS. Unique calls were abundance-poor: WMS-only calls represented 80.1% of WMS calls but only 14.8% of WMS-detected sample fraction, whereas native-only calls represented 63.8% of native calls but 26.6% of native-detected sample fraction (Fig 10B).
 
 Full-depth WMS also reproduced the saliva time-course analysis. WMS species and strain profiles gave subject PERMANOVA R² of 0.628 and 0.572, respectively, and leave-one-timepoint-out subject accuracy of 78.1% and 84.4%. Thus, denser WMS calling did not produce stronger strain-level host discrimination than native 2bRAD. Because sequencing depth, representation and host content differ, this is a modality-scope comparison rather than accuracy validation.
 
@@ -133,7 +131,7 @@ Public WGS cohorts showed application boundaries set by panel scope and sample t
 
 ##### Strain2bScan resolves compartment- and host-specific strain structure in the rhesus macaque gut (Fig 11, Supplementary Tables S6–S11)
 
-To test Strain2bScan in a host-associated, spatially structured community, we profiled a published rhesus macaque GI cohort [31]. The analysis set comprised 128 native BcgI 2bRAD-M libraries from four monkeys (two old, O1–O2; two young, Y1–Y2) sampled across five GI regions and two compartments (66 luminal and 62 mucosal samples; Fig 11A). A cohort-specific panel built from 315 MAGs assembled in the original study covered 18 prevalent gut species. Within-species clustering at 0.95 Jaccard similarity yielded 303 strain-cluster units (Supplementary Table S6). Within this panel, Strain2bScan recovered at least one strain call in 113/128 GI samples (88.3%): 56/66 luminal and 57/62 mucosal. Native 2bRAD-M libraries therefore supported strain-cluster profiling of mucosal tissue as well as luminal contents.
+To test Strain2bScan in a host-associated, spatially structured community, we profiled a published rhesus macaque GI cohort [23]. The analysis set comprised 128 native BcgI 2bRAD-M libraries from four monkeys (two old, O1–O2; two young, Y1–Y2) sampled across five GI regions and two compartments (66 luminal and 62 mucosal samples; Fig 11A). A cohort-specific panel built from 315 MAGs assembled in the original study covered 18 prevalent gut species. Within-species clustering at 0.95 Jaccard similarity yielded 303 strain-cluster units (Supplementary Table S6). Within this panel, Strain2bScan recovered at least one strain call in 113/128 GI samples (88.3%): 56/66 luminal and 57/62 mucosal. Native 2bRAD-M libraries therefore supported strain-cluster profiling of mucosal tissue as well as luminal contents.
 
 Strain-cluster composition differed along the GI axis. Across 50 matched mucosal–luminal sites, 13 clusters differed after Bonferroni correction, and all were enriched in luminal samples (Fig 11D; Supplementary Table S7). Six belonged to *Treponema_D* and four to *Cryptobacteroides*; the strongest difference was *Treponema_D_succinifaciens* C25 (27 luminal versus 15 mucosal positive samples; q = 9.6 × 10⁻⁴). For the 51 luminal samples with calls in both modalities, shotgun yielded more calls per sample than native 2bRAD (median 123 versus 84) and species profiles were more concordant than exact cluster profiles (median Jaccard 0.889 versus 0.605; Fig 11E), consistent with the intended role of 2bRAD markers as a reduced, depth-efficient view rather than exhaustive shotgun discovery.
 
@@ -323,14 +321,14 @@ whose edges join genome pairs with Jaccard ≥ τ, computed with union-find. For
 genomes we use exact all-pairs Jaccard on the tag sets; above that we estimate Jaccard from
 bottom-*k* MinHash [9] sketches (*k* = 2000) of each genome's markers, which reduces the pairwise
 cost from O(n²·m) to O(n²·k) with *k* ≪ *m* and yields partitions identical to exact on real
-data (Results), without the multiple whole-genome alignments used by tools such as SibeliaZ [13]. Clusters are the finest reliable resolution unit: strains within one cluster
+data (Results), without the multiple whole-genome alignments used by tools such as SibeliaZ [11]. Clusters are the finest reliable resolution unit: strains within one cluster
 are too similar to separate from short reads.
 
 **Containment clustering for uneven-completeness panels (`--containment`).** Jaccard penalises
 incompleteness: an incomplete genome's markers are approximately a *subset* of a complete relative's,
 so |A∩B|/|A∪B| falls below τ and the two spuriously split. The optional `--containment` mode instead
 links on **max-containment**, |A∩B| / min(|A|,|B|), which stays ≈ 1 when one marker set is contained in
-the other; the containment estimator used by Mash-screen [14] and sourmash [10] for uneven-completeness genomes.
+the other; the containment estimator used by Mash-screen [12] and sourmash [10] for uneven-completeness genomes.
 It is exact for small panels; for large panels the intersection is estimated from the MinHash-sketch
 Jaccard and the exact set sizes (|A∩B| = J·(|A|+|B|)/(1+J)), then divided by min(|A|,|B|). Because
 max-containment ≥ Jaccard it merges at least as much, so it is opt-in (for reference sets of mixed
@@ -341,7 +339,7 @@ complementary first line of defence.
 incidence; present in all clusters (*species-core*; detects the species, not strains), in one
 cluster with ≥2 genomes (*cluster-specific*), in a single genome (*strain-specific*), or in
 several but not all clusters (*shared-partial*). Cluster- and strain-specific tags are the
-Layer-2 markers. Crucially these are derived from **all** tags of the species' genomes, not
+Layer-2 markers. These markers are derived from **all** tags of the species' genomes, not
 from a pre-built species-unique database: species-unique markers (a genome compared against
 genomes of *other* species) are computed for species detection and are orthogonal to
 within-species strain structure. Each cluster's database is the union of its member genomes'
@@ -351,7 +349,7 @@ still being reachable from that cluster's reads.
 
 **Assembly-quality filtering.** Variable reference completeness biases Jaccard clustering
 toward spurious splits: an incomplete genome's marker set is approximately a subset of its
-complete twin's, so their Jaccard falls below 1 and they fail to cluster. Because CheckM [15] is
+complete twin's, so their Jaccard falls below 1 and they fail to cluster. Because CheckM [13] is
 not run in-line, two dependency-free proxies computed from data already at hand are used;
 contig count (`--max-contigs`), and single-copy tag count relative to the conspecific median
 (`--min-tag-fraction`, a completeness proxy). Genomes far below the median are always flagged;
@@ -567,7 +565,7 @@ which is what makes multi-GB samples tractable.
 
 #### Overview
 
-All simulated reads were generated with ART [18] using `art_illumina -p -l 250 -m 600 -s 150`; this
+All simulated reads were generated with ART [14] using `art_illumina -p -l 250 -m 600 -s 150`; this
 250 bp paired-end configuration includes the ART Illumina quality-error model and was used for every
 primary simulation. Reference panels were restricted to complete or near-complete genomes unless stated
 otherwise. Detection metrics use cluster-set precision, recall and F1 in each tool's own reference or
@@ -578,9 +576,9 @@ resident set size.
 #### 2bRAD versus 16S reference panels
 
 For the 15-species motivation analysis, ~50 genomes per species were obtained from NCBI through ENA and
-restricted to CheckM [15] completeness ≥ 97%, contamination ≤ 5% and assembly level Complete
+restricted to CheckM [13] completeness ≥ 97%, contamination ≤ 5% and assembly level Complete
 Genome/Chromosome. Whole-genome distance used bottom-3000 canonical 21-mer MinHash; 2bRAD distance used
-BcgI tags built by Strain2bScan; 16S distance used the longest barrnap [20] gene, HMMER [21] alignment
+BcgI tags built by Strain2bScan; 16S distance used the longest barrnap [15] gene, HMMER [16] alignment
 and 21-mer Jaccard. Mash [9] distances were converted with
 D(J) = −ln(2J/(1+J)), and per-species Spearman correlations against whole-genome distance used 95% CIs
 from 500 genome subsamples.
@@ -593,20 +591,20 @@ genomes per species (164 genomes), including the ATCC strain and up to five high
 decoys per species; genomes were clustered at 0.95 similarity with `--containment`. Native BcgI used the
 BcgI tree; shotgun used the all-enzyme tree. Strain2bScan used default gates (`--min-support 8`,
 `--min-coverage 0.1`, `--min-abundance 0`, `--min-consistency 0.5`). Shotgun StrainScan 1.0.14 [1] used
-per-species databases in a `linux/amd64` container. inStrain 1.9.1 [8] used Bowtie2 [23] alignments,
-sorted BAM files and skani [22]-dereplicated references at 98% ANI. Genome-level calls required breadth
+per-species databases in a `linux/amd64` container. inStrain 1.9.1 [8] used Bowtie2 [18] alignments,
+sorted BAM files and skani [17]-dereplicated references at 98% ANI. Genome-level calls required breadth
 ≥ 0.5 and reference popANI ≥ 0.99999; abundance was normalized and detection thresholded at 10⁻⁴.
 Supplementary Fig S4 shows the non-dereplicated control. Mock species-to-ATCC-strain mappings are in
 Supplementary Table S12.
 
 #### Real saliva time-course
 
-Native BcgI 2bRAD and paired shotgun WMS saliva from PRJNA1131785 comprised eight subjects and four
+Native BcgI 2bRAD and paired whole-metagenome shotgun (WMS) saliva from PRJNA1131785 comprised eight subjects and four
 within-day timepoints. Libraries were profiled against a 19-species oral-commensal panel (up to 25
 genomes/species) with species gates of 20 panel-specific markers and two detected species markers and call
 gates of two supporting markers and 0.01 coverage. Strain- and species-level cross-species matrices used
 `sample_fraction`; within-species analyses used within-species relative abundance. Bray–Curtis
-dissimilarities were tested by PERMANOVA with 4,999 label permutations (seed 42) [25]. Host assignment used
+dissimilarities were tested by PERMANOVA with 4,999 label permutations (seed 42) [19]. Host assignment used
 leave-one-timepoint-out 1-nearest-neighbour classification, and subject-aware cluster bootstrap with
 20,000 resamples provided uncertainty. Full-depth paired comparisons used all 32 WMS/native pairs.
 
@@ -663,7 +661,7 @@ StrainGST uses its own 0.90-reference space. Metrics were therefore not pooled a
 
 #### Rhesus macaque GI spatial cohort
 
-The final real-cohort application reanalyzed the published rhesus macaque GI spatial cohort [31]. Briefly,
+The final real-cohort application reanalyzed the published rhesus macaque GI spatial cohort [23]. Briefly,
 Hou et al. sampled four *Macaca mulatta* (two 20-year-old and two 8-year-old animals) across five GI
 regions and paired luminal/mucosal compartments under institutional animal ethics approval. Luminal-content
 shotgun libraries used MagPure Soil DNA extraction, Vazyme ND617-02 library preparation and MGISEQ-T7
@@ -691,9 +689,10 @@ Species and strain-call concordance used Jaccard distances; dominant clusters we
 modalities detected the species.
 
 Targeted bile-acid SRM data were acquired by UHPLC–MS/MS in negative MRM mode with internal-standard
-calibration in the original study. We reprocessed 44 vendor WIFF-derived mzML files from the HKU HPC archive
-at `/lustre1/g/aos_shihuang/data/monkey/bile acid/Target`; SHA-256 checksums are in
-`results/monkey_spatial_148/bileacid_mzml_manifest.txt`. mzML metadata identified an ABI/SCIEX WIFF source,
+calibration in the original study. We reprocessed 44 vendor WIFF-derived mzML files from the original
+study's institutional archive; SHA-256 checksums and the public-deposition manifest are in
+`results/monkey_spatial_148/bileacid_mzml_manifest.txt` and
+`results/monkey_spatial_148/zenodo_package_manifest.tsv`. mzML metadata identified an ABI/SCIEX WIFF source,
 Analyst acquisition software and ProteoWizard `pwiz_Reader_ABI` v3.0.24360 conversion. Because the converted
 transition labels were generic and did not retain the vendor compound mapping, features were interpreted at
 precursor-class resolution: LCA-like (Q1 375), dihydroxy (Q1 391), cholate-like (Q1 407) and
@@ -712,7 +711,7 @@ pathway genes to individual strain clusters.
 Pairwise strain sharing was computed only among samples with at least one species-level call and used the
 same gate-filtered 0.95 cluster calls as the preceding analyses. For each sample pair, species detected in
 both samples formed the denominator, following the strain-sharing-rate framework used in epidemiological
-microbiome studies [29,30]. A species contributed to the primary dominant-cluster rate when its
+microbiome studies [21,22]. A species contributed to the primary dominant-cluster rate when its
 highest-within-species-abundance cluster label was identical in both samples. A species contributed to the
 secondary any-cluster rate when at least one cluster label was shared; this secondary metric is more
 sensitive to multi-strain coexistence but less conservative. Exact merged labels (for example,
@@ -741,7 +740,7 @@ epidemiological cohorts. Reads were supplied directly to Strain2bScan as paired 
 273 for all three body sites. PRJNA1517970 analyses used three vaginal, three meconium and one negative
 extraction-control library.
 
-For cohort-specific compatibility testing, six PRJNA1191225 isolate read sets were assembled with SPAdes 4.3.0 [28]
+For cohort-specific compatibility testing, six PRJNA1191225 isolate read sets were assembled with SPAdes 4.3.0 [20]
 (`--isolate`, 8 threads). Three *E. coli* assemblies were clustered at 0.95 similarity into three
 resolvable units; one assembly each from *B. longum*, *B. breve* and *B. bifidum* was built as a
 single-genome species database. Panels used `--enzyme recommended`. All six isolate read sets were then
@@ -782,11 +781,11 @@ The authors declare no competing interests.
 
 ## Ethics
 
-Benchmarking used publicly deposited sequencing data and ATCC commercial mock communities. The rhesus macaque spatial cohort was previously generated and published by Hou et al. [31]; animal procedures were approved as described in that study. No new human participants were recruited, and no new human subject data were generated by this study.
+Benchmarking used publicly deposited sequencing data and ATCC commercial mock communities. The rhesus macaque spatial cohort was previously generated and published by Hou et al. [23]; animal procedures were approved as described in that study. No new human participants were recruited, and no new human subject data were generated by this study.
 
 ## Data and code availability
 
-The Strain2bScan source code is available at https://github.com/HuangShiLab/Strain2bScan. The simulation benchmark used commit 6ae760c2f3bd2f39efc0e6aa06c53a84366cb16e (tag benchmark-v0.1.1-6ae760c); the ATCC mock benchmark used commit f26f234b817ba7772a3f1df59ce720751e9b45b9 (tag benchmark-v0.1.0-f26f234). Derived tables, benchmark configurations, checksums and assembly scripts are available at https://github.com/HuangShiLab/Strain2bScan-paper (tag results-simplified-2026-10-19 and subsequent history). Public human metagenome reads used in the exploratory analyses are from PRJNA1131785, PRJNA288562, PRJNA1517970, PRJNA1191223 and PRJNA1191225. Commercial ATCC mock standards are identified by their catalogue names in the manuscript. The rhesus macaque cohort sequence data are from NGDC BioProject PRJCA052625 and the study resources reported by Hou et al. [31]. Curated metadata and strain, bile-acid, functional and sharing summary tables are in `results/monkey_spatial_148/`. The 44 targeted bile-acid mzML files are archived on the HKU HPC at `/lustre1/g/aos_shihuang/data/monkey/bile acid/Target`; their SHA-256 checksums are in `results/monkey_spatial_148/bileacid_mzml_manifest.txt`. Raw mzML files and large association output tables will be transferred to a public Zenodo record at submission; no new human subject data were generated for this study.
+The Strain2bScan source code is available at https://github.com/HuangShiLab/Strain2bScan. The simulation benchmark used commit 6ae760c2f3bd2f39efc0e6aa06c53a84366cb16e (tag benchmark-v0.1.1-6ae760c); the ATCC mock benchmark used commit f26f234b817ba7772a3f1df59ce720751e9b45b9 (tag benchmark-v0.1.0-f26f234). Derived tables, benchmark configurations, checksums and assembly scripts are available at https://github.com/HuangShiLab/Strain2bScan-paper (tag results-simplified-2026-10-19 and subsequent history). Public human metagenome reads used in the exploratory analyses are from PRJNA1131785, PRJNA288562, PRJNA1517970, PRJNA1191223 and PRJNA1191225. Commercial ATCC mock standards are identified by their catalogue names in the manuscript. The rhesus macaque cohort sequence data are from NGDC BioProject PRJCA052625 and the study resources reported by Hou et al. [23]. Curated metadata and strain, bile-acid, functional and sharing summary tables are in `results/monkey_spatial_148/`. The 44 targeted bile-acid mzML files are retained in the institutional HKU HPC archive; their SHA-256 checksums and public-deposition manifest are in `results/monkey_spatial_148/bileacid_mzml_manifest.txt` and `results/monkey_spatial_148/zenodo_package_manifest.tsv`. Raw mzML files and processed association output tables will be deposited on Zenodo before publication; no new human subject data were generated for this study.
 
 ## Figure legends
 
@@ -1254,55 +1253,36 @@ replicates. Cells show sample counts. *M. tuberculosis* contributed only same-cl
    MinHash.** *Genome Biology* 2016; 17:132.
 10. Brown CT, Irber L. **sourmash: a library for MinHash sketching of DNA.** *Journal of Open Source
    Software* 2016; 1(5):27.
-11. Chklovski A, Parks DH, Woodcroft BJ, Tyson GW. **CheckM2: a rapid, scalable and accurate tool for
-    assessing microbial genome quality using machine learning.** *Nature Methods* 2023; 20(8):1203–1212.
-    doi:10.1038/s41592-023-01940-w.
-12. Orakov A, Fullam A, Coelho LP, *et al.* **GUNC: detection of chimerism and contamination in
-    prokaryotic genomes.** *Genome Biology* 2021; 22:178.
-    doi:10.1186/s13059-021-02393-0.
-13. Minkin I, Medvedev P. **Scalable multiple whole-genome alignment and locally collinear block
+11. Minkin I, Medvedev P. **Scalable multiple whole-genome alignment and locally collinear block
     construction with SibeliaZ.** *Nature Communications* 2020; 11:6327.
     doi:10.1038/s41467-020-19777-8.
-14. Ondov BD, Starrett GJ, Sappington A, *et al.* **Mash Screen: high-throughput sequence containment
+12. Ondov BD, Starrett GJ, Sappington A, *et al.* **Mash Screen: high-throughput sequence containment
    estimation for genome discovery.** *Genome Biology* 2019; 20:232.
    doi:10.1186/s13059-019-1841-x.
-15. Parks DH, Imelfort M, Skennerton CT, Hugenholtz P, Tyson GW. **CheckM: assessing the quality of
+13. Parks DH, Imelfort M, Skennerton CT, Hugenholtz P, Tyson GW. **CheckM: assessing the quality of
     microbial genomes recovered from isolates, single cells, and metagenomes.** *Genome Research*
     2015; 25(7):1043–1055. doi:10.1101/gr.186072.114.
-16. Sun Z, Huang S, Zhang M, *et al.* **Challenges in benchmarking metagenomic profilers.** *Nature
-    Methods* 2021; 18(6):618–626. doi:10.1038/s41592-021-01141-3.
-17. Meyer F, Fritz A, Deng ZL, *et al.* **Critical Assessment of Metagenome Interpretation: the second
-    round of challenges.** *Nature Methods* 2022; 19(4):429–440. doi:10.1038/s41592-022-01431-4.
-18. Huang W, Li L, Myers JR, Marth GT. **ART: a next-generation sequencing read simulator.**
+14. Huang W, Li L, Myers JR, Marth GT. **ART: a next-generation sequencing read simulator.**
     *Bioinformatics* 2012; 28(4):593–594.
-19. Bowers RM, Kyrpides NC, Stepanauskas R, *et al.* **Minimum information about a single amplified genome
-    (MISAG) and a metagenome-assembled genome (MIMAG) of bacteria and archaea.** *Nature Biotechnology*
-    2017; 35(8):725–731. doi:10.1038/nbt.3893.
-20. Seemann T. **Barrnap: basic rapid ribosomal RNA predictor.** Software, https://github.com/tseemann/barrnap.
-21. Eddy SR. **Accelerated profile HMM searches.** *PLoS Computational Biology* 2011; 7(10):e1002195.
+15. Seemann T. **Barrnap: basic rapid ribosomal RNA predictor.** Software, https://github.com/tseemann/barrnap.
+16. Eddy SR. **Accelerated profile HMM searches.** *PLoS Computational Biology* 2011; 7(10):e1002195.
     doi:10.1371/journal.pcbi.1002195.
-22. Shaw J, Yu YW. **Fast and robust metagenomic sequence comparison through sparse chaining with skani.**
+17. Shaw J, Yu YW. **Fast and robust metagenomic sequence comparison through sparse chaining with skani.**
     *Nature Methods* 2023; 20(11):1661–1665. doi:10.1038/s41592-023-02018-3.
-23. Langmead B, Salzberg SL. **Fast gapped-read alignment with Bowtie 2.** *Nature Methods* 2012;
+18. Langmead B, Salzberg SL. **Fast gapped-read alignment with Bowtie 2.** *Nature Methods* 2012;
     9(4):357–359. doi:10.1038/nmeth.1923.
-24. Ye SH, Siddle KJ, Park DJ, Sabeti PC. **Benchmarking metagenomics tools for taxonomic
-    classification.** *Cell* 2019; 178(4):779–794. doi:10.1016/j.cell.2019.07.010.
-25. Anderson MJ. **A new method for non-parametric multivariate analysis of variance.** *Austral Ecology*
+19. Anderson MJ. **A new method for non-parametric multivariate analysis of variance.** *Austral Ecology*
     2001; 26(1):32–46. doi:10.1046/j.1442-9993.2001.01070.x.
-26. Baker DN, Langmead B. **Dashing: fast and accurate genomic distances with HyperLogLog.** *Genome
-    Biology* 2019; 20:265. doi:10.1186/s13059-019-1875-0.
-27. Marçais G, Kingsford C. **A fast, lock-free approach for efficient parallel counting of occurrences of
-    k-mers.** *Bioinformatics* 2011; 27(6):764–770. doi:10.1093/bioinformatics/btr011.
-28. Bankevich A, Nurk S, Antipov D, *et al.* **SPAdes: a new genome assembly algorithm and its
+20. Bankevich A, Nurk S, Antipov D, *et al.* **SPAdes: a new genome assembly algorithm and its
     applications to single-cell sequencing.** *Journal of Computational Biology* 2012; 19(5):455–477.
     doi:10.1089/cmb.2012.0021.
-29. Beghini F, Pullman J, Alexander M, *et al.* **Gut microbiome strain-sharing within isolated village
+21. Beghini F, Pullman J, Alexander M, *et al.* **Gut microbiome strain-sharing within isolated village
     social networks.** *Nature* 2025; 637(8044):167–175.
     doi:10.1038/s41586-024-08222-1.
-30. Heidrich V, Fackelmann G, Ricci L, *et al.* **Strain transmission links human microbiomes along the
+22. Heidrich V, Fackelmann G, Ricci L, *et al.* **Strain transmission links human microbiomes along the
     oral-gut axis and across cohabiting individuals.** *Cell Press Blue* 2026; 1(3):100034.
     doi:10.1016/j.cpblue.2026.100034.
-31. Hou S, Jiang Y, Zhang D, Xu Z, Li Y, Liu X, Zhang H, Zhang J, Zhai Q, Zhang C, Wang X, Huang S.
+23. Hou S, Jiang Y, Zhang D, Xu Z, Li Y, Liu X, Zhang H, Zhang J, Zhai Q, Zhang C, Wang X, Huang S.
     **A high-resolution spatial model of the primate gut microbiome defines niche-specific functions and
     host-adapted microbial metabolism.** *Gut Microbes* 2026; 18(1):2748153.
     doi:10.1080/19490976.2026.2748153.

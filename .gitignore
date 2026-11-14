@@ -5,6 +5,7 @@ work/
 **/dbs/
 **/dbs_*/
 multispecies/
+!results/monkey_spatial_148/hpc_outputs/work/
 acnes/
 scaling/
 ss_db/
@@ -25,6 +26,8 @@ figure_raw_data/**/reads/
 *.iibsp
 *.zip
 *.tar.gz
+!results/software_release/*.tar.gz
+!results/enzyme_sweep_225/predictions.tar.gz
 .DS_Store
 __pycache__/
 *.pid

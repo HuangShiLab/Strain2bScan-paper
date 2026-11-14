@@ -91,7 +91,7 @@ Within a species, each tag is labelled by its incidence across the species' clus
 clusters (*species-core*; identifies the species, not a strain), in exactly **one** cluster of ≥ 2 genomes
 (*cluster-specific*), in a **single genome** (*strain-specific*), or in **several but not all** clusters
 (*shared-partial*). Cluster- and strain-specific tags are the Layer-2 markers; formally, a marker is
-*unique* to a cluster iff it occurs in exactly one cluster. Crucially these labels are derived from the
+*unique* to a cluster iff it occurs in exactly one cluster. These labels are derived from the
 incidence of *all* of the species' single-copy tags, not from any pre-built "species-unique" database:
 species-unique markers (a genome compared against genomes of *other* species) are computed separately, for
 species detection (Layer-1), and are orthogonal to within-species strain structure.

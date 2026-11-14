@@ -12,6 +12,7 @@ import math
 import re
 import statistics
 import sys
+import tarfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -343,13 +344,28 @@ if not p.exists() or hashlib.sha256(p.read_bytes()).hexdigest() != expected:
 enzyme_rows = load_tsv("results/enzyme_sweep_225/persample.tsv")
 if len(enzyme_rows) != 1125:
     fail("enzyme-sweep row count changed")
+enzyme_archive = ROOT / "results/enzyme_sweep_225/predictions.tar.gz"
+enzyme_archive_hashes = {}
+if enzyme_archive.exists():
+    with tarfile.open(enzyme_archive, "r:gz") as archive:
+        for member in archive:
+            if member.isfile():
+                reader = archive.extractfile(member)
+                enzyme_archive_hashes[member.name] = hashlib.sha256(reader.read()).hexdigest()
 for row in enzyme_rows:
     expected_path = (ROOT / "work/enzyme_sweep_225/predictions" /
                      f"enzymes_{row['enzyme_count']}/{row['sample']}.pred")
     if Path(row["prediction"]) != expected_path.relative_to(ROOT):
         fail(f"enzyme-sweep prediction path mismatch: {row['sample']}")
     p = ROOT / row["prediction"]
-    if not p.exists() or hashlib.sha256(p.read_bytes()).hexdigest() != row["prediction_sha256"]:
+    prediction_name = "/".join(p.relative_to(ROOT).parts[-3:])
+    if p.exists():
+        actual = hashlib.sha256(p.read_bytes()).hexdigest()
+    elif prediction_name in enzyme_archive_hashes:
+        actual = enzyme_archive_hashes[prediction_name]
+    else:
+        actual = None
+    if actual != row["prediction_sha256"]:
         fail(f"enzyme-sweep prediction hash mismatch: {row['sample']}")
 enzyme_checksums = ROOT / "results/enzyme_sweep_225/checksums.sha256"
 for line in enzyme_checksums.read_text().splitlines():

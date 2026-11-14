@@ -23,55 +23,36 @@
    MinHash.** *Genome Biology* 2016; 17:132.
 10. Brown CT, Irber L. **sourmash: a library for MinHash sketching of DNA.** *Journal of Open Source
    Software* 2016; 1(5):27.
-11. Chklovski A, Parks DH, Woodcroft BJ, Tyson GW. **CheckM2: a rapid, scalable and accurate tool for
-    assessing microbial genome quality using machine learning.** *Nature Methods* 2023; 20(8):1203–1212.
-    doi:10.1038/s41592-023-01940-w.
-12. Orakov A, Fullam A, Coelho LP, *et al.* **GUNC: detection of chimerism and contamination in
-    prokaryotic genomes.** *Genome Biology* 2021; 22:178.
-    doi:10.1186/s13059-021-02393-0.
-13. Minkin I, Medvedev P. **Scalable multiple whole-genome alignment and locally collinear block
+11. Minkin I, Medvedev P. **Scalable multiple whole-genome alignment and locally collinear block
     construction with SibeliaZ.** *Nature Communications* 2020; 11:6327.
     doi:10.1038/s41467-020-19777-8.
-14. Ondov BD, Starrett GJ, Sappington A, *et al.* **Mash Screen: high-throughput sequence containment
+12. Ondov BD, Starrett GJ, Sappington A, *et al.* **Mash Screen: high-throughput sequence containment
    estimation for genome discovery.** *Genome Biology* 2019; 20:232.
    doi:10.1186/s13059-019-1841-x.
-15. Parks DH, Imelfort M, Skennerton CT, Hugenholtz P, Tyson GW. **CheckM: assessing the quality of
+13. Parks DH, Imelfort M, Skennerton CT, Hugenholtz P, Tyson GW. **CheckM: assessing the quality of
     microbial genomes recovered from isolates, single cells, and metagenomes.** *Genome Research*
     2015; 25(7):1043–1055. doi:10.1101/gr.186072.114.
-16. Sun Z, Huang S, Zhang M, *et al.* **Challenges in benchmarking metagenomic profilers.** *Nature
-    Methods* 2021; 18(6):618–626. doi:10.1038/s41592-021-01141-3.
-17. Meyer F, Fritz A, Deng ZL, *et al.* **Critical Assessment of Metagenome Interpretation: the second
-    round of challenges.** *Nature Methods* 2022; 19(4):429–440. doi:10.1038/s41592-022-01431-4.
-18. Huang W, Li L, Myers JR, Marth GT. **ART: a next-generation sequencing read simulator.**
+14. Huang W, Li L, Myers JR, Marth GT. **ART: a next-generation sequencing read simulator.**
     *Bioinformatics* 2012; 28(4):593–594.
-19. Bowers RM, Kyrpides NC, Stepanauskas R, *et al.* **Minimum information about a single amplified genome
-    (MISAG) and a metagenome-assembled genome (MIMAG) of bacteria and archaea.** *Nature Biotechnology*
-    2017; 35(8):725–731. doi:10.1038/nbt.3893.
-20. Seemann T. **Barrnap: basic rapid ribosomal RNA predictor.** Software, https://github.com/tseemann/barrnap.
-21. Eddy SR. **Accelerated profile HMM searches.** *PLoS Computational Biology* 2011; 7(10):e1002195.
+15. Seemann T. **Barrnap: basic rapid ribosomal RNA predictor.** Software, https://github.com/tseemann/barrnap.
+16. Eddy SR. **Accelerated profile HMM searches.** *PLoS Computational Biology* 2011; 7(10):e1002195.
     doi:10.1371/journal.pcbi.1002195.
-22. Shaw J, Yu YW. **Fast and robust metagenomic sequence comparison through sparse chaining with skani.**
+17. Shaw J, Yu YW. **Fast and robust metagenomic sequence comparison through sparse chaining with skani.**
     *Nature Methods* 2023; 20(11):1661–1665. doi:10.1038/s41592-023-02018-3.
-23. Langmead B, Salzberg SL. **Fast gapped-read alignment with Bowtie 2.** *Nature Methods* 2012;
+18. Langmead B, Salzberg SL. **Fast gapped-read alignment with Bowtie 2.** *Nature Methods* 2012;
     9(4):357–359. doi:10.1038/nmeth.1923.
-24. Ye SH, Siddle KJ, Park DJ, Sabeti PC. **Benchmarking metagenomics tools for taxonomic
-    classification.** *Cell* 2019; 178(4):779–794. doi:10.1016/j.cell.2019.07.010.
-25. Anderson MJ. **A new method for non-parametric multivariate analysis of variance.** *Austral Ecology*
+19. Anderson MJ. **A new method for non-parametric multivariate analysis of variance.** *Austral Ecology*
     2001; 26(1):32–46. doi:10.1046/j.1442-9993.2001.01070.x.
-26. Baker DN, Langmead B. **Dashing: fast and accurate genomic distances with HyperLogLog.** *Genome
-    Biology* 2019; 20:265. doi:10.1186/s13059-019-1875-0.
-27. Marçais G, Kingsford C. **A fast, lock-free approach for efficient parallel counting of occurrences of
-    k-mers.** *Bioinformatics* 2011; 27(6):764–770. doi:10.1093/bioinformatics/btr011.
-28. Bankevich A, Nurk S, Antipov D, *et al.* **SPAdes: a new genome assembly algorithm and its
+20. Bankevich A, Nurk S, Antipov D, *et al.* **SPAdes: a new genome assembly algorithm and its
     applications to single-cell sequencing.** *Journal of Computational Biology* 2012; 19(5):455–477.
     doi:10.1089/cmb.2012.0021.
-29. Beghini F, Pullman J, Alexander M, *et al.* **Gut microbiome strain-sharing within isolated village
+21. Beghini F, Pullman J, Alexander M, *et al.* **Gut microbiome strain-sharing within isolated village
     social networks.** *Nature* 2025; 637(8044):167–175.
     doi:10.1038/s41586-024-08222-1.
-30. Heidrich V, Fackelmann G, Ricci L, *et al.* **Strain transmission links human microbiomes along the
+22. Heidrich V, Fackelmann G, Ricci L, *et al.* **Strain transmission links human microbiomes along the
     oral-gut axis and across cohabiting individuals.** *Cell Press Blue* 2026; 1(3):100034.
     doi:10.1016/j.cpblue.2026.100034.
-31. Hou S, Jiang Y, Zhang D, Xu Z, Li Y, Liu X, Zhang H, Zhang J, Zhai Q, Zhang C, Wang X, Huang S.
+23. Hou S, Jiang Y, Zhang D, Xu Z, Li Y, Liu X, Zhang H, Zhang J, Zhai Q, Zhang C, Wang X, Huang S.
     **A high-resolution spatial model of the primate gut microbiome defines niche-specific functions and
     host-adapted microbial metabolism.** *Gut Microbes* 2026; 18(1):2748153.
     doi:10.1080/19490976.2026.2748153.
