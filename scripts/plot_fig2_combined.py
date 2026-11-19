@@ -43,9 +43,9 @@ plt.rcParams.update({
     "figure.dpi":250,"savefig.dpi":250,"savefig.bbox":"tight",
 })
 
-fig=plt.figure(figsize=(15.0,15.5))
+fig=plt.figure(figsize=(16.5,15.5))
 gs=fig.add_gridspec(2,1,height_ratios=[.72,1.05],hspace=.20,
-                    left=.165,right=.985,top=.945,bottom=.045)
+                    left=.165,right=.88,top=.945,bottom=.045)
 
 # Panel A: quantitative summary for all 15 panels.
 ax=fig.add_subplot(gs[0])
@@ -65,10 +65,12 @@ ax.set_xlim(-.35,1.10); ax.set_ylim(-.75,len(data)-.25); ax.axvline(0,color=".55
 median2=np.median(rho2); median16=np.median(rho16)
 ax.axvline(median2,color="#1F77B4",ls="--",linewidth=1.6)
 ax.axvline(median16,color="#D62728",ls="--",linewidth=1.6)
-ax.text(.965,.94,f"2bRAD median = {median2:.2f}\n16S median = {median16:.2f}",
-        transform=ax.transAxes,ha="right",va="top",fontsize=15,
-        bbox=dict(boxstyle="round,pad=.36",facecolor="white",edgecolor=".75"))
-ax.legend(loc="lower right",frameon=True,framealpha=.95)
+legend_a=ax.legend(loc="center left",bbox_to_anchor=(1.015,.52),
+                   title="A",alignment="left",frameon=True,framealpha=.95,
+                   borderaxespad=0,title_fontproperties={"weight":"bold","size":22})
+fig.text(.885,.665,f"2bRAD median = {median2:.2f}\n16S median = {median16:.2f}",
+         ha="left",va="top",fontsize=15,
+         bbox=dict(boxstyle="round,pad=.36",facecolor="white",edgecolor=".75"))
 ax.grid(alpha=.22,axis="x")
 ax.set_title("Complete/near-complete genome panels; error bars show 95% CIs",loc="left",pad=10,fontsize=19)
 fig.text(.028,.952,"A",fontsize=23,fontweight="bold",ha="left",va="bottom")
@@ -98,10 +100,11 @@ for k,path in enumerate(order):
     ax.set_xticks([0,.5,1]); ax.set_yticks([0,.5,1])
     ax.tick_params(labelsize=14.5); ax.grid(alpha=.18)
     if k==0: ax.set_ylabel("Marker-distance rank",fontsize=16)
-    if k==0:
-        ax.legend(loc="upper left",frameon=True,framealpha=.92,handletextpad=.25,borderpad=.4,
-                  fontsize=15)
+    scatter_handles,scatter_labels=ax.get_legend_handles_labels()
 fig.text(.028,.492,"B",fontsize=23,fontweight="bold",ha="left",va="bottom")
+fig.legend(scatter_handles,scatter_labels,loc="center left",
+           bbox_to_anchor=(.885,.38),title="B",alignment="left",frameon=True,
+           framealpha=.95,title_fontproperties={"weight":"bold","size":22})
 fig.supxlabel("Whole-genome-distance rank",x=.575,y=.004,fontsize=17)
 
 fig.savefig(f"{OUT}.png",bbox_inches="tight",facecolor="white")

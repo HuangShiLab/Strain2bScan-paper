@@ -162,6 +162,20 @@ def style_docx(path: Path) -> None:
     for table in doc.tables:
         style_table(table)
 
+    # Pandoc rescales oversized images to the reference-document text column; restore
+    # the full usable page width after the margins have been tightened.
+    max_width = Inches(7.05)
+    max_height = Inches(8.8)
+    for shape in doc.inline_shapes:
+        aspect = shape.width / shape.height
+        width = max_width
+        height = int(width * shape.height / shape.width)
+        if height > max_height:
+            height = max_height
+            width = int(height * aspect)
+        shape.width = width
+        shape.height = height
+
     metadata = doc.core_properties
     metadata.title = TITLE
     metadata.author = "Yufeng Zhang; Shi Huang"
