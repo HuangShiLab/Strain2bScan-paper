@@ -384,6 +384,17 @@ dissimilarities were tested by PERMANOVA with 4,999 label permutations (seed 42)
 leave-one-timepoint-out 1-nearest-neighbour classification, and subject-aware cluster bootstrap with
 20,000 resamples provided uncertainty. Full-depth paired comparisons used all 32 WMS/native pairs.
 
+### Reference-scope sensitivity panel
+
+To test whether saliva host discrimination depended on reference breadth, we rebuilt BcgI
+panels matched to 79 species selected from the archived saliva species table using the
+Strain2bFunc default criteria (abundance >= 0.01% and prevalence >= 0.8). GTDB r226
+provided 3,072 matched genomes across 198 species; HOMD/HROM provided 255 matched species
+clusters. Each GTDB/HOMD species was clustered at 0.95 Jaccard with BcgI tags, and the 32
+native saliva libraries were reprofiled with the same species and strain gates as above.
+Host discrimination used the same PERMANOVA and leave-one-timepoint-out nearest-neighbour
+metrics as the primary saliva analysis.
+
 ### Simulation pool and comparator workflows
 
 A fixed 15-species pool containing 15–50 complete or near-complete NCBI genomes per species was used for

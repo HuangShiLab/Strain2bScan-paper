@@ -1,0 +1,2 @@
+cross-species filter: 995316/1675554 markers usable for quantification (40.6% shared with another species in the panel, excluded)
+predictions (32 samples) -> /lustre1/g/aos_shihuang/projects/strain2bscan_reference_benchmark_20261120/results/saliva_HOMD_selected79_bcgI.tsv

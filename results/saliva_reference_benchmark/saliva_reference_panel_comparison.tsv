@@ -1,0 +1,7 @@
+panel	level	n_features	R2	pseudo_F	p_value	LOO_accuracy
+current_oral_panel	species	18	0.755283	10.582	0.000200	0.781250
+current_oral_panel	strain	125	0.756668	10.662	0.000200	0.968750
+HOMD_selected79	species	62	0.700047	8.002	0.000200	0.812500
+HOMD_selected79	strain	618	0.683706	7.411	0.000200	1.000000
+GTDB_selected79	species	76	0.781760	12.281	0.000200	0.968750
+GTDB_selected79	strain	293	0.767530	11.320	0.000200	1.000000

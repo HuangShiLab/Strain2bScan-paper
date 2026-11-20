@@ -398,3 +398,45 @@ replicates. Cells show sample counts. *M. tuberculosis* contributed only same-cl
 | *Staphylococcus epidermidis* | same/different | 2/3/5 | 5 each | 5 each | 5 each | 5 each | 5 each | 150 |
 | *Streptococcus pneumoniae* | same/different | 2/3/5 | 5 each | 5 each | 5 each | 5 each | 5 each | 150 |
 | **Total** |  |  | **405** | **405** | **405** | **405** | **405** | **2,025** |
+
+**Table S14. Saliva host discrimination with expanded GTDB and HOMD reference panels.** The same
+32 native BcgI saliva libraries were profiled against the current 19-species oral panel, GTDB
+species databases matched to the Strain2bFunc saliva list, and HOMD/HROM species-cluster
+databases. PERMANOVA R² uses Bray–Curtis distances and subject as the grouping factor;
+LOO is leave-one-timepoint-out 1-nearest-neighbour host classification.
+
+| Panel | Level | Features | PERMANOVA R² | p value | LOO accuracy |
+|---|---|--:|--:|--:|--:|
+| Current oral panel | Species | 18 | 0.7553 | 0.0002 | 0.7813 |
+| Current oral panel | Strain/cluster | 125 | 0.7567 | 0.0002 | 0.9688 |
+| GTDB selected79 | Species | 76 | 0.7818 | 0.0002 | 0.9688 |
+| GTDB selected79 | Strain/cluster | 293 | 0.7675 | 0.0002 | 1.0000 |
+| HOMD selected79 | Species | 62 | 0.7000 | 0.0002 | 0.8125 |
+| HOMD selected79 | Strain/cluster | 618 | 0.6837 | 0.0002 | 1.0000 |
+
+**Table S15. Selected Prevotella and Rothia strain profiles in the reference-scope comparison.**
+Only species with >= 10 present samples and >= 2 clusters are shown. R² is within-species
+strain-profile association with host identity; q is BH correction within each panel.
+
+| Panel | Species | Present samples | Clusters | R² | p | q |
+|---|---|--:|--:|--:|--:|--:|
+| Current oral | *Prevotella melaninogenica* | 31 | 10 | 0.4640 | 0.0004 | 0.0005 |
+| Current oral | *Rothia dentocariosa* | 17 | 6 | 0.6316 | 0.0002 | 0.0003 |
+| Current oral | *Rothia mucilaginosa* | 11 | 3 | 0.8521 | 0.0002 | 0.0003 |
+| HOMD | Rothia mucilaginosa cluster HROM_0004 | 10 | 7 | 0.5018 | 0.0024 | 0.0029 |
+| HOMD | *Rothia aeria* cluster HROM_0198 | 15 | 4 | 0.6187 | 0.0002 | 0.0003 |
+| HOMD | *Prevotella melaninogenica* cluster HROM_0976 | 25 | 21 | 0.6801 | 0.0002 | 0.0003 |
+| HOMD | *Prevotella nigrescens* cluster HROM_0997 | 21 | 13 | 0.4605 | 0.0002 | 0.0003 |
+| HOMD | *Prevotella intermedia* cluster HROM_1000 | 14 | 6 | 0.6824 | 0.0002 | 0.0003 |
+| HOMD | *Prevotella nanceiensis* cluster HROM_1004 | 29 | 11 | 0.5409 | 0.0002 | 0.0003 |
+| HOMD | *Prevotella baroniae* cluster HROM_1017 | 30 | 10 | 0.5354 | 0.0002 | 0.0003 |
+| HOMD | *Prevotella oris* cluster HROM_1026 | 28 | 50 | 0.4531 | 0.0002 | 0.0003 |
+| HOMD | *Prevotella pleuritidis* cluster HROM_1032 | 22 | 7 | 0.5246 | 0.0002 | 0.0003 |
+| HOMD | *Prevotella loescheii* cluster HROM_1160 | 24 | 15 | 0.4742 | 0.0002 | 0.0003 |
+| GTDB | *Prevotella baroniae* | 31 | 8 | 0.4061 | 0.0134 | 0.0143 |
+| GTDB | *Prevotella intermedia* | 13 | 5 | 0.9197 | 0.0002 | 0.0003 |
+| GTDB | *Prevotella koreensis* | 32 | 6 | 0.6605 | 0.0002 | 0.0003 |
+| GTDB | *Prevotella loescheii* | 20 | 8 | 0.7001 | 0.0002 | 0.0003 |
+| GTDB | *Prevotella melaninogenica* | 12 | 11 | 0.2994 | 0.1114 | 0.1114 |
+| GTDB | *Rothia aeria* | 21 | 6 | 0.7221 | 0.0002 | 0.0003 |
+| GTDB | *Rothia dentocariosa* | 14 | 9 | 0.7292 | 0.0002 | 0.0003 |

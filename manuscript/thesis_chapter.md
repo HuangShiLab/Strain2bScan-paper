@@ -161,6 +161,8 @@ Native BcgI 2bRAD-M profiling of four ATCC DNA mocks recovered strain-cluster co
 
 Thirty-two native BcgI 2bRAD-M saliva libraries from eight subjects and four within-day timepoints were profiled against a 19-species oral panel. Species- and strain-level Bray–Curtis profiles gave similar community-level subject associations (PERMANOVA R² = 0.755 and 0.757), but strain features identified the subject in every leave-one-timepoint-out test (100% versus 78.1% for species; Fig 4). Within-subject Bray–Curtis distance was 0.327 versus 0.696 between subjects. At the species level, 15 species had at least ten detectable samples; strain profiles explained 43–85% of subject-level variation, with the largest R² for *Rothia mucilaginosa* (0.852), indicating that much of the individual signal was species- and strain-resolved. Pairwise sharing gave the same conclusion: dominant-cluster sharing was 0.538 within subjects across timepoints versus 0.217 between subjects (difference +0.320; pair-level bootstrap 95% CI 0.264–0.375), and any-cluster sharing was 0.801 versus 0.568 (Supplementary Table S5).
 
+A reference-scope sensitivity comparison asked whether this signal depended on the narrow oral panel. Expanding to 157 GTDB species databases matched to the Strain2bFunc saliva list increased species features from 18 to 76 and strain features from 125 to 293. Host R² rose to 0.782 for species profiles and 0.768 for strain profiles, and the expanded reference recovered a strongly host-specific *Prevotella intermedia* profile (R² = 0.920) plus additional Rothia and Prevotella lineages (Supplementary Tables S14–S15). A HOMD-derived panel gave perfect leave-one-timepoint-out host classification but lower overall R², indicating that broad references can add host-specific calls as well as sparse features. Thus, reference scope, not only marker density, controls strain-level host discrimination.
+
 #### Part II. Shotgun data
 
 ##### Accuracy across the complete 15-species simulation pool (Fig 5, Supplementary Table S13)
@@ -768,6 +770,17 @@ gates of two supporting markers and 0.01 coverage. Strain- and species-level cro
 dissimilarities were tested by PERMANOVA with 4,999 label permutations (seed 42) [19]. Host assignment used
 leave-one-timepoint-out 1-nearest-neighbour classification, and subject-aware cluster bootstrap with
 20,000 resamples provided uncertainty. Full-depth paired comparisons used all 32 WMS/native pairs.
+
+#### Reference-scope sensitivity panel
+
+To test whether saliva host discrimination depended on reference breadth, we rebuilt BcgI
+panels matched to 79 species selected from the archived saliva species table using the
+Strain2bFunc default criteria (abundance >= 0.01% and prevalence >= 0.8). GTDB r226
+provided 3,072 matched genomes across 198 species; HOMD/HROM provided 255 matched species
+clusters. Each GTDB/HOMD species was clustered at 0.95 Jaccard with BcgI tags, and the 32
+native saliva libraries were reprofiled with the same species and strain gates as above.
+Host discrimination used the same PERMANOVA and leave-one-timepoint-out nearest-neighbour
+metrics as the primary saliva analysis.
 
 #### Simulation pool and comparator workflows
 
@@ -1531,6 +1544,48 @@ replicates. Cells show sample counts. *M. tuberculosis* contributed only same-cl
 | *Staphylococcus epidermidis* | same/different | 2/3/5 | 5 each | 5 each | 5 each | 5 each | 5 each | 150 |
 | *Streptococcus pneumoniae* | same/different | 2/3/5 | 5 each | 5 each | 5 each | 5 each | 5 each | 150 |
 | **Total** |  |  | **405** | **405** | **405** | **405** | **405** | **2,025** |
+
+**Table S14. Saliva host discrimination with expanded GTDB and HOMD reference panels.** The same
+32 native BcgI saliva libraries were profiled against the current 19-species oral panel, GTDB
+species databases matched to the Strain2bFunc saliva list, and HOMD/HROM species-cluster
+databases. PERMANOVA R² uses Bray–Curtis distances and subject as the grouping factor;
+LOO is leave-one-timepoint-out 1-nearest-neighbour host classification.
+
+| Panel | Level | Features | PERMANOVA R² | p value | LOO accuracy |
+|---|---|--:|--:|--:|--:|
+| Current oral panel | Species | 18 | 0.7553 | 0.0002 | 0.7813 |
+| Current oral panel | Strain/cluster | 125 | 0.7567 | 0.0002 | 0.9688 |
+| GTDB selected79 | Species | 76 | 0.7818 | 0.0002 | 0.9688 |
+| GTDB selected79 | Strain/cluster | 293 | 0.7675 | 0.0002 | 1.0000 |
+| HOMD selected79 | Species | 62 | 0.7000 | 0.0002 | 0.8125 |
+| HOMD selected79 | Strain/cluster | 618 | 0.6837 | 0.0002 | 1.0000 |
+
+**Table S15. Selected Prevotella and Rothia strain profiles in the reference-scope comparison.**
+Only species with >= 10 present samples and >= 2 clusters are shown. R² is within-species
+strain-profile association with host identity; q is BH correction within each panel.
+
+| Panel | Species | Present samples | Clusters | R² | p | q |
+|---|---|--:|--:|--:|--:|--:|
+| Current oral | *Prevotella melaninogenica* | 31 | 10 | 0.4640 | 0.0004 | 0.0005 |
+| Current oral | *Rothia dentocariosa* | 17 | 6 | 0.6316 | 0.0002 | 0.0003 |
+| Current oral | *Rothia mucilaginosa* | 11 | 3 | 0.8521 | 0.0002 | 0.0003 |
+| HOMD | Rothia mucilaginosa cluster HROM_0004 | 10 | 7 | 0.5018 | 0.0024 | 0.0029 |
+| HOMD | *Rothia aeria* cluster HROM_0198 | 15 | 4 | 0.6187 | 0.0002 | 0.0003 |
+| HOMD | *Prevotella melaninogenica* cluster HROM_0976 | 25 | 21 | 0.6801 | 0.0002 | 0.0003 |
+| HOMD | *Prevotella nigrescens* cluster HROM_0997 | 21 | 13 | 0.4605 | 0.0002 | 0.0003 |
+| HOMD | *Prevotella intermedia* cluster HROM_1000 | 14 | 6 | 0.6824 | 0.0002 | 0.0003 |
+| HOMD | *Prevotella nanceiensis* cluster HROM_1004 | 29 | 11 | 0.5409 | 0.0002 | 0.0003 |
+| HOMD | *Prevotella baroniae* cluster HROM_1017 | 30 | 10 | 0.5354 | 0.0002 | 0.0003 |
+| HOMD | *Prevotella oris* cluster HROM_1026 | 28 | 50 | 0.4531 | 0.0002 | 0.0003 |
+| HOMD | *Prevotella pleuritidis* cluster HROM_1032 | 22 | 7 | 0.5246 | 0.0002 | 0.0003 |
+| HOMD | *Prevotella loescheii* cluster HROM_1160 | 24 | 15 | 0.4742 | 0.0002 | 0.0003 |
+| GTDB | *Prevotella baroniae* | 31 | 8 | 0.4061 | 0.0134 | 0.0143 |
+| GTDB | *Prevotella intermedia* | 13 | 5 | 0.9197 | 0.0002 | 0.0003 |
+| GTDB | *Prevotella koreensis* | 32 | 6 | 0.6605 | 0.0002 | 0.0003 |
+| GTDB | *Prevotella loescheii* | 20 | 8 | 0.7001 | 0.0002 | 0.0003 |
+| GTDB | *Prevotella melaninogenica* | 12 | 11 | 0.2994 | 0.1114 | 0.1114 |
+| GTDB | *Rothia aeria* | 21 | 6 | 0.7221 | 0.0002 | 0.0003 |
+| GTDB | *Rothia dentocariosa* | 14 | 9 | 0.7292 | 0.0002 | 0.0003 |
 
 ## 7. References
 

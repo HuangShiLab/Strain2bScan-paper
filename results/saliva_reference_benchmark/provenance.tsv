@@ -1,0 +1,15 @@
+item	path_or_identifier	sha256_or_value
+Strain2bScan_commit	/lustre1/g/aos_shihuang/Strain2bScan	8fcb0bb
+Strain2bFunc_selected79_species	results/saliva_reference_benchmark/strain2bfunc_selected79_species.txt	derived from archived saliva species table; abundance >=0.01% and prevalence >=0.8
+GTDB_selected79_mapping	/lustre1/g/aos_shihuang/selected79_gtdb_species_map.tsv	3072 genomes; 198 GTDB species
+GTDB_source_fa	/lustre1/g/aos_shihuang/databases/GTDB/GTDBr226/2bradm_gtdb_db/db/BcgI.species.fa.gz	34G compressed
+GTDB_panel_dbs	/lustre1/g/aos_shihuang/projects/strain2bscan_reference_benchmark_20261120/gtdb_bcgI_dbs	157 species DBs
+HROM_metadata	/lustre1/g/aos_shihuang/databases/HROM/data/genome_catalog/HROM_representative_genome_metadata.tsv	5113 representative clusters
+HOMD_selected79_clusters	/lustre1/g/aos_shihuang/HOMD_selected79_clusters.tsv	255 matched clusters
+HOMD_panel_dbs	/lustre1/g/aos_shihuang/projects/strain2bscan_reference_benchmark_20261120/homd_bcgI_dbs	153 species DBs
+GTDB_build_job	HKU_HPC_job_4476964	COMPLETED 00:06:50; 16 CPUs; MaxRSS 8.91 GB
+HOMD_job	HKU_HPC_job_4476568	COMPLETED 00:17:44; 16 CPUs; MaxRSS 88.71 GB
+GTDB_prediction_sha256	results/saliva_reference_benchmark/saliva_GTDB_selected79_bcgI.tsv	79c42c4b312ad2d4a6d8cf804cbe1b4001e90d97bf85dc21bc93af8b7e2af51b
+HOMD_prediction_sha256	results/saliva_reference_benchmark/saliva_HOMD_selected79_bcgI.tsv	26884cd63be2a42aafd0545329654e87319df7df874a8d0e1ae57de917628885
+comparison_sha256	results/saliva_reference_benchmark/saliva_reference_panel_comparison.tsv	da286b8beed91aeda5abc7d0ca22cd92079393a12f5d835c16cd7fe51b069b96
+perspecies_sha256	results/saliva_reference_benchmark/saliva_reference_perspecies_subject.tsv	4a0fbf2ffd0b1cf6df697bdf6253395dfe0b5aeb455c2cb1b501b141fd5d255c
