@@ -22,8 +22,8 @@ Strain2bScan `multi-profile --enzyme BcgI` (gate 50/5) on the real reads:
 - Out-of-panel relatives are correctly held in the **detected-not-resolvable** tier (2–15 per run),
   not counted as detections — the three-tier gate working on real open-world data.
 
-This closes the "all-simulated" gap: Strain2bScan reproduces the Strain2bfunc MSA-1002 mock
-validation (PPTX slide 26) on **real, error-containing 2bRAD data**, and demonstrates the
+This closes the "all-simulated" gap: Strain2bScan extends the prior MSA-1002 mock
+validation on **real, error-containing 2bRAD data**, and demonstrates the
 **low-biomass niche** (full recall at 0.1 ng, precision 1.0 down to 0.001 ng).
 
 ## Refinements still open

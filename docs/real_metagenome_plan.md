@@ -42,10 +42,8 @@ ways to validate strain calls on real data (use one or more):
 
 **Paired shotgun + BcgI-2bRAD saliva, 8 subjects × 4 timepoints/day (9AM/11AM/1PM/5PM) = 32
 samples per data type (64 total).** Biological question: does **strain-level** diversity
-distinguish individuals better than species-level? Prior lab result with **strain2bfunc**
-(github.com/HuangShiLab/strain2bfunc): yes, for 7 species (higher R² / PERMANOVA at strain level).
-strain2bfunc needs a 9.3 GB DB, ~30 GB RAM, ~40 min/sample — Strain2bScan is ~78 MB / ~1 s, so we
-can **reproduce the finding at a fraction of the compute.**
+distinguish individuals better than species-level? A preliminary saliva analysis suggested yes, for 7 species (higher R² / PERMANOVA at strain level).
+Strain2bScan is designed to test that finding with much lower database, memory and runtime costs.
 
 Having **paired shotgun + 2bRAD of the same samples** is what makes this self-validating (no
 external ground truth needed).
@@ -54,13 +52,12 @@ external ground truth needed).
 
 1. **Species selection.** Species-level profiling (2bRAD-M / Fast2bRAD-M) → the dominant oral
    species. Build Strain2bScan DBs for them (many already in the 55-panel; extend to match the
-   strain2bfunc species set for a like-for-like comparison; pin accessions).
+   preliminary species set for a like-for-like comparison; pin accessions).
 2. **Strain profiling.** `multi-profile` all 64 samples (species gate on) → strain (cluster)
    abundance matrix, separately for shotgun and 2bRAD; record runtime/memory.
 3. **Individual discrimination (headline).** Bray–Curtis on strain-level abundances → PCoA +
    **PERMANOVA with subject as factor (R²)**; compare to the same at **species level**. Expect
-   strain-level R² > species-level (individuals more separable at strain level) — replicating
-   strain2bfunc, now with a fast/light tool.
+   strain-level R² > species-level (individuals more separable at strain level) — replicating the preliminary result.
 4. **Paired shotgun-vs-2bRAD concordance (validation #1).** Per sample, compare strain calls from
    shotgun (in-silico digest) vs real 2bRAD (BcgI). High concordance validates **both** the tool
    on real error-containing reads and the in-silico-digestion↔real-2bRAD equivalence — without any
@@ -68,8 +65,7 @@ external ground truth needed).
 5. **Temporal stability (validation #2).** Within-subject across the 4 timepoints: strain
    composition should be stable within-day and distinct between subjects (within/between variance,
    ICC).
-6. **Efficiency on real data (headline #2).** 64 real samples' runtime/memory vs strain2bfunc
-   (~40 min / 30 GB) and StrainScan where a DB exists — the speed/scale advantage, now on real data.
+6. **Efficiency on real data (headline #2).** 64 real samples' runtime/memory and StrainScan where a DB exists — the speed/scale advantage, now on real data.
 
 This one chapter closes the closed-world/error-free gap (real reads), gives open-world FP control
 (real community), demonstrates the native-2bRAD capability (real 2bRAD), reproduces a known
@@ -79,6 +75,6 @@ biological result cheaply, and is internally validated by the paired design.
 
 - **Data access:** FASTQ paths for the 64 samples. 64 saliva metagenomes may be large (tens–hundreds
   of GB) — can a subset (or all) be shared to this machine, or must this run on an HPC?
-- **The species set:** the 7 species from the strain2bfunc result (for a like-for-like comparison),
+- **The species set:** the species from the preliminary result (for a like-for-like comparison),
   or let us select the dominant oral species from the data.
 - **Sample sheet:** subject ID + timepoint + data-type per FASTQ (for PERMANOVA grouping).

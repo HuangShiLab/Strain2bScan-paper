@@ -44,7 +44,7 @@ on the identical DB. Species scored strain-resolved vs the 20-species truth.
    96k → 53k → 33k markers as host rises 0 → 90 → 99%. Fewer surviving markers → species fall below
    the resolve gate.
 
-This reproduces the prior Strain2bfunc claim (2bRAD precision/recall ~1.0 at ≥90% human) with
+This reproduces the prior benchmarking claim (2bRAD precision/recall ~1.0 at ≥90% human) with
 Strain2bScan on real reads, quantifies it against shotgun on the same samples/DB, and gives the
 low-biomass / high-host-contamination selling point a direct, mechanistic figure. (inStrain was not
 run — the contrast here is native-2bRAD vs in-silico-digested-shotgun within one tool; an inStrain-WMS

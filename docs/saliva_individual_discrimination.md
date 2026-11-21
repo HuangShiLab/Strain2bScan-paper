@@ -56,4 +56,4 @@ real open-world data at a fraction of the compute of full-k-mer methods.
 ## Open extensions
 - Paired shotgun↔2bRAD concordance (WMS saliva exists in PRJNA1131785; large — grab a few).
 - Temporal-stability quantification (within-subject across the 4 timepoints; ICC).
-- ML host-ID accuracy on a held-out timepoint (Strain2bfunc reported 100%).
+- ML host-ID accuracy on a held-out timepoint (a prior analysis reported 100%).

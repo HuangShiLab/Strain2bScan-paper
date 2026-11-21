@@ -89,7 +89,7 @@ Native BcgI 2bRAD-M profiling of four ATCC DNA mocks recovered strain-cluster co
 
 Thirty-two native BcgI 2bRAD-M saliva libraries from eight subjects and four within-day timepoints were profiled against a 19-species oral panel. Species- and strain-level Bray–Curtis profiles gave similar community-level subject associations (PERMANOVA R² = 0.755 and 0.757), but strain features identified the subject in every leave-one-timepoint-out test (100% versus 78.1% for species; Fig 4). Within-subject Bray–Curtis distance was 0.327 versus 0.696 between subjects. At the species level, 15 species had at least ten detectable samples; strain profiles explained 43–85% of subject-level variation, with the largest R² for *Rothia mucilaginosa* (0.852), indicating that much of the individual signal was species- and strain-resolved. Pairwise sharing gave the same conclusion: dominant-cluster sharing was 0.538 within subjects across timepoints versus 0.217 between subjects (difference +0.320; pair-level bootstrap 95% CI 0.264–0.375), and any-cluster sharing was 0.801 versus 0.568 (Supplementary Table S5).
 
-A reference-scope sensitivity comparison asked whether this signal depended on the narrow oral panel. Expanding to 157 GTDB species databases matched to the pre-release Strain2bScan prototype saliva list increased species features from 18 to 76 and strain features from 125 to 293. Host R² rose to 0.782 for species profiles and 0.768 for strain profiles, and the expanded reference recovered a strongly host-specific *Prevotella intermedia* profile (R² = 0.920) plus additional Rothia and Prevotella lineages (Supplementary Tables S14–S15). A HOMD-derived panel gave perfect leave-one-timepoint-out host classification but lower overall R², indicating that broad references can add host-specific calls as well as sparse features. Thus, reference scope, not only marker density, controls strain-level host discrimination.
+A reference-scope sensitivity comparison asked whether this signal depended on the narrow oral panel. Expanding to 157 GTDB species databases matched to a saliva prevalence-selected 79-species list increased species features from 18 to 76 and strain features from 125 to 293. Host R² rose to 0.782 for species profiles and 0.768 for strain profiles, and the expanded reference recovered a strongly host-specific *Prevotella intermedia* profile (R² = 0.920) plus additional Rothia and Prevotella lineages (Supplementary Tables S14–S15). A HOMD-derived panel gave perfect leave-one-timepoint-out host classification but lower overall R², indicating that broad references can add host-specific calls as well as sparse features. Thus, reference scope, not only marker density, controls strain-level host discrimination.
 
 #### Part II. Shotgun data
 
@@ -613,8 +613,8 @@ leave-one-timepoint-out 1-nearest-neighbour classification, and subject-aware cl
 #### Reference-scope sensitivity panel
 
 To test whether saliva host discrimination depended on reference breadth, we rebuilt BcgI
-panels matched to 79 species selected from the archived saliva species table using the
-pre-release Strain2bScan prototype default criteria (abundance >= 0.01% and prevalence >= 0.8). GTDB r226
+panels matched to 79 species selected from the saliva species table using abundance >= 0.01%
+and prevalence >= 0.8. GTDB r226
 provided 3,072 matched genomes across 198 species; HOMD/HROM provided 255 matched species
 clusters. Each GTDB/HOMD species was clustered at 0.95 Jaccard with BcgI tags, and the 32
 native saliva libraries were reprofiled with the same species and strain gates as above.
@@ -1243,7 +1243,7 @@ replicates. Cells show sample counts. *M. tuberculosis* contributed only same-cl
 
 **Table S14. Saliva host discrimination with expanded GTDB and HOMD reference panels.** The same
 32 native BcgI saliva libraries were profiled against the current 19-species oral panel, GTDB
-species databases matched to the pre-release Strain2bScan prototype saliva list, and HOMD/HROM species-cluster
+species databases matched to a saliva prevalence-selected 79-species list, and HOMD/HROM species-cluster
 databases. PERMANOVA R² uses Bray–Curtis distances and subject as the grouping factor;
 LOO is leave-one-timepoint-out 1-nearest-neighbour host classification.
 

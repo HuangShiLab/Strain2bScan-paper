@@ -126,7 +126,7 @@ with open(OUT_TSV, "w") as f:
     f.write(f"# WGS: bottom-{SKETCH} canonical {K}-mer MinHash Mash distance. 2bRAD: per-genome Strain2bScan\n")
     f.write("# `build` tag sets (14-enzyme default and BcgI-alone). distance = -ln(2J/(1+J)); pairs with\n")
     f.write("# zero overlap in either space excluded (n_pairs_undefined). 16S deferred (needs an rRNA finder,\n")
-    f.write("# e.g. barrnap; not installed here). PPTX_2brad = prior Strain2bfunc value (slide 23) for reference.\n")
+    f.write("# e.g. barrnap; not installed here). PPTX_2brad = prior reference value for comparison.\n")
     f.write("\t".join(HDR) + "\n")
     for r in allrows:
         f.write("\t".join(str(x) for x in r) + "\n")

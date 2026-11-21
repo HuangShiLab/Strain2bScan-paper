@@ -23,8 +23,7 @@ all 4 folds; 8-way problem (chance 12.5%):
 
 Predicting the held-out timepoint means the classifier never sees the test day for that subject, so
 this is genuine generalization, not memorization. **Strain-level features identify the host with
-perfect accuracy**, beating species-level — reproducing the Strain2bfunc result ("100% host-ID from
-strain-level features") with the fast/light Strain2bScan.
+perfect accuracy**, beating species-level — consistent with the prior analysis.
 
 Together with the PERMANOVA (strain R² = 0.757 versus species R² = 0.755) and the *Neisseria subflava*
 R² = 0.808, this establishes salivary strain signatures as individual-specific and temporally stable,

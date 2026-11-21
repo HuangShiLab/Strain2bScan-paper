@@ -28,7 +28,6 @@ MAIN = {
 }
 
 SUPP = {
-    # (former S1 rank-rank scatter is now Fig 2 panel B — see scripts/plot_fig2_combined.py)
     "S1": ["mock_msa1002_titration"],
     "S2": ["gate_calibration"],
     "S3": ["figS_tree_expansion"],    # DB-expansion cost: 20- vs 28-species combined tree

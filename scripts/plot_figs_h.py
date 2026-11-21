@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fig 6 (2bRAD) & Fig 12 (WMS) in the Strain2bFunc house layout.
+"""Fig 6 (2bRAD) & Fig 12 (WMS) in the combined mock-comparison layout.
 
 One row per (tool, sample). Left: horizontal stacked per-genome abundance aligned to that row.
 Right: metric columns as horizontal grey bars on the SAME row (value labelled), all pointing

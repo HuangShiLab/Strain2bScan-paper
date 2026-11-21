@@ -1,7 +1,7 @@
 # Motivation figure — 2bRAD captures strain-level signal that 16S cannot (15 species)
 
 The "why 2bRAD for strains" motivation (StrainScan's Fig 1 analog), recomputed with Strain2bScan
-across all **15 species** from the Strain2bfunc slide deck (PPTX slide 23). Tool-agnostic property of
+across all **15 species** from the preliminary 15-species analysis. Tool-agnostic property of
 the 2bRAD representation vs 16S; reproduces the prior finding.
 
 ## Method — `scripts/compute_16s_v2.py`, `scripts/plot_16s_v2.py`
@@ -44,7 +44,7 @@ there 2bRAD matches or beats it.
 
 Restricting to complete genomes and adding CIs **does not change the conclusion** (2bRAD median
 0.90→0.94; 16S unchanged), confirming it is not a draft-assembly artifact. Reproduces the
-Strain2bfunc slide-deck finding with Strain2bScan tags + an open 16S pipeline. This is the
+Prior finding with Strain2bScan tags + an open 16S pipeline. This is the
 Introduction/Fig-2 motivation: **16S resolves species, not strains; 2bRAD's reduced tags carry
 genome-wide strain signal at ~1% of the sequencing.**
 
