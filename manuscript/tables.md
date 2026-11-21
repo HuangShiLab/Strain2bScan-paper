@@ -401,7 +401,7 @@ replicates. Cells show sample counts. *M. tuberculosis* contributed only same-cl
 
 **Table S14. Saliva host discrimination with expanded GTDB and HOMD reference panels.** The same
 32 native BcgI saliva libraries were profiled against the current 19-species oral panel, GTDB
-species databases matched to the Strain2bFunc saliva list, and HOMD/HROM species-cluster
+species databases matched to the pre-release Strain2bScan prototype saliva list, and HOMD/HROM species-cluster
 databases. PERMANOVA R² uses Bray–Curtis distances and subject as the grouping factor;
 LOO is leave-one-timepoint-out 1-nearest-neighbour host classification.
 

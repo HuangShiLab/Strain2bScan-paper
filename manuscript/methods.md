@@ -388,7 +388,7 @@ leave-one-timepoint-out 1-nearest-neighbour classification, and subject-aware cl
 
 To test whether saliva host discrimination depended on reference breadth, we rebuilt BcgI
 panels matched to 79 species selected from the archived saliva species table using the
-Strain2bFunc default criteria (abundance >= 0.01% and prevalence >= 0.8). GTDB r226
+pre-release Strain2bScan prototype default criteria (abundance >= 0.01% and prevalence >= 0.8). GTDB r226
 provided 3,072 matched genomes across 198 species; HOMD/HROM provided 255 matched species
 clusters. Each GTDB/HOMD species was clustered at 0.95 Jaccard with BcgI tags, and the 32
 native saliva libraries were reprofiled with the same species and strain gates as above.

@@ -2,7 +2,7 @@
 
 ## Question
 
-The earlier Strain2bFunc saliva analysis suggested that host identity could be
+The earlier pre-release Strain2bScan prototype (formerly Strain2bFunc) saliva analysis suggested that host identity could be
 recovered more strongly when using a broad GTDB/HOMD-like reference. This run
 isolates the reference-panel effect for Strain2bScan by keeping the reads,
 BcgI marker space, profiling gates and downstream metrics fixed while changing
@@ -18,10 +18,10 @@ only the reference panel.
   (`strainscan-port`) on HKU HPC.
 
 The species list was derived from the archived broad saliva species table using
-the Strain2bFunc default selection rule: abundance >= 0.01% in >= 80% of the 32
+the prototype default selection rule: abundance >= 0.01% in >= 80% of the 32
 samples. This gives 79 species
-(`strain2bfunc_selected79_species.txt`). The broader unfiltered table has 403
-species (`strain2bfunc_broad403_species.txt`).
+(`prototype_selected79_species.txt`). The broader unfiltered table has 403
+species (`prototype_broad403_species.txt`).
 
 ## Panels
 
@@ -74,7 +74,7 @@ Key examples:
 * HOMD selected79: multiple additional Prevotella species were resolved,
   including *P. intermedia* R2 = 0.6824 and *P. melaninogenica* R2 = 0.6801.
 
-This confirms that the earlier Strain2bFunc observation was partly driven by
+This confirms that the earlier prototype observation was partly driven by
 reference scope: broader oral/GTDB references recover additional
 Prevotella/Rothia lineages with strong host-specific strain structure.
 
@@ -92,7 +92,7 @@ Prevotella/Rothia lineages with strong host-specific strain structure.
 ## Limitations
 
 * This isolates reference-panel scope for Strain2bScan. It does not yet run the
-  Strain2bFunc genome-level elastic-net deconvolution on identical inputs.
+  prototype genome-level elastic-net deconvolution on identical inputs.
 * GTDB/HOMD species names were matched by normalized nomenclature, including
   GTDB placeholder-suffix fallbacks. Some oral-taxonomy or SGB-style names do
   not map exactly and remain absent.

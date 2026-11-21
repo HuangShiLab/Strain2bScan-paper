@@ -1,6 +1,6 @@
 item	path_or_identifier	sha256_or_value
 Strain2bScan_commit	/lustre1/g/aos_shihuang/Strain2bScan	8fcb0bb
-Strain2bFunc_selected79_species	results/saliva_reference_benchmark/strain2bfunc_selected79_species.txt	derived from archived saliva species table; abundance >=0.01% and prevalence >=0.8
+Pre_release_prototype_selected79_species	results/saliva_reference_benchmark/prototype_selected79_species.txt	derived from archived pre-release prototype saliva species table; abundance >=0.01% and prevalence >=0.8
 GTDB_selected79_mapping	/lustre1/g/aos_shihuang/selected79_gtdb_species_map.tsv	3072 genomes; 198 GTDB species
 GTDB_source_fa	/lustre1/g/aos_shihuang/databases/GTDB/GTDBr226/2bradm_gtdb_db/db/BcgI.species.fa.gz	34G compressed
 GTDB_panel_dbs	/lustre1/g/aos_shihuang/projects/strain2bscan_reference_benchmark_20261120/gtdb_bcgI_dbs	157 species DBs
